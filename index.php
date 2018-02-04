@@ -1,2 +1,5 @@
 <?php 
-	echo "Start MVC sqd";
+	session_start();
+    require("Core/config.php");
+
+    echo DIRNAME;
