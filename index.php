@@ -13,3 +13,7 @@
 
     $Router = new Router();
     $Router->explodeUri();
+    $Router->includeLanguageFile();
+
+
+
