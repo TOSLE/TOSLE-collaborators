@@ -5,6 +5,3 @@ Docker/build/www/
 
 Core/config.php
 Public/Styles/Default/node_modules/
-Public/Styles/Default/sass/
-Public/Styles/Default/package.json
-Public/Styles/Default/package-lock.json
