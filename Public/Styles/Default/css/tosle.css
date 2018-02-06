@@ -1,0 +1,41 @@
+/* IMPORT VARIABLES */
+/* GLOBAL VARIABLES */
+/* DEFAULT*/
+/* DEFAULT */
+/* RED */
+/* RED */
+/* WHITE */
+/* WHITE */
+/* GREEN */
+/* GREEN */
+/* BLUE */
+/* BLUE */
+/* ORANGE */
+/* ORANGE */
+/* PURPLE */
+/* PURPLE*/
+/* GLOBAL VARIABLES */
+/* BACKGROUND COLOR */
+/* WHITE */
+/* WHITE */
+/* BACKGROUND COLOR */
+/* BORDER COLOR */
+/* GREY */
+/* GREY */
+/* BORDER COLOR */
+/* IMPORT VARIABLES */
+/* IMPORT STYLE */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+body {
+  background-color: #F1F1F1; }
+
+header {
+  height: 60px;
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #BDBDBD; }
+
+/* IMPORT STYLE */

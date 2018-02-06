@@ -1,4 +1,7 @@
 .idea/
+#Temporaire
+Docker/build/www/
 
 
 Core/config.php
+Public/Styles/Default/node_modules/
