@@ -54,9 +54,24 @@ class Router {
     /**
      *  Get language package to generete error
      */
-    function includeLanguageFile(){
+    function includeLanguageFile()
+    {
         if(file_exists("Core/Language/".$this->language."/conf.lang.php")){
             include "Core/Language/".$this->language."/conf.lang.php";
+        }
+    }
+
+    function callAction()
+    {
+        if(file_exists("Controllers/".$this->controller.".php")){
+            include "Controllers/".$this->controller.".php";
+            if(class_exists($this->controller)){
+                $obj = new $this->controller();
+                if(method_exists($obj,$this->action)){
+                    $action = $this->action;
+                    $obj->$action($this->parameter);
+                }
+            }
         }
     }
 }
