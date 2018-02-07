@@ -10,3 +10,7 @@
 /**
  * TOSLE Define
  */
+    define("HOMEPAGE_NAME", "Home");
+    define("BLOGPAGE_NAME", "Blog");
+    define("TOSLEPAGE_NAME", "Class");
+    define("MESSAGINGPAGE_NAME", "Chat");
