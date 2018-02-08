@@ -2,13 +2,14 @@ header {
   height: 60px;
   background-color: $backgroundColorWhiteFull;
   border-bottom: 1px solid $borderColorGreyLight;
-  section {
-    width: 1000px;
+  > section {
+    max-width: 1030px;
     margin: 0 auto;
     display: flex;
-    article:first-child{
+    padding: 0 15px;
+    > article:first-child{
       flex-basis: 20%;
-      p {
+      > p {
         line-height: 60px;
         font-size: 2rem;
         color: $textColorBlueTitle;
@@ -21,21 +22,31 @@ header {
         font-size: 1.5rem;
         line-height: 60px;
         margin-right: 40px;
+        color: $textColorGreyLight;
+        &:hover {
+          cursor: pointer;
+        }
       }
-      .profil_icon {
+      > .profil_icon {
         display: inline-block;
         vertical-align: top;
         margin-top: 10px;
         width: 80px;
-        .avatar_icon {
+        > .avatar_icon {
           width: 40px;
           height: 40px;
           border-radius: 50%;
           background-color: $globalColorRedDark;
+          display: inline-block;
         }
         > i{
           display: inline-block;
           vertical-align: top;
+          line-height: 40px;
+          color: $textColorGreyLight;
+          &:hover {
+            cursor: pointer;
+          }
         }
       }
     }

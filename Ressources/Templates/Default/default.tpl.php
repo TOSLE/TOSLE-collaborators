@@ -3,7 +3,7 @@
     <head>
         <title>TOSLE - HOME</title>
         <link href="<?php echo DIRNAME;?>public/Libraries/Framework/ospaf/css/tosle-lib.css" rel="stylesheet">
-        <link href="<?php echo DIRNAME;?>public/Styles/Default/css/tosle.css" rel="stylesheet">
+        <link href="<?php echo DIRNAME;?>public/Styles/Default/css/messaging.css" rel="stylesheet">
     </head>
     <body>
         <header>
