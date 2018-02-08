@@ -26,6 +26,8 @@
 /* TEXT COLOR */
 /* BLUE */
 /* BLUE */
+/* GREY */
+/* GREY */
 /* TEXT COLOR */
 /* IMPORT VARIABLES */
 /* IMPORT STYLE */
@@ -41,35 +43,44 @@ header {
   height: 60px;
   background-color: #FFFFFF;
   border-bottom: 1px solid #BDBDBD; }
-  header section {
-    width: 1000px;
+  header > section {
+    max-width: 1030px;
     margin: 0 auto;
-    display: flex; }
-    header section article:first-child {
+    display: flex;
+    padding: 0 15px; }
+    header > section > article:first-child {
       flex-basis: 20%; }
-      header section article:first-child p {
+      header > section > article:first-child > p {
         line-height: 60px;
         font-size: 2rem;
         color: #1A5CCB; }
-    header section article:last-child {
+    header > section article:last-child {
       flex-basis: 80%;
       text-align: right; }
-      header section article:last-child > i {
+      header > section article:last-child > i {
         font-size: 1.5rem;
         line-height: 60px;
-        margin-right: 40px; }
-      header section article:last-child .profil_icon {
+        margin-right: 40px;
+        color: #8C8C8C; }
+        header > section article:last-child > i:hover {
+          cursor: pointer; }
+      header > section article:last-child > .profil_icon {
         display: inline-block;
         vertical-align: top;
         margin-top: 10px;
         width: 80px; }
-        header section article:last-child .profil_icon .avatar_icon {
+        header > section article:last-child > .profil_icon > .avatar_icon {
           width: 40px;
           height: 40px;
           border-radius: 50%;
-          background-color: #CF2829; }
-        header section article:last-child .profil_icon > i {
+          background-color: #CF2829;
+          display: inline-block; }
+        header > section article:last-child > .profil_icon > i {
           display: inline-block;
-          vertical-align: top; }
+          vertical-align: top;
+          line-height: 40px;
+          color: #8C8C8C; }
+          header > section article:last-child > .profil_icon > i:hover {
+            cursor: pointer; }
 
 /* IMPORT STYLE */
