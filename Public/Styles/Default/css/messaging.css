@@ -56,28 +56,28 @@ header {
     margin: 0 auto;
     display: flex;
     padding: 0 15px; }
-    header > section > article:first-child {
+    header > section > div:first-child {
       flex-basis: 20%; }
-      header > section > article:first-child > p {
+      header > section > div:first-child > p {
         line-height: 60px;
         font-size: 2rem;
         color: #1A5CCB; }
-    header > section article:last-child {
+    header > section > div:last-child {
       flex-basis: 80%;
       text-align: right; }
-      header > section article:last-child > i {
+      header > section > div:last-child > i {
         font-size: 1.5rem;
         line-height: 60px;
         margin-right: 40px;
         color: #8C8C8C; }
-        header > section article:last-child > i:hover {
+        header > section > div:last-child > i:hover {
           cursor: pointer; }
-      header > section article:last-child > .profil_icon {
+      header > section > div:last-child > .profil_icon {
         display: inline-block;
         vertical-align: top;
         margin-top: 10px;
         width: 80px; }
-        header > section article:last-child > .profil_icon > .avatar_icon {
+        header > section > div:last-child > .profil_icon > .avatar_icon {
           width: 40px;
           height: 40px;
           border-radius: 50%;
@@ -85,15 +85,15 @@ header {
           display: inline-block;
           border: 0.5px solid #BDBDBD;
           overflow: hidden; }
-          header > section article:last-child > .profil_icon > .avatar_icon > img {
+          header > section > div:last-child > .profil_icon > .avatar_icon > img {
             width: 40px;
             height: 40px; }
-        header > section article:last-child > .profil_icon > i {
+        header > section > div:last-child > .profil_icon > i {
           display: inline-block;
           vertical-align: top;
           line-height: 40px;
           color: #8C8C8C; }
-          header > section article:last-child > .profil_icon > i:hover {
+          header > section > div:last-child > .profil_icon > i:hover {
             cursor: pointer; }
 
 nav {
@@ -105,27 +105,30 @@ nav {
     margin: 0 auto;
     display: flex;
     height: 60px; }
-    nav > section > article {
+    nav > section > div {
       flex-basis: 25%;
       text-align: center;
-      padding: 5px 0;
-      color: #8C8C8C; }
-      nav > section > article:hover {
-        color: #3D3F3E;
-        background-color: #E5E5E5;
-        transition: 0.4s; }
-      nav > section > article.current {
-        color: #F1F1F1;
-        background-color: #1A5CCB; }
-      nav > section > article > a {
+      padding: 5px 0; }
+      nav > section > div > a {
         display: block;
         width: 100%;
         height: 100%;
-        cursor: pointer; }
-        nav > section > article > a > .material-icons {
+        cursor: pointer;
+        color: #8C8C8C;
+        text-decoration: none; }
+        nav > section > div > a > .material-icons {
           font-size: 2em; }
-        nav > section > article > a > p {
+        nav > section > div > a > p {
           font-size: 0.8em; }
+      nav > section > div:hover {
+        background-color: #E5E5E5;
+        transition: 0.4s; }
+        nav > section > div:hover a {
+          color: #3D3F3E; }
+      nav > section > div.current {
+        background-color: #1A5CCB; }
+        nav > section > div.current a {
+          color: #F1F1F1; }
 
 /* IMPORT STYLE */
 /* IMPORT MEDIA */

@@ -4,25 +4,25 @@ class Router {
     /**
      * @var string
      */
-    private $language;
+    public $language;
     /**
      * @var string
      */
-    private $controller;
+    public $controller;
     /**
      * @var string
      */
-    private $action;
+    public $action;
 
     /**
      * @var string
      */
-    private $uri;
+    public $uri;
 
     /**
      * @var array string
      */
-    private $parameter;
+    public $parameter;
 
     /**
      * Router constructor.
@@ -65,6 +65,9 @@ class Router {
     {
         if(file_exists("Controllers/".$this->controller.".php")){
             include "Controllers/".$this->controller.".php";
+            $controller = $this->controller;
+            $action = $this->action;
+            $language = $this->language;
             if(class_exists($this->controller)){
                 $obj = new $this->controller();
                 if(method_exists($obj,$this->action)){

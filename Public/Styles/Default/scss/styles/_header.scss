@@ -7,7 +7,7 @@ header {
     margin: 0 auto;
     display: flex;
     padding: 0 15px;
-    > article:first-child{
+    > div:first-child{
       flex-basis: 20%;
       > p {
         line-height: 60px;
@@ -15,7 +15,7 @@ header {
         color: $textColorBlueTitle;
       }
     }
-    article:last-child{
+    > div:last-child{
       flex-basis: 80%;
       text-align: right;
       > i {

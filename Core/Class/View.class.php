@@ -36,6 +36,9 @@ class View
 
     function __destruct()
     {
+        global $controller, $action, $language;
+
+        extract($this->data);
         include $this->tpl;
     }
 }
