@@ -2,8 +2,8 @@
 <html>
     <head>
         <title>TOSLE - HOME</title>
-        <link href="<?php echo DIRNAME;?>public/Libraries/Framework/ospaf/css/tosle-lib.css" rel="stylesheet">
-        <link href="<?php echo DIRNAME;?>public/Styles/Default/css/messaging.css" rel="stylesheet">
+        <link href="<?php echo DIRNAME;?>Public/Libraries/Framework/ospaf/css/tosle-lib.css" rel="stylesheet">
+        <link href="<?php echo DIRNAME;?>Public/Styles/Default/css/messaging.css" rel="stylesheet">
     </head>
     <body>
         <header>
