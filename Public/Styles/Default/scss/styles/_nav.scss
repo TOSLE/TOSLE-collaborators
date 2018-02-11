@@ -7,30 +7,35 @@ nav {
     margin: 0 auto;
     display: flex;
     height: 60px;
-    > article {
+    > div {
       flex-basis: 25%;
       text-align: center;
       padding: 5px 0;
-      color: $textColorGreyLight;
-      &:hover {
-        color: $textColorGreyDark;
-        background-color: $backgroundColorGreyLight;
-        transition: 0.4s;
-      }
-      &.current {
-        color: $textColorWhiteLight;
-        background-color: $backgroundColorBlue;
-      }
       > a {
         display: block;
         width: 100%;
         height: 100%;
         cursor: pointer;
+        color: $textColorGreyLight;
+        text-decoration: none;
         > .material-icons {
           font-size: 2em;
         }
         > p {
           font-size: 0.8em;
+        }
+      }
+      &:hover {
+        background-color: $backgroundColorGreyLight;
+        transition: 0.4s;
+        a {
+          color: $textColorGreyDark;
+        }
+      }
+      &.current {
+        background-color: $backgroundColorBlue;
+        a {
+          color: $textColorWhiteLight;
         }
       }
     }
