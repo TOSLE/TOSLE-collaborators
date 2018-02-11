@@ -27,7 +27,7 @@
         <nav>
             <section>
                 <div <?php echo($controller == "IndexController")?"class='current'":"";?>>
-                    <a href="<?php echo DIRNAME;?>">
+                    <a href="<?php echo ($language=="en-EN")?DIRNAME:DIRNAME.substr($language,0,2);?>">
                         <i class="material-icons">&#xE8D1;</i>
                         <p><?php echo HOMEPAGE_NAME; ?></p>
                     </a>
