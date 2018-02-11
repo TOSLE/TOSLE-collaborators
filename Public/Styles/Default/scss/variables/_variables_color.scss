@@ -29,15 +29,22 @@
 /* GLOBAL VARIABLES */
 
 /* BACKGROUND COLOR */
-  /* WHITE */
-      $backgroundColorWhiteFull: #FFFFFF;
-      $backgroundColorWhiteLight: #F1F1F1;
-  /* WHITE */
+      /* WHITE */
+            $backgroundColorWhiteFull: #FFFFFF;
+            $backgroundColorWhiteLight: #F1F1F1;
+      /* WHITE */
+      /* BLUE */
+            $backgroundColorBlue: #1A5CCB;
+            $backgroundColorBlueDark: #037FF1;
+      /* BLUE */
 /* BACKGROUND COLOR */
 
 /* BORDER COLOR */
   /* GREY */
       $borderColorGreyLight: #BDBDBD;
+  /* GREY */
+  /* GREY */
+      $borderColorDarkLight: #3D3F3E;
   /* GREY */
 /* BORDER COLOR */
 
@@ -49,5 +56,9 @@
             $textColorGreyLight: #8C8C8C;
             $textColorGreyDark: #3D3F3E;
       /* GREY */
+      /* WHITE */
+            $textColorWhiteFull: #FFFFFF;
+            $textColorWhiteLight: #F1F1F1;
+      /* WHITE */
 /* TEXT COLOR */
 
