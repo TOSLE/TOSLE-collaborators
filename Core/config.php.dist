@@ -8,4 +8,4 @@
     define("DS", DIRECTORY_SEPARATOR);
 
     $scriptName = (dirname($_SERVER["SCRIPT_NAME"]) == "/")?"":dirname($_SERVER["SCRIPT_NAME"]);
-    define("DIRNAME", $scriptName.DS);config.php
+    define("DIRNAME", $scriptName.DS);

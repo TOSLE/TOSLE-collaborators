@@ -1,6 +1,6 @@
 <?php 
 	session_start();
-    require("Core/config.php");
+    require "Core/config.php";
 
     function autoLoader($parameter)
     {
