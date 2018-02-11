@@ -17,8 +17,8 @@ nav {
         background-color: $backgroundColorBlue;
       }
       &:hover {
-        color: $textColorWhiteLight;
-        background-color: $backgroundColorBlue;
+        color: $textColorGreyDark;
+        background-color: $backgroundColorGreyLight;
         transition: 0.4s;
       }
       > a {

@@ -20,6 +20,8 @@
 /* WHITE */
 /* BLUE */
 /* BLUE */
+/* GREY */
+/* GREY */
 /* BACKGROUND COLOR */
 /* BORDER COLOR */
 /* GREY */
@@ -112,8 +114,8 @@ nav {
         color: #F1F1F1;
         background-color: #1A5CCB; }
       nav > section > article:hover {
-        color: #F1F1F1;
-        background-color: #1A5CCB;
+        color: #3D3F3E;
+        background-color: #CAC9CB;
         transition: 0.4s; }
       nav > section > article > a {
         display: block;
