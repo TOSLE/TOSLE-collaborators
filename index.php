@@ -15,7 +15,7 @@ $tempUri = explode("?", substr(urldecode($_SERVER["REQUEST_URI"]), strlen(dirnam
 
 $uriExploded = explode(DS, $tempUri[0]);
 
-$language = (empty($uriExploded[0]))?"en-EN":$uriExploded[0]."-".strtoupper($uriExploded[0]);
+$language = (empty($uriExploded[0]))?"en-EN":strtolower($uriExploded[0])."-".strtoupper($uriExploded[0]);
 $controller = (empty($uriExploded[1]))?"IndexController": ucfirst(strtolower($uriExploded[1]))."Controller";
 $action = (empty($uriExploded[2]))?"IndexAction": strtolower($uriExploded[2])."Action";
 
