@@ -1,6 +1,4 @@
 .idea/
-#Temporaire
-Docker/build/www/
 
 
 Core/config.php
