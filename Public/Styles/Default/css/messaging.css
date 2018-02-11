@@ -142,11 +142,11 @@ nav {
     body > nav > section {
       height: 150px;
       padding: 0; }
-      body > nav > section > article {
+      body > nav > section > div {
         padding: 35px; }
-        body > nav > section > article > a > .material-icons {
+        body > nav > section > div > a > .material-icons {
           font-size: 3em; }
-        body > nav > section > article > a p {
+        body > nav > section > div > a p {
           font-size: 1.5em; } }
 
 /* IMPORT MEDIA */
