@@ -74,7 +74,12 @@ header {
           height: 40px;
           border-radius: 50%;
           background-color: #CF2829;
-          display: inline-block; }
+          display: inline-block;
+          border: 0.5px solid #BDBDBD;
+          overflow: hidden; }
+          header > section article:last-child > .profil_icon > .avatar_icon > img {
+            width: 40px;
+            height: 40px; }
         header > section article:last-child > .profil_icon > i {
           display: inline-block;
           vertical-align: top;
@@ -83,4 +88,42 @@ header {
           header > section article:last-child > .profil_icon > i:hover {
             cursor: pointer; }
 
-/* IMPORT STYLE */
+nav {
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #BDBDBD;
+  /* Fermeture de la section */ }
+  nav > section {
+    max-width: 1030px;
+    padding: 0 15px;
+    margin: 0 auto;
+    display: flex;
+    height: 60px;
+    /* Fermeture de l'article */ }
+    nav > section > article {
+      flex-basis: 25%;
+      text-align: center;
+      padding: 5px 0;
+      color: #8C8C8C; }
+      nav > section > article.current {
+        color: #3D3F3E;
+        background-color: #EAEAEA;
+        border-left: 1px solid #BDBDBD;
+        border-right: 1px solid #BDBDBD; }
+      nav > section > article:hover {
+        color: #3D3F3E;
+        background-color: #EAEAEA;
+        border-left: 1px solid #BDBDBD;
+        border-right: 1px solid #BDBDBD;
+        transition: 0.4s; }
+      nav > section > article > a {
+        display: block;
+        width: 100%;
+        height: 100%;
+        cursor: pointer; }
+        nav > section > article > a > .material-icons {
+          font-size: 2rem; }
+        nav > section > article > a > p {
+          font-size: 0.8rem; }
+
+/* Fermeture de la nav */
+/* IMPORT STYLE sssssssssssssssssssssssssssdssss*/

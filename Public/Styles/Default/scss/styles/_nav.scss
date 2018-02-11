@@ -1,0 +1,42 @@
+nav {
+  background-color: $backgroundColorWhiteFull;
+  border-bottom: 1px solid $borderColorGreyLight;
+  > section {
+    max-width: 1030px;
+    padding: 0 15px;
+    margin: 0 auto;
+    display: flex;
+    height: 60px;
+    > article {
+      flex-basis: 25%;
+      text-align: center;
+      padding: 5px 0;
+      color: $textColorGreyLight;
+      &.current {
+        color: $textColorGreyDark;
+        background-color: #EAEAEA;
+        border-left: 1px solid $borderColorGreyLight;
+        border-right: 1px solid $borderColorGreyLight;
+      }
+      &:hover {
+        color: $textColorGreyDark;
+        background-color: #EAEAEA;
+        border-left: 1px solid $borderColorGreyLight;
+        border-right: 1px solid $borderColorGreyLight;
+        transition: 0.4s;
+      }
+      > a {
+        display: block;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        > .material-icons {
+          font-size: 2rem;
+        }
+        > p {
+          font-size: 0.8rem;
+        }
+      }
+    } /* Fermeture de l'article */
+  } /* Fermeture de la section */
+} /* Fermeture de la nav */
