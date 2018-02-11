@@ -12,14 +12,14 @@ nav {
       text-align: center;
       padding: 5px 0;
       color: $textColorGreyLight;
-      &.current {
-        color: $textColorWhiteLight;
-        background-color: $backgroundColorBlue;
-      }
       &:hover {
         color: $textColorGreyDark;
         background-color: $backgroundColorGreyLight;
         transition: 0.4s;
+      }
+      &.current {
+        color: $textColorWhiteLight;
+        background-color: $backgroundColorBlue;
       }
       > a {
         display: block;
