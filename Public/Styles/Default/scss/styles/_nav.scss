@@ -2,7 +2,7 @@ nav {
   background-color: $backgroundColorWhiteFull;
   border-bottom: 1px solid $borderColorGreyLight;
   > section {
-    max-width: 1030px;
+    max-width: 1230px;
     padding: 0 15px;
     margin: 0 auto;
     display: flex;
@@ -13,16 +13,12 @@ nav {
       padding: 5px 0;
       color: $textColorGreyLight;
       &.current {
-        color: $textColorGreyDark;
-        background-color: #EAEAEA;
-        border-left: 1px solid $borderColorGreyLight;
-        border-right: 1px solid $borderColorGreyLight;
+        color: $textColorWhiteLight;
+        background-color: $backgroundColorBlue;
       }
       &:hover {
-        color: $textColorGreyDark;
-        background-color: #EAEAEA;
-        border-left: 1px solid $borderColorGreyLight;
-        border-right: 1px solid $borderColorGreyLight;
+        color: $textColorWhiteLight;
+        background-color: $backgroundColorBlue;
         transition: 0.4s;
       }
       > a {

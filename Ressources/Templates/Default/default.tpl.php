@@ -34,7 +34,7 @@
                 </article>
                 <article>
                     <a>
-                        <i class="material-icons">&#xE80D;</i>
+                        <i class="material-icons">&#xE02F;</i>
                         <p><?php echo BLOGPAGE_NAME; ?></p>
                     </a>
                 </article>

@@ -18,8 +18,12 @@
 /* BACKGROUND COLOR */
 /* WHITE */
 /* WHITE */
+/* BLUE */
+/* BLUE */
 /* BACKGROUND COLOR */
 /* BORDER COLOR */
+/* GREY */
+/* GREY */
 /* GREY */
 /* GREY */
 /* BORDER COLOR */
@@ -28,6 +32,8 @@
 /* BLUE */
 /* GREY */
 /* GREY */
+/* WHITE */
+/* WHITE */
 /* TEXT COLOR */
 /* IMPORT VARIABLES */
 /* IMPORT STYLE */
@@ -44,7 +50,7 @@ header {
   background-color: #FFFFFF;
   border-bottom: 1px solid #BDBDBD; }
   header > section {
-    max-width: 1030px;
+    max-width: 1230px;
     margin: 0 auto;
     display: flex;
     padding: 0 15px; }
@@ -92,7 +98,7 @@ nav {
   background-color: #FFFFFF;
   border-bottom: 1px solid #BDBDBD; }
   nav > section {
-    max-width: 1030px;
+    max-width: 1230px;
     padding: 0 15px;
     margin: 0 auto;
     display: flex;
@@ -103,15 +109,11 @@ nav {
       padding: 5px 0;
       color: #8C8C8C; }
       nav > section > article.current {
-        color: #3D3F3E;
-        background-color: #EAEAEA;
-        border-left: 1px solid #BDBDBD;
-        border-right: 1px solid #BDBDBD; }
+        color: #F1F1F1;
+        background-color: #1A5CCB; }
       nav > section > article:hover {
-        color: #3D3F3E;
-        background-color: #EAEAEA;
-        border-left: 1px solid #BDBDBD;
-        border-right: 1px solid #BDBDBD;
+        color: #F1F1F1;
+        background-color: #1A5CCB;
         transition: 0.4s; }
       nav > section > article > a {
         display: block;
