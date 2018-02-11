@@ -110,13 +110,13 @@ nav {
       text-align: center;
       padding: 5px 0;
       color: #8C8C8C; }
+      nav > section > article:hover {
+        color: #3D3F3E;
+        background-color: #E5E5E5;
+        transition: 0.4s; }
       nav > section > article.current {
         color: #F1F1F1;
         background-color: #1A5CCB; }
-      nav > section > article:hover {
-        color: #3D3F3E;
-        background-color: #CAC9CB;
-        transition: 0.4s; }
       nav > section > article > a {
         display: block;
         width: 100%;
