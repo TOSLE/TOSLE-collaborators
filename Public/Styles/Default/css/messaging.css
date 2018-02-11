@@ -119,9 +119,9 @@ nav {
         height: 100%;
         cursor: pointer; }
         nav > section > article > a > .material-icons {
-          font-size: 2rem; }
+          font-size: 2em; }
         nav > section > article > a > p {
-          font-size: 0.8rem; }
+          font-size: 0.8em; }
 
 /* IMPORT STYLE */
 /* IMPORT MEDIA */
@@ -133,9 +133,13 @@ nav {
     border-bottom: 0px solid #BDBDBD;
     border-top: 1px solid #BDBDBD; }
     body > nav > section {
-      height: 100px;
+      height: 150px;
       padding: 0; }
       body > nav > section > article {
-        padding: 25px; } }
+        padding: 35px; }
+        body > nav > section > article > a > .material-icons {
+          font-size: 3em; }
+        body > nav > section > article > a p {
+          font-size: 1.5em; } }
 
 /* IMPORT MEDIA */
