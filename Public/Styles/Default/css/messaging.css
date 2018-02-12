@@ -57,8 +57,7 @@ header {
     max-width: 1280px;
     margin: 0 auto;
     display: flex;
-    padding: 0 15px;
-    outline: none; }
+    padding: 0 15px; }
     header > section > div:first-child {
       flex-basis: 20%; }
       header > section > div:first-child > p {
@@ -69,7 +68,7 @@ header {
       flex-basis: 80%;
       text-align: right; }
       header > section > div:nth-child(2) > i {
-        font-size: 1.5rem;
+        font-size: 1.5em;
         line-height: 60px;
         margin-right: 40px;
         color: #8C8C8C; }
@@ -95,8 +94,8 @@ header {
           border: 0.5px solid #BDBDBD;
           overflow: hidden; }
           header > section > div:nth-child(2) > .profil_icon > .avatar_icon > img {
-            width: 40px;
-            height: 40px; }
+            width: 100%;
+            height: 100%; }
         header > section > div:nth-child(2) > .profil_icon > i {
           display: inline-block;
           vertical-align: top;
@@ -187,6 +186,25 @@ nav {
 /* IMPORT STYLE */
 /* IMPORT MEDIA */
 @media screen and (max-device-width: 420px) {
+  body > header {
+    height: 100px; }
+    body > header > section > div:first-child > p {
+      line-height: 100px;
+      font-size: 3em; }
+    body > header > section div:nth-child(2) > i {
+      font-size: 2.5em;
+      line-height: 100px; }
+    body > header > section div:nth-child(2) > .profil_icon {
+      width: 190px;
+      margin-top: 20px; }
+      body > header > section div:nth-child(2) > .profil_icon > .avatar_icon {
+        width: 60px;
+        height: 60px; }
+        body > header > section div:nth-child(2) > .profil_icon > .avatar_icon > img {
+          width: 100%;
+          height: 100%; }
+      body > header > section div:nth-child(2) > .profil_icon > i {
+        line-height: 70px; }
   body > nav {
     position: fixed;
     bottom: 0;
