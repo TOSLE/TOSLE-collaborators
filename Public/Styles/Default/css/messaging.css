@@ -132,7 +132,7 @@ header {
       text-align: left;
       padding: 10px 0; }
       .profil_menu div:last-child > .ul-menuProfil > .li-menuAction {
-        height: 25px;
+        padding: 0.5em 0;
         line-height: 25px;
         font-size: 0.9em; }
         .profil_menu div:last-child > .ul-menuProfil > .li-menuAction:hover {
@@ -205,6 +205,10 @@ nav {
           height: 100%; }
       body > header > section div:nth-child(2) > .profil_icon > i {
         line-height: 70px; }
+    body > header .profil_menu {
+      width: 400px;
+      margin-left: -220px;
+      font-size: 1.5em; }
   body > nav {
     position: fixed;
     bottom: 0;
