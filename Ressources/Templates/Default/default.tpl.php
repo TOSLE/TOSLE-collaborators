@@ -15,18 +15,21 @@
                 </div>
                 <div>
                     <i class="material-icons">&#xE003;</i>
-                    <div class="profil_icon">
+                    <div id="profil-icon" class="profil_icon">
                         <div class="avatar_icon">
                             <img src="<?php echo DIRNAME;?>Tosle/Users/Images/475899654133.jpg">
                         </div>
                         <i class="material-icons">&#xE313;</i>
+                        <div id="window-menu-profil" class="profil_menu">
+                            <?php include "Ressources/Templates/Default/default/headerMenu.php"; ?>
+                        </div>
                     </div>
                 </div>
             </section>
         </header>
         <nav>
             <section>
-                <div <?php echo($controller == "IndexController")?"class='current'":"";?>>
+                <div <?php echo($controller == "IndexController")?" class='current'":"";?>>
                     <a href="<?php echo ($language=="en-EN")?DIRNAME:DIRNAME.substr($language,0,2);?>">
                         <i class="material-icons">&#xE8D1;</i>
                         <p><?php echo HOMEPAGE_NAME; ?></p>
@@ -52,5 +55,10 @@
                 </div>
             </section>
         </nav>
+        <main>
+
+        </main>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script type="text/javascript" src="Public/Javascripts/Default/menuprofil.js"></script>
     </body>
 </html>

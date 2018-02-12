@@ -3,10 +3,11 @@ header {
   background-color: $backgroundColorWhiteFull;
   border-bottom: 1px solid $borderColorGreyLight;
   > section {
-    max-width: 1230px;
+    max-width: 1280px;
     margin: 0 auto;
     display: flex;
     padding: 0 15px;
+    outline: none;
     > div:first-child{
       flex-basis: 20%;
       > p {
@@ -15,7 +16,7 @@ header {
         color: $textColorBlueTitle;
       }
     }
-    > div:last-child{
+    > div:nth-child(2){
       flex-basis: 80%;
       text-align: right;
       > i {
@@ -32,6 +33,15 @@ header {
         vertical-align: top;
         margin-top: 10px;
         width: 80px;
+        &:hover {
+          cursor: pointer;
+          > .avatar_icon {
+            border: 0.5px solid $borderColorDarkLight;
+          }
+          > i {
+            color: $textColorGreyDark;
+          }
+        }
         > .avatar_icon {
           width: 40px;
           height: 40px;
@@ -50,9 +60,6 @@ header {
           vertical-align: top;
           line-height: 40px;
           color: $textColorGreyLight;
-          &:hover {
-            cursor: pointer;
-          }
         }
       }
     }
