@@ -22,12 +22,14 @@
 /* BLUE */
 /* GREY */
 /* GREY */
+/* BLACK */
+/* BLACK */
 /* BACKGROUND COLOR */
 /* BORDER COLOR */
 /* GREY */
 /* GREY */
-/* GREY */
-/* GREY */
+/* BLACK */
+/* BLACK */
 /* BORDER COLOR */
 /* TEXT COLOR */
 /* BLUE */
@@ -52,32 +54,39 @@ header {
   background-color: #FFFFFF;
   border-bottom: 1px solid #BDBDBD; }
   header > section {
-    max-width: 1230px;
+    max-width: 1280px;
     margin: 0 auto;
     display: flex;
-    padding: 0 15px; }
+    padding: 0 15px;
+    outline: none; }
     header > section > div:first-child {
       flex-basis: 20%; }
       header > section > div:first-child > p {
         line-height: 60px;
         font-size: 2rem;
         color: #1A5CCB; }
-    header > section > div:last-child {
+    header > section > div:nth-child(2) {
       flex-basis: 80%;
       text-align: right; }
-      header > section > div:last-child > i {
+      header > section > div:nth-child(2) > i {
         font-size: 1.5rem;
         line-height: 60px;
         margin-right: 40px;
         color: #8C8C8C; }
-        header > section > div:last-child > i:hover {
+        header > section > div:nth-child(2) > i:hover {
           cursor: pointer; }
-      header > section > div:last-child > .profil_icon {
+      header > section > div:nth-child(2) > .profil_icon {
         display: inline-block;
         vertical-align: top;
         margin-top: 10px;
         width: 80px; }
-        header > section > div:last-child > .profil_icon > .avatar_icon {
+        header > section > div:nth-child(2) > .profil_icon:hover {
+          cursor: pointer; }
+          header > section > div:nth-child(2) > .profil_icon:hover > .avatar_icon {
+            border: 0.5px solid #3D3F3E; }
+          header > section > div:nth-child(2) > .profil_icon:hover > i {
+            color: #3D3F3E; }
+        header > section > div:nth-child(2) > .profil_icon > .avatar_icon {
           width: 40px;
           height: 40px;
           border-radius: 50%;
@@ -85,22 +94,67 @@ header {
           display: inline-block;
           border: 0.5px solid #BDBDBD;
           overflow: hidden; }
-          header > section > div:last-child > .profil_icon > .avatar_icon > img {
+          header > section > div:nth-child(2) > .profil_icon > .avatar_icon > img {
             width: 40px;
             height: 40px; }
-        header > section > div:last-child > .profil_icon > i {
+        header > section > div:nth-child(2) > .profil_icon > i {
           display: inline-block;
           vertical-align: top;
           line-height: 40px;
           color: #8C8C8C; }
-          header > section > div:last-child > .profil_icon > i:hover {
-            cursor: pointer; }
+
+.profil_menu {
+  width: 200px;
+  position: absolute;
+  margin-left: -120px;
+  margin-top: 5px;
+  max-height: 0px;
+  overflow: hidden; }
+  .profil_menu div:first-child {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid #3D3F3E;
+    position: absolute;
+    right: 6px; }
+  .profil_menu div:last-child {
+    width: 100%;
+    border: 1px solid #3D3F3E;
+    background-color: #FFFFFF;
+    position: absolute;
+    top: 5px;
+    border-radius: 5px;
+    max-height: 0px;
+    transition: 0.4s;
+    overflow: hidden; }
+    .profil_menu div:last-child > .ul-menuProfil {
+      list-style: none;
+      text-align: left;
+      padding: 10px 0; }
+      .profil_menu div:last-child > .ul-menuProfil > .li-menuAction {
+        height: 25px;
+        line-height: 25px;
+        font-size: 0.9em; }
+        .profil_menu div:last-child > .ul-menuProfil > .li-menuAction:hover {
+          background-color: #1A5CCB; }
+          .profil_menu div:last-child > .ul-menuProfil > .li-menuAction:hover a {
+            color: #FFFFFF; }
+        .profil_menu div:last-child > .ul-menuProfil > .li-menuAction > a {
+          text-decoration: none;
+          color: #3D3F3E;
+          display: block;
+          width: 80%;
+          margin-left: 10%; }
+      .profil_menu div:last-child > .ul-menuProfil > .separator {
+        border-top: 1px solid #BDBDBD;
+        margin: 5px 3px; }
 
 nav {
   background-color: #FFFFFF;
   border-bottom: 1px solid #BDBDBD; }
   nav > section {
-    max-width: 1230px;
+    max-width: 1280px;
     padding: 0 15px;
     margin: 0 auto;
     display: flex;
