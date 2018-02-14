@@ -10,13 +10,13 @@
     height: 0;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-    border-bottom: 5px solid $backgroundColorDarkLight;
+    border-bottom: 5px solid $backgroundColorGreyNormal;
     position: absolute;
     right: 6px;
   }
   div:last-child{
     width: 100%;
-    border: 1px solid $borderColorDarkLight;
+    border: 1px solid $borderColorGreyNormal;
     background-color: $backgroundColorWhiteFull;
     position: absolute;
     top: 5px;
@@ -33,17 +33,17 @@
         line-height: 25px;
         font-size: 0.9em;
         &:hover{
-          background-color: $backgroundColorBlue;
+          background-color: $backgroundColorBlueMatte;
           a {
             color: $textColorWhiteFull;
           }
         }
         > a {
           text-decoration: none;
-          color: $textColorGreyDark;
+          color: $textColorGreyNormal;
           display: block;
           width: 80%;
-          margin-left: 10%;
+          margin: 0 10%;
         }
       }
       > .separator {

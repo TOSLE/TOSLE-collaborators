@@ -2,8 +2,8 @@
 <html>
     <head>
         <title>TOSLE - HOME</title>
-        <link href="<?php echo DIRNAME;?>Public/Libraries/Framework/ospaf/css/tosle-lib.css" rel="stylesheet">
-        <link href="<?php echo DIRNAME;?>Public/Styles/Default/css/messaging.css" rel="stylesheet">
+        <link href="<?php echo DIRNAME;?>Public/Libraries/Framework/ospaf/css/ospaf.css" rel="stylesheet">
+        <link href="<?php echo DIRNAME;?>Public/Styles/Default/css/template_default.css" rel="stylesheet">
     </head>
     <body>
         <header>
@@ -56,7 +56,7 @@
             </section>
         </nav>
         <main>
-
+            <?php include $this->view;?>
         </main>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <script type="text/javascript" src="<?php echo DIRNAME;?>Public/Javascripts/Default/menuprofil.js"></script>
