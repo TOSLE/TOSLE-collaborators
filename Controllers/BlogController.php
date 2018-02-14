@@ -10,6 +10,6 @@ class BlogController
 {
     function indexAction($params)
     {
-        $View = new View();
+        $View = new View("default", "blog");
     }
 }

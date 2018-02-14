@@ -2,7 +2,7 @@ nav {
   background-color: $backgroundColorWhiteFull;
   border-bottom: 1px solid $borderColorGreyLight;
   > section {
-    max-width: 1280px;
+    max-width: $maxWidthSection;
     padding: 0 15px;
     margin: 0 auto;
     display: flex;
@@ -29,13 +29,13 @@ nav {
         background-color: $backgroundColorGreyLight;
         transition: 0.4s;
         a {
-          color: $textColorGreyDark;
+          color: $textColorGreyNormal;
         }
       }
       &.current {
-        background-color: $backgroundColorBlue;
+        background-color: $backgroundColorBlueMatte;
         a {
-          color: $textColorWhiteLight;
+          color: $textColorWhiteNormal;
         }
       }
     }

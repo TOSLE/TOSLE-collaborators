@@ -1,5 +1,6 @@
 /* IMPORT VARIABLES */
 @import "variables/variables_color";
+@import "variables/variables_params";
 /* IMPORT VARIABLES */
 /* IMPORT STYLE */
 @import "styles/global";
@@ -10,3 +11,7 @@
 /* IMPORT MEDIA */
 @import "media/global_media";
 /* IMPORT MEDIA */
+
+/* BLOG PART */
+@import "styles/blog/blog";
+/* BLOG PART */
