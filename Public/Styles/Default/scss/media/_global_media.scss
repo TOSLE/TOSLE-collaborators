@@ -43,10 +43,10 @@
         width: 100%;
         border-bottom: 0px solid $borderColorGreyLight;
         border-top: 1px solid $borderColorGreyLight;
-        > section {
+        > ul {
           height: 150px;
           padding: 0;
-          > div {
+          > li {
             padding: 35px;
             > a {
               > .material-icons {
