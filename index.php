@@ -27,6 +27,7 @@
     if(file_exists("Core/Language/".$language."/conf.lang.php")){
         include "Core/Language/".$language."/conf.lang.php";
     } else {
+        $language = "en-EN";
         include "Core/Language/en-EN/conf.lang.php";
     }
 

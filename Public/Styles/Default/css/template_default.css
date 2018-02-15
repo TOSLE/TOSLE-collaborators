@@ -50,6 +50,11 @@ Ne pas supprimer, utilisez les comme source d'inspi
 body {
   background-color: #F1F1F1; }
 
+main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 15px; }
+
 header {
   height: 60px;
   background-color: #FFFFFF;
@@ -151,35 +156,36 @@ header {
 nav {
   background-color: #FFFFFF;
   border-bottom: 1px solid #BDBDBD; }
-  nav > section {
+  nav > ul {
     max-width: 1280px;
     padding: 0 15px;
     margin: 0 auto;
     display: flex;
-    height: 60px; }
-    nav > section > div {
+    height: 60px;
+    list-style: none; }
+    nav > ul > li {
       flex-basis: 25%;
-      text-align: center;
-      padding: 5px 0; }
-      nav > section > div > a {
+      text-align: center; }
+      nav > ul > li > a {
+        padding: 5px 0;
         display: block;
         width: 100%;
         height: 100%;
         cursor: pointer;
         color: #8C8C8C;
         text-decoration: none; }
-        nav > section > div > a > .material-icons {
+        nav > ul > li > a > .material-icons {
           font-size: 2em; }
-        nav > section > div > a > p {
+        nav > ul > li > a > p {
           font-size: 0.8em; }
-      nav > section > div:hover {
+      nav > ul > li:hover {
         background-color: #E5E5E5;
         transition: 0.4s; }
-        nav > section > div:hover a {
+        nav > ul > li:hover a {
           color: #3D3F3E; }
-      nav > section > div.current {
+      nav > ul > li.current {
         background-color: #1A5CCB; }
-        nav > section > div.current a {
+        nav > ul > li.current a {
           color: #F1F1F1; }
 
 /* IMPORT STYLE */
@@ -226,43 +232,50 @@ nav {
 
 /* IMPORT MEDIA */
 /* BLOG PART */
-body > main > section {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 15px; }
-  body > main > section > h1 {
-    margin-top: 25px; }
-  body > main > section > .container > .row > div > div {
-    padding: 0; }
-  body > main > section article {
-    background-color: #FFFFFF;
-    height: 300px;
-    display: flex;
-    border: 0.5px solid #BDBDBD; }
-  body > main > section .text-image-lg > div:first-child {
-    flex-basis: 55%;
-    padding: 0;
-    margin: 0; }
-    body > main > section .text-image-lg > div:first-child > div {
-      width: 70%;
-      height: 100%;
-      margin: 0 auto; }
-      body > main > section .text-image-lg > div:first-child > div > .content-text {
-        margin-top: 150px;
-        transform: translateY(-50%); }
-        body > main > section .text-image-lg > div:first-child > div > .content-text > h1 {
-          margin-bottom: 15px; }
-        body > main > section .text-image-lg > div:first-child > div > .content-text > p {
-          margin-bottom: 15px;
-          text-align: justify; }
-  body > main > section .text-image-lg > div:last-child {
-    flex-basis: 45%;
-    padding: 0;
-    margin: 0;
+main > h1 {
+  margin-top: 25px; }
+
+section > .row > div > div {
+  padding: 0; }
+
+section article {
+  background-color: #FFFFFF;
+  height: 300px;
+  display: flex;
+  border: 0.5px solid #BDBDBD; }
+  section article .content-image {
     background-color: #2F80ED; }
-    body > main > section .text-image-lg > div:last-child > img {
+    section article .content-image > img {
       width: 100%;
       height: 100%;
       opacity: 0.4; }
+  section article .content-text {
+    height: 100%;
+    padding: 0 1em;
+    display: flex; }
+    section article .content-text div {
+      margin: auto; }
+      section article .content-text div > h1 {
+        margin-bottom: 10px; }
+      section article .content-text div > p {
+        margin-bottom: 25px;
+        text-align: justify; }
+
+section .text-image-lg > div:first-child {
+  flex-basis: 55%; }
+
+section .text-image-lg > div:last-child {
+  flex-basis: 45%; }
+
+section .text-image-md > div:first-child {
+  flex-basis: 50%; }
+
+section .text-image-md > div:last-child {
+  flex-basis: 50%; }
+
+section .text-lg > .content-text {
+  width: 80%;
+  margin: auto;
+  text-align: center; }
 
 /* BLOG PART */

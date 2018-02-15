@@ -296,14 +296,14 @@ body {
   margin: 0 auto;
   max-width: 100%;
   overflow: hidden; }
-  .container .row {
+  .container > .row {
     display: flex;
     flex-wrap: wrap;
     margin: 0 -1em; }
-    .container .row div {
+    .container > .row > div {
       padding: 0 1em;
       margin: 1em 0; }
-      .container .row div div {
+      .container > .row > div > div {
         word-wrap: break-word; }
 
 @media screen and (max-device-width: 520px) {
