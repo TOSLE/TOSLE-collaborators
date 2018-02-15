@@ -220,14 +220,14 @@ nav {
     width: 100%;
     border-bottom: 0px solid #BDBDBD;
     border-top: 1px solid #BDBDBD; }
-    body > nav > section {
+    body > nav > ul {
       height: 150px;
       padding: 0; }
-      body > nav > section > div {
+      body > nav > ul > li {
         padding: 35px; }
-        body > nav > section > div > a > .material-icons {
+        body > nav > ul > li > a > .material-icons {
           font-size: 3em; }
-        body > nav > section > div > a p {
+        body > nav > ul > li > a p {
           font-size: 1.5em; } }
 
 /* IMPORT MEDIA */
