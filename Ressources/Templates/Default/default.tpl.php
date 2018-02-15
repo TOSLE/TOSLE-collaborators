@@ -2,6 +2,8 @@
 <html>
     <head>
         <title>TOSLE - HOME</title>
+        <meta charset="utf-8">
+        
         <link href="<?php echo DIRNAME;?>Public/Libraries/Framework/ospaf/css/ospaf.css" rel="stylesheet">
         <link href="<?php echo DIRNAME;?>Public/Styles/Default/css/template_default.css" rel="stylesheet">
     </head>
