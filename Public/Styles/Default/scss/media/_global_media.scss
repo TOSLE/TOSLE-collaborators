@@ -39,6 +39,7 @@
       }
       > nav {
         position: fixed;
+        z-index: 100;
         bottom: 0;
         width: 100%;
         border-bottom: 0px solid $borderColorGreyLight;
