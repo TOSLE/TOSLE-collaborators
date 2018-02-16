@@ -1,33 +1,24 @@
 #admin-section {
   > div {
     > div {
-      > article {
+      > div {
         height: 250px;
         width: 100%;
-        display: flex;
-        > div {
+        > a {
+          display: block;
           width: 100%;
+          height: 100%;
           text-align: center;
-          margin: auto;
+          padding: 2em 0;
+          color:$textColorWhiteNormalAdmin;
+          text-decoration: none;
+          > i {
+            font-size: 8em;
+          }
+          h1 {
+            font-size: 2.5em;
+          }
         }
-      }
-      .article-admin-green {
-        background-color: $backgroundColorAdminGreenNormal;
-      }
-      .article-admin-orange {
-        background-color: $backgroundColorAdminOrangeNormal;
-      }
-      .article-admin-sweetblue {
-        background-color: $backgroundColorAdminSweetBlueNormal;
-      }
-      .article-admin-pink {
-        background-color: $backgroundColorAdminPinkNormal;
-      }
-      .article-admin-skyblue {
-        background-color: $backgroundColorAdminSkyBlueNormal;
-      }
-      .article-admin-salmon {
-        background-color: $backgroundColorAdminSalmonNormal;
       }
     }
   }
