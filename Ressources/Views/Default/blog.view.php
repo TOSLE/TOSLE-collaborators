@@ -22,8 +22,13 @@
         <div class="col-5">
             <div>
                 <article class="image-md">
-                    <div class="content-image">
-                        <img src="<?php echo DIRNAME;?>Tosle/Blog/Media/Images/image-exemple-02.jpg">
+                    <div class="content-background-image" style="background-image: url('<?php echo DIRNAME;?>Tosle/Blog/Media/Images/image-exemple-02.jpg');">
+                        <div class="content-text">
+                            <div>
+                                <h1>Titre Article</h1>
+                                <a class="btn btn-md btn-white"><?php echo READMORE_BUTTON;?></a>
+                            </div>
+                        </div>
                     </div>
                 </article>
             </div>
@@ -37,7 +42,6 @@
                         <div>
                             <h1>Titre article</h1>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab consequuntur cupiditate distinctio dolor.
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab consequuntur cupiditate distinctio dolor
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab consequuntur cupiditate distinctio dolor.</p>
                             <a class="btn btn-md btn-blue"><?php echo READMORE_BUTTON;?></a>
                         </div>
@@ -68,8 +72,13 @@
         <div class="col-5">
             <div>
                 <article class="image-md">
-                    <div class="content-image">
-                        <img src="<?php echo DIRNAME;?>Tosle/Blog/Media/Images/image-exemple-02.jpg">
+                    <div class="content-background-image" style="background-image: url('<?php echo DIRNAME;?>Tosle/Blog/Media/Images/image-exemple-02.jpg');">
+                        <div class="content-text">
+                            <div>
+                                <h1>Titre Article</h1>
+                                <a class="btn btn-md btn-white"><?php echo READMORE_BUTTON;?></a>
+                            </div>
+                        </div>
                     </div>
                 </article>
             </div>
@@ -119,7 +128,6 @@
                         <div>
                             <h1>Titre article</h1>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab consequuntur cupiditate distinctio dolor.
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab consequuntur cupiditate distinctio dolor
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab consequuntur cupiditate distinctio dolor.</p>
                             <a class="btn btn-md btn-blue"><?php echo READMORE_BUTTON;?></a>
                         </div>

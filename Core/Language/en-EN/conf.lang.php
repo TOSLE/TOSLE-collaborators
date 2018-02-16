@@ -31,6 +31,12 @@
     ADMIN DEFINE
 */
     define("ADMIN_TITLE_PAGE","Back office");
+    define("ADMIN_HOME_BLOC_TITLE_DASHBOARD", "Dashboard");
+    define("ADMIN_HOME_BLOC_TITLE_LESSONS", "Lessons");
+    define("ADMIN_HOME_BLOC_TITLE_MARK", "Mark");
+    define("ADMIN_HOME_BLOC_TITLE_STUDENT", "Student");
+    define("ADMIN_HOME_BLOC_TITLE_BLOG", "Blog");
+    define("ADMIN_HOME_BLOC_TITLE_HOMEPAGE", "Homepage");
 /*
     BLOGPAGE DEFINE
 */
