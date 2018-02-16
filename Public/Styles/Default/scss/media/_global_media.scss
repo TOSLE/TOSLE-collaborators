@@ -1,5 +1,6 @@
-@media screen and (max-device-width: 420px){
+@media all and (max-device-width: 420px){
     body {
+      padding-bottom: 160px;
       > header {
         height: 100px;
         > section {

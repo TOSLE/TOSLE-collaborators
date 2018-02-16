@@ -24,12 +24,14 @@
     max-height: 0px;
     transition: 0.4s;
     overflow: hidden;
+    z-index: 100;
     > .ul-menuProfil {
       list-style: none;
       text-align: left;
       padding: 10px 0;
+
       > .li-menuAction {
-        padding: 0.5em 0;
+        padding: 0 10%;
         line-height: 25px;
         font-size: 0.9em;
         &:hover{
@@ -43,7 +45,7 @@
           color: $textColorGreyNormal;
           display: block;
           width: 80%;
-          margin: 0 10%;
+          padding: 0.5em 0;
         }
       }
       > .separator {

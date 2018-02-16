@@ -1,5 +1,5 @@
 <h1><?php echo BLOG_TITLE_PAGE;?></h1>
-<section class="container">
+<section id="blog-section" class="container">
     <div class="row">
         <div class="col-7">
             <div>

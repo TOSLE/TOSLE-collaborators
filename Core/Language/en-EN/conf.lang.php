@@ -28,6 +28,10 @@
 
 
 /*
+    ADMIN DEFINE
+*/
+    define("ADMIN_TITLE_PAGE","Back office");
+/*
     BLOGPAGE DEFINE
 */
     define("BLOG_TITLE_PAGE","Blog");
