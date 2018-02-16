@@ -25,6 +25,18 @@ Ne pas supprimer, utilisez les comme source d'inspi
 /* GREY */
 /* BLACK */
 /* BLACK */
+/* ADMIN PART */
+/* GREEN */
+/* GREEN */
+/* ORANGE */
+/* ORANGE */
+/* BLUE */
+/* BLUE */
+/* SALMON */
+/* SALMON */
+/* PINK */
+/* PINK */
+/* ADMIN PART */
 /* BACKGROUND COLOR */
 /* BORDER COLOR */
 /* GREY */
@@ -54,6 +66,9 @@ main {
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 15px; }
+
+main > h1 {
+  margin-top: 25px; }
 
 header {
   height: 60px;
@@ -130,13 +145,14 @@ header {
     border-radius: 5px;
     max-height: 0px;
     transition: 0.4s;
-    overflow: hidden; }
+    overflow: hidden;
+    z-index: 100; }
     .profil_menu div:last-child > .ul-menuProfil {
       list-style: none;
       text-align: left;
       padding: 10px 0; }
       .profil_menu div:last-child > .ul-menuProfil > .li-menuAction {
-        padding: 0.5em 0;
+        padding: 0 10%;
         line-height: 25px;
         font-size: 0.9em; }
         .profil_menu div:last-child > .ul-menuProfil > .li-menuAction:hover {
@@ -148,7 +164,7 @@ header {
           color: #3D3F3E;
           display: block;
           width: 80%;
-          margin: 0 10%; }
+          padding: 0.5em 0; }
       .profil_menu div:last-child > .ul-menuProfil > .separator {
         border-top: 1px solid #BDBDBD;
         margin: 5px 3px; }
@@ -190,91 +206,116 @@ nav {
 
 /* IMPORT STYLE */
 /* IMPORT MEDIA */
-@media screen and (max-device-width: 420px) {
-  body > header {
-    height: 100px; }
-    body > header > section > div:first-child > p {
-      line-height: 100px;
-      font-size: 3em; }
-    body > header > section div:nth-child(2) > i {
-      font-size: 2.5em;
-      line-height: 100px; }
-    body > header > section div:nth-child(2) > .profil_icon {
-      width: 190px;
-      margin-top: 20px; }
-      body > header > section div:nth-child(2) > .profil_icon > .avatar_icon {
-        width: 60px;
-        height: 60px; }
-        body > header > section div:nth-child(2) > .profil_icon > .avatar_icon > img {
-          width: 100%;
-          height: 100%; }
-      body > header > section div:nth-child(2) > .profil_icon > i {
-        line-height: 70px; }
-    body > header .profil_menu {
-      width: 400px;
-      margin-left: -220px;
-      font-size: 1.5em; }
-  body > nav {
-    position: fixed;
-    z-index: 100;
-    bottom: 0;
-    width: 100%;
-    border-bottom: 0px solid #BDBDBD;
-    border-top: 1px solid #BDBDBD; }
-    body > nav > ul {
-      height: 150px;
-      padding: 0; }
-      body > nav > ul > li {
-        padding: 35px; }
-        body > nav > ul > li > a > .material-icons {
-          font-size: 3em; }
-        body > nav > ul > li > a p {
-          font-size: 1.5em; } }
+@media all and (max-device-width: 420px) {
+  body {
+    padding-bottom: 160px; }
+    body > header {
+      height: 100px; }
+      body > header > section > div:first-child > p {
+        line-height: 100px;
+        font-size: 3em; }
+      body > header > section div:nth-child(2) > i {
+        font-size: 2.5em;
+        line-height: 100px; }
+      body > header > section div:nth-child(2) > .profil_icon {
+        width: 190px;
+        margin-top: 20px; }
+        body > header > section div:nth-child(2) > .profil_icon > .avatar_icon {
+          width: 60px;
+          height: 60px; }
+          body > header > section div:nth-child(2) > .profil_icon > .avatar_icon > img {
+            width: 100%;
+            height: 100%; }
+        body > header > section div:nth-child(2) > .profil_icon > i {
+          line-height: 70px; }
+      body > header .profil_menu {
+        width: 400px;
+        margin-left: -220px;
+        font-size: 1.5em; }
+    body > nav {
+      position: fixed;
+      z-index: 100;
+      bottom: 0;
+      width: 100%;
+      border-bottom: 0px solid #BDBDBD;
+      border-top: 1px solid #BDBDBD; }
+      body > nav > ul {
+        height: 150px;
+        padding: 0; }
+        body > nav > ul > li {
+          padding: 35px; }
+          body > nav > ul > li > a > .material-icons {
+            font-size: 3em; }
+          body > nav > ul > li > a p {
+            font-size: 1.5em; } }
 
 /* IMPORT MEDIA */
+/* ADMIN PART */
+#admin-section > div > div > article {
+  height: 250px;
+  width: 100%;
+  display: flex; }
+  #admin-section > div > div > article > div {
+    width: 100%;
+    text-align: center;
+    margin: auto; }
+
+#admin-section > div > div .article-admin-green {
+  background-color: #A3E079; }
+
+#admin-section > div > div .article-admin-orange {
+  background-color: #D8B166; }
+
+#admin-section > div > div .article-admin-sweetblue {
+  background-color: #86A8D6; }
+
+#admin-section > div > div .article-admin-pink {
+  background-color: #E27696; }
+
+#admin-section > div > div .article-admin-skyblue {
+  background-color: #42B7E2; }
+
+#admin-section > div > div .article-admin-salmon {
+  background-color: #FB9990; }
+
 /* BLOG PART */
-main > h1 {
-  margin-top: 25px; }
-
-section > .row > div > div {
-  padding: 0; }
-
-section article {
+/* BLOG PART */
+#blog-section article {
   background-color: #FFFFFF;
   height: 300px;
   display: flex;
   border: 0.5px solid #BDBDBD; }
-  section article .content-image {
+  #blog-section article .content-image {
     background-color: #2F80ED; }
-    section article .content-image > img {
+    #blog-section article .content-image > img {
       width: 100%;
       height: 100%;
       opacity: 0.4; }
-  section article .content-text {
+  #blog-section article .content-text {
     height: 100%;
     padding: 0 1em;
     display: flex; }
-    section article .content-text div {
+    #blog-section article .content-text div {
       margin: auto; }
-      section article .content-text div > h1 {
+      #blog-section article .content-text div > h1 {
         margin-bottom: 10px; }
-      section article .content-text div > p {
+      #blog-section article .content-text div > p {
         margin-bottom: 25px;
         text-align: justify; }
 
-section .text-image-lg > div:first-child {
+#blog-section .text-image-lg > div:first-child {
   flex-basis: 55%; }
 
-section .text-image-lg > div:last-child {
+#blog-section .text-image-lg > div:last-child {
   flex-basis: 45%; }
 
-section .text-image-md > div:first-child {
+#blog-section .text-image-md > div:first-child {
   flex-basis: 50%; }
 
-section .text-image-md > div:last-child {
+#blog-section .text-image-md > div:last-child {
   flex-basis: 50%; }
 
-section .text-lg > .content-text {
+#blog-section .text-lg > .content-text {
   width: 80%;
   margin: auto;
   text-align: center; }

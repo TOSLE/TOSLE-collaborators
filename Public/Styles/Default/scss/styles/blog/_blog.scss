@@ -1,10 +1,4 @@
-main > h1 {
-    margin-top: 25px;
-}
-section {
-  > .row > div > div {
-    padding: 0;
-  }
+#blog-section {
   article{
     background-color: $backgroundColorWhiteFull;
     height: 300px;
