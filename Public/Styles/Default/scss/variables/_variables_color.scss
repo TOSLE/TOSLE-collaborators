@@ -34,24 +34,30 @@ Ne pas supprimer, utilisez les comme source d'inspi
       /* BLACK */
             $backgroundColorBlackFull: #000000;
       /* BLACK */
-  /* ADMIN PART */
+  /* ARTICLE BLOC PART */
       /* GREEN */
-            $backgroundColorAdminGreenNormal: #A3E079;
+            $backgroundColorBlocGreenNormal: #A3E079;
+            $backgroundColorBlocGreenNormalHover: #8CD85A;
       /* GREEN */
       /* ORANGE */
-            $backgroundColorAdminOrangeNormal: #D8B166;
+            $backgroundColorBlocOrangeNormal: #D8B166;
+            $backgroundColorBlocOrangeNormalHover: #D0A149;
       /* ORANGE */
       /* BLUE */
-            $backgroundColorAdminSweetBlueNormal: #86A8D6;
-            $backgroundColorAdminSkyBlueNormal: #42B7E2;
+            $backgroundColorBlocSweetBlueNormal: #86A8D6;
+            $backgroundColorBlocSweetBlueNormalHover: #6791CB;
+            $backgroundColorBlocSkyBlueNormal: #42B7E2;
+            $backgroundColorBlocSkyBlueNormalHover: #22ABDD;
       /* BLUE */
       /* SALMON */
-            $backgroundColorAdminSalmonNormal: #FB9990;
+            $backgroundColorBlocSalmonNormal: #FB9990;
+            $backgroundColorBlocSalmonNormalHover: #FA776B;
       /* SALMON */
       /* PINK */
-            $backgroundColorAdminPinkNormal: #E27696;
+            $backgroundColorBlocPinkNormal: #E27696;
+            $backgroundColorBlocPinkNormalHover: #DB577E;
       /* PINK */
-  /* ADMIN PART */
+  /* ARTICLE BLOC PART */
 /* BACKGROUND COLOR */
 
 /* BORDER COLOR */
@@ -72,7 +78,7 @@ Ne pas supprimer, utilisez les comme source d'inspi
       /* WHITE */
             $textColorWhiteFull: #FFFFFF;
             $textColorWhiteNormal: #F1F1F1;
-            $textColorWhiteNormalAdmin: #F1F1F1;
+            $textColorWhiteNormalBloc: #F1F1F1;
       /* WHITE */
 /* TEXT COLOR */
 

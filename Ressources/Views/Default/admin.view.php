@@ -2,7 +2,7 @@
 <section id="admin-section" class="container">
     <div class="row">
         <div class="col-4">
-            <div class="article-admin-green">
+            <div class="article-bloc article-bloc-green">
                 <a href="#">
                     <i class="material-icons">&#xE871;</i>
                     <h1><?php echo ADMIN_HOME_BLOC_TITLE_DASHBOARD;?></h1>
@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="col-4">
-            <div class="article-admin-orange">
+            <div class="article-bloc article-bloc-orange">
                 <a href="#">
                     <i class="material-icons">&#xE54B;</i>
                     <h1><?php echo ADMIN_HOME_BLOC_TITLE_LESSONS;?></h1>
@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="col-4">
-            <div class="article-admin-sweetblue">
+            <div class="article-bloc article-bloc-sweetblue">
                 <a href="#">
                     <i class="material-icons">&#xE560;</i>
                     <h1><?php echo ADMIN_HOME_BLOC_TITLE_MARK;?></h1>
@@ -28,7 +28,7 @@
     </div>
     <div class="row">
         <div class="col-4">
-            <div class="article-admin-pink">
+            <div class="article-bloc article-bloc-pink">
                 <a href="#">
                     <i class="material-icons">&#xE416;</i>
                     <h1><?php echo ADMIN_HOME_BLOC_TITLE_STUDENT;?></h1>
@@ -36,7 +36,7 @@
             </div>
         </div>
         <div class="col-4">
-            <div class="article-admin-skyblue">
+            <div class="article-bloc article-bloc-skyblue">
                 <a href="#">
                     <i class="material-icons">&#xE02F;</i>
                     <h1><?php echo ADMIN_HOME_BLOC_TITLE_BLOG;?></h1>
@@ -44,7 +44,7 @@
             </div>
         </div>
         <div class="col-4">
-            <div class="article-admin-salmon">
+            <div class="article-bloc article-bloc-salmon">
                 <a href="#">
                     <i class="material-icons">&#xE8D1;</i>
                     <h1><?php echo ADMIN_HOME_BLOC_TITLE_HOMEPAGE;?></h1>

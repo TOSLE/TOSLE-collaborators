@@ -1,18 +1,63 @@
-.article-admin-green {
-  background-color: $backgroundColorAdminGreenNormal;
+.article-bloc {
+  height: 250px;
+  width: 100%;
+  > a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding: 2em 0;
+    color:$textColorWhiteNormal;
+    text-decoration: none;
+    > i {
+      font-size: 8em;
+    }
+    h1 {
+      font-size: 2.5em;
+    }
+  }
 }
-.article-admin-orange {
-  background-color: $backgroundColorAdminOrangeNormal;
+
+.article-bloc-green {
+  background-color: $backgroundColorBlocGreenNormal;
+  transition: 0.4s;
 }
-.article-admin-sweetblue {
-  background-color: $backgroundColorAdminSweetBlueNormal;
+  .article-bloc-green:hover {
+    background-color: $backgroundColorBlocGreenNormalHover;
+  }
+.article-bloc-orange {
+  background-color: $backgroundColorBlocOrangeNormal;
+  transition: 0.4s;
 }
-.article-admin-pink {
-  background-color: $backgroundColorAdminPinkNormal;
+  .article-bloc-orange:hover {
+    background-color: $backgroundColorBlocOrangeNormalHover;
+    transition: 0.4s;
+  }
+.article-bloc-sweetblue {
+  background-color: $backgroundColorBlocSweetBlueNormal;
+  transition: 0.4s;
 }
-.article-admin-skyblue {
-  background-color: $backgroundColorAdminSkyBlueNormal;
+  .article-bloc-sweetblue:hover {
+    background-color: $backgroundColorBlocSweetBlueNormalHover;
+  }
+.article-bloc-pink {
+  background-color: $backgroundColorBlocPinkNormal;
+  transition: 0.4s;
 }
-.article-admin-salmon {
-  background-color: $backgroundColorAdminSalmonNormal;
+  .article-bloc-pink:hover {
+    background-color: $backgroundColorBlocPinkNormalHover;
+  }
+.article-bloc-skyblue {
+  background-color: $backgroundColorBlocSkyBlueNormal;
+  transition: 0.4s;
 }
+  .article-bloc-skyblue:hover {
+    background-color: $backgroundColorBlocSkyBlueNormalHover;
+  }
+.article-bloc-salmon {
+  background-color: $backgroundColorBlocSalmonNormal;
+  transition: 0.4s;
+}
+  .article-bloc-salmon:hover {
+    background-color: $backgroundColorBlocSalmonNormalHover;
+  }
