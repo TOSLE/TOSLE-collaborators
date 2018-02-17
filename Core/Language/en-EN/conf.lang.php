@@ -41,3 +41,11 @@
     BLOGPAGE DEFINE
 */
     define("BLOG_TITLE_PAGE","Blog");
+
+/*
+    PROFILE DEFINE
+*/
+    define("PROFILE_TITLE_PAGE","Student area");
+    define("PROFILE_HOME_BLOC_TITLE_LESSONS", "Lessons");
+    define("PROFILE_HOME_BLOC_TITLE_MARK", "Mark");
+    define("PROFILE_HOME_BLOC_TITLE_ABSENCES", "Absence");
