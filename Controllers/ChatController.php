@@ -10,6 +10,6 @@ class ChatController
 {
     function indexAction($params)
     {
-        $View = new View();
+        $View = new View("default", "chat");
     }
 }

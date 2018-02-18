@@ -1,0 +1,16 @@
+.container-messaging {
+  display: flex;
+  width: 100%;
+  > section:first-child{
+    flex-basis: 20%;
+    background-color: $backgroundColorWhiteFull;
+  }
+  > section:nth-child(2){
+    flex-basis: 30%;
+  }
+  > section:last-child{
+    flex-basis: 50%;
+  }
+}
+@import "view_left_column";
+@import "view_middle_column";
