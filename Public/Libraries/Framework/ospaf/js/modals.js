@@ -1,4 +1,4 @@
-$("button").click(function(){
+$(".target-modal").click(function(){
 	if($(this).attr("data-type")=="open-modal") {
 		var modalTarget =  $(this).attr("data-target");
 		$("#"+modalTarget).css("display", "block");

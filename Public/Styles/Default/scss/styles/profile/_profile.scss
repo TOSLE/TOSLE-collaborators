@@ -1,0 +1,25 @@
+#profile-section {
+  article {
+    background-color: $backgroundColorWhiteFull;
+    box-shadow: 0px 0px 9px rgba(0, 0, 0, 0.25);
+    margin: 0 5px;
+    > .title-article {
+      height: 40px;
+      border-bottom: 0.5px solid $borderColorGreyLight;
+      padding: 0 15px;
+      line-height: 40px;
+      > h2 {
+        color: $textColorBlueMatte;
+        display: inline-block;
+      }
+      > .icon-title-article {
+        float: right;
+        padding-top: 6.5px;
+        color: $textColorGreyLight;
+        &:hover {
+          color: $textColorBlueMatte;
+        }
+      }
+    }
+  }
+}

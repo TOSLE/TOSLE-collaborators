@@ -257,6 +257,7 @@ body {
   width: 100%;
   background-color: rgba(0, 0, 0, 0.7);
   top: 0;
+  left: 0;
   transition: 1s;
   overflow: scroll; }
 
@@ -285,6 +286,46 @@ body {
     border-top: 1px solid #444444; }
 
 /* MODAL CLASS */
+@media all and (max-width: 420px) {
+  .modal-header h2 {
+    font-size: 1.9em; }
+  .modal-main h3 {
+    font-size: 1.6em; }
+  .modal-main p {
+    font-size: 1.4em; }
+  .modal-footer button {
+    font-size: 1.4em; } }
+
+@media all and (max-device-width: 420px) {
+  .modal-header h2 {
+    font-size: 1.9em; }
+  .modal-main h3 {
+    font-size: 1.6em; }
+  .modal-main p {
+    font-size: 1.4em; }
+  .modal-footer button {
+    font-size: 1.4em; } }
+
+@media all and (min-width: 420px) and (min-device-width: 420px) {
+  .modal-header h2 {
+    font-size: 1.7em; }
+  .modal-main h3 {
+    font-size: 1.4em; }
+  .modal-main p {
+    font-size: 1.2em; }
+  .modal-footer button {
+    font-size: 1.2em; } }
+
+@media all and (min-width: 768px) and (min-device-width: 768px) {
+  .modal-header h2 {
+    font-size: 1.5em; }
+  .modal-main h3 {
+    font-size: 1.2em; }
+  .modal-main p {
+    font-size: 1em; }
+  .modal-footer button {
+    font-size: 1em; } }
+
 @font-face {
   font-family: 'Material Icons';
   font-style: normal;

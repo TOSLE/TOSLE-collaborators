@@ -61,3 +61,38 @@
   .article-bloc-salmon:hover {
     background-color: $backgroundColorBlocSalmonNormalHover;
   }
+
+
+
+.news-profile-article {
+  display: flex;
+  width: 100%;
+  padding: 15px 15px;
+  text-decoration: none;
+  transition: 0.4s;
+  > div:first-child{
+    flex-basis: 10%;
+    margin: auto;
+    > img {
+      height: 40px;
+      width: 40px;
+      border: 0.5px solid $borderColorGreyLight;
+      border-radius: 50%;
+    }
+  }
+  > p:nth-child(2) {
+    flex-basis: 80%;
+    font-size: 0.8em;
+    margin: auto;
+    color: $textColorGreyNormal;
+  }
+  > p:last-child {
+    flex-basis: 10%;
+    font-size: 0.6em;
+    color: $textColorGreyLight;
+    margin: auto;
+  }
+  &:hover {
+    background-color: rgba(0,0,0,0.1);
+  }
+}
