@@ -1,0 +1,83 @@
+.middle-column {
+  > .header-middle-column {
+    height: 30px;
+    background-color: $backgroundColorGreyLight;
+    padding: 0 25px;
+    > i {
+      line-height: 30px;
+    }
+    > p {
+      display: inline-block;
+      vertical-align: top;
+      margin-left: 15px;
+      line-height: 30px;
+    }
+  }
+  > .messages-middle{
+    > .content-message:nth-child(2n+1){
+      background-color: $backgroundColorWhiteFull;
+    }
+    > .content-message:nth-child(2n){
+      background-color: $backgroundColorGreyLight;
+    }
+    > .content-message {
+      display: block;
+      padding: 25px 15px;
+      text-decoration: none;
+      transition: 0.4s;
+      > .header-message-info {
+        height: 30px;
+        > .icon-message {
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          background-color: #9B59B6;
+          text-align: center;
+          line-height: 24px;
+          display: inline-block;
+          margin-top: 3px;
+          > p {
+            color: $textColorWhiteFull;
+          }
+        }
+        > .owner-message {
+          display: inline-block;
+          vertical-align: top;
+          margin-left: 15px;
+          line-height: 30px;
+          > p {
+            font-size: 1.2em;
+            color: $textColorGreyNormal2;
+          }
+        }
+      }
+      > .main-message-info {
+        height: 45px;
+        line-height: 45px;
+        > button {
+          background: none;
+          border: none;
+          height: 100%;
+          outline: none;
+          cursor: pointer;
+        }
+        > p {
+          display: inline-block;
+          vertical-align: top;
+          height: 100%;
+          margin-left: 15px;
+          color: $textColorGreyNormal2;
+        }
+      }
+      > .footer-message-info {
+        p {
+          color: $textColorGreyLight;
+          font-size: 0.8em;
+        }
+      }
+      &:hover {
+        background-color: rgba(0,0,0,0.1);
+      }
+    }
+  }
+}

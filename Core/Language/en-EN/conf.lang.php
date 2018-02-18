@@ -43,6 +43,11 @@
     define("BLOG_TITLE_PAGE","Blog");
 
 /*
+    MESSAGING DEFINE
+*/
+    define("MESSAGING_TITLE_PAGE","Blog");
+
+/*
     PROFILE DEFINE
 */
     /* GENERAL PARAMS */
