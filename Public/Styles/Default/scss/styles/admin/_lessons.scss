@@ -1,0 +1,39 @@
+#lessons-section {
+  article {
+    > .main-article {
+      display: flex;
+      width: 100%;
+      > .tab-col-6 {
+        flex-basis: calc(100% / 2);
+      }
+      > .tab-col-2 {
+        flex-basis: calc(100% / 6);
+      }
+      > .tab-col-3 {
+        flex-basis: calc(100% / 4);
+      }
+      > div {
+        .title-tab-col {
+          border-bottom: 0.5px solid $borderColorGreyLight;
+          text-align: center;
+          padding: 5px 0;
+        }
+        .content-tab-col {
+          > div {
+            text-align: center;
+            min-height: 50px;
+            line-height: 50px;
+          }
+          > div:nth-child(2n) {
+            background-color: $backgroundColorGreyLight;
+          }
+          &.little-tab-col {
+            > div {
+              font-size: 0.8em;
+            }
+          }
+        }
+      }
+    }
+  }
+}

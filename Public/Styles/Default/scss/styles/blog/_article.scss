@@ -1,0 +1,105 @@
+#article-view-section {
+  margin-top: 30px;
+  > #image-article {
+    > img {
+      display: block;
+      max-width: 1250px;
+      min-width: 0px;
+      margin: auto;
+    }
+  }
+  > article {
+    margin-top: 30px;
+    > h1 {
+      font-size: 2em;
+    }
+    > p {
+      margin-top: 30px;
+      font-size: 1.2em;
+      text-align: justify;
+    }
+  }
+}
+
+#article-options-section {
+  margin-top: 30px;
+  ul {
+    max-width: 850px;
+    margin: 0 auto;
+    display: flex;
+    list-style: none;
+    background-color: $backgroundColorWhiteFull;
+    border: 0.5px solid $borderColorGreyLight;
+    height: 40px;
+    > li {
+      flex-basis: 25%;
+      > a {
+        text-decoration: none;
+        display: block;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        color: $textColorGreyLight;
+        > i {
+          line-height: 40px;
+        }
+        > p {
+          display: inline-block;
+          vertical-align: top;
+          line-height: 40px;
+          margin-left: 5px;
+        }
+        &:hover {
+          color: $textColorBlackFull;
+        }
+      }
+    }
+  }
+}
+
+#article-lastcom-section {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  .lastcom-article {
+    margin-top: 15px;
+    border: 1px solid $borderColorGreyLight;
+    .com-user {
+      background-color: $backgroundColorWhiteFull;
+      display: flex;
+      border-bottom: 1px solid $borderColorGreyLight;
+      > div:first-child {
+        flex-basis: 5%;
+        padding: 5px;
+        border-right: 1px solid $borderColorGreyLight;
+        > img {
+          display: block;
+          margin: auto;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          border: 0.5px solid $borderColorGreyLight;
+        }
+      }
+      > div {
+        flex-basis: 95%;
+        padding: 5px;
+        > .title-com {
+          font-size: 1.1em;
+          font-weight: bold;
+        }
+        > .content-com {
+          padding: 5px;
+          text-align: justify;
+        }
+        > .date-create {
+          font-size: 0.8em;
+          text-align: right;
+          font-style: italic;
+        }
+      }
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+}
