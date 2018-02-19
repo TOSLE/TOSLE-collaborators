@@ -6,9 +6,7 @@
             <li><a href=#><i class="material-icons">&#xE83A;</i><p>Marked</p></a></li>
             <li><a href=#><i class="material-icons">&#xE150;</i><p>Drafts</p></a></li>
             <li><a href=#><i class="material-icons">&#xE16C;</i><p>Deleted</p></a></li>
-            <li><a href=#><i class="material-icons group-messaging">&#xE836;</i><p>Group 1</p></a></li>
-            <li><a href=#><i class="material-icons group-messaging">&#xE836;</i><p>Group 2</p></a></li>
-            <li><a href=#><i class="material-icons">&#xE145;</i><p>Add category</p></a></li>
+            <li><a href=#><i class="material-icons">&#xE152;</i><p>Filter</p></a></li>
         </ul>
     </section>
     <section class="middle-column">

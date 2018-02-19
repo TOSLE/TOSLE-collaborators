@@ -2,7 +2,7 @@
   width: 200px;
   position: absolute;
   margin-left: -120px;
-  margin-top: 5px;
+  margin-top: 0px;
   max-height: 0px;
   overflow: hidden;
   div:first-child{
@@ -24,7 +24,7 @@
     max-height: 0px;
     transition: 0.4s;
     overflow: hidden;
-    z-index: 100;
+    z-index: 1;
     > .ul-menuProfil {
       list-style: none;
       text-align: left;
