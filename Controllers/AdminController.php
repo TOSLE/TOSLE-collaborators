@@ -12,4 +12,7 @@ class AdminController
     {
         $View = new View("default", "admin");
     }
+    function lessonsAction($params){
+        $View = new View("default", "admin/lessons");
+    }
 }

@@ -142,12 +142,43 @@ Ne pas supprimer, utilisez les comme source d'inspi
   .news-profile-article:hover {
     background-color: rgba(0, 0, 0, 0.1); }
 
+.article-col-6 {
+  background-color: #FFFFFF;
+  box-shadow: 0px 0px 9px rgba(0, 0, 0, 0.25);
+  margin: 0 5px; }
+  .article-col-6 > .title-article {
+    height: 40px;
+    border-bottom: 0.5px solid #BDBDBD;
+    padding: 0 15px;
+    line-height: 40px; }
+    .article-col-6 > .title-article > h2 {
+      color: #1A5CCB;
+      display: inline-block; }
+    .article-col-6 > .title-article > .icon-title-article {
+      float: right;
+      padding-top: 6.5px;
+      color: #8C8C8C; }
+      .article-col-6 > .title-article > .icon-title-article:hover {
+        color: #1A5CCB; }
+
+.clearFix::before {
+  content: '';
+  display: table; }
+
+.clearFix::after {
+  content: '';
+  display: table;
+  clear: both; }
+
 /* IMPORT CLASS */
 /* IMPORT STYLE */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box; }
+
+html, body {
+  height: 100%; }
 
 body {
   background-color: #F1F1F1;
@@ -160,6 +191,27 @@ main {
 
 main > h1 {
   margin-top: 25px; }
+  main > h1 > a {
+    text-decoration: none;
+    color: #000000; }
+    main > h1 > a:hover {
+      text-decoration: underline; }
+  main > h1 > span {
+    font-size: 0.7em;
+    font-style: italic;
+    color: #545557; }
+
+main > h2 {
+  margin-top: 25px; }
+  main > h2 > a {
+    text-decoration: none;
+    color: #000000; }
+    main > h2 > a:hover {
+      text-decoration: underline; }
+  main > h2 > span {
+    font-size: 0.7em;
+    font-style: italic;
+    color: #545557; }
 
 header {
   height: 60px;
@@ -368,27 +420,30 @@ nav {
 
 /* IMPORT MEDIA */
 /* ADMIN PART */
+#lessons-section article > .main-article {
+  display: flex;
+  width: 100%; }
+  #lessons-section article > .main-article > .tab-col-6 {
+    flex-basis: calc(100% / 2); }
+  #lessons-section article > .main-article > .tab-col-2 {
+    flex-basis: calc(100% / 6); }
+  #lessons-section article > .main-article > .tab-col-3 {
+    flex-basis: calc(100% / 4); }
+  #lessons-section article > .main-article > div .title-tab-col {
+    border-bottom: 0.5px solid #BDBDBD;
+    text-align: center;
+    padding: 5px 0; }
+  #lessons-section article > .main-article > div .content-tab-col > div {
+    text-align: center;
+    min-height: 50px;
+    line-height: 50px; }
+  #lessons-section article > .main-article > div .content-tab-col > div:nth-child(2n) {
+    background-color: #E5E5E5; }
+  #lessons-section article > .main-article > div .content-tab-col.little-tab-col > div {
+    font-size: 0.8em; }
+
 /* ADMIN PART */
 /* PROFILE PART */
-#profile-section article {
-  background-color: #FFFFFF;
-  box-shadow: 0px 0px 9px rgba(0, 0, 0, 0.25);
-  margin: 0 5px; }
-  #profile-section article > .title-article {
-    height: 40px;
-    border-bottom: 0.5px solid #BDBDBD;
-    padding: 0 15px;
-    line-height: 40px; }
-    #profile-section article > .title-article > h2 {
-      color: #1A5CCB;
-      display: inline-block; }
-    #profile-section article > .title-article > .icon-title-article {
-      float: right;
-      padding-top: 6.5px;
-      color: #8C8C8C; }
-      #profile-section article > .title-article > .icon-title-article:hover {
-        color: #1A5CCB; }
-
 /* PROFILE PART */
 /* BLOG PART */
 #blog-section article {
@@ -440,6 +495,88 @@ nav {
   margin: auto;
   text-align: center; }
 
+#article-view-section {
+  margin-top: 30px; }
+  #article-view-section > #image-article > img {
+    display: block;
+    max-width: 1250px;
+    min-width: 0px;
+    margin: auto; }
+  #article-view-section > article {
+    margin-top: 30px; }
+    #article-view-section > article > h1 {
+      font-size: 2em; }
+    #article-view-section > article > p {
+      margin-top: 30px;
+      font-size: 1.2em;
+      text-align: justify; }
+
+#article-options-section {
+  margin-top: 30px; }
+  #article-options-section ul {
+    max-width: 850px;
+    margin: 0 auto;
+    display: flex;
+    list-style: none;
+    background-color: #FFFFFF;
+    border: 0.5px solid #BDBDBD;
+    height: 40px; }
+    #article-options-section ul > li {
+      flex-basis: 25%; }
+      #article-options-section ul > li > a {
+        text-decoration: none;
+        display: block;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        color: #8C8C8C; }
+        #article-options-section ul > li > a > i {
+          line-height: 40px; }
+        #article-options-section ul > li > a > p {
+          display: inline-block;
+          vertical-align: top;
+          line-height: 40px;
+          margin-left: 5px; }
+        #article-options-section ul > li > a:hover {
+          color: #000000; }
+
+#article-lastcom-section {
+  margin-top: 30px;
+  margin-bottom: 30px; }
+  #article-lastcom-section .lastcom-article {
+    margin-top: 15px;
+    border: 1px solid #BDBDBD; }
+    #article-lastcom-section .lastcom-article .com-user {
+      background-color: #FFFFFF;
+      display: flex;
+      border-bottom: 1px solid #BDBDBD; }
+      #article-lastcom-section .lastcom-article .com-user > div:first-child {
+        flex-basis: 5%;
+        padding: 5px;
+        border-right: 1px solid #BDBDBD; }
+        #article-lastcom-section .lastcom-article .com-user > div:first-child > img {
+          display: block;
+          margin: auto;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          border: 0.5px solid #BDBDBD; }
+      #article-lastcom-section .lastcom-article .com-user > div {
+        flex-basis: 95%;
+        padding: 5px; }
+        #article-lastcom-section .lastcom-article .com-user > div > .title-com {
+          font-size: 1.1em;
+          font-weight: bold; }
+        #article-lastcom-section .lastcom-article .com-user > div > .content-com {
+          padding: 5px;
+          text-align: justify; }
+        #article-lastcom-section .lastcom-article .com-user > div > .date-create {
+          font-size: 0.8em;
+          text-align: right;
+          font-style: italic; }
+      #article-lastcom-section .lastcom-article .com-user:last-child {
+        border-bottom: none; }
+
 /* BLOG PART */
 /* BLOG PART */
 .container-messaging {
@@ -450,13 +587,6 @@ nav {
     float: left; }
   .container-messaging > section:last-child {
     float: left; }
-  .container-messaging > section::before {
-    display: table;
-    content: ''; }
-  .container-messaging > section::after {
-    display: table;
-    content: '';
-    clear: both; }
 
 .left-column {
   width: 20%;
@@ -524,7 +654,6 @@ nav {
       margin-left: 15px;
       line-height: 30px; }
   .middle-column > .messages-middle {
-    max-height: 900px;
     overflow: scroll; }
     .middle-column > .messages-middle > .content-message {
       background-color: #E5E5E5;
@@ -614,7 +743,6 @@ nav {
     padding: 15px 10px;
     background-color: #FFFFFF;
     border-right: 0.5px solid #BDBDBD;
-    max-height: 954px;
     overflow: scroll; }
     .right-column > .chat-bloc > .message-left {
       margin-right: 45%; }

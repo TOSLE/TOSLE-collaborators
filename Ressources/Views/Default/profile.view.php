@@ -2,10 +2,10 @@
 <section id="profile-section" class="container">
     <div class="row">
         <div class="col-6">
-            <article>
+            <article class="article-col-6">
                 <div class="title-article">
                     <h2><?php echo PROFILE_HOME_CONTENT_TEXT_MY_NEWS;?></h2>
-                    <a href="#" class="target-modal icon-title-article" data-type="open-modal" data-target="my-news-feed"><i class="material-icons">&#xE145;</i></a href="#">
+                    <a href="#" class="target-modal icon-title-article" data-type="open-modal" data-target="my-news-feed"><i class="material-icons">&#xE145;</i></a>
                 </div>
                 <div class="main-article">
                     <a href="#" class="news-profile-article">
@@ -33,7 +33,7 @@
             </article>
         </div>
         <div class="col-6">
-            <article>
+            <article class="article-col-6">
                 <div class="title-article">
                     <h2><?php echo PROFILE_HOME_CONTENT_TEXT_NEWS_FEED;?></h2>
                     <a href="#" class="target-modal icon-title-article" data-type="open-modal" data-target="global-news-feed"><i class="material-icons">&#xE145;</i></a>

@@ -37,6 +37,11 @@
     define("ADMIN_HOME_BLOC_TITLE_STUDENT", "Students");
     define("ADMIN_HOME_BLOC_TITLE_BLOG", "Blog");
     define("ADMIN_HOME_BLOC_TITLE_HOMEPAGE", "Homepage");
+
+    /* LESSONS PART */
+    define("ADMIN_LESSONS_TITLE_ONLINE","Online lessons");
+    define("ADMIN_LESSONS_TITLE_OFFLINE","Offline lessons");
+    /* LESSONS PART */
 /*
     BLOGPAGE DEFINE
 */
@@ -45,7 +50,16 @@
 /*
     MESSAGING DEFINE
 */
-    define("MESSAGING_TITLE_PAGE","Blog");
+    define("MESSAGING_LEFT_COLUMN_NEW_MESSAGE","New Message");
+    define("MESSAGING_LEFT_COLUMN_INBOX","Inbox");
+    define("MESSAGING_LEFT_COLUMN_MARKED","Inbox");
+    define("MESSAGING_LEFT_COLUMN_DRAFTS","Drafts");
+    define("MESSAGING_LEFT_COLUMN_DELETED","Deleted");
+    define("MESSAGING_LEFT_COLUMN_FILTER","Filter");
+
+    define("MESSAGING_MIDDLE_COLUMN_NEWEST","Newest");
+
+    define("MESSAGE_RIGHT_COLUMN_AT", "at");
 
 /*
     PROFILE DEFINE

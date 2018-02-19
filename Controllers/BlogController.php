@@ -12,4 +12,8 @@ class BlogController
     {
         $View = new View("default", "blog");
     }
+    function articleAction($params)
+    {
+        $View = new View("default", "blog/article");
+    }
 }

@@ -11,7 +11,7 @@
         </div>
         <div class="col-4">
             <div class="article-bloc article-bloc-orange">
-                <a href="#">
+                <a href="<?php echo DIRNAME.substr($language,0,2)."/";?>admin/lessons">
                     <i class="material-icons">&#xE54B;</i>
                     <h1><?php echo ADMIN_HOME_BLOC_TITLE_LESSONS;?></h1>
                 </a>

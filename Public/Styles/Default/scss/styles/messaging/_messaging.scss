@@ -9,15 +9,6 @@
   > section:last-child{
     float:left;
   }
-  > section::before {
-    display: table;
-    content: '';
-  }
-  > section::after {
-    display: table;
-    content: '';
-    clear: both;
-  }
 }
 @import "view_left_column";
 @import "view_middle_column";
