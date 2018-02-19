@@ -62,8 +62,8 @@
 }
 
 #article-lastcom-section {
-  margin-top: 30px;
-  margin-bottom: 30px;
+  max-width: 850px;
+  margin: 30px auto;
   .lastcom-article {
     margin-top: 15px;
     border: 1px solid $borderColorGreyLight;
