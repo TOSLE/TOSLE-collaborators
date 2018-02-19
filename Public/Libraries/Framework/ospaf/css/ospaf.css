@@ -93,7 +93,8 @@ body {
   cursor: pointer;
   outline: none;
   border: 1px solid;
-  border-radius: 5px; }
+  border-radius: 5px;
+  text-decoration: none; }
 
 .btn-sm {
   padding: 5px;
@@ -263,7 +264,7 @@ body {
   z-index: 100; }
 
 .modal-window {
-  width: 70%;
+  width: 900px;
   background-color: #FFF;
   border-radius: 10px;
   position: absolute;
