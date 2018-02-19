@@ -176,9 +176,3 @@
         </div>
     </div>
 </section>
-
-
-<script type="text/javascript">
-    $('body').css('background', 'linear-gradient(150deg, #F1F1F1 0%, rgba(243, 243, 243, 0.917771) 50%, rgba(243, 243, 243, 0.724556) 50%, #D8B166 50%)');
-    //$('body').css('background', 'linear-gradient(160deg, #1e5799 0%,#2989d8 50%,#207cca 51%,#7db9e8 100%)');
-</script>

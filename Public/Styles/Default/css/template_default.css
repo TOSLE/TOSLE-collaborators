@@ -502,11 +502,15 @@ nav {
   #article-view-section > article {
     margin-top: 30px; }
     #article-view-section > article > h1 {
-      font-size: 2em; }
+      font-size: 2em;
+      max-width: 850px;
+      margin: 0 auto; }
     #article-view-section > article > p {
-      margin-top: 30px;
-      font-size: 1.2em;
-      text-align: justify; }
+      font-size: 1.1em;
+      text-align: justify;
+      max-width: 850px;
+      margin: 0 auto;
+      margin-top: 30px; }
 
 #article-options-section {
   margin-top: 30px; }
