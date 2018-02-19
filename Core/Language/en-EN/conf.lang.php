@@ -46,13 +46,19 @@
     BLOGPAGE DEFINE
 */
     define("BLOG_TITLE_PAGE","Blog");
+    /* ARTICLE PART */
+    define("BLOG_ARTICLE_BTN_COMMENTS", "Comments");
+    define("BLOG_ARTICLE_BTN_SHARE", "Share");
+    define("BLOG_ARTICLE_BTN_EMBED", "Embed");
+    define("BLOG_ARTICLE_BTN_REACT", "React");
+    /* ARTICLE PART */
 
 /*
     MESSAGING DEFINE
 */
     define("MESSAGING_LEFT_COLUMN_NEW_MESSAGE","New Message");
     define("MESSAGING_LEFT_COLUMN_INBOX","Inbox");
-    define("MESSAGING_LEFT_COLUMN_MARKED","Inbox");
+    define("MESSAGING_LEFT_COLUMN_MARKED","Marked");
     define("MESSAGING_LEFT_COLUMN_DRAFTS","Drafts");
     define("MESSAGING_LEFT_COLUMN_DELETED","Deleted");
     define("MESSAGING_LEFT_COLUMN_FILTER","Filter");

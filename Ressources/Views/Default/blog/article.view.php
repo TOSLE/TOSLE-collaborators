@@ -19,10 +19,10 @@
 
 <section id="article-options-section">
     <ul>
-        <li><a href="#"><i class="material-icons">comment</i><p>6 commentaires</p></a></li>
-        <li><a href="#"><i class="material-icons">share</i><p>8 partages</p></a></li>
-        <li><a href="#"><i class="material-icons">code</i><p>Intégrer l'article</p></a></li>
-        <li><a href="#"><i class="material-icons">create</i><p>Ecrire un commentaire</p></a></li>
+        <li><a href="#"><i class="material-icons">comment</i><p>6 <?php echo BLOG_ARTICLE_BTN_COMMENTS; ?></p></a></li>
+        <li><a href="#"><i class="material-icons">share</i><p>8 <?php echo BLOG_ARTICLE_BTN_SHARE; ?></p></a></li>
+        <li><a href="#"><i class="material-icons">code</i><p><?php echo BLOG_ARTICLE_BTN_EMBED; ?></p></a></li>
+        <li><a href="#"><i class="material-icons">create</i><p><?php echo BLOG_ARTICLE_BTN_REACT; ?></p></a></li>
     </ul>
 </section>
 
