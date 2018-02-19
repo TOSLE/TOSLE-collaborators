@@ -1,15 +1,26 @@
 .container-messaging {
-  display: flex;
   width: 100%;
   > section:first-child{
-    flex-basis: 20%;
+    float:left;
     background-color: $backgroundColorWhiteFull;
+    width: 20%;
   }
   > section:nth-child(2){
-    flex-basis: 30%;
+    float:left;
+    width: 30%;
   }
   > section:last-child{
-    flex-basis: 50%;
+    float:left;
+    width: 50%;
+  }
+  > section::before {
+    display: table;
+    content: '';
+  }
+  > section::after {
+    display: table;
+    content: '';
+    clear: both;
   }
 }
 @import "view_left_column";
