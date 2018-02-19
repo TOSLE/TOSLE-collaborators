@@ -216,7 +216,7 @@ header {
   width: 200px;
   position: absolute;
   margin-left: -120px;
-  margin-top: 5px;
+  margin-top: 0px;
   max-height: 0px;
   overflow: hidden; }
   .profil_menu div:first-child {
@@ -237,7 +237,7 @@ header {
     max-height: 0px;
     transition: 0.4s;
     overflow: hidden;
-    z-index: 100; }
+    z-index: 1; }
     .profil_menu div:last-child > .ul-menuProfil {
       list-style: none;
       text-align: left;
@@ -445,9 +445,7 @@ nav {
 .container-messaging {
   width: 100%; }
   .container-messaging > section:first-child {
-    float: left;
-    background-color: #FFFFFF;
-    width: 20%; }
+    background-color: #FFFFFF; }
   .container-messaging > section:nth-child(2) {
     float: left;
     width: 30%; }
@@ -462,53 +460,56 @@ nav {
     content: '';
     clear: both; }
 
-.left-column > ul {
-  list-style: none; }
-  .left-column > ul > li:first-child {
-    margin-top: 25px;
-    padding: 0 25px;
-    height: 50px;
-    margin-bottom: 25px; }
-    .left-column > ul > li:first-child .button-new-message {
-      background-color: #1A5CCB;
-      display: block;
-      width: 100%;
-      height: 100%;
-      color: #F1F1F1;
-      border: none;
-      cursor: pointer; }
-      .left-column > ul > li:first-child .button-new-message > i {
-        line-height: 50px; }
-      .left-column > ul > li:first-child .button-new-message > p {
-        display: inline-block;
-        margin-left: 15px;
-        vertical-align: top;
-        line-height: 50px; }
-  .left-column > ul > li {
-    width: 100%;
-    height: 60px; }
-    .left-column > ul > li > a {
-      display: block;
-      width: 100%;
-      height: 100%;
+.left-column {
+  width: 20%;
+  float: left; }
+  .left-column > ul {
+    list-style: none; }
+    .left-column > ul > li:first-child {
+      margin-top: 25px;
       padding: 0 25px;
-      text-decoration: none;
-      color: #545557; }
-      .left-column > ul > li > a > p {
-        display: inline-block;
-        font-weight: bold;
-        vertical-align: top;
-        line-height: 60px;
-        margin-left: 15px; }
-      .left-column > ul > li > a > i {
-        line-height: 60px; }
-        .left-column > ul > li > a > i.group-messaging {
-          font-size: 0.8em; }
-      .left-column > ul > li > a:hover {
-        background-color: rgba(0, 0, 0, 0.1); }
-    .left-column > ul > li.current > a {
-      color: #F1F1F1;
-      background-color: #4a84e8; }
+      height: 50px;
+      margin-bottom: 25px; }
+      .left-column > ul > li:first-child .button-new-message {
+        background-color: #1A5CCB;
+        display: block;
+        width: 100%;
+        height: 100%;
+        color: #F1F1F1;
+        border: none;
+        cursor: pointer; }
+        .left-column > ul > li:first-child .button-new-message > i {
+          line-height: 50px; }
+        .left-column > ul > li:first-child .button-new-message > p {
+          display: inline-block;
+          margin-left: 15px;
+          vertical-align: top;
+          line-height: 50px; }
+    .left-column > ul > li {
+      width: 100%;
+      height: 60px; }
+      .left-column > ul > li > a {
+        display: block;
+        width: 100%;
+        height: 100%;
+        padding: 0 25px;
+        text-decoration: none;
+        color: #545557; }
+        .left-column > ul > li > a > p {
+          display: inline-block;
+          font-weight: bold;
+          vertical-align: top;
+          line-height: 60px;
+          margin-left: 15px; }
+        .left-column > ul > li > a > i {
+          line-height: 60px; }
+        .left-column > ul > li > a:hover {
+          background-color: rgba(0, 0, 0, 0.1); }
+      .left-column > ul > li.current > a {
+        color: #F1F1F1;
+        background-color: #4a84e8; }
+      .left-column > ul > li.group-messaging i {
+        font-size: 0.8em; }
 
 .middle-column {
   background-color: #E5E5E5; }
@@ -585,5 +586,66 @@ nav {
       transition: 0.4s; }
       .middle-column .circle-new-message > a > i:hover {
         color: #1A5CCB; }
+
+@media all and (max-device-width: 870px) {
+  section:first-child {
+    float: none;
+    width: 100%; }
+    section:first-child > ul {
+      display: flex;
+      height: 60px; }
+      section:first-child > ul > li, section:first-child > ul li:first-child {
+        margin: 0;
+        padding: 0;
+        height: 60px;
+        text-align: center; }
+        section:first-child > ul > li .button-new-message p, section:first-child > ul > li a p, section:first-child > ul li:first-child .button-new-message p, section:first-child > ul li:first-child a p {
+          display: none; } }
+
+@media all and (max-width: 870px) {
+  section:first-child {
+    float: none;
+    width: 100%; }
+    section:first-child > ul {
+      display: flex;
+      height: 60px; }
+      section:first-child > ul > li, section:first-child > ul li:first-child {
+        margin: 0;
+        padding: 0;
+        height: 60px;
+        text-align: center; }
+        section:first-child > ul > li .button-new-message p, section:first-child > ul > li a p, section:first-child > ul li:first-child .button-new-message p, section:first-child > ul li:first-child a p {
+          display: none; }
+        section:first-child > ul > li a, section:first-child > ul li:first-child a {
+          padding: 0; } }
+
+@media all and (min-device-width: 870px) and (min-width: 870px) and (max-width: 1200px) {
+  section:first-child {
+    float: none;
+    width: 100%; }
+    section:first-child > ul {
+      display: flex;
+      height: 80px; }
+      section:first-child > ul > li, section:first-child > ul > li:first-child {
+        margin: 0;
+        padding: 0;
+        height: 80px;
+        flex-basis: calc(80% / 5);
+        text-align: center; }
+        section:first-child > ul > li > a > p, section:first-child > ul > li:first-child > a > p {
+          display: block;
+          font-size: 0.8em;
+          margin-left: 3px;
+          line-height: 0;
+          margin-top: 15px; }
+        section:first-child > ul > li > a i, section:first-child > ul > li:first-child > a i {
+          line-height: 0;
+          margin-top: 25px; }
+        section:first-child > ul > li > .button-new-message > p, section:first-child > ul > li:first-child > .button-new-message > p {
+          display: inline-block;
+          font-size: 1em;
+          margin-left: 3px; }
+      section:first-child > ul > li:first-child {
+        flex-basis: 20%; } }
 
 /* BLOG PART */

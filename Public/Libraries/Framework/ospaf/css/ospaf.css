@@ -259,10 +259,11 @@ body {
   top: 0;
   left: 0;
   transition: 1s;
-  overflow: scroll; }
+  overflow: scroll;
+  z-index: 100; }
 
 .modal-window {
-  width: 600px;
+  width: 70%;
   background-color: #FFF;
   border-radius: 10px;
   position: absolute;

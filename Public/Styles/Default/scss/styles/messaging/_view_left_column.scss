@@ -1,4 +1,6 @@
 .left-column {
+  width: 20%;
+  float:left;
   > ul {
     list-style: none;
     > li:first-child {
@@ -44,9 +46,6 @@
         }
         > i {
           line-height: 60px;
-          &.group-messaging {
-            font-size: 0.8em;
-          }
         }
         &:hover {
           background-color: rgba(0,0,0,0.1);
@@ -56,6 +55,11 @@
         > a {
           color: $textColorWhiteNormalBloc;
           background-color: $backgroundColorBlueMatteLight;
+        }
+      }
+      &.group-messaging {
+        i{
+          font-size: 0.8em;
         }
       }
     }
