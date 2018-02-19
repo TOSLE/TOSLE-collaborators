@@ -177,9 +177,6 @@ Ne pas supprimer, utilisez les comme source d'inspi
   padding: 0;
   box-sizing: border-box; }
 
-html, body {
-  height: 100%; }
-
 body {
   background-color: #F1F1F1;
   font-size: 100%; }
