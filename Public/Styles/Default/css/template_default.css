@@ -657,7 +657,32 @@ nav {
           font-size: 2.5rem; }
         .left-column > ul > li a i, .left-column > ul li:first-child a i {
           font-size: 2.5rem;
-          line-height: 100px; } }
+          line-height: 100px; }
+  .middle-column {
+    width: 10%; }
+    .middle-column > .header-middle-column {
+      display: none; }
+    .middle-column > .messages-middle > .content-message {
+      padding: 20px 0;
+      text-align: center; }
+      .middle-column > .messages-middle > .content-message > .header-message-info {
+        height: auto; }
+        .middle-column > .messages-middle > .content-message > .header-message-info > .icon-message {
+          width: 48px;
+          height: 48px;
+          line-height: 48px; }
+          .middle-column > .messages-middle > .content-message > .header-message-info > .icon-message p {
+            font-size: 1.5em; }
+        .middle-column > .messages-middle > .content-message > .header-message-info > .owner-message {
+          display: none; }
+      .middle-column > .messages-middle > .content-message > .main-message-info {
+        display: none; }
+      .middle-column > .messages-middle > .content-message > .footer-message-info {
+        display: none; }
+    .middle-column > .circle-new-message {
+      display: none; }
+  .right-column {
+    width: 90%; } }
 
 @media all and (max-width: 870px) {
   .left-column {
