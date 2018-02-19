@@ -53,6 +53,44 @@
       }
     }
   }
+  .middle-column {
+    width: 10%;
+    > .header-middle-column {
+      display: none;
+    }
+    > .messages-middle {
+      > .content-message {
+        padding: 20px 0;
+        text-align: center;
+        > .header-message-info {
+          height: auto;
+          > .icon-message {
+            width: 48px;
+            height: 48px;
+            line-height: 48px;
+            p {
+              font-size: 1.5em;
+            }
+          }
+          > .owner-message {
+            display: none;
+          }
+        }
+        > .main-message-info {
+          display: none;
+        }
+        > .footer-message-info {
+          display: none;
+        }
+      }
+    }
+    > .circle-new-message {
+      display: none;
+    }
+  }
+  .right-column {
+    width: 90%;
+  }
 }
 @media all and (max-width: 870px){
   .left-column {
