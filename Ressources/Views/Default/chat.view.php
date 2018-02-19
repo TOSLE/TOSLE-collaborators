@@ -126,6 +126,93 @@
         </div>
     </section>
     <section class="right-column">
-        d
+        <div class="infos-profil-contact">
+            <h2><a href="#">Julien Domange</a></h2>
+            <p class="group-assign-info"><a href="#">Groupe 4</a></p>
+        </div>
+        <div class="chat-bloc">
+            <article class="message-left">
+                <p >
+                    Salut Mehdi, J’aimerais savoir si tu pourrais être présent pour la réunion de ce soir concernant les maquettes et l’avancement du projet, je te rappelle qu’on est à la bourre et qu’on a beaucoup de boulot, moi j’ai pu avancer sur le framework OSPAF, j’ai hâte de te le montrer. ;) Merci de me répondre.
+                </p>
+                <span>Julien Domange à 12:40 am</span>
+            </article>
+            <article class="message-right">
+                <p >
+                    Salut Julien, Je ne pourrais pas être présent ce soir, je n’aime pas le nom OSPAF change stp. Merci de ta compréhension
+                </p>
+                <span>Vous à 12:55 am</span>
+            </article>
+            <article class="message-left">
+                <p >
+                    Salut Mehdi, J’aimerais savoir si tu pourrais être présent pour la réunion de ce soir concernant les maquettes et l’avancement du projet, je te rappelle qu’on est à la bourre et qu’on a beaucoup de boulot, moi j’ai pu avancer sur le framework OSPAF, j’ai hâte de te le montrer. ;) Merci de me répondre.
+                </p>
+                <span>12:40 am</span>
+            </article>
+            <article class="message-right">
+                <p >
+                    Salut Julien, Je ne pourrais pas être présent ce soir, je n’aime pas le nom OSPAF change stp. Merci de ta compréhension
+                </p>
+                <span>12:55 am</span>
+            </article>
+            <article class="message-left">
+                <p >
+                    Salut Mehdi, J’aimerais savoir si tu pourrais être présent pour la réunion de ce soir concernant les maquettes et l’avancement du projet, je te rappelle qu’on est à la bourre et qu’on a beaucoup de boulot, moi j’ai pu avancer sur le framework OSPAF, j’ai hâte de te le montrer. ;) Merci de me répondre.
+                </p>
+                <span>12:40 am</span>
+            </article>
+            <article class="message-right">
+                <p >
+                    Salut Julien, Je ne pourrais pas être présent ce soir, je n’aime pas le nom OSPAF change stp. Merci de ta compréhension
+                </p>
+                <span>12:55 am</span>
+            </article>
+            <article class="message-left">
+                <p >
+                    Salut Mehdi, J’aimerais savoir si tu pourrais être présent pour la réunion de ce soir concernant les maquettes et l’avancement du projet, je te rappelle qu’on est à la bourre et qu’on a beaucoup de boulot, moi j’ai pu avancer sur le framework OSPAF, j’ai hâte de te le montrer. ;) Merci de me répondre.
+                </p>
+                <span>12:40 am</span>
+            </article>
+            <article class="message-right">
+                <p >
+                    Salut Julien, Je ne pourrais pas être présent ce soir, je n’aime pas le nom OSPAF change stp. Merci de ta compréhension
+                </p>
+                <span>12:55 am</span>
+            </article>
+            <article class="message-right">
+                <p >
+                    Salut Julien, Je ne pourrais pas être présent ce soir, je n’aime pas le nom OSPAF change stp. Merci de ta compréhension
+                </p>
+                <span>12:55 am</span>
+            </article>
+            <article class="message-left">
+                <p >
+                    Salut Mehdi, J’aimerais savoir si tu pourrais être présent pour la réunion de ce soir concernant les maquettes et l’avancement du projet, je te rappelle qu’on est à la bourre et qu’on a beaucoup de boulot, moi j’ai pu avancer sur le framework OSPAF, j’ai hâte de te le montrer. ;) Merci de me répondre.
+                </p>
+                <span>12:40 am</span>
+            </article>
+            <article class="message-right">
+                <p >
+                    Salut Julien, Je ne pourrais pas être présent ce soir, je n’aime pas le nom OSPAF change stp. Merci de ta compréhension
+                </p>
+                <span>12:55 am</span>
+            </article>
+            <article class="message-left">
+                <p >
+                    Salut Mehdi, J’aimerais savoir si tu pourrais être présent pour la réunion de ce soir concernant les maquettes et l’avancement du projet, je te rappelle qu’on est à la bourre et qu’on a beaucoup de boulot, moi j’ai pu avancer sur le framework OSPAF, j’ai hâte de te le montrer. ;) Merci de me répondre.
+                </p>
+                <span>12:40 am</span>
+            </article>
+            <article class="message-right">
+                <p >
+                    Salut Julien, Je ne pourrais pas être présent ce soir, je n’aime pas le nom OSPAF change stp. Merci de ta compréhension
+                </p>
+                <span>12:55 am</span>
+            </article>
+        </div>
     </section>
 </div>
+
+<script text="text/javascript">
+    $("main").css("padding", "0");
+</script>

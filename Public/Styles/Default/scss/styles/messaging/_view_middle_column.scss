@@ -1,4 +1,5 @@
 .middle-column {
+  width: 30%;
   background-color: $backgroundColorGreyLight;
   > .header-middle-column {
     height: 30px;
@@ -15,7 +16,7 @@
     }
   }
   > .messages-middle{
-    max-height: 800px;
+    max-height: 900px;
     overflow: scroll;
     > .content-message {
       background-color: $backgroundColorGreyLight;

@@ -447,11 +447,9 @@ nav {
   .container-messaging > section:first-child {
     background-color: #FFFFFF; }
   .container-messaging > section:nth-child(2) {
-    float: left;
-    width: 30%; }
+    float: left; }
   .container-messaging > section:last-child {
-    float: left;
-    width: 50%; }
+    float: left; }
   .container-messaging > section::before {
     display: table;
     content: ''; }
@@ -512,6 +510,7 @@ nav {
         font-size: 0.8em; }
 
 .middle-column {
+  width: 30%;
   background-color: #E5E5E5; }
   .middle-column > .header-middle-column {
     height: 30px;
@@ -525,7 +524,7 @@ nav {
       margin-left: 15px;
       line-height: 30px; }
   .middle-column > .messages-middle {
-    max-height: 800px;
+    max-height: 900px;
     overflow: scroll; }
     .middle-column > .messages-middle > .content-message {
       background-color: #E5E5E5;
@@ -587,65 +586,157 @@ nav {
       .middle-column .circle-new-message > a > i:hover {
         color: #1A5CCB; }
 
+.right-column {
+  width: 50%; }
+  .right-column > .infos-profil-contact {
+    height: 100%;
+    background-color: #FFFFFF;
+    padding: 15px;
+    border-bottom: 0.5px solid #BDBDBD;
+    border-right: 0.5px solid #BDBDBD; }
+    .right-column > .infos-profil-contact > h2 {
+      text-align: center; }
+      .right-column > .infos-profil-contact > h2 a {
+        text-decoration: none;
+        color: #000000; }
+        .right-column > .infos-profil-contact > h2 a:hover {
+          color: #1A5CCB; }
+    .right-column > .infos-profil-contact > .group-assign-info {
+      text-align: center; }
+      .right-column > .infos-profil-contact > .group-assign-info > a {
+        color: #8C8C8C;
+        text-decoration: none; }
+        .right-column > .infos-profil-contact > .group-assign-info > a:hover {
+          color: #000000; }
+      .right-column > .infos-profil-contact > .group-assign-info i {
+        font-size: 1em; }
+  .right-column > .chat-bloc {
+    padding: 15px 10px;
+    background-color: #FFFFFF;
+    border-right: 0.5px solid #BDBDBD;
+    max-height: 954px;
+    overflow: scroll; }
+    .right-column > .chat-bloc > .message-left {
+      margin-right: 45%; }
+      .right-column > .chat-bloc > .message-left > p {
+        color: white;
+        padding: 10px 15px;
+        background: linear-gradient(#1A5CCB, #3475e5);
+        border-radius: 7px 7px 7px 0px;
+        text-align: justify; }
+      .right-column > .chat-bloc > .message-left > span {
+        font-size: 0.8em; }
+    .right-column > .chat-bloc > .message-right {
+      margin-left: 45%;
+      text-align: right; }
+      .right-column > .chat-bloc > .message-right > p {
+        color: black;
+        padding: 10px 15px;
+        background: linear-gradient(#cccccc, #e6e6e6);
+        border-radius: 11px 11px 0px 11px;
+        text-align: justify; }
+      .right-column > .chat-bloc > .message-right > span {
+        font-size: 0.8em; }
+
 @media all and (max-device-width: 870px) {
-  section:first-child {
+  .left-column {
     float: none;
-    width: 100%; }
-    section:first-child > ul {
+    width: 100%;
+    border-bottom: 0.5px solid #BDBDBD; }
+    .left-column > ul {
       display: flex;
-      height: 60px; }
-      section:first-child > ul > li, section:first-child > ul li:first-child {
+      height: 100px; }
+      .left-column > ul > li, .left-column > ul li:first-child {
         margin: 0;
         padding: 0;
-        height: 60px;
+        height: 100px;
         text-align: center; }
-        section:first-child > ul > li .button-new-message p, section:first-child > ul > li a p, section:first-child > ul li:first-child .button-new-message p, section:first-child > ul li:first-child a p {
-          display: none; } }
+        .left-column > ul > li .button-new-message p, .left-column > ul > li a p, .left-column > ul li:first-child .button-new-message p, .left-column > ul li:first-child a p {
+          display: none; }
+        .left-column > ul > li .button-new-message i, .left-column > ul > li a i, .left-column > ul li:first-child .button-new-message i, .left-column > ul li:first-child a i {
+          font-size: 2.5rem; }
+        .left-column > ul > li a i, .left-column > ul li:first-child a i {
+          font-size: 2.5rem;
+          line-height: 100px; } }
 
 @media all and (max-width: 870px) {
-  section:first-child {
+  .left-column {
     float: none;
-    width: 100%; }
-    section:first-child > ul {
+    width: 100%;
+    border-bottom: 0.5px solid #BDBDBD; }
+    .left-column > ul {
       display: flex;
-      height: 60px; }
-      section:first-child > ul > li, section:first-child > ul li:first-child {
+      height: 100px; }
+      .left-column > ul > li, .left-column > ul li:first-child {
         margin: 0;
         padding: 0;
-        height: 60px;
+        height: 100px;
         text-align: center; }
-        section:first-child > ul > li .button-new-message p, section:first-child > ul > li a p, section:first-child > ul li:first-child .button-new-message p, section:first-child > ul li:first-child a p {
+        .left-column > ul > li .button-new-message p, .left-column > ul > li a p, .left-column > ul li:first-child .button-new-message p, .left-column > ul li:first-child a p {
           display: none; }
-        section:first-child > ul > li a, section:first-child > ul li:first-child a {
-          padding: 0; } }
+        .left-column > ul > li .button-new-message i, .left-column > ul > li a i, .left-column > ul li:first-child .button-new-message i, .left-column > ul li:first-child a i {
+          font-size: 2.5rem; }
+        .left-column > ul > li a i, .left-column > ul li:first-child a i {
+          font-size: 2.5rem;
+          line-height: 100px; }
+  .middle-column {
+    width: 10%; }
+    .middle-column > .header-middle-column {
+      display: none; }
+    .middle-column > .messages-middle > .content-message {
+      padding: 20px 0;
+      text-align: center; }
+      .middle-column > .messages-middle > .content-message > .header-message-info {
+        height: auto; }
+        .middle-column > .messages-middle > .content-message > .header-message-info > .icon-message {
+          width: 48px;
+          height: 48px;
+          line-height: 48px; }
+          .middle-column > .messages-middle > .content-message > .header-message-info > .icon-message p {
+            font-size: 1.5em; }
+        .middle-column > .messages-middle > .content-message > .header-message-info > .owner-message {
+          display: none; }
+      .middle-column > .messages-middle > .content-message > .main-message-info {
+        display: none; }
+      .middle-column > .messages-middle > .content-message > .footer-message-info {
+        display: none; }
+    .middle-column > .circle-new-message {
+      display: none; }
+  .right-column {
+    width: 90%; } }
 
 @media all and (min-device-width: 870px) and (min-width: 870px) and (max-width: 1200px) {
-  section:first-child {
+  .left-column {
     float: none;
-    width: 100%; }
-    section:first-child > ul {
+    width: 100%;
+    border-bottom: 0.5px solid #BDBDBD; }
+    .left-column > ul {
       display: flex;
       height: 80px; }
-      section:first-child > ul > li, section:first-child > ul > li:first-child {
+      .left-column > ul > li, .left-column > ul > li:first-child {
         margin: 0;
         padding: 0;
         height: 80px;
         flex-basis: calc(80% / 5);
         text-align: center; }
-        section:first-child > ul > li > a > p, section:first-child > ul > li:first-child > a > p {
+        .left-column > ul > li > a > p, .left-column > ul > li:first-child > a > p {
           display: block;
           font-size: 0.8em;
           margin-left: 3px;
           line-height: 0;
           margin-top: 15px; }
-        section:first-child > ul > li > a i, section:first-child > ul > li:first-child > a i {
+        .left-column > ul > li > a i, .left-column > ul > li:first-child > a i {
           line-height: 0;
           margin-top: 25px; }
-        section:first-child > ul > li > .button-new-message > p, section:first-child > ul > li:first-child > .button-new-message > p {
+        .left-column > ul > li > .button-new-message > p, .left-column > ul > li:first-child > .button-new-message > p {
           display: inline-block;
           font-size: 1em;
           margin-left: 3px; }
-      section:first-child > ul > li:first-child {
-        flex-basis: 20%; } }
+      .left-column > ul > li:first-child {
+        flex-basis: 20%; }
+  .middle-column {
+    width: 40%; }
+  .right-column {
+    width: 60%; } }
 
 /* BLOG PART */
