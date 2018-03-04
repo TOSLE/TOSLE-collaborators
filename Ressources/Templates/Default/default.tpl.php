@@ -60,7 +60,6 @@
             </ul>
         </nav>
         <main>
-            <?php include $this->view;?>
         </main>
         <script type="text/javascript" src="<?php echo DIRNAME;?>Public/Javascripts/Default/menuprofil.js"></script>
         <!-- jQuery OSPAF -->
