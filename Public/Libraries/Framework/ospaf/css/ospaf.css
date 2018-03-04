@@ -1,4 +1,6 @@
 /* VARIABLES */
+/* VARUABLES BTN-OUTLINE GLOBAL */
+/* VARUABLES BTN-OUTLINE GLOBAL */
 /* VARIABLES BTN-DEFAULT */
 /* btn-default normal */
 /* btn-default normal */
@@ -41,6 +43,18 @@
 /* btn-white outline */
 /* btn-white outline */
 /* VARIABLES BTN-WHITE */
+/* VARIABLES BTN-DARK */
+/* btn-dark normal */
+/* btn-dark normal */
+/* btn-dark outline */
+/* btn-dark outline */
+/* VARIABLES BTN-DARK */
+/* VARIABLES BTN-YELLOW */
+/* btn-yellow normal */
+/* btn-yellow normal */
+/* btn-yellow outline */
+/* btn-yellow outline */
+/* VARIABLES BTN-YELLOW */
 /* VARIABLES */
 /* GENERAL */
 /* GLOBAL CFG */
@@ -52,21 +66,22 @@
 /* GLOBAL CFG */
 /* TEXT CFG */
 body {
-  font-family: "Roboto"; }
+  font-family: "Roboto";
+  font-size: 1rem; }
   body h1 {
-    font-size: 24px;
+    font-size: 1.7em;
     font-weight: bold;
     font-style: normal; }
   body h2 {
-    font-size: 20px;
+    font-size: 1.5em;
     font-weight: bold;
     font-style: normal; }
   body h3 {
-    font-size: 18px;
+    font-size: 1.3em;
     font-weight: bold;
     font-style: italic; }
   body p {
-    font-size: 14px;
+    font-size: 1em;
     font-style: normal; }
 
 /* TEXT CFG */
@@ -85,6 +100,11 @@ body {
   font-weight: bold;
   src: url("../fonts/Roboto/Roboto-Bold.ttf"); }
 
+@font-face {
+  font-family: "Roboto";
+  font-weight: medium;
+  src: url("../fonts/Roboto/Roboto-Medium.ttf"); }
+
 /* IMPORT FONTS ROBOTO */
 /* GENERAL */
 /* CLASS */
@@ -94,38 +114,37 @@ body {
   outline: none;
   border: 1px solid;
   border-radius: 5px;
-  text-decoration: none; }
+  text-decoration: none;
+  padding: 7px;
+  font-size: 1em;
+  transition: background-color .2s; }
 
 .btn-sm {
   padding: 5px;
-  font-size: 12px; }
-
-.btn-md {
-  padding: 7px;
-  font-size: 14px; }
+  font-size: 0.8em; }
 
 .btn-lg {
   padding: 9px;
-  font-size: 14px; }
+  font-size: 1.2em; }
 
 /* BTN DEFAULT */
 .btn-default {
-  background-color: #D2DAE2;
-  border-color: #D2DAE2;
-  color: #000000; }
+  background-color: #949599;
+  border-color: #949599;
+  color: #FFF; }
 
 .btn-default:hover {
-  background-color: #7F8FA6;
-  border-color: #7F8FA6; }
+  background-color: #7D7E82;
+  border-color: #7D7E82; }
 
 .btn-default-outline {
   background-color: #FFFFFF;
-  border-color: #D2DAE2;
+  border-color: #949599;
   color: #000000; }
 
 .btn-default-outline:hover {
   background-color: #F1F1F1;
-  border-color: #7F8FA6; }
+  border-color: #7D7E82; }
 
 /* BTN DEFAULT */
 /* BTN RED */
@@ -150,22 +169,22 @@ body {
 /* BTN RED */
 /* BTN GREEN */
 .btn-green {
-  background-color: #2ECC71;
-  border-color: #2ECC71;
+  background-color: #28A745;
+  border-color: #28A745;
   color: #F5F6FA; }
 
 .btn-green:hover {
-  background-color: #27AE60;
-  border-color: #27AE60; }
+  background-color: #23903C;
+  border-color: #23903C; }
 
 .btn-green-outline {
   background-color: #FFFFFF;
-  border-color: #2ECC71;
+  border-color: #28A745;
   color: #000000; }
 
 .btn-green-outline:hover {
   background-color: #F1F1F1;
-  border-color: #27AE60; }
+  border-color: #23903C; }
 
 /* BTN GREEN */
 /* BTN BLUE */
@@ -230,13 +249,13 @@ body {
 /* BTN PURPLE */
 /* BTN WHITE */
 .btn-white {
-  background-color: #FFFFFF;
-  border-color: #FFFFFF;
-  color: #2F80ED; }
+  background-color: #F8F9FA;
+  border-color: #F8F9FA;
+  color: #333333; }
 
 .btn-white:hover {
-  background-color: #F1F1F1;
-  border-color: #F1F1F1; }
+  background-color: #f0f2f4;
+  border-color: #f0f2f4; }
 
 .btn-white-outline {
   background-color: #FFFFFF;
@@ -248,6 +267,46 @@ body {
   border-color: #2F80ED; }
 
 /* BTN WHITE */
+/* BTN DARK */
+.btn-dark {
+  background-color: #343A40;
+  border-color: #343A40;
+  color: #FFF; }
+
+.btn-dark:hover {
+  background-color: #22262A;
+  border-color: #22262A; }
+
+.btn-dark-outline {
+  background-color: #FFFFFF;
+  border-color: #343A40;
+  color: #000000; }
+
+.btn-dark-outline:hover {
+  background-color: #F1F1F1;
+  border-color: #22262A; }
+
+/* BTN DARK */
+/* BTN YELLOW */
+.btn-yellow {
+  background-color: #FFC107;
+  border-color: #FFC107;
+  color: #000000; }
+
+.btn-yellow:hover {
+  background-color: #E6AC00;
+  border-color: #E6AC00; }
+
+.btn-yellow-outline {
+  background-color: #FFFFFF;
+  border-color: #FFC107;
+  color: #000000; }
+
+.btn-yellow-outline:hover {
+  background-color: #F1F1F1;
+  border-color: #E6AC00; }
+
+/* BTN YELLOW */
 /* BTN OSPAF */
 /* MODAL CLASS */
 .fade-background {
@@ -264,9 +323,9 @@ body {
   z-index: 100; }
 
 .modal-window {
-  width: 900px;
+  width: 80%;
   background-color: #FFF;
-  border-radius: 10px;
+  border-radius: 5px;
   position: absolute;
   top: 100%;
   left: 50%;
@@ -274,60 +333,21 @@ body {
   transition: 1s; }
   .modal-window .modal-header {
     padding: 15px;
-    border-bottom: 1px solid #444444;
+    border-bottom: 1px solid #C4C4C4;
     color: #444444; }
     .modal-window .modal-header .modal-header-icon {
       position: absolute;
       right: 15px;
       cursor: pointer; }
   .modal-window .modal-main {
-    padding: 15px; }
+    padding: 15px;
+    text-align: justify; }
   .modal-window .modal-footer {
     padding: 5px 15px;
     text-align: right;
-    border-top: 1px solid #444444; }
+    border-top: 1px solid #C4C4C4; }
 
 /* MODAL CLASS */
-@media all and (max-width: 420px) {
-  .modal-header h2 {
-    font-size: 1.9em; }
-  .modal-main h3 {
-    font-size: 1.6em; }
-  .modal-main p {
-    font-size: 1.4em; }
-  .modal-footer button {
-    font-size: 1.4em; } }
-
-@media all and (max-device-width: 420px) {
-  .modal-header h2 {
-    font-size: 1.9em; }
-  .modal-main h3 {
-    font-size: 1.6em; }
-  .modal-main p {
-    font-size: 1.4em; }
-  .modal-footer button {
-    font-size: 1.4em; } }
-
-@media all and (min-width: 420px) and (min-device-width: 420px) {
-  .modal-header h2 {
-    font-size: 1.7em; }
-  .modal-main h3 {
-    font-size: 1.4em; }
-  .modal-main p {
-    font-size: 1.2em; }
-  .modal-footer button {
-    font-size: 1.2em; } }
-
-@media all and (min-width: 768px) and (min-device-width: 768px) {
-  .modal-header h2 {
-    font-size: 1.5em; }
-  .modal-main h3 {
-    font-size: 1.2em; }
-  .modal-main p {
-    font-size: 1em; }
-  .modal-footer button {
-    font-size: 1em; } }
-
 @font-face {
   font-family: 'Material Icons';
   font-style: normal;
@@ -446,3 +466,27 @@ body {
     flex-basis: calc(100% / 12); } }
 
 /* GRID */
+/* MEDIA */
+@media all and (max-width: 420px) {
+  body {
+    font-size: 1.3rem; } }
+
+@media all and (max-device-width: 420px) {
+  body {
+    font-size: 1.3rem; } }
+
+@media all and (min-width: 420px) and (min-device-width: 420px) {
+  body {
+    font-size: 1.2rem; } }
+
+@media all and (min-width: 768px) and (min-device-width: 768px) {
+  body {
+    font-size: 1.1rem; } }
+
+@media all and (min-width: 1230px) and (min-device-width: 1230px) {
+  body {
+    font-size: 1rem; }
+    body .modal-window {
+      max-width: 800px; } }
+
+/* MEDIA */
