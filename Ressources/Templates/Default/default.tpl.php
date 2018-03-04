@@ -35,26 +35,26 @@
             <ul>
                 <li <?php echo($controller == "IndexController")?" class='current'":"";?>>
                     <a href="<?php echo ($language=="en-EN")?DIRNAME:DIRNAME.substr($language,0,2);?>">
-                        <i class="material-icons">&#xE8D1;</i>
-                        <p><?php echo HOMEPAGE_NAME; ?></p>
+                        <i class="material-icons">&#xE80C;</i>
+                        <p><?php echo NAVBAR_HOMEPAGE; ?></p>
                     </a>
                 </li>
                 <li <?php echo($controller == "BlogController")?"class='current'":"";?>>
                     <a href="<?php echo DIRNAME.substr($language,0,2)."/";?>blog">
                         <i class="material-icons">&#xE02F;</i>
-                        <p><?php echo BLOGPAGE_NAME; ?></p>
+                        <p><?php echo NAVBAR_BLOG; ?></p>
                     </a>
                 </li>
                 <li <?php echo($controller == "ClassController")?"class='current'":"";?>>
                     <a href="<?php echo DIRNAME.substr($language,0,2)."/";?>class">
-                        <i class="material-icons">&#xE80C;</i>
-                        <p><?php echo CLASSPAGE_NAME; ?></p>
+                        <i class="material-icons">&#xE853;</i>
+                        <p><?php echo NAVBAR_PROFILE; ?></p>
                     </a>
                 </li>
                 <li <?php echo($controller == "ChatController")?"class='current'":"";?>>
                     <a href="<?php echo DIRNAME.substr($language,0,2)."/";?>chat">
                         <i class="material-icons">&#xE0C9;</i>
-                        <p><?php echo MESSAGINGPAGE_NAME;?></p>
+                        <p><?php echo NAVBAR_CHAT;?></p>
                     </a>
                 </li>
             </ul>

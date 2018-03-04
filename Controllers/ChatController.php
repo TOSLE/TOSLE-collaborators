@@ -10,6 +10,7 @@ class ChatController
 {
     function indexAction($params)
     {
-        $View = new View("default", "chat");
+        $View = new View("messaging", "chat");
+        $View->setData("PageName", GLOBAL_HOME_TEXT." ".NAVBAR_CHAT);
     }
 }

@@ -1,1 +1,89 @@
 /* TEMPLATE TOSLE MESSAGING PAGE */
+body > header {
+  background-color: #FFFFFF;
+  position: absolute;
+  width: 100%; }
+  body > header > section {
+    border-bottom: 1px solid #E5E5E5; }
+    body > header > section > div {
+      display: flex;
+      max-width: 1230px;
+      margin: 0 auto; }
+      body > header > section > div > .left-block {
+        flex-basis: 20%; }
+        body > header > section > div > .left-block > p {
+          font-size: 1.7em;
+          line-height: 60px;
+          color: #1A5CCB; }
+      body > header > section > div > .right-block {
+        flex-basis: 80%;
+        text-align: right; }
+        body > header > section > div > .right-block > i {
+          font-size: 1.5em;
+          margin-right: 50px;
+          line-height: 60px;
+          cursor: pointer;
+          transition: color 0.2s; }
+          body > header > section > div > .right-block > i:hover {
+            color: #1A5CCB; }
+        body > header > section > div > .right-block .profil-icon {
+          display: inline-block;
+          cursor: pointer; }
+          body > header > section > div > .right-block .profil-icon > .avatar-profil {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid #E5E5E5;
+            display: inline-block;
+            vertical-align: top;
+            margin-top: 10px;
+            transition: 0.3s;
+            overflow: hidden; }
+            body > header > section > div > .right-block .profil-icon > .avatar-profil > img {
+              width: 100%;
+              height: 100%; }
+          body > header > section > div > .right-block .profil-icon > i {
+            line-height: 60px; }
+          body > header > section > div > .right-block .profil-icon:hover > .avatar-profil {
+            background-color: rgba(26, 92, 203, 0.05);
+            border-color: #1A5CCB; }
+          body > header > section > div > .right-block .profil-icon:hover > i {
+            color: #1A5CCB; }
+  body > header > nav {
+    height: 60px;
+    border-bottom: 1px solid #E5E5E5; }
+    body > header > nav > ul {
+      display: flex;
+      max-width: 1230px;
+      margin: 0 auto;
+      list-style: none; }
+      body > header > nav > ul > li {
+        flex-basis: 25%;
+        height: 100%;
+        transition: background-color 0.3s; }
+        body > header > nav > ul > li > a {
+          display: block;
+          width: 100%;
+          height: 100%;
+          color: #8C8C8C;
+          text-align: center;
+          text-decoration: none;
+          padding: 4px 0; }
+          body > header > nav > ul > li > a > .material-icons {
+            font-size: 2em; }
+          body > header > nav > ul > li > a > p {
+            font-size: 0.9em; }
+        body > header > nav > ul > li:hover {
+          background-color: rgba(0, 0, 0, 0.1); }
+        body > header > nav > ul > li.burgermenu {
+          display: none; }
+        body > header > nav > ul > li.active {
+          background-color: #1A5CCB; }
+          body > header > nav > ul > li.active > a {
+            color: #FFFFFF; }
+
+html {
+  height: 100%; }
+  html body {
+    height: 100%;
+    background-color: #EBEBEB; }
