@@ -43,7 +43,8 @@ body > header {
               width: 100%;
               height: 100%; }
           body > header > section > div > .right-block .profil-icon > i {
-            line-height: 60px; }
+            line-height: 60px;
+            font-size: 1.5em; }
           body > header > section > div > .right-block .profil-icon:hover > .avatar-profil {
             background-color: rgba(26, 92, 203, 0.05);
             border-color: #1A5CCB; }
@@ -77,9 +78,9 @@ body > header {
           background-color: rgba(0, 0, 0, 0.1); }
         body > header > nav > ul > li.burgermenu {
           display: none; }
-        body > header > nav > ul > li.active {
+        body > header > nav > ul > li.current {
           background-color: #1A5CCB; }
-          body > header > nav > ul > li.active > a {
+          body > header > nav > ul > li.current > a {
             color: #FFFFFF; }
 
 html {
@@ -87,3 +88,103 @@ html {
   html body {
     height: 100%;
     background-color: #EBEBEB; }
+
+@media all and (max-device-width: 420px) {
+  body > header > section {
+    height: 90px; }
+    body > header > section > div {
+      padding: 0 5px; }
+      body > header > section > div > .left-block > p {
+        line-height: 90px; }
+      body > header > section > div > .right-block > i {
+        line-height: 90px; }
+      body > header > section > div > .right-block .profil-icon > .avatar-profil {
+        width: 70px;
+        height: 70px; }
+      body > header > section > div > .right-block .profil-icon > i {
+        line-height: 90px; }
+  body > header > nav {
+    height: 90px;
+    position: fixed;
+    bottom: 0;
+    width: 100%; }
+    body > header > nav > ul > li {
+      flex-basis: 20%; }
+      body > header > nav > ul > li > a {
+        padding: 15px 0; }
+      body > header > nav > ul > li.burgermenu {
+        display: block; } }
+
+@media all and (max-width: 420px) {
+  body > header > section {
+    height: 90px; }
+    body > header > section > div {
+      padding: 0 5px; }
+      body > header > section > div > .left-block > p {
+        line-height: 90px; }
+      body > header > section > div > .right-block > i {
+        line-height: 90px; }
+      body > header > section > div > .right-block .profil-icon > .avatar-profil {
+        width: 70px;
+        height: 70px; }
+      body > header > section > div > .right-block .profil-icon > i {
+        line-height: 90px; }
+  body > header > nav {
+    height: 90px;
+    position: fixed;
+    bottom: 0;
+    width: 100%; }
+    body > header > nav > ul > li {
+      flex-basis: 20%; }
+      body > header > nav > ul > li > a {
+        padding: 15px 0; }
+      body > header > nav > ul > li.burgermenu {
+        display: block; } }
+
+@media all and (min-width: 420px) and (min-device-width: 420px) {
+  body > header > section {
+    height: 70px; }
+    body > header > section > div {
+      padding: 0 5px; }
+      body > header > section > div > .left-block > p {
+        line-height: 70px; }
+      body > header > section > div > .right-block > i {
+        line-height: 70px; }
+      body > header > section > div > .right-block .profil-icon > .avatar-profil {
+        width: 50px;
+        height: 50px; }
+      body > header > section > div > .right-block .profil-icon > i {
+        line-height: 70px; }
+  body > header > nav {
+    height: 70px; }
+    body > header > nav > ul > li {
+      flex-basis: 20%; }
+      body > header > nav > ul > li > a {
+        padding: 5px 0; }
+      body > header > nav > ul > li.burgermenu {
+        display: block; } }
+
+@media all and (min-width: 768px) and (min-device-width: 768px) {
+  body > header > section {
+    height: 60px; }
+    body > header > section > div > .left-block > p {
+      line-height: 60px; }
+    body > header > section > div > .right-block > i {
+      line-height: 60px; }
+    body > header > section > div > .right-block .profil-icon > .avatar-profil {
+      width: 40px;
+      height: 40px; }
+    body > header > section > div > .right-block .profil-icon > i {
+      line-height: 60px; }
+  body > header > nav {
+    height: 60px; }
+    body > header > nav > ul > li > a {
+      padding: 3px 0; } }
+
+@media all and (min-width: 1230px) and (min-device-width: 1230px) {
+  body > header > nav > ul > li {
+    flex-basis: 25%; }
+    body > header > nav > ul > li > a {
+      padding: 5px 0; }
+    body > header > nav > ul > li.burgermenu {
+      display: none; } }

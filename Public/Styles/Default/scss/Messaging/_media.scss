@@ -1,0 +1,200 @@
+@media all and (max-device-width: 420px){
+  body {
+    > header {
+      > section {
+        height: $sizeHeightHeader + 30px;
+        > div {
+          padding: 0 5px;
+          > .left-block {
+            > p {
+              line-height: $sizeHeightHeader + 30px;
+            }
+          }
+          > .right-block {
+            > i {
+              line-height: $sizeHeightHeader + 30px;
+            }
+            .profil-icon {
+              > .avatar-profil {
+                width: $sizeHeightHeader + 10px;
+                height: $sizeHeightHeader + 10px;
+              }
+              > i {
+                line-height: $sizeHeightHeader + 30px;
+              }
+            }
+          }
+        }
+      }
+      > nav {
+        height: $sizeHeightHeader + 30px;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        > ul {
+          > li {
+            flex-basis: 20%;
+            > a {
+              padding: 15px 0;
+            }
+            &.burgermenu {
+              display: block;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media all and (max-width: 420px){
+  body {
+    > header {
+      > section {
+        height: $sizeHeightHeader + 30px;
+        > div {
+          padding: 0 5px;
+          > .left-block {
+            > p {
+              line-height: $sizeHeightHeader + 30px;
+            }
+          }
+          > .right-block {
+            > i {
+              line-height: $sizeHeightHeader + 30px;
+            }
+            .profil-icon {
+              > .avatar-profil {
+                width: $sizeHeightHeader + 10px;
+                height: $sizeHeightHeader + 10px;
+              }
+              > i {
+                line-height: $sizeHeightHeader + 30px;
+              }
+            }
+          }
+        }
+      }
+      > nav {
+        height: $sizeHeightHeader + 30px;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        > ul {
+          > li {
+            flex-basis: 20%;
+            > a {
+              padding: 15px 0;
+            }
+            &.burgermenu {
+              display: block;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media all and (min-width: 420px) and (min-device-width: 420px){
+  body {
+    > header {
+      > section {
+        height: $sizeHeightHeader + 10px;
+        > div {
+          padding: 0 5px;
+          > .left-block {
+            > p {
+              line-height: $sizeHeightHeader + 10px;
+            }
+          }
+          > .right-block {
+            > i {
+              line-height: $sizeHeightHeader + 10px;
+            }
+            .profil-icon {
+              > .avatar-profil {
+                width: $sizeHeightHeader - 10px;
+                height: $sizeHeightHeader - 10px;
+              }
+              > i {
+                line-height: $sizeHeightHeader + 10px;
+              }
+            }
+          }
+        }
+      }
+      > nav {
+        height: $sizeHeightHeader + 10px;
+        > ul {
+          > li {
+            flex-basis: 20%;
+            > a {
+              padding: 5px 0;
+            }
+            &.burgermenu {
+              display: block;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media all and (min-width: 768px) and (min-device-width: 768px){
+  body {
+    > header {
+      > section {
+        height: $sizeHeightHeader;
+        > div {
+          > .left-block {
+            > p {
+              line-height: $sizeHeightHeader;
+            }
+          }
+          > .right-block {
+            > i {
+              line-height: $sizeHeightHeader;
+            }
+            .profil-icon {
+              > .avatar-profil {
+                width: $sizeHeightHeader - 20px;
+                height: $sizeHeightHeader - 20px;
+              }
+              > i {
+                line-height: $sizeHeightHeader;
+              }
+            }
+          }
+        }
+      }
+      > nav {
+        height: $sizeHeightHeader;
+        > ul {
+          > li {
+            > a {
+              padding: 3px 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media all and (min-width: 1230px) and (min-device-width: 1230px){
+  body {
+    > header {
+      > nav {
+        > ul {
+          > li {
+            flex-basis: 25%;
+            > a {
+              padding: 5px 0;
+            }
+            &.burgermenu {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
