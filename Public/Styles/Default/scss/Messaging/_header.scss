@@ -34,8 +34,8 @@ body {
             display: inline-block;
             cursor: pointer;
             > .avatar-profil {
-              width: 40px;
-              height: 40px;
+              width: $sizeHeightHeader - 20px;
+              height: $sizeHeightHeader - 20px;
               border-radius: 50%;
               border: 1px solid $colorBorderHeaderAvatar;
               display: inline-block;
@@ -50,6 +50,7 @@ body {
             }
             > i {
               line-height: $sizeHeightHeader;
+              font-size: $sizeFontHeaderMenuIcon;
             }
             &:hover { // profil-icon
               > .avatar-profil {
@@ -97,7 +98,7 @@ body {
           &.burgermenu {
             display: none;
           }
-          &.active {
+          &.current {
             background-color: $colorGlobalToslePrimary;
             > a {
               color: #FFFFFF;
