@@ -1,11 +1,11 @@
 <html>
     <head>
-        <title>TOSLE - <?php echo $PageName;?></title>
+        <title><?php echo $PageName;?></title>
         <meta charset="utf-8">
         <link href="<?php echo DIRNAME;?>Public/Libraries/Framework/ospaf/css/ospaf.css" rel="stylesheet">
         <link href="<?php echo DIRNAME;?>Public/Styles/Default/css/template_messaging.css" rel="stylesheet">
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="<?php echo DIRNAME;?>Public/Libraries/jquery/test/data/jquery-1.9.1.js"></script>
     </head>
     <body>
         <header>
@@ -40,10 +40,18 @@
                         <a href="<?php echo DIRNAME.substr($language,0,2)."/";?>blog"><i class="material-icons">&#xE02F;</i><p><?php echo NAVBAR_BLOG; ?></p></a>
                     </li>
                     <li <?php echo($controller == "ChatController")?" class='current'":"";?>>
-                        <a href="<?php echo DIRNAME.substr($language,0,2)."/";?>chat"><i class="material-icons">&#xE0B7;</i><p><?php echo NAVBAR_CHAT; ?></p></a>
+                        <a href="<?php echo DIRNAME.substr($language,0,2)."/";?>chat"><i class="material-icons">&#xE0B7;</i><p><?php echo NAVBAR_MESSAGING; ?></p></a>
                     </li>
                 </ul>
             </nav>
         </header>
+
+        <div id="positionning-box-tosle">
+            <div class="section-size-body">
+                <div class="content-box">
+                    <?php include "Messaging/header_menu.tpl.php";?>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

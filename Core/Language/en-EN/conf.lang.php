@@ -19,7 +19,7 @@
     define("NAVBAR_MENU", "Menu");
     define("NAVBAR_BLOG", "Blog");
     define("NAVBAR_PROFILE", "Profile");
-    define("NAVBAR_CHAT", "Chat");
+    define("NAVBAR_MESSAGING", "Messaging");
 /*
     TOSLE NAVBAR DEFINE
 */

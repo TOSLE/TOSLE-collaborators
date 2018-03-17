@@ -83,11 +83,39 @@ body > header {
           body > header > nav > ul > li.current > a {
             color: #FFFFFF; }
 
+#menu-header-section {
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  right: 0;
+  margin-top: 60px; }
+  #menu-header-section > .arrow-top-menu {
+    width: 7px;
+    border-bottom: 7px solid #FFFFFF;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    position: absolute;
+    right: 10px; }
+  #menu-header-section > .content-menu-header {
+    margin-top: 7px;
+    background-color: #FFFFFF;
+    width: 100%;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4); }
+
 html {
   height: 100%; }
   html body {
     height: 100%;
     background-color: #EBEBEB; }
+    html body #positionning-box-tosle {
+      position: absolute;
+      width: 100%; }
+      html body #positionning-box-tosle > .section-size-body {
+        max-width: 1230px;
+        margin: 0 auto; }
+        html body #positionning-box-tosle > .section-size-body > .content-box {
+          position: relative;
+          width: 100%; }
 
 @media all and (max-device-width: 420px) {
   body > header > section {
