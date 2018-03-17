@@ -178,21 +178,6 @@
         }
       }
     }
-    #menu-header-section {
-      margin-top: $sizeHeightHeader + 10px;
-      width: 250px;
-      > .arrow-top-menu {
-        width: 7px;
-        border-bottom: 7px solid $colorBackgroundHeader;
-        border-left: 7px solid transparent;
-        border-right: 7px solid transparent;
-        position: absolute;
-        right: 10px;
-      }
-      > .content-menu-header {
-        margin-top: 7px;
-      }
-    }
   }
 }
 @media all and (min-width: 768px) and (min-device-width: 768px){
