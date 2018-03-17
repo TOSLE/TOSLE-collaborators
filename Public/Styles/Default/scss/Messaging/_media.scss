@@ -44,6 +44,9 @@
         }
       }
     }
+    #menu-header-section {
+      margin-top: $sizeHeightHeader + 30px;
+    }
   }
 }
 @media all and (max-width: 420px){
@@ -92,6 +95,9 @@
         }
       }
     }
+    #menu-header-section {
+      margin-top: $sizeHeightHeader + 30px;
+    }
   }
 }
 @media all and (min-width: 420px) and (min-device-width: 420px){
@@ -137,6 +143,9 @@
         }
       }
     }
+    #menu-header-section {
+      margin-top: $sizeHeightHeader + 10px;
+    }
   }
 }
 @media all and (min-width: 768px) and (min-device-width: 768px){
@@ -176,6 +185,9 @@
           }
         }
       }
+    }
+    #menu-header-section {
+      margin-top: $sizeHeightHeader;
     }
   }
 }

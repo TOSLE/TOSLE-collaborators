@@ -13,6 +13,15 @@
     TOSLE GLOBAL DEFINE
 */
 /*
+    TOSLE HEADER DEFINE
+ */
+    define("HEADER_MENU_PROFILE", "View profile");
+    define("HEADER_MENU_LOGOUT", "Log out");
+    define("HEADER_MENU_BACKOFFICE", "Dashboard");
+/*
+    TOSLE HEADER DEFINE
+ */
+/*
     TOSLE NAVBAR DEFINE
 */
     define("NAVBAR_HOMEPAGE", "Class");
