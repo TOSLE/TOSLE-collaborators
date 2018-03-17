@@ -27,7 +27,7 @@
         }
       }
       > nav {
-        height: $sizeHeightHeader + 30px;
+        height: $sizeHeightHeader + 90px;
         position: fixed;
         bottom: 0;
         width: 100%;
@@ -35,7 +35,8 @@
           > li {
             flex-basis: 20%;
             > a {
-              padding: 15px 0;
+              font-size: 1.4em;
+              padding: 30px 0;
             }
             &.burgermenu {
               display: block;
@@ -46,6 +47,27 @@
     }
     #menu-header-section {
       margin-top: $sizeHeightHeader + 30px;
+      width: 450px;
+      > .arrow-top-menu {
+        width: 15px;
+        border-bottom: 15px solid $colorBackgroundHeader;
+        border-left: 15px solid transparent;
+        border-right: 15px solid transparent;
+        position: absolute;
+        right: 7px;
+      }
+      > .content-menu-header {
+        margin-top: 15px;
+        > ul {
+          > li {
+            padding: 0 25px;
+            > a {
+              font-size: 1.3em;
+              padding: 25px 0;
+            }
+          }
+        }
+      }
     }
   }
 }
@@ -86,6 +108,7 @@
           > li {
             flex-basis: 20%;
             > a {
+              font-size: 0.9em;
               padding: 15px 0;
             }
             &.burgermenu {
@@ -96,8 +119,20 @@
       }
     }
     #menu-header-section {
-      margin-top: $sizeHeightHeader + 30px;
-    }
+       margin-top: $sizeHeightHeader + 30px;
+       width: 300px;
+       > .arrow-top-menu {
+         width: 15px;
+         border-bottom: 15px solid $colorBackgroundHeader;
+         border-left: 15px solid transparent;
+         border-right: 15px solid transparent;
+         position: absolute;
+         right: 7px;
+       }
+       > .content-menu-header {
+         margin-top: 15px;
+       }
+     }
   }
 }
 @media all and (min-width: 420px) and (min-device-width: 420px){
@@ -145,6 +180,18 @@
     }
     #menu-header-section {
       margin-top: $sizeHeightHeader + 10px;
+      width: 250px;
+      > .arrow-top-menu {
+        width: 7px;
+        border-bottom: 7px solid $colorBackgroundHeader;
+        border-left: 7px solid transparent;
+        border-right: 7px solid transparent;
+        position: absolute;
+        right: 10px;
+      }
+      > .content-menu-header {
+        margin-top: 7px;
+      }
     }
   }
 }
