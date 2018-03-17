@@ -54,7 +54,7 @@
                 <li <?php echo($controller == "ChatController")?"class='current'":"";?>>
                     <a href="<?php echo DIRNAME.substr($language,0,2)."/";?>chat">
                         <i class="material-icons">&#xE0C9;</i>
-                        <p><?php echo NAVBAR_CHAT;?></p>
+                        <p><?php echo NAVBAR_MESSAGING;?></p>
                     </a>
                 </li>
             </ul>

@@ -16,11 +16,11 @@
                     </div>
                     <div class="right-block">
                         <i class="material-icons">&#xE003;</i>
-                        <div class="profil-icon">
+                        <div id="profil-icon" class="profil-icon">
                             <div class="avatar-profil">
                                 <img src="<?php echo DIRNAME;?>Tosle/Users/Images/475899654133.jpg">
                             </div>
-                            <i class="material-icons">&#xE313;</i>
+                            <i id="arrow-menu" class="material-icons">&#xE313;</i>
                         </div>
                     </div>
                 </div>
@@ -53,5 +53,9 @@
                 </div>
             </div>
         </div>
+
+        <!-- INCLUDE SCRIPT -->
+        <script src="<?php echo DIRNAME;?>Public/Javascripts/Default/menuprofil.js"></script>
+        <!-- INCLUDE SCRIPT -->
     </body>
 </html>
