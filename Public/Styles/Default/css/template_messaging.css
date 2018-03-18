@@ -1,4 +1,26 @@
 /* TEMPLATE TOSLE MESSAGING PAGE */
+html {
+  height: 100%; }
+  html body {
+    height: 100%;
+    background-color: #EBEBEB; }
+    html body #positionning-box-tosle {
+      position: absolute;
+      width: 100%; }
+      html body #positionning-box-tosle > .section-size-body {
+        max-width: 1230px;
+        margin: 0 auto; }
+        html body #positionning-box-tosle > .section-size-body > .content-box {
+          position: relative;
+          width: 100%; }
+    html body .fade-background-burgermenu {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 10; }
+
 body > header {
   background-color: #FFFFFF;
   position: absolute;
@@ -126,103 +148,206 @@ body > header {
           border: 1px solid #E5E5E5;
           margin: 5px 15px; }
 
-html {
-  height: 100%; }
-  html body {
-    height: 100%;
-    background-color: #EBEBEB; }
-    html body #positionning-box-tosle {
-      position: absolute;
-      width: 100%; }
-      html body #positionning-box-tosle > .section-size-body {
-        max-width: 1230px;
-        margin: 0 auto; }
-        html body #positionning-box-tosle > .section-size-body > .content-box {
-          position: relative;
-          width: 100%; }
+main {
+  max-width: 1230px;
+  margin: 0 auto;
+  height: 100%;
+  display: flex; }
+  main > .left-column {
+    flex-basis: 20%; }
+    main > .left-column > .content-box-left {
+      background-color: #FFFFFF;
+      padding: 15px 20px; }
+      main > .left-column > .content-box-left > .btn-tosle {
+        width: 100%;
+        cursor: pointer;
+        height: 60px;
+        text-align: center;
+        display: block;
+        text-decoration: none; }
+        main > .left-column > .content-box-left > .btn-tosle.btn-close-window {
+          display: none;
+          margin-bottom: 15px;
+          border: none; }
+          main > .left-column > .content-box-left > .btn-tosle.btn-close-window > p {
+            font-size: 1.4em; }
+        main > .left-column > .content-box-left > .btn-tosle.new-message {
+          background-color: #1A5CCB;
+          border: 1px solid #1A5CCB;
+          color: #FFFFFF; }
+        main > .left-column > .content-box-left > .btn-tosle > i {
+          font-size: 1.5em;
+          line-height: 60px; }
+        main > .left-column > .content-box-left > .btn-tosle > p {
+          font-size: 1.1em;
+          display: inline-block;
+          vertical-align: top;
+          line-height: 60px; }
+      main > .left-column > .content-box-left > ul {
+        list-style: none;
+        margin-top: 15px; }
+        main > .left-column > .content-box-left > ul > li > a {
+          color: #8C8C8C;
+          text-decoration: none;
+          display: flex;
+          width: 100%;
+          height: 60px;
+          line-height: 60px;
+          transition: color 0.2s; }
+          main > .left-column > .content-box-left > ul > li > a > i {
+            line-height: 60px; }
+          main > .left-column > .content-box-left > ul > li > a > p {
+            text-align: left;
+            flex-basis: 100%;
+            padding-left: 15px; }
+          main > .left-column > .content-box-left > ul > li > a > span.notif-active {
+            text-align: right;
+            flex-basis: 100%; }
+          main > .left-column > .content-box-left > ul > li > a:hover {
+            color: #1A5CCB; }
+      main > .left-column > .content-box-left:nth-child(2) {
+        margin-top: 15px; }
+      main > .left-column > .content-box-left > .profil-info {
+        text-align: center; }
+        main > .left-column > .content-box-left > .profil-info > .identity {
+          font-size: 1.1em; }
+        main > .left-column > .content-box-left > .profil-info > .contact {
+          font-size: 0.8em; }
+          main > .left-column > .content-box-left > .profil-info > .contact > a {
+            text-decoration: none;
+            color: #1A5CCB; }
+      main > .left-column > .content-box-left > .profil-stats {
+        margin-top: 50px;
+        display: flex;
+        justify-content: center; }
+        main > .left-column > .content-box-left > .profil-stats > div {
+          text-align: center;
+          margin-left: 5px; }
+          main > .left-column > .content-box-left > .profil-stats > div > .number {
+            color: #000000; }
+          main > .left-column > .content-box-left > .profil-stats > div > .description {
+            font-size: 0.6em;
+            color: #9E9FA3; }
+          main > .left-column > .content-box-left > .profil-stats > div:first-child {
+            margin-left: 0px; }
+    main > .left-column .footer-infos {
+      font-size: 0.8em;
+      padding: 0 20px;
+      text-align: justify; }
+      main > .left-column .footer-infos > .global-infos {
+        margin-top: 5px; }
+        main > .left-column .footer-infos > .global-infos > p:first-child > i {
+          font-size: 1em;
+          line-height: 15px; }
+        main > .left-column .footer-infos > .global-infos > p:nth-child(2) {
+          font-style: italic;
+          font-size: 0.9em; }
+      main > .left-column .footer-infos > .more-infos {
+        margin-top: 15px; }
+        main > .left-column .footer-infos > .more-infos > a {
+          color: #9E9FA3;
+          text-decoration: none; }
+      main > .left-column .footer-infos a:hover {
+        text-decoration: underline; }
+  main > .middle-column {
+    flex-basis: 30%; }
+  main > .right-column {
+    flex-basis: 50%; }
 
 @media all and (max-device-width: 420px) {
-  body > header > section {
-    height: 90px; }
-    body > header > section > div {
-      padding: 0 5px; }
-      body > header > section > div > .left-block > p {
-        line-height: 90px; }
-      body > header > section > div > .right-block > i {
-        line-height: 90px; }
-      body > header > section > div > .right-block .profil-icon > .avatar-profil {
-        width: 70px;
-        height: 70px; }
-      body > header > section > div > .right-block .profil-icon > i {
-        line-height: 90px; }
-  body > header > nav {
-    height: 150px;
-    position: fixed;
-    bottom: 0;
-    width: 100%; }
-    body > header > nav > ul > li {
-      flex-basis: 20%; }
-      body > header > nav > ul > li > a {
-        font-size: 1.4em;
-        padding: 30px 0; }
-      body > header > nav > ul > li.burgermenu {
-        display: block; }
-  body #menu-header-section {
-    margin-top: 90px;
-    width: 450px; }
-    body #menu-header-section > .arrow-top-menu {
-      width: 15px;
-      border-bottom: 15px solid #FFFFFF;
-      border-left: 15px solid transparent;
-      border-right: 15px solid transparent;
-      position: absolute;
-      right: 7px; }
-    body #menu-header-section > .content-menu-header {
-      margin-top: 15px; }
-      body #menu-header-section > .content-menu-header > ul > li {
-        padding: 0 25px; }
-        body #menu-header-section > .content-menu-header > ul > li > a {
-          font-size: 1.3em;
-          padding: 25px 0; } }
+  body {
+    padding-bottom: 150px; }
+    body > header > section {
+      height: 120px; }
+      body > header > section > div {
+        padding: 0 5px; }
+        body > header > section > div > .left-block > p {
+          line-height: 120px;
+          font-size: 2.5em; }
+        body > header > section > div > .right-block > i {
+          line-height: 120px;
+          font-size: 2.5em; }
+        body > header > section > div > .right-block .profil-icon > .avatar-profil {
+          width: 90px;
+          height: 90px;
+          margin-top: 0; }
+        body > header > section > div > .right-block .profil-icon > i {
+          line-height: 90px;
+          font-size: 2.5em; }
+    body > header > nav {
+      height: 150px;
+      position: fixed;
+      bottom: 0;
+      width: 100%; }
+      body > header > nav > ul > li {
+        flex-basis: 20%; }
+        body > header > nav > ul > li > a {
+          font-size: 1.4em;
+          padding: 30px 0; }
+        body > header > nav > ul > li.burgermenu {
+          display: block; }
+    body > main {
+      padding-top: 120px; }
+    body #menu-header-section {
+      margin-top: 90px;
+      width: 450px; }
+      body #menu-header-section > .arrow-top-menu {
+        width: 15px;
+        border-bottom: 15px solid #FFFFFF;
+        border-left: 15px solid transparent;
+        border-right: 15px solid transparent;
+        position: absolute;
+        right: 15px; }
+      body #menu-header-section > .content-menu-header {
+        margin-top: 15px; }
+        body #menu-header-section > .content-menu-header > ul > li {
+          padding: 0 25px; }
+          body #menu-header-section > .content-menu-header > ul > li > a {
+            font-size: 1.3em;
+            padding: 25px 0; } }
 
 @media all and (max-width: 420px) {
-  body > header > section {
-    height: 90px; }
-    body > header > section > div {
-      padding: 0 5px; }
-      body > header > section > div > .left-block > p {
-        line-height: 90px; }
-      body > header > section > div > .right-block > i {
-        line-height: 90px; }
-      body > header > section > div > .right-block .profil-icon > .avatar-profil {
-        width: 70px;
-        height: 70px; }
-      body > header > section > div > .right-block .profil-icon > i {
-        line-height: 90px; }
-  body > header > nav {
-    height: 90px;
-    position: fixed;
-    bottom: 0;
-    width: 100%; }
-    body > header > nav > ul > li {
-      flex-basis: 20%; }
-      body > header > nav > ul > li > a {
-        font-size: 0.9em;
-        padding: 15px 0; }
-      body > header > nav > ul > li.burgermenu {
-        display: block; }
-  body #menu-header-section {
-    margin-top: 90px;
-    width: 300px; }
-    body #menu-header-section > .arrow-top-menu {
-      width: 15px;
-      border-bottom: 15px solid #FFFFFF;
-      border-left: 15px solid transparent;
-      border-right: 15px solid transparent;
-      position: absolute;
-      right: 7px; }
-    body #menu-header-section > .content-menu-header {
-      margin-top: 15px; } }
+  body {
+    padding-bottom: 90px; }
+    body > header > section {
+      height: 90px; }
+      body > header > section > div {
+        padding: 0 5px; }
+        body > header > section > div > .left-block > p {
+          line-height: 90px; }
+        body > header > section > div > .right-block > i {
+          line-height: 90px; }
+        body > header > section > div > .right-block .profil-icon > .avatar-profil {
+          width: 70px;
+          height: 70px; }
+        body > header > section > div > .right-block .profil-icon > i {
+          line-height: 90px; }
+    body > header > nav {
+      height: 90px;
+      position: fixed;
+      bottom: 0;
+      width: 100%; }
+      body > header > nav > ul > li {
+        flex-basis: 20%; }
+        body > header > nav > ul > li > a {
+          font-size: 0.9em;
+          padding: 15px 0; }
+        body > header > nav > ul > li.burgermenu {
+          display: block; }
+    body > main {
+      padding-top: 90px; }
+    body #menu-header-section {
+      margin-top: 90px;
+      width: 300px; }
+      body #menu-header-section > .arrow-top-menu {
+        width: 15px;
+        border-bottom: 15px solid #FFFFFF;
+        border-left: 15px solid transparent;
+        border-right: 15px solid transparent;
+        position: absolute;
+        right: 7px; }
+      body #menu-header-section > .content-menu-header {
+        margin-top: 15px; } }
 
 @media all and (min-width: 420px) and (min-device-width: 420px) {
   body > header > section {
@@ -246,18 +371,8 @@ html {
         padding: 5px 0; }
       body > header > nav > ul > li.burgermenu {
         display: block; }
-  body #menu-header-section {
-    margin-top: 70px;
-    width: 250px; }
-    body #menu-header-section > .arrow-top-menu {
-      width: 7px;
-      border-bottom: 7px solid #FFFFFF;
-      border-left: 7px solid transparent;
-      border-right: 7px solid transparent;
-      position: absolute;
-      right: 10px; }
-    body #menu-header-section > .content-menu-header {
-      margin-top: 7px; } }
+  body > main {
+    padding-top: 140px; } }
 
 @media all and (min-width: 768px) and (min-device-width: 768px) {
   body > header > section {
@@ -276,7 +391,22 @@ html {
     body > header > nav > ul > li > a {
       padding: 3px 0; }
   body #menu-header-section {
-    margin-top: 60px; } }
+    margin-top: 60px; }
+  body > main {
+    padding-top: 120px; }
+    body > main > .left-column {
+      position: absolute;
+      top: 0;
+      background-color: #F1F1F1;
+      width: 350px;
+      z-index: 11;
+      height: 100%; }
+      body > main > .left-column > .content-box-left > .btn-tosle.btn-close-window {
+        display: block; }
+    body > main > .middle-column {
+      flex-basis: 40%; }
+    body > main > .right-column {
+      flex-basis: 60%; } }
 
 @media all and (min-width: 1230px) and (min-device-width: 1230px) {
   body > header > nav > ul > li {
@@ -284,4 +414,11 @@ html {
     body > header > nav > ul > li > a {
       padding: 5px 0; }
     body > header > nav > ul > li.burgermenu {
-      display: none; } }
+      display: none; }
+  body > main > .left-column {
+    position: static;
+    flex-basis: 20%; }
+  body > main > .middle-column {
+    flex-basis: 30%; }
+  body > main > .right-column {
+    flex-basis: 50%; } }

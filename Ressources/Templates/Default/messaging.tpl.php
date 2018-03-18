@@ -45,7 +45,6 @@
                 </ul>
             </nav>
         </header>
-
         <div id="positionning-box-tosle">
             <div class="section-size-body">
                 <div class="content-box">
@@ -53,7 +52,10 @@
                 </div>
             </div>
         </div>
-
+        <main>
+            <?php include $this->view;?>
+        </main>
+        <div class="fade-background-burgermenu"></div>
         <!-- INCLUDE SCRIPT -->
         <script src="<?php echo DIRNAME;?>Public/Javascripts/Default/menuprofil.js"></script>
         <!-- INCLUDE SCRIPT -->
