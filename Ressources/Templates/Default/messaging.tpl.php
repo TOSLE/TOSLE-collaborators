@@ -27,7 +27,7 @@
             </section>
             <nav>
                 <ul>
-                    <li class="burgermenu">
+                    <li id="open-burgermenu" class="burgermenu">
                         <a href="#"><i class="material-icons">&#xE5D2;</i><p><?php echo NAVBAR_MENU; ?></p></a>
                     </li>
                     <li <?php echo($controller == "IndexController")?" class='current'":"";?>>
@@ -55,9 +55,10 @@
         <main>
             <?php include $this->view;?>
         </main>
-        <div class="fade-background-burgermenu"></div>
+        <div id="fade-background-burgermenu" class="fade-background-burgermenu"></div>
         <!-- INCLUDE SCRIPT -->
         <script src="<?php echo DIRNAME;?>Public/Javascripts/Default/menuprofil.js"></script>
+        <script src="<?php echo DIRNAME;?>Public/Javascripts/Default/Messaging/burgermenu.js"></script>
         <!-- INCLUDE SCRIPT -->
     </body>
 </html>

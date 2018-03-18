@@ -241,10 +241,13 @@
       > .left-column {
         position: absolute;
         top: 0;
-        background-color: #F1F1F1;
-        width: 350px;
+        background-color: $colorBackgroundBody;
+        width: 0;
         z-index: 11;
         height: 100%;
+        overflow: hidden;
+        opacity: 0;
+        transition: opacity 0.4s;
         > .content-box-left {
           > .btn-tosle {
             &.btn-close-window {
@@ -259,6 +262,16 @@
       > .right-column {
         flex-basis: 60%;
       }
+    }
+    .fade-background-burgermenu {
+      width: 0;
+      height: 100%;
+      position: absolute;
+      opacity: 0;
+      top: 0;
+      background-color: rgba(0,0,0,0.5);
+      z-index: 10;
+      transition: opacity 0.4s;
     }
   }
 }
@@ -283,6 +296,16 @@
       > .left-column {
         position: static;
         flex-basis: 20%;
+        background-color: none;
+        height: auto;
+        opacity: 1;
+        > .content-box-left {
+          > .btn-tosle {
+            &.btn-close-window {
+              display: none;
+            }
+          }
+        }
       }
       > .middle-column {
         flex-basis: 30%;
@@ -290,6 +313,9 @@
       > .right-column {
         flex-basis: 50%;
       }
+    }
+    .fade-background-burgermenu {
+      display: none;
     }
   }
 }
