@@ -1,26 +1,31 @@
 @media all and (max-device-width: 420px){
   body {
+    padding-bottom: $sizeHeightHeader + 90px;
     > header {
       > section {
-        height: $sizeHeightHeader + 30px;
+        height: $sizeHeightHeader + 60px;
         > div {
           padding: 0 5px;
           > .left-block {
             > p {
-              line-height: $sizeHeightHeader + 30px;
+              line-height: $sizeHeightHeader + 60px;
+              font-size: 2.5em;
             }
           }
           > .right-block {
             > i {
-              line-height: $sizeHeightHeader + 30px;
+              line-height: $sizeHeightHeader + 60px;
+              font-size: 2.5em;
             }
             .profil-icon {
               > .avatar-profil {
-                width: $sizeHeightHeader + 10px;
-                height: $sizeHeightHeader + 10px;
+                width: $sizeHeightHeader + 30px;
+                height: $sizeHeightHeader + 30px;
+                margin-top: 0;
               }
               > i {
                 line-height: $sizeHeightHeader + 30px;
+                font-size: 2.5em;
               }
             }
           }
@@ -45,6 +50,9 @@
         }
       }
     }
+    > main {
+      padding-top: $sizeHeightHeader + 60px;
+    }
     #menu-header-section {
       margin-top: $sizeHeightHeader + 30px;
       width: 450px;
@@ -54,7 +62,7 @@
         border-left: 15px solid transparent;
         border-right: 15px solid transparent;
         position: absolute;
-        right: 7px;
+        right: 15px;
       }
       > .content-menu-header {
         margin-top: 15px;
@@ -73,6 +81,7 @@
 }
 @media all and (max-width: 420px){
   body {
+    padding-bottom: $sizeHeightHeader + 30px;
     > header {
       > section {
         height: $sizeHeightHeader + 30px;
@@ -117,6 +126,9 @@
           }
         }
       }
+    }
+    > main {
+      padding-top: $sizeHeightHeader + 30px;
     }
     #menu-header-section {
        margin-top: $sizeHeightHeader + 30px;
@@ -178,6 +190,9 @@
         }
       }
     }
+    > main {
+      padding-top: $sizeHeightHeader * 2 + 20px;
+    }
   }
 }
 @media all and (min-width: 768px) and (min-device-width: 768px){
@@ -221,6 +236,30 @@
     #menu-header-section {
       margin-top: $sizeHeightHeader;
     }
+    > main {
+      padding-top: $sizeHeightHeader * 2;
+      > .left-column {
+        position: absolute;
+        top: 0;
+        background-color: #F1F1F1;
+        width: 350px;
+        z-index: 11;
+        height: 100%;
+        > .content-box-left {
+          > .btn-tosle {
+            &.btn-close-window {
+              display: block;
+            }
+          }
+        }
+      }
+      > .middle-column {
+        flex-basis: 40%;
+      }
+      > .right-column {
+        flex-basis: 60%;
+      }
+    }
   }
 }
 @media all and (min-width: 1230px) and (min-device-width: 1230px){
@@ -238,6 +277,18 @@
             }
           }
         }
+      }
+    }
+    > main {
+      > .left-column {
+        position: static;
+        flex-basis: 20%;
+      }
+      > .middle-column {
+        flex-basis: 30%;
+      }
+      > .right-column {
+        flex-basis: 50%;
       }
     }
   }
