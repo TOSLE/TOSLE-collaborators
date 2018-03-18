@@ -1,6 +1,6 @@
-<section class="left-column">
+<section id="left-column" class="left-column">
     <div class="content-box-left">
-        <button class="btn-tosle btn-close-window btn-dark"><i class="material-icons">&#xE5CD;</i><p>Close menu</p></button>
+        <button id="close-burgermenu" class="btn-tosle btn-close-window btn-dark"><i class="material-icons">&#xE5CD;</i><p>Close menu</p></button>
         <a href="#" class="btn-tosle new-message"><i class="material-icons">&#xE158;</i> <p>New Message</p></a>
         <ul>
             <li><a href="#"><i class="material-icons">&#xE0CB;</i><p>In box</p><span class="notif-active">3</span></a></li>
