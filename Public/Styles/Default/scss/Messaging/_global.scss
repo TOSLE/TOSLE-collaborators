@@ -15,5 +15,16 @@ html {
         }
       }
     }
+    .fade-background-burgermenu {
+      width: 0;
+      min-height: 100%;
+      position: absolute;
+      opacity: 0;
+      top: 0;
+      background-color: rgba(0,0,0,0.5);
+      z-index: 10;
+      transition: opacity 0.4s;
+      overflow: scroll;
+    }
   }
 }
