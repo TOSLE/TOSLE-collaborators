@@ -11,10 +11,10 @@
     }
     spl_autoload_register("autoLoader");
 
-    $tempUri = explode("?", substr(urldecode($_SERVER["REQUEST_URI"]), strlen(dirname($_SERVER["SCRIPT_NAME"]))));
+    $tempUri = explode("?", substr(urldecode($_SERVER["REQUEST_URI"]), strlen(DIRNAME)));
 
     $uriExploded = explode(DS, $tempUri[0]);
-
+    
     $language = (empty($uriExploded[0]))?"en-EN":strtolower($uriExploded[0])."-".strtoupper($uriExploded[0]);
     $controller = (empty($uriExploded[1]))?"IndexController": ucfirst(strtolower($uriExploded[1]))."Controller";
     $action = (empty($uriExploded[2]))?"IndexAction": strtolower($uriExploded[2])."Action";
