@@ -5,7 +5,7 @@
         <link href="<?php echo DIRNAME;?>Public/Libraries/Framework/ospaf/css/ospaf.css" rel="stylesheet">
         <link href="<?php echo DIRNAME;?>Public/Styles/Default/css/template_messaging.css" rel="stylesheet">
 
-        <script src="<?php echo DIRNAME;?>Public/Libraries/jquery/test/data/jquery-1.9.1.js"></script>
+        <script src="<?php echo DIRNAME;?>Public/Libraries/jQuery/jquery-3.3.1.js"></script>
     </head>
     <body>
         <header>
