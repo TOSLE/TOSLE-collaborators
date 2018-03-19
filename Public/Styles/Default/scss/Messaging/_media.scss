@@ -52,6 +52,57 @@
     }
     > main {
       padding-top: $sizeHeightHeader + 60px;
+      > .left-column {
+        position: absolute;
+        top: 0;
+        background-color: $colorBackgroundBody;
+        width: 0;
+        z-index: 11;
+        opacity: 0;
+        height: 100%;
+        transition: opacity 0.4s;
+        > .content-box-left {
+          padding: 15px 40px;
+          > .btn-tosle {
+            width: 100%;
+            height: 120px;
+            font-size: 1.8em;
+            &.btn-close-window {
+              display: block;
+            }
+            > i, > p {
+              line-height: 120px;
+            }
+          }
+          > ul {
+            margin-top: 60px;
+            font-size: 1.8em;
+            > li {
+              > a {
+                height: 100px;
+              }
+            }
+          }
+          > .profil-info {
+            font-size: 1.8em;
+          }
+          > .profil-stats {
+            font-size: 1.8em;
+          }
+        }
+        .footer-infos {
+          font-size: 1.8em;
+          > .global-infos {
+            margin-top: 30px;
+          }
+        }
+      }
+      > .middle-column {
+        flex-basis: 40%;
+      }
+      > .right-column {
+        flex-basis: 60%;
+      }
     }
     #menu-header-section {
       margin-top: $sizeHeightHeader + 30px;
@@ -129,6 +180,29 @@
     }
     > main {
       padding-top: $sizeHeightHeader + 30px;
+      > .left-column {
+        position: absolute;
+        top: 0;
+        background-color: $colorBackgroundBody;
+        width: 0;
+        z-index: 11;
+        opacity: 0;
+        height: 100%;
+        transition: opacity 0.4s;
+        > .content-box-left {
+          > .btn-tosle {
+            &.btn-close-window {
+              display: block;
+            }
+          }
+        }
+      }
+      > .middle-column {
+        flex-basis: 40%;
+      }
+      > .right-column {
+        flex-basis: 60%;
+      }
     }
     #menu-header-section {
        margin-top: $sizeHeightHeader + 30px;
@@ -192,6 +266,29 @@
     }
     > main {
       padding-top: $sizeHeightHeader * 2 + 20px;
+      > .left-column {
+        position: absolute;
+        top: 0;
+        background-color: $colorBackgroundBody;
+        width: 0;
+        z-index: 11;
+        opacity: 0;
+        height: 100%;
+        transition: opacity 0.4s;
+        > .content-box-left {
+          > .btn-tosle {
+            &.btn-close-window {
+              display: block;
+            }
+          }
+        }
+      }
+      > .middle-column {
+        flex-basis: 40%;
+      }
+      > .right-column {
+        flex-basis: 60%;
+      }
     }
   }
 }
@@ -244,8 +341,6 @@
         background-color: $colorBackgroundBody;
         width: 0;
         z-index: 11;
-        height: 100%;
-        overflow: hidden;
         opacity: 0;
         transition: opacity 0.4s;
         > .content-box-left {
@@ -262,16 +357,6 @@
       > .right-column {
         flex-basis: 60%;
       }
-    }
-    .fade-background-burgermenu {
-      width: 0;
-      height: 100%;
-      position: absolute;
-      opacity: 0;
-      top: 0;
-      background-color: rgba(0,0,0,0.5);
-      z-index: 10;
-      transition: opacity 0.4s;
     }
   }
 }
@@ -296,7 +381,6 @@
       > .left-column {
         position: static;
         flex-basis: 20%;
-        background-color: none;
         height: auto;
         opacity: 1;
         > .content-box-left {

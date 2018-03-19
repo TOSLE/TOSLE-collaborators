@@ -1,5 +1,6 @@
 > .left-column {
   flex-basis: 20%;
+  overflow: hidden;
   > .content-box-left {
     background-color: $colorBackgroundLeftBox;
     padding: 15px 20px;
