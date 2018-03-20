@@ -290,6 +290,9 @@
         flex-basis: 60%;
       }
     }
+    #menu-header-section {
+      margin-top: $sizeHeightHeader + 10px;
+    }
   }
 }
 @media all and (min-width: 768px) and (min-device-width: 768px){

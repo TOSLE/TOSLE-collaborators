@@ -5,12 +5,110 @@
   border-right: 1px solid $colorBorderBottomSection;
   overflow: auto;
   > .content-actually-filter {
-    background-color: #E0E0E0;
+    background-color: $colorBackgroundMiddleColumn;
     padding: 2.5px 15px;
+    border-bottom: 1px solid $colorBorderBottomSection;
     > p {
       font-size: 1em;
       > i {
         font-size: 0.9em;
+      }
+    }
+  }
+  > .content-message {
+    > .message-info {
+      display: block;
+      padding: 5px;
+      text-decoration: none;
+      background-color: $colorBackgroundMiddleColumn;
+      transition: 0.4s;
+      > .parameter-message {
+        display: none;
+      }
+      > .header-message {
+        padding: 5px 0;
+        display: flex;
+        > .logo-header-message {
+          border-radius: 50%;
+          background-color: #7D7D7D;
+          color: #444444;
+          width: 40px;
+          height: 40px;
+          text-align: center;
+          line-height: 40px;
+          font-size: 1.4em;
+          transition: 0.2s;
+        }
+        > .id-header-message {
+          line-height: 40px;
+          padding: 0 15px;
+          color: #888888;
+        }
+      }
+      > .main-message {
+        padding: 5px 0px;
+        > p {
+          color: #888888;
+        }
+      }
+      > .footer-message {
+        padding: 15px 15px;
+        > p {
+          font-size: 0.8em;
+          color: #888888;
+        }
+      }
+      &.notification {
+        > .header-message {
+          > .logo-header-message {
+            background-color: #7D7D7D;
+            color: #000000;
+          }
+          > .id-header-message {
+            color: #000000;
+            font-weight: bold;
+          }
+        }
+        > .main-message {
+          > p {
+            color: #000000;
+          }
+        }
+        > .footer-message {
+          > p {
+            color: #000000;
+          }
+        }
+      }
+      &:hover, &.active {
+        background-color: #FFFFFF;
+        > .parameter-message {
+          display: block;
+          float: right;
+          padding: 5px 5px;
+          > i {
+            color: black;
+          }
+        }
+        > .header-message {
+          > .logo-header-message {
+            background-color: $colorGlobalToslePrimary;
+            color: white;
+          }
+          > .id-header-message {
+            color: $colorGlobalToslePrimary;
+          }
+        }
+        > .main-message {
+          > p {
+            color: #000000;
+          }
+        }
+        > .footer-message {
+          > p {
+            color: #000000;
+          }
+        }
       }
     }
   }

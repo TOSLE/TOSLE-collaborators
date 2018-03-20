@@ -1,4 +1,6 @@
 /* TEMPLATE TOSLE MESSAGING PAGE */
+/* MIDDLE COLUMN */
+/* MIDDLE COLUMN */
 html {
   height: 100%; }
   html body {
@@ -21,8 +23,7 @@ html {
       top: 0;
       background-color: rgba(0, 0, 0, 0.5);
       z-index: 10;
-      transition: opacity 0.4s;
-      overflow: scroll; }
+      transition: opacity 0.4s; }
 
 body > header {
   background-color: #FFFFFF;
@@ -261,11 +262,73 @@ main {
     overflow: auto; }
     main > .middle-column > .content-actually-filter {
       background-color: #E0E0E0;
-      padding: 2.5px 15px; }
+      padding: 2.5px 15px;
+      border-bottom: 1px solid #E5E5E5; }
       main > .middle-column > .content-actually-filter > p {
         font-size: 1em; }
         main > .middle-column > .content-actually-filter > p > i {
           font-size: 0.9em; }
+    main > .middle-column > .content-message > .message-info {
+      display: block;
+      padding: 5px;
+      text-decoration: none;
+      background-color: #E0E0E0;
+      transition: 0.4s; }
+      main > .middle-column > .content-message > .message-info > .parameter-message {
+        display: none; }
+      main > .middle-column > .content-message > .message-info > .header-message {
+        padding: 5px 0;
+        display: flex; }
+        main > .middle-column > .content-message > .message-info > .header-message > .logo-header-message {
+          border-radius: 50%;
+          background-color: #7D7D7D;
+          color: #444444;
+          width: 40px;
+          height: 40px;
+          text-align: center;
+          line-height: 40px;
+          font-size: 1.4em;
+          transition: 0.2s; }
+        main > .middle-column > .content-message > .message-info > .header-message > .id-header-message {
+          line-height: 40px;
+          padding: 0 15px;
+          color: #888888; }
+      main > .middle-column > .content-message > .message-info > .main-message {
+        padding: 5px 0px; }
+        main > .middle-column > .content-message > .message-info > .main-message > p {
+          color: #888888; }
+      main > .middle-column > .content-message > .message-info > .footer-message {
+        padding: 15px 15px; }
+        main > .middle-column > .content-message > .message-info > .footer-message > p {
+          font-size: 0.8em;
+          color: #888888; }
+      main > .middle-column > .content-message > .message-info.notification > .header-message > .logo-header-message {
+        background-color: #7D7D7D;
+        color: #000000; }
+      main > .middle-column > .content-message > .message-info.notification > .header-message > .id-header-message {
+        color: #000000;
+        font-weight: bold; }
+      main > .middle-column > .content-message > .message-info.notification > .main-message > p {
+        color: #000000; }
+      main > .middle-column > .content-message > .message-info.notification > .footer-message > p {
+        color: #000000; }
+      main > .middle-column > .content-message > .message-info:hover, main > .middle-column > .content-message > .message-info.active {
+        background-color: #FFFFFF; }
+        main > .middle-column > .content-message > .message-info:hover > .parameter-message, main > .middle-column > .content-message > .message-info.active > .parameter-message {
+          display: block;
+          float: right;
+          padding: 5px 5px; }
+          main > .middle-column > .content-message > .message-info:hover > .parameter-message > i, main > .middle-column > .content-message > .message-info.active > .parameter-message > i {
+            color: black; }
+        main > .middle-column > .content-message > .message-info:hover > .header-message > .logo-header-message, main > .middle-column > .content-message > .message-info.active > .header-message > .logo-header-message {
+          background-color: #1A5CCB;
+          color: white; }
+        main > .middle-column > .content-message > .message-info:hover > .header-message > .id-header-message, main > .middle-column > .content-message > .message-info.active > .header-message > .id-header-message {
+          color: #1A5CCB; }
+        main > .middle-column > .content-message > .message-info:hover > .main-message > p, main > .middle-column > .content-message > .message-info.active > .main-message > p {
+          color: #000000; }
+        main > .middle-column > .content-message > .message-info:hover > .footer-message > p, main > .middle-column > .content-message > .message-info.active > .footer-message > p {
+          color: #000000; }
   main > .right-column {
     flex-basis: 50%; }
 
@@ -453,7 +516,9 @@ main {
     body > main > .middle-column {
       flex-basis: 40%; }
     body > main > .right-column {
-      flex-basis: 60%; } }
+      flex-basis: 60%; }
+  body #menu-header-section {
+    margin-top: 70px; } }
 
 @media all and (min-width: 768px) and (min-device-width: 768px) {
   body > header > section {
