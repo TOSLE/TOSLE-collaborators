@@ -1,0 +1,17 @@
+> .middle-column {
+  flex-basis: 30%;
+  background-color: $colorBackgroundHeader;
+  border-left: 1px solid $colorBorderBottomSection;
+  border-right: 1px solid $colorBorderBottomSection;
+  overflow: auto;
+  > .content-actually-filter {
+    background-color: #E0E0E0;
+    padding: 2.5px 15px;
+    > p {
+      font-size: 1em;
+      > i {
+        font-size: 0.9em;
+      }
+    }
+  }
+}
