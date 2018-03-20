@@ -4,9 +4,7 @@ main {
   height: 100%;
   display: flex;
   @import "Column/left_column";
-  > .middle-column {
-    flex-basis: 30%;
-  }
+  @import "Column/middle_column";
   > .right-column {
     flex-basis: 50%;
   }

@@ -254,7 +254,18 @@ main {
       main > .left-column .footer-infos a:hover {
         text-decoration: underline; }
   main > .middle-column {
-    flex-basis: 30%; }
+    flex-basis: 30%;
+    background-color: #FFFFFF;
+    border-left: 1px solid #E5E5E5;
+    border-right: 1px solid #E5E5E5;
+    overflow: auto; }
+    main > .middle-column > .content-actually-filter {
+      background-color: #E0E0E0;
+      padding: 2.5px 15px; }
+      main > .middle-column > .content-actually-filter > p {
+        font-size: 1em; }
+        main > .middle-column > .content-actually-filter > p > i {
+          font-size: 0.9em; }
   main > .right-column {
     flex-basis: 50%; }
 

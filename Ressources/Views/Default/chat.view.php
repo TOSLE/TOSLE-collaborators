@@ -39,7 +39,23 @@
     </div>
 </section>
 <section class="middle-column">
-    <p>middle</p>
+    <div class="content-actually-filter">
+        <p><i class="material-icons">&#xE152;</i> Filtered by <strong>Newest</strong></p>
+    </div>
+    <div class="content-message">
+        <a href="#" class="message-info">
+            <div class="header-message">
+                <div class="logo-header-message">J</div>
+                <div class="id-header-message">Julien Domange</div>
+            </div>
+            <div class="main-message">
+                <p>Bonjour monsieur, j'aurais aimé avoir des rens...</p>
+            </div>
+            <div class="footer-message">
+                <p>3 min ago</p>
+            </div>
+        </a>
+    </div>
 </section>
 <section class="right-column">
     <p>right</p>
