@@ -56,89 +56,13 @@
                 </div>
             </div>
             <div class="main-message">
-                <p>Bonjour monsieur, j'aurais aimé avoir des rens...</p>
+                <p>Bonjour monsieur, j'aurais aimé avoir</p>
             </div>
             <div class="footer-message">
                 <p>3 min ago</p>
             </div>
         </a>
         <a href="#" class="message-info notification">
-            <div class="parameter-message">
-                <i class="material-icons">&#xE8B8;</i>
-            </div>
-            <div class="header-message">
-                <div class="logo-header-message">
-                    J
-                </div>
-                <div class="id-header-message">
-                    Julien Domange
-                </div>
-            </div>
-            <div class="main-message">
-                <p>Bonjour monsieur, j'aurais aimé avoir des rens...</p>
-            </div>
-            <div class="footer-message">
-                <p>3 min ago</p>
-            </div>
-        </a>
-        <a href="#" class="message-info">
-            <div class="parameter-message">
-                <i class="material-icons">&#xE8B8;</i>
-            </div>
-            <div class="header-message">
-                <div class="logo-header-message">
-                    J
-                </div>
-                <div class="id-header-message">
-                    Julien Domange
-                </div>
-            </div>
-            <div class="main-message">
-                <p>Bonjour monsieur, j'aurais aimé avoir des rens...</p>
-            </div>
-            <div class="footer-message">
-                <p>3 min ago</p>
-            </div>
-        </a>
-        <a href="#" class="message-info">
-            <div class="parameter-message">
-                <i class="material-icons">&#xE8B8;</i>
-            </div>
-            <div class="header-message">
-                <div class="logo-header-message">
-                    J
-                </div>
-                <div class="id-header-message">
-                    Julien Domange
-                </div>
-            </div>
-            <div class="main-message">
-                <p>Bonjour monsieur, j'aurais aimé avoir des rens...</p>
-            </div>
-            <div class="footer-message">
-                <p>3 min ago</p>
-            </div>
-        </a>
-        <a href="#" class="message-info">
-            <div class="parameter-message">
-                <i class="material-icons">&#xE8B8;</i>
-            </div>
-            <div class="header-message">
-                <div class="logo-header-message">
-                    J
-                </div>
-                <div class="id-header-message">
-                    Julien Domange
-                </div>
-            </div>
-            <div class="main-message">
-                <p>Bonjour monsieur, j'aurais aimé avoir des rens...</p>
-            </div>
-            <div class="footer-message">
-                <p>3 min ago</p>
-            </div>
-        </a>
-        <a href="#" class="message-info">
             <div class="parameter-message">
                 <i class="material-icons">&#xE8B8;</i>
             </div>

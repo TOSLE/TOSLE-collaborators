@@ -322,7 +322,7 @@ main {
             color: black; }
         main > .middle-column > .content-message > .message-info:hover > .header-message > .logo-header-message, main > .middle-column > .content-message > .message-info.active > .header-message > .logo-header-message {
           background-color: #1A5CCB;
-          color: white; }
+          color: #FFFFFF; }
         main > .middle-column > .content-message > .message-info:hover > .header-message > .id-header-message, main > .middle-column > .content-message > .message-info.active > .header-message > .id-header-message {
           color: #1A5CCB; }
         main > .middle-column > .content-message > .message-info:hover > .main-message > p, main > .middle-column > .content-message > .message-info.active > .main-message > p {
@@ -365,7 +365,8 @@ main {
         body > header > nav > ul > li.burgermenu {
           display: block; }
     body > main {
-      padding-top: 120px; }
+      padding-top: 120px;
+      display: block; }
       body > main > .left-column {
         position: absolute;
         top: 0;
@@ -399,7 +400,39 @@ main {
           body > main > .left-column .footer-infos > .global-infos {
             margin-top: 30px; }
       body > main > .middle-column {
-        flex-basis: 40%; }
+        height: 140px; }
+        body > main > .middle-column > .content-actually-filter {
+          padding: 2.5px 5px;
+          text-align: center;
+          display: none; }
+          body > main > .middle-column > .content-actually-filter > p {
+            font-size: 0.8em; }
+            body > main > .middle-column > .content-actually-filter > p > i {
+              font-size: 0.8em; }
+        body > main > .middle-column > .content-message {
+          min-width: 100%;
+          display: flex;
+          flex-wrap: nowrap; }
+          body > main > .middle-column > .content-message > .message-info {
+            padding: 5px 0;
+            width: 15%;
+            height: 100%; }
+            body > main > .middle-column > .content-message > .message-info > .header-message {
+              display: block; }
+              body > main > .middle-column > .content-message > .message-info > .header-message > .logo-header-message {
+                margin: 0 auto;
+                width: 50px;
+                height: 50px;
+                line-height: 50px; }
+              body > main > .middle-column > .content-message > .message-info > .header-message > .id-header-message {
+                text-align: center;
+                font-size: 1.2em;
+                line-height: 100%;
+                padding: 5px 15px; }
+            body > main > .middle-column > .content-message > .message-info > .main-message {
+              display: none; }
+            body > main > .middle-column > .content-message > .message-info > .footer-message {
+              display: none; }
       body > main > .right-column {
         flex-basis: 60%; }
     body #menu-header-section {
@@ -449,7 +482,8 @@ main {
         body > header > nav > ul > li.burgermenu {
           display: block; }
     body > main {
-      padding-top: 90px; }
+      padding-top: 90px;
+      display: block; }
       body > main > .left-column {
         position: absolute;
         top: 0;
@@ -462,9 +496,38 @@ main {
         body > main > .left-column > .content-box-left > .btn-tosle.btn-close-window {
           display: block; }
       body > main > .middle-column {
-        flex-basis: 40%; }
+        flex-basis: 100%;
+        height: 125px; }
+        body > main > .middle-column > .content-actually-filter {
+          padding: 2.5px 5px;
+          text-align: center;
+          display: none; }
+          body > main > .middle-column > .content-actually-filter > p {
+            font-size: 0.8em; }
+            body > main > .middle-column > .content-actually-filter > p > i {
+              font-size: 0.8em; }
+        body > main > .middle-column > .content-message {
+          min-width: 100%;
+          display: flex;
+          flex-wrap: nowrap; }
+          body > main > .middle-column > .content-message > .message-info {
+            padding: 5px 0;
+            height: 100%; }
+            body > main > .middle-column > .content-message > .message-info > .header-message {
+              display: block; }
+              body > main > .middle-column > .content-message > .message-info > .header-message > .logo-header-message {
+                margin: 0 auto; }
+              body > main > .middle-column > .content-message > .message-info > .header-message > .id-header-message {
+                text-align: center;
+                font-size: 1em;
+                line-height: 100%;
+                padding: 5px 15px; }
+            body > main > .middle-column > .content-message > .message-info > .main-message {
+              display: none; }
+            body > main > .middle-column > .content-message > .message-info > .footer-message {
+              display: none; }
       body > main > .right-column {
-        flex-basis: 60%; }
+        flex-basis: 100%; }
     body #menu-header-section {
       margin-top: 90px;
       width: 300px; }
@@ -514,9 +577,30 @@ main {
       body > main > .left-column > .content-box-left > .btn-tosle.btn-close-window {
         display: block; }
     body > main > .middle-column {
-      flex-basis: 40%; }
+      flex-basis: 30%; }
+      body > main > .middle-column > .content-actually-filter {
+        padding: 2.5px 5px;
+        text-align: center; }
+        body > main > .middle-column > .content-actually-filter > p {
+          font-size: 0.8em; }
+          body > main > .middle-column > .content-actually-filter > p > i {
+            font-size: 0.8em; }
+      body > main > .middle-column > .content-message > .message-info {
+        padding: 2.5px; }
+        body > main > .middle-column > .content-message > .message-info > .header-message {
+          display: block; }
+          body > main > .middle-column > .content-message > .message-info > .header-message > .logo-header-message {
+            margin: 0 auto; }
+          body > main > .middle-column > .content-message > .message-info > .header-message > .id-header-message {
+            text-align: center;
+            font-size: 0.8em; }
+        body > main > .middle-column > .content-message > .message-info > .main-message {
+          display: none; }
+        body > main > .middle-column > .content-message > .message-info > .footer-message {
+          padding: 5px 5px;
+          text-align: center; }
     body > main > .right-column {
-      flex-basis: 60%; }
+      flex-basis: 70%; }
   body #menu-header-section {
     margin-top: 70px; } }
 
@@ -552,6 +636,26 @@ main {
         display: block; }
     body > main > .middle-column {
       flex-basis: 40%; }
+      body > main > .middle-column > .content-actually-filter {
+        padding: 2.5px 15px; }
+        body > main > .middle-column > .content-actually-filter > p {
+          font-size: 1em; }
+          body > main > .middle-column > .content-actually-filter > p > i {
+            font-size: 0.9em; }
+      body > main > .middle-column > .content-message > .message-info {
+        padding: 5px; }
+        body > main > .middle-column > .content-message > .message-info > .header-message {
+          display: flex; }
+          body > main > .middle-column > .content-message > .message-info > .header-message > .logo-header-message {
+            margin: 0; }
+          body > main > .middle-column > .content-message > .message-info > .header-message > .id-header-message {
+            text-align: left;
+            font-size: 1em; }
+        body > main > .middle-column > .content-message > .message-info > .main-message {
+          display: block; }
+        body > main > .middle-column > .content-message > .message-info > .footer-message {
+          padding: 15px 15px;
+          text-align: left; }
     body > main > .right-column {
       flex-basis: 60%; } }
 
