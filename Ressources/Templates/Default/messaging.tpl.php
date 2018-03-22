@@ -48,7 +48,7 @@
         <div id="positionning-box-tosle">
             <div class="section-size-body">
                 <div class="content-box">
-                    <?php include "Messaging/header_menu.tpl.php";?>
+                    <?php include "Header/header_menu.tpl.php";?>
                 </div>
             </div>
         </div>

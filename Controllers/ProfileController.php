@@ -10,6 +10,6 @@ class ProfileController
 {
     function indexAction($params)
     {
-        $View = new View("default", "profile");
+        $View = new View("default");
     }
 }
