@@ -1,10 +1,10 @@
 /* TEMPLATE DEFAULT TOSLE */
 @import "Variables/variable_colors";
 @import "Variables/variable_size";
-@import "Default/variable_colors_default";
-@import "Default/global";
+@import "Template/Default/variable_colors_default";
+@import "Template/Default/global";
 
 @import "Header/header_menu";
-@import "Default/header";
+@import "Template/Default/header";
 
-@import "Default/media";
+@import "Template/Default/media";
