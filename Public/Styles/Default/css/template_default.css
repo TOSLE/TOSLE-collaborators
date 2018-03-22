@@ -1,1 +1,276 @@
 /* TEMPLATE DEFAULT TOSLE */
+html {
+  height: 100%; }
+  html body {
+    height: 100%;
+    background-color: #EBEBEB; }
+    html body #positionning-box-tosle {
+      position: absolute;
+      width: 100%;
+      top: 0; }
+      html body #positionning-box-tosle > .section-size-body {
+        max-width: 1230px;
+        margin: 0 auto; }
+        html body #positionning-box-tosle > .section-size-body > .content-box {
+          position: relative;
+          width: 100%; }
+
+#menu-header-section {
+  width: 250px;
+  position: absolute;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  right: 0;
+  margin-top: 60px;
+  transition: opacity 0.5s; }
+  #menu-header-section > .arrow-top-menu {
+    width: 7px;
+    border-bottom: 7px solid #FFFFFF;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    position: absolute;
+    right: 10px; }
+  #menu-header-section > .content-menu-header {
+    margin-top: 7px;
+    background-color: #FFFFFF;
+    width: 100%;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4);
+    border-radius: 5px; }
+    #menu-header-section > .content-menu-header > ul {
+      list-style: none;
+      padding: 7.5px 0; }
+      #menu-header-section > .content-menu-header > ul > li {
+        padding: 0 15px;
+        transition: background-color 0.2s; }
+        #menu-header-section > .content-menu-header > ul > li > a {
+          text-decoration: none;
+          color: #444444;
+          display: block;
+          width: 100%;
+          padding: 15px 0;
+          transition: color 0.2s; }
+        #menu-header-section > .content-menu-header > ul > li:hover {
+          background-color: #1A5CCB; }
+          #menu-header-section > .content-menu-header > ul > li:hover > a {
+            color: #FFFFFF; }
+        #menu-header-section > .content-menu-header > ul > li.separator {
+          border: 1px solid #E5E5E5;
+          margin: 5px 15px; }
+
+body > header {
+  background-color: #FFFFFF; }
+  body > header > section {
+    border-bottom: 1px solid #E5E5E5; }
+    body > header > section > div {
+      display: flex;
+      max-width: 1230px;
+      margin: 0 auto; }
+      body > header > section > div > .left-block {
+        flex-basis: 20%; }
+        body > header > section > div > .left-block > p {
+          font-size: 1.7em;
+          line-height: 60px;
+          color: #1A5CCB; }
+      body > header > section > div > .right-block {
+        flex-basis: 80%;
+        text-align: right; }
+        body > header > section > div > .right-block > i {
+          font-size: 1.5em;
+          margin-right: 50px;
+          line-height: 60px;
+          cursor: pointer;
+          transition: color 0.2s; }
+          body > header > section > div > .right-block > i:hover {
+            color: #1A5CCB; }
+        body > header > section > div > .right-block .profil-icon {
+          display: inline-block;
+          cursor: pointer; }
+          body > header > section > div > .right-block .profil-icon > .avatar-profil {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid #E5E5E5;
+            display: inline-block;
+            vertical-align: top;
+            margin-top: 10px;
+            transition: 0.3s;
+            overflow: hidden; }
+            body > header > section > div > .right-block .profil-icon > .avatar-profil > img {
+              width: 100%;
+              height: 100%; }
+          body > header > section > div > .right-block .profil-icon > i {
+            line-height: 60px;
+            font-size: 1.5em; }
+          body > header > section > div > .right-block .profil-icon:hover > .avatar-profil {
+            background-color: rgba(26, 92, 203, 0.05);
+            border-color: #1A5CCB; }
+          body > header > section > div > .right-block .profil-icon:hover > i {
+            color: #1A5CCB; }
+  body > header > nav {
+    height: 60px;
+    border-bottom: 1px solid #E5E5E5; }
+    body > header > nav > ul {
+      display: flex;
+      max-width: 1230px;
+      margin: 0 auto;
+      list-style: none; }
+      body > header > nav > ul > li {
+        flex-basis: 25%;
+        height: 100%;
+        transition: background-color 0.3s; }
+        body > header > nav > ul > li > a {
+          display: block;
+          width: 100%;
+          height: 100%;
+          color: #8C8C8C;
+          text-align: center;
+          text-decoration: none;
+          padding: 4px 0; }
+          body > header > nav > ul > li > a > .material-icons {
+            font-size: 2em; }
+          body > header > nav > ul > li > a > p {
+            font-size: 0.9em; }
+        body > header > nav > ul > li:hover {
+          background-color: rgba(0, 0, 0, 0.1); }
+        body > header > nav > ul > li.current {
+          background-color: #1A5CCB; }
+          body > header > nav > ul > li.current > a {
+            color: #FFFFFF; }
+
+@media all and (max-device-width: 420px) {
+  body {
+    padding-bottom: 150px; }
+    body > header > section {
+      height: 120px; }
+      body > header > section > div {
+        padding: 0 5px; }
+        body > header > section > div > .left-block > p {
+          line-height: 120px;
+          font-size: 2.5em; }
+        body > header > section > div > .right-block > i {
+          line-height: 120px;
+          font-size: 2.5em; }
+        body > header > section > div > .right-block .profil-icon > .avatar-profil {
+          width: 90px;
+          height: 90px;
+          margin-top: 0; }
+        body > header > section > div > .right-block .profil-icon > i {
+          line-height: 90px;
+          font-size: 2.5em; }
+    body > header > nav {
+      height: 150px;
+      position: fixed;
+      bottom: 0;
+      width: 100%; }
+      body > header > nav > ul > li {
+        flex-basis: 20%; }
+        body > header > nav > ul > li > a {
+          font-size: 1.4em;
+          padding: 30px 0; }
+    body #menu-header-section {
+      margin-top: 90px;
+      width: 450px; }
+      body #menu-header-section > .arrow-top-menu {
+        width: 15px;
+        border-bottom: 15px solid #FFFFFF;
+        border-left: 15px solid transparent;
+        border-right: 15px solid transparent;
+        position: absolute;
+        right: 15px; }
+      body #menu-header-section > .content-menu-header {
+        margin-top: 15px; }
+        body #menu-header-section > .content-menu-header > ul > li {
+          padding: 0 25px; }
+          body #menu-header-section > .content-menu-header > ul > li > a {
+            font-size: 1.3em;
+            padding: 25px 0; } }
+
+@media all and (max-width: 420px) {
+  body {
+    padding-bottom: 90px; }
+    body > header > section {
+      height: 90px; }
+      body > header > section > div {
+        padding: 0 5px; }
+        body > header > section > div > .left-block > p {
+          line-height: 90px; }
+        body > header > section > div > .right-block > i {
+          line-height: 90px; }
+        body > header > section > div > .right-block .profil-icon > .avatar-profil {
+          width: 70px;
+          height: 70px; }
+        body > header > section > div > .right-block .profil-icon > i {
+          line-height: 90px; }
+    body > header > nav {
+      height: 90px;
+      position: fixed;
+      bottom: 0;
+      width: 100%; }
+      body > header > nav > ul > li {
+        flex-basis: 20%; }
+        body > header > nav > ul > li > a {
+          font-size: 0.9em;
+          padding: 15px 0; }
+    body #menu-header-section {
+      margin-top: 90px;
+      width: 300px; }
+      body #menu-header-section > .arrow-top-menu {
+        width: 15px;
+        border-bottom: 15px solid #FFFFFF;
+        border-left: 15px solid transparent;
+        border-right: 15px solid transparent;
+        position: absolute;
+        right: 7px; }
+      body #menu-header-section > .content-menu-header {
+        margin-top: 15px; } }
+
+@media all and (min-width: 420px) and (min-device-width: 420px) {
+  body > header > section {
+    height: 70px; }
+    body > header > section > div {
+      padding: 0 5px; }
+      body > header > section > div > .left-block > p {
+        line-height: 70px; }
+      body > header > section > div > .right-block > i {
+        line-height: 70px; }
+      body > header > section > div > .right-block .profil-icon > .avatar-profil {
+        width: 50px;
+        height: 50px; }
+      body > header > section > div > .right-block .profil-icon > i {
+        line-height: 70px; }
+  body > header > nav {
+    height: 70px; }
+    body > header > nav > ul > li {
+      flex-basis: 20%; }
+      body > header > nav > ul > li > a {
+        padding: 5px 0; }
+  body #menu-header-section {
+    margin-top: 70px; } }
+
+@media all and (min-width: 768px) and (min-device-width: 768px) {
+  body > header > section {
+    height: 60px; }
+    body > header > section > div > .left-block > p {
+      line-height: 60px; }
+    body > header > section > div > .right-block > i {
+      line-height: 60px; }
+    body > header > section > div > .right-block .profil-icon > .avatar-profil {
+      width: 40px;
+      height: 40px; }
+    body > header > section > div > .right-block .profil-icon > i {
+      line-height: 60px; }
+  body > header > nav {
+    height: 60px; }
+    body > header > nav > ul > li > a {
+      padding: 3px 0; }
+  body #menu-header-section {
+    margin-top: 60px; } }
+
+@media all and (min-width: 1230px) and (min-device-width: 1230px) {
+  body > header > nav > ul > li {
+    flex-basis: 25%; }
+    body > header > nav > ul > li > a {
+      padding: 5px 0; }
+  body .fade-background-burgermenu {
+    display: none; } }

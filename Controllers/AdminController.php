@@ -10,9 +10,9 @@ class AdminController
 {
     function indexAction($params)
     {
-        $View = new View("default", "admin");
+        $View = new View("default");
     }
     function lessonsAction($params){
-        $View = new View("default", "admin/lessons");
+        $View = new View("default");
     }
 }

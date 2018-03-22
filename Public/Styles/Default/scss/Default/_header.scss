@@ -1,0 +1,106 @@
+body {
+  > header {
+    background-color: $colorBackgroundHeader;
+    > section {
+      border-bottom: 1px solid $colorBorderBottomSection;
+      > div {
+        display: flex;
+        max-width: $sizeMaxWidthSection;
+        margin: 0 auto;
+        > .left-block {
+          flex-basis: 20%;
+          > p {
+            font-size: $sizeFontHeaderTitlePage;
+            line-height: $sizeHeightHeader;
+            color: $colorGlobalToslePrimary;
+          }
+        }
+        > .right-block {
+          flex-basis: 80%;
+          text-align: right;
+          > i {
+            font-size: $sizeFontHeaderAlertIcon;
+            margin-right: 50px;
+            line-height: $sizeHeightHeader;
+            cursor: pointer;
+            transition: color 0.2s;
+            &:hover {
+              color: $colorGlobalToslePrimary;
+            }
+          }
+          .profil-icon {
+            display: inline-block;
+            cursor: pointer;
+            > .avatar-profil {
+              width: $sizeHeightHeader - 20px;
+              height: $sizeHeightHeader - 20px;
+              border-radius: 50%;
+              border: 1px solid $colorBorderHeaderAvatar;
+              display: inline-block;
+              vertical-align: top;
+              margin-top: 10px;
+              transition: 0.3s;
+              overflow: hidden;
+              > img {
+                width: 100%;
+                height: 100%;
+              }
+            }
+            > i {
+              line-height: $sizeHeightHeader;
+              font-size: $sizeFontHeaderMenuIcon;
+            }
+            &:hover { // profil-icon
+              > .avatar-profil {
+                background-color: rgba(26,92,203,0.05);
+                border-color: $colorGlobalToslePrimary;
+              }
+              > i {
+                color: $colorGlobalToslePrimary;
+              }
+            }
+          }
+        }
+      }
+    }
+    > nav {
+      height: $sizeHeightHeader;
+      border-bottom: 1px solid $colorBorderBottomSection;
+      > ul {
+        display: flex;
+        max-width: $sizeMaxWidthSection;
+        margin: 0 auto;
+        list-style: none;
+        > li {
+          flex-basis: 25%;
+          height: 100%;
+          transition: background-color 0.3s;
+          > a {
+            display: block;
+            width: 100%;
+            height: 100%;
+            color: $colorTextHeaderList;
+            text-align: center;
+            text-decoration: none;
+            padding: 4px 0;
+            > .material-icons {
+              font-size: $sizeFontHeaderListIcon;
+            }
+            > p {
+              font-size: $sizeFontHeaderListText;
+            }
+          }
+          &:hover {
+            background-color: rgba(0,0,0,0.1);
+          }
+          &.current {
+            background-color: $colorGlobalToslePrimary;
+            > a {
+              color: #FFFFFF;
+            }
+          }
+        }
+      }
+    }
+  }
+}

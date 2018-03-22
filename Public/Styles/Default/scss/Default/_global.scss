@@ -1,0 +1,20 @@
+html {
+  height: 100%;
+  body {
+    height: 100%;
+    background-color: $colorBackgroundBody;
+    #positionning-box-tosle {
+      position: absolute;
+      width: 100%;
+      top: 0;
+      > .section-size-body {
+        max-width: $sizeMaxWidthSection;
+        margin: 0 auto;
+        > .content-box {
+          position: relative;
+          width: 100%;
+        }
+      }
+    }
+  }
+}
