@@ -1,0 +1,41 @@
+body {
+  > header {
+    > section {
+      height: $sizeHeightHeader;
+      > div {
+        > .left-block {
+          > p {
+            line-height: $sizeHeightHeader;
+          }
+        }
+        > .right-block {
+          > i {
+            line-height: $sizeHeightHeader;
+          }
+          .profil-icon {
+            > .avatar-profil {
+              width: $sizeHeightHeader - 20px;
+              height: $sizeHeightHeader - 20px;
+            }
+            > i {
+              line-height: $sizeHeightHeader;
+            }
+          }
+        }
+      }
+    }
+    > nav {
+      height: $sizeHeightHeader;
+      > ul {
+        > li {
+          > a {
+            padding: 3px 0;
+          }
+        }
+      }
+    }
+  }
+  #menu-header-section {
+    margin-top: $sizeHeightHeader;
+  }
+}

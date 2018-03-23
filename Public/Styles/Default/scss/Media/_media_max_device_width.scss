@@ -1,0 +1,72 @@
+body {
+  padding-bottom: $sizeHeightHeader + 90px;
+  > header {
+    > section {
+      height: $sizeHeightHeader + 60px;
+      > div {
+        padding: 0 5px;
+        > .left-block {
+          > p {
+            line-height: $sizeHeightHeader + 60px;
+            font-size: 2.5em;
+          }
+        }
+        > .right-block {
+          > i {
+            line-height: $sizeHeightHeader + 60px;
+            font-size: 2.5em;
+          }
+          .profil-icon {
+            > .avatar-profil {
+              width: $sizeHeightHeader + 30px;
+              height: $sizeHeightHeader + 30px;
+              margin-top: 0;
+            }
+            > i {
+              line-height: $sizeHeightHeader + 30px;
+              font-size: 2.5em;
+            }
+          }
+        }
+      }
+    }
+    > nav {
+      height: $sizeHeightHeader + 90px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      > ul {
+        > li {
+          > a {
+            font-size: 1.4em;
+            padding: 30px 0;
+          }
+        }
+      }
+    }
+  }
+  #menu-header-section {
+    margin-top: $sizeHeightHeader + 60px;
+    width: 450px;
+    > .arrow-top-menu {
+      width: 15px;
+      border-bottom: 15px solid $colorBackgroundHeader;
+      border-left: 15px solid transparent;
+      border-right: 15px solid transparent;
+      position: absolute;
+      right: 15px;
+    }
+    > .content-menu-header {
+      margin-top: 15px;
+      > ul {
+        > li {
+          padding: 0 25px;
+          > a {
+            font-size: 1.3em;
+            padding: 25px 0;
+          }
+        }
+      }
+    }
+  }
+}
