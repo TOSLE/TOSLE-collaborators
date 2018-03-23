@@ -32,3 +32,11 @@
 /*
     TOSLE NAVBAR DEFINE
 */
+
+
+/* TOSLE MESSAGING DEFINE */
+    /* HEAD DEFINE */
+    define("HEAD_TITLE_MESSAGING_VIEWACTION", "View message");
+    define("HEAD_TITLE_MESSAGING_NEWACTION", "New message");
+    /* HEAD DEFINE */
+/* TOSLE MESSAGING DEFINE */

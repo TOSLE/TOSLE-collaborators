@@ -1,6 +1,10 @@
 /* TEMPLATE TOSLE MESSAGING PAGE */
+/* LEFT COLUMN */
+/* LEFT COLUMN */
 /* MIDDLE COLUMN */
 /* MIDDLE COLUMN */
+/* RIGHT COLUMN */
+/* RIGHT COLUMN */
 html {
   height: 100%; }
   html body {
@@ -329,8 +333,28 @@ main {
           color: #000000; }
         main > .middle-column > .content-message > .message-info:hover > .footer-message > p, main > .middle-column > .content-message > .message-info.active > .footer-message > p {
           color: #000000; }
-  main > .right-column {
-    flex-basis: 50%; }
+  main .right-column {
+    height: 100%; }
+    main .right-column > .content-infos-message {
+      background-color: #FFFFFF;
+      padding: 5px 0;
+      border-bottom: 1px solid #E5E5E5; }
+      main .right-column > .content-infos-message > h2 {
+        text-align: center; }
+      main .right-column > .content-infos-message > .more-infos {
+        text-align: center;
+        display: flex;
+        font-size: 0.9em;
+        color: #9E9FA3;
+        justify-content: center;
+        margin-top: 5px; }
+        main .right-column > .content-infos-message > .more-infos > i {
+          font-size: 1.5em; }
+        main .right-column > .content-infos-message > .more-infos > p {
+          line-height: 150%; }
+    main .right-column > .container-message {
+      background-color: #FFFFFF;
+      height: 100%; }
 
 @media all and (max-device-width: 420px) {
   body {

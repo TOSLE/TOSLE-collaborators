@@ -5,7 +5,5 @@ main {
   display: flex;
   @import "Column/left_column";
   @import "Column/middle_column";
-  > .right-column {
-    flex-basis: 50%;
-  }
+  @import "Column/right_column";
 }

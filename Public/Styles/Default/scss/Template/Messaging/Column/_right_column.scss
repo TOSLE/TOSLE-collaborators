@@ -1,0 +1,29 @@
+.right-column {
+  height: 100%;
+  > .content-infos-message {
+    background-color: $colorBackgroundRightColumn;
+    padding: 5px 0;
+    border-bottom: 1px solid $colorBorderBottomSection;
+    > h2 {
+      text-align: center;
+    }
+    > .more-infos {
+      text-align: center;
+      display: flex;
+      font-size: 0.9em;
+      color: $colorFontMoreInfosMessage;
+      justify-content: center;
+      margin-top: 5px;
+      > i {
+        font-size: 1.5em;
+      }
+      > p {
+        line-height: 150%;
+      }
+    }
+  }
+  > .container-message {
+    background-color: $colorBackgroundRightColumn;
+    height: 100%;
+  }
+}
