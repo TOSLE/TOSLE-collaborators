@@ -163,13 +163,11 @@ body > header {
       position: fixed;
       bottom: 0;
       width: 100%; }
-      body > header > nav > ul > li {
-        flex-basis: 20%; }
-        body > header > nav > ul > li > a {
-          font-size: 1.4em;
-          padding: 30px 0; }
+      body > header > nav > ul > li > a {
+        font-size: 1.4em;
+        padding: 30px 0; }
     body #menu-header-section {
-      margin-top: 90px;
+      margin-top: 120px;
       width: 450px; }
       body #menu-header-section > .arrow-top-menu {
         width: 15px;
@@ -184,34 +182,32 @@ body > header {
           padding: 0 25px; }
           body #menu-header-section > .content-menu-header > ul > li > a {
             font-size: 1.3em;
-            padding: 25px 0; } }
+            padding: 25px 0; }
+  body header > nav > ul > li {
+    flex-basis: 25%; } }
 
 @media all and (max-width: 420px) {
   body {
     padding-bottom: 90px; }
-    body > header > section {
-      height: 90px; }
-      body > header > section > div {
-        padding: 0 5px; }
-        body > header > section > div > .left-block > p {
-          line-height: 90px; }
-        body > header > section > div > .right-block > i {
-          line-height: 90px; }
-        body > header > section > div > .right-block .profil-icon > .avatar-profil {
-          width: 70px;
-          height: 70px; }
-        body > header > section > div > .right-block .profil-icon > i {
-          line-height: 90px; }
+    body > header > section > div > .left-block > p {
+      line-height: 90px; }
+    body > header > section > div > .right-block > i {
+      line-height: 90px; }
+    body > header > section > div > .right-block .profil-icon > .avatar-profil {
+      width: 70px;
+      height: 70px; }
+    body > header > section > div > .right-block .profil-icon > i {
+      line-height: 90px; }
     body > header > nav {
       height: 90px;
       position: fixed;
       bottom: 0;
       width: 100%; }
-      body > header > nav > ul > li {
-        flex-basis: 20%; }
-        body > header > nav > ul > li > a {
-          font-size: 0.9em;
-          padding: 15px 0; }
+      body > header > nav > ul > li > a {
+        font-size: 0.9em;
+        padding: 15px 0; }
+      body > header > nav > ul > li.burgermenu {
+        display: block; }
     body #menu-header-section {
       margin-top: 90px;
       width: 300px; }
@@ -221,9 +217,16 @@ body > header {
         border-left: 15px solid transparent;
         border-right: 15px solid transparent;
         position: absolute;
-        right: 7px; }
+        right: 15px; }
       body #menu-header-section > .content-menu-header {
-        margin-top: 15px; } }
+        margin-top: 14px; }
+        body #menu-header-section > .content-menu-header > ul > li {
+          padding: 0 25px; }
+          body #menu-header-section > .content-menu-header > ul > li > a {
+            font-size: 1.3em;
+            padding: 25px 0; }
+  body header > nav > ul > li {
+    flex-basis: 25%; } }
 
 @media all and (min-width: 420px) and (min-device-width: 420px) {
   body > header > section {
@@ -246,7 +249,9 @@ body > header {
       body > header > nav > ul > li > a {
         padding: 5px 0; }
   body #menu-header-section {
-    margin-top: 70px; } }
+    margin-top: 70px; }
+  body header > nav > ul > li {
+    flex-basis: 25%; } }
 
 @media all and (min-width: 768px) and (min-device-width: 768px) {
   body > header > section {
@@ -272,5 +277,7 @@ body > header {
     flex-basis: 25%; }
     body > header > nav > ul > li > a {
       padding: 5px 0; }
-  body .fade-background-burgermenu {
-    display: none; } }
+  body > header > nav > ul > li {
+    flex-basis: 25%; }
+    body > header > nav > ul > li > a {
+      padding: 5px 0; } }

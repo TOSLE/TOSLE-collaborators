@@ -1,48 +1,11 @@
 @media all and (max-device-width: 420px){
+  @import "../../Media/media_max_device_width";
   body {
-    padding-bottom: $sizeHeightHeader + 90px;
     > header {
-      > section {
-        height: $sizeHeightHeader + 60px;
-        > div {
-          padding: 0 5px;
-          > .left-block {
-            > p {
-              line-height: $sizeHeightHeader + 60px;
-              font-size: 2.5em;
-            }
-          }
-          > .right-block {
-            > i {
-              line-height: $sizeHeightHeader + 60px;
-              font-size: 2.5em;
-            }
-            .profil-icon {
-              > .avatar-profil {
-                width: $sizeHeightHeader + 30px;
-                height: $sizeHeightHeader + 30px;
-                margin-top: 0;
-              }
-              > i {
-                line-height: $sizeHeightHeader + 30px;
-                font-size: 2.5em;
-              }
-            }
-          }
-        }
-      }
       > nav {
-        height: $sizeHeightHeader + 90px;
-        position: fixed;
-        bottom: 0;
-        width: 100%;
         > ul {
           > li {
             flex-basis: 20%;
-            > a {
-              font-size: 1.4em;
-              padding: 30px 0;
-            }
             &.burgermenu {
               display: block;
             }
@@ -147,76 +110,16 @@
         flex-basis: 60%;
       }
     }
-    #menu-header-section {
-      margin-top: $sizeHeightHeader + 30px;
-      width: 450px;
-      > .arrow-top-menu {
-        width: 15px;
-        border-bottom: 15px solid $colorBackgroundHeader;
-        border-left: 15px solid transparent;
-        border-right: 15px solid transparent;
-        position: absolute;
-        right: 15px;
-      }
-      > .content-menu-header {
-        margin-top: 15px;
-        > ul {
-          > li {
-            padding: 0 25px;
-            > a {
-              font-size: 1.3em;
-              padding: 25px 0;
-            }
-          }
-        }
-      }
-    }
   }
 }
 @media all and (max-width: 420px){
+  @import "../../Media/media_max_width";
   body {
-    padding-bottom: $sizeHeightHeader + 30px;
-    > header {
-      > section {
-        height: $sizeHeightHeader + 30px;
-        > div {
-          padding: 0 5px;
-          > .left-block {
-            > p {
-              line-height: $sizeHeightHeader + 30px;
-            }
-          }
-          > .right-block {
-            > i {
-              line-height: $sizeHeightHeader + 30px;
-            }
-            .profil-icon {
-              > .avatar-profil {
-                width: $sizeHeightHeader + 10px;
-                height: $sizeHeightHeader + 10px;
-              }
-              > i {
-                line-height: $sizeHeightHeader + 30px;
-              }
-            }
-          }
-        }
-      }
+    header {
       > nav {
-        height: $sizeHeightHeader + 30px;
-        position: fixed;
-        bottom: 0;
-        width: 100%;
         > ul {
           > li {
             flex-basis: 20%;
-            > a {
-              font-size: 0.9em;
-              padding: 15px 0;
-            }
-            &.burgermenu {
-              display: block;
-            }
           }
         }
       }
@@ -243,7 +146,6 @@
       }
       > .middle-column {
         flex-basis: 100%;
-        height: 125px;
         > .content-actually-filter {
           padding: 2.5px 5px;
           text-align: center;
@@ -261,7 +163,6 @@
           flex-wrap: nowrap;
           > .message-info {
             padding: 5px 0;
-            height: 100%;
             > .header-message {
               display: block;
               > .logo-header-message {
@@ -287,59 +188,16 @@
         flex-basis: 100%;
       }
     }
-    #menu-header-section {
-       margin-top: $sizeHeightHeader + 30px;
-       width: 300px;
-       > .arrow-top-menu {
-         width: 15px;
-         border-bottom: 15px solid $colorBackgroundHeader;
-         border-left: 15px solid transparent;
-         border-right: 15px solid transparent;
-         position: absolute;
-         right: 7px;
-       }
-       > .content-menu-header {
-         margin-top: 15px;
-       }
-     }
   }
 }
 @media all and (min-width: 420px) and (min-device-width: 420px){
+  @import "../../Media/media_min_width_420";
   body {
     > header {
-      > section {
-        height: $sizeHeightHeader + 10px;
-        > div {
-          padding: 0 5px;
-          > .left-block {
-            > p {
-              line-height: $sizeHeightHeader + 10px;
-            }
-          }
-          > .right-block {
-            > i {
-              line-height: $sizeHeightHeader + 10px;
-            }
-            .profil-icon {
-              > .avatar-profil {
-                width: $sizeHeightHeader - 10px;
-                height: $sizeHeightHeader - 10px;
-              }
-              > i {
-                line-height: $sizeHeightHeader + 10px;
-              }
-            }
-          }
-        }
-      }
       > nav {
-        height: $sizeHeightHeader + 10px;
         > ul {
           > li {
             flex-basis: 20%;
-            > a {
-              padding: 5px 0;
-            }
             &.burgermenu {
               display: block;
             }
@@ -405,52 +263,11 @@
         flex-basis: 70%;
       }
     }
-    #menu-header-section {
-      margin-top: $sizeHeightHeader + 10px;
-    }
   }
 }
 @media all and (min-width: 768px) and (min-device-width: 768px){
+  @import "../../Media/media_min_width_768";
   body {
-    > header {
-      > section {
-        height: $sizeHeightHeader;
-        > div {
-          > .left-block {
-            > p {
-              line-height: $sizeHeightHeader;
-            }
-          }
-          > .right-block {
-            > i {
-              line-height: $sizeHeightHeader;
-            }
-            .profil-icon {
-              > .avatar-profil {
-                width: $sizeHeightHeader - 20px;
-                height: $sizeHeightHeader - 20px;
-              }
-              > i {
-                line-height: $sizeHeightHeader;
-              }
-            }
-          }
-        }
-      }
-      > nav {
-        height: $sizeHeightHeader;
-        > ul {
-          > li {
-            > a {
-              padding: 3px 0;
-            }
-          }
-        }
-      }
-    }
-    #menu-header-section {
-      margin-top: $sizeHeightHeader;
-    }
     > main {
       padding-top: $sizeHeightHeader * 2;
       > .left-column {
@@ -510,15 +327,12 @@
   }
 }
 @media all and (min-width: 1230px) and (min-device-width: 1230px){
+  @import "../../Media/media_min_width_1230";
   body {
     > header {
       > nav {
         > ul {
           > li {
-            flex-basis: 25%;
-            > a {
-              padding: 5px 0;
-            }
             &.burgermenu {
               display: none;
             }

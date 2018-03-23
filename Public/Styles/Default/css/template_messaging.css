@@ -357,86 +357,11 @@ main {
       position: fixed;
       bottom: 0;
       width: 100%; }
-      body > header > nav > ul > li {
-        flex-basis: 20%; }
-        body > header > nav > ul > li > a {
-          font-size: 1.4em;
-          padding: 30px 0; }
-        body > header > nav > ul > li.burgermenu {
-          display: block; }
-    body > main {
-      padding-top: 120px;
-      display: block; }
-      body > main > .left-column {
-        position: absolute;
-        top: 0;
-        background-color: #EBEBEB;
-        width: 0;
-        z-index: 11;
-        opacity: 0;
-        height: 100%;
-        transition: opacity 0.4s; }
-        body > main > .left-column > .content-box-left {
-          padding: 15px 40px; }
-          body > main > .left-column > .content-box-left > .btn-tosle {
-            width: 100%;
-            height: 120px;
-            font-size: 1.8em; }
-            body > main > .left-column > .content-box-left > .btn-tosle.btn-close-window {
-              display: block; }
-            body > main > .left-column > .content-box-left > .btn-tosle > i, body > main > .left-column > .content-box-left > .btn-tosle > p {
-              line-height: 120px; }
-          body > main > .left-column > .content-box-left > ul {
-            margin-top: 60px;
-            font-size: 1.8em; }
-            body > main > .left-column > .content-box-left > ul > li > a {
-              height: 100px; }
-          body > main > .left-column > .content-box-left > .profil-info {
-            font-size: 1.8em; }
-          body > main > .left-column > .content-box-left > .profil-stats {
-            font-size: 1.8em; }
-        body > main > .left-column .footer-infos {
-          font-size: 1.8em; }
-          body > main > .left-column .footer-infos > .global-infos {
-            margin-top: 30px; }
-      body > main > .middle-column {
-        height: 140px; }
-        body > main > .middle-column > .content-actually-filter {
-          padding: 2.5px 5px;
-          text-align: center;
-          display: none; }
-          body > main > .middle-column > .content-actually-filter > p {
-            font-size: 0.8em; }
-            body > main > .middle-column > .content-actually-filter > p > i {
-              font-size: 0.8em; }
-        body > main > .middle-column > .content-message {
-          min-width: 100%;
-          display: flex;
-          flex-wrap: nowrap; }
-          body > main > .middle-column > .content-message > .message-info {
-            padding: 5px 0;
-            width: 15%;
-            height: 100%; }
-            body > main > .middle-column > .content-message > .message-info > .header-message {
-              display: block; }
-              body > main > .middle-column > .content-message > .message-info > .header-message > .logo-header-message {
-                margin: 0 auto;
-                width: 50px;
-                height: 50px;
-                line-height: 50px; }
-              body > main > .middle-column > .content-message > .message-info > .header-message > .id-header-message {
-                text-align: center;
-                font-size: 1.2em;
-                line-height: 100%;
-                padding: 5px 15px; }
-            body > main > .middle-column > .content-message > .message-info > .main-message {
-              display: none; }
-            body > main > .middle-column > .content-message > .message-info > .footer-message {
-              display: none; }
-      body > main > .right-column {
-        flex-basis: 60%; }
+      body > header > nav > ul > li > a {
+        font-size: 1.4em;
+        padding: 30px 0; }
     body #menu-header-section {
-      margin-top: 90px;
+      margin-top: 120px;
       width: 450px; }
       body #menu-header-section > .arrow-top-menu {
         width: 15px;
@@ -451,83 +376,105 @@ main {
           padding: 0 25px; }
           body #menu-header-section > .content-menu-header > ul > li > a {
             font-size: 1.3em;
-            padding: 25px 0; } }
+            padding: 25px 0; }
+  body > header > nav > ul > li {
+    flex-basis: 20%; }
+    body > header > nav > ul > li.burgermenu {
+      display: block; }
+  body > main {
+    padding-top: 120px;
+    display: block; }
+    body > main > .left-column {
+      position: absolute;
+      top: 0;
+      background-color: #EBEBEB;
+      width: 0;
+      z-index: 11;
+      opacity: 0;
+      height: 100%;
+      transition: opacity 0.4s; }
+      body > main > .left-column > .content-box-left {
+        padding: 15px 40px; }
+        body > main > .left-column > .content-box-left > .btn-tosle {
+          width: 100%;
+          height: 120px;
+          font-size: 1.8em; }
+          body > main > .left-column > .content-box-left > .btn-tosle.btn-close-window {
+            display: block; }
+          body > main > .left-column > .content-box-left > .btn-tosle > i, body > main > .left-column > .content-box-left > .btn-tosle > p {
+            line-height: 120px; }
+        body > main > .left-column > .content-box-left > ul {
+          margin-top: 60px;
+          font-size: 1.8em; }
+          body > main > .left-column > .content-box-left > ul > li > a {
+            height: 100px; }
+        body > main > .left-column > .content-box-left > .profil-info {
+          font-size: 1.8em; }
+        body > main > .left-column > .content-box-left > .profil-stats {
+          font-size: 1.8em; }
+      body > main > .left-column .footer-infos {
+        font-size: 1.8em; }
+        body > main > .left-column .footer-infos > .global-infos {
+          margin-top: 30px; }
+    body > main > .middle-column {
+      height: 140px; }
+      body > main > .middle-column > .content-actually-filter {
+        padding: 2.5px 5px;
+        text-align: center;
+        display: none; }
+        body > main > .middle-column > .content-actually-filter > p {
+          font-size: 0.8em; }
+          body > main > .middle-column > .content-actually-filter > p > i {
+            font-size: 0.8em; }
+      body > main > .middle-column > .content-message {
+        min-width: 100%;
+        display: flex;
+        flex-wrap: nowrap; }
+        body > main > .middle-column > .content-message > .message-info {
+          padding: 5px 0;
+          width: 15%;
+          height: 100%; }
+          body > main > .middle-column > .content-message > .message-info > .header-message {
+            display: block; }
+            body > main > .middle-column > .content-message > .message-info > .header-message > .logo-header-message {
+              margin: 0 auto;
+              width: 50px;
+              height: 50px;
+              line-height: 50px; }
+            body > main > .middle-column > .content-message > .message-info > .header-message > .id-header-message {
+              text-align: center;
+              font-size: 1.2em;
+              line-height: 100%;
+              padding: 5px 15px; }
+          body > main > .middle-column > .content-message > .message-info > .main-message {
+            display: none; }
+          body > main > .middle-column > .content-message > .message-info > .footer-message {
+            display: none; }
+    body > main > .right-column {
+      flex-basis: 60%; } }
 
 @media all and (max-width: 420px) {
   body {
     padding-bottom: 90px; }
-    body > header > section {
-      height: 90px; }
-      body > header > section > div {
-        padding: 0 5px; }
-        body > header > section > div > .left-block > p {
-          line-height: 90px; }
-        body > header > section > div > .right-block > i {
-          line-height: 90px; }
-        body > header > section > div > .right-block .profil-icon > .avatar-profil {
-          width: 70px;
-          height: 70px; }
-        body > header > section > div > .right-block .profil-icon > i {
-          line-height: 90px; }
+    body > header > section > div > .left-block > p {
+      line-height: 90px; }
+    body > header > section > div > .right-block > i {
+      line-height: 90px; }
+    body > header > section > div > .right-block .profil-icon > .avatar-profil {
+      width: 70px;
+      height: 70px; }
+    body > header > section > div > .right-block .profil-icon > i {
+      line-height: 90px; }
     body > header > nav {
       height: 90px;
       position: fixed;
       bottom: 0;
       width: 100%; }
-      body > header > nav > ul > li {
-        flex-basis: 20%; }
-        body > header > nav > ul > li > a {
-          font-size: 0.9em;
-          padding: 15px 0; }
-        body > header > nav > ul > li.burgermenu {
-          display: block; }
-    body > main {
-      padding-top: 90px;
-      display: block; }
-      body > main > .left-column {
-        position: absolute;
-        top: 0;
-        background-color: #EBEBEB;
-        width: 0;
-        z-index: 11;
-        opacity: 0;
-        height: 100%;
-        transition: opacity 0.4s; }
-        body > main > .left-column > .content-box-left > .btn-tosle.btn-close-window {
-          display: block; }
-      body > main > .middle-column {
-        flex-basis: 100%;
-        height: 125px; }
-        body > main > .middle-column > .content-actually-filter {
-          padding: 2.5px 5px;
-          text-align: center;
-          display: none; }
-          body > main > .middle-column > .content-actually-filter > p {
-            font-size: 0.8em; }
-            body > main > .middle-column > .content-actually-filter > p > i {
-              font-size: 0.8em; }
-        body > main > .middle-column > .content-message {
-          min-width: 100%;
-          display: flex;
-          flex-wrap: nowrap; }
-          body > main > .middle-column > .content-message > .message-info {
-            padding: 5px 0;
-            height: 100%; }
-            body > main > .middle-column > .content-message > .message-info > .header-message {
-              display: block; }
-              body > main > .middle-column > .content-message > .message-info > .header-message > .logo-header-message {
-                margin: 0 auto; }
-              body > main > .middle-column > .content-message > .message-info > .header-message > .id-header-message {
-                text-align: center;
-                font-size: 1em;
-                line-height: 100%;
-                padding: 5px 15px; }
-            body > main > .middle-column > .content-message > .message-info > .main-message {
-              display: none; }
-            body > main > .middle-column > .content-message > .message-info > .footer-message {
-              display: none; }
-      body > main > .right-column {
-        flex-basis: 100%; }
+      body > header > nav > ul > li > a {
+        font-size: 0.9em;
+        padding: 15px 0; }
+      body > header > nav > ul > li.burgermenu {
+        display: block; }
     body #menu-header-section {
       margin-top: 90px;
       width: 300px; }
@@ -537,9 +484,61 @@ main {
         border-left: 15px solid transparent;
         border-right: 15px solid transparent;
         position: absolute;
-        right: 7px; }
+        right: 15px; }
       body #menu-header-section > .content-menu-header {
-        margin-top: 15px; } }
+        margin-top: 14px; }
+        body #menu-header-section > .content-menu-header > ul > li {
+          padding: 0 25px; }
+          body #menu-header-section > .content-menu-header > ul > li > a {
+            font-size: 1.3em;
+            padding: 25px 0; }
+  body header > nav > ul > li {
+    flex-basis: 20%; }
+  body > main {
+    padding-top: 90px;
+    display: block; }
+    body > main > .left-column {
+      position: absolute;
+      top: 0;
+      background-color: #EBEBEB;
+      width: 0;
+      z-index: 11;
+      opacity: 0;
+      height: 100%;
+      transition: opacity 0.4s; }
+      body > main > .left-column > .content-box-left > .btn-tosle.btn-close-window {
+        display: block; }
+    body > main > .middle-column {
+      flex-basis: 100%; }
+      body > main > .middle-column > .content-actually-filter {
+        padding: 2.5px 5px;
+        text-align: center;
+        display: none; }
+        body > main > .middle-column > .content-actually-filter > p {
+          font-size: 0.8em; }
+          body > main > .middle-column > .content-actually-filter > p > i {
+            font-size: 0.8em; }
+      body > main > .middle-column > .content-message {
+        min-width: 100%;
+        display: flex;
+        flex-wrap: nowrap; }
+        body > main > .middle-column > .content-message > .message-info {
+          padding: 5px 0; }
+          body > main > .middle-column > .content-message > .message-info > .header-message {
+            display: block; }
+            body > main > .middle-column > .content-message > .message-info > .header-message > .logo-header-message {
+              margin: 0 auto; }
+            body > main > .middle-column > .content-message > .message-info > .header-message > .id-header-message {
+              text-align: center;
+              font-size: 1em;
+              line-height: 100%;
+              padding: 5px 15px; }
+          body > main > .middle-column > .content-message > .message-info > .main-message {
+            display: none; }
+          body > main > .middle-column > .content-message > .message-info > .footer-message {
+            display: none; }
+    body > main > .right-column {
+      flex-basis: 100%; } }
 
 @media all and (min-width: 420px) and (min-device-width: 420px) {
   body > header > section {
@@ -561,8 +560,12 @@ main {
       flex-basis: 20%; }
       body > header > nav > ul > li > a {
         padding: 5px 0; }
-      body > header > nav > ul > li.burgermenu {
-        display: block; }
+  body #menu-header-section {
+    margin-top: 70px; }
+  body > header > nav > ul > li {
+    flex-basis: 20%; }
+    body > header > nav > ul > li.burgermenu {
+      display: block; }
   body > main {
     padding-top: 140px; }
     body > main > .left-column {
@@ -600,9 +603,7 @@ main {
           padding: 5px 5px;
           text-align: center; }
     body > main > .right-column {
-      flex-basis: 70%; }
-  body #menu-header-section {
-    margin-top: 70px; } }
+      flex-basis: 70%; } }
 
 @media all and (min-width: 768px) and (min-device-width: 768px) {
   body > header > section {
@@ -664,8 +665,8 @@ main {
     flex-basis: 25%; }
     body > header > nav > ul > li > a {
       padding: 5px 0; }
-    body > header > nav > ul > li.burgermenu {
-      display: none; }
+  body > header > nav > ul > li.burgermenu {
+    display: none; }
   body > main > .left-column {
     position: static;
     flex-basis: 20%;

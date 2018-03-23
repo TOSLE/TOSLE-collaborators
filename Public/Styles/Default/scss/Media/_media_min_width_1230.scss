@@ -1,0 +1,14 @@
+body {
+  > header {
+    > nav {
+      > ul {
+        > li {
+          flex-basis: 25%;
+          > a {
+            padding: 5px 0;
+          }
+        }
+      }
+    }
+  }
+}

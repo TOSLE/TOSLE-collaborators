@@ -1,0 +1,46 @@
+body {
+  > header {
+    > section {
+      height: $sizeHeightHeader + 10px;
+      > div {
+        padding: 0 5px;
+        > .left-block {
+          > p {
+            line-height: $sizeHeightHeader + 10px;
+          }
+        }
+        > .right-block {
+          > i {
+            line-height: $sizeHeightHeader + 10px;
+          }
+          .profil-icon {
+            > .avatar-profil {
+              width: $sizeHeightHeader - 10px;
+              height: $sizeHeightHeader - 10px;
+            }
+            > i {
+              line-height: $sizeHeightHeader + 10px;
+            }
+          }
+        }
+      }
+    }
+    > nav {
+      height: $sizeHeightHeader + 10px;
+      > ul {
+        > li {
+          flex-basis: 20%;
+          > a {
+            padding: 5px 0;
+            > p {
+
+            }
+          }
+        }
+      }
+    }
+  }
+  #menu-header-section {
+    margin-top: $sizeHeightHeader + 10px;
+  }
+}

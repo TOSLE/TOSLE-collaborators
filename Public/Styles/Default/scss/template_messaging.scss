@@ -1,11 +1,11 @@
 /* TEMPLATE TOSLE MESSAGING PAGE */
 @import "Variables/variable_colors";
 @import "Variables/variable_size";
-@import "Messaging/variable_colors_messaging";
+@import "Template/Messaging/variable_colors_messaging";
 
-@import "Messaging/global";
-@import "Messaging/header";
+@import "Template/Messaging/global";
+@import "Template/Messaging/header";
 @import "Header/header_menu";
-@import "Messaging/main";
+@import "Template/Messaging/main";
 
-@import "Messaging/media";
+@import "Template/Messaging/media";
