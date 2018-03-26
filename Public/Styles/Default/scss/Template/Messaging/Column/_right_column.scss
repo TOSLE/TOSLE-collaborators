@@ -60,4 +60,35 @@
       font-size: 1em;
     }
   }
+  > .edit-new-message {
+    display: flex;
+    border-top: 1px solid $colorBorderBottomSection;
+    padding: 5px;
+    height: 90px;
+    > .content-input {
+      flex-basis: 80%;
+      border-right: 1px solid $colorBorderBottomSection;
+      > textarea {
+        border: none;
+        min-width: 100%;
+        max-width: 100%;
+        min-height: 80px;
+        max-height: 80px;
+        border-bottom: 1px solid $colorBorderBottomSection;
+        outline: none;
+        transition: 0.4s;
+        &:hover, &:active {
+          border-bottom: 1px solid black;
+        }
+      }
+    }
+    > .content-button {
+      flex-basis: 20%;
+      display: flex;
+      > button {
+        margin: auto;
+        display: block;
+      }
+    }
+  }
 }
