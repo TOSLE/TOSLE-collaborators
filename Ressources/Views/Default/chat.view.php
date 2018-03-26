@@ -1,11 +1,11 @@
 <section id="left-column" class="left-column">
     <div class="content-box-left">
-        <button id="close-burgermenu" class="btn-tosle btn-close-window btn-dark"><i class="material-icons">&#xE5CD;</i><p>Close menu</p></button>
-        <a href="#" class="btn-tosle new-message"><i class="material-icons">&#xE158;</i> <p>New Message</p></a>
+        <button id="close-burgermenu" class="btn-tosle btn-close-window btn-dark"><i class="material-icons">&#xE5CD;</i><p><?php echo LEFT_COLUMN_MESSAGING_CLOSEMENU;?></p></button>
+        <a href="#" class="btn-tosle new-message"><i class="material-icons">&#xE158;</i> <p><?php echo LEFT_COLUMN_MESSAGING_NEWMESSAGE;?></p></a>
         <ul>
-            <li><a href="#"><i class="material-icons">&#xE0CB;</i><p>In box</p><span class="notif-active">3</span></a></li>
-            <li><a href="#"><i class="material-icons">&#xE254;</i><p>Drafts</p></a></li>
-            <li><a href="#"><i class="material-icons">&#xE152;</i><p>Filter</p></a></li>
+            <li><a href="#"><i class="material-icons">&#xE0CB;</i><p><?php echo LEFT_COLUMN_MESSAGING_MENU_INBOX;?></p><span class="notif-active">3</span></a></li>
+            <li><a href="#"><i class="material-icons">&#xE254;</i><p><?php echo LEFT_COLUMN_MESSAGING_MENU_DRAFTS;?></p></a></li>
+            <li><a href="#"><i class="material-icons">&#xE152;</i><p><?php echo LEFT_COLUMN_MESSAGING_MENU_FILTER;?></p></a></li>
         </ul>
     </div>
     <div class="content-box-left">
@@ -16,31 +16,30 @@
         <div class="profil-stats">
             <div class="conversation">
                 <p class="number">5</p>
-                <p class="description">Conversation</p>
+                <p class="description"><?php echo LEFT_COLUMN_MESSAGING_PROFILINFOS_NUMBERCHAT;?></p>
             </div>
             <div class="number-message">
                 <p class="number">150</p>
-                <p class="description">Messages</p>
+                <p class="description"><?php echo LEFT_COLUMN_MESSAGING_PROFILINFOS_NUMBERMESSAGE;?></p>
             </div>
             <div class="number-user">
                 <p class="number">33</p>
-                <p class="description">Student</p>
+                <p class="description"><?php echo LEFT_COLUMN_MESSAGING_PROFILINFOS_NUMBERSTUDENT;?></p>
             </div>
         </div>
     </div>
     <div class="footer-infos">
         <div class="more-infos">
-            <a href="#">Mention légales</a> - <a href="#">Flux RSS</a> - <a href="#">Confidentialité</a>
+            <a href="#"><?php echo GLOBAL_FOOTER_LEGAL;?></a> - <a href="#"><?php echo GLOBAL_FOOTER_RSS;?></a> - <a href="#"><?php echo GLOBAL_FOOTER_PRIVACY;?></a>
         </div>
         <div class="global-infos">
             <p>TOSLE <i class="material-icons">&#xE90C;</i> 2018</p>
-            <p>Teaching Open Source Learning Easy</p>
         </div>
     </div>
 </section>
 <section class="middle-column">
     <div class="content-actually-filter">
-        <p><i class="material-icons">&#xE152;</i> Filtered by <strong>Newest</strong></p>
+        <p><i class="material-icons">&#xE152;</i> <?php echo MIDDLE_COLUMN_MESSAGING_HEADER_FILTER;?> <strong>Newest</strong></p>
     </div>
     <div class="content-message">
         <a href="#" class="message-info active">
@@ -56,10 +55,10 @@
                 </div>
             </div>
             <div class="main-message">
-                <p>Bonjour monsieur, j'aurais aimé avoir</p>
+                <p>Mais ça me fais plaisir ! C'est noté !</p>
             </div>
             <div class="footer-message">
-                <p>3 min ago</p>
+                <p>3 <?php echo MIDDLE_COLUMN_MESSAGING_MESSAGE_MIN_AGO;?></p>
             </div>
         </a>
         <a href="#" class="message-info notification">
@@ -78,7 +77,7 @@
                 <p>Bonjour monsieur, j'aurais aimé avoir des rens...</p>
             </div>
             <div class="footer-message">
-                <p>3 min ago</p>
+                <p>3 <?php echo MIDDLE_COLUMN_MESSAGING_MESSAGE_HOUR_AGO;?></p>
             </div>
         </a>
         <a href="#" class="message-info">
@@ -97,7 +96,7 @@
                 <p>Bonjour monsieur, j'aurais aimé avoir des rens...</p>
             </div>
             <div class="footer-message">
-                <p>3 min ago</p>
+                <p>3 <?php echo MIDDLE_COLUMN_MESSAGING_MESSAGE_MONTH_AGO;?></p>
             </div>
         </a>
     </div>
@@ -177,10 +176,10 @@
     </div>
     <div class="edit-new-message">
         <div class="content-input">
-            <textarea type="text" placeholder="Saisissez votre message..."></textarea>
+            <textarea type="text" placeholder="<?php echo RIGHT_COLUMN_MESSAGING_NEWMESSAGE_PLACEHOLDER;?>..."></textarea>
         </div>
         <div class="content-button">
-            <button class="btn btn-dark">Send</button>
+            <button class="btn btn-dark"><?php echo RIGHT_COLUMN_MESSAGING_NEWMESSAGE_BUTTON;?></button>
         </div>
     </div>
 </section>

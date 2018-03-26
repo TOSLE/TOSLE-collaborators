@@ -15,4 +15,13 @@ class AdminController
     function lessonsAction($params){
         $View = new View("default");
     }
+    /**
+     * @Route("/en/admin/chat")
+     * @param array $params
+     * View back office messaging action
+     */
+    function chatAction($params)
+    {
+
+    }
 }
