@@ -108,6 +108,14 @@
       }
       > .right-column {
         flex-basis: 60%;
+        > .content-infos-message {
+          font-size: 1.4em;
+          height: 120px;
+        }
+        > .container-message {
+          padding-bottom: $sizeHeightHeader + 80px;
+          font-size: 1.6em;
+        }
       }
     }
   }
@@ -186,6 +194,12 @@
       }
       > .right-column {
         flex-basis: 100%;
+        > .content-infos-message {
+          height: 80px;
+        }
+        > .container-message {
+          padding-bottom: $sizeHeightHeader + 60px;
+        }
       }
     }
   }

@@ -3,6 +3,7 @@ main {
   margin: 0 auto;
   height: 100%;
   display: flex;
+  overflow: hidden;
   @import "Column/left_column";
   @import "Column/middle_column";
   @import "Column/right_column";
