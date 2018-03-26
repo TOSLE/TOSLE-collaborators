@@ -111,6 +111,53 @@
         </div>
     </div>
     <div class="container-message">
-        s
+        <div class="message-owner">
+            <p>
+                Ceci est le message d'un propriétaire, attention !
+            </p>
+            <p class="date-message">
+                6 min
+            </p>
+        </div>
+        <div class="message-other default-message-other">
+            <p>
+                Ceci est le message d'un autre, par défaut sivouplait, attention !
+            </p>
+            <p class="date-message">
+               4 min
+            </p>
+        </div>
+        <div class="message-owner">
+            <p>
+                Ceci est le message d'un propriétaire, attention !
+            </p>
+            <p class="date-message">
+                6 min
+            </p>
+        </div>
+        <div class="message-other default-message-other">
+            <p>
+                Ceci est le message d'un autre, par défaut sivouplait, attention !
+            </p>
+            <p class="date-message">
+               4 min
+            </p>
+        </div>
+        <div class="message-owner">
+            <p>
+                Ceci est le message d'un propriétaire, attention !
+            </p>
+            <p class="date-message">
+                6 min
+            </p>
+        </div>
+        <div class="message-other default-message-other">
+            <p>
+                Ceci est le message d'un autre, par défaut sivouplait, attention !
+            </p>
+            <p class="date-message">
+               4 min
+            </p>
+        </div>
     </div>
 </section>

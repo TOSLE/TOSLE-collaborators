@@ -1,9 +1,12 @@
 .right-column {
   height: 100%;
+  overflow: auto;
+  background-color: $colorBackgroundRightColumn;
   > .content-infos-message {
     background-color: $colorBackgroundRightColumn;
     padding: 5px 0;
     border-bottom: 1px solid $colorBorderBottomSection;
+    height: 70px;
     > h2 {
       text-align: center;
     }
@@ -23,7 +26,38 @@
     }
   }
   > .container-message {
-    background-color: $colorBackgroundRightColumn;
-    height: 100%;
+    > .message-owner {
+      padding: 5px 10px 5px 10%;
+      > p:first-child {
+        background-color: $colorGlobalToslePrimary;
+        border-radius: 5px 5px 0px 5px;
+        width: 100%;
+        padding: 10px 15px;
+        color: white;
+      }
+      > .date-message {
+        text-align: right;
+      }
+    }
+    > .message-other {
+      padding: 10px 10% 5px 5px;
+      > p:first-child {
+        border-radius: 5px 5px 5px 0px;
+        width: 100%;
+        padding: 10px 15px;
+        color: white;
+      }
+      &.default-message-other {
+        > p:first-child {
+          background-color: grey;
+        }
+      }
+    }
+    .date-message {
+      font-size: 0.8em;
+    }
+    > div > p:first-child {
+      font-size: 1em;
+    }
   }
 }
