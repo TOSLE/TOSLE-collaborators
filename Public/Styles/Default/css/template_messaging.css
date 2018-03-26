@@ -356,29 +356,31 @@ main {
           font-size: 1.5em; }
         main .right-column > .content-infos-message > .more-infos > p {
           line-height: 150%; }
-    main .right-column > .container-message > .message-owner {
-      padding: 5px 10px 5px 10%; }
-      main .right-column > .container-message > .message-owner > p:first-child {
-        background-color: #1A5CCB;
-        border-radius: 5px 5px 0px 5px;
-        width: 100%;
-        padding: 10px 15px;
-        color: white; }
-      main .right-column > .container-message > .message-owner > .date-message {
-        text-align: right; }
-    main .right-column > .container-message > .message-other {
-      padding: 10px 10% 5px 5px; }
-      main .right-column > .container-message > .message-other > p:first-child {
-        border-radius: 5px 5px 5px 0px;
-        width: 100%;
-        padding: 10px 15px;
-        color: white; }
-      main .right-column > .container-message > .message-other.default-message-other > p:first-child {
-        background-color: grey; }
-    main .right-column > .container-message .date-message {
-      font-size: 0.8em; }
-    main .right-column > .container-message > div > p:first-child {
-      font-size: 1em; }
+    main .right-column > .container-message {
+      min-height: 86%; }
+      main .right-column > .container-message > .message-owner {
+        padding: 5px 10px 5px 10%; }
+        main .right-column > .container-message > .message-owner > p:first-child {
+          background-color: #1A5CCB;
+          border-radius: 5px 5px 0px 5px;
+          width: 100%;
+          padding: 10px 15px;
+          color: white; }
+        main .right-column > .container-message > .message-owner > .date-message {
+          text-align: right; }
+      main .right-column > .container-message > .message-other {
+        padding: 10px 10% 5px 5px; }
+        main .right-column > .container-message > .message-other > p:first-child {
+          border-radius: 5px 5px 5px 0px;
+          width: 100%;
+          padding: 10px 15px;
+          color: white; }
+        main .right-column > .container-message > .message-other.default-message-other > p:first-child {
+          background-color: grey; }
+      main .right-column > .container-message .date-message {
+        font-size: 0.8em; }
+      main .right-column > .container-message > div > p:first-child {
+        font-size: 1em; }
     main .right-column > .edit-new-message {
       display: flex;
       border-top: 1px solid #E5E5E5;
