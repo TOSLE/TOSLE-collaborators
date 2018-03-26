@@ -113,8 +113,19 @@
           height: 120px;
         }
         > .container-message {
-          padding-bottom: $sizeHeightHeader + 80px;
           font-size: 1.6em;
+        }
+        > .edit-new-message {
+          padding-bottom: $sizeHeightHeader + 200px;
+          font-size: 1.6em;
+          height: 120px;
+          > .content-input {
+            > textarea {
+              min-height: 110px;
+              max-height: 110px;
+              font-size: 1.6em;
+            }
+          }
         }
       }
     }
@@ -197,8 +208,8 @@
         > .content-infos-message {
           height: 80px;
         }
-        > .container-message {
-          padding-bottom: $sizeHeightHeader + 60px;
+        > .edit-new-message {
+          padding-bottom: $sizeHeightHeader + 140px;
         }
       }
     }
