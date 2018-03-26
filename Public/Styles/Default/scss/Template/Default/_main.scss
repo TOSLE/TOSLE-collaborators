@@ -1,0 +1,6 @@
+main {
+  max-width: $sizeMaxWidthSection;
+  margin: 0 auto;
+  height: 100%;
+  @import "AdminPart/chat";
+}

@@ -22,6 +22,6 @@ class AdminController
      */
     function chatAction($params)
     {
-
+        $View = new View("default", "Admin/chat");
     }
 }
