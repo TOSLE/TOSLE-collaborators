@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "node-sass": "^4.7.2",
-    "npm": "^5.7.1"
+    "npm": "^5.8.0"
   },
   "devDependencies": {},
   "scripts": {

@@ -138,6 +138,11 @@ body > header {
           body > header > nav > ul > li.current > a {
             color: #FFFFFF; }
 
+main {
+  max-width: 1230px;
+  margin: 0 auto;
+  height: 100%; }
+
 @media all and (max-device-width: 420px) {
   body {
     padding-bottom: 150px; }
