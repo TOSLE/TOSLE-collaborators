@@ -4,12 +4,13 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "node-sass": "^4.7.2",
+    "chart.js": "^2.7.2",
+    "node-sass": "^4.8.3",
     "npm": "^5.8.0"
   },
   "devDependencies": {},
   "scripts": {
-    "watch": "node-sass --watch scss -o css"
+    "watch": "node-sass --watch Public/Styles/Default/scss -o Public/Styles/Default/css"
   },
   "author": "",
   "license": "ISC"
