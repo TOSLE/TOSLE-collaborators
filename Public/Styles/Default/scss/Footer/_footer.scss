@@ -1,0 +1,50 @@
+footer {
+  background-color: $colorBackgroundFooter;
+  height: 160px;
+  > .footer-section {
+    width: $sizeMaxWidthSection;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    > #footer-left-col {
+      flex-basis: 20%;
+      padding: 15px;
+      > .footer-title {
+        font-size: 2em;
+        color: #FFFFFF;
+      }
+      > #footer-contact {
+        margin-top: 15px;
+        color: $colorFontFooter;
+        > p {
+          font-size: 1.1em;
+        }
+        > div {
+          margin-top: 5px;
+          > a {
+            display: inline-block;
+            vertical-align: top;
+            line-height: 150%;
+            color:$colorFontFooter;
+            text-decoration: none;
+          }
+        }
+      }
+    }
+    > #footer-right-col{
+      margin: auto;
+      > #link {
+        > a {
+          text-decoration: none;
+          color: $colorFontFooter;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+        span {
+          color: $colorFontFooter;
+        }
+      }
+    }
+  }
+}
