@@ -44,7 +44,7 @@ class DashboardController
 
     function blogAction($params)
     {
-        $View = new View("dashboard", "blog");
+        $View = new View("dashboard", "Dashboard/blog");
         $View->setData("PageName", NAV_DASHBOARD . " " . NAV_DASHBOARD_BLOG);
     }
 
@@ -56,7 +56,7 @@ class DashboardController
 
     function chatAction($params)
     {
-        $View = new View("dashboard", "chat");
+        $View = new View("dashboard", "Dashboard/chat");
         $View->setData("PageName", NAV_DASHBOARD . " " . NAV_DASHBOARD_CHAT);
     }
 
