@@ -6,8 +6,18 @@
  * Time: 21:41
  */
 
+
+/**
+ * Class IndexController
+ * Controller not use
+ */
 class IndexController
 {
+    /**
+     * @Route("/en/index(/index)")
+     * @param array $params
+     * Default action of IndexController
+     */
     function indexAction($params)
     {
         $View = new View();

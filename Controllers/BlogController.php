@@ -11,7 +11,7 @@ class BlogController
     /**
      * @Route("/en/blog(/index)")
      * @param array $params
-     * Default action of ChatController
+     * Default action of BlogController
      */
     function indexAction($params)
     {
@@ -24,6 +24,16 @@ class BlogController
      * View article action
      */
     function viewAction($params)
+    {
+        $View = new View("default");
+    }
+
+    /**
+     * @Route("/en/search/{params}")
+     * @param array $params
+     * View filtered article action
+     */
+    function searchAction($params)
     {
         $View = new View("default");
     }
