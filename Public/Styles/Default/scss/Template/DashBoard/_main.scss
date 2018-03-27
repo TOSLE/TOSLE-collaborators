@@ -1,7 +1,7 @@
 main {
   max-width: $sizeMaxWidthSection;
   margin: 0 auto;
-  height: 100%;
+  min-height: 100%;
   @import "AdminPart/chat";
   @import "Class/class";
 }
