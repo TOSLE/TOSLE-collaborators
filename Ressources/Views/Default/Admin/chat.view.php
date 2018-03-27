@@ -20,7 +20,7 @@
                                 <tr>
                                     <td class="td-content-avatar"><img src="<?php echo DIRNAME;?>Tosle/Users/Images/475899654133.jpg"></td>
                                     <td class="td-content-text">Najla CHELLY to Samy IMMOULA</td>
-                                    <td class="td-content-icone"><a href="#"><i class="material-icons">&#xE157;</i></a></td>
+                                    <td class="td-content-icone"><a href="<?php echo DIRNAME.substr($language,0,2)."/";?>chat"><i class="material-icons">&#xE157;</i></a></td>
                                     <td class="td-content-date">19/03/2018</td>
                                 </tr>
                             </tbody>
