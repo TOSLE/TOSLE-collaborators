@@ -22,7 +22,7 @@ class AdminController
      */
     function chatAction($params)
     {
-        $View = new View("dashboard", "Admin/chat");
+        $View = new View("dashboard", "Dashboard/chat");
     }
     /**
      * @Route("/en/admin/blog")
@@ -31,6 +31,6 @@ class AdminController
      */
     function blogAction($params)
     {
-        $View = new View("dashboard", "Admin/blog");
+        $View = new View("dashboard", "Dashboard/blog");
     }
 }
