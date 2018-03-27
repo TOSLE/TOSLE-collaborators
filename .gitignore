@@ -2,5 +2,5 @@
 
 
 Core/config.php
-Public/Styles/Default/node_modules/
+node_modules/
 .htaccess

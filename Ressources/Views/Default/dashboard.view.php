@@ -12,38 +12,38 @@
                 <section id="nav-dashboard">
                     <nav>
                         <ul>
-                            <li><a href="<?php echo DIRNAME.substr($language,0,2)."/";?>dashboard">
+                            <li><a href="<?php echo DIRNAME.substr($language,0,2)."/dashboard";?>">
                                     <p>Dashboard</p>
                                     <i class="material-icons blue">assessment</i>
 
                                 </a>
                             </li>
-                            <li><a href="<?php echo DIRNAME.substr($language,0,2)."/";?>lessons">
+                            <li><a href="<?php echo DIRNAME.substr($language,0,2)."/dashboard/";?>">
                                     <p>Lessons</p>
                                     <i class="material-icons blue">keyboard_arrow_right</i>
                                 </a>
                             </li>
-                            <li><a href="<?php echo DIRNAME.substr($language,0,2)."/";?>homework">
+                            <li><a href="<?php echo DIRNAME.substr($language,0,2)."/dashboard/";?>">
                                     <p>Homework</p>
                                     <i class="material-icons blue">keyboard_arrow_right</i>
                                 </a>
                             </li>
-                            <li><a href="<?php echo DIRNAME.substr($language,0,2)."/";?>students">
+                            <li><a href="<?php echo DIRNAME.substr($language,0,2)."/dashboard/";?>">
                                     <p>Students</p>
                                     <i class="material-icons blue">keyboard_arrow_right</i>
                                 </a>
                             </li>
-                            <li><a href="<?php echo DIRNAME.substr($language,0,2)."/";?>blog">
+                            <li><a href="<?php echo DIRNAME.substr($language,0,2)."/dashboard/";?>blog">
                                     <p>Blog</p>
                                     <i class="material-icons blue">keyboard_arrow_right</i>
                                 </a>
                             </li>
-                            <li><a href="<?php echo DIRNAME.substr($language,0,2)."/";?>portofolio">
+                            <li><a href="<?php echo DIRNAME.substr($language,0,2)."/dashboard/";?>">
                                     <p>Portofolio</p>
                                     <i class="material-icons blue">keyboard_arrow_right</i>
                                 </a>
                             </li>
-                            <li><a href="<?php echo DIRNAME.substr($language,0,2)."/";?>chat">
+                            <li><a href="<?php echo DIRNAME.substr($language,0,2)."/dashboard/";?>chat">
                                     <p>Chat</p>
                                     <i class="material-icons blue">keyboard_arrow_right</i>
                                 </a>
@@ -138,6 +138,7 @@
                                     </a>
                                 </div>
                                 <div class="container">
+                                    <canvas id="myChart" width="600" height="220"></canvas>
                                     <div class="filter" id="filter-view-cms">
                                         <select id="select-view-cms">
                                             <option value="day">per day</option>

@@ -4,6 +4,11 @@ Projet étudiant
 Afin de rapidement cloner notre CMS axé pour les développeurs, n'hésitez pas à utiliser cette commande
 > git clone --recurse-submodules https://github.com/TOSLE/TOSLE-collaborators.git
 
+A la racine du repo
+> npm install chart.js --save
+
+> npm install node-sass
+ 
 Le template "default" n'est pas prêt. Il arrive bientôt !
 Le template "messaging" est prêt
 __________________________

@@ -1,3 +1,12 @@
+<div class="container">
+    <div class="row">
+        <section class="title-page col-12">
+            <div class="marg-container">
+                <h2><a href="<?php echo DIRNAME.substr($language,0,2)."/dashboard";?>">Dashboard</a> / Blog</h2>
+            </div>
+        </section>
+    </div>
+</div>
 <section id="right-column" class="container">
     <div class="row">
         <div class="col-6">
