@@ -36,6 +36,21 @@
     TOSLE NAVBAR DEFINE
 */
 
+/* TOSLE DASHBOARD DEFINE */
+
+define ("NAV_DASHBOARD", "Dashboard");
+
+    /* NAV DEFINE */
+    define ("NAV_DASHBOARD_LESSON", "Dashboard Lesson");
+    define ("NAV_DASHBOARD_HOMEWORK", "Dashboard Homework");
+    define ("NAV_DASHBOARD_STUDENT", "Dashboard Students");
+    define ("NAV_DASHBOARD_BLOG", "Dashboard Blog");
+    define ("NAV_DASHBOARD_PORTOFOLIO", "Dashboard Portolio");
+    define ("NAV_DASHBOARD_CHAT", "Dashboard Chat");
+    define ("NAV_DASHBOARD_STATISTIC", "Dashboard Statistic");
+    define ("NAV_DASHBOARD_GRAPH", "Dashboard Graphic");
+    /* NAV DEFINE */
+/* TOSLE DASHBOARD DEFINE */
 
 /* TOSLE MESSAGING DEFINE */
     /* HEAD DEFINE */

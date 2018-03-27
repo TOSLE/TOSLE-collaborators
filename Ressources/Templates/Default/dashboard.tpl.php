@@ -1,9 +1,11 @@
 <html>
 <head>
-    <title>TOSLE</title>
     <meta charset="utf-8">
+    <title>Dashboard</title>
     <link href="<?php echo DIRNAME;?>Public/Libraries/Framework/ospaf/css/ospaf.css" rel="stylesheet">
-    <link href="<?php echo DIRNAME;?>Public/Styles/Default/css/template_dashboard.css" rel="stylesheet">
+    <link href="<?php echo DIRNAME;?>Public/Styles/Default/css/template_default.css" rel="stylesheet">
+    <link href="<?php echo DIRNAME;?>Public/Styles/Default/css/template_dashboard_css.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
 
     <script src="<?php echo DIRNAME;?>Public/Libraries/jQuery/jquery-3.3.1.js"></script>
 </head>
@@ -46,7 +48,6 @@
 </footer>
 <!-- INCLUDE SCRIPT -->
 <script src="<?php echo DIRNAME;?>Public/Javascripts/Default/menuprofil.js"></script>
-<script src="<?php echo DIRNAME;?>Public/Javascripts/Default/Messaging/burgermenu.js"></script>
 <!-- INCLUDE SCRIPT -->
 </body>
 </html>
