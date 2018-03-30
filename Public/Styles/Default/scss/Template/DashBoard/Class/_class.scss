@@ -1,19 +1,22 @@
 .content-backoffice {
   background-color: white;
   > .header-content {
-    padding: 5px;
+    height: 40px;
     display: flex;
+    padding: 0 7.5px;
     border-bottom: 1px solid $colorBorderBottomSection;
-    background-color: $colorGlobalToslePrimary;
-    color: white;
-    > h2 {
+    > h4 {
       flex-basis: 95%;
+      line-height: 40px;
     }
     > a {
       display: block;
       flex-basis: 5%;
       padding-top: 2.5px;
-      color: white;
+      color: $colorGlobalToslePrimary;
+      > i {
+        line-height: 150%;
+      }
       &.desactive {
         display: none;
       }
@@ -65,4 +68,8 @@
       }
     }
   }
+}
+
+.bold-text {
+  font-weight: 500;
 }

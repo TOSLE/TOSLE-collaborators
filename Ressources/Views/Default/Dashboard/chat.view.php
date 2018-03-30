@@ -11,9 +11,9 @@
     <div class="row">
         <div class="col-6">
             <div>
-                <div class="content-backoffice">
+                <section class="content-backoffice">
                     <div class="header-content">
-                        <h2>Last chat message</h2>
+                        <h4>Last chat message</h4>
                         <a href="#" class="desactive"><i class="material-icons">&#xE145;</i></a>
                     </div>
                     <div class="main-content">
@@ -28,22 +28,28 @@
                             <tbody>
                                 <tr>
                                     <td class="td-content-avatar"><img src="<?php echo DIRNAME;?>Tosle/Users/Images/475899654133.jpg"></td>
-                                    <td class="td-content-text">Najla CHELLY to Samy IMMOULA</td>
+                                    <td class="td-content-text"><span class="bold-text">Najla CHELLY reply</span></td>
+                                    <td class="td-content-icone"><a href="<?php echo DIRNAME.substr($language,0,2)."/";?>chat"><i class="material-icons">&#xE157;</i></a></td>
+                                    <td class="td-content-date">19/03/2018</td>
+                                </tr>
+                                <tr>
+                                    <td class="td-content-avatar"><img src="<?php echo DIRNAME;?>Tosle/Users/Images/475899654133.jpg"></td>
+                                    <td class="td-content-text"><span class="bold-text">You</span> write to Julien DOMANGE</td>
                                     <td class="td-content-icone"><a href="<?php echo DIRNAME.substr($language,0,2)."/";?>chat"><i class="material-icons">&#xE157;</i></a></td>
                                     <td class="td-content-date">19/03/2018</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                </div>
+                </section>
             </div>
         </div>
         <div class="col-6">
             <div>
-                <div class="content-backoffice">
+                <section class="content-backoffice">
                     <div class="header-content">
-                        <h2>View stats</h2>
-                        <a href="#" class="desactive"><i class="material-icons">&#xE145;</i></a>
+                        <h4>View stats</h4>
+                        <a href="#" class="active"><i class="material-icons">&#xE145;</i></a>
                     </div>
                     <div class="main-content">
                         <table>
@@ -78,7 +84,7 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
+                </section>
             </div>
         </div>
     </div>

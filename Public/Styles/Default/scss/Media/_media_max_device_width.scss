@@ -1,5 +1,7 @@
 body {
-  padding-bottom: $sizeHeightHeader + 90px;
+  > footer {
+    padding-bottom: $sizeHeightHeader + 90px;
+  }
   > header {
     > section {
       height: $sizeHeightHeader + 60px;
