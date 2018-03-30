@@ -196,6 +196,8 @@ main {
               text-align: center; }
   main .bold-text {
     font-weight: 500; }
+  main .additional-message-title {
+    font-size: 0.7em; }
 
 footer {
   background-color: #74858D; }
