@@ -6,7 +6,6 @@
     <link href="<?php echo DIRNAME;?>Public/Styles/Default/css/template_default.css" rel="stylesheet">
     <link href="<?php echo DIRNAME;?>Public/Styles/Default/css/template_dashboard_css.css" rel="stylesheet">
     <link href="<?php echo DIRNAME;?>Public/Styles/Default/css/template_dashboard.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
 
     <script src="<?php echo DIRNAME;?>Public/Libraries/jQuery/jquery-3.3.1.js"></script>
     <script src="<?php echo DIRNAME;?>Public/Libraries/chart.js/dist/Chart.js"></script>
@@ -35,6 +34,12 @@
         </ul>
     </nav>
 </header>
+<main>
+    <?php include $this->view;?>
+</main>
+<footer>
+    <?php include "Footer/footer_default.tpl.php";?>
+</footer>
 <div id="positionning-box-tosle">
     <div class="section-size-body">
         <div class="content-box">
@@ -42,12 +47,6 @@
         </div>
     </div>
 </div>
-<main>
-    <?php include $this->view;?>
-</main>
-<footer>
-    <?php include "Footer/footer_default.tpl.php";?>
-</footer>
 <!-- INCLUDE SCRIPT -->
 <script src="<?php echo DIRNAME;?>Public/Javascripts/Default/menuprofil.js"></script>
 <script src="<?php echo DIRNAME;?>Public/Javascripts/Default/Chartjs/mychart.js"></script>

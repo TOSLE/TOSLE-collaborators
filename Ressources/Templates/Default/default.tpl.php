@@ -31,6 +31,12 @@
         </ul>
     </nav>
 </header>
+<main>
+    <?php include $this->view;?>
+</main>
+<footer>
+    <?php include "Footer/footer_default.tpl.php";?>
+</footer>
 <div id="positionning-box-tosle">
     <div class="section-size-body">
         <div class="content-box">
@@ -38,12 +44,6 @@
         </div>
     </div>
 </div>
-<main>
-    <?php include $this->view;?>
-</main>
-<footer>
-    <?php include "Footer/footer_default.tpl.php";?>
-</footer>
 <!-- INCLUDE SCRIPT -->
 <script src="<?php echo DIRNAME;?>Public/Javascripts/Default/menuprofil.js"></script>
 <script src="<?php echo DIRNAME;?>Public/Javascripts/Default/Messaging/burgermenu.js"></script>
