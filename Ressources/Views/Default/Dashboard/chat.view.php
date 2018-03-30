@@ -2,7 +2,7 @@
     <div class="row">
         <section class="title-page col-12">
             <div class="marg-container">
-                <h2><a href="<?php echo DIRNAME.substr($language,0,2)."/dashboard";?>">Dashboard</a> / Chat</h2>
+                <h2><a class="btn-sm btn-dark" href="<?php echo DIRNAME.substr($language,0,2)."/dashboard";?>">Dashboard</a> <span class="additional-message-title">/ Chat</span></h2>
             </div>
         </section>
     </div>
@@ -49,7 +49,7 @@
                 <section class="content-backoffice">
                     <div class="header-content">
                         <h4>View stats</h4>
-                        <a href="#" class="active"><i class="material-icons">&#xE145;</i></a>
+                        <a href="#" class="desactive"><i class="material-icons">&#xE145;</i></a>
                     </div>
                     <div class="main-content">
                         <table>
