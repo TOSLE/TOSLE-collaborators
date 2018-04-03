@@ -1,94 +1,106 @@
 .right-column {
   height: 100%;
-  overflow: auto;
   background-color: $colorBackgroundRightColumn;
-  > .content-infos-message {
-    background-color: $colorBackgroundRightColumn;
-    padding: 5px 0;
-    border-bottom: 1px solid $colorBorderBottomSection;
-    height: 70px;
-    > h2 {
-      text-align: center;
-    }
-    > .more-infos {
-      text-align: center;
-      display: flex;
-      font-size: 0.9em;
-      color: $colorFontMoreInfosMessage;
-      justify-content: center;
-      margin-top: 5px;
-      > i {
-        font-size: 1.5em;
+  > .content-right-column {
+    position: relative;
+    height: 100%;
+    > .content-infos-message {
+      background-color: $colorBackgroundRightColumn;
+      padding: 5px 0;
+      border-bottom: 1px solid $colorBorderBottomSection;
+      height: 70px;
+      position: absolute;
+      width: 100%;
+      > h2 {
+        text-align: center;
       }
-      > p {
-        line-height: 150%;
-      }
-    }
-  }
-  > .container-message {
-    min-height: 86%;
-    > .message-owner {
-      padding: 5px 10px 5px 10%;
-      > p:first-child {
-        background-color: $colorGlobalToslePrimary;
-        border-radius: 5px 5px 0px 5px;
-        width: 100%;
-        padding: 10px 15px;
-        color: white;
-      }
-      > .date-message {
-        text-align: right;
+      > .more-infos {
+        text-align: center;
+        display: flex;
+        font-size: 1em;
+        color: $colorFontMoreInfosMessage;
+        justify-content: center;
+        margin-top: 5px;
+        > i {
+          font-size: 1.5em;
+        }
+        > p {
+          line-height: 150%;
+        }
       }
     }
-    > .message-other {
-      padding: 10px 10% 5px 5px;
-      > p:first-child {
-        border-radius: 5px 5px 5px 0px;
-        width: 100%;
-        padding: 10px 15px;
-        color: white;
-      }
-      &.default-message-other {
+    > .container-message {
+      padding-top: 70px;
+      padding-bottom: 90px;
+      height: 100%;
+      overflow: auto;
+      > .message-owner {
+        padding: 5px 10px 5px 10%;
         > p:first-child {
-          background-color: grey;
+          background-color: $colorGlobalToslePrimary;
+          border-radius: 5px 5px 0px 5px;
+          width: 100%;
+          padding: 10px 15px;
+          color: white;
+        }
+        > .date-message {
+          text-align: right;
         }
       }
-    }
-    .date-message {
-      font-size: 0.8em;
-    }
-    > div > p:first-child {
-      font-size: 1em;
-    }
-  }
-  > .edit-new-message {
-    display: flex;
-    border-top: 1px solid $colorBorderBottomSection;
-    padding: 5px;
-    height: 90px;
-    > .content-input {
-      flex-basis: 80%;
-      border-right: 1px solid $colorBorderBottomSection;
-      > textarea {
-        border: none;
-        min-width: 100%;
-        max-width: 100%;
-        min-height: 80px;
-        max-height: 80px;
-        border-bottom: 1px solid $colorBorderBottomSection;
-        outline: none;
-        transition: 0.4s;
-        &:hover, &:active {
-          border-bottom: 1px solid black;
+      > .message-other {
+        padding: 10px 10% 5px 5px;
+        > p:first-child {
+          border-radius: 5px 5px 5px 0px;
+          width: 100%;
+          padding: 10px 15px;
+          color: white;
+        }
+        &.default-message-other {
+          > p:first-child {
+            background-color: grey;
+          }
         }
       }
+      .date-message {
+        font-size: 0.8em;
+      }
+      > div > p:first-child {
+        font-size: 1em;
+      }
     }
-    > .content-button {
-      flex-basis: 20%;
+    > .edit-new-message {
       display: flex;
-      > button {
-        margin: auto;
-        display: block;
+      border-top: 1px solid $colorBorderBottomSection;
+      padding: 5px;
+      position: absolute;
+      width: 100%;
+      height: 90px;
+      bottom: 0;
+      background-color: #FFFFFF;
+      > .content-input {
+        flex-basis: 80%;
+        border-right: 1px solid $colorBorderBottomSection;
+        > textarea {
+          border: none;
+          min-width: 100%;
+          max-width: 100%;
+          min-height: 80px;
+          max-height: 80px;
+          border-bottom: 1px solid $colorBorderBottomSection;
+          outline: none;
+          transition: 0.4s;
+          &:hover, &:active {
+            border-bottom: 1px solid black;
+          }
+        }
+      }
+      > .content-button {
+        flex-basis: 20%;
+        display: flex;
+        > button {
+          margin: auto;
+          display: block;
+        }
       }
     }
   }

@@ -1,20 +1,9 @@
+@import "../../Global/global_header";
 html {
   height: 100%;
   body {
     height: 100%;
     background-color: $colorBackgroundBody;
-    #positionning-box-tosle {
-      position: absolute;
-      width: 100%;
-      > .section-size-body {
-        max-width: $sizeMaxWidthSection;
-        margin: 0 auto;
-        > .content-box {
-          position: relative;
-          width: 100%;
-        }
-      }
-    }
     .fade-background-burgermenu {
       width: 0;
       min-height: 100%;

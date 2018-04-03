@@ -5,20 +5,22 @@
 /* MIDDLE COLUMN */
 /* RIGHT COLUMN */
 /* RIGHT COLUMN */
+html > body #positionning-box-tosle {
+  position: absolute;
+  width: 100%;
+  top: 0; }
+  html > body #positionning-box-tosle > .section-size-body {
+    max-width: 1230px;
+    margin: 0 auto; }
+    html > body #positionning-box-tosle > .section-size-body > .content-box {
+      position: relative;
+      width: 100%; }
+
 html {
   height: 100%; }
   html body {
     height: 100%;
     background-color: #EBEBEB; }
-    html body #positionning-box-tosle {
-      position: absolute;
-      width: 100%; }
-      html body #positionning-box-tosle > .section-size-body {
-        max-width: 1230px;
-        margin: 0 auto; }
-        html body #positionning-box-tosle > .section-size-body > .content-box {
-          position: relative;
-          width: 100%; }
     html body .fade-background-burgermenu {
       width: 0;
       min-height: 100%;
@@ -180,7 +182,7 @@ main {
           margin-bottom: 15px;
           border: none; }
           main > .left-column > .content-box-left > .btn-tosle.btn-close-window > p {
-            font-size: 1.4em; }
+            font-size: 1em; }
         main > .left-column > .content-box-left > .btn-tosle.new-message {
           background-color: #1A5CCB;
           border: 1px solid #1A5CCB;
@@ -189,7 +191,7 @@ main {
           font-size: 1.5em;
           line-height: 60px; }
         main > .left-column > .content-box-left > .btn-tosle > p {
-          font-size: 1.1em;
+          font-size: 1em;
           display: inline-block;
           vertical-align: top;
           line-height: 60px; }
@@ -220,9 +222,10 @@ main {
       main > .left-column > .content-box-left > .profil-info {
         text-align: center; }
         main > .left-column > .content-box-left > .profil-info > .identity {
-          font-size: 1.1em; }
+          font-size: 1em; }
         main > .left-column > .content-box-left > .profil-info > .contact {
-          font-size: 0.8em; }
+          font-size: 1em;
+          word-break: break-all; }
           main > .left-column > .content-box-left > .profil-info > .contact > a {
             text-decoration: none;
             color: #1A5CCB; }
@@ -236,22 +239,18 @@ main {
           main > .left-column > .content-box-left > .profil-stats > div > .number {
             color: #000000; }
           main > .left-column > .content-box-left > .profil-stats > div > .description {
-            font-size: 0.6em;
+            font-size: 0.8em;
             color: #9E9FA3; }
           main > .left-column > .content-box-left > .profil-stats > div:first-child {
             margin-left: 0px; }
     main > .left-column .footer-infos {
-      font-size: 0.8em;
       padding: 0 20px;
-      text-align: justify; }
+      text-align: justify;
+      font-size: 0.8em; }
       main > .left-column .footer-infos > .global-infos {
         margin-top: 5px; }
         main > .left-column .footer-infos > .global-infos > p:first-child > i {
-          font-size: 1em;
-          line-height: 15px; }
-        main > .left-column .footer-infos > .global-infos > p:nth-child(2) {
-          font-style: italic;
-          font-size: 0.9em; }
+          font-size: 1em; }
       main > .left-column .footer-infos > .more-infos {
         margin-top: 15px; }
         main > .left-column .footer-infos > .more-infos > a {
@@ -336,76 +335,87 @@ main {
           color: #000000; }
   main .right-column {
     height: 100%;
-    overflow: auto;
     background-color: #FFFFFF; }
-    main .right-column > .content-infos-message {
-      background-color: #FFFFFF;
-      padding: 5px 0;
-      border-bottom: 1px solid #E5E5E5;
-      height: 70px; }
-      main .right-column > .content-infos-message > h2 {
-        text-align: center; }
-      main .right-column > .content-infos-message > .more-infos {
-        text-align: center;
+    main .right-column > .content-right-column {
+      position: relative;
+      height: 100%; }
+      main .right-column > .content-right-column > .content-infos-message {
+        background-color: #FFFFFF;
+        padding: 5px 0;
+        border-bottom: 1px solid #E5E5E5;
+        height: 70px;
+        position: absolute;
+        width: 100%; }
+        main .right-column > .content-right-column > .content-infos-message > h2 {
+          text-align: center; }
+        main .right-column > .content-right-column > .content-infos-message > .more-infos {
+          text-align: center;
+          display: flex;
+          font-size: 1em;
+          color: #9E9FA3;
+          justify-content: center;
+          margin-top: 5px; }
+          main .right-column > .content-right-column > .content-infos-message > .more-infos > i {
+            font-size: 1.5em; }
+          main .right-column > .content-right-column > .content-infos-message > .more-infos > p {
+            line-height: 150%; }
+      main .right-column > .content-right-column > .container-message {
+        padding-top: 70px;
+        padding-bottom: 90px;
+        height: 100%;
+        overflow: auto; }
+        main .right-column > .content-right-column > .container-message > .message-owner {
+          padding: 5px 10px 5px 10%; }
+          main .right-column > .content-right-column > .container-message > .message-owner > p:first-child {
+            background-color: #1A5CCB;
+            border-radius: 5px 5px 0px 5px;
+            width: 100%;
+            padding: 10px 15px;
+            color: white; }
+          main .right-column > .content-right-column > .container-message > .message-owner > .date-message {
+            text-align: right; }
+        main .right-column > .content-right-column > .container-message > .message-other {
+          padding: 10px 10% 5px 5px; }
+          main .right-column > .content-right-column > .container-message > .message-other > p:first-child {
+            border-radius: 5px 5px 5px 0px;
+            width: 100%;
+            padding: 10px 15px;
+            color: white; }
+          main .right-column > .content-right-column > .container-message > .message-other.default-message-other > p:first-child {
+            background-color: grey; }
+        main .right-column > .content-right-column > .container-message .date-message {
+          font-size: 0.8em; }
+        main .right-column > .content-right-column > .container-message > div > p:first-child {
+          font-size: 1em; }
+      main .right-column > .content-right-column > .edit-new-message {
         display: flex;
-        font-size: 0.9em;
-        color: #9E9FA3;
-        justify-content: center;
-        margin-top: 5px; }
-        main .right-column > .content-infos-message > .more-infos > i {
-          font-size: 1.5em; }
-        main .right-column > .content-infos-message > .more-infos > p {
-          line-height: 150%; }
-    main .right-column > .container-message {
-      min-height: 86%; }
-      main .right-column > .container-message > .message-owner {
-        padding: 5px 10px 5px 10%; }
-        main .right-column > .container-message > .message-owner > p:first-child {
-          background-color: #1A5CCB;
-          border-radius: 5px 5px 0px 5px;
-          width: 100%;
-          padding: 10px 15px;
-          color: white; }
-        main .right-column > .container-message > .message-owner > .date-message {
-          text-align: right; }
-      main .right-column > .container-message > .message-other {
-        padding: 10px 10% 5px 5px; }
-        main .right-column > .container-message > .message-other > p:first-child {
-          border-radius: 5px 5px 5px 0px;
-          width: 100%;
-          padding: 10px 15px;
-          color: white; }
-        main .right-column > .container-message > .message-other.default-message-other > p:first-child {
-          background-color: grey; }
-      main .right-column > .container-message .date-message {
-        font-size: 0.8em; }
-      main .right-column > .container-message > div > p:first-child {
-        font-size: 1em; }
-    main .right-column > .edit-new-message {
-      display: flex;
-      border-top: 1px solid #E5E5E5;
-      padding: 5px;
-      height: 90px; }
-      main .right-column > .edit-new-message > .content-input {
-        flex-basis: 80%;
-        border-right: 1px solid #E5E5E5; }
-        main .right-column > .edit-new-message > .content-input > textarea {
-          border: none;
-          min-width: 100%;
-          max-width: 100%;
-          min-height: 80px;
-          max-height: 80px;
-          border-bottom: 1px solid #E5E5E5;
-          outline: none;
-          transition: 0.4s; }
-          main .right-column > .edit-new-message > .content-input > textarea:hover, main .right-column > .edit-new-message > .content-input > textarea:active {
-            border-bottom: 1px solid black; }
-      main .right-column > .edit-new-message > .content-button {
-        flex-basis: 20%;
-        display: flex; }
-        main .right-column > .edit-new-message > .content-button > button {
-          margin: auto;
-          display: block; }
+        border-top: 1px solid #E5E5E5;
+        padding: 5px;
+        position: absolute;
+        width: 100%;
+        height: 90px;
+        bottom: 0;
+        background-color: #FFFFFF; }
+        main .right-column > .content-right-column > .edit-new-message > .content-input {
+          flex-basis: 80%;
+          border-right: 1px solid #E5E5E5; }
+          main .right-column > .content-right-column > .edit-new-message > .content-input > textarea {
+            border: none;
+            min-width: 100%;
+            max-width: 100%;
+            min-height: 80px;
+            max-height: 80px;
+            border-bottom: 1px solid #E5E5E5;
+            outline: none;
+            transition: 0.4s; }
+            main .right-column > .content-right-column > .edit-new-message > .content-input > textarea:hover, main .right-column > .content-right-column > .edit-new-message > .content-input > textarea:active {
+              border-bottom: 1px solid black; }
+        main .right-column > .content-right-column > .edit-new-message > .content-button {
+          flex-basis: 20%;
+          display: flex; }
+          main .right-column > .content-right-column > .edit-new-message > .content-button > button {
+            margin: auto;
+            display: block; }
 
 @media all and (max-device-width: 420px) {
   body > footer {
