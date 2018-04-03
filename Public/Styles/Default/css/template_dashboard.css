@@ -3,21 +3,22 @@
 /* CONTENT-BACKOFFICE */
 /* CONTENT-BACKOFFICE */
 /* CLASS */
+html > body #positionning-box-tosle {
+  position: absolute;
+  width: 100%;
+  top: 0; }
+  html > body #positionning-box-tosle > .section-size-body {
+    max-width: 1230px;
+    margin: 0 auto; }
+    html > body #positionning-box-tosle > .section-size-body > .content-box {
+      position: relative;
+      width: 100%; }
+
 html {
   height: 100%; }
   html body {
     height: 100%;
     background-color: #EBEBEB; }
-    html body #positionning-box-tosle {
-      position: absolute;
-      width: 100%;
-      top: 0; }
-      html body #positionning-box-tosle > .section-size-body {
-        max-width: 1230px;
-        margin: 0 auto; }
-        html body #positionning-box-tosle > .section-size-body > .content-box {
-          position: relative;
-          width: 100%; }
 
 body > header {
   background-color: #FFFFFF; }
