@@ -13,7 +13,7 @@ class BaseSql{
             die("Erreur SQL".$e->getMessage()."\n");
         }
 
-        $this->table =strtolower(get_called_class());
+        $this->table = "tosle_".strtolower(get_called_class());
     }
 
     public function setColumns(){
