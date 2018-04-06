@@ -11,10 +11,10 @@ Class Chapter extends BaseSql {
     protected $id;
     protected $title;
     protected $content;
-    protected $dateCreate;
+    protected $datecreate;
     protected $status;
     protected $type;
-    protected $fileId; /** à vérif */
+    protected $fileid; /** à vérif */
 
     public function __construct()
     {
@@ -72,17 +72,17 @@ Class Chapter extends BaseSql {
     /**
      * @return mixed
      */
-    public function getDateCreate()
+    public function getDatecreate()
     {
-        return $this->dateCreate;
+        return $this->datecreate;
     }
 
     /**
-     * @param mixed $dateCreate
+     * @param mixed $datecreate
      */
-    public function setDateCreate($dateCreate)
+    public function setDatecreate($datecreate)
     {
-        $this->dateCreate = $dateCreate;
+        $this->datecreate = $datecreate;
     }
 
     /**
@@ -120,17 +120,17 @@ Class Chapter extends BaseSql {
     /**
      * @return mixed
      */
-    public function getFileId()
+    public function getFileid()
     {
-        return $this->fileId;
+        return $this->fileid;
     }
 
     /**
-     * @param mixed $fileId
+     * @param mixed $fileid
      */
-    public function setFileId($fileId)
+    public function setFileid($fileid)
     {
-        $this->fileId = $fileId;
+        $this->fileid = $fileid;
     }
 
     public function configFormAdd()

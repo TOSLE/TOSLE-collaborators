@@ -12,7 +12,7 @@ class Homework extends BaseSql {
     protected $title;
     protected $type;
     protected $value;
-    protected $fileId; /** à verifier **/
+    protected $fileid; /** à verifier **/
 
     public function __construct()
     {
@@ -86,17 +86,17 @@ class Homework extends BaseSql {
     /**
      * @return mixed
      */
-    public function getFileId()
+    public function getFileid()
     {
-        return $this->fileId;
+        return $this->fileid;
     }
 
     /**
-     * @param mixed $fileId
+     * @param mixed $fileid
      */
-    public function setFileId($fileId)
+    public function setFileid($fileid)
     {
-        $this->fileId = $fileId;
+        $this->fileid = $fileid;
     }
 
     public function configFromAdd()
