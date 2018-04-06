@@ -11,7 +11,7 @@ class Lesson extends BaseSql {
     protected $id;
     protected $title;
     protected $description;
-    protected $dateCreate;
+    protected $datecreate;
     protected $status;
 
     public function __construct()
@@ -72,15 +72,15 @@ class Lesson extends BaseSql {
      */
     public function getDateCreate()
     {
-        return $this->dateCreate;
+        return $this->datecreate;
     }
 
     /**
-     * @param mixed $dateCreate
+     * @param mixed $datecreate
      */
-    public function setDateCreate($dateCreate)
+    public function setDateCreate($datecreate)
     {
-        $this->dateCreate = $dateCreate;
+        $this->datecreate = $datecreate;
     }
 
     /**

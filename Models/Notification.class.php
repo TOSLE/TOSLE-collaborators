@@ -11,7 +11,7 @@ class Notification extends BaseSql {
     protected $id;
     protected $name;
     protected $value;
-    protected $idDest; /** à véfif */
+    protected $iddest; /** à véfif */
 
     public function __construct()
     {
@@ -71,15 +71,15 @@ class Notification extends BaseSql {
      */
     public function getIdDest()
     {
-        return $this->idDest;
+        return $this->iddest;
     }
 
     /**
-     * @param mixed $idDest
+     * @param mixed $iddest
      */
-    public function setIdDest($idDest)
+    public function setIdDest($iddest)
     {
-        $this->idDest = $idDest;
+        $this->iddest = $iddest;
     }
 
     public function configFormAdd()
