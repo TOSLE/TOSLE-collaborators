@@ -12,9 +12,9 @@ class Blog extends BaseSql {
     protected $title;
     protected $type;
     protected $content;
-    protected $dateCreate;
+    protected $datecreate;
     protected $status;
-    protected $fileId; /** à verif */
+    protected $fileid; /** à verif */
 
     public function __construct()
     {
@@ -88,17 +88,17 @@ class Blog extends BaseSql {
     /**
      * @return mixed
      */
-    public function getDateCreate()
+    public function getDatecreate()
     {
-        return $this->dateCreate;
+        return $this->datecreate;
     }
 
     /**
-     * @param mixed $dateCreate
+     * @param mixed $datecreate
      */
-    public function setDateCreate($dateCreate)
+    public function setDatecreate($datecreate)
     {
-        $this->dateCreate = $dateCreate;
+        $this->datecreate = $datecreate;
     }
 
     /**
@@ -120,17 +120,17 @@ class Blog extends BaseSql {
     /**
      * @return mixed
      */
-    public function getFileId()
+    public function getFileid()
     {
-        return $this->fileId;
+        return $this->fileid;
     }
 
     /**
-     * @param mixed $fileId
+     * @param mixed $fileid
      */
-    public function setFileId($fileId)
+    public function setFileid($fileid)
     {
-        $this->fileId = $fileId;
+        $this->fileid = $fileid;
     }
 
     public function configFormAdd()

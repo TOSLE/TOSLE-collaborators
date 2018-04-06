@@ -10,7 +10,7 @@ class Group extends BaseSql {
 
     protected $id;
     protected $name;
-    protected $fileId; /** a verif */
+    protected $fileid; /** a verif */
 
     public function __construct()
     {
@@ -52,17 +52,17 @@ class Group extends BaseSql {
     /**
      * @return mixed
      */
-    public function getFileId()
+    public function getFileid()
     {
-        return $this->fileId;
+        return $this->fileid;
     }
 
     /**
-     * @param mixed $fileId
+     * @param mixed $fileid
      */
-    public function setFileId($fileId)
+    public function setFileid($fileid)
     {
-        $this->fileId = $fileId;
+        $this->fileid = $fileid;
     }
 
     public function configFormAdd()

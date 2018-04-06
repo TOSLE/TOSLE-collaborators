@@ -9,7 +9,7 @@
 class Conversation extends BaseSql {
 
     protected $id;
-    protected $idDest;
+    protected $iddest;
     protected $type;
     protected $dateCreate;
     protected $status;
@@ -38,17 +38,17 @@ class Conversation extends BaseSql {
     /**
      * @return mixed
      */
-    public function getIdDest()
+    public function getiddest()
     {
-        return $this->idDest;
+        return $this->iddest;
     }
 
     /**
-     * @param mixed $idDest
+     * @param mixed $iddest
      */
-    public function setIdDest($idDest)
+    public function setiddest($iddest)
     {
-        $this->idDest = $idDest;
+        $this->iddest = $iddest;
     }
 
     /**
@@ -70,17 +70,17 @@ class Conversation extends BaseSql {
     /**
      * @return mixed
      */
-    public function getDateCreate()
+    public function getDatecreate()
     {
-        return $this->dateCreate;
+        return $this->datecreate;
     }
 
     /**
-     * @param mixed $dateCreate
+     * @param mixed $datecreate
      */
-    public function setDateCreate($dateCreate)
+    public function setDatecreate($datecreate)
     {
-        $this->dateCreate = $dateCreate;
+        $this->datecreate = $datecreate;
     }
 
     /**
