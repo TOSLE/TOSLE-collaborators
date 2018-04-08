@@ -1,5 +1,5 @@
 <?php
-class User extends BaseSql{
+class User extends CoreSql{
 
     protected $id = null;
     protected $firstname;

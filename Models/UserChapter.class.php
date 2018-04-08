@@ -6,7 +6,7 @@
  * Time: 17:07
  */
 
-class UserChapter extends BaseSql
+class UserChapter extends CoreSql
 {
     protected $id;
     protected $userid;

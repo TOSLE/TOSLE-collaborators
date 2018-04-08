@@ -6,7 +6,7 @@
  * Time: 23:27
  */
 
-class Lesson extends BaseSql {
+class Lesson extends CoreSql {
 
     protected $id;
     protected $title;

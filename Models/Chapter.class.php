@@ -6,7 +6,7 @@
  * Time: 00:37
  */
 
-Class Chapter extends BaseSql {
+Class Chapter extends CoreSql {
 
     protected $id;
     protected $title;

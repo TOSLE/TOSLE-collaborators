@@ -6,7 +6,7 @@
  * Time: 14:53
  */
 
-class UserGroup extends BaseSql
+class UserGroup extends CoreSql
 {
     protected $id;
     protected $groupid;

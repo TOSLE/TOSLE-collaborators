@@ -6,7 +6,7 @@
  * Time: 23:52
  */
 
-class Stat extends BaseSql {
+class Stat extends CoreSql {
 
     protected $id;
     protected $name;

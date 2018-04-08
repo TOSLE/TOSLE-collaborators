@@ -6,7 +6,7 @@
  * Time: 16:12
  */
 
-class LessonMark extends BaseSql
+class LessonMark extends CoreSql
 {
     protected $id;
     protected $markid;

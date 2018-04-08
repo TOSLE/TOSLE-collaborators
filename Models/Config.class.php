@@ -6,7 +6,7 @@
  * Time: 23:56
  */
 
-class Config extends BaseSql {
+class Config extends CoreSql {
 
     protected $id;
     protected $name;

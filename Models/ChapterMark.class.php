@@ -6,7 +6,7 @@
  * Time: 16:12
  */
 
-class ChapterMark extends BaseSql
+class ChapterMark extends CoreSql
 {
     protected $id;
     protected $markid;

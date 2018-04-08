@@ -6,7 +6,7 @@
  * Time: 17:59
  */
 
-class UserLesson extends BaseSql
+class UserLesson extends CoreSql
 {
     protected $id;
     protected $userid;

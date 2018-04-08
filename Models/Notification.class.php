@@ -6,7 +6,7 @@
  * Time: 00:15
  */
 
-class Notification extends BaseSql {
+class Notification extends CoreSql {
 
     protected $id;
     protected $name;
