@@ -6,12 +6,13 @@
  * Time: 00:05
  */
 
-class Message extends BaseSql {
+class Message extends CoreSql {
 
     protected $id;
     protected $content;
     protected $datecreate;
     protected $status;
+    protected $dateupdated;
 
     public function __construct()
     {
@@ -81,6 +82,24 @@ class Message extends BaseSql {
     {
         $this->status = $status;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getDateupdated()
+    {
+        return $this->dateupdated;
+    }
+
+    /**
+     * @param mixed $dateupdated
+     */
+    public function setDateupdated($dateupdated)
+    {
+        $this->dateupdated = $dateupdated;
+    }
+
+
 
     public function configFormAdd()
     {

@@ -6,7 +6,7 @@
  * Time: 23:40
  */
 
-class File extends BaseSql {
+class File extends CoreSql {
 
     protected $id;
     protected $name;

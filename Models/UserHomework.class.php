@@ -6,7 +6,7 @@
  * Time: 15:10
  */
 
-class UserHomework extends BaseSql
+class UserHomework extends CoreSql
 {
     protected $id;
     protected $homeworkid;

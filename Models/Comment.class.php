@@ -6,7 +6,7 @@
  * Time: 00:10
  */
 
-class Comment extends BaseSql {
+class Comment extends CoreSql {
 
     protected $id;
     protected $content;

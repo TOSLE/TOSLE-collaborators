@@ -1,6 +1,6 @@
 <?php
 
-class BaseSql{
+class CoreSql{
 
     private $table;
     private $pdo;

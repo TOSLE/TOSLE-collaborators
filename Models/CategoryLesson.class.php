@@ -6,7 +6,7 @@
  * Time: 14:33
  */
 
-class CategoryLesson extends BaseSql
+class CategoryLesson extends CoreSql
 {
     protected $id;
     protected $categoryid;

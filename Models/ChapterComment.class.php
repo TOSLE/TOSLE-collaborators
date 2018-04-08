@@ -6,7 +6,7 @@
  * Time: 20:13
  */
 
-class ChapterComment extends BaseSql
+class ChapterComment extends CoreSql
 {
     protected $id;
     protected $userid;

@@ -6,7 +6,7 @@
  * Time: 23:54
  */
 
-class Portofolio extends BaseSql {
+class Portofolio extends CoreSql {
 
     protected $id;
     protected $name;

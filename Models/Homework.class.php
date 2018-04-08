@@ -6,13 +6,14 @@
  * Time: 23:36
  */
 
-class Homework extends BaseSql {
+class Homework extends CoreSql {
 
     protected $id;
     protected $title;
     protected $type;
     protected $value;
-    protected $fileid; /** à verifier **/
+    protected $fileid;
+    protected $datecreate;
 
     public function __construct()
     {
@@ -86,7 +87,7 @@ class Homework extends BaseSql {
     /**
      * @return mixed
      */
-    public function getFileid()
+    public function getFileId()
     {
         return $this->fileid;
     }
@@ -94,10 +95,28 @@ class Homework extends BaseSql {
     /**
      * @param mixed $fileid
      */
-    public function setFileid($fileid)
+    public function setFileId($fileid)
     {
         $this->fileid = $fileid;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getDateCreate()
+    {
+        return $this->datecreate;
+    }
+
+    /**
+     * @param mixed $datecreate
+     */
+    public function setDateCreate($datecreate)
+    {
+        $this->datecreate = $datecreate;
+    }
+
+
 
     public function configFromAdd()
     {

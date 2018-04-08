@@ -6,7 +6,7 @@
  * Time: 00:07
  */
 
-class Conversation extends BaseSql {
+class Conversation extends CoreSql {
 
     protected $id;
     protected $iddest;

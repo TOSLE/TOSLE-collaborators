@@ -6,7 +6,7 @@
  * Time: 00:12
  */
 
-class Blog extends BaseSql {
+class Blog extends CoreSql {
 
     protected $id;
     protected $title;

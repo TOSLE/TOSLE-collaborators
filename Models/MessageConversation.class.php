@@ -6,7 +6,7 @@
  * Time: 20:24
  */
 
-class MessageConversation extends BaseSql
+class MessageConversation extends CoreSql
 {
     protected $id;
     protected $messageid;

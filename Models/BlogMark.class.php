@@ -6,7 +6,7 @@
  * Time: 16:25
  */
 
-class BlogMark extends BaseSql
+class BlogMark extends CoreSql
 {
     protected $id;
     protected $markid;

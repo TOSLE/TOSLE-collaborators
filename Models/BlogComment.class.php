@@ -6,7 +6,7 @@
  * Time: 18:28
  */
 
-class BlogComment extends BaseSql
+class BlogComment extends CoreSql
 {
     protected $id;
     protected $userid;
