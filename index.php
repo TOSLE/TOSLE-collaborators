@@ -8,6 +8,9 @@
         if(file_exists("Core/Class/".$parameter)){
             include("Core/Class/".$parameter);
         }
+        if(file_exists("Models/".$parameter)){
+            include("Models/".$parameter);
+        }
     }
     spl_autoload_register("autoLoader");
 
@@ -17,7 +20,7 @@
     
     $language = (empty($uriExploded[0]))?"en-EN":strtolower($uriExploded[0])."-".strtoupper($uriExploded[0]);
     $controller = (empty($uriExploded[1]))?"IndexController": ucfirst(strtolower($uriExploded[1]))."Controller";
-    $action = (empty($uriExploded[2]))?"IndexAction": strtolower($uriExploded[2])."Action";
+    $action = (empty($uriExploded[2]))?"indexAction": strtolower($uriExploded[2])."Action";
 
     unset($uriExploded[0]);
     unset($uriExploded[1]);
@@ -31,12 +34,15 @@
         include "Core/Language/en-EN/conf.lang.php";
     }
 
+    if(isset($_SESSION['token']) && isset($_SESSION['email'])){
+        $userConnect = Authentification::checkAuthentification($_SESSION['token'], $_SESSION['email']);
+    }
+
     if(file_exists("Controllers/".$controller.".php")){
         include "Controllers/".$controller.".php";
         if(class_exists($controller)){
             $obj = new $controller();
             if(method_exists($obj,$action)){
-                $action = $action;
                 $obj->$action($parameter);
             }
         }
