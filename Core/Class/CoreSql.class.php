@@ -25,7 +25,7 @@ class CoreSql{
         $this->setColumns();
 
         if($this->id){
-            $set = array();
+            $set = [];
             foreach ($this->columns as $columnName => $value) {
                 $set[] = $columnName . ' = :'.$columnName;
             }
@@ -40,6 +40,26 @@ class CoreSql{
                 ")");
             $query->execute($this->columns);
         }
+    }
+
+    public function selectAnd($target, $parameterLike, $parameterNotLike = null)
+    {
+        $selectParameter = [];
+        foreach ($parameterLike as $columnName => $value){
+            $selectParameter[] = $columnName . " LIKE '" . $value . "'";
+        }
+        if(isset($parameterNotLike)) {
+            foreach ($parameterNotLike as $columnName => $value) {
+                $selectParameter[] = $columnName . " NOT LIKE '" . $value . "'";
+            }
+        }
+
+        $query = $this->pdo->prepare("
+            SELECT " . implode(',', $target) . " 
+            FROM " . $this->table . " 
+            WHERE " . implode(' AND ', $selectParameter) . "
+        ");
+        return $query->execute();
     }
 
 }
