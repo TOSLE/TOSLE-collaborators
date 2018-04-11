@@ -5,9 +5,12 @@ class User extends CoreSql{
     protected $firstname;
     protected $lastname;
     protected $email;
-    protected $pwd;
+    protected $password;
     protected $token;
-    protected $age = 0;
+    protected $dateconnection;
+    protected $newsletter = 0;
+    protected $fileid = null;
+    protected $birthday = null;
 
     protected $status = 0;
 
@@ -15,30 +18,100 @@ class User extends CoreSql{
         parent::__construct();
     }
 
-    public function setId($id){
+    public function setId($id)
+    {
         $this->id=$id;
     }
-    public function setFirstName($firstname){
+    public function setFirstName($firstname)
+    {
         $this->firstname=ucfirst(strtolower(trim($firstname)));
     }
-    public function setLastName($lastname){
+    public function setLastName($lastname)
+    {
         $this->lastname=strtoupper(trim($lastname));
     }
-    public function setEmail($email){
+    public function setEmail($email)
+    {
         $this->email=strtolower(trim($email));
     }
-    public function setPwd($pwd){
-        $this->pwd = password_hash($pwd, PASSWORD_DEFAULT);
+    public function setPassword($password)
+    {
+        $this->password = password_hash($password, PASSWORD_DEFAULT);
     }
-    public function setToken($token){
-        $this->token=$token;
+    public function setToken()
+    {
+        $this->token=uniqid('token_', true);
     }
-    public function setAge($age){
-        $this->age=$age;
-    }
-    public function setStatus($status){
+    public function setStatus($status)
+    {
         $this->status=$status;
     }
+    public function setDateConnection($dateconnection)
+    {
+        $this->dateconnection = $dateconnection;
+    }
+    public function setNewsLetter($newsletter)
+    {
+        $this->newsletter = $newsletter;
+    }
+    public function setFileId($fileid)
+    {
+        $this->fileid = $fileid;
+    }
+    public function setBirthDay($birthday)
+    {
+        $this->birthday = $birthday;
+    }
+
+
+    public function getId()
+    {
+        return $this->id;
+    }
+    public function getFirstName()
+    {
+        return $this->firstname;
+    }
+    public function getLastName()
+    {
+        return $this->lastname;
+    }
+    public function getEmail()
+    {
+        return $this->email;
+    }
+    public function getPassword()
+    {
+        return $this->password;
+    }
+    public function getToken()
+    {
+        return $this->token;
+    }
+    public function getDateConnection()
+    {
+        return $this->dateconnection;
+    }
+    public function getNewsLetter()
+    {
+        return $this->newsletter;
+    }
+    public function getFileId()
+    {
+        return $this->fileid;
+    }
+    public function getBirthDay()
+    {
+        return $this->birthday;
+    }
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+
+
+
 
     public function configFormAdd()
     {
