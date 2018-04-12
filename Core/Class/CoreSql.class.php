@@ -27,7 +27,11 @@ class CoreSql{
         if($this->id){
             $set = [];
             foreach ($this->columns as $columnName => $value) {
-                $set[] = strtolower(get_called_class()).'_'.$columnName . ' = :'.$columnName;
+                if($this->columns[$columnName] && $columnName != "id") {
+                    $set[] = strtolower(get_called_class()) . '_' . $columnName . ' = :' . $columnName;
+                } else {
+                    unset($this->columns[$columnName]);
+                }
             }
             $query = $this->pdo->prepare("UPDATE ".$this->table." SET "
                 . implode(',', $set) ." WHERE ".strtolower(get_called_class())."_id='".$this->id."'");
@@ -48,22 +52,26 @@ class CoreSql{
 
     public function selectAnd($target, $parameterLike, $parameterNotLike = null)
     {
+        foreach ($target as $key => $value){
+            $target[$key] = strtolower(get_called_class()).'_'.$value;
+        }
         $selectParameter = [];
         foreach ($parameterLike as $columnName => $value){
-            $selectParameter[] = $columnName . " LIKE '" . $value . "'";
+            $selectParameter[] = strtolower(get_called_class()).'_'.$columnName . " LIKE '" . $value . "'";
         }
         if(isset($parameterNotLike)) {
             foreach ($parameterNotLike as $columnName => $value) {
-                $selectParameter[] = $columnName . " NOT LIKE '" . $value . "'";
+                $selectParameter[] = strtolower(get_called_class()).'_'.$columnName . " NOT LIKE '" . $value . "'";
             }
         }
-
         $query = $this->pdo->prepare("
             SELECT " . implode(',', $target) . " 
             FROM " . $this->table . " 
             WHERE " . implode(' AND ', $selectParameter) . "
         ");
-        return $query->execute();
+        $query->execute();
+
+        return $query->fetch();
     }
 
 }

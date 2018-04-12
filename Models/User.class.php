@@ -48,7 +48,7 @@ class User extends CoreSql{
     }
     public function setDateConnection($dateconnection)
     {
-        $this->dateconnection = $dateconnection;
+        $this->dateconnection = date("Y-m-d H:i:s", $dateconnection);
     }
     public function setNewsLetter($newsletter)
     {
