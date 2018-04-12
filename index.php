@@ -35,7 +35,10 @@
     }
 
     if(isset($_SESSION['token']) && isset($_SESSION['email'])){
-        $userConnect = Authentification::checkAuthentification($_SESSION['token'], $_SESSION['email']);
+        print_r($_SESSION);
+        if(!Authentification::checkAuthentification($_SESSION['token'], $_SESSION['email'])){
+            echo "<p>Connection failed</p>";
+        }
     }
 
     if(file_exists("Controllers/".$controller.".php")){

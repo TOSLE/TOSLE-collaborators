@@ -25,4 +25,19 @@ class UserController
 
         $User->save();
     }
+
+    public function connectAction($params)
+    {
+        if(!Authentification::checkAuthentification($params['GET']['token'], $params['GET']['email'])){
+            echo "<p>Connection failed on connect Action</p>";
+
+        } else {
+            header("location:".DIRNAME);
+        }
+    }
+
+    public function disconnectAction($params)
+    {
+        session_destroy();
+    }
 }
