@@ -38,6 +38,8 @@ class UserController
 
     public function disconnectAction($params)
     {
-        session_destroy();
+        header("Location:".DIRNAME);
+        $_SESSION["token"]=null;
+        $_SESSION["email"]=null;
     }
 }

@@ -50,6 +50,8 @@ body > header {
       body > header > section > div > .right-block {
         flex-basis: 80%;
         text-align: right; }
+        body > header > section > div > .right-block .tosle-btn {
+          line-height: 60px; }
         body > header > section > div > .right-block > i {
           font-size: 1.5em;
           margin-right: 50px;
