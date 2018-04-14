@@ -16,6 +16,7 @@ body {
           }
         }
         > .right-block {
+          @import "../../Header/disconnect_menu";
           flex-basis: 80%;
           text-align: right;
           > i {
