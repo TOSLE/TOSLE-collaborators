@@ -22,18 +22,48 @@ class UserController
         $User->setToken();
         $User->setFirstName('Julien');
         $User->setLastName("DOMANGE");
+        $User->setPassword("Testmdp01");
 
         $User->save();
     }
 
     public function connectAction($params)
     {
-        if(!Authentification::checkAuthentification($params['GET']['token'], $params['GET']['email'])){
-            echo "<p>Connection failed on connect Action</p>";
+        $User = new User();
+        $form = $User->configFormConnect();
+        $errors = [];
+        if(!empty($params["POST"])) {
+            $errors = Validate::checkForm($form, $params["POST"]);
+            if (empty($errors)) {
+                $User->setPassword($params["POST"]["pwd"]);
+                $target = [
+                    "password"
+                ];
+                $parameter = [
+                    "email" => $params["POST"]["email"]
+                ];
+                $resultRequest = $User->selectAnd($target, $parameter);
+                if(password_verify($params["POST"]["pwd"], $resultRequest["user_password"])){
+                    $target = [
+                        "email",
+                        "token"
+                    ];
+                    $parameter = [
+                        "email" => $params["POST"]["email"],
+                        "password" => $resultRequest["user_password"]
+                    ];
+                    if($resultRequest = $User->selectAnd($target, $parameter)){
+                        $_SESSION['token'] = $resultRequest["user_token"];
+                        $_SESSION['email'] = $resultRequest["user_email"];
+                        header("Location:".DIRNAME);
+                    }
 
-        } else {
-            header("location:".DIRNAME);
+                }
+            }
         }
+        $View = new View("user", "UserTPL/connect");
+        $View->setData("config", $form);
+        $View->setData("errors", $errors);
     }
 
     public function disconnectAction($params)

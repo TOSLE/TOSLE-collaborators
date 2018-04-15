@@ -33,10 +33,12 @@
         $language = "en-EN";
         include "Core/Language/en-EN/conf.lang.php";
     }
-
+    $userConnected = false;
     if(isset($_SESSION['token']) && isset($_SESSION['email'])){
         if(!Authentification::checkAuthentification($_SESSION['token'], $_SESSION['email'])){
             echo "<p>Connection failed</p>";
+        } else {
+            $userConnected = true;
         }
     }
 
