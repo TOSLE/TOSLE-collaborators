@@ -166,4 +166,23 @@ class User extends CoreSql{
         ];
     }
 
+    public function configFormConnect()
+    {
+        return [
+            "config"=> ["method"=>"post", "action"=>"", "submit"=>"Se connecter"],
+            "input"=> [
+                "email"=>[
+                    "type"=>"email",
+                    "placeholder"=>"Votre email",
+                    "required"=>true
+                ],
+                "pwd"=>[
+                    "type"=>"password",
+                    "placeholder"=>"Votre mot de passe",
+                    "required"=>true
+                ]
+            ]
+        ];
+    }
+
 }

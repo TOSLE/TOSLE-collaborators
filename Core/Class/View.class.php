@@ -29,6 +29,11 @@ class View
         }
     }
 
+    public function addModal($modal, $config, $errors)
+    {
+        include "Ressources/Modals/".$modal.".md.php";
+    }
+
     function setData($key, $value)
     {
         $this->data[$key] = $value;
@@ -36,7 +41,7 @@ class View
 
     function __destruct()
     {
-        global $controller, $action, $language;
+        global $controller, $action, $language, $userConnected;
 
         extract($this->data);
         include $this->tpl;

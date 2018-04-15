@@ -1,8 +1,8 @@
-<pre>
-	<?php
-    print_r($errors);
-    ?>
-</pre>
+<?php if(!empty($errors)): ?>
+    <?php foreach($errors as $name => $value):?>
+        <?php echo $name. " ".$value;?>
+    <?php endforeach; ?>
+<?php endif;?>
 
 <form method="<?php echo $config['config']['method'];?>" action="<?php echo $config['config']['action'];?>">
     <?php foreach ($config["input"] as $name => $attributs):?>
