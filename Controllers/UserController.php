@@ -42,19 +42,20 @@ class UserController
                 $parameter = [
                     "email" => $params["POST"]["email"]
                 ];
-                $resultRequest = $User->selectAnd($target, $parameter);
-                if(password_verify($params["POST"]["pwd"], $resultRequest["user_password"])){
+                $User->selectAnd($target, $parameter);
+                if(password_verify($params["POST"]["pwd"], $User->getPassword())){
                     $target = [
                         "email",
                         "token"
                     ];
                     $parameter = [
                         "email" => $params["POST"]["email"],
-                        "password" => $resultRequest["user_password"]
+                        "password" => $User->getPassword()
                     ];
-                    if($resultRequest = $User->selectAnd($target, $parameter)){
-                        $_SESSION['token'] = $resultRequest["user_token"];
-                        $_SESSION['email'] = $resultRequest["user_email"];
+                    $User->selectAnd($target, $parameter);
+                    if(!(empty($User->getToken()) && empty($User->getEmail()))){
+                        $_SESSION['token'] = $User->getToken();
+                        $_SESSION['email'] = $User->getEmail();
                         header("Location:".DIRNAME);
                     }
 
