@@ -11,22 +11,22 @@ class Authentification
     public static function checkAuthentification($token, $email)
     {
         $User = new User();
-        $target=['id', 'pseudo', 'firstname', 'lastname', 'email'];
+        $target=['id', 'token', 'email'];
         $parameterLike=['token' => $token, 'email' => $email];
 
-        if(!$arrayUser = $User->selectAnd($target, $parameterLike)){
+        $User->selectAnd($target, $parameterLike);
+        if(empty($User->getToken())){
             session_destroy();
             return false;
         }
         $date = new DateTime();
 
-        $User->setId($arrayUser['user_id']);
         $User->setToken();
         $User->setDateConnection($date->getTimestamp());
         $User->save();
 
         $_SESSION["token"]=$User->getToken();
-        $_SESSION["email"]=$arrayUser['user_email'];
+        $_SESSION["email"]=$User->getEmail();
         return true;
     }
 }

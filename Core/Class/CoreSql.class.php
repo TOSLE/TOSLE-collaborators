@@ -71,7 +71,12 @@ class CoreSql{
         ");
         $query->execute();
 
-        return $query->fetch();
+        foreach($query->fetch() as $key => $value){
+            if(!is_numeric($key)) {
+                $tmpString = str_replace(strtolower(get_called_class())."_", "", $key);
+                $this->$tmpString = $value;
+            }
+        }
     }
 
 }
