@@ -33,12 +33,15 @@
         $language = "en-EN";
         include "Core/Language/en-EN/conf.lang.php";
     }
+
+    /**
+     * @params userConnected
+     * Récupère le status de l'utilisateur et vérifie si l'authentification est réussie
+     */
     $userConnected = false;
     if(isset($_SESSION['token']) && isset($_SESSION['email'])){
-        if(!Authentification::checkAuthentification($_SESSION['token'], $_SESSION['email'])){
+        if(!($userConnected = Authentification::checkAuthentification($_SESSION['token'], $_SESSION['email']))){
             echo "<p>Connection failed</p>";
-        } else {
-            $userConnected = true;
         }
     }
 

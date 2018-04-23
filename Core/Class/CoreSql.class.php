@@ -79,4 +79,9 @@ class CoreSql{
         }
     }
 
+    public function selectSimpleResponse($target, $parameterLike, $parameterNotLike = null)
+    {
+
+    }
+
 }
