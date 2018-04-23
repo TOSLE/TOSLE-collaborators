@@ -42,6 +42,7 @@ class CoreSql{
             foreach($this->columns as $key => $value){
                 $columnName[] = strtolower(get_called_class()).'_'.$key;
             }
+            echo $this->table;
             $query = $this->pdo->prepare("INSERT INTO ".$this->table." ("
                 . implode(',', $columnName) .") VALUES (:"
                 . implode(',:', array_keys($this->columns)) .
