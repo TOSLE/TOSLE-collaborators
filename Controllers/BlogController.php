@@ -37,4 +37,19 @@ class BlogController
     {
         $View = new View("default");
     }
+
+    /**
+     * @Route("/en/add/{params}")
+     * @param array $params
+     * Add article
+     */
+    function addAction()
+    {
+        $Blog = new Blog();
+        $Blog->setTitle('Test');
+        $Blog->setContent('lorem ipj jgjhg hjg jg jfgf fhgf gf gjhgjhg jg f fgfd hgf hfgghfhg dhgf hfsum');
+        $Blog->setStatus(1);
+        $Blog->setType(1);
+        $Blog->save();
+    }
 }

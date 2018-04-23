@@ -18,7 +18,7 @@ class Blog extends CoreSql {
 
     public function __construct()
     {
-        //parent::__construct();
+        parent::__construct();
     }
 
     /**
