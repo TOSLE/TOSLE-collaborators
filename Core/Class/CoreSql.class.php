@@ -71,17 +71,17 @@ class CoreSql{
         ");
         $query->execute();
 
-        foreach($query->fetch() as $key => $value){
+        return $query->fetch();
+    }
+
+    public function selectSimpleResponse($target, $parameterLike, $parameterNotLike = null)
+    {
+        foreach($this->selectAnd($target, $parameterLike, $parameterNotLike) as $key => $value){
             if(!is_numeric($key)) {
                 $tmpString = str_replace(strtolower(get_called_class())."_", "", $key);
                 $this->$tmpString = $value;
             }
         }
-    }
-
-    public function selectSimpleResponse($target, $parameterLike, $parameterNotLike = null)
-    {
-
     }
 
 }

@@ -14,7 +14,7 @@ class Authentification
         $target=['id', 'token', 'email', 'status'];
         $parameterLike=['token' => $token, 'email' => $email];
 
-        $User->selectAnd($target, $parameterLike);
+        $User->selectSimpleResponse($target, $parameterLike);
         if(empty($User->getToken()) or $User->getStatus()== 0){
             session_destroy();
             return false;
