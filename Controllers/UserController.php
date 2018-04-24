@@ -62,7 +62,7 @@ class UserController
                 }
             }
         }
-        $View = new View("user", "UserTPL/connect");
+        $View = new View("user", "User/connect");
         $View->setData("config", $form);
         $View->setData("errors", $errors);
     }
