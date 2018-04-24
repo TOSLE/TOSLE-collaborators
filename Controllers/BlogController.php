@@ -15,7 +15,70 @@ class BlogController
      */
     function indexAction($params)
     {
-        $View = new View("default");
+        /*
+         * $User = new User();
+        $form = $User->configFormConnect();
+        $errors = [];
+        if(!empty($params["POST"])) {
+            $errors = Validate::checkForm($form, $params["POST"]);
+            if (empty($errors)) {
+                $User->setPassword($params["POST"]["pwd"]);
+                $target = [
+                    "password"
+                ];
+                $parameter = [
+                    "email" => $params["POST"]["email"]
+                ];
+                $User->selectSimpleResponse($target, $parameter);
+                if(password_verify($params["POST"]["pwd"], $User->getPassword())){
+                    $target = [
+                        "email",
+                        "token"
+                    ];
+                    $parameter = [
+                        "email" => $params["POST"]["email"],
+                        "password" => $User->getPassword()
+                    ];
+                    $User->selectSimpleResponse($target, $parameter);
+                    if(!(empty($User->getToken()) && empty($User->getEmail()))){
+                        $_SESSION['token'] = $User->getToken();
+                        $_SESSION['email'] = $User->getEmail();
+                        header("Location:".DIRNAME);
+                    }
+
+                }
+            }
+        }
+        $View = new View("user", "UserTPL/connect");
+        $View->setData("config", $form);
+        $View->setData("errors", $errors);
+         */
+        $View = new View("default", "Blog/home");
+        $Blog = new Blog();
+        $errors = [];
+        if(!empty($params["GET"])){
+            echo "Il y a une recherche";
+        } else {
+            $target = [
+                "title",
+                "content",
+                "datecreate",
+                "id"
+            ];
+            $parameter = [
+                "status" => 1
+            ];
+            $response = $Blog->selectAnd($target, $parameter);
+            $data = [];
+            foreach($response as $key => $value){
+                $date = new DateTime($value["blog_datecreate"]);
+                $value["blog_datecreate"] = $date->format("l jS \of F Y H:i");
+                $data[] = $value;
+            }
+            $View->setData("data", $data);
+            $View->setData("col", "6");
+        }
+
     }
 
     /**

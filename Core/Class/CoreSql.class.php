@@ -8,7 +8,7 @@ class CoreSql{
 
     public function __construct(){
         try {
-            $this->pdo = new PDO("mysql:host=".DBHOST.";dbname=".DBNAME,DBUSER,DBPWD);
+            $this->pdo = new PDO("mysql:host=".DBHOST.";dbname=".DBNAME.";charset=UTF8",DBUSER,DBPWD);
         } catch(Exception $e){
             die("Erreur SQL".$e->getMessage()."\n");
         }
@@ -40,9 +40,12 @@ class CoreSql{
             unset($this->columns["id"]);
             $columnName = [];
             foreach($this->columns as $key => $value){
-                $columnName[] = strtolower(get_called_class()).'_'.$key;
+                if(!empty($this->columns[$key])){
+                    $columnName[] = strtolower(get_called_class()).'_'.$key;
+                } else {
+                    unset($this->columns[$key]);
+                }
             }
-            echo $this->table;
             $query = $this->pdo->prepare("INSERT INTO ".$this->table." ("
                 . implode(',', $columnName) .") VALUES (:"
                 . implode(',:', array_keys($this->columns)) .
@@ -71,8 +74,7 @@ class CoreSql{
             WHERE " . implode(' AND ', $selectParameter) . "
         ");
         $query->execute();
-
-        return $query->fetch();
+        return $query->fetchAll();
     }
 
     public function selectSimpleResponse($target, $parameterLike, $parameterNotLike = null)
