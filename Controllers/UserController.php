@@ -67,6 +67,41 @@ class UserController
         $View->setData("errors", $errors);
     }
 
+    public function registerAction($params) {
+
+        $User = new User();
+        $form = $User->configFormAdd();
+        $errors = [];
+        if(!empty($params["POST"])) {
+            $errors = Validate::checkForm($form, $params["POST"]);
+            if (empty($errors)) {
+                $User->setFirstName($params["POST"]["firstname"]);
+                $User->setLastName($params["POST"]["lastname"]);
+                $User->setEmail($params["POST"]["email"]); // voir pour le selectMultipleResponse + confirmEmail
+                $User->setEmail($params["POST"]["emailConfirm"]);
+                $User->setPassword($params["POST"]["pwd"]);
+                $User->setPassword($params["POST"]["pwdConfirm"]);
+                $User->setBirthDay($params["POST"]["birthday"]);
+                $target = [
+                    "firstname",
+                    "lastname",
+                    "email",
+                    "emailConfirm",
+                    "pwd",
+                    "pwdConfirm",
+                    "birthday"
+                ];
+                if(!empty($User->getToken())){
+                    $_SESSION['token'] = $User->getToken();
+                }
+            }
+        }
+        $View = new View("user", "User/register");
+        $View->setData("config", $form);
+        $View->setData("errors", $errors);
+
+    }
+
     public function disconnectAction($params)
     {
         header("Location:".DIRNAME);

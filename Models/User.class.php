@@ -149,13 +149,13 @@ class User extends CoreSql{
                     "placeholder"=>"Votre mot de passe",
                     "required"=>true
                 ],
-                "pwdConfirme"=>[
+                "pwdConfirm"=>[
                     "type"=>"password",
                     "placeholder"=>"Confirmez votre mot de passe",
                     "required"=>true,
                     "confirm"=>"pwd"
                 ],
-                "age"=>[
+                "birthday"=>[
                     "type"=>"number",
                     "placeholder"=>"Votre age",
                     "required"=>true,

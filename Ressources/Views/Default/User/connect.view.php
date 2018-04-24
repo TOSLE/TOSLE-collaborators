@@ -18,6 +18,7 @@
                             Veuillez entrer vos informations de connexion ci-dessous
                         </p></article>
                     <section class="input-login-bloc">
+                        <form
                         <label for="login">Adresse mail :</label>
                         <input type="email" name="input-username" id="login" class="input-login"
                                placeholder="Veuillez entrer votre adresse mail de connexion">
