@@ -8,7 +8,7 @@ class CoreSql{
 
     public function __construct(){
         try {
-            $this->pdo = new PDO("mysql:host=".DBHOST.";dbname=".DBNAME,DBUSER,DBPWD);
+            $this->pdo = new PDO("mysql:host=".DBHOST.";dbname=".DBNAME.";charset=UTF8",DBUSER,DBPWD);
         } catch(Exception $e){
             die("Erreur SQL".$e->getMessage()."\n");
         }
@@ -40,7 +40,11 @@ class CoreSql{
             unset($this->columns["id"]);
             $columnName = [];
             foreach($this->columns as $key => $value){
-                $columnName[] = strtolower(get_called_class()).'_'.$key;
+                if(!empty($this->columns[$key])){
+                    $columnName[] = strtolower(get_called_class()).'_'.$key;
+                } else {
+                    unset($this->columns[$key]);
+                }
             }
             $query = $this->pdo->prepare("INSERT INTO ".$this->table." ("
                 . implode(',', $columnName) .") VALUES (:"
@@ -70,8 +74,12 @@ class CoreSql{
             WHERE " . implode(' AND ', $selectParameter) . "
         ");
         $query->execute();
+        return $query->fetchAll();
+    }
 
-        foreach($query->fetch() as $key => $value){
+    public function selectSimpleResponse($target, $parameterLike, $parameterNotLike = null)
+    {
+        foreach($this->selectAnd($target, $parameterLike, $parameterNotLike) as $key => $value){
             if(!is_numeric($key)) {
                 $tmpString = str_replace(strtolower(get_called_class())."_", "", $key);
                 $this->$tmpString = $value;
