@@ -2,5 +2,9 @@
 
 
 Core/config.php
+Core/Class/Router.class.php
+
+Docker/build/apache2config/apache2.conf
+
 node_modules/
 .htaccess
