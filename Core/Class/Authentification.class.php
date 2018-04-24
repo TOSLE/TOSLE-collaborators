@@ -11,11 +11,11 @@ class Authentification
     public static function checkAuthentification($token, $email)
     {
         $User = new User();
-        $target=['id', 'token', 'email'];
+        $target=['id', 'token', 'email', 'status'];
         $parameterLike=['token' => $token, 'email' => $email];
 
-        $User->selectAnd($target, $parameterLike);
-        if(empty($User->getToken())){
+        $User->selectSimpleResponse($target, $parameterLike);
+        if(empty($User->getToken()) or $User->getStatus()== 0){
             session_destroy();
             return false;
         }
@@ -27,6 +27,6 @@ class Authentification
 
         $_SESSION["token"]=$User->getToken();
         $_SESSION["email"]=$User->getEmail();
-        return true;
+        return $User->getStatus();
     }
 }

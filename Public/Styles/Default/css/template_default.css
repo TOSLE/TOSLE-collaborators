@@ -15,6 +15,28 @@ html {
   html body {
     height: 100%;
     background-color: #EBEBEB; }
+  html .blog-article {
+    padding: 5px;
+    height: 300px; }
+    html .blog-article > .content-article {
+      background-color: #FFFFFF;
+      padding: 15px 15px;
+      position: relative;
+      height: 100%;
+      box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.25); }
+      html .blog-article > .content-article > h2 {
+        text-align: center; }
+      html .blog-article > .content-article > .resume {
+        margin: 15px 0;
+        text-align: center; }
+      html .blog-article > .content-article > a {
+        position: absolute;
+        bottom: 15px;
+        right: 15px; }
+      html .blog-article > .content-article > .datecreate {
+        position: absolute;
+        bottom: 15px;
+        font-size: 0.8em; }
 
 #menu-header-section {
   width: 250px;
