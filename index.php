@@ -4,12 +4,14 @@
 
     function autoLoader($parameter)
     {
-        $parameter .= ".class.php";
-        if(file_exists("Core/Class/".$parameter)){
-            include("Core/Class/".$parameter);
+        if(file_exists("Core/Class/".$parameter.".class.php")){
+            include("Core/Class/".$parameter.".class.php");
         }
-        if(file_exists("Models/".$parameter)){
-            include("Models/".$parameter);
+        if(file_exists("Models/".$parameter.".class.php")){
+            include("Models/".$parameter.".class.php");
+        }
+        if(file_exists("Core/".$parameter.".php")){
+            include("Core/".$parameter.".php");
         }
     }
     spl_autoload_register("autoLoader");
@@ -17,14 +19,16 @@
     $tempUri = explode("?", substr(urldecode($_SERVER["REQUEST_URI"]), strlen(DIRNAME)));
 
     $uriExploded = explode(DS, $tempUri[0]);
+
+    $Acces = new Access();
+    $AccessParams = $Acces->getRoute(strtolower($uriExploded[1]));
     
     $language = (empty($uriExploded[0]))?"en-EN":strtolower($uriExploded[0])."-".strtoupper($uriExploded[0]);
-    $controller = (empty($uriExploded[1]))?"IndexController": ucfirst(strtolower($uriExploded[1]))."Controller";
-    $action = (empty($uriExploded[2]))?"indexAction": strtolower($uriExploded[2])."Action";
+    $controller = (empty($AccessParams["controller"]))?"IndexController": ucfirst(strtolower($AccessParams["controller"]))."Controller";
+    $action = (empty($AccessParams["action"]))?"indexAction": strtolower($AccessParams["action"])."Action";
 
     unset($uriExploded[0]);
     unset($uriExploded[1]);
-    unset($uriExploded[2]);
 
     $parameter = ["POST" => $_POST, "GET" => $_GET, "URI" => array_values($uriExploded)];
     if(file_exists("Core/Language/".$language."/conf.lang.php")){

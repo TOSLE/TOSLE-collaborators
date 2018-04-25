@@ -160,7 +160,8 @@ class User extends CoreSql{
                     "placeholder"=>"Votre age",
                     "required"=>true,
                     "maxNum"=>100,
-                    "minNum"=>18
+                    "minNum"=>18,
+                    "class"=>"formulaire fomulaire-age"
                 ]
             ]
         ];
