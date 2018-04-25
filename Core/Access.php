@@ -1,7 +1,7 @@
 <?php
 class Route
 {
-    private $Routes = [
+    private $Access = [
                 [
                     "slug" => "nomroute",
                     "controller" => "controller",
