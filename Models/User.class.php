@@ -152,14 +152,15 @@ class User extends CoreSql{
                     "placeholder"=>"Confirmez votre mot de passe",
                     "required"=>true,
                     "confirm"=>"pwd"
-                ],
+                ]
+                /*
                 "birthday"=>[
                     "type"=>"number",
                     "placeholder"=>"Votre age",
                     "required"=>true,
                     "maxNum"=>100,
                     "minNum"=>18
-                ]
+                ] */
             ]
         ];
     }
@@ -172,12 +173,12 @@ class User extends CoreSql{
                 "email"=>[
                     "type"=>"email",
                     "placeholder"=>"Votre email",
-                    "required"=>true
+                    "required"=>true,
                 ],
                 "pwd"=>[
                     "type"=>"password",
                     "placeholder"=>"Votre mot de passe",
-                    "required"=>true
+                    "required"=>true,
                 ]
             ]
         ];

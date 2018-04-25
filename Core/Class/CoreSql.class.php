@@ -24,13 +24,9 @@ class CoreSql{
     public function save(){
         $this->setColumns();
 
-        echo 'save';
+        echo ' save ';
 
         if($this->id){
-            echo 'if';
-            echo $this->id;
-
-
             $set = [];
             foreach ($this->columns as $columnName => $value) {
                 if($this->columns[$columnName] && $columnName != "id") {
@@ -39,12 +35,13 @@ class CoreSql{
                     unset($this->columns[$columnName]);
                 }
             }
-            echo'<pre>';
-            print_r("UPDATE ".$this->table." SET "
-                . implode(',', $set) ." WHERE ".strtolower(get_called_class())."_id='".$this->id."'");
-            echo'<pre>';
+            print_r($set);
+
             $query = $this->pdo->prepare("UPDATE ".$this->table." SET "
                 . implode(',', $set) ." WHERE ".strtolower(get_called_class())."_id='".$this->id."'");
+
+
+
 
 
             $query->execute($this->columns);
@@ -64,6 +61,13 @@ class CoreSql{
                 . implode(',', $columnName) .") VALUES (:"
                 . implode(',:', array_keys($this->columns)) .
                 ")");
+
+            echo '<pre>';
+            print_r("INSERT INTO ".$this->table." ("
+                . implode(',', $columnName) .") VALUES (:"
+                . implode(',:', array_keys($this->columns)) .
+                ")");
+            echo '<pre>';
             $query->execute($this->columns);
         }
     }
