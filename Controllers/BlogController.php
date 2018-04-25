@@ -15,44 +15,6 @@ class BlogController
      */
     function indexAction($params)
     {
-        /*
-         * $User = new User();
-        $form = $User->configFormConnect();
-        $errors = [];
-        if(!empty($params["POST"])) {
-            $errors = Validate::checkForm($form, $params["POST"]);
-            if (empty($errors)) {
-                $User->setPassword($params["POST"]["pwd"]);
-                $target = [
-                    "password"
-                ];
-                $parameter = [
-                    "email" => $params["POST"]["email"]
-                ];
-                $User->selectSimpleResponse($target, $parameter);
-                if(password_verify($params["POST"]["pwd"], $User->getPassword())){
-                    $target = [
-                        "email",
-                        "token"
-                    ];
-                    $parameter = [
-                        "email" => $params["POST"]["email"],
-                        "password" => $User->getPassword()
-                    ];
-                    $User->selectSimpleResponse($target, $parameter);
-                    if(!(empty($User->getToken()) && empty($User->getEmail()))){
-                        $_SESSION['token'] = $User->getToken();
-                        $_SESSION['email'] = $User->getEmail();
-                        header("Location:".DIRNAME);
-                    }
-
-                }
-            }
-        }
-        $View = new View("user", "UserTPL/connect");
-        $View->setData("config", $form);
-        $View->setData("errors", $errors);
-         */
         $View = new View("default", "Blog/home");
         $Blog = new Blog();
         $errors = [];
