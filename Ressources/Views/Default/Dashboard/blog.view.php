@@ -30,7 +30,7 @@
                                 <tr>
                                     <td class="td-content-text"><?php echo $value["blog_title"];?></td>
                                     <td class="td-content-date"><?php echo $value["blog_datecreate"];?></td>
-                                    <td class="td-content-action"><a href="#" class="btn-sm btn-tosle">View</a></td>
+                                    <td class="td-content-action"><a href="#" class="btn-sm btn-tosle">View</a> <a href="#" class="btn-sm btn-orange">Edit</a> <a href="#" class="btn-sm btn-red">Depublier</a></td>
                                 </tr>
                             <?php endforeach; ?>
                             </tbody>
