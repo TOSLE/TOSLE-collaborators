@@ -79,7 +79,8 @@ class CoreSql{
 
     public function selectSimpleResponse($target, $parameterLike, $parameterNotLike = null)
     {
-        foreach($this->selectAnd($target, $parameterLike, $parameterNotLike) as $key => $value){
+        $response = $this->selectAnd($target, $parameterLike, $parameterNotLike);
+        foreach( $response[0] as $key => $value){
             if(!is_numeric($key)) {
                 $tmpString = str_replace(strtolower(get_called_class())."_", "", $key);
                 $this->$tmpString = $value;

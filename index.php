@@ -24,7 +24,7 @@
     $AccessParams = $Acces->getRoute(strtolower($uriExploded[1]));
     
     $language = (empty($uriExploded[0]))?"en-EN":strtolower($uriExploded[0])."-".strtoupper($uriExploded[0]);
-    $controller = (empty($AccessParams["controller"]))?"IndexController": ucfirst(strtolower($AccessParams["controller"]))."Controller";
+    $controller = (empty($AccessParams["controller"]))?"ClassController": ucfirst(strtolower($AccessParams["controller"]))."Controller";
     $action = (empty($AccessParams["action"]))?"indexAction": strtolower($AccessParams["action"])."Action";
 
     unset($uriExploded[0]);

@@ -13,6 +13,7 @@ class View
     private $data = [];
     private $themeTpl = "Default";
     private $themeView = "Default";
+    private $slugs;
 
     function __construct($tpl="default", $view = "default", $themeTpl = "Default", $themeView = "Default")
     {
@@ -27,6 +28,10 @@ class View
         if(!file_exists($this->tpl)){
             echo ERROR_01_VIEW_CALL;
         }
+
+        $Access = new Access();
+        global $language;
+        $this->slugs = $Access->getSlugs($language);
     }
 
     public function addModal($modal, $config, $errors)

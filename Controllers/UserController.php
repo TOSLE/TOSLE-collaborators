@@ -35,7 +35,6 @@ class UserController
         if(!empty($params["POST"])) {
             $errors = Validate::checkForm($form, $params["POST"]);
             if (empty($errors)) {
-                $User->setPassword($params["POST"]["pwd"]);
                 $target = [
                     "password"
                 ];
