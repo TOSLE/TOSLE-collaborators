@@ -12,12 +12,12 @@ class Access
                     "security" => false
                 ],
             "homepage" => [ // TOSLE Homepage
-                "slug" => "index",
+                "slug" => "",
                 "controller" => "class",
                 "action" => "index",
                 "security" => false
             ],
-            "homeblog" => [ // Blog  homepage
+            "bloghome" => [ // Blog  homepage
                 "slug" => "blog",
                 "controller" => "blog",
                 "action" => "index",
@@ -29,16 +29,34 @@ class Access
                 "action" => "index",
                 "security" => "false"
             ],
-            [ // Profile  homepage
+            "profilehome" => [ // Profile  homepage
                 "slug" => "profile",
                 "controller" => "profile",
                 "action" => "index",
                 "security" => "false"
             ],
-            [ // Sign in
+            "signin" => [ // Sign in
                 "slug" => "sign-in",
                 "controller" => "user",
                 "action" => "connect",
+                "security" => "false"
+            ],
+            "signout" => [ // Sign out
+                "slug" => "sign-out",
+                "controller" => "user",
+                "action" => "disconnect",
+                "security" => "false"
+            ],
+            "dashboardhome" => [ // Dashboard homepage
+                "slug" => "admin",
+                "controller" => "dashboard",
+                "action" => "index",
+                "security" => "false"
+            ],
+            "dashboard_blog" => [ // Dashboard blog homepage
+                "slug" => "blog-dashboard",
+                "controller" => "dashboard",
+                "action" => "blog",
                 "security" => "false"
             ]
         ];
@@ -54,12 +72,12 @@ class Access
         return $this->access["default"];
     }
 
-    public function getSlug($key)
+    public function getSlugs($language)
     {
-        if($this->access[$key]){
-            return $this->access[$key];
-        } else {
-            return $this->access["default"];
+        $data = [];
+        foreach ($this->access as $key => $value){
+            $data[$key] = "".DIRNAME.substr($language,0,2)."/".$value["slug"];
         }
+        return $data;
     }
 }

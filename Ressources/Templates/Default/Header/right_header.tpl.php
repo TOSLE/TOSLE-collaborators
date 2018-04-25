@@ -1,5 +1,5 @@
 <?php if(!$userConnected):?>
-    <a href="<?php echo DIRNAME.substr($language,0,2)."/user/connect";?>" class="btn btn-tosle-outline tosle-btn"><?php echo HEADER_MENU_SIGNIN;?></a>
+    <a href="<?php echo $this->slugs["signin"];?>" class="btn btn-tosle-outline tosle-btn"><?php echo HEADER_MENU_SIGNIN;?></a>
     <a href="#" class="btn btn-default-outline tosle-btn"><?php echo HEADER_MENU_SIGNUP;?></a>
 <?php else: ?>
     <i class="material-icons">&#xE003;</i>
