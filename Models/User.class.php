@@ -123,15 +123,13 @@ class User extends CoreSql{
                     "type"=>"text",
                     "placeholder"=>"Votre prénom",
                     "required"=>true,
-                    "maxString"=>100,
-                    "minString"=>2
+                    "maxString"=>100
                 ],
                 "lastname"=>[
                     "type"=>"text",
                     "placeholder"=>"Votre nom",
                     "required"=>true,
-                    "maxString"=>100,
-                    "minString"=>2
+                    "maxString"=>100
                 ],
                 "email"=>[
                     "type"=>"email",

@@ -15,47 +15,47 @@ class UserController
 
     public function addAction($params)
     {
-        $User = new User();
+        $user = new User();
 
-        $User->setId(1);
-        $User->setEmail('domangejulien@gmail.com');
-        $User->setToken();
-        $User->setFirstName('Julien');
-        $User->setLastName("DOMANGE");
-        $User->setPassword("Testmdp01");
+        $user->setId(4);
+        $user->setEmail('domangejulien@gmail.com');
+        $user->setToken();
+        $user->setFirstName('Julien');
+        $user->setLastName("DOMANGE");
+        $user->setPassword("Testmdp01");
 
-        $User->save();
+        $user->save();
     }
 
     public function connectAction($params)
     {
-        $User = new User();
-        $form = $User->configFormConnect();
+        $user = new User();
+        $form = $user->configFormConnect();
         $errors = [];
         if(!empty($params["POST"])) {
             $errors = Validate::checkForm($form, $params["POST"]);
             if (empty($errors)) {
-                $User->setPassword($params["POST"]["pwd"]);
+                $user->setPassword($params["POST"]["pwd"]);
                 $target = [
                     "password"
                 ];
                 $parameter = [
                     "email" => $params["POST"]["email"]
                 ];
-                $User->selectSimpleResponse($target, $parameter);
-                if(password_verify($params["POST"]["pwd"], $User->getPassword())){
+                $user->selectSimpleResponse($target, $parameter);
+                if(password_verify($params["POST"]["pwd"], $user->getPassword())){
                     $target = [
                         "email",
                         "token"
                     ];
                     $parameter = [
                         "email" => $params["POST"]["email"],
-                        "password" => $User->getPassword()
+                        "password" => $user->getPassword()
                     ];
-                    $User->selectSimpleResponse($target, $parameter);
-                    if(!(empty($User->getToken()) && empty($User->getEmail()))){
-                        $_SESSION['token'] = $User->getToken();
-                        $_SESSION['email'] = $User->getEmail();
+                    $user->selectSimpleResponse($target, $parameter);
+                    if(!(empty($user->getToken()) && empty($user->getEmail()))){
+                        $_SESSION['token'] = $user->getToken();
+                        $_SESSION['email'] = $user->getEmail();
                         header("Location:".DIRNAME);
                     }
 
@@ -68,20 +68,21 @@ class UserController
     }
 
     public function registerAction($params) {
+        echo "Register action";
 
-        $User = new User();
-        $form = $User->configFormAdd();
+        $user = new User();
+        $form = $user->configFormAdd();
         $errors = [];
         if(!empty($params["POST"])) {
             $errors = Validate::checkForm($form, $params["POST"]);
             if (empty($errors)) {
-                $User->setFirstName($params["POST"]["firstname"]);
-                $User->setLastName($params["POST"]["lastname"]);
-                $User->setEmail($params["POST"]["email"]); // voir pour le selectMultipleResponse + confirmEmail
-                $User->setEmail($params["POST"]["emailConfirm"]);
-                $User->setPassword($params["POST"]["pwd"]);
-                $User->setPassword($params["POST"]["pwdConfirm"]);
-                $User->setBirthDay($params["POST"]["birthday"]);
+                $user->setFirstName($params["POST"]["firstname"]);
+                $user->setLastName($params["POST"]["lastname"]);
+                $user->setEmail($params["POST"]["email"]); // voir pour le selectMultipleResponse + confirmEmail
+                $user->setEmail($params["POST"]["emailConfirm"]);
+                $user->setPassword($params["POST"]["pwd"]);
+                $user->setPassword($params["POST"]["pwdConfirm"]);
+                $user->setBirthDay($params["POST"]["birthday"]);
                 $target = [
                     "firstname",
                     "lastname",
@@ -91,9 +92,10 @@ class UserController
                     "pwdConfirm",
                     "birthday"
                 ];
-                if(!empty($User->getToken())){
-                    $_SESSION['token'] = $User->getToken();
+                if(!empty($user->getToken())){
+                    $_SESSION['token'] = $user->getToken();
                 }
+                $user->save();
             }
         }
         $View = new View("user", "User/register");
