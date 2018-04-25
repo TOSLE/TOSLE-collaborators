@@ -1,3 +1,37 @@
 .bg-white {
     background-color: #FFFFFF;
+    -webkit-box-shadow: 10px 11px 25px -1px rgba(143,143,143,0.59);
+    -moz-box-shadow: 10px 11px 25px -1px rgba(143,143,143,0.59);
+    box-shadow: 10px 11px 25px -1px rgba(143,143,143,0.59);
+    border: solid 0.5px #3b3f5442;
+}
+
+.login-bloc h4 {
+    text-align: center;
+    padding: 20px 20px;
+    font-size: 1.4em;
+    font-weight: 400;
+    color: #1A5CCB;
+}
+
+.login-bloc p {
+    font-size: 0.9em;
+    text-align: center;
+    font-weight: 300;
+}
+
+.input-login-bloc {
+    padding: 40px 0 20px 0;
+    text-align: center;
+}
+
+.input-login-bloc > form > input {
+    width : 350px;
+    height: 35px;
+    margin-bottom: 20px;
+
+}
+
+.row {
+    justify-content: center;
 }

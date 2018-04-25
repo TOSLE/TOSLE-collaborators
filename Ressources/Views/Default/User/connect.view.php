@@ -18,15 +18,7 @@
                             Veuillez entrer vos informations de connexion ci-dessous
                         </p></article>
                     <section class="input-login-bloc">
-                        <form
-                        <label for="login">Adresse mail :</label>
-                        <input type="email" name="input-username" id="login" class="input-login"
-                               placeholder="Veuillez entrer votre adresse mail de connexion">
-                    </section>
-                    <section class="input-login-bloc">
-                        <label for="password">Mot de passe:</label>
-                        <input type="password" name="input-password" id="password" class="input-login"
-                               placeholder="Veuillez entrer votre mot de passe">
+                        <?php $this->addModal("form", $config, $errors); ?>
                     </section>
                 </section>
             </div>
@@ -34,6 +26,6 @@
     </div>
 </div>
 
-<?php $this->addModal("form", $config, $errors); ?>
+
 
 
