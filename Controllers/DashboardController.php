@@ -61,6 +61,24 @@ class DashboardController
     {
         $View = new View("dashboard", "Dashboard/blog");
         $View->setData("PageName", NAV_DASHBOARD . " " . NAV_DASHBOARD_BLOG);
+
+        $Blog = new Blog();
+        $target = [
+            "title",
+            "datecreate"
+        ];
+        $parameter = [
+            "status" => 1
+        ];
+        $response = $Blog->selectAnd($target, $parameter);
+        $data = [];
+        foreach($response as $key => $value){
+            $date = new DateTime($value["blog_datecreate"]);
+            $value["blog_datecreate"] = $date->format("m/j/Y");
+            $data[] = $value;
+        }
+
+        $View->setData("lastsPublication", $data);
     }
 
     /**

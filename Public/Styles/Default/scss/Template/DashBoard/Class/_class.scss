@@ -63,6 +63,9 @@
               color: $colorGlobalToslePrimary;
               text-align: center;
             }
+            &.td-content-action {
+              text-align: center;
+            }
           }
         }
       }
