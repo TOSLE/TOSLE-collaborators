@@ -197,6 +197,8 @@ main {
             main .content-backoffice > .main-content > table > tbody > tr > td.td-content-icone {
               color: #1A5CCB;
               text-align: center; }
+            main .content-backoffice > .main-content > table > tbody > tr > td.td-content-action {
+              text-align: center; }
   main .bold-text {
     font-weight: 500; }
   main .additional-message-title {
