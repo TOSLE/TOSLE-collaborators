@@ -22,4 +22,9 @@ class IndexController
     {
         $View = new View();
     }
+
+    function rightAction($params)
+    {
+        echo "Vous n'avez apparemment pas les droits d'accès à ce lien";
+    }
 }
