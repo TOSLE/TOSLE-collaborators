@@ -1,11 +1,6 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <div>
-                <section class="title-page">
-                    <h2>Inscription</h2>
-                </section>
-            </div>
         </div>
     </div>
     <div class="row">
@@ -22,6 +17,18 @@
                     </section>
                 </section>
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 bg-white">
+            <section class="login-bloc">
+                <article class="register-info">
+                    <p>Déjà inscrit ?
+                        <a href="<?php echo DIRNAME . substr($language, 0, 2) . "/user/connect"; ?>">
+                            Connectez-vous ici.</a>
+                    </p>
+                </article>
+            </section>
         </div>
     </div>
 </div>
