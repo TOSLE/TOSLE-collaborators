@@ -54,20 +54,18 @@
      * @params userConnected
      * Récupère le status de l'utilisateur et vérifie si l'authentification est réussie
      */
-    $userStatus = false;
+    $userConnected = false;
     if(isset($_SESSION['token']) && isset($_SESSION['email'])){
-        if(!($userStatus = Authentification::checkAuthentification($_SESSION['token'], $_SESSION['email']))){
-            if($userStatus === false) {
-                echo "<p>Connection failed</p>";
-            }
-            if($userStatus === 0){
-                echo "<p>Please confirm email</p>";
-            }
-            if($userStatus < $Acces->getSecurity($accessParams["slug"])){
-                $controller = "IndexController";
-                $action = "rightAction";
-            }
+        if(($userConnected = Authentification::checkAuthentification($_SESSION['token'], $_SESSION['email']))){
+            $userStatus = Authentification::getUserStatus($_SESSION['token'], $_SESSION['email']);
+        } else {
+            echo "<p>Connection failed</p>";
         }
+    }
+
+    if(($Acces->getSecurity($accessParams["slug"])) && ($userStatus < $Acces->getSecurity($accessParams["slug"]))){
+        $controller = "IndexController";
+        $action = "accessAction";
     }
 
     $parameter = ["POST" => $_POST, "GET" => $_GET, "URI" => array_values($uriExploded)];

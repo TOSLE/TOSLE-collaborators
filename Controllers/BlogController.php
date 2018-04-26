@@ -68,7 +68,7 @@ class BlogController
      * @param array $params
      * Add article
      */
-    function addAction()
+    function addAction($params)
     {
         $Blog = new Blog();
         $Blog->setTitle('Test');
@@ -76,5 +76,35 @@ class BlogController
         $Blog->setStatus(1);
         $Blog->setType(1);
         $Blog->save();
+    }
+
+    function statusAction($params)
+    {
+        global $language;
+
+        $Access = new Access();
+        $Blog = new Blog();
+
+        $target = [
+            "id",
+            "status"
+        ];
+        $parameter = [
+            "id" => $params["URI"][0]
+        ];
+        $Blog->selectSimpleResponse($target, $parameter);
+        if($Blog->getId()){
+            if($Blog->getStatus() > 0){
+                $Blog->setStatus(0);
+            } else {
+                $Blog->setStatus(1);
+            }
+            $Blog->save();
+        }
+
+
+        $redirection = $Access->getSlugs($language);
+
+        header('Location:'.$redirection["dashboard_blog"]);
     }
 }

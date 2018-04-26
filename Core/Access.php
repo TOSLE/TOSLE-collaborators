@@ -24,37 +24,49 @@ class Access
             "slug" => "chat",
             "controller" => "chat",
             "action" => "index",
-            "security" => "false"
+            "security" => false
         ],
         "profilehome" => [ // Profile  homepage
             "slug" => "profile",
             "controller" => "profile",
             "action" => "index",
-            "security" => "false"
+            "security" => false
         ],
         "signin" => [ // Sign in
             "slug" => "sign-in",
             "controller" => "user",
             "action" => "connect",
-            "security" => "false"
+            "security" => false
         ],
         "signout" => [ // Sign out
             "slug" => "sign-out",
             "controller" => "user",
             "action" => "disconnect",
-            "security" => "false"
+            "security" => false
         ],
         "dashboardhome" => [ // Dashboard homepage
             "slug" => "admin",
             "controller" => "dashboard",
             "action" => "index",
-            "security" => "false"
+            "security" => false
         ],
         "dashboard_blog" => [ // Dashboard blog homepage
             "slug" => "blog-dashboard",
             "controller" => "dashboard",
             "action" => "blog",
-            "security" => 0
+            "security" => 2
+        ],
+        "blog_status" => [ // change status blog
+            "slug" => "blog-status",
+            "controller" => "blog",
+            "action" => "status",
+            "security" => 2
+        ],
+        "add_user" => [ // change status blog
+            "slug" => "add-user",
+            "controller" => "user",
+            "action" => "add",
+            "security" => false
         ]
     ];
 
@@ -68,6 +80,15 @@ class Access
         return $this->access["default"];
     }
 
+    public function getSlug($id)
+    {
+        foreach ($this->access as $key => $params){
+            if($key==$id){
+                return $params;
+            }
+        }
+        return $this->access["default"];
+    }
     public function getSlugs($language)
     {
         $data = [];

@@ -14,7 +14,7 @@ class Blog extends CoreSql {
     protected $content;
     protected $datecreate;
     protected $status;
-    protected $fileid; /** à verif */
+    protected $fileid;
 
     public function __construct()
     {

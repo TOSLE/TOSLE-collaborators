@@ -65,20 +65,26 @@ class DashboardController
         $Blog = new Blog();
         $target = [
             "title",
-            "datecreate"
+            "datecreate",
+            "id",
+            "status"
         ];
         $parameter = [
             "status" => 1
         ];
-        $response = $Blog->selectAnd($target, $parameter);
+        $response = $Blog->getLimitedData($Blog->selectAllData($target), 0, 5);
         $data = [];
         foreach($response as $key => $value){
             $date = new DateTime($value["blog_datecreate"]);
             $value["blog_datecreate"] = $date->format("m/j/Y");
             $data[] = $value;
         }
+        global $language;
+        $Access = new Access();
+        $routeBlogStatus = $Access->getSlug("blog_status");
 
         $View->setData("lastsPublication", $data);
+        $View->setData("hrefBlogStatus", $routeBlogStatus["slug"]);
     }
 
     /**
