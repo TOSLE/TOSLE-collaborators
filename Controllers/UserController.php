@@ -5,15 +5,6 @@
  * Date: 11/04/2018
  * Time: 23:32
  */
-//$dirname = DIRNAME;
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
-require 'PHPMailer/src/Exception.php'; //changer avec dirname
-require 'PHPMailer/src/PHPMailer.php';
-require 'PHPMailer/src/SMTP.php';
-//require $dirname .'Public/Libraries/PHPMailer/src/SMTP.php';
 
 class UserController
 {
@@ -91,55 +82,44 @@ class UserController
                 $user->setEmail($params["POST"]["emailConfirm"]);
                 $user->setPassword($params["POST"]["pwd"]);
                 $user->setPassword($params["POST"]["pwdConfirm"]);
+                $user->setToken();
                 $user->save();
 
-                if(!empty($user->getToken())){
-                    $_SESSION['token'] = $user->getToken();
-                }
+                $email = $params["POST"]["email"];
+                $firstName = $params["POST"]["firstname"];
+                $lastName = $params["POST"]["lastname"];
+                $token = $user->getToken();
+
+                Mail::sendMailRegister($email, $firstName, $lastName,$token);
             }
+
         }
         $View = new View("user", "User/register");
         $View->setData("config", $form);
         $View->setData("errors", $errors);
 
-        $mail = new PHPMailer(true);
+    }
 
-        try {
-            //Server settings
-            $mail->SMTPDebug = 2;                                 // Enable verbose debug output
-            $mail->isSMTP();                                      // Set mailer to use SMTP
-            $mail->Host = 'smtp1.example.com;smtp2.example.com';  // Specify main and backup SMTP servers
-            $mail->SMTPAuth = true;                               // Enable SMTP authentication
-            $mail->Username = 'user@example.com';                 // SMTP username
-            $mail->Password = 'secret';                           // SMTP password
-            $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-            $mail->Port = 587;                                    // TCP port to connect to
+    public function verifyAction($params) {
+        if(isset($params["GET"]["email"]) && isset($params["GET"]["token"])){
+            $User = new User();
 
-            //Recipients
-            $mail->setFrom('from@example.com', 'Mailer');
-            $mail->addAddress('joe@example.net', 'Joe User');     // Add a recipient
-            $mail->addAddress('ellen@example.com');               // Name is optional
-            $mail->addReplyTo('info@example.com', 'Information');
-            $mail->addCC('cc@example.com');
-            $mail->addBCC('bcc@example.com');
-
-            //Attachments
-            $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
-            $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
-
-            //Content
-            $mail->isHTML(true);                                  // Set email format to HTML
-            $mail->Subject = 'Here is the subject';
-            $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
-            $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
-            $mail->send();
-            echo 'Message has been sent';
-        } catch (Exception $e) {
-            echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
+            $target = [ /** Ce que l'on récupère lors de la requête (SELECT) **/
+                "id"
+            ];
+            $parameter = [ /** Les parametres pour la condition de la requête **/
+                "email" => $params["GET"]["email"],
+                "token" => $params["GET"]["token"]
+            ];
+            $User->selectSimpleResponse($target, $parameter);
+            if($User->getId()){
+                $User->setToken();
+                $User->save();
+                //redirection success
+            } else {
+                //redirection false
+            }
         }
-
-
     }
 
     public function disconnectAction($params)
@@ -147,10 +127,5 @@ class UserController
         header("Location:".DIRNAME);
         $_SESSION["token"]=null;
         $_SESSION["email"]=null;
-    }
-
-    public function sendMailRegister($mail, $firstName, $lastName) {
-        echo'sendMailRegister';
-
     }
 }

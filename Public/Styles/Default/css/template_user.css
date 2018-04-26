@@ -35,3 +35,7 @@
 .row {
     justify-content: center;
 }
+
+.register-info {
+    padding: 20px 20px;
+}

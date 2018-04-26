@@ -1,0 +1,14 @@
+<?php
+    define("DBUSER","");
+    define("DBPWD","");
+    define("DBHOST",""); #Container name database mysql
+    define("DBNAME","");
+    define("DBPORT","");
+    define("GUSER", "");
+    define("GPWD", "");
+
+    $scriptDS = (DIRECTORY_SEPARATOR == "\\")?"/":DIRECTORY_SEPARATOR;
+    define("DS", $scriptDS);
+
+    $scriptName = (dirname($_SERVER["SCRIPT_NAME"]) == "/")?"":dirname($_SERVER["SCRIPT_NAME"]);
+    define("DIRNAME", $scriptName.DS);

@@ -61,13 +61,6 @@ class CoreSql{
                 . implode(',', $columnName) .") VALUES (:"
                 . implode(',:', array_keys($this->columns)) .
                 ")");
-
-            echo '<pre>';
-            print_r("INSERT INTO ".$this->table." ("
-                . implode(',', $columnName) .") VALUES (:"
-                . implode(',:', array_keys($this->columns)) .
-                ")");
-            echo '<pre>';
             $query->execute($this->columns);
         }
     }
