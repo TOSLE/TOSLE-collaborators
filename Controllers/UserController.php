@@ -17,12 +17,11 @@ class UserController
     {
         $User = new User();
 
-        $User->setId(1);
+        $User->setId(2);
         $User->setEmail('domangejulien@gmail.com');
         $User->setToken();
         $User->setFirstName('Julien');
         $User->setLastName("DOMANGE");
-        $User->setPassword("Testmdp01");
 
         $User->save();
     }

@@ -11,13 +11,13 @@ class Authentification
     public static function checkAuthentification($token, $email)
     {
         $User = new User();
-        $target=['id', 'token', 'email', 'status'];
+        $target=['id', 'token', 'email'];
         $parameterLike=['token' => $token, 'email' => $email];
 
         $User->selectSimpleResponse($target, $parameterLike);
-        if(empty($User->getToken()) or $User->getStatus()== 0){
+        if(empty($User->getToken())){
             session_destroy();
-            return false;
+            return null;
         }
         $date = new DateTime();
 
@@ -27,6 +27,20 @@ class Authentification
 
         $_SESSION["token"]=$User->getToken();
         $_SESSION["email"]=$User->getEmail();
+        return true;
+    }
+
+    public static function getUserStatus($token, $email)
+    {
+        $target=[
+            'status'
+        ];
+        $parameterLike=[
+            'token' => $token,
+            'email' => $email
+        ];
+        $User = new User();
+        $User->selectSimpleResponse($target, $parameterLike);
         return $User->getStatus();
     }
 }

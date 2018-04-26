@@ -2,7 +2,7 @@
     <div class="row">
         <section class="title-page col-12">
             <div class="marg-container">
-                <h2><a class="btn-sm btn-dark" href="<?php echo $this->slugs["dashboardhome"];?>">Dashboard</a> <span class="additional-message-title">/ Chat</span></h2>
+                <h2><a class="btn-sm btn-dark" href="<?php echo $this->slugs["dashboardhome"];?>">Dashboard</a> <span class="additional-message-title">/ Blog</span></h2>
             </div>
         </section>
     </div>
@@ -14,15 +14,15 @@
                 <section class="content-backoffice">
                     <div class="header-content">
                         <h4>Dernières poublications</h4>
-                        <a href="#" class="desactive"><i class="material-icons">&#xE145;</i></a>
+                        <a href="#" class="active"><i class="material-icons">&#xE145;</i></a>
                     </div>
                     <div class="main-content">
                         <table>
                             <thead>
                             <tr>
                                 <td>Titre</td>
-                                <td>Action</td>
                                 <td>Date publication</td>
+                                <td>Action</td>
                             </tr>
                             </thead>
                             <tbody>
@@ -30,7 +30,14 @@
                                 <tr>
                                     <td class="td-content-text"><?php echo $value["blog_title"];?></td>
                                     <td class="td-content-date"><?php echo $value["blog_datecreate"];?></td>
-                                    <td class="td-content-action"><a href="#" class="btn-sm btn-tosle">View</a> <a href="#" class="btn-sm btn-orange">Edit</a> <a href="#" class="btn-sm btn-red">Depublier</a></td>
+                                    <td class="td-content-action">
+                                        <a href="#" class="btn-sm btn-tosle">View</a>
+                                        <a href="#" class="btn-sm btn-yellow">Edit</a>
+                                        <?php if($value["blog_status"]==1): ?>
+                                            <a href="<?php echo $hrefBlogStatus."/".$value["blog_id"];?>" class="btn-sm btn-red">Depublier</a></td>
+                                        <?php else: ?>
+                                            <a href="<?php echo $hrefBlogStatus."/".$value["blog_id"];?>" class="btn-sm btn-green">Publier</a></td>
+                                        <?php endif; ?>
                                 </tr>
                             <?php endforeach; ?>
                             </tbody>
@@ -43,7 +50,7 @@
             <div>
                 <section class="content-backoffice">
                     <div class="header-content">
-                        <h4>View stats</h4>
+                        <h4>Pas encore fait</h4>
                         <a href="#" class="desactive"><i class="material-icons">&#xE145;</i></a>
                     </div>
                     <div class="main-content">

@@ -27,12 +27,13 @@ class CoreSql{
         if($this->id){
             $set = [];
             foreach ($this->columns as $columnName => $value) {
-                if($this->columns[$columnName] && $columnName != "id") {
+                if(isset($this->columns[$columnName]) && $columnName != "id") {
                     $set[] = strtolower(get_called_class()) . '_' . $columnName . ' = :' . $columnName;
                 } else {
                     unset($this->columns[$columnName]);
                 }
             }
+
             $query = $this->pdo->prepare("UPDATE ".$this->table." SET "
                 . implode(',', $set) ." WHERE ".strtolower(get_called_class())."_id='".$this->id."'");
             $query->execute($this->columns);
@@ -86,6 +87,50 @@ class CoreSql{
                 $this->$tmpString = $value;
             }
         }
+    }
+
+    public function selectOr($target, $parameterLike, $parameterNotLike = null)
+    {
+        foreach ($target as $key => $value){
+            $target[$key] = strtolower(get_called_class()).'_'.$value;
+        }
+        $selectParameter = [];
+        foreach ($parameterLike as $columnName => $value){
+            $selectParameter[] = strtolower(get_called_class()).'_'.$columnName . " LIKE '" . $value . "'";
+        }
+        if(isset($parameterNotLike)) {
+            foreach ($parameterNotLike as $columnName => $value) {
+                $selectParameter[] = strtolower(get_called_class()).'_'.$columnName . " NOT LIKE '" . $value . "'";
+            }
+        }
+        $query = $this->pdo->prepare("
+            SELECT " . implode(',', $target) . " 
+            FROM " . $this->table . " 
+            WHERE " . implode(' OR ', $selectParameter) . "
+        ");
+        $query->execute();
+        return $query->fetchAll();
+    }
+
+    public function selectAllData($target)
+    {
+        foreach ($target as $key => $value){
+            $target[$key] = strtolower(get_called_class()).'_'.$value;
+        }
+        $query = $this->pdo->prepare("
+            SELECT " . implode(',', $target) . " 
+            FROM " . $this->table . "
+        ");
+        $query->execute();
+        return $query->fetchAll();
+    }
+
+    public function getLimitedData($arrayFetchAll, $min, $max){
+        $array = [];
+        for($i = $min; $i < $max; $i++){
+            $array[] = $arrayFetchAll[$i];
+        }
+        return $array;
     }
 
 }

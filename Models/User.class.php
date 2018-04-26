@@ -8,11 +8,11 @@ class User extends CoreSql{
     protected $password;
     protected $token;
     protected $dateconnection;
-    protected $newsletter = 0;
+    protected $newsletter = null;
     protected $fileid = null;
     protected $birthday = null;
 
-    protected $status = 0;
+    protected $status = null;
 
     public function __construct(){
         parent::__construct();
@@ -108,10 +108,6 @@ class User extends CoreSql{
     {
         return $this->status;
     }
-
-
-
-
 
     public function configFormAdd()
     {
