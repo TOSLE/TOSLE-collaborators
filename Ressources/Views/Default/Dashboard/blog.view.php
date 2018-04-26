@@ -90,4 +90,7 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <?php $this->addModal("dashboard_bloc", $configLastsPost);?>
+    </div>
 </section>

@@ -34,7 +34,7 @@ class View
         $this->slugs = $Access->getSlugs($language);
     }
 
-    public function addModal($modal, $config, $errors)
+    public function addModal($modal, $config, $errors = false)
     {
         include "Ressources/Modals/".$modal.".md.php";
     }

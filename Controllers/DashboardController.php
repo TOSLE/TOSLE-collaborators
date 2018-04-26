@@ -74,15 +74,35 @@ class DashboardController
         ];
         $response = $Blog->getLimitedData($Blog->selectAllData($target), 0, 5);
         $data = [];
-        foreach($response as $key => $value){
-            $date = new DateTime($value["blog_datecreate"]);
-            $value["blog_datecreate"] = $date->format("m/j/Y");
-            $data[] = $value;
+        foreach($response as $array){
+            $tmpData = [];
+            foreach ($array as $key => $value){
+                if(!is_numeric($key)){
+                    if($key == "blog_datecreate"){
+                        $date = new DateTime($value);
+                        $tmpData[$key] = $date->format("m/j/Y");
+                    } else {
+                        $tmpData[$key] = $value;
+                    }
+                }
+            }
+            $data[] = $tmpData;
         }
         global $language;
         $Access = new Access();
         $routeBlogStatus = $Access->getSlug("blog_status");
 
+        $lastPostsBloc = $Blog->dashboardBlocLastPosts();
+
+        $lastPostsBloc["data"] = [
+            "table_header" => [
+                "Titre",
+                "Date de publication",
+                "Action"
+            ],
+            "table_body" => $data
+        ];
+        $View->setData("configLastsPost", $lastPostsBloc);
         $View->setData("lastsPublication", $data);
         $View->setData("hrefBlogStatus", $routeBlogStatus["slug"]);
     }
