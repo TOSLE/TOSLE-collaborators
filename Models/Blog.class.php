@@ -136,4 +136,22 @@ class Blog extends CoreSql {
     public function configFormAdd()
     {
     }
+
+    public function dashboardBlocLastPosts()
+    {
+        return $array = [
+            "global" => [
+                "title" => "Dernières publications",
+                "icon_header" => [
+                    //"modal" => [
+                    //    "target" => "idtarget"
+                    //],
+                    "href" => [
+                        "location" => "#"
+                    ],
+                ],
+                "col" => 6
+            ]
+        ];
+    }
 }
