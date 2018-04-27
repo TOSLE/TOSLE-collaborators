@@ -43,6 +43,7 @@
 </div>
 <!-- INCLUDE SCRIPT -->
 <script src="<?php echo DIRNAME;?>Public/Javascripts/Default/menuprofil.js"></script>
+<script src="<?php echo DIRNAME;?>Public/Libraries/Framework/ospaf/js/modals.js"></script>
 <script src="<?php echo DIRNAME;?>Public/Javascripts/Default/Chartjs/mychart.js"></script>
 <!-- INCLUDE SCRIPT -->
 </body>

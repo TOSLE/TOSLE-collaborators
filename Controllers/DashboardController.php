@@ -63,41 +63,92 @@ class DashboardController
         $View->setData("PageName", NAV_DASHBOARD . " " . NAV_DASHBOARD_BLOG);
 
         $Blog = new Blog();
-        $target = [
-            "title",
-            "datecreate",
-            "id",
-            "status"
-        ];
-        $parameter = [
-            "status" => 1
-        ];
-        $response = $Blog->getLimitedData($Blog->selectAllData($target), 0, 5);
-        $data = [];
-        foreach($response as $array){
-            $tmpData = [];
-            foreach ($array as $key => $value){
-                if(!is_numeric($key)){
-                    if($key == "blog_datecreate"){
-                        $date = new DateTime($value);
-                        $tmpData[$key] = $date->format("m/j/Y");
-                    } else {
-                        $tmpData[$key] = $value;
-                    }
-                }
-            }
-            $data[] = $tmpData;
-        }
-        global $language;
-        $Access = new Access();
-        $routeBlogStatus = $Access->getSlug("blog_status");
+        /**
+         * Préparation des différentes routes utilisées dans la vue
+         */
+            $Access = new Access();
+            $routeBlogStatus = $Access->getSlug("blog_status");
 
-        $lastPostsBloc = $Blog->dashboardBlocLastPosts($response);
+        /**
+         * Préparation des requêtes
+         */
+            $target = [
+                "title",
+                "datecreate",
+                "id",
+                "status"
+            ];
+        /**
+         * Construction des données affichées dans le bloc "Dernières publications
+         */
+            $limitedResponses = $Blog->getLimitedData($Blog->selectAllData($target), 0, 5);
+            $globalArray = [
+                "title" => "Dernières publications",
+                "col" => 6,
+                "table_header" => [
+                    "Titre",
+                    "Date de publication",
+                    "Action"
+                ],
+                "icon_header" => [
+                    "modal" => [
+                        "target" => "modal_view_all_posts"
+                    ]
+                ],
+                "table_body_class" => [
+                    1 => "td-content-text",
+                    2 => "td-content-date",
+                    3 => "td-content-action"
+                ],
+                "color_button" => [
+                    1 => "tosle",
+                    2 => "yellow",
+                    3 => "red",
+                    4 => "green"
+                ]
+            ];
+            $lastPostsBloc = $Blog->createArrayDashboardbloc($limitedResponses, $globalArray);
+            $lastPostsBloc["data_href_blog_status"] = $routeBlogStatus["slug"];
 
-        $lastPostsBloc["data_href_blog_status"] = $routeBlogStatus["slug"];
-        $View->setData("configLastsPost", $lastPostsBloc);
-        $View->setData("lastsPublication", $data);
-        $View->setData("hrefBlogStatus", $routeBlogStatus["slug"]);
+        /**
+         * Construction des données affichées dans la modal du bloc dernières publications
+         */
+            $allResponses = $Blog->selectAllData($target);
+            $globalArray = [
+                "title" => "Toutes les publications",
+                "col" => 6,
+                "table_header" => [
+                    "Titre",
+                    "Date de publication",
+                    "Action"
+                ],
+                "icon_header" => [
+                    "modal" => [
+                        "target" => "modal_view_all_posts"
+                    ]
+                ],
+                "table_body_class" => [
+                    1 => "td-content-text",
+                    2 => "td-content-date",
+                    3 => "td-content-action"
+                ],
+                "color_button" => [
+                    1 => "tosle",
+                    2 => "yellow",
+                    3 => "red",
+                    4 => "green"
+                ]
+            ];
+            $allPostsBlog = $Blog->createArrayDashboardbloc($allResponses, $globalArray);
+            $allPostsBlog["data_href_blog_status"] = $routeBlogStatus["slug"];
+            $allPostsBlog["global"]["col"] = 12;
+
+        /**
+         * Affectation des données pour la vue
+         */
+            $View->setData("configLastsPost", $lastPostsBloc);
+            $View->setData("configAllPosts", $allPostsBlog);
+            $View->setData("idModalViewAllPosts", $lastPostsBloc["global"]["icon_header"]["modal"]["target"]);
     }
 
     /**
