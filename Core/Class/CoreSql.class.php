@@ -137,7 +137,7 @@ class CoreSql{
      * @param $array
      * contains response from SQL query
      */
-    public function createDataForDashboardBloc($arrays)
+    public function reorganiseDataForDashboard($arrays)
     {
         $data = [];
         foreach($arrays as $array){
@@ -151,6 +151,66 @@ class CoreSql{
             $data[]=$tmpArray;
         }
         return $data;
+    }
+
+    /**
+     * @param $arrays
+     * @return array
+     * Construction des blocs du dashboard. Il ne faut pas hésiter à réecrire les valeurs par défaut
+     * Le paramètre ["icon_header"] est désactivé par défaut. Il faut le redéfénir dans
+     */
+    public function createArrayDashboardbloc($arraysData, $globalArray)
+    {
+        $data = [];
+        foreach ($this->reorganiseDataForDashboard($arraysData) as $array){
+            $tmpData = [];
+            foreach($array as $key => $value){
+                if($key == "datecreate"){
+                    $tmpData[2] = $value;
+                }
+                if($key == "title"){
+                    $tmpData[1] = $value;
+                }
+                if($key == "status"){
+                    $tmpData[3] = $value;
+                }
+                if($key == "id"){
+                    $tmpData["data_id"] = $value;
+                }
+            }
+            $data[] = $tmpData;
+        }
+        return [
+            /*
+            * "global" => [
+            *    "title" => "Dernières publications",
+            *    "col" => 6,
+            *    "icon_header" => [
+            *        "modal" => [
+            *            "target" => "id_modal"
+            *        ],
+            *        "href" => [
+            *            "location" => "location"
+            *        ]
+            *    ],
+            *    "table_header" => [
+            *        "Titre",
+            *        "Date de publication",
+            *        "Action"
+            *    ],
+            *    "table_body_class" => [
+            *        1 => "td-content-text",
+            *        2 => "td-content-date",
+            *        3 => "td-content-action"
+            *    ]
+            *],
+            */
+            "global" => $globalArray,
+            "data" => [
+                "type" => "latest_post",
+                "array_data" => $data
+            ]
+        ];
     }
 
 }

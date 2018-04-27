@@ -25,19 +25,29 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach($config["data"] as $value):?>
+                        <?php foreach($config["data"]["array_data"] as $value):?>
                             <tr>
-                                <td class="<?php echo $config["global"]["table_body_class"][1];?>"><?php echo $value["data_title"];?></td>
-                                <td class="<?php echo $config["global"]["table_body_class"][2];?>"><?php echo $value["data_post_date"];?></td>
-                                <td class="<?php echo $config["global"]["table_body_class"][3];?>">
-                                    <a href="#" class="btn-sm btn-tosle">View</a>
-                                    <a href="#" class="btn-sm btn-yellow">Edit</a>
-                                    <?php if($value["data_status"]==1): ?>
-                                        <a href="<?php echo $config["data_href_blog_status"]."/".$value["data_id"];?>" class="btn-sm btn-red">Depublier</a></td>
-                                    <?php else: ?>
-                                        <a href="<?php echo $config["data_href_blog_status"]."/".$value["data_id"];?>" class="btn-sm btn-green">Publier</a></td>
-                                    <?php endif; ?>
-                                </td>
+                                <?php if($config["data"]["type"]== "latest_post"):?>
+                                    <?php if(isset($value[1])):?>
+                                        <td class="<?php echo $config["global"]["table_body_class"][1];?>"><?php echo (strlen($value[1]) > 30 )?substr($value[1], 0, 30)."...":$value[1];?></td>
+                                    <?php endif;?>
+                                    <?php if(isset($value[2])): ?>
+                                        <td class="<?php echo $config["global"]["table_body_class"][2];?>"><?php echo $value[2];?></td>
+                                    <?php endif;?>
+                                    <td class="<?php echo $config["global"]["table_body_class"][3];?>">
+                                        <a href="#" class="btn-sm btn-<?php echo $config["global"]["color_button"][1];?>">View</a>
+                                        <a href="#" class="btn-sm btn-<?php echo $config["global"]["color_button"][2];?>">Edit</a>
+                                        <?php if(isset($value[3])): ?>
+                                            <?php if($value[3]):?>
+                                                <a href="<?php echo $config["data_href_blog_status"]."/".$value["data_id"];?>" class="btn-sm btn-<?php echo $config["global"]["color_button"][3];?>">Depublier</a></td>
+                                            <?php else: ?>
+                                                <a href="<?php echo $config["data_href_blog_status"]."/".$value["data_id"];?>" class="btn-sm btn-<?php echo $config["global"]["color_button"][4];?>">Publier</a></td>
+                                            <?php endif;?>
+                                        <?php endif;?>
+                                    </td>
+                                <?php elseif($config["data"]["type"]== "stats"):?>
+                                <?php else: ?>
+                                <?php endif;?>
                             </tr>
                         <?php endforeach;?>
                     </tbody>
