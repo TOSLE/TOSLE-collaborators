@@ -9,43 +9,7 @@
 </div>
 <section id="right-column" class="container">
     <div class="row">
-        <div class="col-6">
-            <div>
-                <section class="content-backoffice">
-                    <div class="header-content">
-                        <h4>Dernières poublications</h4>
-                        <a href="#" class="active"><i class="material-icons">&#xE145;</i></a>
-                    </div>
-                    <div class="main-content">
-                        <table>
-                            <thead>
-                            <tr>
-                                <td>Titre</td>
-                                <td>Date publication</td>
-                                <td>Action</td>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php foreach ($lastsPublication as $key => $value): ?>
-                                <tr>
-                                    <td class="td-content-text"><?php echo $value["blog_title"];?></td>
-                                    <td class="td-content-date"><?php echo $value["blog_datecreate"];?></td>
-                                    <td class="td-content-action">
-                                        <a href="#" class="btn-sm btn-tosle">View</a>
-                                        <a href="#" class="btn-sm btn-yellow">Edit</a>
-                                        <?php if($value["blog_status"]==1): ?>
-                                            <a href="<?php echo $hrefBlogStatus."/".$value["blog_id"];?>" class="btn-sm btn-red">Depublier</a></td>
-                                        <?php else: ?>
-                                            <a href="<?php echo $hrefBlogStatus."/".$value["blog_id"];?>" class="btn-sm btn-green">Publier</a></td>
-                                        <?php endif; ?>
-                                </tr>
-                            <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
-            </div>
-        </div>
+        <?php $this->addModal("dashboard_bloc", $configLastsPost);?>
         <div class="col-6">
             <div>
                 <section class="content-backoffice">
@@ -89,8 +53,5 @@
                 </section>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <?php $this->addModal("dashboard_bloc", $configLastsPost);?>
     </div>
 </section>

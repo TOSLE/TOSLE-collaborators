@@ -36,6 +36,7 @@ class View
 
     public function addModal($modal, $config, $errors = false)
     {
+        global $slugs;
         include "Ressources/Modals/".$modal.".md.php";
     }
 
