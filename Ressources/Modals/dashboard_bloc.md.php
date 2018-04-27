@@ -19,19 +19,29 @@
                 <table>
                     <thead>
                         <tr>
-                            <?php foreach($config["data"]["table_header"] as $value):?>
+                            <?php foreach($config["global"]["table_header"] as $value):?>
                                 <td><?php echo $value; ?></td>
                             <?php endforeach;?>
                         </tr>
                     </thead>
                     <tbody>
+                        <?php foreach($config["data"] as $value):?>
+                            <tr>
+                                <td class="<?php echo $config["global"]["table_body_class"][1];?>"><?php echo $value["data_title"];?></td>
+                                <td class="<?php echo $config["global"]["table_body_class"][2];?>"><?php echo $value["data_post_date"];?></td>
+                                <td class="<?php echo $config["global"]["table_body_class"][3];?>">
+                                    <a href="#" class="btn-sm btn-tosle">View</a>
+                                    <a href="#" class="btn-sm btn-yellow">Edit</a>
+                                    <?php if($value["data_status"]==1): ?>
+                                        <a href="<?php echo $config["data_href_blog_status"]."/".$value["data_id"];?>" class="btn-sm btn-red">Depublier</a></td>
+                                    <?php else: ?>
+                                        <a href="<?php echo $config["data_href_blog_status"]."/".$value["data_id"];?>" class="btn-sm btn-green">Publier</a></td>
+                                    <?php endif; ?>
+                                </td>
+                            </tr>
+                        <?php endforeach;?>
                     </tbody>
                 </table>
-                <?php
-                echo "<pre>";
-                print_r($config);
-                echo "</pre>";
-                ?>
             </div>
         </section>
     </div>

@@ -133,4 +133,24 @@ class CoreSql{
         return $array;
     }
 
+    /**
+     * @param $array
+     * contains response from SQL query
+     */
+    public function createDataForDashboardBloc($arrays)
+    {
+        $data = [];
+        foreach($arrays as $array){
+            $tmpArray = [];
+            foreach($array as $key => $value){
+                if(!is_numeric($key)){
+                    $tmpKey = str_replace(strtolower(get_called_class())."_", "", $key);
+                    $tmpArray[$tmpKey] = $value;
+                }
+            }
+            $data[]=$tmpArray;
+        }
+        return $data;
+    }
+
 }

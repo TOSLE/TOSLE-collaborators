@@ -92,16 +92,9 @@ class DashboardController
         $Access = new Access();
         $routeBlogStatus = $Access->getSlug("blog_status");
 
-        $lastPostsBloc = $Blog->dashboardBlocLastPosts();
+        $lastPostsBloc = $Blog->dashboardBlocLastPosts($response);
 
-        $lastPostsBloc["data"] = [
-            "table_header" => [
-                "Titre",
-                "Date de publication",
-                "Action"
-            ],
-            "table_body" => $data
-        ];
+        $lastPostsBloc["data_href_blog_status"] = $routeBlogStatus["slug"];
         $View->setData("configLastsPost", $lastPostsBloc);
         $View->setData("lastsPublication", $data);
         $View->setData("hrefBlogStatus", $routeBlogStatus["slug"]);
