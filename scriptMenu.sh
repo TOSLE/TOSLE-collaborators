@@ -7,6 +7,7 @@ while :
         echo '[2] Liste des fichiers du repertoire'
         echo '[3] Changement de repertoire'
         echo '[4] Realiser une indexation de un ou plusieurs fichiers'
+        echo '[5] Realiser un commit :'
         echo '[0] Fin ou "q"'
         echo 'Faites votre selection :'
         read ch
@@ -23,6 +24,9 @@ while :
         ;;
         4) echo -n 'Sur quoi voulez-vous realiser votre "git add" ? :' ; read optionAdd
         git add $optionAdd
+        ;;
+        5) echo -n 'Entrez votre message de commit :' ; read messageCommit
+        git commit -m "$messageCommit"
         ;;
         *) echo 'Le choix selectionner ne fonctionne pas'
     esac
