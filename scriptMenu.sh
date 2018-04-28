@@ -22,23 +22,24 @@ while :
         3) echo -n 'Chemin ou nom du repertoire a atteindre :' ; read rep ; cd $rep
         ;;
         git) clear
+            echo ''
             echo 'Bienvenue dans le menu de commande GIT, si vous avez des doutes, merci de ne pas utiliser ce menu !'
             echo 'En effet, ce menu executera les commandes automatiquements, il est peut-etre donc necessaire de connaitre son fonctionnement'
+            echo 'Le menu GIT ne pourra pas vous permettre de changer de branche, ni de merge.'
             while :
                 do
                     BRANCH=$(git symbolic-ref HEAD --short 2> /dev/null)
+                    echo ''
                     echo "Menu GIT -> Branche courante : $BRANCH"
-                    echo '[branch] Choisir une nouvelle branche'
                     echo '[status] Voir le status de la branche courante'
                     echo '[add] Indexation de un ou plusieurs fichiers (git add)'
                     echo '[commit] Realiser une sauvegarde (commit)'
                     echo '[push] Realiser un push sur la branche distance'
+                    echo '[pull] Realiser un pull sur la branche distance'
+                    echo '[rebase] Effectuer un rebase de preproduction-master'
                     echo 'Ecrire un caractere au hasard pour quitter ce menu'
-                    read git
+                    echo -n 'Selection : ' ; read git
                     case $git in
-                        branch) echo -n 'Saisissez le nom de la branche : ' ; read newBranch
-                        git checkout $newBranch
-                        ;;
                         status) git status
                         ;;
                         add) echo -n 'Sur quoi voulez-vous realiser votre "git add" ? :' ; read optionAdd
@@ -60,12 +61,20 @@ while :
                                 o) echo "Push sur la branche : $BRANCH"
                                 echo 'Veuillez renseigner le remote parmis cette liste...'
                                 git remote -v
-                                echo -n 'Votre choix :' ; read remote
+                                echo -n 'Votre choix : ' ; read remote
                                 git push $remote $BRANCH
                                 ;;
                                 *) echo 'Fin de votre operation'
                                 return 0
                             esac
+                        ;;
+                        pull) echo 'Pull en cours'
+                        echo 'Veuillez renseigner le remote parmis cette liste...'
+                        git remote -v
+                        echo -n 'Votre choix : ' ; read remote
+                        git pull $remote $BRANCH
+                        ;;
+                        rebase) git rebase preproduction-master
                         ;;
                         *) return 0
                     esac
