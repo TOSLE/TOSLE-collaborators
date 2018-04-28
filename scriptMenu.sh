@@ -49,10 +49,11 @@ while :
                         echo -n "Voulez-vous poursuivre votre operation ?" ; read confirmPush
                             case $confirmPush in
                                 o) echo "Push sur la branche : $BRANCH"
-                                echo -n 'Veuillez renseigner le remote parmis cette liste :'
+                                echo 'Veuillez renseigner le remote parmis cette liste :'
+                                echo ''
                                 git remote -v
                                 echo -n 'Votre choix :' ; read remote
-                                git push origin $remote
+                                git push $remote $BRANCH
                                 ;;
                                 *) echo 'Fin de votre operation'
                                 return 0
