@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-clear
 while :
     do
+        clear
         echo 'Menu'
         echo '[1] Affichage repertoire courant'
         echo '[2] Liste des fichiers du repertoire'
@@ -51,10 +51,11 @@ while :
                             git commit -m "$messageCommit"
                             ;;
                             *) echo 'Fin de votre operation'
-                            return 0
+                            break
                         esac
                         ;;
                         push)
+                        echo '' ; echo '******** IMPORTANT ********'
                         echo "La branche courante est la suivante : $BRANCH"
                         echo -n "Voulez-vous poursuivre votre operation ? [o/n]" ; read confirmPush
                             case $confirmPush in
@@ -65,7 +66,7 @@ while :
                                 git push $remote $BRANCH
                                 ;;
                                 *) echo 'Fin de votre operation'
-                                return 0
+                                break
                             esac
                         ;;
                         pull) echo 'Pull en cours'
@@ -76,7 +77,7 @@ while :
                         ;;
                         rebase) git rebase preproduction-master
                         ;;
-                        *) return 0
+                        *) break
                     esac
             done
         ;;
