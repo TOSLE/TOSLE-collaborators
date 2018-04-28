@@ -26,16 +26,25 @@ while :
             echo 'En effet, ce menu executera les commandes automatiquements, il est peut-etre donc necessaire de connaitre son fonctionnement'
             while :
                 do
-                    echo 'Menu GIT'
-                    echo '[1] Indexation de un ou plusieurs fichiers (git add)'
-                    echo '[2] Realiser une sauvegarde (commit)'
-                    echo '[3] Realiser un push sur la branche distance'
+                    BRANCH=$(git symbolic-ref HEAD --short 2> /dev/null)
+                    echo "Menu GIT -> Branche courante : $BRANCH"
+                    echo '[branch] Choisir une nouvelle branche'
+                    echo '[status] Voir le status de la branche courante'
+                    echo '[add] Indexation de un ou plusieurs fichiers (git add)'
+                    echo '[commit] Realiser une sauvegarde (commit)'
+                    echo '[push] Realiser un push sur la branche distance'
+                    echo 'Ecrire un caractere au hasard pour quitter ce menu'
                     read git
                     case $git in
-                        1) echo -n 'Sur quoi voulez-vous realiser votre "git add" ? :' ; read optionAdd
+                        branch) echo -n 'Saisissez le nom de la branche : ' ; read newBranch
+                        git checkout $newBranch
+                        ;;
+                        status) git status
+                        ;;
+                        add) echo -n 'Sur quoi voulez-vous realiser votre "git add" ? :' ; read optionAdd
                         git add $optionAdd
                         ;;
-                        2) echo -n 'Il est necessaire de faire une indexation avant de continuer cette operation, continuer ? [o/n]' ; read confirm
+                        commit) echo -n 'Il est necessaire de faire une indexation avant de poursuivre cette operation, continuer ? [o/n]' ; read confirm
                         case $confirm in
                             o) echo -n 'Entrez votre message de commit :' ; read messageCommit
                             git commit -m "$messageCommit"
@@ -44,13 +53,12 @@ while :
                             return 0
                         esac
                         ;;
-                        3) BRANCH=$(git symbolic-ref HEAD --short 2> /dev/null)
+                        push)
                         echo "La branche courante est la suivante : $BRANCH"
-                        echo -n "Voulez-vous poursuivre votre operation ?" ; read confirmPush
+                        echo -n "Voulez-vous poursuivre votre operation ? [o/n]" ; read confirmPush
                             case $confirmPush in
                                 o) echo "Push sur la branche : $BRANCH"
-                                echo 'Veuillez renseigner le remote parmis cette liste :'
-                                echo ''
+                                echo 'Veuillez renseigner le remote parmis cette liste...'
                                 git remote -v
                                 echo -n 'Votre choix :' ; read remote
                                 git push $remote $BRANCH
