@@ -14,6 +14,7 @@ class CoreSql{
         }
 
         $this->table = "tosle_".strtolower(get_called_class());
+        echo $this->table.'<br>';
     }
 
     public function setColumns(){
@@ -134,7 +135,7 @@ class CoreSql{
     }
 
     /**
-     * @param $array
+     * @param $arrays
      * contains response from SQL query
      */
     public function reorganiseDataForDashboard($arrays)
@@ -211,6 +212,11 @@ class CoreSql{
                 "array_data" => $data
             ]
         ];
+    }
+
+    public function count($parameter)
+    {
+
     }
 
 }
