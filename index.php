@@ -13,6 +13,9 @@
         if(file_exists("Core/".$parameter.".php")){
             include("Core/".$parameter.".php");
         }
+        if(file_exists("Repository/".$parameter.".php")){
+            include("Repository/".$parameter.".php");
+        }
     }
     spl_autoload_register("autoLoader");
 

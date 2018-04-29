@@ -62,6 +62,7 @@ class DashboardController
         $View = new View("dashboard", "Dashboard/blog");
         $View->setData("PageName", NAV_DASHBOARD . " " . NAV_DASHBOARD_BLOG);
 
+        $BlogRepository = new BlogRepository();
         $Blog = new Blog();
         /**
          * Préparation des différentes routes utilisées dans la vue
