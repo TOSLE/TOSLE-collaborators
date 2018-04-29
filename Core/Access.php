@@ -70,7 +70,7 @@ class Access
         ]
     ];
 
-    public function getRoute($slug)
+    public function getRoute($slug = false)
     {
         foreach ($this->access as $route){
             if($route["slug"]==$slug){
