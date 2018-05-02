@@ -30,7 +30,7 @@ class BlogController
             $parameter = [
                 "status" => 1
             ];
-            $response = $Blog->selectAnd($target, $parameter);
+            $response = $Blog->getData($target, $parameter);
             $data = [];
             foreach($response as $key => $value){
                 $date = new DateTime($value["blog_datecreate"]);
@@ -92,7 +92,7 @@ class BlogController
         $parameter = [
             "id" => $params["URI"][0]
         ];
-        $Blog->selectSimpleResponse($target, $parameter);
+        $Blog->getOneData($target, $parameter);
         if($Blog->getId()){
             if($Blog->getStatus() > 0){
                 $Blog->setStatus(0);

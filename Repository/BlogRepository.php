@@ -13,8 +13,8 @@ class BlogRepository extends Blog
         parent::__construct();
     }
 
-    public function countNumberOfBlog()
+    public function countNumberOfBlog($target, $parameter = null)
     {
-
+        return $this->countData($target, $parameter)[0];
     }
 }
