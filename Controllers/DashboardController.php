@@ -63,6 +63,7 @@ class DashboardController
         $View->setData("PageName", NAV_DASHBOARD . " " . NAV_DASHBOARD_BLOG);
 
         $BlogRepository = new BlogRepository();
+        echo $BlogRepository->countNumberOfBlog(["id"], ["status" => "1"]);
         $Blog = new Blog();
         /**
          * Préparation des différentes routes utilisées dans la vue

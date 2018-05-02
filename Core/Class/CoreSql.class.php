@@ -3,9 +3,17 @@
 class CoreSql{
 
     private $table;
+    private $columnBase;
     private $pdo;
     private $columns;
 
+    /**
+     * CoreSql constructor.
+     * Ne prend aucun paramètre
+     * Il va initialiser la connexion à la base de données et quelques variables :
+     * @var $table : contient le nom de la table en prenant soin de retirer le "Repository"
+     * @var $columnBase : cette variable est utilisé pour les noms de colonnes, qui commencent tous par le nom de la table. Elle permet notemment d'enlever le "Repository"
+     */
     public function __construct(){
         try {
             $this->pdo = new PDO("mysql:host=".DBHOST.";dbname=".DBNAME.";charset=UTF8",DBUSER,DBPWD);
@@ -13,15 +21,29 @@ class CoreSql{
             die("Erreur SQL".$e->getMessage()."\n");
         }
 
-        $this->table = "tosle_".strtolower(get_called_class());
-        echo $this->table.'<br>';
+        $this->table = "tosle_".strtolower(str_ireplace("Repository","",get_called_class()));
+        $this->columnBase = strtolower(str_ireplace("Repository","",get_called_class()));
     }
 
+    /**
+     * function setColumns
+     * Elle permet de retirer les attributs de CoreSql afin de construire notre requête avec les attributs de nos modèles uniquement
+     */
     public function setColumns(){
         $columnsExcluded = get_class_vars(get_class());
         $this->columns = array_diff_key(get_object_vars($this), $columnsExcluded);
     }
 
+    /**
+     * function save
+     * save permet de gérer deux requêtes :
+     * UPDATE :
+     *      en cas d'un attribut id (non null), la fonction va construire une requête en ne prenant en compte que les attributs
+     *      (non null) afin de mettre à jour les données correspondant à notre idée
+     * INSERT INTO :
+     *      dans le cas où aucun n'id n'est renseigné, la fonction va tout simplement ajouter à notre base de données ce qu'on aura inséré dans
+     *      nos attributs
+     */
     public function save(){
         $this->setColumns();
 
@@ -56,7 +78,27 @@ class CoreSql{
         }
     }
 
-    public function selectAnd($target, $parameterLike, $parameterNotLike = null)
+    /**
+     * function getData
+     * @param array $target
+     * @param array $parameterLike
+     * @param array $parameterNotLike
+     * @return array
+     *
+     * Cette fonction prend deux tableaux en paramètres obligatoire et un facultatif.
+     * $target contient les champs que nous souhaitons récupérer
+     *      Ce tableau est du type :
+     *      "nom de la colonne recherchée"
+     * $parameterLike contient les paramètres permettant de sélectionner des données qui valent à une donnée
+     *      Ce tableau est du type associatif :
+     *      "colonne de trie" => valeur que l'on doit retrouver dans la colonne
+     * $parameterNotLike contient les paramètres que nous ne voulons pas et fonctionne de la même manière que $parameterLike
+     *      Ce tableau est du type associatif :
+     *      "colonne de trie" => valeur que l'on ne doit pas retrouver dans la colonne
+     *
+     * Cette fonction nous retourne un array contenant le résultat de la requête. Le reste est trié par les Repository
+     */
+    public function getData($target, $parameterLike, $parameterNotLike = null)
     {
         foreach ($target as $key => $value){
             $target[$key] = strtolower(get_called_class()).'_'.$value;
@@ -78,10 +120,10 @@ class CoreSql{
         $query->execute();
         return $query->fetchAll();
     }
-
-    public function selectSimpleResponse($target, $parameterLike, $parameterNotLike = null)
+    
+    public function getOneData($target, $parameterLike, $parameterNotLike = null)
     {
-        $response = $this->selectAnd($target, $parameterLike, $parameterNotLike);
+        $response = $this->getData($target, $parameterLike, $parameterNotLike);
         foreach( $response[0] as $key => $value){
             if(!is_numeric($key)) {
                 $tmpString = str_replace(strtolower(get_called_class())."_", "", $key);
@@ -116,7 +158,7 @@ class CoreSql{
     public function selectAllData($target)
     {
         foreach ($target as $key => $value){
-            $target[$key] = strtolower(get_called_class()).'_'.$value;
+            $target[$key] = $this->columnBase.'_'.$value;
         }
         $query = $this->pdo->prepare("
             SELECT " . implode(',', $target) . " 
@@ -124,6 +166,35 @@ class CoreSql{
         ");
         $query->execute();
         return $query->fetchAll();
+    }
+
+    /**
+     * @param array $target
+     * @param array $parameter
+     * @return array
+     */
+    public function countData($target, $parameter = null)
+    {
+        foreach ($target as $key => $value){
+            $target[$key] = $this->columnBase.'_'.$value;
+        }
+        $tmpString = "";
+        if(isset($parameter)){
+            $selectParameter = [];
+            foreach ($parameter as $columnName => $value){
+                $selectParameter[] = $this->columnBase.'_'.$columnName . " LIKE '" . $value . "'";
+            }
+            $tmpString = "WHERE " . implode(' AND ', $selectParameter);
+        }
+
+        $query = $this->pdo->prepare("
+            SELECT COUNT(" . implode(',', $target) . ")
+            FROM " . $this->table . "
+            ".$tmpString."
+        ");
+
+        $query->execute();
+        return $query->fetch();
     }
 
     public function getLimitedData($arrayFetchAll, $min, $max){

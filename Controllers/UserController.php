@@ -39,7 +39,7 @@ class UserController
                 $parameter = [
                     "email" => $params["POST"]["email"]
                 ];
-                $User->selectSimpleResponse($target, $parameter);
+                $User->getOneData($target, $parameter);
                 if(password_verify($params["POST"]["pwd"], $User->getPassword())){
                     $target = [
                         "email",
@@ -49,7 +49,7 @@ class UserController
                         "email" => $params["POST"]["email"],
                         "password" => $User->getPassword()
                     ];
-                    $User->selectSimpleResponse($target, $parameter);
+                    $User->getOneData($target, $parameter);
                     if(!(empty($User->getToken()) && empty($User->getEmail()))){
                         $_SESSION['token'] = $User->getToken();
                         $_SESSION['email'] = $User->getEmail();
