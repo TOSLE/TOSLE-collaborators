@@ -64,7 +64,6 @@ class DashboardController
 
         $BlogRepository = new BlogRepository();
         echo $BlogRepository->countNumberOfBlog(["id"], ["status" => "1"]);
-        $Blog = new Blog();
         /**
          * Préparation des différentes routes utilisées dans la vue
          */
@@ -83,9 +82,10 @@ class DashboardController
         /**
          * Construction des données affichées dans le bloc "Dernières publications
          */
-            $limitedResponses = $Blog->getLimitedData($Blog->selectAllData($target), 0, 5);
+            $BlogRepository->setOrderByParameter(["id" => "DESC"]);
+            $BlogRepository->setLimitParameter(5);
             $globalArray = [
-                "title" => "Dernières publications",
+                "title" => "Derniers articles",
                 "col" => 6,
                 "table_header" => [
                     "Titre",
@@ -109,13 +109,13 @@ class DashboardController
                     4 => "green"
                 ]
             ];
-            $lastPostsBloc = $Blog->createArrayDashboardbloc($limitedResponses, $globalArray);
+            $lastPostsBloc = $BlogRepository->createArrayDashboardbloc($BlogRepository->getData($target), $globalArray);
             $lastPostsBloc["data_href_blog_status"] = $routeBlogStatus["slug"];
 
         /**
          * Construction des données affichées dans la modal du bloc dernières publications
          */
-            $allResponses = $Blog->selectAllData($target);
+            $allResponses = $BlogRepository->getData($target);
             $globalArray = [
                 "title" => "Toutes les publications",
                 "col" => 6,
@@ -141,7 +141,7 @@ class DashboardController
                     4 => "green"
                 ]
             ];
-            $allPostsBlog = $Blog->createArrayDashboardbloc($allResponses, $globalArray);
+            $allPostsBlog = $BlogRepository->createArrayDashboardbloc($allResponses, $globalArray);
             $allPostsBlog["data_href_blog_status"] = $routeBlogStatus["slug"];
             $allPostsBlog["global"]["col"] = 12;
 

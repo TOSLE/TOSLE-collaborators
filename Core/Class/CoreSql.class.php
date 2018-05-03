@@ -6,6 +6,9 @@ class CoreSql{
     private $columnBase;
     private $pdo;
     private $columns;
+    private $whereParameter;
+    private $limitParameter;
+    private $orderByParameter;
 
     /**
      * CoreSql constructor.
@@ -14,7 +17,8 @@ class CoreSql{
      * @var $table : contient le nom de la table en prenant soin de retirer le "Repository"
      * @var $columnBase : cette variable est utilisé pour les noms de colonnes, qui commencent tous par le nom de la table. Elle permet notemment d'enlever le "Repository"
      */
-    public function __construct(){
+    public function __construct()
+    {
         try {
             $this->pdo = new PDO("mysql:host=".DBHOST.";dbname=".DBNAME.";charset=UTF8",DBUSER,DBPWD);
         } catch(Exception $e){
@@ -29,7 +33,8 @@ class CoreSql{
      * function setColumns
      * Elle permet de retirer les attributs de CoreSql afin de construire notre requête avec les attributs de nos modèles uniquement
      */
-    public function setColumns(){
+    public function setColumns()
+    {
         $columnsExcluded = get_class_vars(get_class());
         $this->columns = array_diff_key(get_object_vars($this), $columnsExcluded);
     }
@@ -44,7 +49,8 @@ class CoreSql{
      *      dans le cas où aucun n'id n'est renseigné, la fonction va tout simplement ajouter à notre base de données ce qu'on aura inséré dans
      *      nos attributs
      */
-    public function save(){
+    public function save()
+    {
         $this->setColumns();
 
         if($this->id){
@@ -79,93 +85,157 @@ class CoreSql{
     }
 
     /**
+     * @param array $parameterAnd
+     * @param array $parameterOr
+     * Cette fonction sert à construire notre 'WHERE' pour notre requête en base de données
+     * Le tableau $parameterAnd ou $parameterOr doi être de cette forme :
+     * $parameterAnd = [
+     *      "LIKE" => [
+     *          "columnName1" => $value,
+     *          "columnName2" => $value2
+     *      ],
+     *      "NOT LIKE" => [
+     *          "columnName1" => $value,
+     *          "columnName2" => $value2
+     *      ]
+     * ]
+     * $parameterOr = [
+     *      "LIKE" => [
+     *          "columnName1" => $value,
+     *          "columnName2" => $value2
+     *      ],
+     *      "NOT LIKE" => [
+     *          "columnName1" => $value,
+     *          "columnName2" => $value2
+     *      ]
+     * ]
+     */
+    public function setWhereParameter($parameterAnd, $parameterOr = null)
+    {
+        $tmpArrayAnd = [];
+        if(isset($parameterAnd["LIKE"])){
+            foreach ($parameterAnd["LIKE"] as $columnName => $value){
+                $tmpArrayAnd[] = $this->columnBase.'_'.$columnName . " LIKE '" . $value . "'";
+            }
+        }
+        if(isset($parameterAnd["NOT LIKE"])){
+            foreach ($parameterAnd["NOT LIKE"] as $columnName => $value){
+                $tmpArrayAnd[] = $this->columnBase.'_'.$columnName . " NOT LIKE '" . $value . "'";
+            }
+        }
+        $tmpArrayOr = [];
+        if(isset($parameterOr["LIKE"])){
+            foreach ($parameterOr["LIKE"] as $columnName => $value){
+                $tmpArrayOr[] = $this->columnBase.'_'.$columnName . " LIKE '" . $value . "'";
+            }
+        }
+        if(isset($parameterOr["NOT LIKE"])){
+            foreach ($parameterOr["NOT LIKE"] as $columnName => $value){
+                $tmpArrayOr[] = $this->columnBase.'_'.$columnName . " NOT LIKE '" . $value . "'";
+            }
+        }
+
+        $tmpString = "";
+        if(!empty($tmpArrayAnd)){
+            $tmpString = implode(' AND ', $tmpArrayAnd);
+            if(!empty($tmpArrayOr)){
+                $tmpString .= ' OR ' . implode(' OR ', $tmpArrayOr);
+            }
+        } else {
+            if(!empty($tmpArrayOr)){
+                $tmpString = implode(' OR ', $tmpArrayOr);
+            }
+        }
+
+        if(!empty($tmpString)){
+            $this->whereParameter = "";
+        }
+        $this->whereParameter = "WHERE ".$tmpString;
+    }
+
+    function setLimitParameter($limit, $offset = 0)
+    {
+        $this->limitParameter = "";
+        if(is_numeric($limit)){
+            $this->limitParameter = "LIMIT " . $limit;
+            if(is_numeric($offset)){
+                $this->limitParameter .= " OFFSET " . $offset;
+            }
+        }
+    }
+
+    function setOrderByParameter($arrayParameter)
+    {
+        $this->orderByParameter = "";
+        $tmpArray = [];
+        foreach($arrayParameter as $columnName => $typeOrder){
+            $tmpArray[] = $this->columnBase.'_'.$columnName. " " .$typeOrder;
+        }
+        $this->orderByParameter = "ORDER BY " . implode(', ', $tmpArray);
+    }
+    /**
      * function getData
      * @param array $target
-     * @param array $parameterLike
-     * @param array $parameterNotLike
      * @return array
      *
      * Cette fonction prend deux tableaux en paramètres obligatoire et un facultatif.
      * $target contient les champs que nous souhaitons récupérer
      *      Ce tableau est du type :
      *      "nom de la colonne recherchée"
-     * $parameterLike contient les paramètres permettant de sélectionner des données qui valent à une donnée
-     *      Ce tableau est du type associatif :
-     *      "colonne de trie" => valeur que l'on doit retrouver dans la colonne
-     * $parameterNotLike contient les paramètres que nous ne voulons pas et fonctionne de la même manière que $parameterLike
-     *      Ce tableau est du type associatif :
-     *      "colonne de trie" => valeur que l'on ne doit pas retrouver dans la colonne
      *
      * Cette fonction nous retourne un array contenant le résultat de la requête. Le reste est trié par les Repository
      */
-    public function getData($target, $parameterLike, $parameterNotLike = null)
-    {
-        foreach ($target as $key => $value){
-            $target[$key] = strtolower(get_called_class()).'_'.$value;
-        }
-        $selectParameter = [];
-        foreach ($parameterLike as $columnName => $value){
-            $selectParameter[] = strtolower(get_called_class()).'_'.$columnName . " LIKE '" . $value . "'";
-        }
-        if(isset($parameterNotLike)) {
-            foreach ($parameterNotLike as $columnName => $value) {
-                $selectParameter[] = strtolower(get_called_class()).'_'.$columnName . " NOT LIKE '" . $value . "'";
-            }
-        }
-        $query = $this->pdo->prepare("
-            SELECT " . implode(',', $target) . " 
-            FROM " . $this->table . " 
-            WHERE " . implode(' AND ', $selectParameter) . "
-        ");
-        $query->execute();
-        return $query->fetchAll();
-    }
-    
-    public function getOneData($target, $parameterLike, $parameterNotLike = null)
-    {
-        $response = $this->getData($target, $parameterLike, $parameterNotLike);
-        foreach( $response[0] as $key => $value){
-            if(!is_numeric($key)) {
-                $tmpString = str_replace(strtolower(get_called_class())."_", "", $key);
-                $this->$tmpString = $value;
-            }
-        }
-    }
-
-    public function selectOr($target, $parameterLike, $parameterNotLike = null)
-    {
-        foreach ($target as $key => $value){
-            $target[$key] = strtolower(get_called_class()).'_'.$value;
-        }
-        $selectParameter = [];
-        foreach ($parameterLike as $columnName => $value){
-            $selectParameter[] = strtolower(get_called_class()).'_'.$columnName . " LIKE '" . $value . "'";
-        }
-        if(isset($parameterNotLike)) {
-            foreach ($parameterNotLike as $columnName => $value) {
-                $selectParameter[] = strtolower(get_called_class()).'_'.$columnName . " NOT LIKE '" . $value . "'";
-            }
-        }
-        $query = $this->pdo->prepare("
-            SELECT " . implode(',', $target) . " 
-            FROM " . $this->table . " 
-            WHERE " . implode(' OR ', $selectParameter) . "
-        ");
-        $query->execute();
-        return $query->fetchAll();
-    }
-
-    public function selectAllData($target)
+    public function getData($target)
     {
         foreach ($target as $key => $value){
             $target[$key] = $this->columnBase.'_'.$value;
         }
+
         $query = $this->pdo->prepare("
             SELECT " . implode(',', $target) . " 
-            FROM " . $this->table . "
+            FROM " . $this->table . " 
+            ".$this->whereParameter."
+            ".$this->orderByParameter."
+            ".$this->limitParameter."
         ");
+
         $query->execute();
+
+        // On vide le parameter WHERE pour éviter tout problème sur requête qui viendrait après et où on ne veut pas de parametre
+        $this->whereParameter = "";
+        $this->orderByParameter = "";
+        $this->limitParameter = "";
+
         return $query->fetchAll();
+    }
+
+    public function getOneData($target)
+    {
+        foreach ($target as $key => $value){
+            $target[$key] = $this->columnBase.'_'.$value;
+        }
+
+        $query = $this->pdo->prepare("
+            SELECT " . implode(',', $target) . " 
+            FROM " . $this->table . " 
+            ".$this->whereParameter."
+            ".$this->orderByParameter."
+            ".$this->limitParameter."
+        ");
+
+        $query->execute();
+
+        // On vide le parameter WHERE pour éviter tout problème sur requête qui viendrait après et où on ne veut pas de parametre
+        $this->whereParameter = "";
+        $this->orderByParameter = "";
+        $this->limitParameter = "";
+
+        foreach($query->fetch() as $key => $value){
+            if(!is_numeric($key)) {
+                $tmpString = str_replace($this->columnBase."_", "", $key);
+                $this->$tmpString = $value;
+            }
+        }
     }
 
     /**
@@ -197,14 +267,6 @@ class CoreSql{
         return $query->fetch();
     }
 
-    public function getLimitedData($arrayFetchAll, $min, $max){
-        $array = [];
-        for($i = $min; $i < $max; $i++){
-            $array[] = $arrayFetchAll[$i];
-        }
-        return $array;
-    }
-
     /**
      * @param $arrays
      * contains response from SQL query
@@ -216,7 +278,7 @@ class CoreSql{
             $tmpArray = [];
             foreach($array as $key => $value){
                 if(!is_numeric($key)){
-                    $tmpKey = str_replace(strtolower(get_called_class())."_", "", $key);
+                    $tmpKey = str_replace($this->columnBase."_", "", $key);
                     $tmpArray[$tmpKey] = $value;
                 }
             }
