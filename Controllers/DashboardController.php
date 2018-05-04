@@ -110,7 +110,7 @@ class DashboardController
                 ]
             ];
             $lastPostsBloc = $BlogRepository->createArrayDashboardbloc($BlogRepository->getData($target), $globalArray);
-            $lastPostsBloc["data_href_blog_status"] = $routeBlogStatus["slug"];
+            $lastPostsBloc["data_href_blog_status"] = "blog/status";
 
         /**
          * Construction des données affichées dans la modal du bloc dernières publications

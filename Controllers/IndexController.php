@@ -27,4 +27,8 @@ class IndexController
     {
         echo "Vous n'avez apparemment pas les droits d'accès à ce lien";
     }
+    function notfoundAction($params)
+    {
+        echo "Oops ! Le lien semple ne pas exister ! :/";
+    }
 }
