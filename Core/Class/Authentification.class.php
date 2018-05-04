@@ -41,6 +41,6 @@ class Authentification
         ];
         $User = new User();
         $User->getOneData($target, $parameterLike);
-        return $User->getStatus();
+        return intval($User->getStatus());
     }
 }
