@@ -14,8 +14,10 @@ class DashboardBlocModal
     private $tableBodyClass;
     private $tableBodyContent = "No table body founded";
     private $colSizeBloc = 6;
-    private $buttonValue = ["red" => "Value not found"];
-    private $specificButton = null;
+    private $actionButtonStatus = null;
+    private $actionButtonView = null;
+    private $actionButtonEdit = null;
+    private $typeArrayData = false;
 
     /**
      * @param string $title
@@ -83,28 +85,14 @@ class DashboardBlocModal
     }
 
     /**
-     * @param string $color
-     * @param string $value
-     * Contient la couleur des buttons du Framework OSPAF et le texte à afficher.
-     * La couleur ne se limite qu'à ce qui est après le "btn-"
-     */
-    public function setButtonValue($color, $value)
-    {
-        $this->buttonValue[$color] = $value;
-    }
-
-    /**
-     * @param string $key
-     * @param array $array
+     * @param $condition
+     * @param string $string
      * Contient la clé d'identification (utile dans le fichier dashboard_bloc.md.php)
-     * Le tableau en deuxième paramètre doit être du type associatif :
-     * [
-     *      condition_true_or_false (0 ou 1) => $value
-     * ]
+     * Contient le texte à afficher
      */
-    public function setSpecificButton($key, $array)
+    public function setActionButtonStatus($condition, $string = "Publish")
     {
-        $this->specificButton[$key] = $array;
+        $this->actionButtonStatus[$condition] = $string;
     }
 
     /**
@@ -112,29 +100,38 @@ class DashboardBlocModal
      * @param string $tableName
      * Contient le tableau non formaté retourné par la fonction getData() de la class CoreSql
      * Le deuxième paramètre est le nom de la table en base
+     * Si le nom de table n'est pas renseigné, c'est que notre tableau de donnée est fait main. Il n'est
+     * donc pas nécessaire de faire un traitement
      */
-    public function setTableBodyContent($arraysData, $tableName)
+    public function setTableBodyContent($arraysData, $tableName = null)
     {
-        $data = [];
-        foreach ($this->reorganiseDataForDashboard($arraysData, $tableName) as $array){
-            $tmpData = [];
-            foreach($array as $key => $value){
-                if($key == "datecreate"){
-                    $tmpData[2] = $value;
+        if(isset($tableName)){
+            $data = [];
+            foreach ($this->reorganiseDataForDashboard($arraysData, $tableName) as $array){
+                $tmpData = [];
+                foreach($array as $key => $value){
+                    if($key == "datecreate"){
+                        $tmpData[2] = $value;
+                    }
+                    if($key == "title"){
+                        $tmpData[1] = $value;
+                    }
+                    if($key == "status"){
+                        $tmpData["actionButtonStatus"] = $value;
+                    }
+                    if($key == "id"){
+                        $tmpData["actionButtonView"] = $value;
+                        $tmpData["actionButtonEdit"] = $value;
+                    }
                 }
-                if($key == "title"){
-                    $tmpData[1] = $value;
-                }
-                if($key == "status"){
-                    $tmpData["specificButton_publishStatus"] = $value;
-                }
-                if($key == "id"){
-                    $tmpData["data_id"] = $value;
-                }
+                $data[] = $tmpData;
             }
-            $data[] = $tmpData;
+            $this->typeArrayData = true;
+            $this->tableBodyContent = $data;
+        } else {
+            $this->typeArrayData = false;
+            $this->tableBodyContent = $arraysData;
         }
-        $this->tableBodyContent = $data;
     }
 
     /**
@@ -159,6 +156,10 @@ class DashboardBlocModal
         return $arrayReturn;
     }
 
+    /**
+     * @return array
+     * Retourne notre tableau à envoyer à notre modal
+     */
     public function getArrayData()
     {
         return [
@@ -168,11 +169,14 @@ class DashboardBlocModal
                 "icon_header" => $this->iconHeader,
                 "table_header" => $this->tableHeaderContent,
                 "table_body_class" => $this->tableBodyClass,
-                "button_value" => $this->buttonValue,
-                "specific_button" => $this->specificButton
+                "column_action_button" => [
+                    "actionButtonStatus" => $this->actionButtonStatus,
+                    "actionButtonView" => $this->actionButtonView,
+                    "actionButtonEdit" => $this->actionButtonEdit
+                ]
             ],
             "data" => [
-                "type" => "latest_post",
+                "database" => $this->typeArrayData,
                 "array_data" => $this->tableBodyContent
             ]
         ];
