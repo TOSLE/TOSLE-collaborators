@@ -59,11 +59,11 @@ class DashboardController
      */
     function blogAction($params)
     {
+
         $View = new View("dashboard", "Dashboard/blog");
         $View->setData("PageName", NAV_DASHBOARD . " " . NAV_DASHBOARD_BLOG);
 
         $BlogRepository = new BlogRepository();
-        echo $BlogRepository->countNumberOfBlog(["id"], ["status" => "1"]);
         /**
          * Préparation des différentes routes utilisées dans la vue
          */
@@ -90,7 +90,8 @@ class DashboardController
                 "table_header" => [
                     "Titre",
                     "Date de publication",
-                    "Action"
+                    "Action",
+                    "Action 2"
                 ],
                 "icon_header" => [
                     "modal" => [
@@ -112,6 +113,32 @@ class DashboardController
             $lastPostsBloc = $BlogRepository->createArrayDashboardbloc($BlogRepository->getData($target), $globalArray);
             $lastPostsBloc["data_href_blog_status"] = "blog/status";
 
+            $DashboardBlocModal = new DashboardBlocModal();
+            $DashboardBlocModal->setTitle("Mon premier modal entier");
+            $DashboardBlocModal->setIconHeader("modal_view_all_posts", "modal");
+            $DashboardBlocModal->setTableHeader([
+                1 => "Titre",
+                2 => "Date de publication",
+                3 => "Action"
+            ]);
+            $DashboardBlocModal->setColSizeBloc(6);
+            $DashboardBlocModal->setButtonValue("tosle", "View");
+            $DashboardBlocModal->setButtonValue("yellow", "Edit");
+            $DashboardBlocModal->setSpecificButton("specificButton_publishStatus", [
+                0 => "Depublier",
+                1 => "Publier"
+            ]);
+            $DashboardBlocModal->setTableBodyClass([
+                1 => "td-content-text",
+                2 => "td-content-date",
+                3 => "td-content-action"
+            ]);
+            $DashboardBlocModal->setTableBodyContent($BlogRepository->getData($target), "blog");
+            $returnedArray = $DashboardBlocModal->getArrayData();
+            echo "<pre>";
+            print_r($returnedArray);
+            echo "</pre>";
+            $View->setData("returnedArray", $returnedArray);
         /**
          * Construction des données affichées dans la modal du bloc dernières publications
          */

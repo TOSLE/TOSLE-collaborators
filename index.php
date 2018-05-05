@@ -7,14 +7,17 @@
         if(file_exists("Core/Class/".$parameter.".class.php")){
             include("Core/Class/".$parameter.".class.php");
         }
-        if(file_exists("Models/".$parameter.".class.php")){
-            include("Models/".$parameter.".class.php");
+        if(file_exists("Core/Models/".$parameter.".class.php")){
+            include("Core/Models/".$parameter.".class.php");
+        }
+        if(file_exists("Core/ModalsRepository/".$parameter.".php")){
+            include("Core/ModalsRepository/".$parameter.".php");
         }
         if(file_exists("Core/".$parameter.".php")){
             include("Core/".$parameter.".php");
         }
-        if(file_exists("Repository/".$parameter.".php")){
-            include("Repository/".$parameter.".php");
+        if(file_exists("Core/Repository/".$parameter.".php")){
+            include("Core/Repository/".$parameter.".php");
         }
     }
     spl_autoload_register("autoLoader");

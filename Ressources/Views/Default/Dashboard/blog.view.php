@@ -9,7 +9,7 @@
 </div>
 <section id="right-column" class="container">
     <div class="row">
-        <?php $this->addModal("dashboard_bloc", $configLastsPost);?>
+
         <div class="col-6">
             <div>
                 <section class="content-backoffice">
@@ -53,6 +53,9 @@
                 </section>
             </div>
         </div>
+    </div>
+    <div class="row">
+        <?php $this->addModal("dashboard_bloc", $returnedArray);?>
     </div>
 </section>
 
