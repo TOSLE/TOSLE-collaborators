@@ -61,6 +61,12 @@ class Access
             "controller" => "user",
             "action" => "add",
             "security" => false
+        ],
+        "view_blog_article" => [ // change status blog
+            "slug" => "view-blog-article",
+            "controller" => "user",
+            "action" => "add",
+            "security" => false
         ]
     ];
 
@@ -108,5 +114,13 @@ class Access
             return $this->backOffice[$route];
         }
         return -1;
+    }
+    public function getPathBackOffice($language)
+    {
+        $data = [];
+        foreach ($this->backOffice as $key => $value){
+            $data[$key] = "".DIRNAME.substr($language,0,2)."/".$key;
+        }
+        return $data;
     }
 }

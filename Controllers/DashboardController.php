@@ -59,119 +59,52 @@ class DashboardController
      */
     function blogAction($params)
     {
+        global $language;
 
         $View = new View("dashboard", "Dashboard/blog");
+        $BlogRepository = new BlogRepository();
+        $Access = new Access();
+        $hrefBackOffice = $Access->getPathBackOffice($language);
+        /**
+         * On set les variables importantes de la vue (le pagename)
+         */
         $View->setData("PageName", NAV_DASHBOARD . " " . NAV_DASHBOARD_BLOG);
 
-        $BlogRepository = new BlogRepository();
-        /**
-         * Préparation des différentes routes utilisées dans la vue
-         */
-            $Access = new Access();
-            $routeBlogStatus = $Access->getSlug("blog_status");
 
-        /**
-         * Préparation des requêtes
-         */
-            $target = [
-                "title",
-                "datecreate",
-                "id",
-                "status"
-            ];
-        /**
-         * Construction des données affichées dans le bloc "Dernières publications
-         */
-            $BlogRepository->setOrderByParameter(["id" => "DESC"]);
-            $BlogRepository->setLimitParameter(5);
-            $globalArray = [
-                "title" => "Derniers articles",
-                "col" => 6,
-                "table_header" => [
-                    "Titre",
-                    "Date de publication",
-                    "Action",
-                    "Action 2"
-                ],
-                "icon_header" => [
-                    "modal" => [
-                        "target" => "modal_view_all_posts"
-                    ]
-                ],
-                "table_body_class" => [
-                    1 => "td-content-text",
-                    2 => "td-content-date",
-                    3 => "td-content-action"
-                ],
-                "color_button" => [
-                    1 => "tosle",
-                    2 => "yellow",
-                    3 => "red",
-                    4 => "green"
-                ]
-            ];
-            $lastPostsBloc = $BlogRepository->createArrayDashboardbloc($BlogRepository->getData($target), $globalArray);
-            $lastPostsBloc["data_href_blog_status"] = "blog/status";
+        $latestArticles = $BlogRepository->getModalLatestArticle();
+        $View->setData("latestBlogArticle", $latestArticles);
 
-            $DashboardBlocModal = new DashboardBlocModal();
-            $DashboardBlocModal->setTitle("Mon premier modal entier");
-            $DashboardBlocModal->setIconHeader("modal_view_all_posts", "modal");
-            $DashboardBlocModal->setTableHeader([
-                1 => "Titre",
-                2 => "Date de publication",
-                3 => "Action"
-            ]);
-            $DashboardBlocModal->setColSizeBloc(6);
-            $DashboardBlocModal->setActionButtonStatus(0, "Publish");
-            $DashboardBlocModal->setActionButtonStatus(1, "Unpublish");
-
-            $DashboardBlocModal->setTableBodyClass([
-                1 => "td-content-text",
-                2 => "td-content-date",
-                3 => "td-content-action"
-            ]);
-            $DashboardBlocModal->setTableBodyContent($BlogRepository->getData($target), "blog");
-            $returnedArray = $DashboardBlocModal->getArrayData();
-            $View->setData("returnedArray", $returnedArray);
-        /**
-         * Construction des données affichées dans la modal du bloc dernières publications
-         */
-            $allResponses = $BlogRepository->getData($target);
-            $globalArray = [
-                "title" => "Toutes les publications",
-                "col" => 6,
-                "table_header" => [
-                    "Titre",
-                    "Date de publication",
-                    "Action"
-                ],
-                "icon_header" => [
-                    "modal" => [
-                        "target" => "modal_view_all_posts"
-                    ]
-                ],
-                "table_body_class" => [
-                    1 => "td-content-text",
-                    2 => "td-content-date",
-                    3 => "td-content-action"
-                ],
-                "color_button" => [
-                    1 => "tosle",
-                    2 => "yellow",
-                    3 => "red",
-                    4 => "green"
-                ]
-            ];
-            $allPostsBlog = $BlogRepository->createArrayDashboardbloc($allResponses, $globalArray);
-            $allPostsBlog["data_href_blog_status"] = $routeBlogStatus["slug"];
-            $allPostsBlog["global"]["col"] = 12;
+        $StatsBlog = new DashboardBlocModal();
+        $StatsBlog->setTitle("Blog Analytics");
+        $StatsBlog->setTableHeader([
+            1 => "Type",
+            2 => "Value"
+        ]);
+        $StatsBlog->setTableBodyClass([
+            1 => "td-content-text",
+            2 => "td-content-number"
+        ]);
+        $StatsBlog->setColSizeBloc(6);
+        $StatsBlog->setTableBodyContent([
+            0 => [
+                1 => "Nombre d'article",
+                2 => $BlogRepository->countNumberOfBlog(["id"])
+            ],
+            1 => [
+                1 => "Nombre d'article publié",
+                2 => $BlogRepository->countNumberOfBlog(["id"], ["status" => 1])
+            ],
+            2 => [
+                1 => "Nombre d'article dépublié",
+                2 => $BlogRepository->countNumberOfBlog(["id"], ["status" => 0])
+            ]
+        ]);
+        $View->setData("statsBlog", $StatsBlog->getArrayData());
 
         /**
          * Affectation des données pour la vue
          */
-            $View->setData("configLastsPost", $lastPostsBloc);
-            $View->setData("configAllPosts", $allPostsBlog);
-            $View->setData("idModalViewAllPosts", $lastPostsBloc["global"]["icon_header"]["modal"]["target"]);
+            $View->setData("idModalViewAllPosts", $latestArticles["global"]["icon_header"]["modal"]["target"]);
     }
 
     /**
