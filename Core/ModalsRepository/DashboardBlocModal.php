@@ -14,10 +14,11 @@ class DashboardBlocModal
     private $tableBodyClass;
     private $tableBodyContent = "No table body founded";
     private $colSizeBloc = 6;
-    private $actionButtonStatus = null;
     private $actionButtonView = null;
     private $actionButtonEdit = null;
+    private $actionButtonStatus = null;
     private $typeArrayData = false;
+    private $arrayHref = null;
 
     /**
      * @param string $title
@@ -85,14 +86,14 @@ class DashboardBlocModal
     }
 
     /**
-     * @param $condition
-     * @param string $string
+     * @param $key
+     * @param array $array
      * Contient la clé d'identification (utile dans le fichier dashboard_bloc.md.php)
      * Contient le texte à afficher
      */
-    public function setActionButtonStatus($condition, $string = "Publish")
+    public function setActionButtonStatus($key, $array)
     {
-        $this->actionButtonStatus[$condition] = $string;
+        $this->actionButtonStatus[$key] = $array;
     }
 
     /**
@@ -111,25 +112,24 @@ class DashboardBlocModal
                 $tmpData = [];
                 foreach($array as $key => $value){
                     if($key == "datecreate"){
-                        $tmpData[2] = $value;
+                        $tmpData["data_datecreate"] = $value;
                     }
                     if($key == "title"){
-                        $tmpData[1] = $value;
+                        $tmpData["data_title"] = $value;
                     }
                     if($key == "status"){
-                        $tmpData["actionButtonStatus"] = $value;
+                        $tmpData["data_status"] = $value;
                     }
                     if($key == "id"){
-                        $tmpData["actionButtonView"] = $value;
-                        $tmpData["actionButtonEdit"] = $value;
+                        $tmpData["data_id"] = $value;
                     }
                 }
                 $data[] = $tmpData;
             }
-            $this->typeArrayData = true;
+            $this->typeArrayData = 1;
             $this->tableBodyContent = $data;
         } else {
-            $this->typeArrayData = false;
+            $this->typeArrayData = 0;
             $this->tableBodyContent = $arraysData;
         }
     }
@@ -156,6 +156,29 @@ class DashboardBlocModal
         return $arrayReturn;
     }
 
+    public function setArrayHref($key, $action)
+    {
+        $this->arrayHref[$key] = $action;
+    }
+
+    /**
+     * @param string $value
+     * Set une valeur au texte affiché par le bouton
+     */
+    public function setActionButtonEdit($value)
+    {
+        $this->actionButtonEdit = $value;
+    }
+
+    /**
+     * @param string $value
+     * Set une valeur au texte affiché par le bouton
+     */
+    public function setActionButtonView($value)
+    {
+        $this->actionButtonView = $value;
+    }
+
     /**
      * @return array
      * Retourne notre tableau à envoyer à notre modal
@@ -170,14 +193,15 @@ class DashboardBlocModal
                 "table_header" => $this->tableHeaderContent,
                 "table_body_class" => $this->tableBodyClass,
                 "column_action_button" => [
-                    "actionButtonStatus" => $this->actionButtonStatus,
                     "actionButtonView" => $this->actionButtonView,
-                    "actionButtonEdit" => $this->actionButtonEdit
+                    "actionButtonEdit" => $this->actionButtonEdit,
+                    "actionButtonStatus" => $this->actionButtonStatus
                 ]
             ],
             "data" => [
                 "database" => $this->typeArrayData,
-                "array_data" => $this->tableBodyContent
+                "array_data" => $this->tableBodyContent,
+                "data_href" => $this->arrayHref
             ]
         ];
     }
