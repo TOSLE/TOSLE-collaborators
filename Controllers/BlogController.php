@@ -73,12 +73,7 @@ class BlogController
      */
     function addAction($params)
     {
-        $Blog = new Blog();
-        $Blog->setTitle('Test');
-        $Blog->setContent('lorem ipj jgjhg hjg jg jfgf fhgf gf gjhgjhg jg f fgfd hgf hfgghfhg dhgf hfsum');
-        $Blog->setStatus(1);
-        $Blog->setType(1);
-        $Blog->save();
+        $View = new View("dashboard", "Dashboard/add_article_blog");
     }
 
     function statusAction($params)

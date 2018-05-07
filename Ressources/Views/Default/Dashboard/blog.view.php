@@ -9,8 +9,9 @@
 </div>
 <section id="right-column" class="container">
     <div class="row">
-            <?php $this->addModal("dashboard_bloc", $latestBlogArticle);?>
+            <?php $this->addModal("dashboard_bloc", $blocGeneral);?>
             <?php $this->addModal("dashboard_bloc", $statsBlog);?>
+            <?php $this->addModal("dashboard_bloc", $latestBlogArticle);?>
 </section>
 
 <div id="<?php echo $idModalViewAllPosts;?>" class="fade-background" data-type="parent-modal">
