@@ -30,8 +30,7 @@ class View
         }
 
         $Access = new Access();
-        global $language;
-        $this->slugs = $Access->getSlugs($language);
+        $this->slugs = $Access->getSlugs() + $Access->getPathBackOffice();
     }
 
     public function addModal($modal, $config, $errors = false)

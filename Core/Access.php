@@ -71,7 +71,8 @@ class Access
     ];
 
     private $backOffice = [
-        "blog/status" => 2
+        "blog/status" => 2,
+        "blog/add" => 2
     ];
 
     public function getRoute($slug = false)
@@ -93,8 +94,9 @@ class Access
         }
         return $this->access["default"];
     }
-    public function getSlugs($language)
+    public function getSlugs()
     {
+        global $language;
         $data = [];
         foreach ($this->access as $key => $value){
             $data[$key] = "".DIRNAME.substr($language,0,2)."/".$value["slug"];
@@ -115,8 +117,9 @@ class Access
         }
         return -1;
     }
-    public function getPathBackOffice($language)
+    public function getPathBackOffice()
     {
+        global $language;
         $data = [];
         foreach ($this->backOffice as $key => $value){
             $data[$key] = "".DIRNAME.substr($language,0,2)."/".$key;

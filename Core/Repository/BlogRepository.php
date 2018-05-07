@@ -39,9 +39,8 @@ class BlogRepository extends Blog
 
     public function getModalLatestArticle()
     {
-        global $language;
         $Access = new Access();
-        $hrefBackOffice = $Access->getPathBackOffice($language);
+        $hrefBackOffice = $Access->getPathBackOffice();
         $ViewLatestBloc = new DashboardBlocModal();
         $ViewLatestBloc->setTitle("View latest post on your blog");
         $ViewLatestBloc->setIconHeader("modal_view_all_posts", "modal");
@@ -50,7 +49,7 @@ class BlogRepository extends Blog
             2 => "Date de publication",
             3 => "Action"
         ]);
-        $ViewLatestBloc->setColSizeBloc(6);
+        $ViewLatestBloc->setColSizeBloc(12);
         $ViewLatestBloc->setActionButtonStatus(0, [
             "color" => "red",
             "text" => "Publish",
