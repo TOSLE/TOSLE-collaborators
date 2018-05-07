@@ -3,7 +3,7 @@
         <section class="content-backoffice">
             <div class="header-content">
                 <h4><?php echo (empty($config["global"]["title"]))?"No title in config array, please insert title":$config["global"]["title"];?></h4>
-                <?php if($config["global"]["icon_header"]):?>
+                <?php if(!empty($config["global"]["icon_header"])):?>
                     <?php foreach($config["global"]["icon_header"] as $key => $value): ?>
                         <?php if($key == "modal"):?>
                             <a href="#" class="target-modal active" data-type="open-modal" data-target="<?php echo $value["target"];?>"><i class="material-icons">&#xE145;</i></a>
@@ -25,31 +25,62 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach($config["data"]["array_data"] as $value):?>
-                            <tr>
-                                <?php if($config["data"]["type"]== "latest_post"):?>
-                                    <?php if(isset($value[1])):?>
-                                        <td class="<?php echo $config["global"]["table_body_class"][1];?>"><?php echo (strlen($value[1]) > 30 )?substr($value[1], 0, 30)."...":$value[1];?></td>
-                                    <?php endif;?>
-                                    <?php if(isset($value[2])): ?>
-                                        <td class="<?php echo $config["global"]["table_body_class"][2];?>"><?php echo $value[2];?></td>
-                                    <?php endif;?>
-                                    <td class="<?php echo $config["global"]["table_body_class"][3];?>">
-                                        <a href="#" class="btn-sm btn-<?php echo $config["global"]["color_button"][1];?>">View</a>
-                                        <a href="#" class="btn-sm btn-<?php echo $config["global"]["color_button"][2];?>">Edit</a>
-                                        <?php if(isset($value[3])): ?>
-                                            <?php if($value[3]):?>
-                                                <a href="<?php echo $config["data_href_blog_status"]."/".$value["data_id"];?>" class="btn-sm btn-<?php echo $config["global"]["color_button"][3];?>">Depublier</a></td>
-                                            <?php else: ?>
-                                                <a href="<?php echo $config["data_href_blog_status"]."/".$value["data_id"];?>" class="btn-sm btn-<?php echo $config["global"]["color_button"][4];?>">Publier</a></td>
-                                            <?php endif;?>
+                        <?php if(!empty($config["data"]["database"])):?>
+                            <?php foreach($config["data"]["array_data"] as $key => $arrayValue):?>
+                                <tr>
+                                    <?php foreach($config["global"]["table_body_class"] as $className):?>
+                                        <?php if($className == "td-content-text"):?>
+                                            <td class="<?php echo $className;?>"><?php echo $arrayValue["data_title"];?></td>
                                         <?php endif;?>
-                                    </td>
-                                <?php elseif($config["data"]["type"]== "stats"):?>
-                                <?php else: ?>
-                                <?php endif;?>
-                            </tr>
-                        <?php endforeach;?>
+                                        <?php if($className == "td-content-date"):?>
+                                            <td class="<?php echo $className;?>"><?php echo $arrayValue["data_datecreate"];?></td>
+                                        <?php endif;?>
+                                        <?php if($className == "td-content-action"):?>
+                                            <td class="<?php echo $className;?>">
+                                                <?php foreach($config["global"]["column_action_button"] as $typeButton => $content):?>
+                                                    <?php if($typeButton == "actionButtonEdit"):?>
+                                                        <?php if(isset($content)):?>
+                                                            <a href="<?php echo $config["data"]["data_href"]["edit"]."/".$arrayValue["data_id"];?>" class="btn-sm btn-orange"><?php echo $content;?></a>
+                                                        <?php endif;?>
+                                                    <?php endif;?>
+                                                    <?php if($typeButton == "actionButtonView"):?>
+                                                        <?php if(isset($content)):?>
+                                                            <a href="<?php echo $config["data"]["data_href"]["view"]."/".$arrayValue["data_id"];?>" class="btn-sm btn-tosle"><?php echo $content;?></a>
+                                                        <?php endif;?>
+                                                    <?php endif;?>
+                                                    <?php if($typeButton == "actionButtonStatus"):?>
+                                                        <?php if(isset($content)):?>
+                                                            <?php if($content[$arrayValue["data_status"]]["type"]=="href"):?>
+                                                                <a href="<?php echo $content[$arrayValue["data_status"]]["target"].$arrayValue["data_id"];?>" class="btn-sm btn-<?php echo $content[$arrayValue["data_status"]]["color"];?>"><?php echo $content[$arrayValue["data_status"]]["text"];?></a>
+                                                            <?php else:?>
+                                                                <button class="target-modal btn-sm btn-<?php echo $content[$arrayValue["data_status"]]["color"];?>" data-type="open-modal" data-target="<?php echo $content[$arrayValue["data_status"]]["target"];?>"><?php echo $content[$arrayValue["data_status"]]["text"];?></button>
+                                                            <?php endif;?>
+
+                                                        <?php endif;?>
+                                                    <?php endif;?>
+                                                <?php endforeach;?>
+                                            </td>
+                                        <?php endif;?>
+                                    <?php endforeach;?>
+                                </tr>
+                            <?php endforeach;?>
+                        <?php else:?>
+                            <?php foreach($config["data"]["array_data"] as $arrayValue):?>
+                                <tr>
+                                    <?php foreach($arrayValue as $key => $value):?>
+                                        <?php if($key == "button_action"):?>
+                                            <?php if($value["type"]=="href"):?>
+                                                <td class="td-content-action"><a href="<?php echo $value["target"];?>" class="btn-sm btn-<?php echo $value["color"];?>"><?php echo $value["text"];?></a></td>
+                                            <?php else:?>
+                                                <td class="td-content-action"><button class="target-modal" data-type="open-modal" data-target="<?php echo $value["target"];?>"><?php echo $value["text"];?></button></td>
+                                            <?php endif;?>
+                                        <?php else: ?>
+                                            <td class="<?php echo $config["global"]["table_body_class"][$key];?>"><?php echo $value;?></td>
+                                        <?php endif;?>
+                                    <?php endforeach;?>
+                                </tr>
+                            <?php endforeach;?>
+                        <?php endif;?>
                     </tbody>
                 </table>
             </div>
