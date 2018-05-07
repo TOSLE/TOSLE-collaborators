@@ -5,7 +5,7 @@ class Access
         "default" => [ // Redirect 404
             "slug" => "404",
             "controller" => "index",
-            "action" => "index",
+            "action" => "notfound",
             "security" => false
         ],
         "homepage" => [ // TOSLE Homepage
@@ -15,7 +15,7 @@ class Access
             "security" => false
         ],
         "bloghome" => [ // Blog  homepage
-            "slug" => "blog",
+            "slug" => "blog-homepage",
             "controller" => "blog",
             "action" => "index",
             "security" => false
@@ -45,21 +45,15 @@ class Access
             "security" => false
         ],
         "dashboardhome" => [ // Dashboard homepage
-            "slug" => "admin",
+            "slug" => "dashboard-homepage",
             "controller" => "dashboard",
             "action" => "index",
             "security" => false
         ],
         "dashboard_blog" => [ // Dashboard blog homepage
-            "slug" => "blog-dashboard",
+            "slug" => "dashboard-blog",
             "controller" => "dashboard",
             "action" => "blog",
-            "security" => 2
-        ],
-        "blog_status" => [ // change status blog
-            "slug" => "blog-status",
-            "controller" => "blog",
-            "action" => "status",
             "security" => 2
         ],
         "add_user" => [ // change status blog
@@ -67,7 +61,17 @@ class Access
             "controller" => "user",
             "action" => "add",
             "security" => false
+        ],
+        "view_blog_article" => [ // change status blog
+            "slug" => "view-blog-article",
+            "controller" => "user",
+            "action" => "add",
+            "security" => false
         ]
+    ];
+
+    private $backOffice = [
+        "blog/status" => 2
     ];
 
     public function getRoute($slug = false)
@@ -102,5 +106,21 @@ class Access
     {
         $route = $this->getRoute($slug);
         return $route["security"];
+    }
+
+    public function getBackOfficeRoute($route)
+    {
+        if(isset($this->backOffice[$route])){
+            return $this->backOffice[$route];
+        }
+        return -1;
+    }
+    public function getPathBackOffice($language)
+    {
+        $data = [];
+        foreach ($this->backOffice as $key => $value){
+            $data[$key] = "".DIRNAME.substr($language,0,2)."/".$key;
+        }
+        return $data;
     }
 }

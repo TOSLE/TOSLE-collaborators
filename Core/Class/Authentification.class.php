@@ -14,7 +14,7 @@ class Authentification
         $target=['id', 'token', 'email'];
         $parameterLike=['token' => $token, 'email' => $email];
 
-        $User->selectSimpleResponse($target, $parameterLike);
+        $User->getOneData($target, $parameterLike);
         if(empty($User->getToken())){
             session_destroy();
             return null;
@@ -40,7 +40,7 @@ class Authentification
             'email' => $email
         ];
         $User = new User();
-        $User->selectSimpleResponse($target, $parameterLike);
-        return $User->getStatus();
+        $User->getOneData($target, $parameterLike);
+        return intval($User->getStatus());
     }
 }

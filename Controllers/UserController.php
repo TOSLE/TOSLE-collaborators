@@ -37,19 +37,25 @@ class UserController
                     "password"
                 ];
                 $parameter = [
-                    "email" => $params["POST"]["email"]
+                    "LIKE" => [
+                        "email" => $params["POST"]["email"]
+                    ]
                 ];
-                $User->selectSimpleResponse($target, $parameter);
+                $User->setWhereParameter($parameter);
+                $User->getOneData($target);
                 if(password_verify($params["POST"]["pwd"], $User->getPassword())){
                     $target = [
                         "email",
                         "token"
                     ];
                     $parameter = [
-                        "email" => $params["POST"]["email"],
-                        "password" => $User->getPassword()
+                        "LIKE" => [
+                            "email" => $params["POST"]["email"],
+                            "password" => $User->getPassword()
+                        ]
                     ];
-                    $User->selectSimpleResponse($target, $parameter);
+                    $User->setWhereParameter($parameter);
+                    $User->getOneData($target);
                     if(!(empty($User->getToken()) && empty($User->getEmail()))){
                         $_SESSION['token'] = $User->getToken();
                         $_SESSION['email'] = $User->getEmail();

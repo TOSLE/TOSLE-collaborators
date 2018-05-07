@@ -7,14 +7,17 @@
         if(file_exists("Core/Class/".$parameter.".class.php")){
             include("Core/Class/".$parameter.".class.php");
         }
-        if(file_exists("Models/".$parameter.".class.php")){
-            include("Models/".$parameter.".class.php");
+        if(file_exists("Core/Models/".$parameter.".class.php")){
+            include("Core/Models/".$parameter.".class.php");
+        }
+        if(file_exists("Core/ModalsRepository/".$parameter.".php")){
+            include("Core/ModalsRepository/".$parameter.".php");
         }
         if(file_exists("Core/".$parameter.".php")){
             include("Core/".$parameter.".php");
         }
-        if(file_exists("Repository/".$parameter.".php")){
-            include("Repository/".$parameter.".php");
+        if(file_exists("Core/Repository/".$parameter.".php")){
+            include("Core/Repository/".$parameter.".php");
         }
     }
     spl_autoload_register("autoLoader");
@@ -47,20 +50,17 @@
         $slug = $uriExploded[1];
     }
     $accessParams = $Acces->getRoute(strtolower($slug));
-    
+
     $language = (empty($uriExploded[0]))?"en-EN":strtolower($uriExploded[0])."-".strtoupper($uriExploded[0]);
     $controller = (empty($accessParams["controller"]))?"ClassController": ucfirst(strtolower($accessParams["controller"]))."Controller";
     $action = (empty($accessParams["action"]))?"indexAction": strtolower($accessParams["action"])."Action";
-
-    unset($uriExploded[0]);
-    unset($uriExploded[1]);
-
 
     /**
      * @params userConnected
      * Récupère le status de l'utilisateur et vérifie si l'authentification est réussie
      */
     $userConnected = false;
+    $userStatus = false;
     if(isset($_SESSION['token']) && isset($_SESSION['email'])){
         if(($userConnected = Authentification::checkAuthentification($_SESSION['token'], $_SESSION['email']))){
             $userStatus = Authentification::getUserStatus($_SESSION['token'], $_SESSION['email']);
@@ -69,12 +69,42 @@
         }
     }
 
-    if(($Acces->getSecurity($accessParams["slug"])) && ($userStatus < $Acces->getSecurity($accessParams["slug"]))){
+    if($userStatus < $Acces->getSecurity($accessParams["slug"])){
         $controller = "IndexController";
         $action = "accessAction";
     }
 
+    /**
+     * Il est possible que l'URI renseigné soit sous le format domaine/langue/controller/action
+     * On va donc tester s'il ne s'agit pas de ce genre d'URI
+     */
+    if(isset($uriExploded[1]) && isset($uriExploded[2])){
+        $backOfficeRoute = $Acces->getBackOfficeRoute(strtolower($uriExploded[1]).'/'.strtolower($uriExploded[2]));
+        if(!(intval($userStatus) < intval($backOfficeRoute)) && $backOfficeRoute != -1){
+            $controller = ucfirst(strtolower($uriExploded[1]))."Controller";
+            $action = strtolower($uriExploded[2])."Action";
+            unset($uriExploded[2]);
+        } else {
+            if(!($backOfficeRoute == -1)){
+                $controller = "IndexController";
+                $action = "accessAction";
+                unset($uriExploded[2]);
+            } else {
+                $controller = "IndexController";
+                $action = "notfoundAction";
+                unset($uriExploded[2]);
+            }
+        }
+    }
+    /* Mieux vaut vivre 1 an commme un coq que 100 ans comme une poule */
+
+        /**
+         * On créer notre tableau de paramètre qui contiendra nos GET, POST et paramètres en URI
+         */
+        unset($uriExploded[0]);
+        unset($uriExploded[1]);
     $parameter = ["POST" => $_POST, "GET" => $_GET, "URI" => array_values($uriExploded)];
+
     if(file_exists("Core/Language/".$language."/conf.lang.php")){
         include "Core/Language/".$language."/conf.lang.php";
     } else {

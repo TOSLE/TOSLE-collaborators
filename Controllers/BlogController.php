@@ -28,9 +28,12 @@ class BlogController
                 "id"
             ];
             $parameter = [
-                "status" => 1
+                "LIKE" => [
+                    "status" => 1
+                ]
             ];
-            $response = $Blog->selectAnd($target, $parameter);
+            $Blog->setWhereParameter($parameter, null);
+            $response = $Blog->getData($target, $parameter);
             $data = [];
             foreach($response as $key => $value){
                 $date = new DateTime($value["blog_datecreate"]);
@@ -90,9 +93,12 @@ class BlogController
             "status"
         ];
         $parameter = [
-            "id" => $params["URI"][0]
+            "LIKE" => [
+                "id" => $params["URI"][0]
+            ]
         ];
-        $Blog->selectSimpleResponse($target, $parameter);
+        $Blog->setWhereParameter($parameter);
+        $Blog->getOneData($target);
         if($Blog->getId()){
             if($Blog->getStatus() > 0){
                 $Blog->setStatus(0);
