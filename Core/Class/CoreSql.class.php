@@ -206,6 +206,26 @@ class CoreSql{
         $this->orderByParameter = "";
         $this->limitParameter = "";
 
+        $this->setColumns();
+        $className = ucfirst($this->columnBase);
+        $tmpArray = [];
+        foreach($query->fetchAll() as $data){
+            $object = new $className();
+            foreach ($data as $key => $value){
+                foreach($this->columns as $columnName => $content){
+                    if(str_ireplace($this->columnBase."_","",$key) == $columnName){
+                        $tmpColumn = "set".ucfirst($columnName);
+                        $object->$tmpColumn($content);
+                    }
+                }
+            }
+            $tmpArray[] = $object;
+        }
+
+        echo "<pre>";
+        print_r($tmpArray);
+        echo "</pre>";
+
         return $query->fetchAll();
     }
 
