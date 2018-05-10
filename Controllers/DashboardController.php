@@ -128,15 +128,15 @@ class DashboardController
         $StatsBlog->setTableBodyContent([
             0 => [
                 1 => "Nombre d'article",
-                2 => $BlogRepository->countNumberOfBlog(["id"])
+                2 => $BlogRepository->countNumberOfBlog()
             ],
             1 => [
                 1 => "Nombre d'article publié",
-                2 => $BlogRepository->countNumberOfBlog(["id"], ["status" => 1])
+                2 => $BlogRepository->countNumberOfBlogByStatus(1)
             ],
             2 => [
                 1 => "Nombre d'article dépublié",
-                2 => $BlogRepository->countNumberOfBlog(["id"], ["status" => 0])
+                2 => $BlogRepository->countNumberOfBlogByStatus(0)
             ]
         ]);
         $View->setData("statsBlog", $StatsBlog->getArrayData());

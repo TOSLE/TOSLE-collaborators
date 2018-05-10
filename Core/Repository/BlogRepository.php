@@ -13,9 +13,22 @@ class BlogRepository extends Blog
         parent::__construct();
     }
 
-    public function countNumberOfBlog($target, $parameter = null)
+    public function countNumberOfBlog()
     {
-        return $this->countData($target, $parameter)[0];
+        return $this->countData(["id"])[0];
+    }
+
+    /**
+     * @param int $status
+     */
+    public function countNumberOfBlogByStatus($status = 1)
+    {
+        $this->setWhereParameter([
+            "LIKE" => [
+                "status" => $status
+            ]
+        ]);
+        return $this->countData(["id"])[0];
     }
 
     public function getLatestArticle($number)
