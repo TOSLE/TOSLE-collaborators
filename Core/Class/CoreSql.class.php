@@ -206,26 +206,6 @@ class CoreSql{
         $this->orderByParameter = "";
         $this->limitParameter = "";
 
-        $this->setColumns();
-        $className = ucfirst($this->columnBase);
-        $tmpArray = [];
-        foreach($query->fetchAll() as $data){
-            $object = new $className();
-            foreach ($data as $key => $value){
-                foreach($this->columns as $columnName => $content){
-                    if(str_ireplace($this->columnBase."_","",$key) == $columnName){
-                        $tmpColumn = "set".ucfirst($columnName);
-                        $object->$tmpColumn($content);
-                    }
-                }
-            }
-            $tmpArray[] = $object;
-        }
-
-        echo "<pre>";
-        print_r($tmpArray);
-        echo "</pre>";
-
         return $query->fetchAll();
     }
 
@@ -263,113 +243,28 @@ class CoreSql{
      * @param array $parameter
      * @return array
      */
-    public function countData($target, $parameter = null)
+    public function countData($target)
     {
         foreach ($target as $key => $value){
             $target[$key] = $this->columnBase.'_'.$value;
         }
-        $tmpString = "";
-        if(isset($parameter)){
-            $selectParameter = [];
-            foreach ($parameter as $columnName => $value){
-                $selectParameter[] = $this->columnBase.'_'.$columnName . " LIKE '" . $value . "'";
-            }
-            $tmpString = "WHERE " . implode(' AND ', $selectParameter);
-        }
 
         $query = $this->pdo->prepare("
-            SELECT COUNT(" . implode(',', $target) . ")
-            FROM " . $this->table . "
-            ".$tmpString."
+            SELECT count(" . implode(',', $target) . ") 
+            FROM " . $this->table . " 
+            ".$this->whereParameter."
+            ".$this->orderByParameter."
+            ".$this->limitParameter."
         ");
 
         $query->execute();
+
+        // On vide le parameter WHERE pour éviter tout problème sur requête qui viendrait après et où on ne veut pas de parametre
+        $this->whereParameter = "";
+        $this->orderByParameter = "";
+        $this->limitParameter = "";
+
         return $query->fetch();
-    }
-
-    /**
-     * @param $arrays
-     * contains response from SQL query
-     */
-    public function reorganiseDataForDashboard($arrays)
-    {
-        $data = [];
-        foreach($arrays as $array){
-            $tmpArray = [];
-            foreach($array as $key => $value){
-                if(!is_numeric($key)){
-                    $tmpKey = str_replace($this->columnBase."_", "", $key);
-                    $tmpArray[$tmpKey] = $value;
-                }
-            }
-            $data[]=$tmpArray;
-        }
-        return $data;
-    }
-
-    /**
-     * @param $arrays
-     * @return array
-     * Construction des blocs du dashboard. Il ne faut pas hésiter à réecrire les valeurs par défaut
-     * Le paramètre ["icon_header"] est désactivé par défaut. Il faut le redéfénir dans
-     */
-    public function createArrayDashboardbloc($arraysData, $globalArray)
-    {
-        $data = [];
-        foreach ($this->reorganiseDataForDashboard($arraysData) as $array){
-            $tmpData = [];
-            foreach($array as $key => $value){
-                if($key == "datecreate"){
-                    $tmpData[2] = $value;
-                }
-                if($key == "title"){
-                    $tmpData[1] = $value;
-                }
-                if($key == "status"){
-                    $tmpData[3] = $value;
-                }
-                if($key == "id"){
-                    $tmpData["data_id"] = $value;
-                }
-            }
-            $data[] = $tmpData;
-        }
-        return [
-            /*
-            * "global" => [
-            *    "title" => "Dernières publications",
-            *    "col" => 6,
-            *    "icon_header" => [
-            *        "modal" => [
-            *            "target" => "id_modal"
-            *        ],
-            *        "href" => [
-            *            "location" => "location"
-            *        ]
-            *    ],
-            *    "table_header" => [
-            *        "Titre",
-            *        "Date de publication",
-            *        "Action"
-            *    ],
-            *    "table_body_class" => [
-            *        1 => "td-content-text",
-            *        2 => "td-content-date",
-            *        3 => "td-content-action"
-            *    ]
-            *],
-            */
-            "global" => $globalArray,
-            "data" => [
-                "type" => "latest_post",
-                "array_data" => $data
-            ]
-        ];
-    }
-
-    public function count($parameter)
-    {
-
     }
 
 }
