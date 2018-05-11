@@ -1,7 +1,0 @@
-RewriteEngine On
-RewriteBase /A-GITHUB/TOSLE-collaborators/
-
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME} !-f
-
-RewriteRule ^(.*)$ index.php [L,QSA]
