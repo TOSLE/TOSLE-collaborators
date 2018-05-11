@@ -52,7 +52,6 @@ class CoreSql{
     public function save()
     {
         $this->setColumns();
-
         if($this->id){
             $set = [];
             foreach ($this->columns as $columnName => $value) {
@@ -65,6 +64,11 @@ class CoreSql{
 
             $query = $this->pdo->prepare("UPDATE ".$this->table." SET "
                 . implode(',', $set) ." WHERE ".strtolower(get_called_class())."_id='".$this->id."'");
+
+
+
+
+
             $query->execute($this->columns);
         }	else {
             unset($this->columns["id"]);
@@ -76,6 +80,7 @@ class CoreSql{
                     unset($this->columns[$key]);
                 }
             }
+
             $query = $this->pdo->prepare("INSERT INTO ".$this->table." ("
                 . implode(',', $columnName) .") VALUES (:"
                 . implode(',:', array_keys($this->columns)) .
