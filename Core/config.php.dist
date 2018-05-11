@@ -1,7 +1,7 @@
 <?php
     define("DBUSER","");
     define("DBPWD","");
-    define("DBHOST",""); #Container name database mysql
+    define("DBHOST","");
     define("DBNAME","");
     define("DBPORT","");
     define("GUSER", "");
