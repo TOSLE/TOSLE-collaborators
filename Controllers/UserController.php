@@ -27,13 +27,13 @@ class UserController
 
     public function connectAction($params)
     {
-        $user = new User();
-        $form = $user->configFormConnect();
+        $User = new User();
+        $form = $User->configFormConnect();
         $errors = [];
         if(!empty($params["POST"])) {
             $errors = Validate::checkForm($form, $params["POST"]);
             if (empty($errors)) {
-                $user->setPassword($params["POST"]["pwd"]);
+                $User->setPassword($params["POST"]["pwd"]);
                 $target = [
                     "password"
                 ];
