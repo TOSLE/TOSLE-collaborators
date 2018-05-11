@@ -1,4 +1,4 @@
-<?php 
+<?php
 	session_start();
     require "Core/config.php";
 
@@ -96,7 +96,6 @@
             }
         }
     }
-    /* Mieux vaut vivre 1 an commme un coq que 100 ans comme une poule */
 
         /**
          * On créer notre tableau de paramètre qui contiendra nos GET, POST et paramètres en URI

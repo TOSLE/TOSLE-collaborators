@@ -1,6 +1,5 @@
 .idea/
 
-
 Core/config.php
 node_modules/
 .htaccess

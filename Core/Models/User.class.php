@@ -119,15 +119,13 @@ class User extends CoreSql{
                     "type"=>"text",
                     "placeholder"=>"Votre prénom",
                     "required"=>true,
-                    "maxString"=>100,
-                    "minString"=>2
+                    "maxString"=>100
                 ],
                 "lastname"=>[
                     "type"=>"text",
                     "placeholder"=>"Votre nom",
                     "required"=>true,
-                    "maxString"=>100,
-                    "minString"=>2
+                    "maxString"=>100
                 ],
                 "email"=>[
                     "type"=>"email",
@@ -145,19 +143,11 @@ class User extends CoreSql{
                     "placeholder"=>"Votre mot de passe",
                     "required"=>true
                 ],
-                "pwdConfirme"=>[
+                "pwdConfirm"=>[
                     "type"=>"password",
                     "placeholder"=>"Confirmez votre mot de passe",
                     "required"=>true,
                     "confirm"=>"pwd"
-                ],
-                "age"=>[
-                    "type"=>"number",
-                    "placeholder"=>"Votre age",
-                    "required"=>true,
-                    "maxNum"=>100,
-                    "minNum"=>18,
-                    "class"=>"formulaire fomulaire-age"
                 ]
             ]
         ];
@@ -171,12 +161,12 @@ class User extends CoreSql{
                 "email"=>[
                     "type"=>"email",
                     "placeholder"=>"Votre email",
-                    "required"=>true
+                    "required"=>true,
                 ],
                 "pwd"=>[
                     "type"=>"password",
                     "placeholder"=>"Votre mot de passe",
-                    "required"=>true
+                    "required"=>true,
                 ]
             ]
         ];

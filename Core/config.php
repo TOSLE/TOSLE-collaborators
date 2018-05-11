@@ -1,11 +1,11 @@
 <?php
-    define("DBUSER","");
+    define("DBUSER","root");
     define("DBPWD","");
-    define("DBHOST",""); #Container name database mysql
-    define("DBNAME","");
-    define("DBPORT","");
-    define("GUSER", "");
-    define("GPWD", "");
+    define("DBHOST","localhost"); #le nom du container docker qui gère la bdd
+    define("DBNAME","tosle_database");
+    define("DBPORT","3306");
+    define("GUSER", "contact.tosle@gmail.com");
+    define("GPWD", "ostosle2018");
 
     $scriptDS = (DIRECTORY_SEPARATOR == "\\")?"/":DIRECTORY_SEPARATOR;
     define("DS", $scriptDS);
