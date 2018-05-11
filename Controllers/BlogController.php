@@ -33,11 +33,15 @@ class BlogController
                 ]
             ];
             $Blog->setWhereParameter($parameter, null);
-            $response = $Blog->getData($target, $parameter);
+            $array = $Blog->getData($target);
             $data = [];
-            foreach($response as $key => $value){
-                $date = new DateTime($value["blog_datecreate"]);
+            foreach($array as $content){
+                $date = new DateTime($content->getDatecreate());
                 $value["blog_datecreate"] = $date->format("l jS \of F Y H:i");
+                $value["blog_title"] = $content->getTitle();
+                $value["blog_content"] = $content->getContent();
+                $value["blog_status"] = $content->getStatus();
+                $value["blog_id"] = $content->getId();
                 $data[] = $value;
             }
             $View->setData("data", $data);
