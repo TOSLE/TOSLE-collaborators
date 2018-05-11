@@ -64,11 +64,6 @@ class CoreSql{
 
             $query = $this->pdo->prepare("UPDATE ".$this->table." SET "
                 . implode(',', $set) ." WHERE ".strtolower(get_called_class())."_id='".$this->id."'");
-
-
-
-
-
             $query->execute($this->columns);
         }	else {
             unset($this->columns["id"]);
