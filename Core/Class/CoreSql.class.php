@@ -206,7 +206,23 @@ class CoreSql{
         $this->orderByParameter = "";
         $this->limitParameter = "";
 
-        return $query->fetchAll();
+        $queryResponse = $query->fetchAll();
+
+        $tableName = ucfirst($this->columnBase);
+        $arrayData = [];
+        foreach($queryResponse as $contentArray){
+            $tmpData = [];
+            $object = new $tableName();
+            foreach($contentArray as $keyArray => $value){
+                if(!is_numeric($keyArray)){
+                    $tmpString = "set".ucfirst(str_ireplace($this->columnBase."_", "", $keyArray));
+                    $object->$tmpString($value);
+                }
+            }
+            $arrayData[] = $object;
+        }
+
+        return $arrayData;
     }
 
     public function getOneData($target)

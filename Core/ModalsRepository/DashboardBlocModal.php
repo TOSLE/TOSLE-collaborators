@@ -108,22 +108,21 @@ class DashboardBlocModal
     {
         if(isset($tableName)){
             $data = [];
-            foreach ($this->reorganiseDataForDashboard($arraysData, $tableName) as $array){
+            foreach($arraysData as $content){
                 $tmpData = [];
-                foreach($array as $key => $value){
-                    if($key == "datecreate"){
-                        $tmpData["data_datecreate"] = $value;
-                    }
-                    if($key == "title"){
-                        $tmpData["data_title"] = $value;
-                    }
-                    if($key == "status"){
-                        $tmpData["data_status"] = $value;
-                    }
-                    if($key == "id"){
-                        $tmpData["data_id"] = $value;
-                    }
+                if(!empty($content->getDatecreate())){
+                    $tmpData["data_datecreate"] = $content->getDatecreate();
                 }
+                if(!empty($content->getTitle())){
+                    $tmpData["data_title"] = $content->getTitle();
+                }
+                if(!empty($content->getStatus()) || $content->getStatus() == 0){
+                    $tmpData["data_status"] = $content->getStatus();
+                }
+                if(!empty($content->getId())){
+                    $tmpData["data_id"] = $content->getId();
+                }
+
                 $data[] = $tmpData;
             }
             $this->typeArrayData = 1;
@@ -132,28 +131,6 @@ class DashboardBlocModal
             $this->typeArrayData = 0;
             $this->tableBodyContent = $arraysData;
         }
-    }
-
-    /**
-     * @param array $arraysData
-     * @param string $tableName
-     * Contient le tableau non formaté retourné par la fonction getData() de la class CoreSql
-     * Le deuxième paramètre est le nom de la table en base
-     * @return array formated
-     */
-    private function reorganiseDataForDashboard($arraysData, $tableName){
-        $arrayReturn = [];
-        foreach($arraysData as $array){
-            $tmpArray = [];
-            foreach($array as $key => $value){
-                if(!is_numeric($key)){
-                    $tmpKey = str_replace(strtolower($tableName)."_", "", $key);
-                    $tmpArray[$tmpKey] = $value;
-                }
-            }
-            $arrayReturn[]=$tmpArray;
-        }
-        return $arrayReturn;
     }
 
     public function setArrayHref($key, $action)
