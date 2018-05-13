@@ -133,7 +133,27 @@ class Blog extends CoreSql {
         $this->fileid = $fileid;
     }
 
-    public function configFormAdd()
+    function configFormAddArticleText()
     {
+        $Access = new Access();
+        $slugs = $Access->getSlugs();
+        return [
+            "config"=> [
+                "method"=>"post",
+                "action"=>"", "submit"=>"Publier l'article",
+                "save"=>"Sauvegarder sans publier"
+            ],
+            "input"=> [
+                "title"=>[
+                    "type"=>"text",
+                    "placeholder"=>"Your title",
+                    "required"=>true,
+                    "maxString"=>100,
+                    "label"=>"Insert title of your article"
+                ]
+            ],
+            "ckeditor" => true,
+            "exit" => $slugs["dashboard_blog"]
+        ];
     }
 }
