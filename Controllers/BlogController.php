@@ -77,7 +77,21 @@ class BlogController
      */
     function addAction($params)
     {
-        $View = new View("dashboard", "Dashboard/add_article_blog");
+        if(isset($params["URI"][0])){
+            $getTypeNewArticle = $params["URI"][0];
+            if($getTypeNewArticle == "text"){
+                $View = new View("dashboard", "Dashboard/add_article_blog");
+                $Blog = new BlogRepository();
+                $configForm = $Blog->configFormAddArticleText();
+
+                $View->setData("errors", "");
+                $View->setData("configForm", $configForm);
+            } else {
+                echo "Le chemin n'existe pas";
+            }
+        } else {
+            echo "coucou";
+        }
     }
 
     function statusAction($params)
