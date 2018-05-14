@@ -38,6 +38,12 @@ class Access
             "action" => "connect",
             "security" => false
         ],
+        "signup" => [ // Sign up
+            "slug" => "sign-up",
+            "controller" => "user",
+            "action" => "register",
+            "security" => false
+        ],
         "signout" => [ // Sign out
             "slug" => "sign-out",
             "controller" => "user",
