@@ -22,7 +22,12 @@ class Authentification
             return null;
         }
         $date = new DateTime();
-        $comparaison = new DateTime($User->getDateconnection());
+        $dateCompare = new DateTime($User->getDateconnection());
+        $interval = $date->diff($dateCompare);
+        if($interval->i > 30){
+            session_destroy();
+            return -1;
+        }
         $User->setToken();
         $User->setDateConnection($date->getTimestamp());
         $User->save();
@@ -37,12 +42,12 @@ class Authentification
         $target=[
             'status'
         ];
-        $parameterLike=[
+        $User = new User();
+        $User->setWhereParameter(["LIKE" => [
             'token' => $token,
             'email' => $email
-        ];
-        $User = new User();
-        $User->getOneData($target, $parameterLike);
+        ]]);
+        $User->getOneData($target);
         return intval($User->getStatus());
     }
 }
