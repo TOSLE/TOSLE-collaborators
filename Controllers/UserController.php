@@ -62,7 +62,6 @@ class UserController
                         $_SESSION['email'] = $User->getEmail();
                         header("Location:".DIRNAME);
                     }
-
                 }
             }
         }
