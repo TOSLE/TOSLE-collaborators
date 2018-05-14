@@ -46,6 +46,7 @@ class UserController
                 $User->getOneData($target);
                 if(password_verify($params["POST"]["pwd"], $User->getPassword())){
                     $target = [
+                        "id",
                         "email",
                         "token"
                     ];
@@ -58,6 +59,10 @@ class UserController
                     $User->setWhereParameter($parameter);
                     $User->getOneData($target);
                     if(!(empty($User->getToken()) && empty($User->getEmail()))){
+                        $date = new DateTime();
+                        $User->setDateconnection($date->getTimestamp());
+                        $User->setToken();
+                        $User->save();
                         $_SESSION['token'] = $User->getToken();
                         $_SESSION['email'] = $User->getEmail();
                         header("Location:".DIRNAME);
