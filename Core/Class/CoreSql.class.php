@@ -63,14 +63,14 @@ class CoreSql{
             }
 
             $query = $this->pdo->prepare("UPDATE ".$this->table." SET "
-                . implode(',', $set) ." WHERE ".strtolower(get_called_class())."_id='".$this->id."'");
+                . implode(',', $set) ." WHERE ".$this->columnBase."_id='".$this->id."'");
             $query->execute($this->columns);
         }	else {
             unset($this->columns["id"]);
             $columnName = [];
             foreach($this->columns as $key => $value){
                 if(!empty($this->columns[$key])){
-                    $columnName[] = strtolower(get_called_class()).'_'.$key;
+                    $columnName[] = $this->columnBase.'_'.$key;
                 } else {
                     unset($this->columns[$key]);
                 }

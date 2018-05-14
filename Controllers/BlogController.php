@@ -33,13 +33,20 @@ class BlogController
                 ]
             ];
             $Blog->setWhereParameter($parameter, null);
+            $Blog->setOrderByParameter(["id"=>"DESC"]);
+            $Blog->setLimitParameter(6, 0);
             $array = $Blog->getData($target);
             $data = [];
             foreach($array as $content){
                 $date = new DateTime($content->getDatecreate());
                 $value["blog_datecreate"] = $date->format("l jS \of F Y H:i");
                 $value["blog_title"] = $content->getTitle();
-                $value["blog_content"] = $content->getContent();
+
+                $contentValue = strip_tags($content->getContent(), "<p>");
+                $contentValue = str_replace("&nbsp;", "", $contentValue);
+                $contentValue = str_replace("<p>", "", $contentValue);
+                $contentValue = str_replace("</p>", " ", $contentValue);
+                $value["blog_content"] = (strlen($contentValue)>200)?substr($contentValue, 0, 200):$contentValue;
                 $value["blog_status"] = $content->getStatus();
                 $value["blog_id"] = $content->getId();
                 $data[] = $value;
@@ -83,6 +90,13 @@ class BlogController
                 $View = new View("dashboard", "Dashboard/add_article_blog");
                 $Blog = new BlogRepository();
                 $configForm = $Blog->configFormAddArticleText();
+                if(isset($params["POST"])){
+                    $tmpArray = $params["POST"];
+                    $Blog->setTitle($tmpArray["title"]);
+                    $Blog->setContent($tmpArray["textArea_article"]);
+                    (isset($tmpArray["publish"]))?$Blog->setStatus(1):$Blog->setStatus(0);
+                    $Blog->save();
+                }
 
                 $View->setData("errors", "");
                 $View->setData("configForm", $configForm);
