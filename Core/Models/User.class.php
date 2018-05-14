@@ -46,7 +46,7 @@ class User extends CoreSql{
     {
         $this->status=$status;
     }
-    public function setDateConnection($dateconnection)
+    public function setDateconnection($dateconnection)
     {
         $this->dateconnection = date("Y-m-d H:i:s", $dateconnection);
     }
@@ -88,19 +88,19 @@ class User extends CoreSql{
     {
         return $this->token;
     }
-    public function getDateConnection()
+    public function getDateconnection()
     {
         return $this->dateconnection;
     }
-    public function getNewsLetter()
+    public function getNewsletter()
     {
         return $this->newsletter;
     }
-    public function getFileId()
+    public function getFileid()
     {
         return $this->fileid;
     }
-    public function getBirthDay()
+    public function getBirthday()
     {
         return $this->birthday;
     }

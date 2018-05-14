@@ -83,7 +83,7 @@ class BlogRepository extends Blog
             2 => "td-content-date",
             3 => "td-content-action"
         ]);
-        $ViewLatestBloc->setTableBodyContent($this->getLatestArticle(5), "blog");
+        $ViewLatestBloc->setTableBodyContent($this->getLatestArticle(5), true);
         $ViewLatestBloc->setArrayHref("edit", "view");
         $ViewLatestBloc->setArrayHref("view", "view");
         return $ViewLatestBloc->getArrayData();
