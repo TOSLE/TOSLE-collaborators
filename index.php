@@ -4,8 +4,8 @@
 
     function autoLoader($parameter)
     {
-        if(file_exists("Core/Class/".$parameter.".class.php")){
-            include("Core/Class/".$parameter.".class.php");
+        if(file_exists("Core/Class/".$parameter.".php")){
+            include("Core/Class/".$parameter.".php");
         }
         if(file_exists("Core/Models/".$parameter.".class.php")){
             include("Core/Models/".$parameter.".class.php");
