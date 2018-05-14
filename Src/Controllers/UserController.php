@@ -27,6 +27,7 @@ class UserController
                     } else {
                         $errors[AUTHENTIFICATION_FAILED_KEY] = AUTHENTIFICATION_FAILED_MESSAGE;
                     }
+
                 }
             }
         }
