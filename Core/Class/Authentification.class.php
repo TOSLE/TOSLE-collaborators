@@ -11,16 +11,18 @@ class Authentification
     public static function checkAuthentification($token, $email)
     {
         $User = new User();
-        $target=['id', 'token', 'email'];
-        $parameterLike=['token' => $token, 'email' => $email];
-
-        $User->getOneData($target, $parameterLike);
+        $target=['id', 'token', 'email', 'dateconnection'];
+        $User->setWhereParameter(["LIKE" => [
+            'token' => $token,
+            'email' => $email
+        ]]);
+        $User->getOneData($target);
         if(empty($User->getToken())){
             session_destroy();
             return null;
         }
         $date = new DateTime();
-
+        $comparaison = new DateTime($User->getDateconnection());
         $User->setToken();
         $User->setDateConnection($date->getTimestamp());
         $User->save();
