@@ -7,6 +7,7 @@ while :
         echo '[2] Liste des fichiers du repertoire'
         echo '[3] Changement de repertoire'
         echo '[git] Commandes GIT'
+        echo '[docker] Commandes Docker'
         echo '[0/q] Fin de votre operation'
         echo 'Choix :'
         read ch
@@ -80,6 +81,34 @@ while :
                         *) break
                     esac
             done
+        ;;
+        docker)
+        while :
+        do
+            clear
+            echo 'Menu de commande Docker'
+            echo '[run] Lancer le serveur'
+            echo '[ps] Voir les containers en fonctionnement'
+            echo '[stop] Arreter les serveurs'
+            echo '[*] Appuyer sur une touche pour quitter'
+            echo -n 'Selection : ' ; read ch
+            case $ch in
+                run) echo 'Lancement du serveur : en cours'
+                cd Docker/build && docker-compose up -d && cd ../../
+                echo 'Lancement du serveur : ok'
+                ;;
+                ps) echo 'Liste des container'
+                docker ps
+                echo -n 'Appuyez sur entrer pour continuer' ; read enterToContinue
+                ;;
+                stop) echo 'Arret du serveur : en cours'
+                cd Docker/build && docker-compose down && cd ../../
+                echo 'Arret du serveur : ok'
+                ;;
+                *) echo 'Fin du menu'
+                break
+            esac
+        done
         ;;
         *) echo 'Le choix selectionner ne fonctionne pas'
     esac
