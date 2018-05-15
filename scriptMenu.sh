@@ -127,9 +127,12 @@ while :
                 npm install node-sass
                 echo 'Installation terminee...'
                 ;;
-                sass) echo 'Lancement du serveur de node sass : en cours'
+                sass) echo 'Pour quitter le serveur, appuyez sur CTRL + C'
+                echo 'Le serveur node sass bloque votre menu, soyez sur de ne plus en avoir besoin pour vos developpements'
+                echo 'Lancement du serveur : en cours'
+                echo 'Rappel : [CTRL + C] pour quitter'
                 npm run watch
-                echo 'Lancement du serveur de node sass : ok'
+                echo 'Lancement du serveur de node sass : termine'
                 ;;
                 *) break
             esac
