@@ -8,6 +8,7 @@ while :
         echo '[3] Changement de repertoire'
         echo '[git] Commandes GIT'
         echo '[docker] Commandes Docker'
+        echo '[node] Commandes NodeJs'
         echo '[0/q] Fin de votre operation'
         echo 'Choix :'
         read ch
@@ -107,6 +108,30 @@ while :
                 ;;
                 *) echo 'Fin du menu'
                 break
+            esac
+        done
+        ;;
+        node) while :
+        do
+            clear
+            echo 'Menu des commandes NodeJs'
+            echo '[install] Installation de votre environnement'
+            echo '[sass] Lancer le serveur de node sass pour vos develloppement en sass'
+            echo '[*] Appuyer sur une touche pour quitter'
+            echo -n 'Selection : ' ; read ch
+            case $ch in
+                install) echo 'Installation de ChartJs : en cours'
+                npm install chart.js --save
+                echo 'Installation terminee...'
+                echo 'Installation de Node Sass : en cours'
+                npm install node-sass
+                echo 'Installation terminee...'
+                ;;
+                sass) echo 'Lancement du serveur de node sass : en cours'
+                npm run watch
+                echo 'Lancement du serveur de node sass : ok'
+                ;;
+                *) break
             esac
         done
         ;;
