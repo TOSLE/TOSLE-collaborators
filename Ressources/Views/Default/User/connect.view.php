@@ -12,6 +12,9 @@
                         <p>
                             Veuillez entrer vos informations de connexion ci-dessous
                         </p></article>
+                    <section class="confirm-register">
+                        <span><?php echo $textConfirm; ?></span>
+                    </section>
                     <section class="input-login-bloc">
                         <?php $this->addModal("form", $config, $errors); ?>
                     </section>
@@ -24,7 +27,7 @@
             <section class="login-bloc">
                 <article class="register-info">
                     <p>Pas encore de compte ?
-                        <a href="<?php echo DIRNAME . substr($language, 0, 2) . "/user/register"; ?>">
+                        <a href="<?php echo DIRNAME . substr($language, 0, 2) . "/sign-up"; ?>">
                             Inscrivez-vous ici.</a>
                     </p>
                 </article>

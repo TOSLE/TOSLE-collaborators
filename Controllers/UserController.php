@@ -30,7 +30,7 @@ class UserController
         $User = new User();
         $form = $User->configFormConnect();
         $errors = [];
-        if(!empty($params["POST"])) {
+        if (!empty($params["POST"])) {
             $errors = Validate::checkForm($form, $params["POST"]);
             if (empty($errors)) {
                 $User->setPassword($params["POST"]["pwd"]);
@@ -44,7 +44,7 @@ class UserController
                 ];
                 $User->setWhereParameter($parameter);
                 $User->getOneData($target);
-                if(password_verify($params["POST"]["pwd"], $User->getPassword())){
+                if (password_verify($params["POST"]["pwd"], $User->getPassword())) {
                     $target = [
                         "email",
                         "token"
@@ -57,26 +57,30 @@ class UserController
                     ];
                     $User->setWhereParameter($parameter);
                     $User->getOneData($target);
-                    if(!(empty($User->getToken()) && empty($User->getEmail()))){
+                    if (!(empty($User->getToken()) && empty($User->getEmail()))) {
                         $_SESSION['token'] = $User->getToken();
                         $_SESSION['email'] = $User->getEmail();
-                        header("Location:".DIRNAME);
+                        header("Location:" . DIRNAME);
                     }
                 }
             }
         }
         $View = new View("user", "User/connect");
+        if(isset($params['URI'][0])){ // message de confirmation après l'inscription
+            if($params['URI'][0] == 'confirmed'){
+                $View->setData('textConfirm', 'Accès confirmé');
+            }
+        }
         $View->setData("config", $form);
         $View->setData("errors", $errors);
     }
 
-    public function registerAction($params) {
-        echo "Register action";
-
+    public function registerAction($params)
+    {
         $user = new User();
         $form = $user->configFormAdd();
         $errors = [];
-        if(!empty($params["POST"])) {
+        if (!empty($params["POST"])) {
             $errors = Validate::checkForm($form, $params["POST"]);
             if (empty($errors)) {
                 $user->setFirstName($params["POST"]["firstname"]);
@@ -93,7 +97,7 @@ class UserController
                 $lastName = $params["POST"]["lastname"];
                 $token = $user->getToken();
 
-                Mail::sendMailRegister($email, $firstName, $lastName,$token);
+                Mail::sendMailRegister($email, $firstName, $lastName, $token);
             }
 
         }
@@ -103,32 +107,45 @@ class UserController
 
     }
 
-    public function verifyAction($params) {
-        if(isset($params["GET"]["email"]) && isset($params["GET"]["token"])){
+    public function verifyAction($params)
+    {
+        $Access = new Access();
+        $redirection = $Access->getSlugs();
+
+        if (isset($params["GET"]["email"]) && isset($params["GET"]["token"])) {
             $User = new User();
 
-            $target = [ /** Ce que l'on récupère lors de la requête (SELECT) **/
+            $target = [/** Ce que l'on récupère lors de la requête (SELECT) **/
                 "id"
             ];
-            $parameter = [ /** Les parametres pour la condition de la requête **/
-                "email" => $params["GET"]["email"],
-                "token" => $params["GET"]["token"]
+            $parameter = [/** Les parametres pour la condition de la requête **/
+                "LIKE" => [
+                    "email" => $params["GET"]["email"],
+                    "token" => $params["GET"]["token"]
+                ]
             ];
-            $User->selectSimpleResponse($target, $parameter);
-            if($User->getId()){
+            $User->setWhereParameter($parameter, null);
+            $User->getOneData($target);
+            if (!empty($User->getId())) {
                 $User->setToken();
+                $User->setStatus(1);
                 $User->save();
-                //redirection success
+
+                //blogcontroller
+
+                $messConfirm = 'Inscription confirmé, vous pouvez vous connectez dès maintenant';
+                header('Location:'.$redirection["signin"].'?textConfirm='.$messConfirm);
             } else {
-                //redirection false
+                $messError = 'Inscription echoué, veuillez reesayer de vous inscrire.';
+                header('Location:'.$redirection["signup"].'?$infoSignup='.$messError);
             }
         }
     }
 
     public function disconnectAction($params)
     {
-        header("Location:".DIRNAME);
-        $_SESSION["token"]=null;
-        $_SESSION["email"]=null;
+        header("Location:" . DIRNAME);
+        $_SESSION["token"] = null;
+        $_SESSION["email"] = null;
     }
 }
