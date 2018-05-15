@@ -17,7 +17,7 @@ class UserController
     {
         $User = new User();
 
-        $User->setId(1);
+        
         $User->setEmail('domangejulien@gmail.com');
         $User->setToken();
         $User->setFirstName('Julien');
