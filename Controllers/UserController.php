@@ -67,7 +67,6 @@ class UserController
                         $_SESSION['email'] = $User->getEmail();
                         header("Location:".DIRNAME);
                     }
-
                 }
             }
         }
@@ -81,8 +80,9 @@ class UserController
         $View->setData("errors", $errors);
     }
 
-    public function registerAction($params)
-    {
+    public function registerAction($params) {
+        echo "Register action";
+
         $user = new User();
         $form = $user->configFormAdd();
         $errors = [];
