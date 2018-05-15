@@ -30,7 +30,7 @@ class UserController
         $User = new User();
         $form = $User->configFormConnect();
         $errors = [];
-        if (!empty($params["POST"])) {
+        if(!empty($params["POST"])) {
             $errors = Validate::checkForm($form, $params["POST"]);
             if (empty($errors)) {
                 $User->setPassword($params["POST"]["pwd"]);
@@ -44,8 +44,9 @@ class UserController
                 ];
                 $User->setWhereParameter($parameter);
                 $User->getOneData($target);
-                if (password_verify($params["POST"]["pwd"], $User->getPassword())) {
+                if(password_verify($params["POST"]["pwd"], $User->getPassword())){
                     $target = [
+                        "id",
                         "email",
                         "token"
                     ];
@@ -57,12 +58,15 @@ class UserController
                     ];
                     $User->setWhereParameter($parameter);
                     $User->getOneData($target);
-                    if (!(empty($User->getToken()) && empty($User->getEmail()))) {
+                    if(!(empty($User->getToken()) && empty($User->getEmail()))){
+                        $date = new DateTime();
+                        $User->setDateconnection($date->getTimestamp());
+                        $User->setToken();
+                        $User->save();
                         $_SESSION['token'] = $User->getToken();
                         $_SESSION['email'] = $User->getEmail();
-                        header("Location:" . DIRNAME);
+                        header("Location:".DIRNAME);
                     }
-
                 }
             }
         }
@@ -76,12 +80,13 @@ class UserController
         $View->setData("errors", $errors);
     }
 
-    public function registerAction($params)
-    {
+    public function registerAction($params) {
+        echo "Register action";
+
         $user = new User();
         $form = $user->configFormAdd();
         $errors = [];
-        if (!empty($params["POST"])) {
+        if(!empty($params["POST"])) {
             $errors = Validate::checkForm($form, $params["POST"]);
             if (empty($errors)) {
                 $user->setFirstName($params["POST"]["firstname"]);
