@@ -24,7 +24,11 @@
                 </p>
             </noscript>
         </div>
-        <textarea id="textAreaArticle" class="ckeditor" name ="textArea_article" placeholder="Vous n'avez aucune limite de caractère pour votre article." style="margin-bottom: 15px; min-width: 100%; max-width: 100%; min-height: 700px; max-height: 1000px;" class="form-control"></textarea>
+        <textarea id="textAreaArticle" class="ckeditor" name ="textArea_article" placeholder="Vous n'avez aucune limite de caractère pour votre article." style="min-width: 100%; max-width: 100%; min-height: 700px; max-height: 1000px;" class="form-control">
+            <?php if(isset($config["content_value"]["ckeditor"])):?>
+                <?php echo $config["content_value"]["ckeditor"];?>
+            <?php endif;?>
+        </textarea>
         <script type="text/javascript" src="<?php echo DIRNAME;?>Public/Libraries/CKEditor/ckeditor.js"></script>
     <?php endif;?>
     <div>
