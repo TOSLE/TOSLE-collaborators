@@ -60,7 +60,7 @@ class Access
             "slug" => "dashboard-homepage",
             "controller" => "dashboard",
             "action" => "index",
-            "security" => false
+            "security" => 2
         ],
         "dashboard_blog" => [ // Dashboard blog homepage
             "slug" => "dashboard-blog",
@@ -76,15 +76,16 @@ class Access
         ],
         "view_blog_article" => [ // change status blog
             "slug" => "view-blog-article",
-            "controller" => "user",
-            "action" => "add",
+            "controller" => "blog",
+            "action" => "view",
             "security" => false
         ]
     ];
 
     private $backOffice = [
         "blog/status" => 2,
-        "blog/add" => 2
+        "blog/add" => 2,
+        "blog/edit" => 2
     ];
 
     public function getRoute($slug = false)

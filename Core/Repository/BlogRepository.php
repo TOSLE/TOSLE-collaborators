@@ -13,13 +13,18 @@ class BlogRepository extends Blog
         parent::__construct();
     }
 
+    /**
+     * @return integer
+     * Retourne le nombre d'article de la table Blog
+     */
     public function countNumberOfBlog()
     {
         return $this->countData(["id"])[0];
     }
 
     /**
-     * @param int $status
+     * @return integer
+     * Retourne le nombre d'article de la table Blog en fonction du status (par défaut vaut 1 (publié))
      */
     public function countNumberOfBlogByStatus($status = 1)
     {
@@ -29,6 +34,21 @@ class BlogRepository extends Blog
             ]
         ]);
         return $this->countData(["id"])[0];
+    }
+
+    /**
+     * @param integer $id
+     * Retourne tous les éléments d'un article en fonction de son id
+     */
+    public function getArticle($id)
+    {
+        $parameter = [
+            "LIKE" => [
+                "id" => $id
+            ]
+        ];
+        $this->setWhereParameter($parameter);
+        $this->getOneData(["id", "title", "content"]);
     }
 
     public function getLatestArticle($number)
@@ -54,6 +74,7 @@ class BlogRepository extends Blog
     {
         $Access = new Access();
         $hrefBackOffice = $Access->getPathBackOffice();
+        $hrefFrontOffice = $Access->getSlugs();
         $ViewLatestBloc = new DashboardBlocModal();
         $ViewLatestBloc->setTitle("View latest post on your blog");
         $ViewLatestBloc->setIconHeader("modal_view_all_posts", "modal");
@@ -64,13 +85,13 @@ class BlogRepository extends Blog
         ]);
         $ViewLatestBloc->setColSizeBloc(12);
         $ViewLatestBloc->setActionButtonStatus(0, [
-            "color" => "red",
+            "color" => "green",
             "text" => "Publish",
             "type" => "href",
             "target" => $hrefBackOffice["blog/status"]."/"
         ]);
         $ViewLatestBloc->setActionButtonStatus(1, [
-            "color" => "green",
+            "color" => "red",
             "text" => "Unpublish",
             "type" => "href",
             "target" => $hrefBackOffice["blog/status"]."/"
@@ -84,8 +105,8 @@ class BlogRepository extends Blog
             3 => "td-content-action"
         ]);
         $ViewLatestBloc->setTableBodyContent($this->getLatestArticle(5), true);
-        $ViewLatestBloc->setArrayHref("edit", "view");
-        $ViewLatestBloc->setArrayHref("view", "view");
+        $ViewLatestBloc->setArrayHref("edit", $hrefBackOffice["blog/edit"]);
+        $ViewLatestBloc->setArrayHref("view", $hrefFrontOffice["view_blog_article"]);
         return $ViewLatestBloc->getArrayData();
     }
 }
