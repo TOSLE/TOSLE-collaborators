@@ -23,7 +23,7 @@ class Mail
         $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
         try {
             //Server settings
-            $mail->SMTPDebug = 2;                                 // Enable verbose debug output
+            $mail->SMTPDebug = 0;                                 // Enable verbose debug output
             $mail->isSMTP();                                      // Set mailer to use SMTP
             $mail->Host = 'smtp.gmail.com';                       // Specify main and backup SMTP servers
             $mail->SMTPAuth = true;                               // Enable SMTP authentication
@@ -47,8 +47,8 @@ class Mail
             $mail->isHTML(true);                                  // Set email format to HTML
             $mail->Subject = 'Bienvenue sur le CMS TOSLE '.$firstName.' '.$lastName;
             //$mail->Body = 'Veuillez confirmer votre inscription en cliquant sur le lien ci-dessous </br>http://localhost:88/en/verify-mail-register?token='.$token.'';
-            $mail->Body = 'Veuillez confirmer votre inscription en cliquant sur le lien ci-dessous </br>http://localhost:88/en/user/verify?email='.$email.'&amp;token='.$token.'';
-            $mail->AltBody = 'Veuillez confirmer votre inscription en cliquant sur le lien ci-dessous http://localhost:88/en/user/verify?email='.$email.'?token='.$token.'';
+            $mail->Body = 'Veuillez confirmer votre inscription en cliquant sur le lien ci-dessous </br>http://localhost:88/en/user-verify?email='.$email.'&amp;token='.$token.'';
+            $mail->AltBody = 'Veuillez confirmer votre inscription en cliquant sur le lien ci-dessous http://localhost:88/en/user-verify?email='.$email.'?token='.$token.'';
 
             $mail->send();
             echo 'Message has been sent';

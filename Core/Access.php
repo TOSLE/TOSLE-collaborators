@@ -44,6 +44,12 @@ class Access
             "action" => "register",
             "security" => false
         ],
+        "verify" => [ // Verify user
+            "slug" => "user-verify",
+            "controller" => "user",
+            "action" => "verify",
+            "security" => false
+        ],
         "signout" => [ // Sign out
             "slug" => "sign-out",
             "controller" => "user",
