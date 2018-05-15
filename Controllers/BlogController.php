@@ -91,11 +91,13 @@ class BlogController
                 $Blog = new BlogRepository();
                 $configForm = $Blog->configFormAddArticleText();
                 if(isset($params["POST"])){
-                    $tmpArray = $params["POST"];
-                    $Blog->setTitle($tmpArray["title"]);
-                    $Blog->setContent($tmpArray["textArea_article"]);
-                    (isset($tmpArray["publish"]))?$Blog->setStatus(1):$Blog->setStatus(0);
-                    $Blog->save();
+                    if(!empty($params["POST"])) {
+                        $tmpArray = $params["POST"];
+                        $Blog->setTitle($tmpArray["title"]);
+                        $Blog->setContent($tmpArray["textArea_article"]);
+                        (isset($tmpArray["publish"])) ? $Blog->setStatus(1) : $Blog->setStatus(0);
+                        $Blog->save();
+                    }
                 }
 
                 $View->setData("errors", "");
