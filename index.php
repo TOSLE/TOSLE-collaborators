@@ -78,7 +78,7 @@
      * Il est possible que l'URI renseigné soit sous le format domaine/langue/controller/action
      * On va donc tester s'il ne s'agit pas de ce genre d'URI
      */
-    if(isset($uriExploded[1]) && isset($uriExploded[2])){
+    if(isset($uriExploded[1]) && isset($uriExploded[2]) && $accessParams["slug"] == $Acces->getSlug("default")["slug"]){
         $backOfficeRoute = $Acces->getBackOfficeRoute(strtolower($uriExploded[1]).'/'.strtolower($uriExploded[2]));
         if(!(intval($userStatus) < intval($backOfficeRoute)) && $backOfficeRoute != -1){
             $controller = ucfirst(strtolower($uriExploded[1]))."Controller";

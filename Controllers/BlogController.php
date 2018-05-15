@@ -101,10 +101,34 @@ class BlogController
                 $View->setData("errors", "");
                 $View->setData("configForm", $configForm);
             } else {
-                echo "Le chemin n'existe pas";
+                echo "Le paramètre renseigné ne fait pas partie de la liste attendue";
             }
         } else {
-            echo "coucou";
+            echo "Il faut un paramètre pour ce controller !";
+        }
+    }
+
+    function editAction($params)
+    {
+        if(isset($params["URI"][0])){
+            $getIdArticle = $params["URI"][0];
+            if(is_numeric($getIdArticle)){
+                $View = new View("dashboard", "Dashboard/add_article_blog");
+                $Blog = new BlogRepository();
+                $configForm = $Blog->configFormAddArticleText();
+
+                $Blog->getArticle($getIdArticle);
+
+                $configForm["content_value"] = [
+                    $Blog->getTitle(),
+                    "ckeditor" => $Blog->getContent()
+                ];
+
+                $View->setData("errors", "");
+                $View->setData("configForm", $configForm);
+                $View->setData("valueConfigForm", $valueConfigForm);
+
+            }
         }
     }
 
@@ -136,7 +160,7 @@ class BlogController
         }
 
 
-        $redirection = $Access->getSlugs($language);
+        $redirection = $Access->getSlugs();
 
         header('Location:'.$redirection["dashboard_blog"]);
     }
