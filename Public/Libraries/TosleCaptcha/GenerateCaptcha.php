@@ -5,7 +5,7 @@ session_start();
  * Height : hauteur de l'image
  * Image : contient notre image
  */
-$width = 170;
+$width = 200;
 $height = 60;
 $image = imagecreate($width, $height);
 
@@ -44,7 +44,7 @@ $x = rand(10,15);
 for($i = 0; $i < strlen($captcha); $i++){
     $y = rand(20, $height-20);
     $angle = rand(-30, 30);
-    $size = rand(10,15);
+    $size = rand(13,18);
     $fontKey = rand(0, sizeof($fonts)-1);
     imagettftext($image, $size, $angle, $x, $y, imagecolorallocate($image, rand(0,100), rand(0,100), rand(0,100)), $fonts[$fontKey], $captcha[$i]);
 
@@ -58,7 +58,7 @@ for($i = 0; $i < strlen($captcha); $i++){
  * y1 position du x début
  * y2 position du x fin
  */
-for($j = 0; $j < rand(3,6); $j++){
+for($j = 0; $j < rand(3,8); $j++){
     $color = imagecolorallocate($image, rand(100,150), rand(100,150), rand(100,150));
     $x1 = rand(0, $width);
     $x2 = rand(0, $width);

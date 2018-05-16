@@ -81,8 +81,6 @@ class UserController
     }
 
     public function registerAction($params) {
-        echo "Register action";
-
         $user = new User();
         $form = $user->configFormAdd();
         $errors = [];

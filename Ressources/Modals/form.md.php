@@ -16,7 +16,7 @@
             <?php endif;?>
         <?php endforeach;?>
         <?php if(isset($config["captcha"])):?>
-            <label for="captcha" class="captcha img">
+            <label for="captcha" class="captcha_img">
                 <img src="<?php echo DIRNAME;?>Public/Libraries//TosleCaptcha/GenerateCaptcha.php">
             </label>
             <input id="captcha" type="text" name="captcha" placeholder="Veuillez saisir le captcha présent ci-dessus" required='required'>
