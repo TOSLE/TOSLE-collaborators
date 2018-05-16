@@ -1,5 +1,9 @@
+# IDE
 .idea/
 
-Core/config.php
+#Fichiers et dossiers à ignorer pour éviter la surcharge du repo
 node_modules/
+
+#Partie des fichiers à copier coller et où il faut enlever l'extension '.dist'
+Core/config.php
 .htaccess
