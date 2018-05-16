@@ -69,7 +69,7 @@ class CoreSql{
             unset($this->columns["id"]);
             $columnName = [];
             foreach($this->columns as $key => $value){
-                if(!empty($this->columns[$key])){
+                if(!empty($this->columns[$key]) || $this->columns[$key] === 0){
                     $columnName[] = $this->columnBase.'_'.$key;
                 } else {
                     unset($this->columns[$key]);

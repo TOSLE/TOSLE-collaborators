@@ -85,6 +85,8 @@ class BlogController
     function addAction($params)
     {
         if(isset($params["URI"][0])){
+            $Access = new Access();
+            $route = $Access->getSlugs();
             $getTypeNewArticle = $params["URI"][0];
             if($getTypeNewArticle == "text"){
                 $View = new View("dashboard", "Dashboard/add_article_blog");
@@ -95,8 +97,10 @@ class BlogController
                         $tmpArray = $params["POST"];
                         $Blog->setTitle($tmpArray["title"]);
                         $Blog->setContent($tmpArray["textArea_article"]);
-                        (isset($tmpArray["publish"])) ? $Blog->setStatus(1) : $Blog->setStatus(0);
+                        (isset($tmpArray["publish"]))?$Blog->setStatus(1):$Blog->setStatus(0);
+                        $Blog->setType(1);
                         $Blog->save();
+                        header('Location:'.$route['dashboard_blog']);
                     }
                 }
 
@@ -122,14 +126,12 @@ class BlogController
                 $Blog->getArticle($getIdArticle);
 
                 $configForm["content_value"] = [
-                    $Blog->getTitle(),
+                    "title" => $Blog->getTitle(),
                     "ckeditor" => $Blog->getContent()
                 ];
 
                 $View->setData("errors", "");
                 $View->setData("configForm", $configForm);
-                $View->setData("valueConfigForm", $valueConfigForm);
-
             }
         }
     }

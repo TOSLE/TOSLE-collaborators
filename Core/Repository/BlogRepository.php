@@ -59,7 +59,8 @@ class BlogRepository extends Blog
                 "title",
                 "datecreate",
                 "id",
-                "status"
+                "status",
+                "type"
             ];
             $this->setOrderByParameter(["id" => "DESC"]);
             $this->setLimitParameter($number);
