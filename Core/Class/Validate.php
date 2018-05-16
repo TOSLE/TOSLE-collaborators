@@ -37,6 +37,13 @@ class Validate
                 $errorsMsg["longueur"]= $name. " doit faire plus de ".$attributs["minNum"];
             }
         }
+        if(isset($config["captcha"])){
+            if(isset($_SESSION["captcha"]) && isset($data['captcha'])) {
+                if($_SESSION["captcha"] == $data['captcha']){
+                    $errorsMsg["captcha"] = "Le captcha saisi n'est pas valide";
+                }
+            }
+        }
 
         return $errorsMsg;
     }
