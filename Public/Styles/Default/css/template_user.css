@@ -1,39 +1,32 @@
+html {
+    background: #F1F1F1;
+}
+
+.bloc-login-container {
+    width: 900px;
+    margin: 0 auto;
+}
 .bg-white {
+    width: 100%;
     background-color: #FFFFFF;
-    -webkit-box-shadow: 10px 11px 25px -1px rgba(143,143,143,0.59);
-    -moz-box-shadow: 10px 11px 25px -1px rgba(143,143,143,0.59);
-    box-shadow: 10px 11px 25px -1px rgba(143,143,143,0.59);
+    -webkit-box-shadow: 0px 0px 15px 0px rgba(143,143,143,0.59);
+    -moz-box-shadow: 0px 0px 15px 0px rgba(143,143,143,0.59);
+    box-shadow: 0px 0px 15px 0px rgba(143,143,143,0.59);
     border: solid 0.5px #3b3f5442;
 }
 
-.login-bloc h4 {
+.login-bloc h2 {
     text-align: center;
-    padding: 20px 20px;
-    font-size: 1.4em;
-    font-weight: 400;
     color: #1A5CCB;
 }
-
-.login-bloc p {
+.login-bloc .register-login p {
+    text-align: center;
     font-size: 0.9em;
-    text-align: center;
-    font-weight: 300;
+    padding: 20px 0;
 }
 
-.input-login-bloc {
-    padding: 40px 0 20px 0;
-    text-align: center;
-}
-
-.input-login-bloc > form > input {
-    width : 350px;
-    height: 35px;
-    margin-bottom: 20px;
-
-}
-
-.row {
-    justify-content: center;
+.login-bloc {
+    padding: 15px;
 }
 
 .register-info {
