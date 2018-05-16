@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 /**
  * Width : largeur de l'image
  * Height : hauteur de l'image

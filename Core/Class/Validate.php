@@ -39,7 +39,7 @@ class Validate
         }
         if(isset($config["captcha"])){
             if(isset($_SESSION["captcha"]) && isset($data['captcha'])) {
-                if($_SESSION["captcha"] == $data['captcha']){
+                if($_SESSION["captcha"] != $data['captcha']){
                     $errorsMsg["captcha"] = "Le captcha saisi n'est pas valide";
                 }
             }
