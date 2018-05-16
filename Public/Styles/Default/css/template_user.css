@@ -32,3 +32,13 @@ html {
 .register-info {
     padding: 20px 20px;
 }
+
+.errors-message {
+    font-size: 0.9em;
+    color: red;
+    margin-bottom: 15px;
+}
+
+.errors-message .error-type {
+    font-weight: 500;
+}

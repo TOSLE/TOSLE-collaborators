@@ -1,7 +1,11 @@
 <?php if(!empty($errors)): ?>
-    <?php foreach($errors as $name => $value):?>
-        <?php echo $name. " ".$value;?>
-    <?php endforeach; ?>
+    <div class="errors-message">
+        <?php foreach($errors as $name => $value):?>
+            <p>
+                <span class="error-type">*<?php echo $name; ?></span> <span class="error-content"><?php echo $value;?></span>
+            </p>
+        <?php endforeach; ?>
+    </div>
 <?php endif;?>
 
 <form method="<?php echo $config['config']['method'];?>" action="<?php echo $config['config']['action'];?>">
@@ -15,7 +19,7 @@
             <label for="captcha" class="captcha img">
                 <img src="<?php echo DIRNAME;?>Public/Libraries//TosleCaptcha/GenerateCaptcha.php">
             </label>
-            <input id="captcha" type="text" name="captcha" placeholder="Veuillez saisir le captcha présent ci-dessus">
+            <input id="captcha" type="text" name="captcha" placeholder="Veuillez saisir le captcha présent ci-dessus" required='required'>
             <div class="small-precision-input">Vous pouvez recharger la page pour générer un nouveau captcha</div>
         <?php endif;?>
         <input type="submit" class="btn btn-tosle" value="<?php echo $config["config"]["submit"];?>">
