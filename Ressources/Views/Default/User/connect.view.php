@@ -27,7 +27,7 @@
                 <section class="login-bloc">
                     <article class="register-info">
                         <p>Pas encore de compte ?
-                            <a href="<?php echo DIRNAME . substr($language, 0, 2) . "/user/register"; ?>">
+                            <a href="<?php echo $this->slugs['signup'];?>">
                                 Inscrivez-vous ici.</a>
                         </p>
                     </article>

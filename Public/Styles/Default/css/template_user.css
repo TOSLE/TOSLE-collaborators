@@ -2,7 +2,7 @@ html {
     background: #F1F1F1;
 }
 
-.bloc-login-container {
+.bloc-login-container, .bloc-signup-container {
     width: 900px;
     margin: 0 auto;
 }
@@ -15,11 +15,11 @@ html {
     border: solid 0.5px #3b3f5442;
 }
 
-.login-bloc h2 {
+.bloc-login-container h2, .bloc-signup-container h2 {
     text-align: center;
     color: #1A5CCB;
 }
-.login-bloc .register-login p {
+.bloc-login-container p, .bloc-signup-container p {
     text-align: center;
     font-size: 0.9em;
     padding: 20px 0;
@@ -27,10 +27,6 @@ html {
 
 .login-bloc {
     padding: 15px;
-}
-
-.register-info {
-    padding: 20px 20px;
 }
 
 .errors-message {
@@ -41,4 +37,8 @@ html {
 
 .errors-message .error-type {
     font-weight: 500;
+}
+
+.captcha_img img {
+    border: 1px solid #000;
 }

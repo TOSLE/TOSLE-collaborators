@@ -149,7 +149,8 @@ class User extends CoreSql{
                     "required"=>true,
                     "confirm"=>"pwd"
                 ]
-            ]
+            ],
+            "captcha" => true
         ];
     }
 
