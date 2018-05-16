@@ -29,6 +29,7 @@
                 <?php echo $config["content_value"]["ckeditor"];?>
             <?php endif;?>
         </textarea>
+        <script>var globalDirname = '<?php echo DIRNAME;?>';</script>
         <script type="text/javascript" src="<?php echo DIRNAME;?>Public/Libraries/ckeditor/ckeditor.js"></script>
     <?php endif;?>
     <div>
