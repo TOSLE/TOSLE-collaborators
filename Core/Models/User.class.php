@@ -156,7 +156,11 @@ class User extends CoreSql{
     public function configFormConnect()
     {
         return [
-            "config"=> ["method"=>"post", "action"=>"", "submit"=>"Se connecter"],
+            "config"=> [
+                "method"=>"post",
+                "action"=>"",
+                "submit"=>"Se connecter"
+            ],
             "input"=> [
                 "email"=>[
                     "type"=>"email",
