@@ -8,10 +8,10 @@ CKEDITOR.editorConfig = function( config ) {
 	// config.language = 'fr';
 	// config.uiColor = '#AADC6E';
 
-    config.filebrowserBrowseUrl = globalDirname + '/Public/Libraries/ckeditor/kcfinder/browse.php?opener=ckeditor&type=files';
-    config.filebrowserImageBrowseUrl = globalDirname + '/Public/Libraries/ckeditor/kcfinder/browse.php?opener=ckeditor&type=images';
-    config.filebrowserFlashBrowseUrl = globalDirname + '/Public/Libraries/ckeditor/kcfinder/browse.php?opener=ckeditor&type=flash';
-    config.filebrowserUploadUrl = globalDirname + '/Public/Libraries/ckeditor/kcfinder/kcfinder/upload.php?opener=ckeditor&type=files';
-    config.filebrowserImageUploadUrl = globalDirname + '/Public/Libraries/ckeditor/kcfinder/upload.php?opener=ckeditor&type=images';
-    config.filebrowserFlashUploadUrl = globalDirname + '/Public/Libraries/ckeditor/kcfinder/upload.php?opener=ckeditor&type=flash';
+    config.filebrowserBrowseUrl = globalDirname + 'kcfinder/browse.php?opener=ckeditor&type=files';
+    config.filebrowserImageBrowseUrl = globalDirname + 'kcfinder/browse.php?opener=ckeditor&type=images';
+    config.filebrowserFlashBrowseUrl = globalDirname + 'kcfinder/browse.php?opener=ckeditor&type=flash';
+    config.filebrowserUploadUrl = globalDirname + 'kcfinder/kcfinder/upload.php?opener=ckeditor&type=files';
+    config.filebrowserImageUploadUrl = globalDirname + 'kcfinder/upload.php?opener=ckeditor&type=images';
+    config.filebrowserFlashUploadUrl = globalDirname + 'kcfinder/upload.php?opener=ckeditor&type=flash';
 };
