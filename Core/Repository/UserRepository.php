@@ -8,7 +8,54 @@
 
 class UserRepository extends User
 {
-    function getUserByAuthentification()
+
+    /**
+     * @param string $password
+     * @param string $email
+     * @return integer int
+     * verrifyUserLogin va permettre de vérifier l'identification de l'utilisateur grâce au mot de passe et l'email en deux étapes
+     */
+    function verrifyUserLogin($password, $email)
+    {
+        $parameter = [
+            "LIKE" => [
+                "email" => $email
+            ]
+        ];
+        $this->setWhereParameter($parameter);
+        $this->getOneData(["password"]);
+        if(!empty($this->password)){
+            if(password_verify($password, $this->password)){
+                $target = [
+                    "id",
+                    "email",
+                    "token"
+                ];
+                $parameter = [
+                    "LIKE" => [
+                        "email" => $email,
+                        "password" => $this->password
+                    ]
+                ];
+                $this->setWhereParameter($parameter);
+                $this->getOneData($target);
+                if(!empty($this->token) && !empty($this->email)){
+                    $dateSetter = new DateTime();
+                    $this->setDateconnection($dateSetter->getTimestamp());
+                    $this->setToken();
+                    $this->save();
+                    $_SESSION['token'] = $this->token;
+                    $_SESSION['email'] = $this->email;
+                    return 1;
+                }
+            } else {
+                return 0;
+            }
+        } else {
+            return 0;
+        }
+    }
+    function verrifyAuthentificationSession()
     {
 
     }
