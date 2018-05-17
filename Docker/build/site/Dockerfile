@@ -10,6 +10,9 @@ RUN docker-php-ext-configure gd \
         --with-freetype-dir=/usr/include/freetype2 \
     && docker-php-ext-install gd
 
+RUN apt-get update && apt-get install -y --no-install-recommends libmagickwand-dev && rm -rf /var/lib/apt/lists/*
+
+RUN pecl install imagick-3.4.3 && docker-php-ext-enable imagick
 # Workaround for write permission on write to MacOS X volumes
 # See https://github.com/boot2docker/boot2docker/pull/534
 RUN usermod -u 1000 www-data
