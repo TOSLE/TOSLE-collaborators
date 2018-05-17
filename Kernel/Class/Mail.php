@@ -51,7 +51,6 @@ class Mail
             $mail->AltBody = 'Veuillez confirmer votre inscription en cliquant sur le lien ci-dessous http://localhost:88/en/user-verify?email='.$email.'?token='.$token.'';
 
             $mail->send();
-            echo 'Message has been sent';
         } catch (Exception $e) {
             echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
         }
