@@ -13,18 +13,6 @@ class UserController
         echo "nothing";
     }
 
-    public function addAction($params)
-    {
-        $user = new User();
-
-        $User->setEmail('domangejulien@gmail.com');
-        $User->setToken();
-        $User->setFirstName('Julien');
-        $User->setLastName("DOMANGE");
-
-        $user->save();
-    }
-
     public function connectAction($params)
     {
         $User = new User();
