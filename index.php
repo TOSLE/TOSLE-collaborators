@@ -1,23 +1,23 @@
 <?php
 	session_start();
-    require "Core/config.php";
+    require "Kernel/config.php";
 
     function autoLoader($parameter)
     {
-        if(file_exists("Core/Class/".$parameter.".php")){
-            include("Core/Class/".$parameter.".php");
+        if(file_exists("Kernel/Class/".$parameter.".php")){
+            include("Kernel/Class/".$parameter.".php");
         }
-        if(file_exists("Core/Models/".$parameter.".class.php")){
-            include("Core/Models/".$parameter.".class.php");
+        if(file_exists("Kernel/Models/".$parameter.".class.php")){
+            include("Kernel/Models/".$parameter.".class.php");
         }
-        if(file_exists("Core/ModalsRepository/".$parameter.".php")){
-            include("Core/ModalsRepository/".$parameter.".php");
+        if(file_exists("Kernel/ModalsRepository/".$parameter.".php")){
+            include("Kernel/ModalsRepository/".$parameter.".php");
         }
-        if(file_exists("Core/".$parameter.".php")){
-            include("Core/".$parameter.".php");
+        if(file_exists("Kernel/".$parameter.".php")){
+            include("Kernel/".$parameter.".php");
         }
-        if(file_exists("Core/Repository/".$parameter.".php")){
-            include("Core/Repository/".$parameter.".php");
+        if(file_exists("Kernel/Repository/".$parameter.".php")){
+            include("Kernel/Repository/".$parameter.".php");
         }
     }
     spl_autoload_register("autoLoader");
@@ -104,11 +104,11 @@
         unset($uriExploded[1]);
     $parameter = ["POST" => $_POST, "GET" => $_GET, "URI" => array_values($uriExploded)];
 
-    if(file_exists("Core/Language/".$language."/conf.lang.php")){
-        include "Core/Language/".$language."/conf.lang.php";
+    if(file_exists("Kernel/Language/".$language."/conf.lang.php")){
+        include "Kernel/Language/".$language."/conf.lang.php";
     } else {
         $language = "en-EN";
-        include "Core/Language/en-EN/conf.lang.php";
+        include "Kernel/Language/en-EN/conf.lang.php";
     }
 
     if(file_exists("Controllers/".$controller.".php")){
