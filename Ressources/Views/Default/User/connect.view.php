@@ -26,9 +26,9 @@
             <div class="bg-white">
                 <section class="login-bloc">
                     <article class="register-info">
-                        <p>Pas encore de compte ?
-                            <a href="<?php echo $this->slugs['signup'];?>">
-                                Inscrivez-vous ici.</a>
+                        <p>
+                            <a href="<?php echo DIRNAME;?>" class="btn btn-blue">Revenir à l'accueil</a>
+                            <a href="<?php echo $this->slugs['signup'];?>" class="btn btn-tosle-outline">Cliquez-ici pour s'inscrire</a>
                         </p>
                     </article>
                 </section>

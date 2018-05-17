@@ -15,60 +15,29 @@ class UserController
 
     public function connectAction($params)
     {
-        $User = new User();
+        $User = new UserRepository();
         $form = $User->configFormConnect();
         $errors = [];
         if(!empty($params["POST"])) {
             $errors = Validate::checkForm($form, $params["POST"]);
-            if (empty($errors)) {
-                $target = [
-                    "password"
-                ];
-                $parameter = [
-                    "LIKE" => [
-                        "email" => $params["POST"]["email"]
-                    ]
-                ];
-                $User->setWhereParameter($parameter);
-                $User->getOneData($target);
-                if(!empty($User->getPassword())) {
-                    if (password_verify($params["POST"]["pwd"], $User->getPassword())) {
-                        $target = [
-                            "id",
-                            "email",
-                            "token"
-                        ];
-                        $parameter = [
-                            "LIKE" => [
-                                "email" => $params["POST"]["email"],
-                                "password" => $User->getPassword()
-                            ]
-                        ];
-                        $User->setWhereParameter($parameter);
-                        $User->getOneData($target);
-                        if (!(empty($User->getToken()) && empty($User->getEmail()))) {
-                            $date = new DateTime();
-                            $User->setDateconnection($date->getTimestamp());
-                            $User->setToken();
-                            $User->save();
-                            $_SESSION['token'] = $User->getToken();
-                            $_SESSION['email'] = $User->getEmail();
-                            header("Location:" . DIRNAME);
-                        }
+            if(empty($errors)){
+                if(isset($params["POST"]["email"]) && isset($params["POST"]["pwd"])){
+                    if($User->verrifyUserLogin($params["POST"]["pwd"], $params["POST"]["email"])){
+                        header("Location:" . DIRNAME);
                     } else {
                         $errors[AUTHENTIFICATION_FAILED_KEY] = AUTHENTIFICATION_FAILED_MESSAGE;
                     }
-                } else {
-                    $errors[AUTHENTIFICATION_FAILED_KEY] = AUTHENTIFICATION_FAILED_MESSAGE;
                 }
             }
         }
         $View = new View("user", "User/connect");
+        $registerMessage = "";
         if(isset($params['URI'][0])){ // message de confirmation après l'inscription
             if($params['URI'][0] == 'confirmed'){
                 $View->setData('textConfirm', 'Accès confirmé');
             }
         }
+        $View->setData('textConfirm', 'Accès confirmé');
         $View->setData("config", $form);
         $View->setData("errors", $errors);
     }
@@ -96,9 +65,15 @@ class UserController
 
                 Mail::sendMailRegister($email, $firstName, $lastName,$token);
             }
-
         }
         $View = new View("user", "User/register");
+        $registerMessage = "";
+        if(isset($params['URI'][0])){ // message de confirmation après l'inscription
+            if($params['URI'][0] == 'error'){
+                $registerMessage = REGISTER_FAILED_MESSAGE;
+            }
+        }
+        $View->setData('infoSignup', $registerMessage);
         $View->setData("config", $form);
         $View->setData("errors", $errors);
 
@@ -131,10 +106,10 @@ class UserController
                 //blogcontroller
 
                 $messConfirm = 'Inscription confirmé, vous pouvez vous connectez dès maintenant';
-                header('Location:'.$redirection["signin"].'?textConfirm='.$messConfirm);
+                header('Location:'.$redirection["signin"].'/confirmed');
             } else {
                 $messError = 'Inscription echoué, veuillez reesayer de vous inscrire.';
-                header('Location:'.$redirection["signup"].'?$infoSignup='.$messError);
+                header('Location:'.$redirection["signup"].'/error');
             }
         }
     }

@@ -56,7 +56,7 @@ class CoreSql{
             $set = [];
             foreach ($this->columns as $columnName => $value) {
                 if(isset($this->columns[$columnName]) && $columnName != "id") {
-                    $set[] = strtolower(get_called_class()) . '_' . $columnName . ' = :' . $columnName;
+                    $set[] = $this->columnBase . '_' . $columnName . ' = :' . $columnName;
                 } else {
                     unset($this->columns[$columnName]);
                 }
