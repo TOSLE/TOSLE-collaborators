@@ -33,7 +33,6 @@ class UserController
         if(!empty($params["POST"])) {
             $errors = Validate::checkForm($form, $params["POST"]);
             if (empty($errors)) {
-                $User->setPassword($params["POST"]["pwd"]);
                 $target = [
                     "password"
                 ];
@@ -44,29 +43,35 @@ class UserController
                 ];
                 $User->setWhereParameter($parameter);
                 $User->getOneData($target);
-                if(password_verify($params["POST"]["pwd"], $User->getPassword())){
-                    $target = [
-                        "id",
-                        "email",
-                        "token"
-                    ];
-                    $parameter = [
-                        "LIKE" => [
-                            "email" => $params["POST"]["email"],
-                            "password" => $User->getPassword()
-                        ]
-                    ];
-                    $User->setWhereParameter($parameter);
-                    $User->getOneData($target);
-                    if(!(empty($User->getToken()) && empty($User->getEmail()))){
-                        $date = new DateTime();
-                        $User->setDateconnection($date->getTimestamp());
-                        $User->setToken();
-                        $User->save();
-                        $_SESSION['token'] = $User->getToken();
-                        $_SESSION['email'] = $User->getEmail();
-                        header("Location:".DIRNAME);
+                if(!empty($User->getPassword())) {
+                    if (password_verify($params["POST"]["pwd"], $User->getPassword())) {
+                        $target = [
+                            "id",
+                            "email",
+                            "token"
+                        ];
+                        $parameter = [
+                            "LIKE" => [
+                                "email" => $params["POST"]["email"],
+                                "password" => $User->getPassword()
+                            ]
+                        ];
+                        $User->setWhereParameter($parameter);
+                        $User->getOneData($target);
+                        if (!(empty($User->getToken()) && empty($User->getEmail()))) {
+                            $date = new DateTime();
+                            $User->setDateconnection($date->getTimestamp());
+                            $User->setToken();
+                            $User->save();
+                            $_SESSION['token'] = $User->getToken();
+                            $_SESSION['email'] = $User->getEmail();
+                            header("Location:" . DIRNAME);
+                        }
+                    } else {
+                        $errors[AUTHENTIFICATION_FAILED_KEY] = AUTHENTIFICATION_FAILED_MESSAGE;
                     }
+                } else {
+                    $errors[AUTHENTIFICATION_FAILED_KEY] = AUTHENTIFICATION_FAILED_MESSAGE;
                 }
             }
         }
