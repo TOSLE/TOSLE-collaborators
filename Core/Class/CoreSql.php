@@ -238,18 +238,18 @@ class CoreSql{
             ".$this->orderByParameter."
             ".$this->limitParameter."
         ");
-
         $query->execute();
-
+        $resultQuery = $query->fetch();
         // On vide le parameter WHERE pour éviter tout problème sur requête qui viendrait après et où on ne veut pas de parametre
         $this->whereParameter = "";
         $this->orderByParameter = "";
         $this->limitParameter = "";
-
-        foreach($query->fetch() as $key => $value){
-            if(!is_numeric($key)) {
-                $tmpString = str_replace($this->columnBase."_", "", $key);
-                $this->$tmpString = $value;
+        if($resultQuery) {
+            foreach ($resultQuery as $key => $value) {
+                if (!is_numeric($key)) {
+                    $tmpString = str_replace($this->columnBase . "_", "", $key);
+                    $this->$tmpString = $value;
+                }
             }
         }
     }
