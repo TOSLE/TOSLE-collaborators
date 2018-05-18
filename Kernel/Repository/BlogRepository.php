@@ -70,8 +70,11 @@ class BlogRepository extends Blog
     }
 
 
-
-    public function getModalLatestArticle()
+    /**
+     * @param int $colSize
+     * @return array
+     */
+    public function getModalLatestArticle($colSize = 12)
     {
         $Access = new Access();
         $hrefBackOffice = $Access->getPathBackOffice();
@@ -84,7 +87,7 @@ class BlogRepository extends Blog
             2 => "Date de publication",
             3 => "Action"
         ]);
-        $ViewLatestBloc->setColSizeBloc(12);
+        $ViewLatestBloc->setColSizeBloc($colSize);
         $ViewLatestBloc->setActionButtonStatus(0, [
             "color" => "green",
             "text" => "Publish",
