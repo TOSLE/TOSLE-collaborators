@@ -69,7 +69,7 @@ class DashboardController
         $View->setData("PageName", NAV_DASHBOARD . " " . NAV_DASHBOARD_BLOG);
 
 
-        $latestArticles = $BlogRepository->getModalLatestArticle();
+        $latestArticles = $BlogRepository->getModalLatestArticle(12);
         $View->setData("latestBlogArticle", $latestArticles);
 
         $BlocGeneral = new DashboardBlocModal();
