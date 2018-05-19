@@ -23,6 +23,10 @@
         <div class="modal-main">
             <div class="container">
                 <div class="row">
+                    <?php $this->addModal("dashboard_bloc", $modalAllPublishPost);?>
+                </div>
+                <div class="row">
+                    <?php $this->addModal("dashboard_bloc", $modalAllUnpublishPost);?>
                 </div>
             </div>
         </div>
