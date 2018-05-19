@@ -84,13 +84,13 @@ class BlogController
      */
     function addAction($params)
     {
+        $Access = new Access();
+        $route = $Access->getSlugs();
         if(isset($params["URI"][0])){
-            $Access = new Access();
-            $route = $Access->getSlugs();
             $getTypeNewArticle = $params["URI"][0];
+            $Blog = new BlogRepository();
             if($getTypeNewArticle == "text"){
                 $View = new View("dashboard", "Dashboard/add_article_blog");
-                $Blog = new BlogRepository();
                 $configForm = $Blog->configFormAddArticleText();
                 if(isset($params["POST"])){
                     if(!empty($params["POST"])) {
@@ -107,10 +107,10 @@ class BlogController
                 $View->setData("errors", "");
                 $View->setData("configForm", $configForm);
             } else {
-                echo "Le paramètre renseigné ne fait pas partie de la liste attendue";
+                header('Location:'.$route['dashboard_blog'].'/error');
             }
         } else {
-            echo "Il faut un paramètre pour ce controller !";
+            header('Location:'.$route['dashboard_blog']);
         }
     }
 
@@ -124,12 +124,18 @@ class BlogController
                 $configForm = $Blog->configFormAddArticleText();
 
                 $Blog->getArticle($getIdArticle);
-
-                $configForm["content_value"] = [
-                    "title" => $Blog->getTitle(),
-                    "ckeditor" => $Blog->getContent()
-                ];
-
+                $typeArticle = $Blog->getType();
+                switch ($typeArticle){
+                    case 1:
+                        $configForm["content_value"] = [
+                            "title" => $Blog->getTitle(),
+                            "ckeditor" => $Blog->getContent()
+                        ];
+                        break;
+                    default:
+                        header('Location:'.$route['dashboard_blog']);
+                        break;
+                }
                 $View->setData("errors", "");
                 $View->setData("configForm", $configForm);
             }
