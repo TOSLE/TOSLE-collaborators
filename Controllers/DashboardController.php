@@ -61,8 +61,6 @@ class DashboardController
     {
         $View = new View("dashboard", "Dashboard/blog");
         $BlogRepository = new BlogRepository();
-        $Access = new Access();
-        $hrefBackOffice = $Access->getPathBackOffice();
         /**
          * On set les variables importantes de la vue (le pagename)
          */
@@ -72,74 +70,18 @@ class DashboardController
         $latestArticles = $BlogRepository->getModalLatestArticle(12);
         $View->setData("latestBlogArticle", $latestArticles);
 
-        $BlocGeneral = new DashboardBlocModal();
-        $BlocGeneral->setTitle("Principal menu");
-        $BlocGeneral->setTableHeader([
-            1 => "Name of action",
-            2 => "Action"
-        ]);
-        $BlocGeneral->setTableBodyClass([
-            1 => "td-content-text",
-            2 => "td-content-action"
-        ]);
-        $BlocGeneral->setColSizeBloc(6);
-        $BlocGeneral->setTableBodyContent([
-            0 => [
-                1 => "Nouveau post de type texte",
-                "button_action" => [
-                    "type" => "href",
-                    "target" => $hrefBackOffice["blog/add"]."/text",
-                    "color" => "tosle",
-                    "text" => "New post"
-                ]
-            ],
-            1 => [
-                1 => "Nouveau post de type image",
-                "button_action" => [
-                    "type" => "href",
-                    "target" => $hrefBackOffice["blog/add"]."/image",
-                    "color" => "tosle",
-                    "text" => "New post"
-                ]
-            ],
-            2 => [
-                1 => "Nouveau post de type vidéo",
-                "button_action" => [
-                    "type" => "href",
-                    "target" => $hrefBackOffice["blog/add"]."/video",
-                    "color" => "tosle",
-                    "text" => "New post"
-                ]
-            ]
-        ]);
-        $View->setData("blocGeneral", $BlocGeneral->getArrayData());
 
-        $StatsBlog = new DashboardBlocModal();
-        $StatsBlog->setTitle("Blog Analytics");
-        $StatsBlog->setTableHeader([
-            1 => "Type",
-            2 => "Value"
-        ]);
-        $StatsBlog->setTableBodyClass([
-            1 => "td-content-text",
-            2 => "td-content-number"
-        ]);
-        $StatsBlog->setColSizeBloc(6);
-        $StatsBlog->setTableBodyContent([
-            0 => [
-                1 => "Nombre d'article",
-                2 => $BlogRepository->countNumberOfBlog()
-            ],
-            1 => [
-                1 => "Nombre d'article publié",
-                2 => $BlogRepository->countNumberOfBlogByStatus(1)
-            ],
-            2 => [
-                1 => "Nombre d'article dépublié",
-                2 => $BlogRepository->countNumberOfBlogByStatus(0)
-            ]
-        ]);
-        $View->setData("statsBlog", $StatsBlog->getArrayData());
+        $modalAddPost = $BlogRepository->getModalAddPost();
+        $View->setData("blocGeneral", $modalAddPost);
+
+        $modalStatBlog = $BlogRepository->getModalStats();
+        $View->setData("statsBlog", $modalStatBlog);
+
+        $modalAllPublishPost = $BlogRepository->getModalAllArticle(12, 1);
+        $View->setData('modalAllPublishPost', $modalAllPublishPost);
+
+        $modalAllUnpublishPost = $BlogRepository->getModalAllArticle(12, 0);
+        $View->setData('modalAllUnpublishPost', $modalAllUnpublishPost);
 
         /**
          * Affectation des données pour la vue
