@@ -69,7 +69,7 @@
         }
     }
 
-    if($userStatus < $Acces->getSecurity($accessParams["slug"])){
+    if($userStatus < $accessParams["security"]){
         $controller = "IndexController";
         $action = "accessAction";
     }

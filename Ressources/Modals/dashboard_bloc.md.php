@@ -45,7 +45,7 @@
                                                     <?php endif;?>
                                                     <?php if($typeButton == "actionButtonView"):?>
                                                         <?php if(isset($content)):?>
-                                                            <a href="<?php echo $config["data"]["data_href"]["view"]."/".urlencode($arrayValue["data_title"]);?>" class="btn-sm btn-tosle"><?php echo $content;?></a>
+                                                            <a href="<?php echo $config["data"]["data_href"]["view"]."/".Access::constructUrl($arrayValue["data_title"]);?>" class="btn-sm btn-tosle"><?php echo $content;?></a>
                                                         <?php endif;?>
                                                     <?php endif;?>
                                                     <?php if($typeButton == "actionButtonStatus"):?>

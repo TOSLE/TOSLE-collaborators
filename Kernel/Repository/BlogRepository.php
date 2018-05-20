@@ -109,9 +109,7 @@ class BlogRepository extends Blog
      */
     public function getModalLatestArticle($colSize = 12)
     {
-        $Access = new Access();
-        $hrefBackOffice = $Access->getPathBackOffice();
-        $hrefFrontOffice = $Access->getSlugs();
+        $routes = Access::getSlugsById();
         $ViewLatestBloc = new DashboardBlocModal();
         $ViewLatestBloc->setTitle("View latest post on your blog");
         $ViewLatestBloc->setIconHeader("modal_view_all_posts", "modal");
@@ -125,13 +123,13 @@ class BlogRepository extends Blog
             "color" => "green",
             "text" => "Publish",
             "type" => "href",
-            "target" => $hrefBackOffice["blog/status"]."/"
+            "target" => $routes["blog/status"]."/"
         ]);
         $ViewLatestBloc->setActionButtonStatus(1, [
             "color" => "red",
             "text" => "Unpublish",
             "type" => "href",
-            "target" => $hrefBackOffice["blog/status"]."/"
+            "target" => $routes["blog/status"]."/"
         ]);
         $ViewLatestBloc->setActionButtonEdit("Edit");
         $ViewLatestBloc->setActionButtonView("View");
@@ -142,8 +140,8 @@ class BlogRepository extends Blog
             3 => "td-content-action"
         ]);
         $ViewLatestBloc->setTableBodyContent($this->getLatestArticle(5), true);
-        $ViewLatestBloc->setArrayHref("edit", $hrefBackOffice["blog/edit"]);
-        $ViewLatestBloc->setArrayHref("view", $hrefFrontOffice["view_blog_article"]);
+        $ViewLatestBloc->setArrayHref("edit", $routes["blog/edit"]);
+        $ViewLatestBloc->setArrayHref("view", $routes["view_blog_article"]);
         return $ViewLatestBloc->getArrayData();
     }
 
@@ -156,9 +154,7 @@ class BlogRepository extends Blog
      */
     public function getModalAllArticle($colSize = 12, $status = 1)
     {
-        $Access = new Access();
-        $hrefBackOffice = $Access->getPathBackOffice();
-        $hrefFrontOffice = $Access->getSlugs();
+        $routes = Access::getSlugsById();
         $ViewArticleBloc = new DashboardBlocModal();
         if($status === 1)
             $ViewArticleBloc->setTitle("View article with the status : Publish");
@@ -174,13 +170,13 @@ class BlogRepository extends Blog
             "color" => "green",
             "text" => "Publish",
             "type" => "href",
-            "target" => $hrefBackOffice["blog/status"]."/"
+            "target" => $routes["blog/status"]."/"
         ]);
         $ViewArticleBloc->setActionButtonStatus(1, [
             "color" => "red",
             "text" => "Unpublish",
             "type" => "href",
-            "target" => $hrefBackOffice["blog/status"]."/"
+            "target" => $routes["blog/status"]."/"
         ]);
         $ViewArticleBloc->setActionButtonEdit("Edit");
         $ViewArticleBloc->setActionButtonView("View");
@@ -191,8 +187,8 @@ class BlogRepository extends Blog
             3 => "td-content-action"
         ]);
         $ViewArticleBloc->setTableBodyContent($this->getAllArticleByStatus($status), true);
-        $ViewArticleBloc->setArrayHref("edit", $hrefBackOffice["blog/edit"]);
-        $ViewArticleBloc->setArrayHref("view", $hrefFrontOffice["view_blog_article"]);
+        $ViewArticleBloc->setArrayHref("edit", $routes["blog/edit"]);
+        $ViewArticleBloc->setArrayHref("view", $routes["view_blog_article"]);
         return $ViewArticleBloc->getArrayData();
     }
 
@@ -236,10 +232,9 @@ class BlogRepository extends Blog
      */
     public function getModalAddPost()
     {
-        $Access = new Access();
         $BlocGeneral = new DashboardBlocModal();
 
-        $hrefBackOffice = $Access->getPathBackOffice();
+        $routes = Access::getSlugsById();
 
         $BlocGeneral->setTitle("Principal menu");
         $BlocGeneral->setTableHeader([
@@ -256,7 +251,7 @@ class BlogRepository extends Blog
                 1 => "Nouveau post de type texte",
                 "button_action" => [
                     "type" => "href",
-                    "target" => $hrefBackOffice["blog/add"]."/text",
+                    "target" => $routes["blog/add"]."/text",
                     "color" => "tosle",
                     "text" => "New post"
                 ]
@@ -265,7 +260,7 @@ class BlogRepository extends Blog
                 1 => "Nouveau post de type image",
                 "button_action" => [
                     "type" => "href",
-                    "target" => $hrefBackOffice["blog/add"]."/image",
+                    "target" => $routes["blog/add"]."/image",
                     "color" => "tosle",
                     "text" => "New post"
                 ]
@@ -274,7 +269,7 @@ class BlogRepository extends Blog
                 1 => "Nouveau post de type vidéo",
                 "button_action" => [
                     "type" => "href",
-                    "target" => $hrefBackOffice["blog/add"]."/video",
+                    "target" => $routes["blog/add"]."/video",
                     "color" => "tosle",
                     "text" => "New post"
                 ]
