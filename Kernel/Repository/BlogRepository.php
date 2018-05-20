@@ -49,7 +49,7 @@ class BlogRepository extends Blog
             ]
         ];
         $this->setWhereParameter($parameter);
-        $this->getOneData(["id", "title", "content"]);
+        $this->getOneData(["id", "title", "content", "type"]);
     }
 
     /**

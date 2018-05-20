@@ -116,6 +116,8 @@ class BlogController
 
     function editAction($params)
     {
+        $Access = new Access();
+        $routes = $Access->getSlugs();
         if(isset($params["URI"][0])){
             $getIdArticle = $params["URI"][0];
             if(is_numeric($getIdArticle)){
@@ -124,16 +126,26 @@ class BlogController
                 $configForm = $Blog->configFormAddArticleText();
 
                 $Blog->getArticle($getIdArticle);
-                $typeArticle = $Blog->getType();
-                switch ($typeArticle){
+                switch ($Blog->getType()){
                     case 1:
+                        if(isset($params["POST"])){
+                            if(!empty($params["POST"])) {
+                                $tmpArray = $params["POST"];
+                                $Blog->setTitle($tmpArray["title"]);
+                                $Blog->setContent($tmpArray["textArea_article"]);
+                                (isset($tmpArray["publish"]))?$Blog->setStatus(1):$Blog->setStatus(0);
+                                $Blog->setType(1);
+                                $Blog->save();
+                                header('Location:'.$routes['dashboard_blog']);
+                            }
+                        }
                         $configForm["content_value"] = [
                             "title" => $Blog->getTitle(),
                             "ckeditor" => $Blog->getContent()
                         ];
                         break;
                     default:
-                        header('Location:'.$route['dashboard_blog']);
+                        header('Location:'.$routes['dashboard_blog']);
                         break;
                 }
                 $View->setData("errors", "");
