@@ -29,8 +29,7 @@ class View
             echo ERROR_01_VIEW_CALL;
         }
 
-        $Access = new Access();
-        $this->slugs = $Access->getSlugs() + $Access->getPathBackOffice();
+        $this->slugs = Access::getSlugsById();
     }
 
     public function addModal($modal, $config, $errors = false)

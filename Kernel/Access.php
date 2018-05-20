@@ -88,6 +88,11 @@ class Access
         "blog/edit" => 2
     ];
 
+    /**
+     * @param string|bool $slug
+     * @return array
+     * Retourne le tableau correspondant au slug fournit en paramètre
+     */
     public function getRoute($slug = false)
     {
         foreach ($this->access as $route){
@@ -98,6 +103,11 @@ class Access
         return $this->access["default"];
     }
 
+    /**
+     * @param string $id
+     * @return array
+     * Retourne le slug correspond à l'id de celui-ci
+     */
     public function getSlug($id)
     {
         foreach ($this->access as $key => $params){
@@ -107,22 +117,30 @@ class Access
         }
         return $this->access["default"];
     }
-    public function getSlugs()
+
+    /**
+     * @return array
+     * Retourne le tableau des slugs
+     */
+    public function getAccess()
     {
-        global $language;
-        $data = [];
-        foreach ($this->access as $key => $value){
-            $data[$key] = "".DIRNAME.substr($language,0,2)."/".$value["slug"];
-        }
-        return $data;
+        return $this->access;
     }
 
-    public function getSecurity($slug)
+    /**
+     * @return array
+     * Retourne le tableau des slugs du backoffice
+     */
+    public function getBackoffice()
     {
-        $route = $this->getRoute($slug);
-        return $route["security"];
+        return $this->backOffice;
     }
 
+    /**
+     * @param $route
+     * @return int|mixed
+     * Permet de savoir si la route fournit existe, sinon on renvoit un -1
+     */
     public function getBackOfficeRoute($route)
     {
         if(isset($this->backOffice[$route])){
@@ -130,13 +148,36 @@ class Access
         }
         return -1;
     }
-    public function getPathBackOffice()
+
+    /**
+     * @return array
+     * Retourne un tableau comprenant toutes les routes du Backoffice et et du front office sous la forme
+     * key => chemin
+     */
+    public static function getSlugsById()
     {
         global $language;
+        $Acces = new Access();
         $data = [];
-        foreach ($this->backOffice as $key => $value){
+        foreach ($Acces->getAccess() as $key => $value){
+            $data[$key] = "".DIRNAME.substr($language,0,2)."/".$value["slug"];
+        }
+        foreach ($Acces->getBackoffice() as $key => $value){
             $data[$key] = "".DIRNAME.substr($language,0,2)."/".$key;
         }
         return $data;
+    }
+
+    /**
+     * @param string $string
+     * @return string
+     * Permet de retourner une chaine de caractere sous le format URL
+     */
+    public static function constructUrl($string = "url to encode")
+    {
+        $search = array('à', 'ä', 'â', 'é', 'è', 'ë', 'ê', 'ï', 'ì', 'î', 'ù', 'û', 'ü', 'ô', 'ö', '&', ' ', '?', '!', 'ç', ';', '/');
+        $replace = array('a', 'a', 'a', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'u', 'u', 'u', 'o', 'o', '', '-', '', '', 'c', '', '-');
+
+        return urlencode(str_replace($search, $replace, strtolower($string)));
     }
 }

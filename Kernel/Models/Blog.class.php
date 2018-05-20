@@ -135,8 +135,7 @@ class Blog extends CoreSql {
 
     function configFormAddArticleText()
     {
-        $Access = new Access();
-        $slugs = $Access->getSlugs();
+        $slugs = Access::getSlugsById();
         return [
             "config"=> [
                 "method"=>"post",

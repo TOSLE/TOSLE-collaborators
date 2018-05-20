@@ -81,8 +81,7 @@ class UserController
 
     public function verifyAction($params)
     {
-        $Access = new Access();
-        $redirection = $Access->getSlugs();
+        $routes = Access::getSlugsById();
 
         if (isset($params["GET"]["email"]) && isset($params["GET"]["token"])) {
             $User = new User();
@@ -106,10 +105,10 @@ class UserController
                 //blogcontroller
 
                 $messConfirm = 'Inscription confirmé, vous pouvez vous connectez dès maintenant';
-                header('Location:'.$redirection["signin"].'/confirmed');
+                header('Location:'.$routes["signin"].'/confirmed');
             } else {
                 $messError = 'Inscription echoué, veuillez reesayer de vous inscrire.';
-                header('Location:'.$redirection["signup"].'/error');
+                header('Location:'.$routes["signup"].'/error');
             }
         }
     }

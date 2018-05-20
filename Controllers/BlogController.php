@@ -84,8 +84,7 @@ class BlogController
      */
     function addAction($params)
     {
-        $Access = new Access();
-        $route = $Access->getSlugs();
+        $routes = Access::getSlugsById();
         if(isset($params["URI"][0])){
             $getTypeNewArticle = $params["URI"][0];
             $Blog = new BlogRepository();
@@ -100,24 +99,23 @@ class BlogController
                         (isset($tmpArray["publish"]))?$Blog->setStatus(1):$Blog->setStatus(0);
                         $Blog->setType(1);
                         $Blog->save();
-                        header('Location:'.$route['dashboard_blog']);
+                        header('Location:'.$routes['dashboard_blog']);
                     }
                 }
 
                 $View->setData("errors", "");
                 $View->setData("configForm", $configForm);
             } else {
-                header('Location:'.$route['dashboard_blog'].'/error');
+                header('Location:'.$routes['dashboard_blog'].'/error');
             }
         } else {
-            header('Location:'.$route['dashboard_blog']);
+            header('Location:'.$routes['dashboard_blog']);
         }
     }
 
     function editAction($params)
     {
-        $Access = new Access();
-        $routes = $Access->getSlugs();
+        $routes = Access::getSlugsById();
         if(isset($params["URI"][0])){
             $getIdArticle = $params["URI"][0];
             if(is_numeric($getIdArticle)){
@@ -156,9 +154,7 @@ class BlogController
 
     function statusAction($params)
     {
-        global $language;
-
-        $Access = new Access();
+        $routes = Access::getSlugsById();
         $Blog = new Blog();
 
         $target = [
@@ -181,9 +177,6 @@ class BlogController
             $Blog->save();
         }
 
-
-        $redirection = $Access->getSlugs();
-
-        header('Location:'.$redirection["dashboard_blog"]);
+        header('Location:'.$routes["dashboard_blog"]);
     }
 }
