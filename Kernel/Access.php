@@ -75,7 +75,7 @@ class Access
             "security" => false
         ],
         "view_blog_article" => [ // change status blog
-            "slug" => "view-blog-article",
+            "slug" => "view-article",
             "controller" => "blog",
             "action" => "view",
             "security" => false
