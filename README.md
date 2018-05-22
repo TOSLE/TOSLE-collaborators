@@ -9,7 +9,7 @@ A la racine du repo
 
 > npm install node-sass
  
-Le README sera ridigé d'ici peu
+Le README sera ridigé d'ici peu de temps
 __________________________
 
 # Student Project - TOSLE
