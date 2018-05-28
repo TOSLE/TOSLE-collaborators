@@ -9,8 +9,7 @@ A la racine du repo
 
 > npm install node-sass
  
-Le template "default" n'est pas prêt. Il arrive bientôt !
-Le template "messaging" est prêt
+Le README sera ridigé d'ici peu de temps :)
 __________________________
 
 # Student Project - TOSLE
