@@ -49,6 +49,7 @@ class BlogController
                 $value["blog_content"] = (strlen($contentValue)>200)?substr($contentValue, 0, 200):$contentValue;
                 $value["blog_status"] = $content->getStatus();
                 $value["blog_id"] = $content->getId();
+                $value["blog_url"] = Access::constructUrl($content->getTitle());
                 $data[] = $value;
             }
             $View->setData("data", $data);
@@ -64,7 +65,7 @@ class BlogController
      */
     function viewAction($params)
     {
-        $View = new View("default");
+        $View = new View("default", "Blog/view_article");
     }
 
     /**
