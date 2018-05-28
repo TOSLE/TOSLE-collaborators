@@ -7,17 +7,17 @@
         if(file_exists("Kernel/Class/".$parameter.".php")){
             include("Kernel/Class/".$parameter.".php");
         }
-        if(file_exists("Kernel/Models/".$parameter.".class.php")){
-            include("Kernel/Models/".$parameter.".class.php");
+        if(file_exists("Src/Models/".$parameter.".class.php")){
+            include("Src/Models/".$parameter.".class.php");
         }
-        if(file_exists("Kernel/ModalsRepository/".$parameter.".php")){
-            include("Kernel/ModalsRepository/".$parameter.".php");
+        if(file_exists("Src/ModalsRepository/".$parameter.".php")){
+            include("Src/ModalsRepository/".$parameter.".php");
         }
         if(file_exists("Kernel/".$parameter.".php")){
             include("Kernel/".$parameter.".php");
         }
-        if(file_exists("Kernel/Repository/".$parameter.".php")){
-            include("Kernel/Repository/".$parameter.".php");
+        if(file_exists("Src/Repository/".$parameter.".php")){
+            include("Src/Repository/".$parameter.".php");
         }
     }
     spl_autoload_register("autoLoader");
@@ -111,8 +111,8 @@
         include "Kernel/Language/en-EN/conf.lang.php";
     }
 
-    if(file_exists("Controllers/".$controller.".php")){
-        include "Controllers/".$controller.".php";
+    if(file_exists("Src/Controllers/".$controller.".php")){
+        include "Src/Controllers/".$controller.".php";
         if(class_exists($controller)){
             $obj = new $controller();
             if(method_exists($obj,$action)){
