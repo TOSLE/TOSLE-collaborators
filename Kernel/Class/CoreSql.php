@@ -256,7 +256,6 @@ class CoreSql{
 
     /**
      * @param array $target
-     * @param array $parameter
      * @return array
      */
     public function countData($target)
@@ -281,6 +280,15 @@ class CoreSql{
         $this->limitParameter = "";
 
         return $query->fetch();
+    }
+
+    public function setJunctionData($parameter)
+    {
+        /**
+         * Le parameter marche par pairet possède les correspondances
+         * Le getData aura un test à faire pour savoir si la fonction a été appelé
+         * Et comme ça la même fonction pour une requete différente :)
+         */
     }
 
 }
