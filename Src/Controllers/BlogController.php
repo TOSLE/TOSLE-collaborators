@@ -66,15 +66,33 @@ class BlogController
      */
     function viewAction($params)
     {
-        $View = new View("default", "Blog/view_article");
-        $Blog = new BlogRepository();
-        $Blog->getArticleByUrl($params["URI"][0]);
-        $data = [
-            "title" => $Blog->getTitle(),
-            "content" => $Blog->getContent(),
-            "datecreate" => $Blog->getDatecreate()
-        ];
-        $View->setData("data", $data);
+        if(isset($params["URI"][0]) && !empty($params["URI"][0])){
+            $View = new View("default", "Blog/view_article");
+            $Blog = new BlogRepository();
+            if($Blog->getArticleByUrl($params["URI"][0])){
+                $article = [
+                    "title" => $Blog->getTitle(),
+                    "content" => $Blog->getContent(),
+                    "datecreate" => $Blog->getDatecreate()
+                ];
+                if(isset($params["URI"][1]) && !empty($params["URI"][1])){
+                    $BlogComment = new BlogComment();
+                    $BlogComment->setUserid(1);
+                    $BlogComment->setBlogid($Blog->getId());
+                    $BlogComment->setCommentid(1);
+                    $BlogComment->save();
+                }
+
+
+                $View->setData("article_content", $article);
+            } else {
+                echo "L'article demandé n'est pas disponible ou n'existe pas";
+            }
+        } else {
+            header('Location:'.Access::getSlugsById()["bloghome"]);
+        }
+
+
     }
 
     /**
