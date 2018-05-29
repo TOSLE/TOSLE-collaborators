@@ -14,6 +14,7 @@ class Blog extends CoreSql {
     protected $content;
     protected $datecreate;
     protected $status;
+    protected $url;
     protected $fileid;
 
     public function __construct()
@@ -132,6 +133,24 @@ class Blog extends CoreSql {
     {
         $this->fileid = $fileid;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * @param mixed $url
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+    }
+
+
 
     function configFormAddArticleText()
     {
