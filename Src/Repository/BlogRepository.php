@@ -53,6 +53,7 @@ class BlogRepository extends Blog
     }
     /**
      * @param integer $id
+     * @return bool
      * Retourne tous les éléments d'un article en fonction de son id
      */
     public function getArticleByUrl($url)
@@ -64,6 +65,11 @@ class BlogRepository extends Blog
         ];
         $this->setWhereParameter($parameter);
         $this->getOneData(["id", "title", "content", "type", "url", "datecreate"]);
+        if(!isset($this->id)){
+            return false;
+        } else {
+            return true;
+        }
     }
 
     /**
