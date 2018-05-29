@@ -49,7 +49,21 @@ class BlogRepository extends Blog
             ]
         ];
         $this->setWhereParameter($parameter);
-        $this->getOneData(["id", "title", "content", "type"]);
+        $this->getOneData(["id", "title", "content", "type", "url"]);
+    }
+    /**
+     * @param integer $id
+     * Retourne tous les éléments d'un article en fonction de son id
+     */
+    public function getArticleByUrl($url)
+    {
+        $parameter = [
+            "LIKE" => [
+                "url" => $url
+            ]
+        ];
+        $this->setWhereParameter($parameter);
+        $this->getOneData(["id", "title", "content", "type", "url", "datecreate"]);
     }
 
     /**

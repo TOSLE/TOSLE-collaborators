@@ -25,7 +25,8 @@ class BlogController
                 "title",
                 "content",
                 "datecreate",
-                "id"
+                "id",
+                "url"
             ];
             $parameter = [
                 "LIKE" => [
@@ -49,7 +50,7 @@ class BlogController
                 $value["blog_content"] = (strlen($contentValue)>200)?substr($contentValue, 0, 200):$contentValue;
                 $value["blog_status"] = $content->getStatus();
                 $value["blog_id"] = $content->getId();
-                $value["blog_url"] = Access::constructUrl($content->getTitle());
+                $value["blog_url"] = $content->getUrl();
                 $data[] = $value;
             }
             $View->setData("data", $data);
@@ -66,6 +67,14 @@ class BlogController
     function viewAction($params)
     {
         $View = new View("default", "Blog/view_article");
+        $Blog = new BlogRepository();
+        $Blog->getArticleByUrl($params["URI"][0]);
+        $data = [
+            "title" => $Blog->getTitle(),
+            "content" => $Blog->getContent(),
+            "datecreate" => $Blog->getDatecreate()
+        ];
+        $View->setData("data", $data);
     }
 
     /**
@@ -99,6 +108,7 @@ class BlogController
                         $Blog->setContent($tmpArray["textArea_article"]);
                         (isset($tmpArray["publish"]))?$Blog->setStatus(1):$Blog->setStatus(0);
                         $Blog->setType(1);
+                        $Blog->setUrl(Access::constructUrl($Blog->getTitle()));
                         $Blog->save();
                         header('Location:'.$routes['dashboard_blog']);
                     }
