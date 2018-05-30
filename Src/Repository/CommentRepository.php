@@ -25,4 +25,15 @@ class CommentRepository extends Comment
         $this->setWhereParameter($parameter);
         $this->getOneData($target);
     }
+
+    public function getAll($identifier, $value)
+    {
+        if($identifier == "blog"){
+            $target = ["id", "content"];
+            $join = [
+                "blog_id" => $value
+            ];
+            $this->setLeftJoin($join);
+        }
+    }
 }

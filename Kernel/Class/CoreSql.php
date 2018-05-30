@@ -9,6 +9,7 @@ class CoreSql{
     private $whereParameter;
     private $limitParameter;
     private $orderByParameter;
+    private $leftJoin = "";
 
     /**
      * CoreSql constructor.
@@ -281,13 +282,27 @@ class CoreSql{
         return $query->fetch();
     }
 
-    public function setJunctionData($parameter)
+    /**
+     * @param array $parameters
+     */
+    public function setLeftJoin($parameters)
     {
         /**
          * Le parameter marche par pairet possède les correspondances
          * Le getData aura un test à faire pour savoir si la fonction a été appelé
          * Et comme ça la même fonction pour une requete différente :)
          */
+        echo "<pre>";
+        print_r($parameters);
+        echo "</pre>";
+        foreach ($parameters as $origin => $value){
+            $explodedArray = explode("_", $origin);
+            $tmpArray[] = $explodedArray[0].".".$origin." = ".$this->table.".".$explodedArray[0].$explodedArray[1];
+
+        }
+
+        $this->leftJoin .= "LEFT JOIN tosle_".$explodedArray[0].$this->columnBase." ON ".implode(",", $tmpArray) ;
+        echo $this->leftJoin;
     }
 
 }
