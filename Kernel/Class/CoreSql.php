@@ -24,7 +24,6 @@ class CoreSql{
         } catch(Exception $e){
             die("Erreur SQL".$e->getMessage()."\n");
         }
-
         $this->table = "tosle_".strtolower(str_ireplace("Repository","",get_called_class()));
         $this->columnBase = strtolower(str_ireplace("Repository","",get_called_class()));
     }
@@ -75,11 +74,11 @@ class CoreSql{
                     unset($this->columns[$key]);
                 }
             }
-
             $query = $this->pdo->prepare("INSERT INTO ".$this->table." ("
                 . implode(',', $columnName) .") VALUES (:"
                 . implode(',:', array_keys($this->columns)) .
                 ")");
+
             $query->execute($this->columns);
         }
     }
