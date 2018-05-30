@@ -78,14 +78,15 @@ class BlogController
                 if(isset($params["URI"][1]) && !empty($params["URI"][1])){
                     $Commentaire = new CommentRepository();
                     $Commentaire->setContent("Coucou toi");
+                    $Commentaire->setTag();
                     $Commentaire->save();
-
+                    $Commentaire->getComment("tag", $Commentaire->getTag());
                     $User = new UserRepository();
                     $User->getUser();
                     $BlogComment = new BlogComment();
                     $BlogComment->setUserid($User->getId());
                     $BlogComment->setBlogid($Blog->getId());
-                    $BlogComment->setCommentid(1);
+                    $BlogComment->setCommentid($Commentaire->getId());
                     $BlogComment->save();
                 }
 

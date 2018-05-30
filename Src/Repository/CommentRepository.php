@@ -8,8 +8,21 @@
 
 class CommentRepository extends Comment
 {
-    public function getComment($id)
+    public function getComment($identifier, $value)
     {
-
+        $target = [
+            "id",
+            "content",
+            "tag"
+        ];
+        if($identifier === "tag"){
+            $parameter = [
+                "LIKE" => [
+                    "tag" => $value
+                ]
+            ];
+        }
+        $this->setWhereParameter($parameter);
+        $this->getOneData($target);
     }
 }
