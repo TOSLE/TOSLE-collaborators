@@ -76,8 +76,14 @@ class BlogController
                     "datecreate" => $Blog->getDatecreate()
                 ];
                 if(isset($params["URI"][1]) && !empty($params["URI"][1])){
+                    $Commentaire = new CommentRepository();
+                    $Commentaire->setContent("Coucou toi");
+                    $Commentaire->save();
+
+                    $User = new UserRepository();
+                    $User->getUser();
                     $BlogComment = new BlogComment();
-                    $BlogComment->setUserid(1);
+                    $BlogComment->setUserid($User->getId());
                     $BlogComment->setBlogid($Blog->getId());
                     $BlogComment->setCommentid(1);
                     $BlogComment->save();
