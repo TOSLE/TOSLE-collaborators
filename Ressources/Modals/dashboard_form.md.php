@@ -39,8 +39,8 @@
             <a href="<?php echo $config["exit"];?>" class="btn btn-red">Exit</a>
         <?php endif;?>
         <?php if(isset($config["config"]["save"])):?>
-            <input type="submit" class="btn btn-orange" name="save-draft" value="<?php echo $config["config"]["save"];?>">
+            <button type="submit" class="btn btn-orange" name="save-draft"><?php echo $config["config"]["save"];?></button>
         <?php endif;?>
-            <input type="submit" class="btn btn-green" name="publish" value="<?php echo $config["config"]["submit"];?>">
+        <button type="submit" class="btn btn-green" name="publish"><?php echo $config["config"]["submit"];?></button>
     </div>
 </form>
