@@ -75,24 +75,18 @@ class BlogController
                     "content" => $Blog->getContent(),
                     "datecreate" => $Blog->getDatecreate()
                 ];
-                /*if(isset($params["URI"][1]) && !empty($params["URI"][1])){
-                    $Commentaire = new CommentRepository();
-                    $Commentaire->setContent("Coucou toi");
-                    $Commentaire->setTag();
-                    $Commentaire->save();
-                    $Commentaire->getComment("tag", $Commentaire->getTag());
-                    $User = new UserRepository();
-                    $User->getUser();
-                    $BlogComment = new BlogComment();
-                    $BlogComment->setUserid($User->getId());
-                    $BlogComment->setBlogid($Blog->getId());
-                    $BlogComment->setCommentid($Commentaire->getId());
-                    $BlogComment->save();
-                }*/
                 $Comment = new CommentRepository();
                 $comments = $Comment->getAll("blog", $Blog->getId());
+                foreach($comments as $comment){
+                    $commentaires[] = [
+                        "id" => $comment->getId(),
+                        "content" => $comment->getContent(),
+                        "tag" => $comment->getTag()
+                    ];
+                }
 
                 $View->setData("article_content", $article);
+                $View->setData("commentaires", $commentaires);
             } else {
                 echo "L'article demandé n'est pas disponible ou n'existe pas";
             }
