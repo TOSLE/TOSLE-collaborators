@@ -295,7 +295,18 @@ class CoreSql{
     }
 
     /**
-     * @param array $parameters
+     * @param array $joinParameter
+     * @param array $whereParameter
+     * $joinParameter = [
+     *      "table_to_join" => [
+     *          "columnName_in_origin_table"
+     *      ]
+     * ];
+     * $whereParameter = [
+     *      "table_to_join" => [
+     *          "columnName_in_target_table" => $value
+     *      ]
+     * ];
      */
     public function setLeftJoin($joinParameter, $whereParameter)
     {
