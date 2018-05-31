@@ -29,11 +29,19 @@ class CommentRepository extends Comment
     public function getAll($identifier, $value)
     {
         if($identifier == "blog"){
-            $target = ["id", "content"];
-            $join = [
-                "blog_id" => $value
+            $target = ["id", "content", "tag"];
+            $joinParameter = [
+                "blogcomment" => [
+                        "comment_id"
+                ]
             ];
-            $this->setLeftJoin($join);
+            $whereParameter = [
+                "blogcomment" => [
+                    "blog_id" => $value
+                ]
+            ];
+            $this->setLeftJoin($joinParameter, $whereParameter);
+            return $this->getData($target);
         }
     }
 }

@@ -79,6 +79,10 @@ class CoreSql{
                 . implode(',', $columnName) .") VALUES (:"
                 . implode(',:', array_keys($this->columns)) .
                 ")");
+            echo "INSERT INTO ".$this->table." ("
+                . implode(',', $columnName) .") VALUES (:"
+                . implode(',:', array_keys($this->columns)) .
+                ")";
 
             $query->execute($this->columns);
         }
@@ -150,7 +154,12 @@ class CoreSql{
         if(!empty($tmpString)){
             $this->whereParameter = "";
         }
-        $this->whereParameter = "WHERE ".$tmpString;
+
+        if(empty($this->whereParameter)){
+            $this->whereParameter = "WHERE ".$tmpString;
+        } else {
+            $this->whereParameter .= ' AND '.$tmpString;
+        }
     }
 
     function setLimitParameter($limit, $offset = 0)
@@ -194,17 +203,18 @@ class CoreSql{
         $query = $this->pdo->prepare("
             SELECT " . implode(',', $target) . " 
             FROM " . $this->table . " 
+            ".$this->leftJoin."
             ".$this->whereParameter."
             ".$this->orderByParameter."
             ".$this->limitParameter."
         ");
-
         $query->execute();
 
         // On vide le parameter WHERE pour éviter tout problème sur requête qui viendrait après et où on ne veut pas de parametre
         $this->whereParameter = "";
         $this->orderByParameter = "";
         $this->limitParameter = "";
+        $this->leftJoin = "";
 
         $queryResponse = $query->fetchAll();
 
@@ -233,7 +243,8 @@ class CoreSql{
 
         $query = $this->pdo->prepare("
             SELECT " . implode(',', $target) . " 
-            FROM " . $this->table . " 
+            FROM " . $this->table . "  
+            ".$this->leftJoin."
             ".$this->whereParameter."
             ".$this->orderByParameter."
             ".$this->limitParameter."
@@ -244,6 +255,7 @@ class CoreSql{
         $this->whereParameter = "";
         $this->orderByParameter = "";
         $this->limitParameter = "";
+        $this->leftJoin = "";
         if($resultQuery) {
             foreach ($resultQuery as $key => $value) {
                 if (!is_numeric($key)) {
@@ -285,24 +297,37 @@ class CoreSql{
     /**
      * @param array $parameters
      */
-    public function setLeftJoin($parameters)
+    public function setLeftJoin($joinParameter, $whereParameter)
     {
-        /**
-         * Le parameter marche par pairet possède les correspondances
-         * Le getData aura un test à faire pour savoir si la fonction a été appelé
-         * Et comme ça la même fonction pour une requete différente :)
-         */
-        echo "<pre>";
-        print_r($parameters);
-        echo "</pre>";
-        foreach ($parameters as $origin => $value){
-            $explodedArray = explode("_", $origin);
-            $tmpArray[] = $explodedArray[0].".".$origin." = ".$this->table.".".$explodedArray[0].$explodedArray[1];
-
+        $arrayTmp = [];
+        foreach($joinParameter as $table => $arrayColumn){
+            $tableJoin = "tosle_".$table;
+            foreach($arrayColumn as $columnName){
+                $arrayExploded = explode('_', $columnName);
+                $arrayTmp[] = $tableJoin.".".$table."_".implode('',$arrayExploded)." = ".$this->table.".".$columnName;
+            }
+            $this->leftJoin .= "LEFT JOIN ".$tableJoin." ON ".implode('AND', $arrayTmp);
+        }
+        $arrayTmp = [];
+        foreach($whereParameter as $table => $arrayColumn){
+            foreach($arrayColumn as $columnName => $targetValue){
+                $arrayExploded = explode('_', $columnName);
+                $arrayTmp[] = $tableJoin.".".$table."_".implode('', $arrayExploded)." = ".$targetValue;
+            }
+            $tmpString = implode('AND', $arrayTmp);
         }
 
-        $this->leftJoin .= "LEFT JOIN tosle_".$explodedArray[0].$this->columnBase." ON ".implode(",", $tmpArray) ;
-        echo $this->leftJoin;
+        if(empty($this->whereParameter)){
+            $this->whereParameter = "WHERE ".$tmpString;
+        } else {
+            $this->whereParameter .= ' AND '.$tmpString;
+        }
+
+        /*echo "SELECT comment_content
+        FROM tosle_comment
+        LEFT JOIN tosle_blogcomment ON tosle_blogcomment.blogcomment_commentid = tosle_comment.comment_id
+        WHERE tosle_blogcomment.blogcomment_blogid = 1 
+        ";*/
     }
 
 }
