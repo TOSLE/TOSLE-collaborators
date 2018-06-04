@@ -43,5 +43,20 @@ class CommentRepository extends Comment
             $this->setLeftJoin($joinParameter, $whereParameter);
             return $this->getData($target);
         }
+        if($identifier == "number_blog"){
+            $target = ["id"];
+            $joinParameter = [
+                "blogcomment" => [
+                        "comment_id"
+                ]
+            ];
+            $whereParameter = [
+                "blogcomment" => [
+                    "blog_id" => $value
+                ]
+            ];
+            $this->setLeftJoin($joinParameter, $whereParameter);
+            return $this->countData($target)[0];
+        }
     }
 }

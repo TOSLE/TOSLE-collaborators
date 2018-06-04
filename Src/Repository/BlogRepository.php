@@ -107,7 +107,8 @@ class BlogRepository extends Blog
                 "datecreate",
                 "id",
                 "status",
-                "type"
+                "type",
+                "content"
             ];
             $this->setOrderByParameter(["id" => "DESC"]);
             $this->setWhereParameter([
@@ -296,5 +297,14 @@ class BlogRepository extends Blog
             ]
         ]);
         return $BlocGeneral->getArrayData();
+    }
+
+    public function getResumeContent($content){
+        $contentValue = strip_tags($content, "<p>");
+        $contentValue = str_replace("&nbsp;", "", $contentValue);
+        $contentValue = str_replace("<p>", "", $contentValue);
+        $contentValue = str_replace("</p>", " ", $contentValue);
+
+        return (strlen($contentValue)>200)?substr($contentValue, 0, 200):$contentValue;
     }
 }

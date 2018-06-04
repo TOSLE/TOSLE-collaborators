@@ -278,7 +278,8 @@ class CoreSql{
 
         $query = $this->pdo->prepare("
             SELECT count(" . implode(',', $target) . ") 
-            FROM " . $this->table . " 
+            FROM " . $this->table . "   
+            ".$this->leftJoin."
             ".$this->whereParameter."
             ".$this->orderByParameter."
             ".$this->limitParameter."
@@ -290,6 +291,7 @@ class CoreSql{
         $this->whereParameter = "";
         $this->orderByParameter = "";
         $this->limitParameter = "";
+        $this->leftJoin = "";
 
         return $query->fetch();
     }
