@@ -16,41 +16,25 @@ class BlogController
     function indexAction($params)
     {
         $View = new View("default", "Blog/home");
-        $Blog = new Blog();
+        $Blog = new BlogRepository();
+        $Comment = new CommentRepository();
         $errors = [];
         if(!empty($params["GET"])){
             echo "Il y a une recherche";
         } else {
-            $target = [
-                "title",
-                "content",
-                "datecreate",
-                "id",
-                "url"
-            ];
-            $parameter = [
-                "LIKE" => [
-                    "status" => 1
-                ]
-            ];
-            $Blog->setWhereParameter($parameter, null);
-            $Blog->setOrderByParameter(["id"=>"DESC"]);
-            $Blog->setLimitParameter(6, 0);
-            $array = $Blog->getData($target);
+            $array = $Blog->getAllArticleByStatus(1);
             $data = [];
             foreach($array as $content){
                 $date = new DateTime($content->getDatecreate());
                 $value["blog_datecreate"] = $date->format("l jS \of F Y H:i");
                 $value["blog_title"] = $content->getTitle();
 
-                $contentValue = strip_tags($content->getContent(), "<p>");
-                $contentValue = str_replace("&nbsp;", "", $contentValue);
-                $contentValue = str_replace("<p>", "", $contentValue);
-                $contentValue = str_replace("</p>", " ", $contentValue);
-                $value["blog_content"] = (strlen($contentValue)>200)?substr($contentValue, 0, 200):$contentValue;
+
+                $value["blog_content"] = $Blog->getResumeContent($content->getContent());
                 $value["blog_status"] = $content->getStatus();
                 $value["blog_id"] = $content->getId();
                 $value["blog_url"] = $content->getUrl();
+                $value["blog_numberComment"] = $Comment->getAll("number_blog", $content->getId());
                 $data[] = $value;
             }
             $View->setData("data", $data);
