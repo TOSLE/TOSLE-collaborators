@@ -79,10 +79,6 @@ class CoreSql{
                 . implode(',', $columnName) .") VALUES (:"
                 . implode(',:', array_keys($this->columns)) .
                 ")");
-            echo "INSERT INTO ".$this->table." ("
-                . implode(',', $columnName) .") VALUES (:"
-                . implode(',:', array_keys($this->columns)) .
-                ")";
 
             $query->execute($this->columns);
         }
