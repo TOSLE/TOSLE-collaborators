@@ -47,8 +47,8 @@ class Mail
             $mail->isHTML(true);                                  // Set email format to HTML
             $mail->Subject = 'Bienvenue sur le CMS TOSLE '.$firstName.' '.$lastName;
             //$mail->Body = 'Veuillez confirmer votre inscription en cliquant sur le lien ci-dessous </br>http://localhost:88/en/verify-mail-register?token='.$token.'';
-            $mail->Body = 'Veuillez confirmer votre inscription en cliquant sur le lien ci-dessous </br>http://localhost:88/en/user-verify?email='.$email.'&amp;token='.$token.'';
-            $mail->AltBody = 'Veuillez confirmer votre inscription en cliquant sur le lien ci-dessous http://localhost:88/en/user-verify?email='.$email.'?token='.$token.'';
+            $mail->Body = 'Veuillez confirmer votre inscription en cliquant sur le lien ci-dessous </br>http://'.$_SERVER["SERVER_NAME"].Access::getSlugsById()['verify'].'?email='.$email.'&amp;token='.$token.'';
+            $mail->AltBody = 'Veuillez confirmer votre inscription en cliquant sur le lien ci-dessous http://'.$_SERVER["SERVER_NAME"].Access::getSlugsById()['verify'].'?email='.$email.'?token='.$token.'';
 
             $mail->send();
         } catch (Exception $e) {

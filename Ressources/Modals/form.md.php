@@ -12,7 +12,7 @@
     <div class="form-group-base">
         <?php foreach ($config["input"] as $name => $attributs):?>
             <?php if($attributs["type"]=="text" || $attributs["type"]=="email" || $attributs["type"]=="number" || $attributs["type"]=="password"):?>
-                <input type="<?php echo $attributs["type"];?>" placeholder="<?php echo $attributs["placeholder"];?>" name="<?php echo $name;?>" <?php echo (isset($attributs["required"]))?"required='required'":"";?>><br>
+                <input type="<?php echo $attributs["type"];?>" placeholder="<?php echo $attributs["placeholder"];?>" name="<?php echo $name;?>" <?php echo (isset($attributs["required"]))?"required='required'":"";?> value="<?php echo (isset($config["data_content"][$name]))?$config["data_content"][$name]:"";?>"><br>
             <?php endif;?>
         <?php endforeach;?>
         <?php if(isset($config["captcha"])):?>
