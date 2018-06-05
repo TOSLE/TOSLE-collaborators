@@ -9,10 +9,19 @@ html {
 .bg-white {
     width: 100%;
     background-color: #FFFFFF;
-    -webkit-box-shadow: 0px 0px 15px 0px rgba(143,143,143,0.59);
-    -moz-box-shadow: 0px 0px 15px 0px rgba(143,143,143,0.59);
-    box-shadow: 0px 0px 15px 0px rgba(143,143,143,0.59);
+    -webkit-box-shadow: 0px 0px 8px 0px rgba(143,143,143,0.59);
+    -moz-box-shadow: 0px 0px 8px 0px rgba(143,143,143,0.59);
+    box-shadow: 0px 0px 8px 0px rgba(143,143,143,0.59);
     border: solid 0.5px #3b3f5442;
+}
+.bg-message-blog {
+    width: 100%;
+    background-color: #FFFFFF;
+    -webkit-box-shadow: 0px 0px 8px 0px rgba(143,143,143,0.59);
+    -moz-box-shadow: 0px 0px 8px 0px rgba(143,143,143,0.59);
+    box-shadow: 0px 0px 8px 0px rgba(143,143,143,0.59);
+    border: solid 0.5px #3b3f5442;
+    border-radius: 5px;
 }
 
 .bloc-login-container h2, .bloc-signup-container h2 {
@@ -27,6 +36,11 @@ html {
 
 .login-bloc {
     padding: 15px;
+}
+body > main .message-bloc > .login-message {
+    color: #0000cc;
+    font-weight: 500;
+    font-style: italic;
 }
 
 .errors-message {
