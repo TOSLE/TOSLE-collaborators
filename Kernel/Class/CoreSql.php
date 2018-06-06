@@ -1,7 +1,5 @@
 <?php
-
 class CoreSql{
-
     private $table;
     private $columnBase;
     private $pdo;
@@ -10,7 +8,6 @@ class CoreSql{
     private $limitParameter;
     private $orderByParameter;
     private $leftJoin = "";
-
     /**
      * CoreSql constructor.
      * Ne prend aucun paramètre
@@ -28,7 +25,6 @@ class CoreSql{
         $this->table = "tosle_".strtolower(str_ireplace("Repository","",get_called_class()));
         $this->columnBase = strtolower(str_ireplace("Repository","",get_called_class()));
     }
-
     /**
      * function setColumns
      * Elle permet de retirer les attributs de CoreSql afin de construire notre requête avec les attributs de nos modèles uniquement
@@ -38,7 +34,6 @@ class CoreSql{
         $columnsExcluded = get_class_vars(get_class());
         $this->columns = array_diff_key(get_object_vars($this), $columnsExcluded);
     }
-
     /**
      * function save
      * save permet de gérer deux requêtes :
@@ -61,7 +56,6 @@ class CoreSql{
                     unset($this->columns[$columnName]);
                 }
             }
-
             $query = $this->pdo->prepare("UPDATE ".$this->table." SET "
                 . implode(',', $set) ." WHERE ".$this->columnBase."_id='".$this->id."'");
             $query->execute($this->columns);
@@ -79,11 +73,13 @@ class CoreSql{
                 . implode(',', $columnName) .") VALUES (:"
                 . implode(',:', array_keys($this->columns)) .
                 ")");
-
+            echo "INSERT INTO ".$this->table." ("
+                . implode(',', $columnName) .") VALUES (:"
+                . implode(',:', array_keys($this->columns)) .
+                ")";
             $query->execute($this->columns);
         }
     }
-
     /**
      * @param array $parameterAnd
      * @param array $parameterOr
@@ -134,7 +130,6 @@ class CoreSql{
                 $tmpArrayOr[] = $this->columnBase.'_'.$columnName . " NOT LIKE '" . $value . "'";
             }
         }
-
         $tmpString = "";
         if(!empty($tmpArrayAnd)){
             $tmpString = implode(' AND ', $tmpArrayAnd);
@@ -146,18 +141,15 @@ class CoreSql{
                 $tmpString = implode(' OR ', $tmpArrayOr);
             }
         }
-
         if(!empty($tmpString)){
             $this->whereParameter = "";
         }
-
         if(empty($this->whereParameter)){
             $this->whereParameter = "WHERE ".$tmpString;
         } else {
             $this->whereParameter .= ' AND '.$tmpString;
         }
     }
-
     function setLimitParameter($limit, $offset = 0)
     {
         $this->limitParameter = "";
@@ -168,7 +160,6 @@ class CoreSql{
             }
         }
     }
-
     function setOrderByParameter($arrayParameter)
     {
         $this->orderByParameter = "";
@@ -195,7 +186,6 @@ class CoreSql{
         foreach ($target as $key => $value){
             $target[$key] = $this->columnBase.'_'.$value;
         }
-
         $query = $this->pdo->prepare("
             SELECT " . implode(',', $target) . " 
             FROM " . $this->table . " 
@@ -205,15 +195,12 @@ class CoreSql{
             ".$this->limitParameter."
         ");
         $query->execute();
-
         // On vide le parameter WHERE pour éviter tout problème sur requête qui viendrait après et où on ne veut pas de parametre
         $this->whereParameter = "";
         $this->orderByParameter = "";
         $this->limitParameter = "";
         $this->leftJoin = "";
-
         $queryResponse = $query->fetchAll();
-
         $tableName = ucfirst($this->columnBase);
         $arrayData = [];
         foreach($queryResponse as $contentArray){
@@ -227,16 +214,13 @@ class CoreSql{
             }
             $arrayData[] = $object;
         }
-
         return $arrayData;
     }
-
     public function getOneData($target)
     {
         foreach ($target as $key => $value){
             $target[$key] = $this->columnBase.'_'.$value;
         }
-
         $query = $this->pdo->prepare("
             SELECT " . implode(',', $target) . " 
             FROM " . $this->table . "  
@@ -261,7 +245,6 @@ class CoreSql{
             }
         }
     }
-
     /**
      * @param array $target
      * @return array
@@ -271,27 +254,20 @@ class CoreSql{
         foreach ($target as $key => $value){
             $target[$key] = $this->columnBase.'_'.$value;
         }
-
         $query = $this->pdo->prepare("
             SELECT count(" . implode(',', $target) . ") 
-            FROM " . $this->table . "   
-            ".$this->leftJoin."
+            FROM " . $this->table . " 
             ".$this->whereParameter."
             ".$this->orderByParameter."
             ".$this->limitParameter."
         ");
-
         $query->execute();
-
         // On vide le parameter WHERE pour éviter tout problème sur requête qui viendrait après et où on ne veut pas de parametre
         $this->whereParameter = "";
         $this->orderByParameter = "";
         $this->limitParameter = "";
-        $this->leftJoin = "";
-
         return $query->fetch();
     }
-
     /**
      * @param array $joinParameter
      * @param array $whereParameter
@@ -325,18 +301,15 @@ class CoreSql{
             }
             $tmpString = implode('AND', $arrayTmp);
         }
-
         if(empty($this->whereParameter)){
             $this->whereParameter = "WHERE ".$tmpString;
         } else {
             $this->whereParameter .= ' AND '.$tmpString;
         }
-
         /*echo "SELECT comment_content
         FROM tosle_comment
         LEFT JOIN tosle_blogcomment ON tosle_blogcomment.blogcomment_commentid = tosle_comment.comment_id
-        WHERE tosle_blogcomment.blogcomment_blogid = 1 
+        WHERE tosle_blogcomment.blogcomment_blogid = 1
         ";*/
     }
-
 }
