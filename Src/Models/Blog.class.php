@@ -167,10 +167,45 @@ class Blog extends CoreSql {
                     "placeholder"=>"Your title",
                     "required"=>true,
                     "maxString"=>100,
-                    "label"=>"Insert title of your article"
+                    "label"=>"Insert title of your article",
+                    "description"=>"Max 100 character"
+                ],
+                "image"=>[
+                    "type"=>"file",
+                    "required"=>true,
+                    "label"=>"Select your background image",
+                    "format"=>"PNG JPG JPEG",
+                    "description"=>"Authorised format (png, jpg, jpeg)"
                 ]
             ],
             "ckeditor" => true,
+            "exit" => $slugs["dashboard_blog"]
+        ];
+    }
+
+    function configFormAddArticleImage()
+    {
+        $slugs = Access::getSlugsById();
+        return [
+            "config"=> [
+                "method"=>"post",
+                "action"=>"", "submit"=>"Publier l'article",
+                "save"=>"Sauvegarder sans publier"
+            ],
+            "input"=> [
+                "title"=>[
+                    "type"=>"text",
+                    "placeholder"=>"Your title",
+                    "required"=>true,
+                    "maxString"=>100,
+                    "label"=>"Insert title of your article"
+                ],
+                "image"=>[
+                    "type"=>"file",
+                    "required"=>true,
+                    "label"=>"Select your image"
+                ]
+            ],
             "exit" => $slugs["dashboard_blog"]
         ];
     }
