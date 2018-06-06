@@ -13,6 +13,12 @@
             <?php if($attributs["type"]=="text" || $attributs["type"]=="email" || $attributs["type"]=="number" || $attributs["type"]=="password"):?>
                 <input id="<?php echo $name;?>" type="<?php echo $attributs["type"];?>" placeholder="<?php echo $attributs["placeholder"];?>" name="<?php echo $name;?>" <?php echo (isset($attributs["required"]))?"required='required'":"";?> value="<?php echo (isset($config["content_value"][$name]))?$config["content_value"][$name]:"";?>">
             <?php endif;?>
+            <?php if($attributs["type"]=="file"):?>
+                <input id="<?php echo $name;?>" type="<?php echo $attributs["type"];?>" name="<?php echo $name;?>" <?php echo (isset($attributs["required"]))?"required='required'":"";?>>
+            <?php endif;?>
+            <?php if(isset($attributs["description"])):?>
+                <div class="small-precision-input"><?php echo $attributs["description"];?></div>
+            <?php endif;?>
         <?php endforeach;?>
         <?php if(isset($config["ckeditor"])):?>
             <label for="textArea_article">Edition de votre article</label>
