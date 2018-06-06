@@ -220,6 +220,7 @@ class BlogRepository extends Blog
     public function getModalStats()
     {
         $StatsBlog = new DashboardBlocModal();
+        $Comment = new CommentRepository();
         $StatsBlog->setTitle("Blog Analytics");
         $StatsBlog->setTableHeader([
             1 => "Type",
@@ -242,6 +243,10 @@ class BlogRepository extends Blog
             2 => [
                 1 => "Nombre d'article dépublié",
                 2 => $this->countNumberOfBlogByStatus(0)
+            ],
+            3 => [
+                1 => "Nombre de commentaires",
+                2 => $Comment->getAll("number_all", null)
             ]
         ]);
         return $StatsBlog->getArrayData();
