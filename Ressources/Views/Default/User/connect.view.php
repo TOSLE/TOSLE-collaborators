@@ -3,7 +3,7 @@
         <div class="col-12">
         </div>
     </div>
-    <?php if(isset($textConfirm)):?>
+    <?php if(isset($textConfirm) && !empty($textConfirm)):?>
         <div class="row">
             <div class="col-1"></div>
             <div class="col-10">
@@ -50,7 +50,6 @@
                     </article>
                 </section>
             </div>
-
         </div>
     </div>
 </div>
