@@ -1,12 +1,4 @@
 <?php
-    define("DBUSER","");
-    define("DBPWD","");
-    define("DBHOST","");
-    define("DBNAME","");
-    define("DBPORT","");
-    define("GUSER", "");
-    define("GPWD", "");
-
     $scriptDS = (DIRECTORY_SEPARATOR == "\\")?"/":DIRECTORY_SEPARATOR;
     define("DS", $scriptDS);
 
