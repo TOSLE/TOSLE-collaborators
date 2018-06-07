@@ -108,7 +108,8 @@ class BlogRepository extends Blog
                 "id",
                 "status",
                 "type",
-                "content"
+                "content",
+                "url"
             ];
             $this->setOrderByParameter(["id" => "DESC"]);
             $this->setWhereParameter([
