@@ -107,8 +107,23 @@ class BlogController
             if($getTypeNewArticle == "text"){
                 $View = new View("dashboard", "Dashboard/add_article_blog");
                 $configForm = $Blog->configFormAddArticleText();
-                if(isset($params["POST"])){
-                    if(!empty($params["POST"])) {
+                if(isset($params["POST"]) && !empty($params["POST"])){
+                    $errors = Form::checkForm($configForm, $params["POST"]);
+                    if(empty($errors)){
+                        if(isset($_FILES)){
+                            $errors = Form::checkFiles($_FILES);
+                        }
+                        if(empty($errors)){
+                            $File = new FileRepository();
+                            $File->addFile($_FILES, $configForm, "Blog/Article");
+                        }
+                        else {
+                            print_r($errors);
+                        }
+                    } else {
+                        print_r($errors);
+                    }
+                    /*if(!empty($params["POST"])) {
                         $tmpArray = $params["POST"];
                         $Blog->setTitle($tmpArray["title"]);
                         $Blog->setContent($tmpArray["textArea_article"]);
@@ -117,7 +132,7 @@ class BlogController
                         $Blog->setUrl(Access::constructUrl($Blog->getTitle()));
                         $Blog->save();
                         header('Location:'.$routes['dashboard_blog']);
-                    }
+                    }*/
                 }
 
                 $View->setData("errors", "");

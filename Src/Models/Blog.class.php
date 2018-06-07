@@ -172,7 +172,7 @@ class Blog extends CoreSql {
                 ],
                 "image"=>[
                     "type"=>"file",
-                    "required"=>true,
+                    "required"=>false,
                     "label"=>"Select your background image",
                     "format"=>"PNG JPG JPEG",
                     "description"=>"Authorised format (png, jpg, jpeg)"

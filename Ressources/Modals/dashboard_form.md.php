@@ -4,7 +4,7 @@
     <?php endforeach; ?>
 <?php endif;?>
 
-<form method="<?php echo $config['config']['method'];?>" action="<?php echo $config['config']['action'];?>">
+<form method="<?php echo $config['config']['method'];?>" action="<?php echo $config['config']['action'];?>" enctype="multipart/form-data">
     <div class="form-group-base">
         <?php foreach ($config["input"] as $name => $attributs):?>
             <?php if(isset($attributs["label"])):?>
@@ -14,7 +14,7 @@
                 <input id="<?php echo $name;?>" type="<?php echo $attributs["type"];?>" placeholder="<?php echo $attributs["placeholder"];?>" name="<?php echo $name;?>" <?php echo (isset($attributs["required"]))?"required='required'":"";?> value="<?php echo (isset($config["content_value"][$name]))?$config["content_value"][$name]:"";?>">
             <?php endif;?>
             <?php if($attributs["type"]=="file"):?>
-                <input id="<?php echo $name;?>" type="<?php echo $attributs["type"];?>" name="<?php echo $name;?>" <?php echo (isset($attributs["required"]))?"required='required'":"";?>>
+                <input id="<?php echo $name;?>" type="<?php echo $attributs["type"];?>" name="<?php echo $name;?>[]" <?php echo (isset($attributs["required"]) && $attributs["required"])?"required='required'":"";?> multiple>
             <?php endif;?>
             <?php if(isset($attributs["description"])):?>
                 <div class="small-precision-input"><?php echo $attributs["description"];?></div>
