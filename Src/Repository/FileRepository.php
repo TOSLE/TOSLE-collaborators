@@ -8,22 +8,45 @@
 
 class FileRepository extends File
 {
-    public function addFile($file, $authorisedFormat, $destination)
+    public function addFile($_file, $_configForm, $_destination)
     {
-        $content_dir = DIRNAME.'/TOSLE/'.ucfirst(strtolower($destination)).'/';
-        $arrayExtensionAccept = explode(' ', strtolower($authorisedFormat));
-        array_push($arrayExtensionAccept, explode(' ', strtoupper($authorisedFormat));
+        $directoryDestination = DIRNAME.'Tosle/'.ucfirst(strtolower($_destination)).'/';
 
+        foreach($_configForm as $type => $arrayType) {
+            if($type == "input")
+                foreach($arrayType as $arrayData){
+                    if($arrayData["type"] == "file")
+                        $tmpAuthorisedFormat = $arrayData['format'];
+                }
+        }
+        if(empty($tmpAuthorisedFormat)){
+            return 0;
+        }
+
+        $tmpAuthorisedFormat .= " ".strtolower($tmpAuthorisedFormat);
+        $authorisedFormat = explode(' ', $tmpAuthorisedFormat);
+
+
+        foreach($_file as $files){
+            foreach($files as $type => $arraysValue){
+                $tmpArray[] = [
+                     "nique ton code"
+                ];
+            }
+        }
+        echo "<pre>";
+        print_r($_file);
+        echo "</pre>";
         // Chemin de l'image
-        $tmp_file = $_FILES['inputFile']['tmp_name'];
+        /*$tmp_file = $_FILES['inputFile']['tmp_name'];
         echo $tmp_file;
 
         // Vérification si le fichier est trouvé
-        if( !is_uploaded_file($tmp_file) ){
+        if(!is_uploaded_file($tmp_file) ){
             exit("Le fichier est introuvable");
         }
 
-       /*// Création d'un nom unique par images
+       // Création d'un nom unique par images
         $name_file = uniqid('img_',false);
 
         //1. strrchr renvoie l'extension avec le point (« . »).

@@ -6,7 +6,7 @@
  * Time: 11:17
  */
 
-class Validate
+class Form
 {
     public static function checkForm($config, $data)
     {
@@ -77,5 +77,30 @@ class Validate
     public static function checkNumber($number)
     {
         return is_numeric(trim($number));
+    }
+
+    public static function checkFiles($_files)
+    {
+        $errorsMsg = [];
+        foreach ($_files as $files){
+            foreach($files as $type => $arrayValues){
+                if($type == "error")
+                    foreach ($arrayValues as $value){
+                        if($value > 0)
+                            $errorsMsg["image_error"] = "Failed to upload image";
+                    }
+                if($type == "size")
+                    foreach ($arrayValues as $value){
+                        if($value == 0)
+                            $errorsMsg["image_size"] = "Failed to upload image";
+                    }
+            }
+        }
+        return $errorsMsg;
+    }
+
+    public static function setSelectInput($config, $configSelect)
+    {
+
     }
 }
