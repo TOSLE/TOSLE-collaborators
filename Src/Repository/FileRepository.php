@@ -16,26 +16,41 @@ class FileRepository extends File
             if($type == "input")
                 foreach($arrayType as $arrayData){
                     if($arrayData["type"] == "file")
-                        $tmpAuthorisedFormat = $arrayData['format'];
+                        $tmpAuthorisedFormat[] = $arrayData['format'];
                 }
         }
         if(empty($tmpAuthorisedFormat)){
             return 0;
         }
-
-        $tmpAuthorisedFormat .= " ".strtolower($tmpAuthorisedFormat);
-        $authorisedFormat = explode(' ', $tmpAuthorisedFormat);
-
-
-        foreach($_file as $files){
-            foreach($files as $type => $arraysValue){
-                $tmpArray[] = [
-                     "nique ton code"
-                ];
-            }
+        foreach($tmpAuthorisedFormat as $value) {
+            $value .= " " . strtolower($value);
+            $authorisedFormat[] = explode(' ', $value);
         }
+
+        $_tmpArrayContainer = [];
+        $_tmpArrayContainerByInput = [];
+        foreach($_file as $inputName => $content){
+            foreach($content as $type => $arraysValue)
+                foreach($arraysValue as $key => $value)
+                    $_tmpArrayContainer[$key][] = [
+                        $type => $value
+                    ];
+            $_tmpArrayContainerByInput[$inputName] = $_tmpArrayContainer;
+        }
+
+        $_tmpArrayFormated = [];
+        $arrayFiles = [];
+        foreach($_tmpArrayContainerByInput as $inputName => $content) {
+            foreach($content as $row)
+                foreach ($row as $arraysData)
+                    foreach($arraysData as $type => $value)
+                        $_tmpArrayFormated[$type] = $value;
+            $arrayFiles[$inputName] = $_tmpArrayFormated;
+        }
+
+
         echo "<pre>";
-        print_r($_file);
+        print_r($arrayFiles);
         echo "</pre>";
         // Chemin de l'image
         /*$tmp_file = $_FILES['inputFile']['tmp_name'];
