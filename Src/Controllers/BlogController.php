@@ -112,13 +112,12 @@ class BlogController
                     if(empty($errors)){
                         if(isset($_FILES)){
                             $errors = Form::checkFiles($_FILES);
-                        }
-                        if(empty($errors)){
-                            $File = new FileRepository();
-                            $File->addFile($_FILES, $configForm, "Blog/Article");
-                        }
-                        else {
-                            print_r($errors);
+                            if(empty($errors) && $errors != 1){
+                                $File = new FileRepository();
+                                $File->addFile($_FILES, $configForm, "Blog/Article");
+                            } else {
+                                print_r($errors);
+                            }
                         }
                     } else {
                         print_r($errors);

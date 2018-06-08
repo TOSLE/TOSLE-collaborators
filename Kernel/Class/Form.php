@@ -82,21 +82,27 @@ class Form
     public static function checkFiles($_files)
     {
         $errorsMsg = [];
+        $fileNotFound = 0;
         foreach ($_files as $files){
             foreach($files as $type => $arrayValues){
                 if($type == "error")
-                    foreach ($arrayValues as $value){
-                        if($value > 0)
+                    foreach ($arrayValues as $key => $value){
+                        if($value > 0 && $value != 4)
                             $errorsMsg["image_error"] = "Failed to upload image";
+                        if ($value == 4) $fileNotFound = 1;
                     }
                 if($type == "size")
-                    foreach ($arrayValues as $value){
-                        if($value == 0)
+                    foreach ($arrayValues as $key => $value){
+                        if($value == 0 && $files['error'][$key] != 4)
                             $errorsMsg["image_size"] = "Failed to upload image";
                     }
             }
         }
-        return $errorsMsg;
+        if(!empty($errorsMsg))
+            return $errorsMsg;
+        else
+            if($fileNotFound)return 1;
+            else return 0;
     }
 
     public static function setSelectInput($config, $configSelect)
