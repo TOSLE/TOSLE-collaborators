@@ -175,7 +175,8 @@ class Blog extends CoreSql {
                     "required"=>false,
                     "label"=>"Select your background image",
                     "format"=>"PNG JPG JPEG",
-                    "description"=>"Authorised format (png, jpg, jpeg)"
+                    "description"=>"Authorised format (png, jpg, jpeg)",
+                    "multiple"=>false
                 ]
             ],
             "ckeditor" => true,
