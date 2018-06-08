@@ -23,7 +23,7 @@ class FileRepository extends File
             return 0;
         }
         foreach($tmpAuthorisedFormat as $value) {
-            $value .= " " . strtolower($value);
+            $value = strtoupper($value) . " " . strtolower($value);
             $authorisedFormat[] = explode(' ', $value);
         }
 
@@ -40,18 +40,33 @@ class FileRepository extends File
 
         $_tmpArrayFormated = [];
         $arrayFiles = [];
-        foreach($_tmpArrayContainerByInput as $inputName => $content) {
-            foreach($content as $row)
-                foreach ($row as $arraysData)
-                    foreach($arraysData as $type => $value)
+        foreach($_tmpArrayContainerByInput as $inputName => $content)
+            foreach ($content as $row) {
+                foreach ($row as $arrayData)
+                    foreach ($arrayData as $type => $value)
                         $_tmpArrayFormated[$type] = $value;
-            $arrayFiles[$inputName] = $_tmpArrayFormated;
-        }
-
+                $arrayFiles[$inputName][] = $_tmpArrayFormated;
+            }
 
         echo "<pre>";
         print_r($arrayFiles);
         echo "</pre>";
+
+        foreach($arrayFiles as $inputName => $files){
+            foreach($files as $file){
+                if(!is_uploaded_file($file["tmp_name"]) ){
+                    return $errorMessage["ERROR_UPLOAD"] = [
+                        "TMP FILE IS NOT FOUND",
+                        $files,
+                        $file
+                    ];
+                }
+                // Set uniq Name
+                $fileExtension = strtolower(  substr(  strrchr($file['name'], '.')  ,1)  );
+                $fileName = uniqid('background_article_insertDate_', false).".".$fileExtension;
+                echo $fileName;
+            }
+        }
         // Chemin de l'image
         /*$tmp_file = $_FILES['inputFile']['tmp_name'];
         echo $tmp_file;
