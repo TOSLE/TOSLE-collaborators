@@ -44,6 +44,54 @@ html {
         color: #8C8C8C; }
         html .blog-article > .content-article > .info-comment-homeblog > i {
           margin-left: 5px; }
+  html .article {
+    padding: 5px; }
+    html .article > .content-article {
+      background-color: #FFFFFF;
+      box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+      justify-content: center; }
+      html .article > .content-article .container .row {
+        justify-content: center; }
+      html .article > .content-article .title-article {
+        margin: 40px 0 40px 0; }
+      html .article > .content-article .text-article {
+        margin-bottom: 40px; }
+      html .article > .content-article .info-article {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 40px; }
+        html .article > .content-article .info-article div {
+          display: flex;
+          margin-left: auto; }
+          html .article > .content-article .info-article div span {
+            color: #8C8C8C;
+            font-size: 12px; }
+      html .article > .content-article .action-article {
+        margin-bottom: 40px; }
+        html .article > .content-article .action-article nav {
+          display: flex;
+          flex-direction: row;
+          justify-content: center; }
+        html .article > .content-article .action-article .action {
+          display: flex;
+          border: solid 1px #BDBDBD;
+          height: 30px;
+          color: #8C8C8C;
+          min-width: 200px;
+          cursor: pointer; }
+          html .article > .content-article .action-article .action .container {
+            display: flex;
+            flex-direction: row;
+            margin: auto;
+            justify-content: center;
+            align-items: center; }
+            html .article > .content-article .action-article .action .container .svg-action i {
+              font-size: 16px; }
+            html .article > .content-article .action-article .action .container .name-action {
+              padding-left: 5px;
+              padding-right: 5px; }
+      html .article > .content-article .comments-article h5 {
+        margin-bottom: 40px; }
 
 #menu-header-section {
   width: 250px;
@@ -174,6 +222,17 @@ main {
   max-width: 1230px;
   margin: 0 auto;
   min-height: 90%; }
+  main > .container > .row {
+    margin-bottom: 27px !important; }
+    main > .container > .row > .title-page {
+      margin: 26px 0 0 0; }
+      main > .container > .row > .title-page > .marg-container {
+        margin-left: 15px; }
+      main > .container > .row > .title-page h2 {
+        font-weight: 300;
+        color: #3D3F3E; }
+        main > .container > .row > .title-page h2 > .additional-message-title {
+          font-size: 0.7em; }
 
 footer {
   background-color: #74858D; }
