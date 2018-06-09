@@ -87,13 +87,13 @@ class Form
             foreach($files as $type => $arrayValues){
                 if($type == "error")
                     foreach ($arrayValues as $key => $value){
-                        if($value > 0 && $value != 4)
+                        if($value > 0 && $value == UPLOAD_ERR_OK)
                             $errorsMsg["image_error"] = "Failed to upload image";
                         if ($value == 4) $fileNotFound = 1;
                     }
                 if($type == "size")
                     foreach ($arrayValues as $key => $value){
-                        if($value == 0 && $files['error'][$key] != 4)
+                        if($value == 0 && $files['error'][$key] == UPLOAD_ERR_OK)
                             $errorsMsg["image_size"] = "Failed to upload image";
                     }
             }

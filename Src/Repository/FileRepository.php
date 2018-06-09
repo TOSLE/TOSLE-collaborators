@@ -24,7 +24,7 @@ class FileRepository extends File
         }
         foreach($tmpAuthorisedFormat as $value) {
             $value = strtoupper($value) . " " . strtolower($value);
-            $authorisedFormat[] = explode(' ', $value);
+            $authorisedFormat = explode(' ', $value);
         }
 
         $_tmpArrayContainer = [];
@@ -61,10 +61,44 @@ class FileRepository extends File
                         $file
                     ];
                 }
-                // Set uniq Name
-                $fileExtension = strtolower(  substr(  strrchr($file['name'], '.')  ,1)  );
-                $fileName = uniqid('background_article_insertDate_', false).".".$fileExtension;
-                echo $fileName;
+                /**
+                 * @var string $fileExtension
+                 * Récupère l'extension du fichier et y insérère le . avant
+                 * @var string $fileName
+                 * Créer un nom de fichier unique pour le fichier et y ajoute l'extension
+                 */
+                $fileExtension = strtolower(substr(strrchr($file['name'], '.'),1));
+                $fileName = uniqid('file_', false)."_".date("Y-m-d").".".$fileExtension;
+                $directoryDestination = "C:\wamp\www".str_ireplace("/", "\\", $directoryDestination);
+                if (in_array($fileExtension, $authorisedFormat) ) {
+                    if(!move_uploaded_file($file["tmp_name"], $directoryDestination.$fileName) ){
+                        return $errorMessage["ERROR_UPLOAD"] = [
+                            "ERROR UPLOAD FILE IN FOLDER : ".$directoryDestination,
+                            $files,
+                            $file
+                        ];
+                    }
+                    echo "FILE UPLOAD : OK";
+
+                    /*// Fichier : OK -> On passe à la BDD
+                    $imgheader_dateAjout = date("d-m-y"); echo $imgheader_dateAjout;
+                    $imgheader_nom = htmlspecialchars($_POST['inputNameFile']);
+                    $imgheader_url = $content_dir.$name_file;
+                    $imgheader_taille = $_FILES['inputFile']['size'];
+                    $imgheader_nomImage = $name_file;
+
+                    echo '<br>';
+                    echo $imgheader_nom.'<br>'.$imgheader_url.'<br>'.$imgheader_taille;
+
+                    $req = $bdd->prepare('INSERT INTO data_image_header (imgheader_nom, imgheader_url, imgheader_taille, imgheader_dateAjout, imgheader_nomImage) VALUES(:imgheader_nom, :imgheader_url, :imgheader_taille, :imgheader_dateAjout, :imgheader_nomImage)');
+                    $req->execute(array(
+                        'imgheader_nom' => $imgheader_nom,
+                        'imgheader_url' => $imgheader_url,
+                        'imgheader_taille' => $imgheader_taille,
+                        'imgheader_nomImage' => $imgheader_nomImage,
+                        'imgheader_dateAjout' => $imgheader_dateAjout));
+                    ?><script type="text/javascript">document.location.href="../configSite.php?addFile=1";</script><?php*/
+                }
             }
         }
         // Chemin de l'image
