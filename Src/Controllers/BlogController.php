@@ -114,7 +114,11 @@ class BlogController
                             $errors = Form::checkFiles($_FILES);
                             if(empty($errors) && $errors != 1){
                                 $File = new FileRepository();
-                                $File->addFile($_FILES, $configForm, "Blog/Article");
+                                $arrayFile = $File->addFile($_FILES, $configForm, "Blog/Article", "Background image");
+
+                                foreach ($arrayFile as $file){
+                                    echo $file->getTag()."<br>";
+                                }
                             } else {
                                 print_r($errors);
                             }
