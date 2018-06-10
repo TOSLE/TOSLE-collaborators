@@ -221,38 +221,14 @@ class BlogController
                      * On regarde les erreurs éventuelles du formulaire
                      */
                     if(empty($errors)){
-                        /** On regarde si nous avons des données de type FILE */
-                        if(isset($_FILES)){
-                            $errors = Form::checkFiles($_FILES);
-                            /**
-                             * On va récupérer la valeur de retour du checkForm des formulaire
-                             */
-                            if(empty($errors) || is_numeric($errors)){
-                                /**
-                                 * On regarde si nous n'avons pas un fichier vide
-                                 */
-                                $file = null;
-                                if( $errors != 1) {
-                                    $File = new FileRepository();
-                                    $arrayFile = $File->addFile($_FILES, $configForm, "Blog/Article", "Image");
-                                    foreach ($arrayFile as $fileId){
-                                        $file =  $fileId;
-                                    }
-                                }
-                                $tmpPostArray = $params["POST"];
-                                $Blog->setTitle($tmpPostArray["title"]);
-                                $Blog->setContent($tmpPostArray["textarea_articleImage"]);
-                                (isset($tmpPostArray["publish"]))?$Blog->setStatus(1):$Blog->setStatus(0);
-                                $Blog->setType(2);
-                                $Blog->setUrl(Access::constructUrl($Blog->getTitle()));
-                                $Blog->setFileid($file);
-                                $Blog->save();
-                                header('Location:'.$routes['dashboard_blog']);
-                            } else {
-                                echo "Erreur dans le formulaire de type file";
-                                print_r($errors);
-                            }
-                        }
+                        $tmpPostArray = $params["POST"];
+                        $Blog->setTitle($tmpPostArray["title"]);
+                        $Blog->setContent($tmpPostArray["link"]);
+                        (isset($tmpPostArray["publish"]))?$Blog->setStatus(1):$Blog->setStatus(0);
+                        $Blog->setType(3);
+                        $Blog->setUrl(Access::constructUrl($Blog->getTitle()));
+                        $Blog->save();
+                        header('Location:'.$routes['dashboard_blog']);
                     } else {
                         echo "Erreur dans le formulaire de base";
                         print_r($errors);
