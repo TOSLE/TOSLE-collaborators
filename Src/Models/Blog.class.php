@@ -152,7 +152,7 @@ class Blog extends CoreSql {
 
 
 
-    function configFormAddArticleText()
+    public function configFormAddArticleText()
     {
         $slugs = Access::getSlugsById();
         return [
@@ -188,8 +188,7 @@ class Blog extends CoreSql {
             "exit" => $slugs["dashboard_blog"]
         ];
     }
-
-    function configFormAddArticleImage()
+    public function configFormAddArticleImage()
     {
         $slugs = Access::getSlugsById();
         return [
@@ -220,6 +219,35 @@ class Blog extends CoreSql {
                 "name" => "textarea_articleImage",
                 "description" => "Un maximum de 500 caractères",
                 "placeholder" => "Maximum 500 caractères"
+            ],
+            "exit" => $slugs["dashboard_blog"]
+        ];
+    }
+
+    public function configFormAddArticleVideo()
+    {
+        $slugs = Access::getSlugsById();
+        return [
+            "config"=> [
+                "method"=>"post",
+                "action"=>"", "submit"=>"Publier l'article",
+                "save"=>"Sauvegarder sans publier"
+            ],
+            "input"=> [
+                "title"=>[
+                    "type"=>"text",
+                    "placeholder"=>"Your title",
+                    "required"=>true,
+                    "maxString"=>100,
+                    "label"=>"Insert title of your article"
+                ],
+                "link"=>[
+                    "type"=>"text",
+                    "required"=>true,
+                    "label"=>"Insert link of your video",
+                    "placeholder"=>"Link of your video",
+                    "description" => "YouTube is only player supported by our Framework",
+                ]
             ],
             "exit" => $slugs["dashboard_blog"]
         ];
