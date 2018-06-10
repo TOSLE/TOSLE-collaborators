@@ -309,6 +309,11 @@ class BlogRepository extends Blog
         return $BlocGeneral->getArrayData();
     }
 
+    /**
+     * @param string $content
+     * @return string
+     * Permet de récupérer un résumé de 200 caractères au maximum d'un contenu, le tout en enlevant certaines balises
+     */
     public function getResumeContent($content){
         $contentValue = strip_tags($content, "<p>");
         $contentValue = str_replace("&nbsp;", "", $contentValue);
@@ -318,6 +323,10 @@ class BlogRepository extends Blog
         return (strlen($contentValue)>200)?substr($contentValue, 0, 200):$contentValue;
     }
 
+    /**
+     * @return int
+     * Permet de récupérer le nombre d'article qui possède une jointure avec un fichier
+     */
     public function getNumberArticleWithFile()
     {
         $target = [
@@ -330,5 +339,10 @@ class BlogRepository extends Blog
         ];
         $this->setWhereParameter($parameter);
         return $this->countData($target)[0];
+    }
+
+    public function addArticleText($_file)
+    {
+
     }
 }
