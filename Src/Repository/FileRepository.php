@@ -10,7 +10,7 @@ class FileRepository extends File
 {
     public function addFile($_file, $_configForm, $_destination)
     {
-        $directoryDestination = DIRNAME.'Tosle/'.ucfirst(strtolower($_destination)).'/';
+        $directoryDestination = '../..'.DIRNAME.'Tosle/'.ucfirst(strtolower($_destination)).'/';
 
         foreach($_configForm as $type => $arrayType) {
             if($type == "input")
@@ -69,7 +69,8 @@ class FileRepository extends File
                  */
                 $fileExtension = strtolower(substr(strrchr($file['name'], '.'),1));
                 $fileName = uniqid('file_', false)."_".date("Y-m-d").".".$fileExtension;
-                $directoryDestination = "C:\wamp\www".str_ireplace("/", "\\", $directoryDestination);
+                //$directoryDestination = "C:\wamp\www".str_ireplace("/", "\\", $directoryDestination);
+                $directoryDestination = $directoryDestination;
                 if (in_array($fileExtension, $authorisedFormat) ) {
                     if(!move_uploaded_file($file["tmp_name"], $directoryDestination.$fileName) ){
                         return $errorMessage["ERROR_UPLOAD"] = [

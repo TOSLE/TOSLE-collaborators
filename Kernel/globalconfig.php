@@ -10,7 +10,7 @@
         else
             define("SYSTEM", "LINUX");
 
-    $scriptDS = (DIRECTORY_SEPARATOR == "\\")?"\\":DIRECTORY_SEPARATOR;
+    $scriptDS = (DIRECTORY_SEPARATOR == "\\")?"/":DIRECTORY_SEPARATOR;
     define("DS", $scriptDS);
 
     $scriptName = (dirname($_SERVER["SCRIPT_NAME"]) == "/")?"":dirname($_SERVER["SCRIPT_NAME"]);
