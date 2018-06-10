@@ -61,6 +61,7 @@ class BlogController
                     "content" => $Blog->getContent(),
                     "datecreate" => $Blog->getDatecreate()
                 ];
+                $commentaires = null;
                 $Comment = new CommentRepository();
                 $comments = $Comment->getAll("blog", $Blog->getId());
                 foreach($comments as $comment){
