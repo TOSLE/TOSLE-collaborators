@@ -8,6 +8,14 @@
 
 class FileRepository extends File
 {
+
+    /**
+     * @param $_file
+     * @param $_configForm
+     * @param $_destination
+     * @param $_comment
+     * @return array|int
+     */
     public function addFile($_file, $_configForm, $_destination, $_comment)
     {
         $directoryDestination = '../..'.DIRNAME.'Tosle/'.ucfirst(strtolower($_destination)).'/';
@@ -48,7 +56,7 @@ class FileRepository extends File
                 $arrayFiles[$inputName][] = $_tmpArrayFormated;
             }
 
-        $returnArrayObject = [];
+        $arrayObject = [];
         foreach($arrayFiles as $inputName => $files){
             foreach($files as $file){
                 if(!is_uploaded_file($file["tmp_name"]) ){
@@ -75,11 +83,31 @@ class FileRepository extends File
                     $file->setComment($_comment);
                     $file->setTag();
                     $file->save();
-                    $returnArrayObject[] = $file;
+                    $arrayObject[] = $file;
                 }
             }
         }
 
+        $returnArrayObject = [];
+        foreach($arrayObject as $file){
+            $returnArrayObject[] = $this->getFileByTag($file->getTag());
+        }
         return $returnArrayObject;
+    }
+
+    public function getFileByTag($_tag)
+    {
+        $target = [
+            "id"
+        ];
+        $parameter = [
+            "LIKE" => [
+                "tag" => $_tag
+            ]
+        ];
+
+        $this->setWhereParameter($parameter);
+        $this->getOneData($target);
+        return $this->getId();
     }
 }

@@ -101,41 +101,63 @@ class BlogController
     function addAction($params)
     {
         $routes = Access::getSlugsById();
+        /**
+         * On regarde si nous avons bien un paramètre dans une URL
+         */
         if(isset($params["URI"][0])){
             $getTypeNewArticle = $params["URI"][0];
             $Blog = new BlogRepository();
+            /**
+             * Gestion du type text des ajouts d'articles
+             */
             if($getTypeNewArticle == "text"){
                 $View = new View("dashboard", "Dashboard/add_article_blog");
                 $configForm = $Blog->configFormAddArticleText();
+                /**
+                 * On regarde si nous avons bien un formulaire envoyé
+                 */
                 if(isset($params["POST"]) && !empty($params["POST"])){
                     $errors = Form::checkForm($configForm, $params["POST"]);
+                    /**
+                     * On regarde les erreurs éventuelles du formulaire
+                     */
                     if(empty($errors)){
+                        /** On regarde si nous avons des données de type FILE */
                         if(isset($_FILES)){
                             $errors = Form::checkFiles($_FILES);
-                            if(empty($errors) && $errors != 1){
-                                $File = new FileRepository();
-                                $arrayFile = $File->addFile($_FILES, $configForm, "Blog/Article", "Background image");
-
-                                foreach ($arrayFile as $file){
-                                    echo $file->getTag()."<br>";
+                            /**
+                             * On va récupérer la valeur de retour du checkForm des formulaire
+                             */
+                            if(empty($errors) || is_numeric($errors)){
+                                /**
+                                 * On regarde si nous n'avons pas un fichier vide
+                                 */
+                                $file = null;
+                                if( $errors != 1) {
+                                    $File = new FileRepository();
+                                    $arrayFile = $File->addFile($_FILES, $configForm, "Blog/Article", "Background image");
+                                    foreach ($arrayFile as $fileId){
+                                        $file =  $fileId;
+                                    }
                                 }
+                                $tmpPostArray = $params["POST"];
+                                $Blog->setTitle($tmpPostArray["title"]);
+                                $Blog->setContent($tmpPostArray["textArea_article"]);
+                                (isset($tmpPostArray["publish"]))?$Blog->setStatus(1):$Blog->setStatus(0);
+                                $Blog->setType(1);
+                                $Blog->setUrl(Access::constructUrl($Blog->getTitle()));
+                                $Blog->setFileid($file);
+                                $Blog->save();
+                                header('Location:'.$routes['dashboard_blog']);
                             } else {
+                                echo "Erreur dans le formulaire de type file";
                                 print_r($errors);
                             }
                         }
                     } else {
+                        echo "Erreur dans le formulaire de base";
                         print_r($errors);
                     }
-                    /*if(!empty($params["POST"])) {
-                        $tmpArray = $params["POST"];
-                        $Blog->setTitle($tmpArray["title"]);
-                        $Blog->setContent($tmpArray["textArea_article"]);
-                        (isset($tmpArray["publish"]))?$Blog->setStatus(1):$Blog->setStatus(0);
-                        $Blog->setType(1);
-                        $Blog->setUrl(Access::constructUrl($Blog->getTitle()));
-                        $Blog->save();
-                        header('Location:'.$routes['dashboard_blog']);
-                    }*/
                 }
 
                 $View->setData("errors", "");
