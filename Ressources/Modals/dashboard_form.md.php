@@ -21,22 +21,38 @@
             <?php endif;?>
         <?php endforeach;?>
         <?php if(isset($config["ckeditor"])):?>
-            <label for="textArea_article">Edition de votre article</label>
-            <div id="alerts">
-                <noscript>
-                    <p>
-                        <strong>CKEditor requires JavaScript to run</strong>. In a browser with no JavaScript support, like yours, you should still see the contents (HTML data) and you should be able to edit it normally, without a rich editor interface.
-                    </p>
-                </noscript>
-            </div>
-            <textarea id="textAreaArticle" class="ckeditor" name ="textArea_article" placeholder="Vous n'avez aucune limite de caractère pour votre article." style="min-width: 100%; max-width: 100%; min-height: 700px; max-height: 1000px;" class="form-control">
-                <?php if(isset($config["content_value"]["ckeditor"])):?>
-                    <?php echo $config["content_value"]["ckeditor"];?>
-                <?php endif;?>
-            </textarea>
-            <script>var globalDirname = '<?php echo DIRNAME;?>Public/Libraries/ckeditor/';
-            </script>
-            <script type="text/javascript" src="<?php echo DIRNAME;?>Public/Libraries/ckeditor/ckeditor.js"></script>
+            <label for="<?php echo (isset($config["ckeditor"]["name"]))?$config["ckeditor"]["name"]:"No_name_found";?>"><?php echo ($attributs == "label")?$value:"Enter your article";?></label>
+            <?php if(isset($config["ckeditor"]["name"])):?>
+                <div id="alerts">
+                    <noscript>
+                        <p>
+                            <strong>CKEditor requires JavaScript to run</strong>. In a browser with no JavaScript support, like yours, you should still see the contents (HTML data) and you should be able to edit it normally, without a rich editor interface.
+                        </p>
+                    </noscript>
+                </div>
+                <textarea id="<?php echo $config["ckeditor"]["name"];?>" class="ckeditor" name ="<?php echo $config["ckeditor"]["name"];?>" placeholder="<?php echo (isset($config["ckeditor"]["placeholder"]))?$config["ckeditor"]["placeholder"]:"";?>" style="min-width: 100%; max-width: 100%; min-height: 700px; max-height: 1000px;" class="form-control">
+                    <?php if(isset($config["content_value"]["ckeditor"])):?>
+                        <?php echo $config["content_value"]["ckeditor"];?>
+                    <?php endif;?>
+                </textarea>
+                <script>var globalDirname = '<?php echo DIRNAME;?>Public/Libraries/ckeditor/';
+                </script>
+                <script type="text/javascript" src="<?php echo DIRNAME;?>Public/Libraries/ckeditor/ckeditor.js"></script>
+            <?php endif;?>
+            <?php if(isset($config["ckeditor"]["description"])):?>
+                <div class="small-precision-input"><?php echo $config["ckeditor"]["description"];?></div>
+            <?php endif;?>
+        <?php endif;?>
+        <?php if(isset($config["textarea"])):?>
+            <?php if(isset($config["textarea"]["label"])):?>
+                <label for="textArea_exampleBase"><?php echo $config["textarea"]["label"];?></label>
+            <?php endif;?>
+            <?php if(isset($config["textarea"]["name"])):?>
+                <textarea id="<?php echo $config["textarea"]["name"];?>" name="<?php echo $config["textarea"]["name"];?>" class="textarea-col-12" placeholder="<?php echo (isset($config["textarea"]["placeholder"])?$config["textarea"]["placeholder"]:"");?>"></textarea>
+            <?php endif;?>
+            <?php if(isset($config["textarea"]["description"])):?>
+                <div class="small-precision-input"><?php echo $config["textarea"]["description"];?></div>
+            <?php endif;?>
         <?php endif;?>
         <div>
             Voici les différentes options du formulaire

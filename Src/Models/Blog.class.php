@@ -179,7 +179,12 @@ class Blog extends CoreSql {
                     "multiple"=>true
                 ]
             ],
-            "ckeditor" => true,
+            "ckeditor" => [
+                "label" => "Edition de votre article",
+                "name" => "ckeditor_article",
+                "description" => "Pas de limite !",
+                "placeholder" => "Placeholder"
+            ],
             "exit" => $slugs["dashboard_blog"]
         ];
     }
@@ -206,6 +211,12 @@ class Blog extends CoreSql {
                     "required"=>true,
                     "label"=>"Select your image"
                 ]
+            ],
+            "textarea" => [
+                "label" => "Image description",
+                "name" => "textarea_articleImage",
+                "description" => "Un maximum de 500 caractères",
+                "placeholder" => "Maximum 500 caractères"
             ],
             "exit" => $slugs["dashboard_blog"]
         ];

@@ -143,7 +143,7 @@ class BlogController
                                 }
                                 $tmpPostArray = $params["POST"];
                                 $Blog->setTitle($tmpPostArray["title"]);
-                                $Blog->setContent($tmpPostArray["textArea_article"]);
+                                $Blog->setContent($tmpPostArray["ckeditor_article"]);
                                 (isset($tmpPostArray["publish"]))?$Blog->setStatus(1):$Blog->setStatus(0);
                                 $Blog->setType(1);
                                 $Blog->setUrl(Access::constructUrl($Blog->getTitle()));
@@ -160,6 +160,13 @@ class BlogController
                         print_r($errors);
                     }
                 }
+
+                $View->setData("errors", "");
+                $View->setData("configForm", $configForm);
+            } elseif ($getTypeNewArticle == "image"){
+                $View = new View("dashboard", "Dashboard/add_article_blog");
+                $configForm = $Blog->configFormAddArticleImage();
+
 
                 $View->setData("errors", "");
                 $View->setData("configForm", $configForm);
