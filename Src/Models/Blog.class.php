@@ -176,7 +176,7 @@ class Blog extends CoreSql {
                     "label"=>"Select your background image",
                     "format"=>"PNG JPG JPEG",
                     "description"=>"Authorised format (png, jpg, jpeg)",
-                    "multiple"=>true
+                    "multiple"=>false
                 ]
             ],
             "ckeditor" => [
@@ -209,7 +209,10 @@ class Blog extends CoreSql {
                 "image"=>[
                     "type"=>"file",
                     "required"=>true,
-                    "label"=>"Select your image"
+                    "label"=>"Select your image",
+                    "format"=>"PNG JPG JPEG",
+                    "description"=>"Authorised format (png, jpg, jpeg)",
+                    "multiple"=>false
                 ]
             ],
             "textarea" => [

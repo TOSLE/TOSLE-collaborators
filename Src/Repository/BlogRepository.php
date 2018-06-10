@@ -248,6 +248,10 @@ class BlogRepository extends Blog
             3 => [
                 1 => "Nombre de commentaires",
                 2 => $Comment->getAll("number_all", null)
+            ],
+            4 => [
+                1 => "Nombre d'articles avec fichier",
+                2 => $this->getNumberArticleWithFile()
             ]
         ]);
         return $StatsBlog->getArrayData();
@@ -312,5 +316,19 @@ class BlogRepository extends Blog
         $contentValue = str_replace("</p>", " ", $contentValue);
 
         return (strlen($contentValue)>200)?substr($contentValue, 0, 200):$contentValue;
+    }
+
+    public function getNumberArticleWithFile()
+    {
+        $target = [
+            "id"
+        ];
+        $parameter = [
+            "NOT LIKE" => [
+                "fileid" => null
+            ]
+        ];
+        $this->setWhereParameter($parameter);
+        return $this->countData($target)[0];
     }
 }
