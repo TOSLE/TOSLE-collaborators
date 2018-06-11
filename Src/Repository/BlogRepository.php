@@ -341,8 +341,57 @@ class BlogRepository extends Blog
         return $this->countData($target)[0];
     }
 
-    public function addArticleText($_file)
+    public function addArticle($_file, $_post, $_type)
     {
+        switch($_type) {
+            case "text":
+                $configForm = $this->configFormAddArticleText();
+                $typeBlog = 1;
+                $inputContentName = "ckeditor_article";
+                break;
+            case "image":
+                $configForm = $this->configFormAddArticleImage();
+                $typeBlog = 2;
+                $inputContentName = "textarea_articleImage";
+                break;
+            case "video":
+                $configForm = $this->configFormAddArticleVideo();
+                $typeBlog = 3;
+                $inputContentName = "link";
+                break;
+            default:
+                return $errorMsg["TYPE_UNDEFINED"] = "TYPE NOT FOUND";
+                break;
+        }
+        $errors = Form::checkForm($configForm, $_post);
+        if(empty($errors)){
+            $file = null;
+            if(isset($_file)){
+                $errors = Form::checkFiles($_file);
+                if(empty($errors) || is_numeric($errors)){
+                    if( $errors != 1) {
+                        $File = new FileRepository();
+                        $arrayFile = $File->addFile($_FILES, $configForm, "Blog/Article", "Background image");
+                        foreach ($arrayFile as $fileId) {
+                            $file = $fileId;
+                        }
+                    }
+                } else {
+                    return $errors;
+                }
+            }
+            $tmpPostArray = $_post;
+            $this->setTitle($tmpPostArray["title"]);
+            $this->setContent($tmpPostArray[$inputContentName]);
+            (isset($tmpPostArray["publish"]))?$this->setStatus(1):$this->setStatus(0);
+            $this->setType($typeBlog);
+            $this->setUrl(Access::constructUrl($this->getTitle()));
+            $this->setFileid($file);
+            $this->save();
 
+            return 1;
+        } else {
+            return $errors;
+        }
     }
 }
