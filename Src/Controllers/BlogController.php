@@ -137,8 +137,8 @@ class BlogController
                                 if( $errors != 1) {
                                     $File = new FileRepository();
                                     $arrayFile = $File->addFile($_FILES, $configForm, "Blog/Article", "Background image");
-                                    foreach ($arrayFile as $fileId){
-                                        $file =  $fileId;
+                                    foreach ($arrayFile as $fileId) {
+                                            $file = $fileId;
                                     }
                                 }
                                 $tmpPostArray = $params["POST"];
@@ -160,7 +160,6 @@ class BlogController
                         print_r($errors);
                     }
                 }
-
                 $View->setData("errors", "");
                 $View->setData("configForm", $configForm);
             } elseif ($getTypeNewArticle == "image"){

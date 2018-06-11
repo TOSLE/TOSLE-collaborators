@@ -18,7 +18,10 @@ class FileRepository extends File
      */
     public function addFile($_file, $_configForm, $_destination, $_comment)
     {
-        $directoryDestination = '../..'.DIRNAME.'Tosle/'.ucfirst(strtolower($_destination)).'/';
+        if(SYSTEM == "LINUX")
+            $directoryDestination = getcwd().DIRNAME.'Tosle/'.ucfirst(strtolower($_destination)).'/';
+        else
+            $directoryDestination = '../..'.DIRNAME.'Tosle/'.ucfirst(strtolower($_destination)).'/';
 
         foreach($_configForm as $type => $arrayType) {
             if($type == "input")
@@ -71,9 +74,9 @@ class FileRepository extends File
                 if (in_array($fileExtension, $authorisedFormat) ) {
                     if(!move_uploaded_file($file["tmp_name"], $directoryDestination.$fileName) ){
                         return $errorMessage["ERROR_UPLOAD"] = [
-                            "ERROR UPLOAD FILE IN FOLDER : ".$directoryDestination,
-                            $files,
-                            $file
+                            "ERROR" => "ERROR UPLOAD FILE IN FOLDER : ".$directoryDestination,
+                            "FILE TRAITE" => $files,
+                            "FILE NON TRAITE" => $file
                         ];
                     }
                     $file = new File();
