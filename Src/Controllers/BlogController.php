@@ -111,7 +111,7 @@ class BlogController
             $View = new View("dashboard", "Dashboard/add_article_blog");
 
             if((isset($_FILES) && !empty($_FILES)) || (isset($params["POST"]) && !empty($params["POST"]))){
-                $resultAdd = $Blog->addArticle($_FILES, $_POST, $getTypeNewArticle);
+                $resultAdd = $Blog->addArticle($_FILES, $params["POST"], $getTypeNewArticle);
                 if($resultAdd == 1){
                     header('Location:'.$routes['dashboard_blog']);
                 }
@@ -138,7 +138,43 @@ class BlogController
     {
         $routes = Access::getSlugsById();
         if(isset($params["URI"][0])){
-            $getIdArticle = $params["URI"][0];
+            if(is_numeric($params["URI"][0])) {
+                $Blog = new BlogRepository();
+                $View = new View("dashboard", "Dashboard/add_article_blog");
+                $arrayReturn = $Blog->editArticle($params["URI"][0]);
+                $arrayBlog = $arrayReturn["blog"];
+                $pathFile = (isset($arrayReturn["file"]))?$arrayReturn["file"]->getPath().$arrayReturn["file"]->getName():null;
+                $configForm = $arrayReturn["configForm"];
+                $configForm["content_value"] = [
+                    "title" => $arrayBlog->getTitle(),
+                    "content" => $arrayBlog->getContent(),
+                    "link" => $arrayBlog->getContent(),
+                    "file" => $pathFile,
+                ];
+                switch($arrayBlog->getType()){
+                    case 1:
+                        $typeArticle = "text";
+                        break;
+                    case 2:
+                        $typeArticle = "image";
+                        break;
+                    case 3:
+                        $typeArticle = "video";
+                        break;
+                    default:
+                        return -1;
+                        break;
+                }
+                if((isset($_FILES) && !empty($_FILES)) || (isset($params["POST"]) && !empty($params["POST"]))){
+                    $resultAdd = $Blog->addArticle($_FILES, $params["POST"], $typeArticle, $params["URI"][0]);
+                    if($resultAdd == 1){
+                        header('Location:'.$routes['dashboard_blog']);
+                    }
+                }
+                $View->setData("errors", "");
+                $View->setData("configForm", $configForm);
+            }
+            /*
             if(is_numeric($getIdArticle)){
                 $View = new View("dashboard", "Dashboard/add_article_blog");
                 $Blog = new BlogRepository();
@@ -169,7 +205,9 @@ class BlogController
                 }
                 $View->setData("errors", "");
                 $View->setData("configForm", $configForm);
-            }
+            }*/
+        } else {
+            header('Location:'.$routes['dashboard_blog']);
         }
     }
 

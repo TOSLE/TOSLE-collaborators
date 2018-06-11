@@ -49,7 +49,7 @@ class BlogRepository extends Blog
             ]
         ];
         $this->setWhereParameter($parameter);
-        $this->getOneData(["id", "title", "content", "type", "url"]);
+        $this->getOneData(["id", "title", "content", "type", "url", "fileid"]);
     }
     /**
      * @param integer $id
@@ -341,7 +341,7 @@ class BlogRepository extends Blog
         return $this->countData($target)[0];
     }
 
-    public function addArticle($_file, $_post, $_type)
+    public function addArticle($_file, $_post, $_type, $_idArticle = null)
     {
         switch($_type) {
             case "text":
@@ -381,6 +381,9 @@ class BlogRepository extends Blog
                 }
             }
             $tmpPostArray = $_post;
+            if(isset($_idArticle)) {
+                $this->setId($_idArticle);
+            }
             $this->setTitle($tmpPostArray["title"]);
             $this->setContent($tmpPostArray[$inputContentName]);
             (isset($tmpPostArray["publish"]))?$this->setStatus(1):$this->setStatus(0);
@@ -392,6 +395,39 @@ class BlogRepository extends Blog
             return 1;
         } else {
             return $errors;
+        }
+    }
+
+    public function editArticle($_idArticle)
+    {
+        $this->getArticle($_idArticle);
+        if(!empty($this->id)){
+            $File = null;
+            if(!empty($this->getFileid())){
+                $File = new FileRepository();
+                $File->getFileById($this->getFileid());
+            }
+            switch($this->getType()){
+                case 1:
+                    $configForm = $this->configFormAddArticleText();
+                    break;
+                case 2:
+                    $configForm = $this->configFormAddArticleImage();
+                    break;
+                case 3:
+                    $configForm = $this->configFormAddArticleVideo();
+                    break;
+                default:
+                    return -1;
+                    break;
+            }
+            return $arrayObject = [
+                "blog" => $this,
+                "file" => $File,
+                "configForm" => $configForm
+            ];
+        } else {
+            return 0;
         }
     }
 }

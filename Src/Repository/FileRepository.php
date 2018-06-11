@@ -18,10 +18,13 @@ class FileRepository extends File
      */
     public function addFile($_file, $_configForm, $_destination, $_comment)
     {
-        if(SYSTEM == "LINUX")
-            $directoryDestination = getcwd().DIRNAME.'Tosle/'.ucfirst(strtolower($_destination)).'/';
-        else
-            $directoryDestination = '../..'.DIRNAME.'Tosle/'.ucfirst(strtolower($_destination)).'/';
+        if(SYSTEM == "LINUX") {
+            $directoryDestination = getcwd() . DIRNAME . 'Tosle/' . ucfirst(strtolower($_destination)) . '/';
+        } else {
+            $directoryDestination = '../..' . DIRNAME . 'Tosle/' . ucfirst(strtolower($_destination)) . '/';
+        }
+
+        $pathDirectory = DIRNAME . 'Tosle/' . ucfirst(strtolower($_destination)) . '/';
 
         foreach($_configForm as $type => $arrayType) {
             if($type == "input")
@@ -81,7 +84,7 @@ class FileRepository extends File
                     }
                     $file = new File();
                     $file->setType(1);
-                    $file->setPath($directoryDestination);
+                    $file->setPath($pathDirectory);
                     $file->setName($fileName);
                     $file->setComment($_comment);
                     $file->setTag();
@@ -106,6 +109,27 @@ class FileRepository extends File
         $parameter = [
             "LIKE" => [
                 "tag" => $_tag
+            ]
+        ];
+
+        $this->setWhereParameter($parameter);
+        $this->getOneData($target);
+        return $this->getId();
+    }
+
+    public function getFileById($_id)
+    {
+        $target = [
+            "id",
+            "path",
+            "name",
+            "comment",
+            "tag",
+            "type"
+        ];
+        $parameter = [
+            "LIKE" => [
+                "id" => $_id
             ]
         ];
 
