@@ -14,6 +14,9 @@
                 <input id="<?php echo $name;?>" type="<?php echo $attributs["type"];?>" placeholder="<?php echo $attributs["placeholder"];?>" name="<?php echo $name;?>" <?php echo (isset($attributs["required"]))?"required='required'":"";?> value="<?php echo (isset($config["content_value"][$name]))?$config["content_value"][$name]:"";?>">
             <?php endif;?>
             <?php if($attributs["type"]=="file"):?>
+                <?php if(isset($config["content_value"]["file"])):?>
+                    <img src="<?php echo $config["content_value"]["file"];?>" width="200" height="100">
+                <?php endif;?>
                 <input id="<?php echo $name;?>" type="<?php echo $attributs["type"];?>" name="<?php echo $name;?>[]" <?php echo (isset($attributs["required"]) && $attributs["required"])?"required='required'":"";?> <?php echo (isset($attributs["multiple"]) && $attributs["multiple"])?"multiple":"";?>>
             <?php endif;?>
             <?php if(isset($attributs["description"])):?>
@@ -31,8 +34,8 @@
                     </noscript>
                 </div>
                 <textarea id="<?php echo $config["ckeditor"]["name"];?>" class="ckeditor" name ="<?php echo $config["ckeditor"]["name"];?>" placeholder="<?php echo (isset($config["ckeditor"]["placeholder"]))?$config["ckeditor"]["placeholder"]:"";?>" style="min-width: 100%; max-width: 100%; min-height: 700px; max-height: 1000px;" class="form-control">
-                    <?php if(isset($config["content_value"]["ckeditor"])):?>
-                        <?php echo $config["content_value"]["ckeditor"];?>
+                    <?php if(isset($config["content_value"]["content"])):?>
+                        <?php echo $config["content_value"]["content"];?>
                     <?php endif;?>
                 </textarea>
                 <script>var globalDirname = '<?php echo DIRNAME;?>Public/Libraries/ckeditor/';
@@ -48,7 +51,7 @@
                 <label for="textArea_exampleBase"><?php echo $config["textarea"]["label"];?></label>
             <?php endif;?>
             <?php if(isset($config["textarea"]["name"])):?>
-                <textarea id="<?php echo $config["textarea"]["name"];?>" name="<?php echo $config["textarea"]["name"];?>" class="textarea-col-12" placeholder="<?php echo (isset($config["textarea"]["placeholder"])?$config["textarea"]["placeholder"]:"");?>"></textarea>
+                <textarea id="<?php echo $config["textarea"]["name"];?>" name="<?php echo $config["textarea"]["name"];?>" class="textarea-col-12" placeholder="<?php echo (isset($config["textarea"]["placeholder"])?$config["textarea"]["placeholder"]:"");?>"><?php if(isset($config["content_value"]["content"])):?><?php echo $config["content_value"]["content"];?><?php endif;?></textarea>
             <?php endif;?>
             <?php if(isset($config["textarea"]["description"])):?>
                 <div class="small-precision-input"><?php echo $config["textarea"]["description"];?></div>
