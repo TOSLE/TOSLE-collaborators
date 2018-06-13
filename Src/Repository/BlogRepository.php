@@ -446,7 +446,10 @@ class BlogRepository extends Blog
     {
         $pagination = [];
         $numberTotalOfBlog = $this->countNumberOfBlogByStatus()[0];
-        $totalPage = (int)($numberTotalOfBlog / $_numberArticle) + 1;
+        $totalPage = ($numberTotalOfBlog != $_numberArticle)?(int)($numberTotalOfBlog / $_numberArticle) + 1:1;
+        if($totalPage == 1) {
+            return 0;
+        }
         $position = (isset($_get['page']) && ($_get['page'] <= $totalPage && $_get['page'] >= 1))?$_get['page']:1;
         unset($_get['page']);
         $href = "";
