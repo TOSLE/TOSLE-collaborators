@@ -18,16 +18,20 @@ class BlogController
         $View = new View("default", "Blog/home");
         $Blog = new BlogRepository();
         $Comment = new CommentRepository();
+        /**
+         * Default var
+         */
+        $colSize = 6;
+        $numberBlog = 6;
+        $page = 1;
+        $offset = $numberBlog * $page - $numberBlog;
         $errors = [];
         if(!empty($params["GET"])){
             if(isset($params["GET"]["colsize"]))
                 if($params["GET"]["colsize"] == "4" || $params["GET"]["colsize"] == "6" || $params["GET"]["colsize"] == "12")
-                    $View->setData("col", $params["GET"]["colsize"]);
-                else $View->setData("col", "6");
-        } else {
-            $View->setData("col", "6");
+                    $colSize = $params["GET"]["colsize"];
         }
-        $array = $Blog->getAllArticleByStatus(1);
+        $array = $Blog->getAllArticleByStatus(1, $numberBlog, $offset);
         $data = [];
         foreach($array as $content){
             $date = new DateTime($content->getDatecreate());
@@ -42,7 +46,10 @@ class BlogController
             $value["blog_numberComment"] = $Comment->getAll("number_blog", $content->getId());
             $data[] = $value;
         }
+        $pagination = $Blog->getPagination($numberBlog, $params["GET"]);
+        $View->setData("pagination", $pagination);
         $View->setData("data", $data);
+        $View->setData("col", $colSize);
     }
 
     /**
@@ -174,38 +181,6 @@ class BlogController
                 $View->setData("errors", "");
                 $View->setData("configForm", $configForm);
             }
-            /*
-            if(is_numeric($getIdArticle)){
-                $View = new View("dashboard", "Dashboard/add_article_blog");
-                $Blog = new BlogRepository();
-                $configForm = $Blog->configFormAddArticleText();
-
-                $Blog->getArticle($getIdArticle);
-                switch ($Blog->getType()){
-                    case 1:
-                        if(isset($params["POST"])){
-                            if(!empty($params["POST"])) {
-                                $tmpArray = $params["POST"];
-                                $Blog->setTitle($tmpArray["title"]);
-                                $Blog->setContent($tmpArray["textArea_article"]);
-                                (isset($tmpArray["publish"]))?$Blog->setStatus(1):$Blog->setStatus(0);
-                                $Blog->setType(1);
-                                $Blog->save();
-                                header('Location:'.$routes['dashboard_blog']);
-                            }
-                        }
-                        $configForm["content_value"] = [
-                            "title" => $Blog->getTitle(),
-                            "ckeditor" => $Blog->getContent()
-                        ];
-                        break;
-                    default:
-                        header('Location:'.$routes['dashboard_blog']);
-                        break;
-                }
-                $View->setData("errors", "");
-                $View->setData("configForm", $configForm);
-            }*/
         } else {
             header('Location:'.$routes['dashboard_blog']);
         }

@@ -95,10 +95,12 @@ class BlogRepository extends Blog
     }
     /**
      * @param int $status
+     * @param int $max
+     * @param int $min
      * @return array|boolean
      * Retourne tous les articles par rapport à un status
      */
-    public function getAllArticleByStatus($status = 1)
+    public function getAllArticleByStatus($status = 1, $max = null, $min = 0)
     {
         if(is_numeric($status))
         {
@@ -112,6 +114,9 @@ class BlogRepository extends Blog
                 "url"
             ];
             $this->setOrderByParameter(["id" => "DESC"]);
+            if(isset($max)) {
+                $this->setLimitParameter($max, $min);
+            }
             $this->setWhereParameter([
                 "LIKE" => [
                     "status" => $status
@@ -429,5 +434,55 @@ class BlogRepository extends Blog
         } else {
             return 0;
         }
+    }
+
+    /**
+     * @param int $_numberArticle
+     * @param array $_get
+     * @return array
+     * Cette fonction retourne une pagination pour les blogs en fonction d'un tableau envoyé
+     */
+    public function getPagination($_numberArticle, $_get = null)
+    {
+        $pagination = [];
+        $numberTotalOfBlog = $this->countNumberOfBlogByStatus()[0];
+        $totalPage = (int)($numberTotalOfBlog / $_numberArticle) + 1;
+        $position = (isset($_get['page']) && ($_get['page'] <= $totalPage && $_get['page'] >= 1))?$_get['page']:1;
+        unset($_get['page']);
+        $href = "";
+        $arrayHref=[];
+        foreach ($_get as $key => $value){
+            $arrayHref[] = $key.'='.$value;
+        }
+        if(isset($_get) && !empty($_get)){
+            $href = implode('&amp;', $arrayHref);
+        }
+        if($position != 1){
+            if(!empty($href)){
+                $pagination['first_page'] = Access::getSlugsById()['bloghome'].'?'.$href;
+            } else {
+                $pagination['first_page'] = Access::getSlugsById()['bloghome'].$href;
+            }
+        }
+        for($i=1; $i <= $totalPage; $i++){
+            if($i > 1){
+                if(!empty($href)){
+                    $href = '?page='.$i.'&amp;'.$href;
+                } else {
+                    $href = '?page='.$i;
+                }
+                $pagination[$i] = Access::getSlugsById()['bloghome'].$href;
+            } else {
+                if(!empty($href)){
+                    $pagination[$i] = Access::getSlugsById()['bloghome'].'?'.$href;
+                } else {
+                    $pagination[$i] = Access::getSlugsById()['bloghome'].$href;
+                }
+            }
+        }
+        if($position != $totalPage){
+            $pagination['last_page'] = Access::getSlugsById()['bloghome'].$href;
+        }
+        return $pagination;
     }
 }
