@@ -445,9 +445,12 @@ class BlogRepository extends Blog
     public function getPagination($_numberArticle, $_get = null)
     {
         $pagination = [];
-        $numberTotalOfBlog = $this->countNumberOfBlogByStatus()[0];
-        $totalPage = ($numberTotalOfBlog != $_numberArticle)?(int)($numberTotalOfBlog / $_numberArticle) + 1:1;
-        if($totalPage == 1) {
+        $numberTotalOfBlog = $this->countNumberOfBlogByStatus();
+        $totalPage = ($numberTotalOfBlog != $_numberArticle)?(int)($numberTotalOfBlog / $_numberArticle):1;
+        if($totalPage < $numberTotalOfBlog / $_numberArticle){
+            $totalPage++;
+        }
+        if($totalPage <= 1) {
             return 0;
         }
         $position = (isset($_get['page']) && ($_get['page'] <= $totalPage && $_get['page'] >= 1))?$_get['page']:1;
@@ -470,11 +473,10 @@ class BlogRepository extends Blog
         for($i=1; $i <= $totalPage; $i++){
             if($i > 1){
                 if(!empty($href)){
-                    $href = '?page='.$i.'&amp;'.$href;
+                    $pagination[$i] = Access::getSlugsById()['bloghome'].'?page='.$i.'&amp;'.$href;
                 } else {
-                    $href = '?page='.$i;
+                    $pagination[$i] = Access::getSlugsById()['bloghome'].'?page='.$i;
                 }
-                $pagination[$i] = Access::getSlugsById()['bloghome'].$href;
             } else {
                 if(!empty($href)){
                     $pagination[$i] = Access::getSlugsById()['bloghome'].'?'.$href;

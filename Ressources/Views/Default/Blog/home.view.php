@@ -36,7 +36,7 @@
         <div class="col-12">
             <ul class="pagination tosle justify-center">
                 <?php foreach($pagination as $key => $href):?>
-                    <li class="item">
+                    <li class="item <?php echo ($page == $key)?"active":"";?>">
                         <a href="<?php echo $href;?>" class="link-page <?php echo ($key == "first_page" || $key == "last_page")?"material-icons":"";?>"><?php echo $key;?></a>
                     </li>
                 <?php endforeach;?>
