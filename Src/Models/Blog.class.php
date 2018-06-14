@@ -155,6 +155,7 @@ class Blog extends CoreSql {
     public function configFormAddArticleText()
     {
         $slugs = Access::getSlugsById();
+        $category = new CategoryRepository;
         return [
             "config"=> [
                 "method"=>"post",
@@ -185,6 +186,7 @@ class Blog extends CoreSql {
                 "description" => "Pas de limite !",
                 "placeholder" => "Placeholder"
             ],
+            'select' => $category->configFormCategory(1),
             "exit" => $slugs["dashboard_blog"]
         ];
     }
