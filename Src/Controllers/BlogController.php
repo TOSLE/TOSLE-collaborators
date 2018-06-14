@@ -24,12 +24,19 @@ class BlogController
         $colSize = 6;
         $numberBlog = 6;
         $page = 1;
-        $offset = $numberBlog * $page - $numberBlog;
+        $offset = 0;
+        $pagination = $Blog->getPagination($numberBlog, $params["GET"]);
         $errors = [];
         if(!empty($params["GET"])){
-            if(isset($params["GET"]["colsize"]))
-                if($params["GET"]["colsize"] == "4" || $params["GET"]["colsize"] == "6" || $params["GET"]["colsize"] == "12")
+            if(isset($params["GET"]["colsize"])) {
+                if ($params["GET"]["colsize"] == "4" || $params["GET"]["colsize"] == "6" || $params["GET"]["colsize"] == "12"){
                     $colSize = $params["GET"]["colsize"];
+                }
+            }
+            if(isset($params['GET']['page']) && array_key_exists($params['GET']['page'], $pagination)){
+                $page = $params['GET']['page'];
+                $offset = $numberBlog * $page - $numberBlog;
+            }
         }
         $array = $Blog->getAllArticleByStatus(1, $numberBlog, $offset);
         $data = [];
@@ -46,8 +53,8 @@ class BlogController
             $value["blog_numberComment"] = $Comment->getAll("number_blog", $content->getId());
             $data[] = $value;
         }
-        $pagination = $Blog->getPagination($numberBlog, $params["GET"]);
         $View->setData("pagination", $pagination);
+        $View->setData("page", $page);
         $View->setData("data", $data);
         $View->setData("col", $colSize);
     }
