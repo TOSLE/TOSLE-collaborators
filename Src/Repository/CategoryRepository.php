@@ -20,19 +20,19 @@ class CategoryRepository extends Category
             $option[$category->getId()] = $category->getName();
         }
         return [
+                "category_select" => [
+                    "label" => "Selection des catégories",
+                    "description" => "Vous avez le droit à plusieurs choix",
+                    "multiple" => true,
+                    "options" => $option
+                ],
                 "category_input" => [
                     "type"=>"text",
                     "placeholder"=>"Ajouts de catégories",
                     "required"=>false,
                     "label"=>"Ajouter des catégories",
-                    "description"=>"Format attendu : [category 1; category 2; category 3]"
+                    "description"=>"Format attendu : [category 1; category 2; category 3]. Il seront automatiquement ajoutés."
                 ],
-                "category_select" => [
-                    "label" => "Select tag",
-                    "description" => "Vous avez le droit à plusieurs choix",
-                    "multiple" => true,
-                    "options" => $option
-                ]
             ];
     }
 
@@ -58,5 +58,70 @@ class CategoryRepository extends Category
         ];
         $this->setWhereParameter($parameter);
         return $this->getData($target);
+    }
+
+    /**
+     * @param string $_input
+     * @return array|int Category
+     *
+     */
+    public function addCategory($_input, $_type, $_targetId)
+    {
+        if(is_string($_input)){
+            $inputExploded = explode(';', $_input);
+            switch($_type){
+                case 'blog': $type = 1; break;
+                case 'lesson': $type = 2; break;
+                default: return ['CODE_ERROR' => '1'];
+            }
+            $arrayTag = [];
+            foreach($inputExploded as $categoryName){
+                $this->setName($categoryName);
+                $this->setType($type);
+                $this->setTag();
+                $arrayTag[] = $this->getTag();
+                $this->save();
+            }
+            $categoryBlog = new CategoryBlog();
+            foreach($arrayTag as $tag){
+                $this->getCategoryByTag($tag);
+                $categoryBlog->setBlogId($_targetId);
+                $categoryBlog->setCategoryId($this->getId());
+                $categoryBlog->save();
+            }
+            return 1;
+        }
+        return ['CODE_ERROR' => '0'];
+    }
+
+    /**
+     * @param string $_tag
+     * Trouve une catégorie par son tag
+     */
+    public function getCategoryByTag($_tag)
+    {
+        $target = [
+            'id',
+            'name',
+            'type',
+            'tag',
+        ];
+        $parameter = [
+            'LIKE' => [
+                'tag' => $_tag
+            ]
+        ];
+        $this->setWhereParameter($parameter);
+        $this->getOneData($target);
+    }
+
+    public function getCategoryByIdentifier($_identifier, $_id)
+    {
+        $target = [
+            'id',
+            'name',
+            'type',
+            'tag',
+        ];
     }
 }

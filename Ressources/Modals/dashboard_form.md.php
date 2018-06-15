@@ -52,6 +52,15 @@
                         <div class="small-precision-input"><?php echo $attributs["description"];?></div>
                     <?php endif;?>
                 <?php endif;?>
+                <?php if($name == "category_input"):?>
+                    <?php if(isset($attributs["label"])):?>
+                        <label for="<?php echo $name;?>"><?php echo $attributs["label"];?></label>
+                    <?php endif;?>
+                    <input id="<?php echo $name;?>" type="<?php echo $attributs["type"];?>" placeholder="<?php echo $attributs["placeholder"];?>" name="<?php echo $name;?>" <?php echo (isset($attributs["required"]))?"required='required'":"";?> value="<?php echo (isset($config["content_value"][$name]))?$config["content_value"][$name]:"";?>">
+                    <?php if(isset($attributs["description"])):?>
+                        <div class="small-precision-input"><?php echo $attributs["description"];?></div>
+                    <?php endif;?>
+                <?php endif;?>
             <?php endforeach;?>
         <?php endif; ?>
         <?php if(isset($config["ckeditor"])):?>
