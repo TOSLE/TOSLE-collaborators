@@ -66,20 +66,22 @@ class FileRepository extends File
         foreach($arrayFiles as $inputName => $files){
             foreach($files as $file){
                 if(!is_uploaded_file($file["tmp_name"]) ){
-                    return $errorMessage["ERROR_UPLOAD"] = [
-                        "TMP FILE IS NOT FOUND",
-                        $files,
-                        $file
+                    return [
+                        "CODE_ERROR" => 1,
+                        "MESSAGE" => "TMP_FILE_IS_NOT_FOUND",
+                        "FILE_AFTER_PROCESS" => $files,
+                        "FILE_SEND" =>$_file
                     ];
                 }
                 $fileExtension = strtolower(substr(strrchr($file['name'], '.'),1));
                 $fileName = uniqid('file_', false)."_".date("Y-m-d").".".$fileExtension;
                 if (in_array($fileExtension, $authorisedFormat) ) {
                     if(!move_uploaded_file($file["tmp_name"], $directoryDestination.$fileName) ){
-                        return $errorMessage["ERROR_UPLOAD"] = [
-                            "ERROR" => "ERROR UPLOAD FILE IN FOLDER : ".$directoryDestination,
-                            "FILE TRAITE" => $files,
-                            "FILE NON TRAITE" => $file
+                        return [
+                            "CODE_ERROR" => 3,
+                            "MESSAGE" => "ERROR_UPLOAD_FILE_IN_FOLDER : ".$directoryDestination,
+                            "FILE_AFTER_PROCESS" => $files,
+                            "FILE_SEND" => $_file
                         ];
                     }
                     $file = new File();
@@ -90,7 +92,15 @@ class FileRepository extends File
                     $file->setTag();
                     $file->save();
                     $arrayObject[] = $file;
+                } else {
+                    return [
+                        'CODE_ERROR' => 2,
+                        'MESSAGE' => 'FORBIDEN FORMAT, detected : '.$fileExtension.', expected :'.implode(', ',$authorisedFormat),
+                        'FILE_AFTER_PROCESS' => $files,
+                        'FILE_SEND' => $_file
+                    ];
                 }
+
             }
         }
 

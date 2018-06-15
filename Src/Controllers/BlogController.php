@@ -126,19 +126,18 @@ class BlogController
 
             if((isset($_FILES) && !empty($_FILES)) || (isset($params["POST"]) && !empty($params["POST"]))){
                 $resultAdd = $Blog->addArticle($_FILES, $params["POST"], $getTypeNewArticle);
-                if($resultAdd == 1){
+                if($resultAdd === 1){
                     header('Location:'.$routes['dashboard_blog']);
+                } else {
+                    $View->setData("errors", $resultAdd);
                 }
             }
 
             if($getTypeNewArticle == "text"){
-                $View->setData("errors", "");
                 $View->setData("configForm", $Blog->configFormAddArticleText());
             } elseif ($getTypeNewArticle == "image"){
-                $View->setData("errors", "");
                 $View->setData("configForm", $Blog->configFormAddArticleImage());
             } elseif ($getTypeNewArticle == "video"){
-                $View->setData("errors", "");
                 $View->setData("configForm", $Blog->configFormAddArticleVideo());
             } else {
                 header('Location:'.$routes['dashboard_blog'].'/error');

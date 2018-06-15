@@ -377,6 +377,9 @@ class BlogRepository extends Blog
                     if( $errors != 1) {
                         $File = new FileRepository();
                         $arrayFile = $File->addFile($_FILES, $configForm, "Blog/Article", "Background image");
+                        if(array_key_exists('CODE_ERROR', $arrayFile)){
+                            return $arrayFile;
+                        }
                         foreach ($arrayFile as $fileId) {
                             $file = $fileId;
                         }
