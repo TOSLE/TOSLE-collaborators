@@ -1,7 +1,21 @@
 <?php if(!empty($errors)): ?>
-    <?php foreach($errors as $name => $value):?>
-        <?php echo $name. " ".$value;?>
-    <?php endforeach; ?>
+    <?php if($errors['CODE_ERROR']):?>
+    <section class="container">
+        <div class="row">
+            <div class="col-12">
+                <div>
+                    <h2>Une erreur est détectée sur votre fichier</h2>
+                    <p> Message d'erreur : <?php echo $errors['MESSAGE'];?></p>
+                    <p>Code d'erreur : <?php echo $errors['CODE_ERROR'];?></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <?php else:?>
+        <?php foreach($errors as $name => $value):?>
+            <?php echo $name. " ".$value;?>
+        <?php endforeach; ?>
+    <?php endif;?>
 <?php endif;?>
 
 <form method="<?php echo $config['config']['method'];?>" action="<?php echo $config['config']['action'];?>" enctype="multipart/form-data">
