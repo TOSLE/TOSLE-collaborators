@@ -346,6 +346,14 @@ class BlogRepository extends Blog
         return $this->countData($target)[0];
     }
 
+    /**
+     * @param array $_file
+     * @param array $_post
+     * @param string $_type
+     * @param int|bool $_idArticle
+     * @return array|int
+     * Permet d'ajouter un article et vérifie les informations. Retourne un tableau d'erreur s'il y en a une
+     */
     public function addArticle($_file, $_post, $_type, $_idArticle = null)
     {
         switch($_type) {
@@ -392,6 +400,7 @@ class BlogRepository extends Blog
             if(isset($_idArticle)) {
                 $this->setId($_idArticle);
             }
+
             $this->setTitle($tmpPostArray["title"]);
             $this->setContent($tmpPostArray[$inputContentName]);
             (isset($tmpPostArray["publish"]))?$this->setStatus(1):$this->setStatus(0);
@@ -400,12 +409,25 @@ class BlogRepository extends Blog
             $this->setFileid($file);
             $this->save();
 
+            $this->getArticleByUrl($this->getUrl());
+            if(isset($tmpPostArray["category_input"]) && !empty($tmpPostArray["category_input"])){
+                $category = new CategoryRepository();
+                $arrayCategory = $category->addCategory($tmpPostArray["category_input"], 'blog', $this->getId());
+                if(array_key_exists('CODE_ERROR', $arrayCategory)){
+                    return $arrayCategory;
+                }
+            }
             return 1;
         } else {
             return $errors;
         }
     }
 
+    /**
+     * @param $_idArticle
+     * @return array|int
+     * Cette fonction retourne les éléments nécessaires à l'affichage des formulaires pour editer un article
+     */
     public function editArticle($_idArticle)
     {
         $this->getArticle($_idArticle);
@@ -415,6 +437,8 @@ class BlogRepository extends Blog
                 $File = new FileRepository();
                 $File->getFileById($this->getFileid());
             }
+            $category = new CategoryRepository();
+            $categoryFounded = ;
             switch($this->getType()){
                 case 1:
                     $configForm = $this->configFormAddArticleText();
