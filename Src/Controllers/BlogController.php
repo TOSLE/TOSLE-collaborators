@@ -123,7 +123,7 @@ class BlogController
             $getTypeNewArticle = $params["URI"][0];
             $Blog = new BlogRepository();
             $View = new View("dashboard", "Dashboard/add_article_blog");
-
+            $View->setData("errors", "");
             if((isset($_FILES) && !empty($_FILES)) || (isset($params["POST"]) && !empty($params["POST"]))){
                 $resultAdd = $Blog->addArticle($_FILES, $params["POST"], $getTypeNewArticle);
                 if($resultAdd === 1){
@@ -163,6 +163,7 @@ class BlogController
                     "content" => $arrayBlog->getContent(),
                     "link" => $arrayBlog->getContent(),
                     "file" => $pathFile,
+                    "selectedOption" => $arrayReturn['selectedOption']
                 ];
                 switch($arrayBlog->getType()){
                     case 1:

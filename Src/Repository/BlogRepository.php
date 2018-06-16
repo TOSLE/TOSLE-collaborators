@@ -438,7 +438,7 @@ class BlogRepository extends Blog
                 $File->getFileById($this->getFileid());
             }
             $category = new CategoryRepository();
-            $categoryFounded = ;
+            $categoryFounded = $category->getCategoryByIdentifier('blog', $this->id);
             switch($this->getType()){
                 case 1:
                     $configForm = $this->configFormAddArticleText();
@@ -456,6 +456,7 @@ class BlogRepository extends Blog
             return $arrayObject = [
                 "blog" => $this,
                 "file" => $File,
+                "selectedOption" => $categoryFounded,
                 "configForm" => $configForm
             ];
         } else {
