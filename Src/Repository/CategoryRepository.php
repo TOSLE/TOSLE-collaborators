@@ -115,13 +115,31 @@ class CategoryRepository extends Category
         $this->getOneData($target);
     }
 
+    /**
+     * @param string $_identifier
+     * @param int $_id
+     * @return array|int category
+     *
+     */
     public function getCategoryByIdentifier($_identifier, $_id)
     {
-        $target = [
-            'id',
-            'name',
-            'type',
-            'tag',
+        $target = ["id", "name"];
+        $joinParameter = [
+            "categoryblog" => [
+                "category_id"
+            ]
         ];
+        $whereParameter = [
+            "categoryblog" => [
+                $_identifier."_id" => $_id
+            ]
+        ];
+        $this->setLeftJoin($joinParameter, $whereParameter);
+        $array = $this->getData($target);
+        $returnArrayId= [];
+        foreach($array as $category) {
+            $returnArrayId[$category->getId()] = $category->getName();
+        }
+        return $returnArrayId;
     }
 }

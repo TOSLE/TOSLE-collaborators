@@ -1,5 +1,5 @@
 <?php if(!empty($errors)): ?>
-    <?php if($errors['CODE_ERROR']):?>
+    <?php if(isset($errors['CODE_ERROR'])):?>
     <section class="container">
         <div class="row">
             <div class="col-12">
@@ -45,7 +45,7 @@
                     <?php endif;?>
                     <select id="<?php echo $name;?>" name="<?php echo $name;?>" <?php echo (isset($attributs["multiple"]))?"multiple":"";?>>
                         <?php foreach($attributs["options"] as $value => $text):?>
-                            <option value="<?php echo $value;?>"><?php echo $text;?></option>
+                            <option value="<?php echo $value;?>" <?php echo (isset($config['content_value']['selectedOption'][$value]))?"selected":"";?>><?php echo $text;?></option>
                         <?php endforeach;?>
                     </select>
                     <?php if(isset($attributs["description"])):?>
