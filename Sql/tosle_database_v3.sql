@@ -58,6 +58,12 @@ CREATE TABLE IF NOT EXISTS `tosle_database`.`tosle_user` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+--
+-- Table content : `tosle_user`
+--
+
+INSERT INTO `tosle_user` (`user_id`, `user_firstname`, `user_lastname`, `user_pseudo`, `user_email`, `user_password`, `user_birthday`, `user_dateinscription`, `user_dateupdated`, `user_status`, `user_newsletter`, `user_token`, `user_dateconnection`, `user_fileid`) VALUES
+(1, 'Contact', 'TOSLE', NULL, 'contact.tosle@gmail.com', '$2y$10$ThcGxW4k.caCq4boi3uLa.ioerM812n75GnVdWtQhgI/vFcU3kRDa', NULL, '2018-06-16 21:08:41', '2018-06-16 21:13:24', 2, NULL, 'token_5b257d6906f862.58742387', '2018-06-16 19:13:13', NULL);
 
 -- -----------------------------------------------------
 -- Table `tosle_database`.`tosle_group`
