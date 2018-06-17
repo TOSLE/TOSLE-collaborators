@@ -21,6 +21,15 @@
                         <div class="content-article">
                             <h2><?php echo $value["blog_title"];?></h2>
                             <p class="resume"><?php echo $value["blog_content"];?></p>
+                            <?php if(isset($value["category"])):?>
+                                <ul class="tag-list category-list-homeblog">
+                                    <?php foreach ($value["category"] as $category):?>
+                                        <li class="item tosle">
+                                            <?php echo $category;?>
+                                        </li>
+                                    <?php endforeach;?>
+                                </ul>
+                            <?php endif;?>
                             <p class="info-comment-homeblog"><?php echo $value["blog_numberComment"];?> <i class="material-icons">comment</i></p>
                             <a href="<?php echo $this->slugs["view_blog_article"]."/".$value["blog_url"];?>" class="btn btn-tosle"><?php echo BLOG_BUTTON_READMORE;?></a>
                             <p class="datecreate"><?php echo $value["blog_datecreate"];?></p>

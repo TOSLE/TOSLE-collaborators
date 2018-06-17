@@ -336,4 +336,16 @@ class CoreSql{
         }
     }
 
+    public function delete()
+    {
+        $query = $this->pdo->prepare("
+            DELETE "." 
+            FROM " . $this->table . " 
+            ".$this->whereParameter."
+        ");
+        $query->execute();
+
+        $this->whereParameter = "";
+    }
+
 }
