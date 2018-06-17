@@ -410,9 +410,15 @@ class BlogRepository extends Blog
             $this->save();
 
             $this->getArticleByUrl($this->getUrl());
+
+            if(isset($tmpPostArray["category_select"]) && !empty($tmpPostArray["category_select"]))
+            {
+                $category = new CategoryRepository();
+                $arrayCategory = $category->addCategoryBySelect($tmpPostArray["category_select"], 'blog', $this->getId());
+            }
             if(isset($tmpPostArray["category_input"]) && !empty($tmpPostArray["category_input"])){
                 $category = new CategoryRepository();
-                $arrayCategory = $category->addCategory($tmpPostArray["category_input"], 'blog', $this->getId());
+                $arrayCategory = $category->addCategoryByInput($tmpPostArray["category_input"], 'blog', $this->getId());
                 if(array_key_exists('CODE_ERROR', $arrayCategory)){
                     return $arrayCategory;
                 }

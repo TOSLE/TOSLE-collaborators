@@ -43,7 +43,7 @@
                     <?php if(isset($attributs["label"])):?>
                         <label for="<?php echo $name;?>"><?php echo $attributs["label"];?></label>
                     <?php endif;?>
-                    <select id="<?php echo $name;?>" name="<?php echo $name;?>" <?php echo (isset($attributs["multiple"]))?"multiple":"";?>>
+                    <select <?php echo (isset($attributs["multiple"]))?"multiple='multiple'":"";?> size="8" id="<?php echo $name;?>" name="<?php echo $name;?>[]">
                         <?php foreach($attributs["options"] as $value => $text):?>
                             <option value="<?php echo $value;?>" <?php echo (isset($config['content_value']['selectedOption'][$value]))?"selected":"";?>><?php echo $text;?></option>
                         <?php endforeach;?>
@@ -56,7 +56,7 @@
                     <?php if(isset($attributs["label"])):?>
                         <label for="<?php echo $name;?>"><?php echo $attributs["label"];?></label>
                     <?php endif;?>
-                    <input id="<?php echo $name;?>" type="<?php echo $attributs["type"];?>" placeholder="<?php echo $attributs["placeholder"];?>" name="<?php echo $name;?>" <?php echo (isset($attributs["required"]))?"required='required'":"";?> value="<?php echo (isset($config["content_value"][$name]))?$config["content_value"][$name]:"";?>">
+                    <input id="<?php echo $name;?>" type="<?php echo $attributs["type"];?>" placeholder="<?php echo $attributs["placeholder"];?>" name="<?php echo $name;?>" <?php echo (isset($attributs["required"]) && $attributs["required"]==true )?"required='required'":"";?> value="<?php echo (isset($config["content_value"][$name]))?$config["content_value"][$name]:"";?>">
                     <?php if(isset($attributs["description"])):?>
                         <div class="small-precision-input"><?php echo $attributs["description"];?></div>
                     <?php endif;?>

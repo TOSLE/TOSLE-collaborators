@@ -44,6 +44,9 @@ html {
         color: #8C8C8C; }
         html .blog-article > .content-article > .info-comment-homeblog > i {
           margin-left: 5px; }
+      html .blog-article > .content-article > .category-list-homeblog {
+        position: absolute;
+        bottom: 75px; }
 
 #menu-header-section {
   width: 250px;

@@ -65,13 +65,19 @@ class CategoryRepository extends Category
      * @return array|int Category
      *
      */
-    public function addCategory($_input, $_type, $_targetId)
+    public function addCategoryByInput($_input, $_type, $_targetId)
     {
         if(is_string($_input)){
             $inputExploded = explode(';', $_input);
             switch($_type){
-                case 'blog': $type = 1; break;
-                case 'lesson': $type = 2; break;
+                case 'blog':
+                    $type = 1;
+                    $joinTable = new CategoryBlog();
+                break;
+                case 'lesson':
+                    $type = 2;
+                    $joinTable = new CategoryLesson();
+                break;
                 default: return ['CODE_ERROR' => '1'];
             }
             $arrayTag = [];
@@ -82,16 +88,29 @@ class CategoryRepository extends Category
                 $arrayTag[] = $this->getTag();
                 $this->save();
             }
-            $categoryBlog = new CategoryBlog();
             foreach($arrayTag as $tag){
                 $this->getCategoryByTag($tag);
-                $categoryBlog->setBlogId($_targetId);
-                $categoryBlog->setCategoryId($this->getId());
-                $categoryBlog->save();
+                $joinTable->setBlogId($_targetId);
+                $joinTable->setCategoryId($this->getId());
+                $joinTable->save();
             }
             return 1;
         }
         return ['CODE_ERROR' => '0'];
+    }
+
+    public function addCategoryBySelect($_select, $_type, $_targetId)
+    {
+        switch ($_type){
+            case 'blog': $joinTable = new CategoryBlog();break;
+            default: return 0;
+        }
+        $joinTable->deleteJoin('blogid', $_targetId);
+        foreach($_select as $id){
+            $joinTable->setBlogId($_targetId);
+            $joinTable->setCategoryId($id);
+            $joinTable->save();
+        }
     }
 
     /**

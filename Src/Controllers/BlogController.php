@@ -18,6 +18,7 @@ class BlogController
         $View = new View("default", "Blog/home");
         $Blog = new BlogRepository();
         $Comment = new CommentRepository();
+        $Category = new CategoryRepository();
         /**
          * Default var
          */
@@ -51,6 +52,7 @@ class BlogController
             $value["blog_id"] = $content->getId();
             $value["blog_url"] = $content->getUrl();
             $value["blog_numberComment"] = $Comment->getAll("number_blog", $content->getId());
+            $value["category"] = $Category->getCategoryByIdentifier('blog', $content->getId());
             $data[] = $value;
         }
         $View->setData("pagination", $pagination);
@@ -77,12 +79,14 @@ class BlogController
                 ];
                 $commentaires = null;
                 $Comment = new CommentRepository();
+                $Category = new CategoryRepository();
                 $comments = $Comment->getAll("blog", $Blog->getId());
                 foreach($comments as $comment){
                     $commentaires[] = [
                         "id" => $comment->getId(),
                         "content" => $comment->getContent(),
-                        "tag" => $comment->getTag()
+                        "tag" => $comment->getTag(),
+                        "category" => $Category->getCategoryByIdentifier('blog', $comment->getId())
                     ];
                 }
 

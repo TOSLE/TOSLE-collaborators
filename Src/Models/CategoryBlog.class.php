@@ -46,4 +46,19 @@ class CategoryBlog extends CoreSql
     {
         $this->blogid = $blogid;
     }
+
+    /**
+     * @param $column
+     * @param $value
+     */
+    public function deleteJoin($column, $value)
+    {
+        $parameter = [
+            'LIKE' => [
+                $column => $value
+            ]
+        ];
+        $this->setWhereParameter($parameter);
+        $this->delete();
+    }
 }
