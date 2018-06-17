@@ -46,7 +46,8 @@ html {
           margin-left: 5px; }
       html .blog-article > .content-article > .category-list-homeblog {
         position: absolute;
-        bottom: 75px; }
+        bottom: 75px;
+        max-width: 95%; }
 
 #menu-header-section {
   width: 250px;
