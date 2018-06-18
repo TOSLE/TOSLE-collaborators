@@ -42,6 +42,7 @@ class BlogController
         $array = $Blog->getAllArticleByStatus(1, $numberBlog, $offset);
         $data = [];
         foreach($array as $content){
+            $File = new FileRepository();
             $date = new DateTime($content->getDatecreate());
             $value["blog_datecreate"] = $date->format("l jS \of F Y H:i");
             $value["blog_title"] = $content->getTitle();
@@ -53,6 +54,7 @@ class BlogController
             $value["blog_url"] = $content->getUrl();
             $value["blog_numberComment"] = $Comment->getAll("number_blog", $content->getId());
             $value["category"] = $Category->getCategoryByIdentifier('blog', $content->getId());
+            $value["image"] = $File->getFileById($content->getFileid());
             $data[] = $value;
         }
         $View->setData("pagination", $pagination);
