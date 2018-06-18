@@ -69,6 +69,19 @@ class Comment extends CoreSql {
 
     public function configFormAdd()
     {
+        $slugs = Access::getSlugsById();
+        return [
+            "config"=> [
+                "method"=>"post",
+                "action"=>"", "submit"=>"Envoyer votre commentaire",
+            ],
+            "textarea" => [
+                "label" => "Nouveau commentaire",
+                "name" => "textarea_articleImage",
+                "description" => "Laissez parler votre imagination",
+                "placeholder" => "Soyez sûr de ce que vous voulez publier."
+            ],
+        ];
     }
 
 }
