@@ -325,7 +325,7 @@ class BlogRepository extends Blog
         $contentValue = str_replace("<p>", "", $contentValue);
         $contentValue = str_replace("</p>", " ", $contentValue);
 
-        return (strlen($contentValue)>200)?substr($contentValue, 0, 200):$contentValue;
+        return (strlen($contentValue)>200)?substr($contentValue, 0, 200).'...':$contentValue;
     }
 
     /**
