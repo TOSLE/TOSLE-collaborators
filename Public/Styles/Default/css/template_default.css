@@ -20,34 +20,39 @@ html {
     height: 300px; }
     html .blog-article > .content-article {
       background-color: #FFFFFF;
-      padding: 15px 15px;
-      position: relative;
       height: 100%;
-      box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.25); }
-      html .blog-article > .content-article > h2 {
-        text-align: center; }
-      html .blog-article > .content-article > .resume {
-        margin: 15px 0;
-        text-align: center; }
-      html .blog-article > .content-article > a {
-        position: absolute;
-        bottom: 15px;
-        right: 15px; }
-      html .blog-article > .content-article > .datecreate {
-        position: absolute;
-        bottom: 15px;
-        font-size: 0.8em; }
-      html .blog-article > .content-article > .info-comment-homeblog {
-        position: absolute;
-        bottom: 45px;
-        display: flex;
-        color: #8C8C8C; }
-        html .blog-article > .content-article > .info-comment-homeblog > i {
-          margin-left: 5px; }
-      html .blog-article > .content-article > .category-list-homeblog {
-        position: absolute;
-        bottom: 75px;
-        max-width: 95%; }
+      box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.25);
+      background-size: cover; }
+      html .blog-article > .content-article > .fade-background-article {
+        position: relative;
+        padding: 15px 15px;
+        height: 100%;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.8); }
+        html .blog-article > .content-article > .fade-background-article > h2 {
+          text-align: center; }
+        html .blog-article > .content-article > .fade-background-article > .resume {
+          margin: 15px 0;
+          text-align: center; }
+        html .blog-article > .content-article > .fade-background-article > a {
+          position: absolute;
+          bottom: 15px;
+          right: 15px; }
+        html .blog-article > .content-article > .fade-background-article > .datecreate {
+          position: absolute;
+          bottom: 15px;
+          font-size: 0.8em; }
+        html .blog-article > .content-article > .fade-background-article > .info-comment-homeblog {
+          position: absolute;
+          bottom: 45px;
+          display: flex;
+          color: #8C8C8C; }
+          html .blog-article > .content-article > .fade-background-article > .info-comment-homeblog > i {
+            margin-left: 5px; }
+        html .blog-article > .content-article > .fade-background-article > .category-list-homeblog {
+          position: absolute;
+          bottom: 75px;
+          max-width: 95%; }
 
 #menu-header-section {
   width: 250px;

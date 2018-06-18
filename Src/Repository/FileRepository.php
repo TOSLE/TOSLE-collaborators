@@ -145,6 +145,6 @@ class FileRepository extends File
 
         $this->setWhereParameter($parameter);
         $this->getOneData($target);
-        return $this->getId();
+        return $this;
     }
 }

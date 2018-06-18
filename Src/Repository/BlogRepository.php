@@ -111,7 +111,8 @@ class BlogRepository extends Blog
                 "status",
                 "type",
                 "content",
-                "url"
+                "url",
+                "fileid"
             ];
             $this->setOrderByParameter(["id" => "DESC"]);
             if(isset($max)) {
