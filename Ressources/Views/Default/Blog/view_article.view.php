@@ -2,7 +2,7 @@
     <div class="row">
         <section class="title-page col-12">
             <div class="marg-container">
-                <h2><a class="btn-sm btn-dark" href="<?php echo $this->slugs["blog-homepage"] ?>">Blog</a><span
+                <h2><a class="btn-sm btn-dark" href="<?php echo $this->slugs["bloghome"]; ?>">Blog</a><span
                             class="additional-message-title"> / <?php echo $article_content['title']; ?></span></h2>
             </div>
         </section>
