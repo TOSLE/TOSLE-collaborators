@@ -13,10 +13,11 @@ class Lesson extends CoreSql {
     protected $description;
     protected $datecreate;
     protected $status;
+    protected $url;
 
     public function __construct()
     {
-        //parent::__construct();
+        parent::__construct();
     }
 
     /**
@@ -99,6 +100,22 @@ class Lesson extends CoreSql {
         $this->status = $status;
     }
 
+    /**
+     * @param string $url
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
     public function configFormAddLesson()
     {
         $slugs = Access::getSlugsById();
@@ -107,6 +124,7 @@ class Lesson extends CoreSql {
             "config"=> [
                 "method"=>"post",
                 "action"=>"",
+                "save"=>"Sauvegarder en brouillon",
                 "submit"=>"Enregistrer le nouveau cours",
                 "form_file"=>false,
             ],
@@ -117,14 +135,6 @@ class Lesson extends CoreSql {
                     "required"=>true,
                     "maxString"=>100,
                     "label"=>"Renseignez le titre de votre cours"
-                ],
-                "image"=>[
-                    "type"=>"file",
-                    "required"=>true,
-                    "label"=>"Select your image",
-                    "format"=>"PNG JPG JPEG",
-                    "description"=>"Authorised format (png, jpg, jpeg)",
-                    "multiple"=>false
                 ]
             ],
             "textarea" => [

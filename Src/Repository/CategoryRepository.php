@@ -117,14 +117,25 @@ class CategoryRepository extends Category
     public function addCategoryBySelect($_select, $_type, $_targetId)
     {
         switch ($_type){
-            case 'blog': $joinTable = new CategoryBlog();break;
+            case 'blog':
+                $CategoryBlog = new CategoryBlog();
+                $CategoryBlog->deleteJoin('blogid', $_targetId);
+                foreach($_select as $id){
+                    $CategoryBlog->setBlogId($_targetId);
+                    $CategoryBlog->setCategoryId($id);
+                    $CategoryBlog->save();
+                }
+            break;
+            case 'lesson':
+                $CategoryLesson = new CategoryLesson();
+                $CategoryLesson->deleteJoin('lessonid', $_targetId);
+                foreach($_select as $id){
+                    $CategoryLesson->setLessonId($_targetId);
+                    $CategoryLesson->setCategoryId($id);
+                    $CategoryLesson->save();
+                }
+            break;
             default: return 0;
-        }
-        $joinTable->deleteJoin('blogid', $_targetId);
-        foreach($_select as $id){
-            $joinTable->setBlogId($_targetId);
-            $joinTable->setCategoryId($id);
-            $joinTable->save();
         }
     }
 
