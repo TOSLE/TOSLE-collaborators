@@ -26,7 +26,7 @@ class DashboardController
      */
     function lessonsAction($params)
     {
-        $View = new View("dashboard", "lesson");
+        $View = new View("dashboard", "Dashboard/lesson");
         $View->setData("PageName", NAV_DASHBOARD . " " . NAV_DASHBOARD_LESSON);
     }
 

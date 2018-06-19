@@ -28,7 +28,7 @@
 
                                                         </a>
                                                     </li>
-                                                    <li><a href="<?php echo DIRNAME . substr($language, 0, 2) . "/dashboard/"; ?>">
+                                                    <li><a href="<?php echo $this->slugs["dashboard_lesson"]?>">
                                                             <p>Lessons</p>
                                                             <i class="material-icons blue">keyboard_arrow_right</i>
                                                         </a>
