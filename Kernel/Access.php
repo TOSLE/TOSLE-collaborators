@@ -97,7 +97,9 @@ class Access
     private $backOffice = [
         "blog/status" => 2,
         "blog/add" => 2,
-        "blog/edit" => 2
+        "blog/edit" => 2,
+        "lesson/add" => 2,
+        "lesson/edit" => 2,
     ];
 
     /**

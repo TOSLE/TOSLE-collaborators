@@ -12,6 +12,7 @@
             <?php $this->addModal("dashboard_bloc", $blocGeneral);?>
             <?php $this->addModal("dashboard_bloc", $statsBlog);?>
             <?php $this->addModal("dashboard_bloc", $latestBlogArticle);?>
+    </div>
 </section>
 
 <div id="<?php echo $idModalViewAllPosts;?>" class="fade-background" data-type="parent-modal">
