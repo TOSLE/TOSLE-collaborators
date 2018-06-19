@@ -7,3 +7,8 @@
         </section>
     </div>
 </div>
+<section id="right-column" class="container">
+    <div class="row">
+        <?php $this->addModal("dashboard_bloc", $modalAddOption);?>
+    </div>
+</section>

@@ -8,5 +8,11 @@
     </div>
 </section>
 <section>
-    <?php $this->addModal("dashboard_form", $configForm, $errors); ?>
+    <div class="row">
+        <div class="col-12">
+            <div>
+                <?php $this->addModal("dashboard_form", $configForm, $errors); ?>
+            </div>
+        </div>
+    </div>
 </section>
