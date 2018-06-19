@@ -53,4 +53,9 @@ class LessonRepository extends Lesson
         ]);
         return $BlocGeneral->getArrayData();
     }
+
+    public function addLesson($_file, $_post)
+    {
+
+    }
 }

@@ -160,7 +160,8 @@ class Blog extends CoreSql {
             "config"=> [
                 "method"=>"post",
                 "action"=>"", "submit"=>"Publier l'article",
-                "save"=>"Sauvegarder sans publier"
+                "save"=>"Sauvegarder sans publier",
+                "form_file"=>true,
             ],
             "input"=> [
                 "title"=>[
@@ -198,7 +199,8 @@ class Blog extends CoreSql {
             "config"=> [
                 "method"=>"post",
                 "action"=>"", "submit"=>"Publier l'article",
-                "save"=>"Sauvegarder sans publier"
+                "save"=>"Sauvegarder sans publier",
+                "form_file"=>true,
             ],
             "input"=> [
                 "title"=>[
@@ -236,7 +238,8 @@ class Blog extends CoreSql {
             "config"=> [
                 "method"=>"post",
                 "action"=>"", "submit"=>"Publier l'article",
-                "save"=>"Sauvegarder sans publier"
+                "save"=>"Sauvegarder sans publier",
+                "form_file"=>true,
             ],
             "input"=> [
                 "title"=>[
