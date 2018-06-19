@@ -19,7 +19,7 @@ class UserController
         $form = $User->configFormConnect();
         $errors = [];
         if(!empty($params["POST"])) {
-            $errors = Validate::checkForm($form, $params["POST"]);
+            $errors = Form::checkForm($form, $params["POST"]);
             if(empty($errors)){
                 if(isset($params["POST"]["email"]) && isset($params["POST"]["pwd"])){
                     if($User->verrifyUserLogin($params["POST"]["pwd"], $params["POST"]["email"])){
@@ -53,7 +53,7 @@ class UserController
         $form = $user->configFormAdd();
         $errors = [];
         if(!empty($params["POST"])) {
-            $errors = Validate::checkForm($form, $params["POST"]);
+            $errors = Form::checkForm($form, $params["POST"]);
             if (empty($errors)) {
                 $user->setFirstName($params["POST"]["firstname"]);
                 $user->setLastName($params["POST"]["lastname"]);

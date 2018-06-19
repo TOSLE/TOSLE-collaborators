@@ -22,6 +22,17 @@
             <input id="captcha" type="text" name="captcha" placeholder="Veuillez saisir le captcha présent ci-dessus" required='required'>
             <div class="small-precision-input">Vous pouvez recharger la page pour générer un nouveau captcha</div>
         <?php endif;?>
+        <?php if(isset($config["textarea"])):?>
+            <?php if(isset($config["textarea"]["label"])):?>
+                <label for="textArea_exampleBase"><?php echo $config["textarea"]["label"];?></label>
+            <?php endif;?>
+            <?php if(isset($config["textarea"]["name"])):?>
+                <textarea id="<?php echo $config["textarea"]["name"];?>" name="<?php echo $config["textarea"]["name"];?>" class="textarea-col-12" placeholder="<?php echo (isset($config["textarea"]["placeholder"])?$config["textarea"]["placeholder"]:"");?>"><?php if(isset($config["content_value"]["content"])):?><?php echo $config["content_value"]["content"];?><?php endif;?></textarea>
+            <?php endif;?>
+            <?php if(isset($config["textarea"]["description"])):?>
+                <div class="small-precision-input"><?php echo $config["textarea"]["description"];?></div>
+            <?php endif;?>
+        <?php endif;?>
         <input type="submit" class="btn btn-tosle" value="<?php echo $config["config"]["submit"];?>">
     </div>
 </form>
