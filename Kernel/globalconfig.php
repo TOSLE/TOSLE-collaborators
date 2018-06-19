@@ -1,11 +1,14 @@
 <?php
-    define("DBUSER","");
-    define("DBPWD","");
-    define("DBHOST","");
-    define("DBNAME","");
-    define("DBPORT","");
-    define("GUSER", "");
-    define("GPWD", "");
+/**
+ * ENV VAR
+ */
+    $modeDev = true;
+
+    if($modeDev)
+        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN')
+            define("SYSTEM", "WINDOWS");
+        else
+            define("SYSTEM", "LINUX");
 
     $scriptDS = (DIRECTORY_SEPARATOR == "\\")?"/":DIRECTORY_SEPARATOR;
     define("DS", $scriptDS);
