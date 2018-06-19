@@ -74,6 +74,12 @@ class Access
             "action" => "blog",
             "security" => 2
         ],
+        "dashboard_lesson" => [ // Dashboard blog homepage
+            "slug" => "dashboard-lesson",
+            "controller" => "dashboard",
+            "action" => "lessons",
+            "security" => 2
+        ],
         "add_user" => [ // change status blog
             "slug" => "add-user",
             "controller" => "user",
