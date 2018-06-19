@@ -98,8 +98,8 @@ class Access
         "blog/status" => 2,
         "blog/add" => 2,
         "blog/edit" => 2,
-        "lesson/add" => 2,
-        "lesson/edit" => 2,
+        "class/add" => 2,
+        "class/edit" => 2,
     ];
 
     /**

@@ -99,9 +99,39 @@ class Lesson extends CoreSql {
         $this->status = $status;
     }
 
-    public function configFormAdd()
+    public function configFormAddLesson()
     {
-
+        $slugs = Access::getSlugsById();
+        return [
+            "config"=> [
+                "method"=>"post",
+                "action"=>"", "submit"=>"Enregistrer le nouveau cours"
+            ],
+            "input"=> [
+                "title"=>[
+                    "type"=>"text",
+                    "placeholder"=>"Intitulé du cours",
+                    "required"=>true,
+                    "maxString"=>100,
+                    "label"=>"Renseignez le titre de votre cours"
+                ],
+                "image"=>[
+                    "type"=>"file",
+                    "required"=>true,
+                    "label"=>"Select your image",
+                    "format"=>"PNG JPG JPEG",
+                    "description"=>"Authorised format (png, jpg, jpeg)",
+                    "multiple"=>false
+                ]
+            ],
+            "textarea" => [
+                "label" => "Lesson description",
+                "name" => "textarea_lesson",
+                "description" => "Un maximum de 500 caractères",
+                "placeholder" => "Maximum 500 caractères"
+            ],
+            "exit" => $slugs["dashboard_lesson"]
+        ];
     }
 
 }

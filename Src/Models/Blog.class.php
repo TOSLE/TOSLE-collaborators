@@ -193,6 +193,7 @@ class Blog extends CoreSql {
     public function configFormAddArticleImage()
     {
         $slugs = Access::getSlugsById();
+        $category = new CategoryRepository;
         return [
             "config"=> [
                 "method"=>"post",
@@ -222,6 +223,7 @@ class Blog extends CoreSql {
                 "description" => "Un maximum de 500 caractères",
                 "placeholder" => "Maximum 500 caractères"
             ],
+            'select' => $category->configFormCategory(1),
             "exit" => $slugs["dashboard_blog"]
         ];
     }
@@ -229,6 +231,7 @@ class Blog extends CoreSql {
     public function configFormAddArticleVideo()
     {
         $slugs = Access::getSlugsById();
+        $category = new CategoryRepository;
         return [
             "config"=> [
                 "method"=>"post",
@@ -251,6 +254,7 @@ class Blog extends CoreSql {
                     "description" => "YouTube is only player supported by our Framework",
                 ]
             ],
+            'select' => $category->configFormCategory(1),
             "exit" => $slugs["dashboard_blog"]
         ];
     }
