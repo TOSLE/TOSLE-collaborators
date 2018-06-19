@@ -37,6 +37,17 @@ html {
         position: absolute;
         bottom: 15px;
         font-size: 0.8em; }
+      html .blog-article > .content-article > .info-comment-homeblog {
+        position: absolute;
+        bottom: 45px;
+        display: flex;
+        color: #8C8C8C; }
+        html .blog-article > .content-article > .info-comment-homeblog > i {
+          margin-left: 5px; }
+      html .blog-article > .content-article > .category-list-homeblog {
+        position: absolute;
+        bottom: 75px;
+        max-width: 95%; }
 
 #menu-header-section {
   width: 250px;

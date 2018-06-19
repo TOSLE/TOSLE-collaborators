@@ -6,7 +6,7 @@
  * Time: 11:17
  */
 
-class Validate
+class Form
 {
     public static function checkForm($config, $data)
     {
@@ -77,5 +77,36 @@ class Validate
     public static function checkNumber($number)
     {
         return is_numeric(trim($number));
+    }
+
+    public static function checkFiles($_files)
+    {
+        $errorsMsg = [];
+        $fileNotFound = 0;
+        foreach ($_files as $files){
+            foreach($files as $type => $arrayValues){
+                if($type == "error")
+                    foreach ($arrayValues as $key => $value){
+                        if($value > 0 && $value == UPLOAD_ERR_OK)
+                            $errorsMsg["image_error"] = "Failed to upload image";
+                        if ($value == 4) $fileNotFound = 1;
+                    }
+                if($type == "size")
+                    foreach ($arrayValues as $key => $value){
+                        if($value == 0 && $files['error'][$key] == UPLOAD_ERR_OK)
+                            $errorsMsg["image_size"] = "Failed to upload image";
+                    }
+            }
+        }
+        if(!empty($errorsMsg))
+            return $errorsMsg;
+        else
+            if($fileNotFound)return 1;
+            else return 0;
+    }
+
+    public static function setSelectInput($config, $configSelect)
+    {
+
     }
 }

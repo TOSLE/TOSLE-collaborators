@@ -10,10 +10,11 @@ class Comment extends CoreSql {
 
     protected $id;
     protected $content;
+    protected $tag;
 
     public function __construct()
     {
-        //parent::__construct();
+        parent::__construct();
     }
 
     /**
@@ -47,6 +48,24 @@ class Comment extends CoreSql {
     {
         $this->content = $content;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getTag()
+    {
+        return $this->tag;
+    }
+
+    /**
+     *
+     */
+    public function setTag()
+    {
+        $this->tag = uniqid();
+    }
+
+
 
     public function configFormAdd()
     {

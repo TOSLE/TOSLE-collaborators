@@ -13,10 +13,11 @@ class File extends CoreSql {
     protected $path;
     protected $type;
     protected $comment;
+    protected $tag;
 
     public function __construct()
     {
-        //parent::__construct();
+        parent::__construct();
     }
 
     /**
@@ -97,6 +98,22 @@ class File extends CoreSql {
     public function setComment($comment)
     {
         $this->comment = $comment;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTag()
+    {
+        return $this->tag;
+    }
+
+    /**
+     *
+     */
+    public function setTag()
+    {
+        $this->tag = uniqid();
     }
 
 

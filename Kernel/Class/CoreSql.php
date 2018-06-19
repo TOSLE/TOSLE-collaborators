@@ -9,6 +9,7 @@ class CoreSql{
     private $whereParameter;
     private $limitParameter;
     private $orderByParameter;
+    private $leftJoin = "";
 
     /**
      * CoreSql constructor.
@@ -24,7 +25,6 @@ class CoreSql{
         } catch(Exception $e){
             die("Erreur SQL".$e->getMessage()."\n");
         }
-
         $this->table = "tosle_".strtolower(str_ireplace("Repository","",get_called_class()));
         $this->columnBase = strtolower(str_ireplace("Repository","",get_called_class()));
     }
@@ -75,11 +75,11 @@ class CoreSql{
                     unset($this->columns[$key]);
                 }
             }
-
             $query = $this->pdo->prepare("INSERT INTO ".$this->table." ("
                 . implode(',', $columnName) .") VALUES (:"
                 . implode(',:', array_keys($this->columns)) .
                 ")");
+
             $query->execute($this->columns);
         }
     }
@@ -150,7 +150,12 @@ class CoreSql{
         if(!empty($tmpString)){
             $this->whereParameter = "";
         }
-        $this->whereParameter = "WHERE ".$tmpString;
+
+        if(empty($this->whereParameter)){
+            $this->whereParameter = "WHERE ".$tmpString;
+        } else {
+            $this->whereParameter .= ' AND '.$tmpString;
+        }
     }
 
     function setLimitParameter($limit, $offset = 0)
@@ -194,17 +199,18 @@ class CoreSql{
         $query = $this->pdo->prepare("
             SELECT " . implode(',', $target) . " 
             FROM " . $this->table . " 
+            ".$this->leftJoin."
             ".$this->whereParameter."
             ".$this->orderByParameter."
             ".$this->limitParameter."
         ");
-
         $query->execute();
 
         // On vide le parameter WHERE pour éviter tout problème sur requête qui viendrait après et où on ne veut pas de parametre
         $this->whereParameter = "";
         $this->orderByParameter = "";
         $this->limitParameter = "";
+        $this->leftJoin = "";
 
         $queryResponse = $query->fetchAll();
 
@@ -233,7 +239,8 @@ class CoreSql{
 
         $query = $this->pdo->prepare("
             SELECT " . implode(',', $target) . " 
-            FROM " . $this->table . " 
+            FROM " . $this->table . "  
+            ".$this->leftJoin."
             ".$this->whereParameter."
             ".$this->orderByParameter."
             ".$this->limitParameter."
@@ -244,6 +251,7 @@ class CoreSql{
         $this->whereParameter = "";
         $this->orderByParameter = "";
         $this->limitParameter = "";
+        $this->leftJoin = "";
         if($resultQuery) {
             foreach ($resultQuery as $key => $value) {
                 if (!is_numeric($key)) {
@@ -266,7 +274,8 @@ class CoreSql{
 
         $query = $this->pdo->prepare("
             SELECT count(" . implode(',', $target) . ") 
-            FROM " . $this->table . " 
+            FROM " . $this->table . "   
+            ".$this->leftJoin."
             ".$this->whereParameter."
             ".$this->orderByParameter."
             ".$this->limitParameter."
@@ -278,17 +287,65 @@ class CoreSql{
         $this->whereParameter = "";
         $this->orderByParameter = "";
         $this->limitParameter = "";
+        $this->leftJoin = "";
 
         return $query->fetch();
     }
 
-    public function setJunctionData($parameter)
+    /**
+     * @param array $joinParameter
+     * @param array $whereParameter
+     * $joinParameter = [
+     *      "table_to_join" => [
+     *          "columnName_in_origin_table"
+     *      ]
+     * ];
+     * $whereParameter = [
+     *      "table_to_join" => [
+     *          "columnName_in_target_table" => $value
+     *      ]
+     * ];
+     */
+    public function setLeftJoin($joinParameter, $whereParameter)
     {
-        /**
-         * Le parameter marche par pairet possède les correspondances
-         * Le getData aura un test à faire pour savoir si la fonction a été appelé
-         * Et comme ça la même fonction pour une requete différente :)
-         */
+        $arrayTmp = [];
+        foreach($joinParameter as $table => $arrayColumn){
+            $tableJoin = "tosle_".$table;
+            foreach($arrayColumn as $columnName){
+                $arrayExploded = explode('_', $columnName);
+                $arrayTmp[] = $tableJoin.".".$table."_".implode('',$arrayExploded)." = ".$this->table.".".$columnName;
+            }
+            $this->leftJoin .= "LEFT JOIN ".$tableJoin." ON ".implode('AND', $arrayTmp);
+        }
+        $arrayTmp = [];
+        if(isset($whereParameter)){
+            foreach($whereParameter as $table => $arrayColumn){
+                foreach($arrayColumn as $columnName => $targetValue){
+                    $arrayExploded = explode('_', $columnName);
+                    $arrayTmp[] = $tableJoin.".".$table."_".implode('', $arrayExploded)." = ".$targetValue;
+                }
+                $tmpString = implode('AND', $arrayTmp);
+            }
+        }
+        if(isset($tmpString)){
+            if(empty($this->whereParameter)){
+                $this->whereParameter = "WHERE ".$tmpString;
+            } else {
+                $this->whereParameter .= ' AND '.$tmpString;
+            }
+        }
+    }
+
+    public function delete()
+    {
+        $query = $this->pdo->prepare("
+            DELETE "." 
+            FROM " . $this->table . " 
+            ".$this->whereParameter."
+        ");
+        $query->execute();
+
+        $this->whereParameter = "";
     }
 
 }
