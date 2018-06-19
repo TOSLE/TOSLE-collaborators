@@ -20,6 +20,12 @@ class Access
             "action" => "index",
             "security" => false
         ],
+        "classhome" => [ // Blog  homepage
+            "slug" => "class-homepage",
+            "controller" => "class",
+            "action" => "index",
+            "security" => false
+        ],
         "chathome" => [ // Chat  homepage
             "slug" => "chat",
             "controller" => "chat",
