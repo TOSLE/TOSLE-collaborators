@@ -99,7 +99,7 @@ class ClassController
             if((isset($params["POST"]) && !empty($params["POST"]))){
                 $resultAdd = $Lesson->addLesson($params["POST"]);
                 if($resultAdd === 1){
-                    header('Location:'.$routes['dashboard_blog']);
+                    header('Location:'.$routes['dashboard_lesson']);
                 } else {
                     $View->setData("errors", $resultAdd);
                 }
