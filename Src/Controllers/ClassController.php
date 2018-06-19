@@ -15,7 +15,49 @@ class ClassController
      */
     function indexAction($params)
     {
-        $View = new View("default");
+       // $View = new View("default");
+        $View = new View("default", "Class/home");
+        $Class = new Lesson();
+        $errors = [];
+        if(!empty($params["GET"])){
+            echo "Il y a une recherche";
+        } else {
+            $target = [
+                "title",
+                "description",
+                "datecreate",
+                "id"
+            ];
+            $parameter = [
+                "LIKE" => [
+                    "status" => 1
+                ]
+            ];
+
+            $Class->setWhereParameter($parameter, null);
+            $Class->setOrderByParameter(["id"=>"DESC"]);
+            $Class->setLimitParameter(5, 0);
+            $array = $Class->getData($target);
+            $data = [];
+
+            foreach($array as $content){
+                $date = new DateTime($content->getDatecreate());
+                $value["lesson_datecreate"] = $date->format("l jS \of F Y H:i");
+                $value["lesson_title"] = $content->getTitle();
+
+                $contentValue = strip_tags($content->getContent(), "<p>");
+                $contentValue = str_replace("&nbsp;", "", $contentValue);
+                $contentValue = str_replace("<p>", "", $contentValue);
+                $contentValue = str_replace("</p>", " ", $contentValue);
+                $value["lesson_description"] = (strlen($contentValue)>200)?substr($contentValue, 0, 200):$contentValue;
+                $value["lesson_status"] = $content->getStatus();
+                $value["lesson_id"] = $content->getId();
+                $data[] = $value;
+            }
+
+            $View->setData("data", $data);
+            $View->setData("col", "6");
+        }
     }
 
     /**
