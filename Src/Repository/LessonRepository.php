@@ -9,8 +9,10 @@
 class LessonRepository extends Lesson
 {
     /**
+     * @param int $_colsize
      * @return array object
      * Permet de récupérer la configuration d'une modal pour les ajouts concernant les lessons
+     * Le paramètre permet de définir la taille du bloc
      */
     public function getModalAdd($_colsize = 6)
     {
@@ -34,7 +36,7 @@ class LessonRepository extends Lesson
                 1 => "Créer un nouveau cours",
                 "button_action" => [
                     "type" => "href",
-                    "target" => $routes["lesson/add"]."/lesson",
+                    "target" => $routes["class/add"]."/lesson",
                     "color" => "tosle",
                     "text" => "New post"
                 ]
@@ -43,7 +45,7 @@ class LessonRepository extends Lesson
                 1 => "Créer un chapitre",
                 "button_action" => [
                     "type" => "href",
-                    "target" => $routes["blog/add"]."/chapter",
+                    "target" => $routes["class/add"]."/chapter",
                     "color" => "tosle",
                     "text" => "New post"
                 ]

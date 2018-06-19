@@ -79,4 +79,32 @@ class ClassController
     {
         $View = new View("default");
     }
+
+    /**
+     * @Route("/en/class/{params}")
+     * @param array $params
+     * View filtered lessons action
+     */
+    function addAction($params)
+    {
+        $routes = Access::getSlugsById();
+        /**
+         * On regarde si nous avons bien un paramètre dans une URL
+         */
+        if(isset($params["URI"][0])){
+            $getTypeNewArticle = $params["URI"][0];
+            $View = new View("dashboard", "Dashboard/add_lesson");
+            $Lesson = new LessonRepository();
+            $View->setData("errors", "");
+            if((isset($_FILES) && !empty($_FILES)) || (isset($params["POST"]) && !empty($params["POST"]))){
+            }
+
+            if($getTypeNewArticle == "lesson"){
+            } else {
+                header('Location:'.$routes['dashboard_lesson'].'/error');
+            }
+        } else {
+            header('Location:'.$routes['dashboard_lesson']);
+        }
+    }
 }
