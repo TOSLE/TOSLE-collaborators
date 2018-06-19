@@ -16,7 +16,7 @@
   *     1. Set PHP ini settings using ini_set()
   *     2. Custom session save handler with session_set_save_handler()
   *     3. Any custom integration code. If you use any global variables
-  *        here, they can be accessed in conf/config.php via $GLOBALS
+  *        here, they can be accessed in conf/parameter.php via $GLOBALS
   *        array. It's recommended to use constants instead.
   */
 
