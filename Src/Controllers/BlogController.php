@@ -34,6 +34,12 @@ class BlogController
                     $colSize = $params["GET"]["colsize"];
                 }
             }
+            if(isset($params["GET"]["number"])) {
+                if ($params["GET"]["number"] >= 1 || $params["GET"]["number"] <= 12){
+                    $numberBlog = $params["GET"]["number"];
+                    $pagination = $Blog->getPagination($numberBlog, $params["GET"]);
+                }
+            }
             if(isset($params['GET']['page']) && array_key_exists($params['GET']['page'], $pagination)){
                 $page = $params['GET']['page'];
                 $offset = $numberBlog * $page - $numberBlog;
