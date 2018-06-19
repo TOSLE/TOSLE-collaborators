@@ -11,7 +11,7 @@
     <div class="row">
         <div class="col-12">
             <div>
-                En attente
+                <?php $this->addModal("dashboard_form", $configForm, $errors); ?>
             </div>
         </div>
     </div>

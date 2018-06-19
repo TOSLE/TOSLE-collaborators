@@ -102,10 +102,13 @@ class Lesson extends CoreSql {
     public function configFormAddLesson()
     {
         $slugs = Access::getSlugsById();
+        $category = new CategoryRepository;
         return [
             "config"=> [
                 "method"=>"post",
-                "action"=>"", "submit"=>"Enregistrer le nouveau cours"
+                "action"=>"",
+                "submit"=>"Enregistrer le nouveau cours",
+                "form_file"=>false,
             ],
             "input"=> [
                 "title"=>[
@@ -130,6 +133,7 @@ class Lesson extends CoreSql {
                 "description" => "Un maximum de 500 caractères",
                 "placeholder" => "Maximum 500 caractères"
             ],
+            'select' => $category->configFormCategory(2),
             "exit" => $slugs["dashboard_lesson"]
         ];
     }

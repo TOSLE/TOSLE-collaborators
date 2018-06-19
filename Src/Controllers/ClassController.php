@@ -92,14 +92,21 @@ class ClassController
          * On regarde si nous avons bien un paramètre dans une URL
          */
         if(isset($params["URI"][0])){
-            $getTypeNewArticle = $params["URI"][0];
+            $getTypeURI = $params["URI"][0];
             $View = new View("dashboard", "Dashboard/add_lesson");
             $Lesson = new LessonRepository();
             $View->setData("errors", "");
-            if((isset($_FILES) && !empty($_FILES)) || (isset($params["POST"]) && !empty($params["POST"]))){
+            if((isset($params["POST"]) && !empty($params["POST"]))){
+                $resultAdd = $Lesson->addLesson($params["POST"]);
+                if($resultAdd === 1){
+                    header('Location:'.$routes['dashboard_blog']);
+                } else {
+                    $View->setData("errors", $resultAdd);
+                }
             }
 
-            if($getTypeNewArticle == "lesson"){
+            if($getTypeURI == "lesson"){
+                $View->setData("configForm", $Lesson->configFormAddLesson());
             } else {
                 header('Location:'.$routes['dashboard_lesson'].'/error');
             }

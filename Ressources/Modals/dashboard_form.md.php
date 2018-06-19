@@ -18,7 +18,7 @@
     <?php endif;?>
 <?php endif;?>
 
-<form method="<?php echo $config['config']['method'];?>" action="<?php echo $config['config']['action'];?>" enctype="multipart/form-data">
+<form method="<?php echo $config['config']['method'];?>" action="<?php echo $config['config']['action'];?>" <?php echo (isset($config['config']['form_file']) && $config['config']['form_file'])?"enctype='multipart/form-data'":"";?>>
     <div class="form-group-base">
         <?php foreach ($config["input"] as $name => $attributs):?>
             <?php if(isset($attributs["label"])):?>

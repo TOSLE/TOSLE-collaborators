@@ -62,6 +62,8 @@ class CategoryRepository extends Category
 
     /**
      * @param string $_input
+     * @param string $_type
+     * @param int $_targetId
      * @return array|int Category
      *
      */
@@ -88,11 +90,24 @@ class CategoryRepository extends Category
                 $arrayTag[] = $this->getTag();
                 $this->save();
             }
-            foreach($arrayTag as $tag){
-                $this->getCategoryByTag($tag);
-                $joinTable->setBlogId($_targetId);
-                $joinTable->setCategoryId($this->getId());
-                $joinTable->save();
+            switch($_type){
+                case 'blog':
+                    foreach($arrayTag as $tag){
+                        $this->getCategoryByTag($tag);
+                        $joinTable->setBlogId($_targetId);
+                        $joinTable->setCategoryId($this->getId());
+                        $joinTable->save();
+                    }
+                    break;
+                case 'lesson':
+                    foreach($arrayTag as $tag){
+                        $this->getCategoryByTag($tag);
+                        $joinTable->setLessonId($_targetId);
+                        $joinTable->setCategoryId($this->getId());
+                        $joinTable->save();
+                    }
+                    break;
+                default: return ['CODE_ERROR' => '1'];
             }
             return 1;
         }
@@ -144,7 +159,7 @@ class CategoryRepository extends Category
     {
         $target = ["id", "name"];
         $joinParameter = [
-            "categoryblog" => [
+            "category".$_identifier => [
                 "category_id"
             ]
         ];
