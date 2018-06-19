@@ -108,7 +108,7 @@ class uploader {
             $this->file = &$_FILES[key($_FILES)];
 
         // CONFIG & SESSION SETUP
-        $session = new session("conf/parameter.php");
+        $session = new session("conf/config.php");
         $this->config = $session->getConfig();
         $this->session = &$session->values;
 
