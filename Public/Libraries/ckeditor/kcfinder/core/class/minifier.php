@@ -25,7 +25,7 @@ class minifier {
     );
 
     public function __construct($type=null) {
-        $this->config = require("conf/config.php");
+        $this->config = require("conf/parameter.php");
         $type = strtolower($type);
         if (isset($this->mime[$type]))
             $this->type = $type;
@@ -41,7 +41,7 @@ class minifier {
         $mtFiles = array(
             __FILE__,
             $_SERVER['SCRIPT_FILENAME'],
-            "conf/config.php"
+            "conf/parameter.php"
         );
 
         // GET SOURCE CODE FILES
