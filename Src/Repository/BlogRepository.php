@@ -505,7 +505,7 @@ class BlogRepository extends Blog
             if(!empty($href)){
                 $pagination['first_page'] = Access::getSlugsById()['bloghome'].'?'.$href;
             } else {
-                $pagination['first_page'] = Access::getSlugsById()['bloghome'].$href;
+                $pagination['first_page'] = Access::getSlugsById()['bloghome'];
             }
         }
         for($i=1; $i <= $totalPage; $i++){
@@ -524,7 +524,11 @@ class BlogRepository extends Blog
             }
         }
         if($position != $totalPage){
-            $pagination['last_page'] = Access::getSlugsById()['bloghome'].$href;
+            if(!empty($href)){
+                $pagination['last_page'] = Access::getSlugsById()['bloghome'].'?page='.$totalPage.'&amp;'.$href;
+            } else {
+                $pagination['last_page'] = Access::getSlugsById()['bloghome'].'?page='.$totalPage;
+            }
         }
         return $pagination;
     }
