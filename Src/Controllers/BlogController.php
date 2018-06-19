@@ -16,46 +16,49 @@ class BlogController
     function indexAction($params)
     {
         $View = new View("default", "Blog/home");
-        $Blog = new Blog();
+        $Blog = new BlogRepository();
+        $Comment = new CommentRepository();
+        $Category = new CategoryRepository();
+        /**
+         * Default var
+         */
+        $colSize = 6;
+        $numberBlog = 6;
+        $page = 1;
+        $offset = 0;
+        $pagination = $Blog->getPagination($numberBlog, $params["GET"]);
         $errors = [];
         if(!empty($params["GET"])){
-            echo "Il y a une recherche";
-        } else {
-            $target = [
-                "title",
-                "content",
-                "datecreate",
-                "id"
-            ];
-            $parameter = [
-                "LIKE" => [
-                    "status" => 1
-                ]
-            ];
-            $Blog->setWhereParameter($parameter, null);
-            $Blog->setOrderByParameter(["id"=>"DESC"]);
-            $Blog->setLimitParameter(6, 0);
-            $array = $Blog->getData($target);
-            $data = [];
-            foreach($array as $content){
-                $date = new DateTime($content->getDatecreate());
-                $value["blog_datecreate"] = $date->format("l jS \of F Y H:i");
-                $value["blog_title"] = $content->getTitle();
-
-                $contentValue = strip_tags($content->getContent(), "<p>");
-                $contentValue = str_replace("&nbsp;", "", $contentValue);
-                $contentValue = str_replace("<p>", "", $contentValue);
-                $contentValue = str_replace("</p>", " ", $contentValue);
-                $value["blog_content"] = (strlen($contentValue)>200)?substr($contentValue, 0, 200):$contentValue;
-                $value["blog_status"] = $content->getStatus();
-                $value["blog_id"] = $content->getId();
-                $value["blog_url"] = Access::constructUrl($content->getTitle());
-                $data[] = $value;
+            if(isset($params["GET"]["colsize"])) {
+                if ($params["GET"]["colsize"] == "4" || $params["GET"]["colsize"] == "6" || $params["GET"]["colsize"] == "12"){
+                    $colSize = $params["GET"]["colsize"];
+                }
             }
-            $View->setData("data", $data);
-            $View->setData("col", "6");
+            if(isset($params['GET']['page']) && array_key_exists($params['GET']['page'], $pagination)){
+                $page = $params['GET']['page'];
+                $offset = $numberBlog * $page - $numberBlog;
+            }
         }
+        $array = $Blog->getAllArticleByStatus(1, $numberBlog, $offset);
+        $data = [];
+        foreach($array as $content){
+            $date = new DateTime($content->getDatecreate());
+            $value["blog_datecreate"] = $date->format("l jS \of F Y H:i");
+            $value["blog_title"] = $content->getTitle();
 
+
+            $value["blog_content"] = $Blog->getResumeContent($content->getContent());
+            $value["blog_status"] = $content->getStatus();
+            $value["blog_id"] = $content->getId();
+            $value["blog_url"] = $content->getUrl();
+            $value["blog_numberComment"] = $Comment->getAll("number_blog", $content->getId());
+            $value["category"] = $Category->getCategoryByIdentifier('blog', $content->getId());
+            $data[] = $value;
+        }
+        $View->setData("pagination", $pagination);
+        $View->setData("page", $page);
+        $View->setData("data", $data);
+        $View->setData("col", $colSize);
     }
 
     /**
@@ -65,7 +68,38 @@ class BlogController
      */
     function viewAction($params)
     {
-        $View = new View("default", "Blog/view_article");
+        if(isset($params["URI"][0]) && !empty($params["URI"][0])){
+            $View = new View("default", "Blog/view_article");
+            $Blog = new BlogRepository();
+            if($Blog->getArticleByUrl($params["URI"][0])){
+                $article = [
+                    "title" => $Blog->getTitle(),
+                    "content" => $Blog->getContent(),
+                    "datecreate" => $Blog->getDatecreate()
+                ];
+                $commentaires = null;
+                $Comment = new CommentRepository();
+                $Category = new CategoryRepository();
+                $comments = $Comment->getAll("blog", $Blog->getId());
+                foreach($comments as $comment){
+                    $commentaires[] = [
+                        "id" => $comment->getId(),
+                        "content" => $comment->getContent(),
+                        "tag" => $comment->getTag(),
+                        "category" => $Category->getCategoryByIdentifier('blog', $comment->getId())
+                    ];
+                }
+
+                $View->setData("article_content", $article);
+                $View->setData("commentaires", $commentaires);
+            } else {
+                echo "L'article demandé n'est pas disponible ou n'existe pas";
+            }
+        } else {
+            header('Location:'.Access::getSlugsById()["bloghome"]);
+        }
+
+
     }
 
     /**
@@ -86,26 +120,29 @@ class BlogController
     function addAction($params)
     {
         $routes = Access::getSlugsById();
+        /**
+         * On regarde si nous avons bien un paramètre dans une URL
+         */
         if(isset($params["URI"][0])){
             $getTypeNewArticle = $params["URI"][0];
             $Blog = new BlogRepository();
-            if($getTypeNewArticle == "text"){
-                $View = new View("dashboard", "Dashboard/add_article_blog");
-                $configForm = $Blog->configFormAddArticleText();
-                if(isset($params["POST"])){
-                    if(!empty($params["POST"])) {
-                        $tmpArray = $params["POST"];
-                        $Blog->setTitle($tmpArray["title"]);
-                        $Blog->setContent($tmpArray["textArea_article"]);
-                        (isset($tmpArray["publish"]))?$Blog->setStatus(1):$Blog->setStatus(0);
-                        $Blog->setType(1);
-                        $Blog->save();
-                        header('Location:'.$routes['dashboard_blog']);
-                    }
+            $View = new View("dashboard", "Dashboard/add_article_blog");
+            $View->setData("errors", "");
+            if((isset($_FILES) && !empty($_FILES)) || (isset($params["POST"]) && !empty($params["POST"]))){
+                $resultAdd = $Blog->addArticle($_FILES, $params["POST"], $getTypeNewArticle);
+                if($resultAdd === 1){
+                    header('Location:'.$routes['dashboard_blog']);
+                } else {
+                    $View->setData("errors", $resultAdd);
                 }
+            }
 
-                $View->setData("errors", "");
-                $View->setData("configForm", $configForm);
+            if($getTypeNewArticle == "text"){
+                $View->setData("configForm", $Blog->configFormAddArticleText());
+            } elseif ($getTypeNewArticle == "image"){
+                $View->setData("configForm", $Blog->configFormAddArticleImage());
+            } elseif ($getTypeNewArticle == "video"){
+                $View->setData("configForm", $Blog->configFormAddArticleVideo());
             } else {
                 header('Location:'.$routes['dashboard_blog'].'/error');
             }
@@ -118,38 +155,45 @@ class BlogController
     {
         $routes = Access::getSlugsById();
         if(isset($params["URI"][0])){
-            $getIdArticle = $params["URI"][0];
-            if(is_numeric($getIdArticle)){
-                $View = new View("dashboard", "Dashboard/add_article_blog");
+            if(is_numeric($params["URI"][0])) {
                 $Blog = new BlogRepository();
-                $configForm = $Blog->configFormAddArticleText();
-
-                $Blog->getArticle($getIdArticle);
-                switch ($Blog->getType()){
+                $View = new View("dashboard", "Dashboard/add_article_blog");
+                $arrayReturn = $Blog->editArticle($params["URI"][0]);
+                $arrayBlog = $arrayReturn["blog"];
+                $pathFile = (isset($arrayReturn["file"]))?$arrayReturn["file"]->getPath().$arrayReturn["file"]->getName():null;
+                $configForm = $arrayReturn["configForm"];
+                $configForm["content_value"] = [
+                    "title" => $arrayBlog->getTitle(),
+                    "content" => $arrayBlog->getContent(),
+                    "link" => $arrayBlog->getContent(),
+                    "file" => $pathFile,
+                    "selectedOption" => $arrayReturn['selectedOption']
+                ];
+                switch($arrayBlog->getType()){
                     case 1:
-                        if(isset($params["POST"])){
-                            if(!empty($params["POST"])) {
-                                $tmpArray = $params["POST"];
-                                $Blog->setTitle($tmpArray["title"]);
-                                $Blog->setContent($tmpArray["textArea_article"]);
-                                (isset($tmpArray["publish"]))?$Blog->setStatus(1):$Blog->setStatus(0);
-                                $Blog->setType(1);
-                                $Blog->save();
-                                header('Location:'.$routes['dashboard_blog']);
-                            }
-                        }
-                        $configForm["content_value"] = [
-                            "title" => $Blog->getTitle(),
-                            "ckeditor" => $Blog->getContent()
-                        ];
+                        $typeArticle = "text";
+                        break;
+                    case 2:
+                        $typeArticle = "image";
+                        break;
+                    case 3:
+                        $typeArticle = "video";
                         break;
                     default:
-                        header('Location:'.$routes['dashboard_blog']);
+                        return -1;
                         break;
+                }
+                if((isset($_FILES) && !empty($_FILES)) || (isset($params["POST"]) && !empty($params["POST"]))){
+                    $resultAdd = $Blog->addArticle($_FILES, $params["POST"], $typeArticle, $params["URI"][0]);
+                    if($resultAdd == 1){
+                        header('Location:'.$routes['dashboard_blog']);
+                    }
                 }
                 $View->setData("errors", "");
                 $View->setData("configForm", $configForm);
             }
+        } else {
+            header('Location:'.$routes['dashboard_blog']);
         }
     }
 

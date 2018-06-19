@@ -59,4 +59,17 @@ class UserRepository extends User
     {
 
     }
+
+    public function getUser()
+    {
+        $target = ["id"];
+        $parameter = [
+            "LIKE" => [
+                "token" => $_SESSION["token"],
+                "email" => $_SESSION["email"]
+            ]
+        ];
+        $this->setWhereParameter($parameter);
+        $this->getOneData($target);
+    }
 }

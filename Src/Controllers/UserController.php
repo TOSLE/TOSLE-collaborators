@@ -19,7 +19,7 @@ class UserController
         $form = $User->configFormConnect();
         $errors = [];
         if(!empty($params["POST"])) {
-            $errors = Validate::checkForm($form, $params["POST"]);
+            $errors = Form::checkForm($form, $params["POST"]);
             if(empty($errors)){
                 if(isset($params["POST"]["email"]) && isset($params["POST"]["pwd"])){
                     if($User->verrifyUserLogin($params["POST"]["pwd"], $params["POST"]["email"])){
@@ -34,10 +34,15 @@ class UserController
         $registerMessage = "";
         if(isset($params['URI'][0])){ // message de confirmation après l'inscription
             if($params['URI'][0] == 'confirmed'){
-                $View->setData('textConfirm', 'Accès confirmé');
+                $registerMessage = 'Accès confirmé';
             }
         }
-        $View->setData('textConfirm', 'Accès confirmé');
+        if(isset($params['URI'][0])){ // message de confirmation après l'inscription
+            if($params['URI'][0] == 'registered'){
+                $registerMessage = 'Inscription réussie, à présent, veuillez confirmer votre inscription pour valider votre adresse email.';
+            }
+        }
+        $View->setData('textConfirm', $registerMessage);
         $View->setData("config", $form);
         $View->setData("errors", $errors);
     }
@@ -47,7 +52,7 @@ class UserController
         $form = $user->configFormAdd();
         $errors = [];
         if(!empty($params["POST"])) {
-            $errors = Validate::checkForm($form, $params["POST"]);
+            $errors = Form::checkForm($form, $params["POST"]);
             if (empty($errors)) {
                 $user->setFirstName($params["POST"]["firstname"]);
                 $user->setLastName($params["POST"]["lastname"]);
@@ -64,6 +69,13 @@ class UserController
                 $token = $user->getToken();
 
                 Mail::sendMailRegister($email, $firstName, $lastName,$token);
+                header('Location:'.Access::getSlugsById()['signin'].'/registered');
+            } else {
+                $form["data_content"] = [
+                    "email" => $params["POST"]["email"],
+                    "firstname" => $params["POST"]["firstname"],
+                    "lastname" => $params["POST"]["lastname"],
+                ];
             }
         }
         $View = new View("user", "User/register");

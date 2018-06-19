@@ -14,6 +14,7 @@ class Blog extends CoreSql {
     protected $content;
     protected $datecreate;
     protected $status;
+    protected $url;
     protected $fileid;
 
     public function __construct()
@@ -133,7 +134,63 @@ class Blog extends CoreSql {
         $this->fileid = $fileid;
     }
 
-    function configFormAddArticleText()
+    /**
+     * @return mixed
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * @param mixed $url
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+    }
+
+
+
+    public function configFormAddArticleText()
+    {
+        $slugs = Access::getSlugsById();
+        $category = new CategoryRepository;
+        return [
+            "config"=> [
+                "method"=>"post",
+                "action"=>"", "submit"=>"Publier l'article",
+                "save"=>"Sauvegarder sans publier"
+            ],
+            "input"=> [
+                "title"=>[
+                    "type"=>"text",
+                    "placeholder"=>"Your title",
+                    "required"=>true,
+                    "maxString"=>100,
+                    "label"=>"Insert title of your article",
+                    "description"=>"Max 100 character"
+                ],
+                "image"=>[
+                    "type"=>"file",
+                    "required"=>false,
+                    "label"=>"Select your background image",
+                    "format"=>"PNG JPG JPEG",
+                    "description"=>"Authorised format (png, jpg, jpeg)",
+                    "multiple"=>false
+                ]
+            ],
+            "ckeditor" => [
+                "label" => "Edition de votre article",
+                "name" => "ckeditor_article",
+                "description" => "Pas de limite !",
+                "placeholder" => "Placeholder"
+            ],
+            'select' => $category->configFormCategory(1),
+            "exit" => $slugs["dashboard_blog"]
+        ];
+    }
+    public function configFormAddArticleImage()
     {
         $slugs = Access::getSlugsById();
         return [
@@ -149,9 +206,51 @@ class Blog extends CoreSql {
                     "required"=>true,
                     "maxString"=>100,
                     "label"=>"Insert title of your article"
+                ],
+                "image"=>[
+                    "type"=>"file",
+                    "required"=>true,
+                    "label"=>"Select your image",
+                    "format"=>"PNG JPG JPEG",
+                    "description"=>"Authorised format (png, jpg, jpeg)",
+                    "multiple"=>false
                 ]
             ],
-            "ckeditor" => true,
+            "textarea" => [
+                "label" => "Image description",
+                "name" => "textarea_articleImage",
+                "description" => "Un maximum de 500 caractères",
+                "placeholder" => "Maximum 500 caractères"
+            ],
+            "exit" => $slugs["dashboard_blog"]
+        ];
+    }
+
+    public function configFormAddArticleVideo()
+    {
+        $slugs = Access::getSlugsById();
+        return [
+            "config"=> [
+                "method"=>"post",
+                "action"=>"", "submit"=>"Publier l'article",
+                "save"=>"Sauvegarder sans publier"
+            ],
+            "input"=> [
+                "title"=>[
+                    "type"=>"text",
+                    "placeholder"=>"Your title",
+                    "required"=>true,
+                    "maxString"=>100,
+                    "label"=>"Insert title of your article"
+                ],
+                "link"=>[
+                    "type"=>"text",
+                    "required"=>true,
+                    "label"=>"Insert link of your video",
+                    "placeholder"=>"Link of your video",
+                    "description" => "YouTube is only player supported by our Framework",
+                ]
+            ],
             "exit" => $slugs["dashboard_blog"]
         ];
     }

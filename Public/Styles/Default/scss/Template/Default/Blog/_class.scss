@@ -24,6 +24,20 @@
       bottom: 15px;
       font-size: 0.8em;
     }
+    > .info-comment-homeblog {
+      position: absolute;
+      bottom: 45px;
+      display: flex;
+      color: $colorTextHeaderList;
+      > i {
+        margin-left: 5px;
+      }
+    }
+    > .category-list-homeblog {
+      position: absolute;
+      bottom: 75px;
+      max-width: 95%;
+    }
   }
 
 }
