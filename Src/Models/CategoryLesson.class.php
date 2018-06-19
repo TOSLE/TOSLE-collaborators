@@ -46,4 +46,22 @@ class CategoryLesson extends CoreSql
     {
         $this->lessonid = $lessonid;
     }
+
+
+
+
+    /**
+     * @param $column
+     * @param $value
+     */
+    public function deleteJoin($column, $value)
+    {
+        $parameter = [
+            'LIKE' => [
+                $column => $value
+            ]
+        ];
+        $this->setWhereParameter($parameter);
+        $this->delete();
+    }
 }
