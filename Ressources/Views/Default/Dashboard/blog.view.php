@@ -2,7 +2,8 @@
     <div class="row">
         <section class="title-page col-12">
             <div class="marg-container">
-                <h2><a class="btn-sm btn-dark" href="<?php echo $this->slugs["dashboardhome"];?>">Dashboard</a> <span class="additional-message-title">/ Blog</span></h2>
+                <h2><a class="btn-sm btn-dark" href="<?php echo $this->slugs["dashboardhome"]; ?>">Dashboard</a> <span
+                            class="additional-message-title">/ Blog</span></h2>
             </div>
         </section>
     </div>
@@ -15,7 +16,7 @@
     </div>
 </section>
 
-<div id="<?php echo $idModalViewAllPosts;?>" class="fade-background" data-type="parent-modal">
+<div id="<?php echo $idModalViewAllPosts; ?>" class="fade-background" data-type="parent-modal">
     <div class="modal-window">
         <div class="modal-header">
             <i class="modal-header-icon material-icons" data-type="close-modal">close</i>
@@ -24,10 +25,10 @@
         <div class="modal-main">
             <div class="container">
                 <div class="row">
-                    <?php $this->addModal("dashboard_bloc", $modalAllPublishPost);?>
+                    <?php $this->addModal("dashboard_bloc", $modalAllPublishPost); ?>
                 </div>
                 <div class="row">
-                    <?php $this->addModal("dashboard_bloc", $modalAllUnpublishPost);?>
+                    <?php $this->addModal("dashboard_bloc", $modalAllUnpublishPost); ?>
                 </div>
             </div>
         </div>
