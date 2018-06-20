@@ -58,13 +58,22 @@ class BlogRepository extends Blog
      */
     public function getArticleByUrl($url)
     {
+        $target = [
+            "id",
+            "title",
+            "content",
+            "type",
+            "url",
+            "datecreate",
+            "fileid"
+        ];
         $parameter = [
             "LIKE" => [
                 "url" => $url
             ]
         ];
         $this->setWhereParameter($parameter);
-        $this->getOneData(["id", "title", "content", "type", "url", "datecreate"]);
+        $this->getOneData($target);
         if(!isset($this->id)){
             return false;
         } else {
@@ -386,12 +395,15 @@ class BlogRepository extends Blog
                     if( $errors != 1) {
                         $File = new FileRepository();
                         $arrayFile = $File->addFile($_FILES, $configForm, "Blog/Article", "Background image");
-                        if(array_key_exists('CODE_ERROR', $arrayFile)){
-                            return $arrayFile;
+                        if(!is_numeric($arrayFile)){
+                            if(array_key_exists('CODE_ERROR', $arrayFile)){
+                                return $arrayFile;
+                            }
+                            foreach ($arrayFile as $fileId) {
+                                $file = $fileId;
+                            }
                         }
-                        foreach ($arrayFile as $fileId) {
-                            $file = $fileId;
-                        }
+
                     }
                 } else {
                     return $errors;
@@ -531,5 +543,19 @@ class BlogRepository extends Blog
             }
         }
         return $pagination;
+    }
+
+    public function getPlayerVideo($_contentArticle)
+    {
+        $parseUrl = parse_url($_contentArticle);
+        switch($parseUrl['host']){
+            case 'www.youtube.com':
+                $query = explode('=', $parseUrl['query'])[1];
+                return '<iframe width="800" height="500" src="https://www.youtube.com/embed/'.$query.'" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
+                break;
+            default:
+                return $_contentArticle;
+                break;
+        }
     }
 }
