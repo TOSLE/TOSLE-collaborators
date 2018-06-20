@@ -100,6 +100,8 @@ class BlogController
 
                 $View->setData("article_content", $article);
                 $View->setData("commentaires", $commentaires);
+
+                var_dump($commentaires);
             } else {
                 echo "L'article demandé n'est pas disponible ou n'existe pas";
             }

@@ -82,12 +82,18 @@
                                             <div class="container">
                                                 <div class="comment">
                                                     <div class="picture-user">
+                                                        <span></span>
                                                     </div>
-                                                    <div class="name-user">
-                                                    </div>
-                                                    <div class="content">
-                                                    </div>
-                                                    <div class="info">
+                                                    <div>
+                                                        <div class="name-user">
+                                                            Julien Domange
+                                                        </div>
+                                                        <div class="content">
+                                                            <span>Whaou ! C’est impressionnant comme article, merci pour celui-ci ! Maintenant, les maquettes !</span>
+                                                        </div>
+                                                        <div class="info">
+                                                            <span>February 28 at 6:33pm</span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
