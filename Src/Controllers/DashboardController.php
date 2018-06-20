@@ -90,9 +90,9 @@ class DashboardController
     }
 
     /**
-     * @Route("/en/dashboard/portfolio")
+     * @Route("/en/dashboard/Portfolio")
      * @param array $params
-     * View portfolio dashboard action
+     * View Portfolio dashboard action
      */
     function portofolioAction($params)
     {

@@ -79,6 +79,12 @@ class Access
             "controller" => "blog",
             "action" => "view",
             "security" => false
+        ],
+        "Portfolio" => [
+            "slug" => "portfolio-view",
+            "controller" => "portfolio",
+            "action" => "index",
+            "security" => false
         ]
     ];
 

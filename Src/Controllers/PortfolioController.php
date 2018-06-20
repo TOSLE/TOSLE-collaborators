@@ -9,21 +9,21 @@
 class PortfolioController
 {
     /**
-     * @Route("/en/portfolio(/index)")
+     * @Route("/en/Portfolio(/index)")
      * @param array $params
      * Default action of PortfolioController
      */
     function indexAction($params)
     {
-        $View = new View("default","portfolio/portfolio");
+        $View = new View("default", "Portfolio/portfolio");
 
 
     }
 
     /**
-     * @Route("/en/portfolio/edit")
+     * @Route("/en/Portfolio/edit")
      * @param array $params
-     * Edit portfolio action
+     * Edit Portfolio action
      */
     function editAction($params)
     {
@@ -32,14 +32,17 @@ class PortfolioController
 
     }
     /**
-     * @Route("/en/portfolio/add")
+     * @Route("/en/Portfolio/add")
      * @param array $params
-     * Edit portfolio action
+     * Edit Portfolio action
      */
+}
+    /*
+
     function addfileAction($params)
     {
 
-        $View = new view("default","portfolio/portfolio");
+        $View = new view("default","Portfolio/Portfolio");
         $fileaddportfolio->setId('Id');
         $fileaddportfolio->setName('Name');
         $fileaddportfolio->setValue("Value");
@@ -92,12 +95,5 @@ if(isset($_POST['Id'])&& isset($_POST['Name']) && isset($_POST['Value'])) {
  
  
             $insertion->closeCursor(); // déconnexion
- 
-}
+
 ?>
-
-
-
-);
-
-}
