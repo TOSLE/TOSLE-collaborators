@@ -11,7 +11,7 @@
       padding: 15px 15px;
       height: 100%;
       width: 100%;
-      background-color: rgba(255,255,255, 0.8);
+      background-color: rgba(255, 255, 255, 0.8);
       > h2 {
         text-align: center;
       }
@@ -114,6 +114,44 @@
     .comments-article {
       h5 {
         margin-bottom: 40px;
+      }
+      .comment {
+        display: flex;
+        flex-direction: row;
+        padding: 5px;
+        .picture-user {
+          display: flex;
+          align-items: center;
+        }
+        .picture-user > span {
+          border-radius: 50%;
+          border: solid 1px #919191;
+          width: 42px;
+          height: 42px;
+          display: block;
+        }
+        > div:nth-child(2) {
+          display: flex;
+          flex-direction: column;
+          margin-left: 10px;
+          .name-user {
+            color: #1A5CCB;
+            font-size: 16px;
+            font-weight: 600;
+          }
+          .content {
+            font-size: 14px;
+          }
+          .info {
+            display: flex;
+            align-self: flex-end;
+            color: #919191;
+            font-size: 12px;
+          }
+          div {
+            margin-bottom: 3px;
+          }
+        }
       }
     }
   }
