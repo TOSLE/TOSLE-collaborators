@@ -100,6 +100,7 @@ class Access
         "blog/edit" => 2,
         "class/add" => 2,
         "class/edit" => 2,
+        "class/status" => 2,
     ];
 
     /**

@@ -114,4 +114,32 @@ class ClassController
             header('Location:'.$routes['dashboard_lesson']);
         }
     }
+
+    public function statusAction($params)
+    {
+        $routes = Access::getSlugsById();
+        $Lesson = new LessonRepository();
+
+        $target = [
+            "id",
+            "status"
+        ];
+        $parameter = [
+            "LIKE" => [
+                "id" => $params["URI"][0]
+            ]
+        ];
+        $Lesson->setWhereParameter($parameter);
+        $Lesson->getOneData($target);
+        if($Lesson->getId()){
+            if($Lesson->getStatus() > 0){
+                $Lesson->setStatus(0);
+            } else {
+                $Lesson->setStatus(1);
+            }
+            $Lesson->save();
+        }
+
+        header('Location:'.$routes["dashboard_lesson"]);
+    }
 }

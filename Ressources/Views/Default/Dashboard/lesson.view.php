@@ -10,5 +10,7 @@
 <section id="right-column" class="container">
     <div class="row">
         <?php $this->addModal("dashboard_bloc", $modalAddOption);?>
+        <?php $this->addModal("dashboard_bloc", $modalStats);?>
+        <?php $this->addModal("dashboard_bloc", $modalLastLesson);?>
     </div>
 </section>

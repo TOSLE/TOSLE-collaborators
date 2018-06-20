@@ -31,6 +31,8 @@ class DashboardController
         $Lesson = new LessonRepository();
 
         $View->setData("modalAddOption", $Lesson->getModalAdd(12));
+        $View->setData("modalStats", $Lesson->getModalStats());
+        $View->setData("modalLastLesson", $Lesson->getModalLatestArticle());
     }
 
     /**
