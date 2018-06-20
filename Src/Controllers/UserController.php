@@ -22,8 +22,10 @@ class UserController
             $errors = Form::checkForm($form, $params["POST"]);
             if(empty($errors)){
                 if(isset($params["POST"]["email"]) && isset($params["POST"]["pwd"])){
-                    if($User->verrifyUserLogin($params["POST"]["pwd"], $params["POST"]["email"])){
+                    if($User->verrifyUserLogin($params["POST"]["pwd"], $params["POST"]["email"])){                                             
+
                         header("Location:" . DIRNAME);
+
                     } else {
                         $errors[AUTHENTIFICATION_FAILED_KEY] = AUTHENTIFICATION_FAILED_MESSAGE;
                     }
@@ -43,6 +45,7 @@ class UserController
                 $registerMessage = 'Inscription réussie, à présent, veuillez confirmer votre inscription pour valider votre adresse email.';
             }
         }
+        $errors["error status"]=" status invalide";
         $View->setData('textConfirm', $registerMessage);
         $View->setData("config", $form);
         $View->setData("errors", $errors);
@@ -116,11 +119,11 @@ class UserController
                 $User->save();
 
                 //blogcontroller
-
                 $messConfirm = 'Inscription confirmé, vous pouvez vous connectez dès maintenant';
                 header('Location:'.$routes["signin"].'/confirmed');
             } else {
                 $messError = 'Inscription echoué, veuillez reesayer de vous inscrire.';
+               
                 header('Location:'.$routes["signup"].'/error');
             }
         }
