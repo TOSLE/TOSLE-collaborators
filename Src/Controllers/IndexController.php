@@ -31,4 +31,9 @@ class IndexController
     {
         echo "Oops ! Le lien semple ne pas exister ! :/";
     }
+
+    function installAction($params)
+    {
+        echo "Procédure d'installation";
+    }
 }

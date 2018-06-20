@@ -26,8 +26,11 @@ class DashboardController
      */
     function lessonsAction($params)
     {
-        $View = new View("dashboard", "lesson");
+        $View = new View("dashboard", "Dashboard/lesson");
         $View->setData("PageName", NAV_DASHBOARD . " " . NAV_DASHBOARD_LESSON);
+        $Lesson = new LessonRepository();
+
+        $View->setData("modalAddOption", $Lesson->getModalAdd(12));
     }
 
     /**
@@ -39,6 +42,7 @@ class DashboardController
     {
         $View = new View("dashboard", "homework");
         $View->setData("PageName", NAV_DASHBOARD . " " . NAV_DASHBOARD_LESSON);
+
     }
 
     /**

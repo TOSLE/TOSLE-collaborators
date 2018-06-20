@@ -11,10 +11,11 @@ class Category extends CoreSql {
     protected $id;
     protected $name;
     protected $type;
+    protected $tag;
 
     public function __construct()
     {
-        //parent::__construct();
+        parent::__construct();
     }
 
     /**
@@ -64,6 +65,23 @@ class Category extends CoreSql {
     {
         $this->type = $type;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getTag()
+    {
+        return $this->tag;
+    }
+
+    /**
+     * @param mixed $type
+     */
+    public function setTag()
+    {
+        $this->tag = uniqid();
+    }
+
 
     public function configFormAdd()
     {

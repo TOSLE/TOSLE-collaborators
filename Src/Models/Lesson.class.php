@@ -13,10 +13,11 @@ class Lesson extends CoreSql {
     protected $description;
     protected $datecreate;
     protected $status;
+    protected $url;
 
     public function __construct()
     {
-        //parent::__construct();
+        parent::__construct();
     }
 
     /**
@@ -99,9 +100,52 @@ class Lesson extends CoreSql {
         $this->status = $status;
     }
 
-    public function configFormAdd()
+    /**
+     * @param string $url
+     */
+    public function setUrl($url)
     {
+        $this->url = $url;
+    }
 
+    /**
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    public function configFormAddLesson()
+    {
+        $slugs = Access::getSlugsById();
+        $category = new CategoryRepository;
+        return [
+            "config"=> [
+                "method"=>"post",
+                "action"=>"",
+                "save"=>"Sauvegarder en brouillon",
+                "submit"=>"Enregistrer le nouveau cours",
+                "form_file"=>false,
+            ],
+            "input"=> [
+                "title"=>[
+                    "type"=>"text",
+                    "placeholder"=>"Intitulé du cours",
+                    "required"=>true,
+                    "maxString"=>100,
+                    "label"=>"Renseignez le titre de votre cours"
+                ]
+            ],
+            "textarea" => [
+                "label" => "Lesson description",
+                "name" => "textarea_lesson",
+                "description" => "Un maximum de 500 caractères",
+                "placeholder" => "Maximum 500 caractères"
+            ],
+            'select' => $category->configFormCategory(2),
+            "exit" => $slugs["dashboard_lesson"]
+        ];
     }
 
 }

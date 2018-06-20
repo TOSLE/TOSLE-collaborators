@@ -20,6 +20,12 @@ class Access
             "action" => "index",
             "security" => false
         ],
+        "classhome" => [ // Blog  homepage
+            "slug" => "class-homepage",
+            "controller" => "class",
+            "action" => "index",
+            "security" => false
+        ],
         "chathome" => [ // Chat  homepage
             "slug" => "chat",
             "controller" => "chat",
@@ -68,6 +74,12 @@ class Access
             "action" => "blog",
             "security" => 2
         ],
+        "dashboard_lesson" => [ // Dashboard blog homepage
+            "slug" => "dashboard-lesson",
+            "controller" => "dashboard",
+            "action" => "lessons",
+            "security" => 2
+        ],
         "add_user" => [ // change status blog
             "slug" => "add-user",
             "controller" => "user",
@@ -91,7 +103,9 @@ class Access
     private $backOffice = [
         "blog/status" => 2,
         "blog/add" => 2,
-        "blog/edit" => 2
+        "blog/edit" => 2,
+        "class/add" => 2,
+        "class/edit" => 2,
     ];
 
     /**
@@ -181,9 +195,9 @@ class Access
      */
     public static function constructUrl($string = "url to encode")
     {
-        $search = array('à', 'ä', 'â', 'é', 'è', 'ë', 'ê', 'ï', 'ì', 'î', 'ù', 'û', 'ü', 'ô', 'ö', '&', ' ', '?', '!', 'ç', ';', '/', '.', ',');
-        $replace = array('a', 'a', 'a', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'u', 'u', 'u', 'o', 'o', '', '-', '', '', 'c', '', '-', '-', '-');
+        $search = array('à', 'ä', 'â', 'é', 'è', 'ë', 'ê', 'ï', 'ì', 'î', 'ù', 'û', 'ü', 'ô', 'ö', '&', ' ', '?', '!', 'ç', ';', '/', '.', ',', ':', '(', ')', '=');
+        $replace = array('a', 'a', 'a', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'u', 'u', 'u', 'o', 'o', '', '-', '', '', 'c', '', '-', '', '', '', '', '', '');
 
-        return urlencode(str_replace($search, $replace, strtolower($string)));
+        return urlencode(str_replace($search, $replace, strtolower(trim($string))));
     }
 }

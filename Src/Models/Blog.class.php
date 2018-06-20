@@ -152,14 +152,55 @@ class Blog extends CoreSql {
 
 
 
-    function configFormAddArticleText()
+    public function configFormAddArticleText()
     {
         $slugs = Access::getSlugsById();
+        $category = new CategoryRepository;
         return [
             "config"=> [
                 "method"=>"post",
                 "action"=>"", "submit"=>"Publier l'article",
-                "save"=>"Sauvegarder sans publier"
+                "save"=>"Sauvegarder sans publier",
+                "form_file"=>true,
+            ],
+            "input"=> [
+                "title"=>[
+                    "type"=>"text",
+                    "placeholder"=>"Your title",
+                    "required"=>true,
+                    "maxString"=>100,
+                    "label"=>"Insert title of your article",
+                    "description"=>"Max 100 character"
+                ],
+                "image"=>[
+                    "type"=>"file",
+                    "required"=>false,
+                    "label"=>"Select your background image",
+                    "format"=>"PNG JPG JPEG",
+                    "description"=>"Authorised format (png, jpg, jpeg)",
+                    "multiple"=>false
+                ]
+            ],
+            "ckeditor" => [
+                "label" => "Edition de votre article",
+                "name" => "ckeditor_article",
+                "description" => "Pas de limite !",
+                "placeholder" => "Placeholder"
+            ],
+            'select' => $category->configFormCategory(1),
+            "exit" => $slugs["dashboard_blog"]
+        ];
+    }
+    public function configFormAddArticleImage()
+    {
+        $slugs = Access::getSlugsById();
+        $category = new CategoryRepository;
+        return [
+            "config"=> [
+                "method"=>"post",
+                "action"=>"", "submit"=>"Publier l'article",
+                "save"=>"Sauvegarder sans publier",
+                "form_file"=>true,
             ],
             "input"=> [
                 "title"=>[
@@ -168,9 +209,55 @@ class Blog extends CoreSql {
                     "required"=>true,
                     "maxString"=>100,
                     "label"=>"Insert title of your article"
+                ],
+                "image"=>[
+                    "type"=>"file",
+                    "required"=>true,
+                    "label"=>"Select your image",
+                    "format"=>"PNG JPG JPEG",
+                    "description"=>"Authorised format (png, jpg, jpeg)",
+                    "multiple"=>false
                 ]
             ],
-            "ckeditor" => true,
+            "textarea" => [
+                "label" => "Image description",
+                "name" => "textarea_articleImage",
+                "description" => "Un maximum de 500 caractères",
+                "placeholder" => "Maximum 500 caractères"
+            ],
+            'select' => $category->configFormCategory(1),
+            "exit" => $slugs["dashboard_blog"]
+        ];
+    }
+
+    public function configFormAddArticleVideo()
+    {
+        $slugs = Access::getSlugsById();
+        $category = new CategoryRepository;
+        return [
+            "config"=> [
+                "method"=>"post",
+                "action"=>"", "submit"=>"Publier l'article",
+                "save"=>"Sauvegarder sans publier",
+                "form_file"=>true,
+            ],
+            "input"=> [
+                "title"=>[
+                    "type"=>"text",
+                    "placeholder"=>"Your title",
+                    "required"=>true,
+                    "maxString"=>100,
+                    "label"=>"Insert title of your article"
+                ],
+                "link"=>[
+                    "type"=>"text",
+                    "required"=>true,
+                    "label"=>"Insert link of your video",
+                    "placeholder"=>"Link of your video",
+                    "description" => "YouTube is only player supported by our Framework",
+                ]
+            ],
+            'select' => $category->configFormCategory(1),
             "exit" => $slugs["dashboard_blog"]
         ];
     }

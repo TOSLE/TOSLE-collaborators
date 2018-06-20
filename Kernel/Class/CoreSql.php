@@ -79,10 +79,6 @@ class CoreSql{
                 . implode(',', $columnName) .") VALUES (:"
                 . implode(',:', array_keys($this->columns)) .
                 ")");
-            echo "INSERT INTO ".$this->table." ("
-                . implode(',', $columnName) .") VALUES (:"
-                . implode(',:', array_keys($this->columns)) .
-                ")";
 
             $query->execute($this->columns);
         }
@@ -278,7 +274,8 @@ class CoreSql{
 
         $query = $this->pdo->prepare("
             SELECT count(" . implode(',', $target) . ") 
-            FROM " . $this->table . " 
+            FROM " . $this->table . "   
+            ".$this->leftJoin."
             ".$this->whereParameter."
             ".$this->orderByParameter."
             ".$this->limitParameter."
@@ -290,6 +287,7 @@ class CoreSql{
         $this->whereParameter = "";
         $this->orderByParameter = "";
         $this->limitParameter = "";
+        $this->leftJoin = "";
 
         return $query->fetch();
     }
@@ -320,25 +318,34 @@ class CoreSql{
             $this->leftJoin .= "LEFT JOIN ".$tableJoin." ON ".implode('AND', $arrayTmp);
         }
         $arrayTmp = [];
-        foreach($whereParameter as $table => $arrayColumn){
-            foreach($arrayColumn as $columnName => $targetValue){
-                $arrayExploded = explode('_', $columnName);
-                $arrayTmp[] = $tableJoin.".".$table."_".implode('', $arrayExploded)." = ".$targetValue;
+        if(isset($whereParameter)){
+            foreach($whereParameter as $table => $arrayColumn){
+                foreach($arrayColumn as $columnName => $targetValue){
+                    $arrayExploded = explode('_', $columnName);
+                    $arrayTmp[] = $tableJoin.".".$table."_".implode('', $arrayExploded)." = ".$targetValue;
+                }
+                $tmpString = implode('AND', $arrayTmp);
             }
-            $tmpString = implode('AND', $arrayTmp);
         }
-
-        if(empty($this->whereParameter)){
-            $this->whereParameter = "WHERE ".$tmpString;
-        } else {
-            $this->whereParameter .= ' AND '.$tmpString;
+        if(isset($tmpString)){
+            if(empty($this->whereParameter)){
+                $this->whereParameter = "WHERE ".$tmpString;
+            } else {
+                $this->whereParameter .= ' AND '.$tmpString;
+            }
         }
+    }
 
-        /*echo "SELECT comment_content
-        FROM tosle_comment
-        LEFT JOIN tosle_blogcomment ON tosle_blogcomment.blogcomment_commentid = tosle_comment.comment_id
-        WHERE tosle_blogcomment.blogcomment_blogid = 1 
-        ";*/
+    public function delete()
+    {
+        $query = $this->pdo->prepare("
+            DELETE "." 
+            FROM " . $this->table . " 
+            ".$this->whereParameter."
+        ");
+        $query->execute();
+
+        $this->whereParameter = "";
     }
 
 }

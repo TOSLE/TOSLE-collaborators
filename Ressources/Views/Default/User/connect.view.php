@@ -3,6 +3,22 @@
         <div class="col-12">
         </div>
     </div>
+    <?php if(isset($textConfirm) && !empty($textConfirm)):?>
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-10">
+                <div class="bg-message-blog">
+                    <section class="message-bloc">
+                        <article class="login-message">
+                            <p>
+                                <?php echo $textConfirm;?>
+                            </p>
+                        </article>
+                    </section>
+                </div>
+            </div>
+        </div>
+    <?php endif;?>
     <div class="row">
         <div class="col-3"></div>
         <div class="col-6">
@@ -11,8 +27,9 @@
                     <h2>Bienvenue sur le CMS Tosle</h2>
                     <article class="register-login">
                         <p>
-                            Veuillez entrer vos informations de connexion ci-dessous
-                        </p></article>
+                            Veuillez entrer vos informations de connexion ci-dessous.
+                        </p>
+                    </article>
                     <section>
                         <?php $this->addModal("form", $config, $errors); ?>
                     </section>
@@ -33,7 +50,6 @@
                     </article>
                 </section>
             </div>
-
         </div>
     </div>
 </div>
