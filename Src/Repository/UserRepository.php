@@ -29,7 +29,8 @@ class UserRepository extends User
                 $target = [
                     "id",
                     "email",
-                    "token"
+                    "token",
+                    "status"
                 ];
                 $parameter = [
                     "LIKE" => [
@@ -40,13 +41,20 @@ class UserRepository extends User
                 $this->setWhereParameter($parameter);
                 $this->getOneData($target);
                 if(!empty($this->token) && !empty($this->email)){
-                    $dateSetter = new DateTime();
-                    $this->setDateconnection($dateSetter->getTimestamp());
-                    $this->setToken();
-                    $this->save();
-                    $_SESSION['token'] = $this->token;
-                    $_SESSION['email'] = $this->email;
-                    return 1;
+
+                    if(empty($this->status))
+                    {               
+                        echo "refus";
+                    }
+                    else{
+                        $dateSetter = new DateTime();
+                        $this->setDateconnection($dateSetter->getTimestamp());
+                        $this->setToken();
+                        $this->save();
+                        $_SESSION['token'] = $this->token;
+                        $_SESSION['email'] = $this->email;
+                        return 1;
+                    }
                 }
             } else {
                 return 0;
