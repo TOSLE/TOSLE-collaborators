@@ -98,8 +98,32 @@ class CommentRepository extends Comment
      *
      * $_targetId correspond à l'identifiant du type
      */
-    public function addComment($_post, $_type, $_targetId)
+    public function addComment($_config, $_post, $_type, $_targetId)
     {
+        $errors = Form::checkForm($_config, $_post);
+        if(empty($errors)){
+            $User = new UserRepository();
+            $User->getUser();
+            $this->setContent($_post['textarea_comment']);
+            $this->setTag();
+            $this->save();
+            $this->getComment('tag', $this->getTag());
+            switch($_type){
+                case 1:
+                    $BlogComment = new BlogComment();
+                    $BlogComment->setBlogid($_targetId);
+                    $BlogComment->setCommentid($this->getId());
 
+                    $BlogComment->setUserid($User->getId());
+                    $BlogComment->save();
+                    break;
+                case 2:
+                    break;
+                default:
+                    return 1;
+                    break;
+            }
+        }
+        return 0;
     }
 }

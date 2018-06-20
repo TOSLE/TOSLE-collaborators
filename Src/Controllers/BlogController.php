@@ -81,7 +81,11 @@ class BlogController
             $Blog = new BlogRepository();
             $Comment = new CommentRepository();
             $Category = new CategoryRepository();
+            $configFormComment = $Comment->configFormAdd();
             if($Blog->getArticleByUrl($params["URI"][0])){
+                if(isset($params['POST']) && !empty($params['POST'])){
+                    $Comment->addComment($configFormComment, $params['POST'], 1, $Blog->getId());
+                }
                 $article = [
                     "title" => $Blog->getTitle(),
                     "content" => $Blog->getContent(),
@@ -107,7 +111,7 @@ class BlogController
 
                 $View->setData("article_content", $article);
                 $View->setData("commentaires", $commentaires);
-                $View->setData("formAddComment", $Comment->configFormAdd());
+                $View->setData("formAddComment", $configFormComment);
             } else {
                 echo "L'article demandé n'est pas disponible ou n'existe pas";
             }
