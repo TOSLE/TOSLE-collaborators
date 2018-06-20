@@ -53,7 +53,93 @@ class LessonRepository extends Lesson
         ]);
         return $BlocGeneral->getArrayData();
     }
+    /**
+     * @return array object
+     * Permet de récupérer la modal statistique
+     */
+    public function getModalStats()
+    {
+        $StatsBlog = new DashboardBlocModal();
+        $StatsBlog->setTitle("Lesson Analytics");
+        $StatsBlog->setTableHeader([
+            1 => "Type",
+            2 => "Value"
+        ]);
+        $StatsBlog->setTableBodyClass([
+            1 => "td-content-text",
+            2 => "td-content-number"
+        ]);
+        $StatsBlog->setColSizeBloc(6);
+        $StatsBlog->setTableBodyContent([
+            0 => [
+                1 => "Nombre de cours",
+                2 => 1
+            ],
+            1 => [
+                1 => "Nombre de chapitre",
+                2 => 2
+            ],
+        ]);
+        return $StatsBlog->getArrayData();
+    }
 
+    /**
+     * @param int $colSize
+     * @return array
+     * Permet de récupérer la configuration de la modal "LastArticle"
+     * Le paramètre permet de définir une largeur à notre modal
+     */
+    public function getModalLatestArticle($colSize = 12)
+    {
+        $routes = Access::getSlugsById();
+        $ViewLatestBloc = new DashboardBlocModal();
+        $ViewLatestBloc->setTitle("Latest lesson on your Website");
+        $ViewLatestBloc->setIconHeader("modal_view_all_lesson", "modal");
+        $ViewLatestBloc->setTableHeader([
+            1 => "Title",
+            2 => "Create at",
+            4 => "Action"
+        ]);
+        $ViewLatestBloc->setColSizeBloc($colSize);
+        $ViewLatestBloc->setActionButtonStatus(0, [
+            "color" => "green",
+            "text" => "Publish",
+            "type" => "href",
+            "target" => $routes["class/status"]."/"
+        ]);
+        $ViewLatestBloc->setActionButtonStatus(1, [
+            "color" => "red",
+            "text" => "Unpublish",
+            "type" => "href",
+            "target" => $routes["class/status"]."/"
+        ]);
+        $ViewLatestBloc->setActionButtonEdit("Edit");
+
+        $ViewLatestBloc->setTableBodyClass([
+            1 => "td-content-text",
+            2 => "td-content-date",
+            4 => "td-content-action"
+        ]);
+        $ViewLatestBloc->setTableBodyContent($this->getLastLesson(), true);
+        $ViewLatestBloc->setArrayHref("edit", $routes["class/edit"]);
+        return $ViewLatestBloc->getArrayData();
+    }
+
+    public function getLastLesson($_number = 5)
+    {
+        $target = [
+            'id',
+            'title',
+            'description',
+            'url',
+            'status',
+            'color',
+            'datecreate'
+        ];
+        $this->setOrderByParameter(["id" => "DESC"]);
+        $this->setLimitParameter($_number);
+        return $this->getData($target);
+    }
     /**
      * @param array $_post
      * @param int|null $_idLesson
