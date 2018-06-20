@@ -70,6 +70,7 @@ class LessonRepository extends Lesson
             }
             $this->setTitle($tmpPostArray["title"]);
             $this->setDescription($tmpPostArray["textarea_lesson"]);
+            $this->setColor($tmpPostArray["select_color"]);
             (isset($tmpPostArray["publish"]))?$this->setStatus(1):$this->setStatus(0);
             $this->setUrl(Access::constructUrl($this->getTitle()));
             $this->save();
