@@ -553,6 +553,14 @@ class BlogRepository extends Blog
                 $query = explode('=', $parseUrl['query'])[1];
                 return '<iframe width="800" height="500" src="https://www.youtube.com/embed/'.$query.'" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
                 break;
+            case 'www.dailymotion.com':
+                $query = $parseUrl['path'];
+                return '<iframe frameborder="0" width="800" height="500" src="//www.dailymotion.com/embed/'.$query.'" allowfullscreen allow="autoplay"></iframe>';
+                break;
+            case 'vimeo.com':
+                $query = explode('/', $parseUrl['path'])[3];
+                return '<iframe src="https://player.vimeo.com/video/'.$query.'" width="800" height="500" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
+                break;
             default:
                 return $_contentArticle;
                 break;
