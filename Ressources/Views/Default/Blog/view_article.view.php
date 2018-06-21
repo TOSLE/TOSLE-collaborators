@@ -66,39 +66,29 @@
                                                         <div class="name-action">integrate</div>
                                                     </div>
                                                 </div>
-                                                <div class="action">
-                                                    <div class="container">
-                                                        <div class="svg-action">
-                                                            <i class="material-icons">
-                                                                create
-                                                            </i>
-                                                        </div>
-                                                        <div class="name-action">write a comment</div>
-                                                    </div>
-                                                </div>
                                             </nav>
                                         </section>
                                         <section class="comments-article">
                                             <h5>Last comments</h5>
                                             <div class="container">
-                                                <?php foreach($commentaires as $row => $comment):?>
-                                                <div class="comment">
-                                                    <div class="picture-user">
-                                                        <span></span>
+                                                <?php foreach ($commentaires as $row => $comment): ?>
+                                                    <div class="comment">
+                                                        <div class="picture-user">
+                                                            <span></span>
+                                                        </div>
+                                                        <div>
+                                                            <div class="name-user">
+                                                                <? echo $comment["firstname"] . ' ' . $comment["lastname"]; ?>
+                                                            </div>
+                                                            <div class="content">
+                                                                <span><?php echo $comment["content"]; ?></span>
+                                                            </div>
+                                                            <div class="info">
+                                                                <span>February 28 at 6:33pm</span>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div>
-                                                        <div class="name-user">
-                                                            <? echo $comment["firstname"].' '.$comment["lastname"]; ?>
-                                                        </div>
-                                                        <div class="content">
-                                                            <span><?php echo $comment["content"]; ?></span>
-                                                        </div>
-                                                        <div class="info">
-                                                            <span>February 28 at 6:33pm</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <?php endforeach;?>
+                                                <?php endforeach; ?>
                                                 <div class="comment">
                                                     <div class="picture-user">
                                                         <span></span>
@@ -118,7 +108,7 @@
                                             </div>
                                         </section>
                                         <section class="container-editor">
-                                            <?php $this->addModal("form", $formAddComment);?>
+                                            <?php $this->addModal("form", $formAddComment); ?>
                                         </section>
                                     </div>
                                 </div>
