@@ -95,7 +95,7 @@
                                                                 <span><?php echo $comment["content"]; ?></span>
                                                             </div>
                                                             <div class="info">
-                                                                <span>February 28 at 6:33pm</span>
+                                                                <span><?php echo $comment["date"]; ?></span>
                                                             </div>
                                                         </div>
                                                     </div>

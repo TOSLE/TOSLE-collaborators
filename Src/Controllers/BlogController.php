@@ -104,13 +104,20 @@ class BlogController
                 $comments = $Comment->getAll("blog", $Blog->getId());
                 foreach($comments as $comment){
                     $author = $Comment->getAuthorComment($comment->getId());
+                    $dateupdated = $comment->getDateupdated();
+                    if(isset($dateupdated)){
+                        $date = new DateTime($comment->getDateupdated());
+                    } else {
+                        $date = new DateTime($comment->getDatecreate());
+                    }
+
                     $commentaires[] = [
                         "id" => $comment->getId(),
                         "content" => $comment->getContent(),
                         "firstname" => $author['firstname'],
                         "lastname" => $author['lastname'],
-                        "create" => $comment->getDatecreate(),
-                        "updated" => $comment->getDateupdated(),
+                        "date" => $date->format("l jS \of F Y H:i"),
+
                     ];
                 }
 
