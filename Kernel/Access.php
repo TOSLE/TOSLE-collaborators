@@ -101,6 +101,7 @@ class Access
         "class/add" => 2,
         "class/edit" => 2,
         "class/status" => 2,
+        "chapter/add" => 2,
     ];
 
     /**

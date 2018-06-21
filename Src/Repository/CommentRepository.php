@@ -126,4 +126,16 @@ class CommentRepository extends Comment
         }
         return 0;
     }
+
+    public function getAuthorComment($_idComment)
+    {
+        $User = new UserRepository();
+        $BlogComment = new BlogComment();
+        $User->getUserById($BlogComment->getUserid($_idComment));
+        return [
+            "firstname" => $User->getFirstName(),
+            "lastname" => $User->getLastName(),
+        ];
+
+    }
 }
