@@ -77,7 +77,7 @@ class Comment extends CoreSql {
             ],
             "textarea" => [
                 "label" => "Nouveau commentaire",
-                "name" => "textarea_articleImage",
+                "name" => "textarea_comment",
                 "description" => "Laissez parler votre imagination",
                 "placeholder" => "Soyez sûr de ce que vous voulez publier."
             ],

@@ -79,15 +79,26 @@ class BlogController
         if(isset($params["URI"][0]) && !empty($params["URI"][0])){
             $View = new View("default", "Blog/view_article");
             $Blog = new BlogRepository();
+            $Comment = new CommentRepository();
+            $Category = new CategoryRepository();
+            $configFormComment = $Comment->configFormAdd();
             if($Blog->getArticleByUrl($params["URI"][0])){
+                if(isset($params['POST']) && !empty($params['POST'])){
+                    $Comment->addComment($configFormComment, $params['POST'], 1, $Blog->getId());
+                }
                 $article = [
                     "title" => $Blog->getTitle(),
                     "content" => $Blog->getContent(),
-                    "datecreate" => $Blog->getDatecreate()
+                    "datecreate" => $Blog->getDatecreate(),
+                    'image' => $Blog->getFileid(),
+                    'url' => $Blog->getUrl(),
+                    'type' => $Blog->getType(),
+                    "category" => $Category->getCategoryByIdentifier('blog', $Blog->getId()),
                 ];
+                if($Blog->getType() == 3){
+                    $article['content'] = $Blog->getPlayerVideo($Blog->getContent());
+                }
                 $commentaires = null;
-                $Comment = new CommentRepository();
-                $Category = new CategoryRepository();
                 $comments = $Comment->getAll("blog", $Blog->getId());
                 foreach($comments as $comment){
                     $commentaires[] = [
@@ -100,8 +111,10 @@ class BlogController
 
                 $View->setData("article_content", $article);
                 $View->setData("commentaires", $commentaires);
+                $View->setData("formAddComment", $configFormComment);
 
                 var_dump($commentaires);
+
             } else {
                 echo "L'article demandé n'est pas disponible ou n'existe pas";
             }
