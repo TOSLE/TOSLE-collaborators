@@ -107,3 +107,6 @@
             </div>
         </div>
     </div>
+
+
+<?php $this->addModal("form", $formAddComment);?>
