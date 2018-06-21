@@ -42,6 +42,7 @@
                                                                 comment
                                                             </i>
                                                         </div>
+                                                        <span><?php echo count($commentaires); ?></span>
                                                         <div class="name-action">comments</div>
                                                     </div>
                                                 </div>
@@ -80,17 +81,44 @@
                                         <section class="comments-article">
                                             <h5>Last comments</h5>
                                             <div class="container">
+                                                <?php foreach($commentaires as $row => $comment):?>
                                                 <div class="comment">
                                                     <div class="picture-user">
+                                                        <span></span>
                                                     </div>
-                                                    <div class="name-user">
+                                                    <div>
+                                                        <div class="name-user">
+                                                            <? echo $comment["firstname"].' '.$comment["lastname"]; ?>
+                                                        </div>
+                                                        <div class="content">
+                                                            <span><?php echo $comment["content"]; ?></span>
+                                                        </div>
+                                                        <div class="info">
+                                                            <span>February 28 at 6:33pm</span>
+                                                        </div>
                                                     </div>
-                                                    <div class="content">
+                                                </div>
+                                                <?php endforeach;?>
+                                                <div class="comment">
+                                                    <div class="picture-user">
+                                                        <span></span>
                                                     </div>
-                                                    <div class="info">
+                                                    <div>
+                                                        <div class="name-user">
+                                                            Julien Domange
+                                                        </div>
+                                                        <div class="content">
+                                                            <span>Whaou ! C’est impressionnant comme article, merci pour celui-ci ! Maintenant, les maquettes !</span>
+                                                        </div>
+                                                        <div class="info">
+                                                            <span>February 28 at 6:33pm</span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                        </section>
+                                        <section class="container-editor">
+                                            <?php $this->addModal("form", $formAddComment);?>
                                         </section>
                                     </div>
                                 </div>
@@ -101,6 +129,4 @@
             </div>
         </div>
     </div>
-
-
-<?php $this->addModal("form", $formAddComment);?>
+</div>
