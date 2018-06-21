@@ -136,7 +136,7 @@ Class Chapter extends CoreSql {
     public function configFormAdd()
     {
         $slugs = Access::getSlugsById();
-        $category = new CategoryRepository;
+        $lesson = new LessonRepository();
         return [
             "config"=> [
                 "method"=>"post",
@@ -160,7 +160,7 @@ Class Chapter extends CoreSql {
                     "label"=>"Selectionnez le/les fichiers à joindre à ce chapitre",
                     "format"=>"PDF DOCX DOCM DOTX DOTM XLSX XLSM XLSB XLTM",
                     "description"=>"Authorised format (pdf, docx, docm, dotx, dotm, xlsx, xlsm, xlsb, xltm)",
-                    "multiple"=>true
+                    "multiple"=>false
                 ]
             ],
             "ckeditor" => [
@@ -169,7 +169,7 @@ Class Chapter extends CoreSql {
                 "description" => "Pas de limite !",
                 "placeholder" => "Placeholder"
             ],
-            'select_lesson' => $category->configFormCategory(1),
+            'select' => $lesson->getSelectLesson(),
             "exit" => $slugs["dashboard_blog"]
         ];
     }
