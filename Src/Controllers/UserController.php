@@ -22,14 +22,12 @@ class UserController
             $errors = Form::checkForm($form, $params["POST"]);
             if(empty($errors)){
                 if(isset($params["POST"]["email"]) && isset($params["POST"]["pwd"])){
-                    if($User->verrifyUserLogin($params["POST"]["pwd"], $params["POST"]["email"])){                                             
-
-                        header("Location:" . DIRNAME);
-
+                    $returnValue=$User->verrifyUserLogin($params["POST"]["pwd"], $params["POST"]["email"]);
+                    if(is_numeric($returnValue)){                                             
+                            header("Location:" . DIRNAME);                        
                     } else {
-                        $errors[AUTHENTIFICATION_FAILED_KEY] = AUTHENTIFICATION_FAILED_MESSAGE;
+                        $errors=$returnValue;                                                
                     }
-
                 }
             }
         }
@@ -45,7 +43,7 @@ class UserController
                 $registerMessage = 'Inscription réussie, à présent, veuillez confirmer votre inscription pour valider votre adresse email.';
             }
         }
-        $errors["error status"]=" status invalide";
+     //   $errors["error status"]=" status invalide";
         $View->setData('textConfirm', $registerMessage);
         $View->setData("config", $form);
         $View->setData("errors", $errors);
