@@ -14,7 +14,8 @@ Class Chapter extends CoreSql {
     protected $datecreate;
     protected $status;
     protected $type;
-    protected $fileid; /** à vérif */
+    protected $fileid;
+    protected $url;
 
     public function __construct()
     {
@@ -132,6 +133,23 @@ Class Chapter extends CoreSql {
     {
         $this->fileid = $fileid;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * @param mixed $url
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+    }
+
 
     public function configFormAdd()
     {
