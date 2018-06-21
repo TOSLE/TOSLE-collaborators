@@ -70,7 +70,7 @@
                 <?php endif;?>
                 <select id="<?php echo $name;?>" name="<?php echo $name;?>" <?php echo (isset($attributs["required"]))?"required='required'":"";?>>
                     <?php foreach($attributs["options"] as $value => $text):?>
-                        <option value="<?php echo $value;?>"><?php echo $text;?></option>
+                        <option value="<?php echo $value;?>" <?php echo (isset($config['content_value'][$name]) && $config['content_value'][$name]==$value)?"selected":"";?>><?php echo $text;?></option>
                     <?php endforeach;?>
                 </select>
                 <?php if(isset($attributs["description"])):?>

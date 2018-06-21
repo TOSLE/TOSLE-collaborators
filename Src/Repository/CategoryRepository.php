@@ -175,7 +175,7 @@ class CategoryRepository extends Category
             ]
         ];
         $whereParameter = [
-            "categoryblog" => [
+            "category".$_identifier => [
                 $_identifier."_id" => $_id
             ]
         ];

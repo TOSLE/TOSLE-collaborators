@@ -220,26 +220,28 @@ class BlogController
     function statusAction($params)
     {
         $routes = Access::getSlugsById();
-        $Blog = new Blog();
+        if(is_numeric($params["URI"][0])){
+            $Blog = new Blog();
 
-        $target = [
-            "id",
-            "status"
-        ];
-        $parameter = [
-            "LIKE" => [
-                "id" => $params["URI"][0]
-            ]
-        ];
-        $Blog->setWhereParameter($parameter);
-        $Blog->getOneData($target);
-        if($Blog->getId()){
-            if($Blog->getStatus() > 0){
-                $Blog->setStatus(0);
-            } else {
-                $Blog->setStatus(1);
+            $target = [
+                "id",
+                "status"
+            ];
+            $parameter = [
+                "LIKE" => [
+                    "id" => $params["URI"][0]
+                ]
+            ];
+            $Blog->setWhereParameter($parameter);
+            $Blog->getOneData($target);
+            if($Blog->getId()){
+                if($Blog->getStatus() > 0){
+                    $Blog->setStatus(0);
+                } else {
+                    $Blog->setStatus(1);
+                }
+                $Blog->save();
             }
-            $Blog->save();
         }
 
         header('Location:'.$routes["dashboard_blog"]);
