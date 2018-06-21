@@ -101,11 +101,12 @@ class BlogController
                 $commentaires = null;
                 $comments = $Comment->getAll("blog", $Blog->getId());
                 foreach($comments as $comment){
+                    $author = $Comment->getAuthorComment($comment->getId());
                     $commentaires[] = [
                         "id" => $comment->getId(),
                         "content" => $comment->getContent(),
-                        //"tag" => $comment->getTag(),
-                        //"category" => $Category->getCategoryByIdentifier('blog', $comment->getId())
+                        "firstname" => $author['firstname'],
+                        "lastname" => $author['lastname'],
                     ];
                 }
 
@@ -223,26 +224,28 @@ class BlogController
     function statusAction($params)
     {
         $routes = Access::getSlugsById();
-        $Blog = new Blog();
+        if(is_numeric($params["URI"][0])){
+            $Blog = new Blog();
 
-        $target = [
-            "id",
-            "status"
-        ];
-        $parameter = [
-            "LIKE" => [
-                "id" => $params["URI"][0]
-            ]
-        ];
-        $Blog->setWhereParameter($parameter);
-        $Blog->getOneData($target);
-        if($Blog->getId()){
-            if($Blog->getStatus() > 0){
-                $Blog->setStatus(0);
-            } else {
-                $Blog->setStatus(1);
+            $target = [
+                "id",
+                "status"
+            ];
+            $parameter = [
+                "LIKE" => [
+                    "id" => $params["URI"][0]
+                ]
+            ];
+            $Blog->setWhereParameter($parameter);
+            $Blog->getOneData($target);
+            if($Blog->getId()){
+                if($Blog->getStatus() > 0){
+                    $Blog->setStatus(0);
+                } else {
+                    $Blog->setStatus(1);
+                }
+                $Blog->save();
             }
-            $Blog->save();
         }
 
         header('Location:'.$routes["dashboard_blog"]);

@@ -1,4 +1,4 @@
-<li <?php echo($controller == "ClassController")?" class='current'":"";?>>
+<li <?php echo($controller == "ClassController" || $controller == "ChapterController")?" class='current'":"";?>>
     <a href="<?php echo $this->slugs["homepage"];?>"><i class="material-icons">&#xE80C;</i><p><?php echo NAVBAR_HOMEPAGE; ?></p></a>
 </li>
 <li <?php echo($controller == "ProfileController")?" class='current'":"";?>>
