@@ -94,11 +94,14 @@ html {
             margin: auto;
             justify-content: center;
             align-items: center; }
+            html .article > .content-article .action-article .action .container span {
+              margin-left: 5px;
+              font-size: 14px; }
             html .article > .content-article .action-article .action .container .svg-action i {
               font-size: 16px; }
             html .article > .content-article .action-article .action .container .name-action {
               padding-left: 5px;
-              padding-right: 5px; }
+              padding-right: 2px; }
       html .article > .content-article .comments-article {
         margin-bottom: 40px; }
         html .article > .content-article .comments-article h5 {

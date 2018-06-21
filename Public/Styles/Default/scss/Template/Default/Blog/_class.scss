@@ -98,6 +98,10 @@
           margin: auto;
           justify-content: center;
           align-items: center;
+          span {
+            margin-left: 5px;
+            font-size: 14px;
+          }
           .svg-action {
             i {
               font-size: 16px;
@@ -105,7 +109,7 @@
           }
           .name-action {
             padding-left: 5px;
-            padding-right: 5px;
+            padding-right: 2px;
 
           }
         }
