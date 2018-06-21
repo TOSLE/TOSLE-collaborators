@@ -241,6 +241,11 @@ class LessonRepository extends Lesson
         }
     }
 
+
+    /**
+     * @return array
+     * Generateur de configuration pour la selection d'un cours
+     */
     public function getSelectLesson()
     {
         $target = [
