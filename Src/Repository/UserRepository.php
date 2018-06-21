@@ -43,8 +43,8 @@ class UserRepository extends User
                 if(!empty($this->token) && !empty($this->email)){
 
                     if(empty($this->status))
-                    {               
-                        echo "refus";
+                    {
+                        return [AUTHENTIFICATION_FAILED_KEY => "Vous n'avez pas valider votre compte"];
                     }
                     else{
                         $dateSetter = new DateTime();
@@ -57,10 +57,10 @@ class UserRepository extends User
                     }
                 }
             } else {
-                return 0;
+                return [AUTHENTIFICATION_FAILED_KEY => AUTHENTIFICATION_FAILED_MESSAGE];
             }
         } else {
-            return 0;
+           return [AUTHENTIFICATION_FAILED_KEY => AUTHENTIFICATION_FAILED_MESSAGE];
         }
     }
     function verrifyAuthentificationSession()
