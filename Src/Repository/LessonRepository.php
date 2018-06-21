@@ -183,6 +183,48 @@ class LessonRepository extends Lesson
         }
     }
 
+    /**
+     * @param $_idArticle
+     * @return array|int
+     * Cette fonction retourne les éléments nécessaires à l'affichage des formulaires pour editer un article
+     */
+    public function editLesson($_idLesson)
+    {
+        $this->getLessonById($_idLesson);
+        if(!empty($this->id)){
+            $category = new CategoryRepository();
+            $categoryFounded = $category->getCategoryByIdentifier('lesson', $this->id);
+            return $arrayObject = [
+                "lesson" => $this,
+                "selectedOption" => $categoryFounded,
+                "configForm" => $this->configFormAddLesson()
+            ];
+        } else {
+            return 0;
+        }
+    }
+
+    public function getLessonById($_id)
+    {
+        $parameter = [
+            "LIKE" => [
+                "id" => $_id
+            ]
+        ];
+        $this->setWhereParameter($parameter);
+        $this->getOneData(["id", "title", "description", "color"]);
+        if(!isset($this->id)){
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
+     * @param string $_url
+     * @return bool
+     * Récupère le contenu d'un cours en fonction d'un url
+     */
     public function getLessonByUrl($_url)
     {
         $parameter = [
