@@ -245,14 +245,6 @@ class CoreSql{
             ".$this->orderByParameter."
             ".$this->limitParameter."
         ");
-        echo "
-            SELECT " . implode(',', $target) . " 
-            FROM " . $this->table . "  
-            ".$this->leftJoin."
-            ".$this->whereParameter."
-            ".$this->orderByParameter."
-            ".$this->limitParameter."
-        ";
         $query->execute();
         $resultQuery = $query->fetch();
         // On vide le parameter WHERE pour éviter tout problème sur requête qui viendrait après et où on ne veut pas de parametre

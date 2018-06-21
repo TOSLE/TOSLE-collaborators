@@ -109,9 +109,6 @@ class BlogController
                         "lastname" => $author['lastname'],
                     ];
                 }
-                echo '<pre>';
-                print_r($commentaires);
-                echo '</pre>';
 
                 $View->setData("article_content", $article);
                 $View->setData("commentaires", $commentaires);
