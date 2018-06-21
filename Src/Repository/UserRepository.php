@@ -29,7 +29,8 @@ class UserRepository extends User
                 $target = [
                     "id",
                     "email",
-                    "token"
+                    "token",
+                    "status"
                 ];
                 $parameter = [
                     "LIKE" => [
@@ -40,19 +41,26 @@ class UserRepository extends User
                 $this->setWhereParameter($parameter);
                 $this->getOneData($target);
                 if(!empty($this->token) && !empty($this->email)){
-                    $dateSetter = new DateTime();
-                    $this->setDateconnection($dateSetter->getTimestamp());
-                    $this->setToken();
-                    $this->save();
-                    $_SESSION['token'] = $this->token;
-                    $_SESSION['email'] = $this->email;
-                    return 1;
+
+                    if(empty($this->status))
+                    {
+                        return [AUTHENTIFICATION_FAILED_KEY => "Vous n'avez pas valider votre compte"];
+                    }
+                    else{
+                        $dateSetter = new DateTime();
+                        $this->setDateconnection($dateSetter->getTimestamp());
+                        $this->setToken();
+                        $this->save();
+                        $_SESSION['token'] = $this->token;
+                        $_SESSION['email'] = $this->email;
+                        return 1;
+                    }
                 }
             } else {
-                return 0;
+                return [AUTHENTIFICATION_FAILED_KEY => AUTHENTIFICATION_FAILED_MESSAGE];
             }
         } else {
-            return 0;
+           return [AUTHENTIFICATION_FAILED_KEY => AUTHENTIFICATION_FAILED_MESSAGE];
         }
     }
     function verrifyAuthentificationSession()
