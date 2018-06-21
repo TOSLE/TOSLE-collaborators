@@ -42,6 +42,7 @@
                                                                 comment
                                                             </i>
                                                         </div>
+                                                        <span><?php echo count($commentaires); ?></span>
                                                         <div class="name-action">comments</div>
                                                     </div>
                                                 </div>
@@ -87,7 +88,7 @@
                                                     </div>
                                                     <div>
                                                         <div class="name-user">
-                                                            Julien Domange
+                                                            <? echo $comment["firstname"].' '.$comment["lastname"]; ?>
                                                         </div>
                                                         <div class="content">
                                                             <span><?php echo $comment["content"]; ?></span>

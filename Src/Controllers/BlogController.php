@@ -114,8 +114,6 @@ class BlogController
                 $View->setData("commentaires", $commentaires);
                 $View->setData("formAddComment", $configFormComment);
 
-                var_dump($commentaires);
-
             } else {
                 echo "L'article demandé n'est pas disponible ou n'existe pas";
             }
