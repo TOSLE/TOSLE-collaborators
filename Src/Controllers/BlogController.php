@@ -104,8 +104,8 @@ class BlogController
                     $commentaires[] = [
                         "id" => $comment->getId(),
                         "content" => $comment->getContent(),
-                        "tag" => $comment->getTag(),
-                        "category" => $Category->getCategoryByIdentifier('blog', $comment->getId())
+                        //"tag" => $comment->getTag(),
+                        //"category" => $Category->getCategoryByIdentifier('blog', $comment->getId())
                     ];
                 }
 
