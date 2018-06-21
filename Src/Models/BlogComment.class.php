@@ -37,8 +37,14 @@ class BlogComment extends CoreSql
     /**
      * @return mixed
      */
-    public function getUserid()
+    public function getUserid($_idComment)
     {
+        $parameter = [
+            'LIKE' => [
+                'commentid' => $_idComment
+            ]
+        ];
+        $this->getOneData(['userid']);
         return $this->userid;
     }
 

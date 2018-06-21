@@ -45,7 +45,7 @@ class LessonRepository extends Lesson
                 1 => "Créer un chapitre",
                 "button_action" => [
                     "type" => "href",
-                    "target" => $routes["class/add"]."/chapter",
+                    "target" => $routes["chapter/add"]."/chapter",
                     "color" => "tosle",
                     "text" => "New post"
                 ]

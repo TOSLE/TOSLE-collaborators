@@ -151,7 +151,7 @@ Class Chapter extends CoreSql {
                     "placeholder"=>"Titre du chapitre",
                     "required"=>true,
                     "maxString"=>100,
-                    "label"=>"Insert title of your article",
+                    "label"=>"Insert title of your chapter",
                     "description"=>"Max 100 character"
                 ],
                 "file"=>[

@@ -101,13 +101,17 @@ class BlogController
                 $commentaires = null;
                 $comments = $Comment->getAll("blog", $Blog->getId());
                 foreach($comments as $comment){
+                    $author = $Comment->getAuthorComment($comment->getId());
                     $commentaires[] = [
                         "id" => $comment->getId(),
                         "content" => $comment->getContent(),
-                        "tag" => $comment->getTag(),
-                        "category" => $Category->getCategoryByIdentifier('blog', $comment->getId())
+                        "firstname" => $author['firstname'],
+                        "lastname" => $author['lastname'],
                     ];
                 }
+                echo '<pre>';
+                print_r($commentaires);
+                echo '</pre>';
 
                 $View->setData("article_content", $article);
                 $View->setData("commentaires", $commentaires);
