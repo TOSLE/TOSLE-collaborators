@@ -267,4 +267,13 @@ class LessonRepository extends Lesson
             ],
         ];
     }
+
+    public function addChapter($_idLesson, $_idChapter)
+    {
+        $LessonChapter = new LessonChapter();
+        $LessonChapter->setOrder(1);
+        $LessonChapter->setChapterId($_idChapter);
+        $LessonChapter->setLessonId($_idLesson);
+        $LessonChapter->save();
+    }
 }

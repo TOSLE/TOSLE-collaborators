@@ -26,7 +26,7 @@ class ChapterRepository extends Chapter
                 if(empty($errors) || is_numeric($errors)){
                     if( $errors != 1) {
                         $File = new FileRepository();
-                        $arrayFile = $File->addFile($_FILES, $configForm, "Blog/Article", "Background image");
+                        $arrayFile = $File->addFile($_FILES, $configForm, "Lesson/Chapter", "File attach to chapter");
                         if(!is_numeric($arrayFile)){
                             if(array_key_exists('CODE_ERROR', $arrayFile)){
                                 return $arrayFile;
@@ -54,23 +54,14 @@ class ChapterRepository extends Chapter
             $this->setFileid($file);
             $this->save();
 
-            $this->getArticleByUrl($this->getUrl());
-
-            if(isset($tmpPostArray["category_select"]) && !empty($tmpPostArray["category_select"]))
-            {
-                $category = new CategoryRepository();
-                $arrayCategory = $category->addCategoryBySelect($tmpPostArray["category_select"], 'blog', $this->getId());
+            $this->getChapterByUrl($this->getUrl());
+            if($tmpPostArray['select_lesson'] != 'default'){
+                $Lesson = new LessonRepository();
+                $Lesson->addChapter($tmpPostArray['select_lesson'], $this->getId());
+            } else {
+                return ['Lesson' => 'Lesson not found'];
             }
-            if(isset($tmpPostArray["category_input"]) && !empty($tmpPostArray["category_input"])){
-                $category = new CategoryRepository();
-                $arrayCategory = $category->addCategoryByInput($tmpPostArray["category_input"], 'blog', $this->getId());
-                if(!is_numeric($arrayCategory)){
-                    if(array_key_exists('CODE_ERROR', $arrayCategory)){
-                        return $arrayCategory;
-                    }
-                }
 
-            }
             return 1;
         } else {
             return $errors;
@@ -84,6 +75,16 @@ class ChapterRepository extends Chapter
             'fileid',
             'title',
             'content',
+            'datecreate',
+            'status',
+            'url',
         ];
+        $parameter = [
+            'LIKE' => [
+                'url' => $_url
+            ]
+        ];
+        $this->setWhereParameter($parameter);
+        $this->getOneData($target);
     }
 }
