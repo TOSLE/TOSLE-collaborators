@@ -135,6 +135,43 @@ Class Chapter extends CoreSql {
 
     public function configFormAdd()
     {
+        $slugs = Access::getSlugsById();
+        $category = new CategoryRepository;
+        return [
+            "config"=> [
+                "method"=>"post",
+                "action"=>"",
+                "submit"=>"Publier le chapitre",
+                "save"=>"Sauvegarder en brouillon",
+                "form_file"=>true,
+            ],
+            "input"=> [
+                "title"=>[
+                    "type"=>"text",
+                    "placeholder"=>"Titre du chapitre",
+                    "required"=>true,
+                    "maxString"=>100,
+                    "label"=>"Insert title of your article",
+                    "description"=>"Max 100 character"
+                ],
+                "file"=>[
+                    "type"=>"file",
+                    "required"=>false,
+                    "label"=>"Selectionnez le/les fichiers à joindre à ce chapitre",
+                    "format"=>"PDF DOCX DOCM DOTX DOTM XLSX XLSM XLSB XLTM",
+                    "description"=>"Authorised format (pdf, docx, docm, dotx, dotm, xlsx, xlsm, xlsb, xltm)",
+                    "multiple"=>true
+                ]
+            ],
+            "ckeditor" => [
+                "label" => "Edition de votre chapitre",
+                "name" => "ckeditor_chapter",
+                "description" => "Pas de limite !",
+                "placeholder" => "Placeholder"
+            ],
+            'select_lesson' => $category->configFormCategory(1),
+            "exit" => $slugs["dashboard_blog"]
+        ];
     }
 
 
