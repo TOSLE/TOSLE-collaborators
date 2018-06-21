@@ -44,7 +44,7 @@ class CommentRepository extends Comment
     public function getAll($identifier, $value)
     {
         if($identifier == "blog"){
-            $target = ["id", "content", "tag"];
+            $target = ["id", "content", "tag", "datecreate", "dateupdated"];
             $joinParameter = [
                 "blogcomment" => [
                         "comment_id"
@@ -56,6 +56,7 @@ class CommentRepository extends Comment
                 ]
             ];
             $this->setLeftJoin($joinParameter, $whereParameter);
+            $this->setOrderByParameter(["id"=>"DESC"]);
             return $this->getData($target);
         }
         if($identifier == "number_blog"){

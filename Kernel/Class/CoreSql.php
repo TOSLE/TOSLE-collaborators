@@ -178,6 +178,7 @@ class CoreSql{
         }
         $this->orderByParameter = "ORDER BY " . implode(', ', $tmpArray);
     }
+
     /**
      * function getData
      * @param array $target
