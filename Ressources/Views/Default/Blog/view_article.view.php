@@ -80,6 +80,24 @@
                                         <section class="comments-article">
                                             <h5>Last comments</h5>
                                             <div class="container">
+                                                <?php foreach($commentaires as $row => $comment):?>
+                                                <div class="comment">
+                                                    <div class="picture-user">
+                                                        <span></span>
+                                                    </div>
+                                                    <div>
+                                                        <div class="name-user">
+                                                            Julien Domange
+                                                        </div>
+                                                        <div class="content">
+                                                            <span><?php echo $comment["content"]; ?></span>
+                                                        </div>
+                                                        <div class="info">
+                                                            <span>February 28 at 6:33pm</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <?php endforeach;?>
                                                 <div class="comment">
                                                     <div class="picture-user">
                                                         <span></span>
@@ -98,6 +116,9 @@
                                                 </div>
                                             </div>
                                         </section>
+                                        <section class="container-editor">
+                                            <?php $this->addModal("form", $formAddComment);?>
+                                        </section>
                                     </div>
                                 </div>
                             </div>
@@ -107,6 +128,4 @@
             </div>
         </div>
     </div>
-
-
-<?php $this->addModal("form", $formAddComment);?>
+</div>
