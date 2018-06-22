@@ -387,6 +387,7 @@ class BlogRepository extends Blog
                 break;
         }
         $errors = Form::checkForm($configForm, $_post);
+        $_post = Form::secureData($_post);
         if(empty($errors)){
             $file = null;
             if(isset($_file)){

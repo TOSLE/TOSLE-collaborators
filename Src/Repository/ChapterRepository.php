@@ -19,6 +19,7 @@ class ChapterRepository extends Chapter
     {
         $configForm = $this->configFormAdd();
         $errors = Form::checkForm($configForm, $_post);
+        $_post = Form::secureData($_post);
         if(empty($errors)){
             $file = null;
             if(isset($_file)){
@@ -35,7 +36,6 @@ class ChapterRepository extends Chapter
                                 $file = $fileId;
                             }
                         }
-
                     }
                 } else {
                     return $errors;

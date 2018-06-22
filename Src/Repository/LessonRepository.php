@@ -149,6 +149,7 @@ class LessonRepository extends Lesson
     {
 
         $errors = Form::checkForm($this->configFormAddLesson(), $_post);
+        $_post = Form::secureData($_post);
         if(empty($errors)){
             $tmpPostArray = $_post;
             if(isset($_idLesson)) {
