@@ -20,23 +20,25 @@
 
 <form method="<?php echo $config['config']['method'];?>" action="<?php echo $config['config']['action'];?>" <?php echo (isset($config['config']['form_file']) && $config['config']['form_file'])?"enctype='multipart/form-data'":"";?>>
     <div class="form-group-base">
-        <?php foreach ($config["input"] as $name => $attributs):?>
-            <?php if(isset($attributs["label"])):?>
-                <label for="<?php echo $name;?>"><?php echo $attributs["label"];?></label>
-            <?php endif;?>
-            <?php if($attributs["type"]=="text" || $attributs["type"]=="email" || $attributs["type"]=="number" || $attributs["type"]=="password"):?>
-                <input id="<?php echo $name;?>" type="<?php echo $attributs["type"];?>" placeholder="<?php echo $attributs["placeholder"];?>" name="<?php echo $name;?>" <?php echo (isset($attributs["required"]))?"required='required'":"";?> value="<?php echo (isset($config["content_value"][$name]))?$config["content_value"][$name]:"";?>">
-            <?php endif;?>
-            <?php if($attributs["type"]=="file"):?>
-                <?php if(isset($config["content_value"]["file"])):?>
-                    <img src="<?php echo $config["content_value"]["file"];?>" width="200" height="100">
+        <?php if(isset($config['input'])):?>
+            <?php foreach ($config["input"] as $name => $attributs):?>
+                <?php if(isset($attributs["label"])):?>
+                    <label for="<?php echo $name;?>"><?php echo $attributs["label"];?></label>
                 <?php endif;?>
-                <input id="<?php echo $name;?>" type="<?php echo $attributs["type"];?>" name="<?php echo $name;?>[]" <?php echo (isset($attributs["required"]) && $attributs["required"])?"required='required'":"";?> <?php echo (isset($attributs["multiple"]) && $attributs["multiple"])?"multiple":"";?>>
-            <?php endif;?>
-            <?php if(isset($attributs["description"])):?>
-                <div class="small-precision-input"><?php echo $attributs["description"];?></div>
-            <?php endif;?>
-        <?php endforeach;?>
+                <?php if($attributs["type"]=="text" || $attributs["type"]=="email" || $attributs["type"]=="number" || $attributs["type"]=="password"):?>
+                    <input id="<?php echo $name;?>" type="<?php echo $attributs["type"];?>" placeholder="<?php echo $attributs["placeholder"];?>" name="<?php echo $name;?>" <?php echo (isset($attributs["required"]))?"required='required'":"";?> value="<?php echo (isset($config["content_value"][$name]))?$config["content_value"][$name]:"";?>">
+                <?php endif;?>
+                <?php if($attributs["type"]=="file"):?>
+                    <?php if(isset($config["content_value"]["file"])):?>
+                        <img src="<?php echo $config["content_value"]["file"];?>" width="200" height="100">
+                    <?php endif;?>
+                    <input id="<?php echo $name;?>" type="<?php echo $attributs["type"];?>" name="<?php echo $name;?>[]" <?php echo (isset($attributs["required"]) && $attributs["required"])?"required='required'":"";?> <?php echo (isset($attributs["multiple"]) && $attributs["multiple"])?"multiple":"";?>>
+                <?php endif;?>
+                <?php if(isset($attributs["description"])):?>
+                    <div class="small-precision-input"><?php echo $attributs["description"];?></div>
+                <?php endif;?>
+            <?php endforeach;?>
+        <?php endif;?>
         <?php if(isset($config["select_multiple"])): ?>
             <?php foreach($config["select_multiple"] as $name => $attributs):?>
                 <?php if($name == "category_select"):?>
