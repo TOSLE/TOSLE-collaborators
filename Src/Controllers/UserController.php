@@ -50,7 +50,8 @@ class UserController
     }
 
     public function registerAction($params) {
-        $user = new User();
+        $user = new UserRepository();
+
         $form = $user->configFormAdd();
         $errors = [];
         if(!empty($params["POST"])) {
@@ -58,7 +59,20 @@ class UserController
             if (empty($errors)) {
                 $user->setFirstName($params["POST"]["firstname"]);
                 $user->setLastName($params["POST"]["lastname"]);
-                $user->setEmail($params["POST"]["email"]); // voir pour le selectMultipleResponse + confirmEmail
+                $user->checkEmailExist($params["POST"]["email"]);
+                $retourValue=$user->checkEmailExist($params["POST"]["email"]);
+                if(is_numeric($retourValue)){     
+                    echo "testt";
+
+                     $user->setEmail($params["POST"]["email"]); // voir pour le selectMultipleResponse + confirmEmail                                        
+                    } else {
+                        $errors=$retourValue;                                                
+
+                    }
+
+               
+                
+
                 $user->setEmail($params["POST"]["emailConfirm"]);
                 $user->setPassword($params["POST"]["pwd"]);
                 $user->setPassword($params["POST"]["pwdConfirm"]);

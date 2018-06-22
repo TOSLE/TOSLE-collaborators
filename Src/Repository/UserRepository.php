@@ -67,6 +67,42 @@ class UserRepository extends User
     {
 
     }
+     function checkEmailExist($email)
+    {
+        $target = ["email"];
+        $parameter = [
+            "LIKE" => [
+                "email" => $_SESSION["email"]
+            ]
+        ];    
+       $entree=$email;
+
+        $tableau=$this->getData($target);
+     //   echo '<pre>',print_r($tableau),'</pre>';
+
+        foreach ($tableau as $cle) {
+            $result =  $cle->getEmail();
+        //   echo $entree.'<br>';
+       //    echo $result.'<br>';
+        //    echo $target;
+            if($result == $entree)
+            {
+                //echo "problem";
+                return [AUTHENTIFICATION_FAILED_KEY => "Mail déjà utilisé"];
+                //return [AUTHENTIFICATION_FAILED_KEY => "Vous n'avez pas valider votre compte"];
+            }
+            else{
+                return 1;
+            }
+          //  echo $email->getEmail().'<br>';
+        }
+        /*if(in_array($target,$tableau)){
+                 echo "coco";       
+        }  */     
+        die();
+
+    }
+    
 
     public function getUser()
     {
