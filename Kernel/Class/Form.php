@@ -39,18 +39,19 @@ class Form
                 }
             }
         }
-
-        if(isset($config["captcha"])){
-            if(isset($_SESSION["captcha"]) && isset($data['captcha'])) {
-                if($_SESSION["captcha"] != $data['captcha']){
-                    $errorsMsg["captcha"] = "Le captcha saisi n'est pas valide";
+        echo $data[$name];
+        if(isset($config["select"])){
+            foreach($config["select"] as $name => $attributs) {
+                if(isset($attributs['options']) && !empty($attributs['options'])){
+                    if($data[$name] === "_forbidden"){
+                        $errorsMsg[$attributs['label']] = "Il est nécessaire de sélectionner une autre valeur que celle par défaut";
+                    }
                 }
             }
         }
 
         return $errorsMsg;
     }
-
     public static function minString($string, $length)
     {
         return strlen(trim($string)>=$length);
@@ -106,10 +107,5 @@ class Form
         else
             if($fileNotFound)return 1;
             else return 0;
-    }
-
-    public static function setSelectInput($config, $configSelect)
-    {
-
     }
 }
