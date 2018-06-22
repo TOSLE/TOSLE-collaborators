@@ -76,6 +76,9 @@ class FileRepository extends File
                 $fileExtension = strtolower(substr(strrchr($file['name'], '.'),1));
                 $fileName = uniqid('file_', false)."_".date("Y-m-d").".".$fileExtension;
                 if (in_array($fileExtension, $authorisedFormat) ) {
+                    if(!file_exists($directoryDestination)){
+                        mkdir($directoryDestination, 0777, true);
+                    }
                     if(!move_uploaded_file($file["tmp_name"], $directoryDestination.$fileName) ){
                         return [
                             "CODE_ERROR" => 3,

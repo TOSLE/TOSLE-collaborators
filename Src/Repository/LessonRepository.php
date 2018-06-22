@@ -253,13 +253,13 @@ class LessonRepository extends Lesson
             'title'
         ];
         $array = $this->getData($target);
-        $option['default'] = "Pas de cours sélectionné";
+        $option['_forbidden'] = "Pas de cours sélectionné";
         foreach($array as $lesson){
             $option[$lesson->getId()] = $lesson->getTitle();
         }
         return [
             "select_lesson" => [
-                "label" => "SSelection du cours",
+                "label" => "Selection du cours",
                 "description" => "Vous pourrez toujours le modifier plus tard",
                 "multiple" => false,
                 "required" => true,
