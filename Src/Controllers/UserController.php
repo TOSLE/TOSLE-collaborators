@@ -19,10 +19,12 @@ class UserController
         $form = $User->configFormConnect();
         $errors = [];
         if(!empty($params["POST"])) {
-            $errors = Form::checkForm($form, $params["POST"]);
+            $_post = $params["POST"];
+            $errors = Form::checkForm($form, $_post);
+            $_post = Form::secureData($_post);
             if(empty($errors)){
-                if(isset($params["POST"]["email"]) && isset($params["POST"]["pwd"])){
-                    $returnValue=$User->verrifyUserLogin($params["POST"]["pwd"], $params["POST"]["email"]);
+                if(isset($_post["email"]) && isset($_post["pwd"])){
+                    $returnValue=$User->verrifyUserLogin($_post["pwd"], $_post["email"]);
                     if(is_numeric($returnValue)){                                             
                             header("Location:" . DIRNAME);                        
                     } else {
@@ -54,29 +56,31 @@ class UserController
         $form = $user->configFormAdd();
         $errors = [];
         if(!empty($params["POST"])) {
-            $errors = Form::checkForm($form, $params["POST"]);
+            $_post = $params["POST"];
+            $errors = Form::checkForm($form, $_post);
+            $_post = Form::secureData($_post);
             if (empty($errors)) {
-                $user->setFirstName($params["POST"]["firstname"]);
-                $user->setLastName($params["POST"]["lastname"]);
-                $user->setEmail($params["POST"]["email"]); // voir pour le selectMultipleResponse + confirmEmail
-                $user->setEmail($params["POST"]["emailConfirm"]);
-                $user->setPassword($params["POST"]["pwd"]);
-                $user->setPassword($params["POST"]["pwdConfirm"]);
+                $user->setFirstName($_post["firstname"]);
+                $user->setLastName($_post["lastname"]);
+                $user->setEmail($_post["email"]); // voir pour le selectMultipleResponse + confirmEmail
+                $user->setEmail($_post["emailConfirm"]);
+                $user->setPassword($_post["pwd"]);
+                $user->setPassword($_post["pwdConfirm"]);
                 $user->setToken();
                 $user->save();
 
-                $email = $params["POST"]["email"];
-                $firstName = $params["POST"]["firstname"];
-                $lastName = $params["POST"]["lastname"];
+                $email = $_post["email"];
+                $firstName = $_post["firstname"];
+                $lastName = $_post["lastname"];
                 $token = $user->getToken();
 
                 Mail::sendMailRegister($email, $firstName, $lastName,$token);
                 header('Location:'.Access::getSlugsById()['signin'].'/registered');
             } else {
                 $form["data_content"] = [
-                    "email" => $params["POST"]["email"],
-                    "firstname" => $params["POST"]["firstname"],
-                    "lastname" => $params["POST"]["lastname"],
+                    "email" => $_post["email"],
+                    "firstname" => $_post["firstname"],
+                    "lastname" => $_post["lastname"],
                 ];
             }
         }
