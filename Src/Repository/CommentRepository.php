@@ -102,6 +102,7 @@ class CommentRepository extends Comment
     public function addComment($_config, $_post, $_type, $_targetId)
     {
         $errors = Form::checkForm($_config, $_post);
+        $_post = Form::secureData($_post);
         if(empty($errors)){
             $User = new UserRepository();
             $User->getUser();
