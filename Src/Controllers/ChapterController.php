@@ -27,7 +27,6 @@ class ChapterController
                     $View->setData("errors", $resultAdd);
                 }
             }
-
             if($getTypeNewArticle == "chapter"){
                 $View->setData("configForm", $Chapter->configFormAdd());
             }  else {
