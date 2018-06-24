@@ -128,8 +128,9 @@ class LessonRepository extends Lesson
     public function getModalLastArticleByLesson($_urlLesson)
     {
         $routes = Access::getSlugsById();
+        $this->getLessonByUrl($_urlLesson);
         $ViewLatestBloc = new DashboardBlocModal();
-        $ViewLatestBloc->setTitle("Chapter of your lesson");
+        $ViewLatestBloc->setTitle("Chapter of your lesson : ".$this->getTitle());
         $ViewLatestBloc->setTableHeader([
             1 => "Title",
             2 => "Create at",
@@ -156,8 +157,7 @@ class LessonRepository extends Lesson
             4 => "td-content-action"
         ]);
         $ViewLatestBloc->setTableBodyContent($this->getChapterByUrlLesson($_urlLesson), true);
-        $ViewLatestBloc->setActionTargetButton("Chapters", $routes['dashboard_chapter']);
-        $ViewLatestBloc->setArrayHref("edit", $routes["class/edit"]);
+        $ViewLatestBloc->setArrayHref("edit", $routes["chapter/edit"]);
         return $ViewLatestBloc->getArrayData();
     }
 
@@ -169,7 +169,6 @@ class LessonRepository extends Lesson
     public function getChapterByUrlLesson($_urlLesson)
     {
         $Chapter = new ChapterRepository();
-        $this->getLessonByUrl($_urlLesson);
         if(!empty($this->getId())){
             $target = [
                 'id',
