@@ -160,48 +160,20 @@ class UserController
 
                     }*/
                     $email = $params["POST"]["email"];
+                   
+                   
+                
+              }             Mail::sendMailPassword($email); 
+        }
+        
   $View->setData("config", $form);
-                    $View->setData("errors", $errors);
-                      Mail::sendMailPassword($email);
-                
-              }              
-        }
+                    $View->setData("errors", $errors);    
+
+    }   
         
-  
 
-    }
-public function setnewpasswordAction($params)
-    {        $View = new View("default", "User/newpassword");
 
-        $user = new UserRepository();
-        $form = $user->passwordFormAdd();
-        $errors = [];
     
-
-        if(!empty($params["POST"])) {
-            $errors = Form::checkForm($form, $params["POST"]);
-            if (empty($errors)) {
-                $user->checkEmailExist($params["POST"]["email"]);
-                $retourValue=$user->checkEmailExist($params["POST"]["email"]);
-                if(is_numeric($retourValue)){     
-                    echo "testt";
-
-                     $user->setEmail($params["POST"]["email"]); // voir pour le selectMultipleResponse + confirmEmail                                        
-                    } else {
-                        $errors=$retourValue;                                                
-
-                    }
-                    $email = $params["POST"]["email"];
-
-                      Mail::sendMailPassword($email);
-                
-              }              
-        }
-        
-    $View->setData("config", $form);
-                    $View->setData("errors", $errors);
-
-    }
 
     public function disconnectAction($params)
     {
