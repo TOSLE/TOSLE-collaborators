@@ -109,7 +109,7 @@ class DashboardBlocModal
     {
         if(isset($tableName)){
             $data = [];
-            foreach($arraysData as $content){
+            foreach($arraysData as $type => $content){
                 $tmpData = [];
                 if(!empty($content->getDatecreate())){
                     $tmpData["data_datecreate"] = $content->getDatecreate();
@@ -123,7 +123,6 @@ class DashboardBlocModal
                 if(!empty($content->getId())){
                     $tmpData["data_id"] = $content->getId();
                 }
-
                 $data[] = $tmpData;
             }
             $this->typeArrayData = 1;

@@ -36,4 +36,38 @@ class ChapterController
             header('Location:'.$routes['dashboard_lesson']);
         }
     }
+
+    /**
+     * @param $params
+     * Récupère l'id de l'article et modifie le status
+     */
+    public function statusAction($params)
+    {
+        $routes = Access::getSlugsById();
+        if(is_numeric($params["URI"][0])){
+            $Lesson = new LessonRepository();
+
+            $target = [
+                "id",
+                "status"
+            ];
+            $parameter = [
+                "LIKE" => [
+                    "id" => $params["URI"][0]
+                ]
+            ];
+            $Lesson->setWhereParameter($parameter);
+            $Lesson->getOneData($target);
+            if($Lesson->getId()){
+                if($Lesson->getStatus() > 0){
+                    $Lesson->setStatus(0);
+                } else {
+                    $Lesson->setStatus(1);
+                }
+                $Lesson->save();
+            }
+        }
+
+        header('Location:'.$routes["dashboard_lesson"]);
+    }
 }
