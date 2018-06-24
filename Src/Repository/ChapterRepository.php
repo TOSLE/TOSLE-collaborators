@@ -22,7 +22,7 @@ class ChapterRepository extends Chapter
         $_post = Form::secureData($_post);
         if(empty($errors)){
             $file = null;
-            if(isset($_file)){
+            if(isset($_post["file"])){
                 $errors = Form::checkFiles($_file);
                 if(empty($errors) || is_numeric($errors)){
                     if( $errors != 1) {
@@ -87,4 +87,5 @@ class ChapterRepository extends Chapter
         $this->setWhereParameter($parameter);
         $this->getOneData($target);
     }
+
 }

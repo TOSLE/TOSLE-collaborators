@@ -136,7 +136,7 @@ class DashboardController
 
         /*$View->setData("modalAddOption", $Lesson->getModalAdd(12));
         $View->setData("modalStats", $Lesson->getModalStats());*/
-        $View->setData("modalChapter", $Lesson->getModalLatestArticle());
+        $View->setData("modalChapter", $Lesson->getModalLastArticleByLesson($params["URI"][0]));
     }
 
 }
