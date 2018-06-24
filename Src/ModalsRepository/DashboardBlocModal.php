@@ -17,6 +17,7 @@ class DashboardBlocModal
     private $actionButtonView = null;
     private $actionButtonEdit = null;
     private $actionButtonStatus = null;
+    private $actionButtonTarget = null;
     private $typeArrayData = false;
     private $arrayHref = null;
 
@@ -157,6 +158,20 @@ class DashboardBlocModal
     }
 
     /**
+     * @param string $_buttonName
+     * @param string $_target
+     * Prend en paramètre le nom du bouton, et l'id de la modal a viser. Cela inclu que la modal soit présente sur la page,
+     * la fonction ne gère pas sa création.
+     */
+    public function setActionTargetButton($_buttonName, $_target)
+    {
+        $this->actionButtonTarget = [
+            "name" => $_buttonName,
+            "target" => $_target
+        ];
+    }
+
+    /**
      * @return array
      * Retourne notre tableau à envoyer à notre modal
      */
@@ -170,9 +185,10 @@ class DashboardBlocModal
                 "table_header" => $this->tableHeaderContent,
                 "table_body_class" => $this->tableBodyClass,
                 "column_action_button" => [
+                    "actionButtonTarget" => $this->actionButtonTarget,
                     "actionButtonView" => $this->actionButtonView,
                     "actionButtonEdit" => $this->actionButtonEdit,
-                    "actionButtonStatus" => $this->actionButtonStatus
+                    "actionButtonStatus" => $this->actionButtonStatus,
                 ]
             ],
             "data" => [

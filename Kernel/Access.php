@@ -80,6 +80,12 @@ class Access
             "action" => "lessons",
             "security" => 2
         ],
+        "dashboard_chapter" => [ // Dashboard blog homepage
+            "slug" => "dashboard-chapter",
+            "controller" => "dashboard",
+            "action" => "chapter",
+            "security" => 2
+        ],
         "add_user" => [ // change status blog
             "slug" => "add-user",
             "controller" => "user",
