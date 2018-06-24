@@ -128,4 +128,15 @@ class DashboardController
         $View->setData("PageName", NAV_DASHBOARD . " " . NAV_DASHBOARD_STATISTIC);
     }
 
+    public function chapterAction($params)
+    {
+        $View = new View("dashboard", "Dashboard/chapter");
+        $View->setData("PageName", NAV_DASHBOARD . " " . NAV_DASHBOARD_LESSON);
+        $Lesson = new LessonRepository();
+
+        /*$View->setData("modalAddOption", $Lesson->getModalAdd(12));
+        $View->setData("modalStats", $Lesson->getModalStats());*/
+        $View->setData("modalChapter", $Lesson->getModalLatestArticle());
+    }
+
 }

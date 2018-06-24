@@ -121,6 +121,7 @@ class LessonRepository extends Lesson
             4 => "td-content-action"
         ]);
         $ViewLatestBloc->setTableBodyContent($this->getLastLesson(), true);
+        $ViewLatestBloc->setActionTargetButton("Chapters", $routes['dashboard_chapter']);
         $ViewLatestBloc->setArrayHref("edit", $routes["class/edit"]);
         return $ViewLatestBloc->getArrayData();
     }
