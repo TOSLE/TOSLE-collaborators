@@ -116,4 +116,22 @@ class UserRepository extends User
         $this->setWhereParameter($parameter);
         $this->getOneData($target);
     }
+
+    public function getUserById($_id)
+    {
+        $target = [
+            "id",
+            "firstname",
+            "lastname",
+            "email",
+            "status"
+        ];
+        $parameter = [
+            "LIKE" => [
+                "id" => $_id
+            ]
+        ];
+        $this->setWhereParameter($parameter);
+        $this->getOneData($target);
+    }
 }

@@ -14,6 +14,7 @@ class Lesson extends CoreSql {
     protected $datecreate;
     protected $status;
     protected $url;
+    protected $color;
 
     public function __construct()
     {
@@ -116,6 +117,21 @@ class Lesson extends CoreSql {
         return $this->url;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getColor()
+    {
+        return $this->color;
+    }
+    /**
+     * @param string $color
+     */
+    public function setColor($color)
+    {
+        $this->color = $color;
+    }
+
     public function configFormAddLesson()
     {
         $slugs = Access::getSlugsById();
@@ -143,7 +159,22 @@ class Lesson extends CoreSql {
                 "description" => "Un maximum de 500 caractères",
                 "placeholder" => "Maximum 500 caractères"
             ],
-            'select' => $category->configFormCategory(2),
+            'select_multiple' => $category->configFormCategory(2),
+            'select' => [
+                'select_color' => [
+                    'label' => 'Choisissez la couleur de votre cours',
+                    'required' => false,
+                    'options' => [
+                        'none' => 'Aucune',
+                        '#FFFFFF' => 'Blanc',
+                        '#F43C3E' => 'Rouge',
+                        '#28A745' => 'Vert',
+                        '#FA690E' => 'Orange',
+                        '#1A5CCB' => 'Blanc',
+                    ],
+                    'description' => 'Couleur d\'arrière plan'
+                ]
+            ],
             "exit" => $slugs["dashboard_lesson"]
         ];
     }

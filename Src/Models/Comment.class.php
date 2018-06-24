@@ -11,6 +11,8 @@ class Comment extends CoreSql {
     protected $id;
     protected $content;
     protected $tag;
+    protected $datecreate;
+    protected $dateupdated;
 
     public function __construct()
     {
@@ -65,6 +67,40 @@ class Comment extends CoreSql {
         $this->tag = uniqid();
     }
 
+    /**
+     * @return mixed
+     */
+    public function getDatecreate()
+    {
+        return $this->datecreate;
+    }
+
+    /**
+     * @param mixed $datecreate
+     */
+    public function setDatecreate($datecreate)
+    {
+        $this->datecreate = $datecreate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDateupdated()
+    {
+        return $this->dateupdated;
+    }
+
+    /**
+     * @param mixed $dateupdated
+     */
+    public function setDateupdated($dateupdated)
+    {
+        $this->dateupdated = $dateupdated;
+    }
+
+
+
 
 
     public function configFormAdd()
@@ -77,7 +113,7 @@ class Comment extends CoreSql {
             ],
             "textarea" => [
                 "label" => "Nouveau commentaire",
-                "name" => "textarea_articleImage",
+                "name" => "textarea_comment",
                 "description" => "Laissez parler votre imagination",
                 "placeholder" => "Soyez sûr de ce que vous voulez publier."
             ],

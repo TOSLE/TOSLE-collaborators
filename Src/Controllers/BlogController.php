@@ -79,27 +79,50 @@ class BlogController
         if(isset($params["URI"][0]) && !empty($params["URI"][0])){
             $View = new View("default", "Blog/view_article");
             $Blog = new BlogRepository();
+            $Comment = new CommentRepository();
+            $Category = new CategoryRepository();
+            $configFormComment = $Comment->configFormAdd();
             if($Blog->getArticleByUrl($params["URI"][0])){
+                if(isset($params['POST']) && !empty($params['POST'])){
+                    $Comment->addComment($configFormComment, $params['POST'], 1, $Blog->getId());
+                    // Pour vider la variable POST, on redirige vers la page
+                    header('Location:'.Access::getSlugsById()["view_blog_article"].'/'.$params["URI"][0]);
+                }
                 $article = [
                     "title" => $Blog->getTitle(),
                     "content" => $Blog->getContent(),
-                    "datecreate" => $Blog->getDatecreate()
+                    "datecreate" => $Blog->getDatecreate(),
+                    'image' => $Blog->getFileid(),
+                    'url' => $Blog->getUrl(),
+                    'type' => $Blog->getType(),
+                    "category" => $Category->getCategoryByIdentifier('blog', $Blog->getId()),
                 ];
+                if($Blog->getType() == 3){
+                    $article['content'] = $Blog->getPlayerVideo($Blog->getContent());
+                }
                 $commentaires = null;
-                $Comment = new CommentRepository();
-                $Category = new CategoryRepository();
                 $comments = $Comment->getAll("blog", $Blog->getId());
                 foreach($comments as $comment){
+                    $author = $Comment->getAuthorComment($comment->getId());
+                    $date = new DateTime($comment->getDateupdated());
+
                     $commentaires[] = [
                         "id" => $comment->getId(),
                         "content" => $comment->getContent(),
-                        "tag" => $comment->getTag(),
-                        "category" => $Category->getCategoryByIdentifier('blog', $comment->getId())
+                        "firstname" => $author['firstname'],
+                        "lastname" => $author['lastname'],
+                        "date" => $date->format("l jS \of F Y H:i"),
+
                     ];
                 }
 
                 $View->setData("article_content", $article);
-                $View->setData("commentaires", $commentaires);
+                $View->setData("commentaires_all", $commentaires);
+                if(isset($commentaires)){
+                    $View->setData("commentaires_last", array_slice($commentaires, 0, 5));
+                }
+                $View->setData("formAddComment", $configFormComment);
+
             } else {
                 echo "L'article demandé n'est pas disponible ou n'existe pas";
             }
@@ -208,26 +231,28 @@ class BlogController
     function statusAction($params)
     {
         $routes = Access::getSlugsById();
-        $Blog = new Blog();
+        if(is_numeric($params["URI"][0])){
+            $Blog = new Blog();
 
-        $target = [
-            "id",
-            "status"
-        ];
-        $parameter = [
-            "LIKE" => [
-                "id" => $params["URI"][0]
-            ]
-        ];
-        $Blog->setWhereParameter($parameter);
-        $Blog->getOneData($target);
-        if($Blog->getId()){
-            if($Blog->getStatus() > 0){
-                $Blog->setStatus(0);
-            } else {
-                $Blog->setStatus(1);
+            $target = [
+                "id",
+                "status"
+            ];
+            $parameter = [
+                "LIKE" => [
+                    "id" => $params["URI"][0]
+                ]
+            ];
+            $Blog->setWhereParameter($parameter);
+            $Blog->getOneData($target);
+            if($Blog->getId()){
+                if($Blog->getStatus() > 0){
+                    $Blog->setStatus(0);
+                } else {
+                    $Blog->setStatus(1);
+                }
+                $Blog->save();
             }
-            $Blog->save();
         }
 
         header('Location:'.$routes["dashboard_blog"]);

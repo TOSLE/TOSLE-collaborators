@@ -60,6 +60,7 @@ class ClassController
         }
     }
 
+
     /**
      * @Route("/en/class/{idArticle}")
      * @param array $params
@@ -113,5 +114,69 @@ class ClassController
         } else {
             header('Location:'.$routes['dashboard_lesson']);
         }
+    }
+
+    public function editAction($params)
+    {
+        $routes = Access::getSlugsById();
+        if(isset($params["URI"][0])){
+            if(is_numeric($params["URI"][0])) {
+                $Lesson = new LessonRepository();
+                $View = new View("dashboard", "Dashboard/add_lesson");
+                $arrayReturn = $Lesson->editLesson($params["URI"][0]);
+                $arrayLesson = $arrayReturn["lesson"];
+                $configForm = $arrayReturn["configForm"];
+                $configForm["content_value"] = [
+                    "title" => $arrayLesson->getTitle(),
+                    "content" => $arrayLesson->getDescription(),
+                    "select_color" => $arrayLesson->getColor(),
+                    "selectedOption" => $arrayReturn['selectedOption']
+                ];
+                if(isset($params["POST"]) && !empty($params["POST"])){
+                    $resultAdd = $Lesson->addLesson($params["POST"], $params["URI"][0]);
+                    if($resultAdd == 1){
+                        header('Location:'.$routes['dashboard_lesson']);
+                    }
+                }
+                $View->setData("errors", "");
+                $View->setData("configForm", $configForm);
+            }
+        } else {
+            header('Location:'.$routes['dashboard_lesson']);
+        }
+    }
+
+    /**
+     * @param $params
+     * Récupère l'id de la lesson et modifie le status
+     */
+    public function statusAction($params)
+    {
+        $routes = Access::getSlugsById();
+        if(is_numeric($params["URI"][0])){
+            $Lesson = new LessonRepository();
+
+            $target = [
+                "id",
+                "status"
+            ];
+            $parameter = [
+                "LIKE" => [
+                    "id" => $params["URI"][0]
+                ]
+            ];
+            $Lesson->setWhereParameter($parameter);
+            $Lesson->getOneData($target);
+            if($Lesson->getId()){
+                if($Lesson->getStatus() > 0){
+                    $Lesson->setStatus(0);
+                } else {
+                    $Lesson->setStatus(1);
+                }
+                $Lesson->save();
+            }
+        }
+
+        header('Location:'.$routes["dashboard_lesson"]);
     }
 }

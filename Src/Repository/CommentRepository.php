@@ -44,7 +44,7 @@ class CommentRepository extends Comment
     public function getAll($identifier, $value)
     {
         if($identifier == "blog"){
-            $target = ["id", "content", "tag"];
+            $target = ["id", "content", "tag", "datecreate", "dateupdated"];
             $joinParameter = [
                 "blogcomment" => [
                         "comment_id"
@@ -56,6 +56,7 @@ class CommentRepository extends Comment
                 ]
             ];
             $this->setLeftJoin($joinParameter, $whereParameter);
+            $this->setOrderByParameter(["id"=>"DESC"]);
             return $this->getData($target);
         }
         if($identifier == "number_blog"){
@@ -98,8 +99,45 @@ class CommentRepository extends Comment
      *
      * $_targetId correspond à l'identifiant du type
      */
-    public function addComment($_post, $_type, $_targetId)
+    public function addComment($_config, $_post, $_type, $_targetId)
     {
+        $errors = Form::checkForm($_config, $_post);
+        $_post = Form::secureData($_post);
+        if(empty($errors)){
+            $User = new UserRepository();
+            $User->getUser();
+            $this->setContent($_post['textarea_comment']);
+            $this->setTag();
+            $this->save();
+            $this->getComment('tag', $this->getTag());
+            switch($_type){
+                case 1:
+                    $BlogComment = new BlogComment();
+                    $BlogComment->setBlogid($_targetId);
+                    $BlogComment->setCommentid($this->getId());
+
+                    $BlogComment->setUserid($User->getId());
+                    $BlogComment->save();
+                    break;
+                case 2:
+                    break;
+                default:
+                    return 1;
+                    break;
+            }
+        }
+        return 0;
+    }
+
+    public function getAuthorComment($_idComment)
+    {
+        $User = new UserRepository();
+        $BlogComment = new BlogComment();
+        $User->getUserById($BlogComment->getUserid($_idComment));
+        return [
+            "firstname" => $User->getFirstName(),
+            "lastname" => $User->getLastName(),
+        ];
 
     }
 }
