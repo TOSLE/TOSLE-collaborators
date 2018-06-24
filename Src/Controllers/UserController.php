@@ -19,12 +19,10 @@ class UserController
         $form = $User->configFormConnect();
         $errors = [];
         if(!empty($params["POST"])) {
-            $_post = $params["POST"];
-            $errors = Form::checkForm($form, $_post);
-            $_post = Form::secureData($_post);
+            $errors = Form::checkForm($form, $params["POST"]);
             if(empty($errors)){
-                if(isset($_post["email"]) && isset($_post["pwd"])){
-                    $returnValue=$User->verrifyUserLogin($_post["pwd"], $_post["email"]);
+                if(isset($params["POST"]["email"]) && isset($params["POST"]["pwd"])){
+                    $returnValue=$User->verrifyUserLogin($params["POST"]["pwd"], $params["POST"]["email"]);
                     if(is_numeric($returnValue)){                                             
                             header("Location:" . DIRNAME);                        
                     } else {
@@ -57,11 +55,8 @@ class UserController
         $form = $user->configFormAdd();
         $errors = [];
         if(!empty($params["POST"])) {
-            $_post = $params["POST"];
-            $errors = Form::checkForm($form, $_post);
-            $_post = Form::secureData($_post);
+            $errors = Form::checkForm($form, $params["POST"]);
             if (empty($errors)) {
-
                 $user->setFirstName($params["POST"]["firstname"]);
                 $user->setLastName($params["POST"]["lastname"]);
                 $user->checkEmailExist($params["POST"]["email"]);
@@ -75,28 +70,24 @@ class UserController
 
                     }
 
-               
-                
-
                 $user->setEmail($params["POST"]["emailConfirm"]);
                 $user->setPassword($params["POST"]["pwd"]);
                 $user->setPassword($params["POST"]["pwdConfirm"]);
-
                 $user->setToken();
                 $user->save();
 
-                $email = $_post["email"];
-                $firstName = $_post["firstname"];
-                $lastName = $_post["lastname"];
+                $email = $params["POST"]["email"];
+                $firstName = $params["POST"]["firstname"];
+                $lastName = $params["POST"]["lastname"];
                 $token = $user->getToken();
 
                 Mail::sendMailRegister($email, $firstName, $lastName,$token);
                 header('Location:'.Access::getSlugsById()['signin'].'/registered');
             } else {
                 $form["data_content"] = [
-                    "email" => $_post["email"],
-                    "firstname" => $_post["firstname"],
-                    "lastname" => $_post["lastname"],
+                    "email" => $params["POST"]["email"],
+                    "firstname" => $params["POST"]["firstname"],
+                    "lastname" => $params["POST"]["lastname"],
                 ];
             }
         }
@@ -145,6 +136,71 @@ class UserController
                 header('Location:'.$routes["signup"].'/error');
             }
         }
+    }
+
+    public function getpasswordAction($params)
+    {        $View = new View("default", "User/newpassword");
+
+        $user = new UserRepository();
+        $form = $user->passwordFormAdd();
+        $errors = [];
+    
+
+        if(!empty($params["POST"])) {
+            $errors = Form::checkForm($form, $params["POST"]);
+            if (empty($errors)) {
+              /*  $user->checkEmailExist($params["POST"]["email"]);
+                $retourValue=$user->checkEmailExist($params["POST"]["email"]);
+                if(is_numeric($retourValue)){     
+                    echo "testt";
+*/
+                     $user->setEmail($params["POST"]["email"]); // voir pour le selectMultipleResponse + confirmEmail                                        
+                  /*  } else {
+                        $errors=$retourValue;                                                
+
+                    }*/
+                    $email = $params["POST"]["email"];
+  $View->setData("config", $form);
+                    $View->setData("errors", $errors);
+                      Mail::sendMailPassword($email);
+                
+              }              
+        }
+        
+  
+
+    }
+public function setnewpasswordAction($params)
+    {        $View = new View("default", "User/newpassword");
+
+        $user = new UserRepository();
+        $form = $user->passwordFormAdd();
+        $errors = [];
+    
+
+        if(!empty($params["POST"])) {
+            $errors = Form::checkForm($form, $params["POST"]);
+            if (empty($errors)) {
+                $user->checkEmailExist($params["POST"]["email"]);
+                $retourValue=$user->checkEmailExist($params["POST"]["email"]);
+                if(is_numeric($retourValue)){     
+                    echo "testt";
+
+                     $user->setEmail($params["POST"]["email"]); // voir pour le selectMultipleResponse + confirmEmail                                        
+                    } else {
+                        $errors=$retourValue;                                                
+
+                    }
+                    $email = $params["POST"]["email"];
+
+                      Mail::sendMailPassword($email);
+                
+              }              
+        }
+        
+    $View->setData("config", $form);
+                    $View->setData("errors", $errors);
+
     }
 
     public function disconnectAction($params)

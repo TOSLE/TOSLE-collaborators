@@ -46,7 +46,7 @@
                         <p>
                             <a href="<?php echo DIRNAME;?>" class="btn btn-blue">Revenir à l'accueil</a>
                             <a href="<?php echo $this->slugs['signup'];?>" class="btn btn-tosle-outline">Cliquez-ici pour s'inscrire</a>
-                            <a href="<?php echo $this->slugs['view_new_password'];?>" >Mot de passe oublié ?</a>
+                            <a href="<?php echo $this->slugs['view-newpassword'];?>" >Mot de passe oublié ?</a>
                         </p>
                     </article>
                 </section>

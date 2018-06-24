@@ -91,6 +91,12 @@ class Access
             "controller" => "blog",
             "action" => "view",
             "security" => false
+        ],
+        "view-newpassword" => [ // change status blog
+            "slug" => "view-newpassword",
+            "controller" => "user",
+            "action" => "getpassword",
+            "security" => false
         ]
     ];
 
@@ -100,8 +106,6 @@ class Access
         "blog/edit" => 2,
         "class/add" => 2,
         "class/edit" => 2,
-        "class/status" => 2,
-        "chapter/add" => 2,
     ];
 
     /**
@@ -191,8 +195,8 @@ class Access
      */
     public static function constructUrl($string = "url to encode")
     {
-        $search = array('à', 'ä', 'â', 'é', 'è', 'ë', 'ê', 'ï', 'ì', 'î', 'ù', 'û', 'ü', 'ô', 'ö', '&', ' ', '?', '!', 'ç', ';', '/', '.', ',', ':', '(', ')', '=', '\'');
-        $replace = array('a', 'a', 'a', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'u', 'u', 'u', 'o', 'o', '', '-', '', '', 'c', '', '-', '', '', '', '', '', '', '-');
+        $search = array('à', 'ä', 'â', 'é', 'è', 'ë', 'ê', 'ï', 'ì', 'î', 'ù', 'û', 'ü', 'ô', 'ö', '&', ' ', '?', '!', 'ç', ';', '/', '.', ',', ':', '(', ')', '=');
+        $replace = array('a', 'a', 'a', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'u', 'u', 'u', 'o', 'o', '', '-', '', '', 'c', '', '-', '', '', '', '', '', '');
 
         return urlencode(str_replace($search, $replace, strtolower(trim($string))));
     }
