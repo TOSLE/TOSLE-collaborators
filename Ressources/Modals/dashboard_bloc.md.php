@@ -29,6 +29,20 @@
                             <?php foreach($config["data"]["array_data"] as $key => $arrayValue):?>
                                 <tr>
                                     <?php foreach($config["global"]["table_body_class"] as $className):?>
+                                        <?php if($className == "td-content-order"):?>
+                                        <?php if(isset($config["global"]["column_action_button"]["actionButtonOrder"])):?>
+                                            <td class="<?php echo $className;?>">
+                                                <?php echo ($key+1) ?>
+                                                <a class="btn-sm btn-tosle material-icons ordered-button">
+                                                    arrow_downward
+                                                </a>
+                                                <a class="btn-sm btn-tosle material-icons ordered-button">
+                                                    arrow_upward                                                </a>
+                                            </td>
+                                        <?php else: ?>
+                                            <td class="<?php echo $className;?>"><?php echo ($key+1) ?></td>
+                                        <?php endif;?>
+                                        <?php endif;?>
                                         <?php if($className == "td-content-text"):?>
                                             <td class="<?php echo $className;?>"><?php echo $arrayValue["data_title"];?></td>
                                         <?php endif;?>
