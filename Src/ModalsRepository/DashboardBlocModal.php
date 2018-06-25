@@ -124,7 +124,7 @@ class DashboardBlocModal
                 if(!empty($content->getId())){
                     $tmpData["data_id"] = $content->getId();
                 }
-                if(!empty($content->getLessonchapter())){
+                if(is_a($arraysData[0], 'Chapter') && !empty($content->getLessonchapter())){
                     $tmpData["data_order"] = $content->getLessonchapter()->getOrder();
                 }
                 $data[] = $tmpData;
