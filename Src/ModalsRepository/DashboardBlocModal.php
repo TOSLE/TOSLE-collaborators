@@ -124,6 +124,9 @@ class DashboardBlocModal
                 if(!empty($content->getId())){
                     $tmpData["data_id"] = $content->getId();
                 }
+                if(!empty($content->getLessonchapter())){
+                    $tmpData["data_order"] = $content->getLessonchapter()->getOrder();
+                }
                 $data[] = $tmpData;
             }
             $this->typeArrayData = 1;

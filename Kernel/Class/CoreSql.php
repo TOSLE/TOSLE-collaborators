@@ -183,6 +183,25 @@ class CoreSql{
         $this->orderByParameter = "ORDER BY " . implode(', ', $tmpArray);
     }
 
+
+    /**
+     * @param array $_target
+     * @return array
+     * Permet de traiter la gestion des targets
+     */
+    public function getTarget($_target)
+    {
+        $arrayTarget = [];
+        foreach ($_target as $key => $value){
+            if(substr($value, 0,1) === '_'){
+                $arrayTarget[$key] = substr($value, 1);
+            } else {
+                $arrayTarget[$key] = $this->columnBase.'_'.$value;
+            }
+        }
+
+        return $arrayTarget;
+    }
     /**
      * function getData
      * @param array $target
@@ -197,9 +216,7 @@ class CoreSql{
      */
     public function getData($target)
     {
-        foreach ($target as $key => $value){
-            $target[$key] = $this->columnBase.'_'.$value;
-        }
+        $target = $this->getTarget($target);
 
         $query = $this->pdo->prepare("
             SELECT " . implode(',', $target) . " 
@@ -226,13 +243,19 @@ class CoreSql{
             $object = new $tableName();
             foreach($contentArray as $keyArray => $value){
                 if(!is_numeric($keyArray)){
-                    $tmpString = "set".ucfirst(str_ireplace($this->columnBase."_", "", $keyArray));
-                    $object->$tmpString($value);
+                    $explodedContent = explode('_', $keyArray);
+                    if($explodedContent[0] == $this->columnBase){
+                        $tmpString = "set".ucfirst($explodedContent[1]);
+                        $object->$tmpString($value);
+                    } else {
+                        $foreinTable = ucfirst($explodedContent[0]);
+                        $tmpString = "set".$foreinTable;
+                        $object->$tmpString($value);
+                    }
                 }
             }
             $arrayData[] = $object;
         }
-
         return $arrayData;
     }
 

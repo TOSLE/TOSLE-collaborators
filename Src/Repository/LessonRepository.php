@@ -181,7 +181,8 @@ class LessonRepository extends Lesson
                 'status',
                 'type',
                 'url',
-                "fileid"
+                "fileid",
+                "_lessonchapter_id"
             ];
 
             $joinParameter = [

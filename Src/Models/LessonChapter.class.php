@@ -13,9 +13,22 @@ class LessonChapter extends CoreSql
     protected $lessonid;
     protected $chapterid;
 
-    public function __construct()
+    public function __construct($_id)
     {
         parent::__construct();
+        $target = [
+            'id',
+            'lessonid',
+            'chapterid',
+            'order',
+        ];
+        $parameter = [
+            'LIKE' => [
+                'id' => $_id
+            ]
+        ];
+        $this->setWhereParameter($parameter);
+        $this->getOneData($target);
     }
 
     /**
@@ -81,6 +94,5 @@ class LessonChapter extends CoreSql
     {
         $this->chapterid = $chapterid;
     }
-
 
 }
