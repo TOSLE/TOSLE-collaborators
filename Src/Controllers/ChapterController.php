@@ -17,6 +17,7 @@ class ChapterController
         if(isset($params["URI"][0])){
             $getTypeNewArticle = $params["URI"][0];
             $Chapter = new ChapterRepository();
+            $configForm = $Chapter->configFormAdd();
             $View = new View("dashboard", "Dashboard/add_chapter");
             $View->setData("errors", "");
             if((isset($_FILES) && !empty($_FILES)) || (isset($params["POST"]) && !empty($params["POST"]))){
@@ -25,10 +26,15 @@ class ChapterController
                     header('Location:'.$routes['dashboard_lesson']);
                 } else {
                     $View->setData("errors", $resultAdd);
+                    $configForm["data_content"] = [
+                        "title" => $params["POST"]["title"],
+                        "select_lesson" => $params["POST"]["select_lesson"],
+                        "content" => $params["POST"]["ckeditor_chapter"],
+                    ];
                 }
             }
             if($getTypeNewArticle == "chapter"){
-                $View->setData("configForm", $Chapter->configFormAdd());
+                $View->setData("configForm", $configForm);
             }  else {
                 header('Location:'.$routes['dashboard_lesson'].'/error');
             }
@@ -44,8 +50,8 @@ class ChapterController
     public function statusAction($params)
     {
         $routes = Access::getSlugsById();
-        if(is_numeric($params["URI"][0])){
-            $Lesson = new LessonRepository();
+        if(is_numeric($params["URI"][1])){
+            $Chapter = new ChapterRepository();
 
             $target = [
                 "id",
@@ -53,21 +59,21 @@ class ChapterController
             ];
             $parameter = [
                 "LIKE" => [
-                    "id" => $params["URI"][0]
+                    "id" => $params["URI"][1]
                 ]
             ];
-            $Lesson->setWhereParameter($parameter);
-            $Lesson->getOneData($target);
-            if($Lesson->getId()){
-                if($Lesson->getStatus() > 0){
-                    $Lesson->setStatus(0);
+            $Chapter->setWhereParameter($parameter);
+            $Chapter->getOneData($target);
+            if($Chapter->getId()){
+                if($Chapter->getStatus() > 0){
+                    $Chapter->setStatus(0);
                 } else {
-                    $Lesson->setStatus(1);
+                    $Chapter->setStatus(1);
                 }
-                $Lesson->save();
+                $Chapter->save();
             }
         }
 
-        header('Location:'.$routes["dashboard_lesson"]);
+        header('Location:'.$routes["dashboard_chapter"].'/'.$params["URI"][0]);
     }
 }

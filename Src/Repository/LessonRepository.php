@@ -141,13 +141,13 @@ class LessonRepository extends Lesson
             "color" => "green",
             "text" => "Publish",
             "type" => "href",
-            "target" => $routes["chapter/status"]."/"
+            "target" => $routes["chapter/status"]."/".$this->getUrl().'/'
         ]);
         $ViewLatestBloc->setActionButtonStatus(1, [
             "color" => "red",
             "text" => "Unpublish",
             "type" => "href",
-            "target" => $routes["chapter/status"]."/"
+            "target" => $routes["chapter/status"]."/".$this->getUrl().'/'
         ]);
         $ViewLatestBloc->setActionButtonEdit("Edit");
 
