@@ -390,7 +390,7 @@ class BlogRepository extends Blog
         $_post = Form::secureData($_post);
         if(empty($errors)){
             $file = null;
-            if(isset($_file)){
+            if(isset($_post["file"])){
                 $errors = Form::checkFiles($_file);
                 if(empty($errors) || is_numeric($errors)){
                     if( $errors != 1) {
