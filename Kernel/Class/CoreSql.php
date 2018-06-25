@@ -174,7 +174,11 @@ class CoreSql{
         $this->orderByParameter = "";
         $tmpArray = [];
         foreach($arrayParameter as $columnName => $typeOrder){
-            $tmpArray[] = $this->columnBase.'_'.$columnName. " " .$typeOrder;
+            if(substr($columnName, 0,1) === '_'){
+                $tmpArray[] = substr($columnName, 1). " " .$typeOrder;
+            } else {
+                $tmpArray[] = $this->columnBase.'_'.$columnName. " " .$typeOrder;
+            }
         }
         $this->orderByParameter = "ORDER BY " . implode(', ', $tmpArray);
     }

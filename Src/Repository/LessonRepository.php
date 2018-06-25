@@ -192,7 +192,7 @@ class LessonRepository extends Lesson
                 ]
             ];
             $Chapter->setLeftJoin($joinParameter, $whereParameter);
-            $Chapter->setOrderByParameter(["id" => "DESC"]);
+            $Chapter->setOrderByParameter(["_lessonchapter_order" => "ASC"]);
             return $Chapter->getData($target);
         } else {
             return ["error" => "URL de lesson inconnue"];
