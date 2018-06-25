@@ -157,6 +157,18 @@ class BlogController
         if(isset($params["URI"][0])){
             $getTypeNewArticle = $params["URI"][0];
             $Blog = new BlogRepository();
+            if($getTypeNewArticle == "text"){
+                $configForm = $Blog->configFormAddArticleText();
+                $contentInputName = $params["POST"]["ckeditor_article"];
+            } elseif ($getTypeNewArticle == "image"){
+                $configForm = $Blog->configFormAddArticleImage();
+                $contentInputName = $params["POST"]["textarea_articleImage"];
+            } elseif ($getTypeNewArticle == "video"){
+                $configForm = $Blog->configFormAddArticleVideo();
+                $contentInputName = $params["POST"]["link"];
+            } else {
+                header('Location:'.$routes['dashboard_blog'].'/error');
+            }
             $View = new View("dashboard", "Dashboard/add_article_blog");
             $View->setData("errors", "");
             if((isset($_FILES) && !empty($_FILES)) || (isset($params["POST"]) && !empty($params["POST"]))){
@@ -165,18 +177,16 @@ class BlogController
                     header('Location:'.$routes['dashboard_blog']);
                 } else {
                     $View->setData("errors", $resultAdd);
+                    $configForm["data_content"] = [
+                        "title" => $params["POST"]["title"],
+                        "select_lesson" => $params["POST"]["select_lesson"],
+                        "category_input" => $params["POST"]["category_input"],
+                        "content" => $contentInputName,
+                        "link" => $contentInputName,
+                    ];
                 }
             }
-
-            if($getTypeNewArticle == "text"){
-                $View->setData("configForm", $Blog->configFormAddArticleText());
-            } elseif ($getTypeNewArticle == "image"){
-                $View->setData("configForm", $Blog->configFormAddArticleImage());
-            } elseif ($getTypeNewArticle == "video"){
-                $View->setData("configForm", $Blog->configFormAddArticleVideo());
-            } else {
-                header('Location:'.$routes['dashboard_blog'].'/error');
-            }
+            $View->setData("configForm", $configForm);
         } else {
             header('Location:'.$routes['dashboard_blog']);
         }
@@ -193,7 +203,7 @@ class BlogController
                 $arrayBlog = $arrayReturn["blog"];
                 $pathFile = (isset($arrayReturn["file"]))?$arrayReturn["file"]->getPath().$arrayReturn["file"]->getName():null;
                 $configForm = $arrayReturn["configForm"];
-                $configForm["content_value"] = [
+                $configForm["data_content"] = [
                     "title" => $arrayBlog->getTitle(),
                     "content" => $arrayBlog->getContent(),
                     "link" => $arrayBlog->getContent(),
