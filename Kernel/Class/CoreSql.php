@@ -158,7 +158,12 @@ class CoreSql{
         }
     }
 
-    function setLimitParameter($limit, $offset = 0)
+    /**
+     * @param int $limit
+     * @param int $offset
+     * Setter de la partie LIMIT des requêtes select
+     */
+    public function setLimitParameter($limit, $offset = 0)
     {
         $this->limitParameter = "";
         if(is_numeric($limit)){
@@ -169,11 +174,20 @@ class CoreSql{
         }
     }
 
-    function setOrderByParameter($arrayParameter)
+    /**
+     * @param array $arrayOrder
+     * Prend le tableau en paramètre et construit la partie ORDER BY du SELECT
+     * Format du tableau :
+     * $array = [
+     *  'columnName' => 'ASC',
+     *  'columnName' => 'DESC',
+     * ]
+     */
+    public function setOrderByParameter($arrayOrder)
     {
         $this->orderByParameter = "";
         $tmpArray = [];
-        foreach($arrayParameter as $columnName => $typeOrder){
+        foreach($arrayOrder as $columnName => $typeOrder){
             if(substr($columnName, 0,1) === '_'){
                 $tmpArray[] = substr($columnName, 1). " " .$typeOrder;
             } else {
