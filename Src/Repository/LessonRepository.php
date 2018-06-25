@@ -132,8 +132,9 @@ class LessonRepository extends Lesson
         $ViewLatestBloc = new DashboardBlocModal();
         $ViewLatestBloc->setTitle("Chapter of your lesson : ".$this->getTitle());
         $ViewLatestBloc->setTableHeader([
-            1 => "Title",
-            2 => "Create at",
+            1 => "Order",
+            2 => "Title",
+            3 => "Create at",
             4 => "Action"
         ]);
         $ViewLatestBloc->setColSizeBloc(12);
@@ -152,12 +153,14 @@ class LessonRepository extends Lesson
         $ViewLatestBloc->setActionButtonEdit("Edit");
 
         $ViewLatestBloc->setTableBodyClass([
-            1 => "td-content-text",
-            2 => "td-content-date",
+            1 => "td-content-order",
+            2 => "td-content-text",
+            3 => "td-content-date",
             4 => "td-content-action"
         ]);
         $ViewLatestBloc->setTableBodyContent($this->getChapterByUrlLesson($_urlLesson), true);
         $ViewLatestBloc->setArrayHref("edit", $routes["chapter/edit"]);
+        $ViewLatestBloc->setActionButtonOrder($routes["chapter/order"]);
         return $ViewLatestBloc->getArrayData();
     }
 

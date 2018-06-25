@@ -18,6 +18,7 @@ class DashboardBlocModal
     private $actionButtonEdit = null;
     private $actionButtonStatus = null;
     private $actionButtonTarget = null;
+    private $actionButtonOrder = null;
     private $typeArrayData = false;
     private $arrayHref = null;
 
@@ -171,6 +172,17 @@ class DashboardBlocModal
     }
 
     /**
+     * @param string $_targetUrl
+     * Cette fonction définit l'endroit où sont gérés les order. La modal va de son côté généré deux fleches et rajouter la mention :
+     * - 'up' pour monter dans les ordres
+     * - 'down' pour baisser dans les ordres
+     */
+    public function setActionButtonOrder($_targetUrl)
+    {
+        $this->actionButtonOrder = $_targetUrl;
+    }
+
+    /**
      * @return array
      * Retourne notre tableau à envoyer à notre modal
      */
@@ -188,6 +200,7 @@ class DashboardBlocModal
                     "actionButtonView" => $this->actionButtonView,
                     "actionButtonEdit" => $this->actionButtonEdit,
                     "actionButtonStatus" => $this->actionButtonStatus,
+                    "actionButtonOrder" => $this->actionButtonOrder,
                 ]
             ],
             "data" => [
