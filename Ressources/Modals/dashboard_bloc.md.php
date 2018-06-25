@@ -32,15 +32,15 @@
                                         <?php if($className == "td-content-order"):?>
                                         <?php if(isset($config["global"]["column_action_button"]["actionButtonOrder"])):?>
                                             <td class="<?php echo $className;?>">
-                                                <?php echo ($arrayValue["data_order"]) ?>
                                                 <a class="btn-sm btn-tosle material-icons ordered-button">
                                                     arrow_downward
                                                 </a>
+                                                <?php echo ($arrayValue["data_order"]) ?>
                                                 <a class="btn-sm btn-tosle material-icons ordered-button">
                                                     arrow_upward                                                </a>
                                             </td>
                                         <?php else: ?>
-                                            <td class="<?php echo $className;?>"><?php echo ($key+1) ?></td>
+                                            <td class="<?php echo $className;?>"><?php echo $key; ?></td>
                                         <?php endif;?>
                                         <?php endif;?>
                                         <?php if($className == "td-content-text"):?>
