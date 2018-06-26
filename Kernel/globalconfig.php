@@ -11,12 +11,7 @@
     define("DIRNAME", $scriptName.DS);
 
     if(DEV_MODE){
-        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-            define("SYSTEM", "WINDOWS");
-        }
-        else {
-            define("SYSTEM", "LINUX");
-        }
+        define('SYSTEM', (strpos(PHP_OS, 'WIN') === 0)?"WIN":"LINUX");
         ini_set('display_errors', 1);
         ini_set('log_errors', 1);
         ini_set('error_log', DIRNAME. 'Kernel/Logs/log_error_php.txt');
