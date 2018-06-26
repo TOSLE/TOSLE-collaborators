@@ -24,6 +24,11 @@ class GeneratorXML
         $this->routes = Access::getSlugsById();
         $this->dirPath = $dirPath;
         $this->fileName = $fileName.'.xml';
+        if(SYSTEM == "LINUX") {
+            $this->dirPath = getcwd() . DIRNAME . $dirPath;
+        } else {
+            $this->dirPath = '../..' . $dirPath;
+        }
         if(!file_exists($this->dirPath)){
             mkdir($this->dirPath, 0755, true);
         }
@@ -81,10 +86,10 @@ class GeneratorXML
             $this->channel->appendChild($item);
         }
         $this->xmlDoc->appendChild($this->channel);
+        $this->xmlDoc->save($this->dirPath.'/'.$this->fileName);
     }
 
     public function __destruct()
     {
-        $this->xmlDoc->save($this->dirPath.'/'.$this->fileName);
     }
 }

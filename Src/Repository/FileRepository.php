@@ -19,12 +19,12 @@ class FileRepository extends File
     public function addFile($_file, $_configForm, $_destination, $_comment)
     {
         if(SYSTEM == "LINUX") {
-            $directoryDestination = getcwd() . DIRNAME . 'Tosle/' . ucfirst(strtolower($_destination)) . '/';
+            $directoryDestination = getcwd() . DIRNAME . 'Tosle/Static/' . ucfirst(strtolower($_destination)) . '/';
         } else {
-            $directoryDestination = '../..' . DIRNAME . 'Tosle/' . ucfirst(strtolower($_destination)) . '/';
+            $directoryDestination = '../..' . DIRNAME . 'Tosle/Static/' . ucfirst(strtolower($_destination)) . '/';
         }
 
-        $pathDirectory = DIRNAME . 'Tosle/' . ucfirst(strtolower($_destination)) . '/';
+        $pathDirectory = DIRNAME . 'Tosle/Static/' . ucfirst(strtolower($_destination)) . '/';
 
         foreach($_configForm as $type => $arrayType) {
             if($type == "input")
@@ -106,7 +106,6 @@ class FileRepository extends File
 
             }
         }
-
         $returnArrayObject = [];
         foreach($arrayObject as $file){
             $returnArrayObject[] = $this->getFileByTag($file->getTag());
