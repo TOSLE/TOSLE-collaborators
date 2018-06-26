@@ -159,13 +159,19 @@ class BlogController
             $Blog = new BlogRepository();
             if($getTypeNewArticle == "text"){
                 $configForm = $Blog->configFormAddArticleText();
-                $contentInputName = $params["POST"]["ckeditor_article"];
+                if(isset($params["POST"]["ckeditor_article"])){
+                    $contentInputName = $params["POST"]["ckeditor_article"];
+                }
             } elseif ($getTypeNewArticle == "image"){
                 $configForm = $Blog->configFormAddArticleImage();
-                $contentInputName = $params["POST"]["textarea_articleImage"];
+                if(isset($params["POST"]["textarea_articleImage"])){
+                    $contentInputName = $params["POST"]["textarea_articleImage"];
+                }
             } elseif ($getTypeNewArticle == "video"){
                 $configForm = $Blog->configFormAddArticleVideo();
-                $contentInputName = $params["POST"]["link"];
+                if(isset($params["POST"]["link"])){
+                    $contentInputName = $params["POST"]["link"];
+                }
             } else {
                 header('Location:'.$routes['dashboard_blog'].'/error');
             }
@@ -174,6 +180,8 @@ class BlogController
             if((isset($_FILES) && !empty($_FILES)) || (isset($params["POST"]) && !empty($params["POST"]))){
                 $resultAdd = $Blog->addArticle($_FILES, $params["POST"], $getTypeNewArticle);
                 if($resultAdd === 1){
+                    $GeneratorXML = new GeneratorXML('blogfeed');
+                    $GeneratorXML->setBlogFeed($Blog->getAllArticleByStatus(1));
                     header('Location:'.$routes['dashboard_blog']);
                 } else {
                     $View->setData("errors", $resultAdd);
