@@ -93,6 +93,9 @@ class GeneratorXML
         $this->xmlDoc->appendChild($this->channel);
     }
 
+    /**
+     * Lorsqu'on a terminé avec notre objet, on save le XML
+     */
     public function __destruct()
     {
         $this->xmlDoc->save($this->dirPath['SERVER_PATH'].$this->fileName);

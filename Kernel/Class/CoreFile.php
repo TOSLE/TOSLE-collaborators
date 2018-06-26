@@ -8,6 +8,12 @@
 
 class CoreFile
 {
+    /**
+     * @param $relativePath
+     * @return array
+     * La fonction permet de tester l'existance d'un fichier, elle va ensuite, s'il n'est pas trouvé
+     * le créer et enfin, retourner un tableau utilisable peu importe le système d'exploitation
+     */
     static public function testStaticDirectory($relativePath)
     {
         if(SYSTEM == "LINUX") {
