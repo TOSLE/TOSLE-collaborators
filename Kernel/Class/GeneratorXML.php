@@ -19,23 +19,18 @@ class GeneratorXML
      * @param string $fileName
      * @param string $dirPath
      */
-    public function __construct($fileName, $dirPath = "Tosle/Static/xml")
+    public function __construct($fileName, $dirPath = "xml")
     {
         $this->routes = Access::getSlugsById();
-        $this->dirPath = $dirPath;
         $this->fileName = $fileName.'.xml';
-        if(SYSTEM == "LINUX") {
-            $this->dirPath = getcwd() . DIRNAME . $dirPath;
-        } else {
-            $this->dirPath = '../..' . $dirPath;
-        }
-        if(!file_exists($this->dirPath)){
-            mkdir($this->dirPath, 0755, true);
-        }
+        $this->dirPath = CoreFile::testStaticDirectory($dirPath);
         $this->xmlDoc = new DOMDocument('1.0', 'utf-8');
         $this->getWebSiteData();
     }
 
+    /**
+     * Initialise les données du site internet en cours
+     */
     public function getWebSiteData()
     {
         $this->channel = $this->xmlDoc->createElement('channel');
@@ -58,6 +53,16 @@ class GeneratorXML
     }
 
     /**
+     * @param $string
+     * @return string
+     * convert string to available XML String
+     */
+    public function convertStringToXml($string)
+    {
+        return html_entity_decode($string);
+    }
+
+    /**
      * @param array Blog $content
      * Générateur du fichier XML pour le contenu des Blogs
      */
@@ -68,7 +73,7 @@ class GeneratorXML
             foreach($content as $blog){
                 $item = $this->xmlDoc->createElement('item');
                 $title = $this->xmlDoc->createElement('title', $blog->getTitle());
-                $description = $this->xmlDoc->createElement('description', $BlogRepository->getResumeContent($blog->getContent()));
+                $description = $this->xmlDoc->createElement('description', $this->convertStringToXml($BlogRepository->getResumeContent($blog->getContent())));
                 $datePub = $this->xmlDoc->createElement('pubDate', $blog->getDatecreate());
                 $link = $this->xmlDoc->createElement('link', $_SERVER['SERVER_NAME'].$this->routes['view_blog_article'].'/'.$blog->getUrl());
                 $item->appendChild($title);
@@ -86,10 +91,10 @@ class GeneratorXML
             $this->channel->appendChild($item);
         }
         $this->xmlDoc->appendChild($this->channel);
-        $this->xmlDoc->save($this->dirPath.'/'.$this->fileName);
     }
 
     public function __destruct()
     {
+        $this->xmlDoc->save($this->dirPath['SERVER_PATH'].$this->fileName);
     }
 }

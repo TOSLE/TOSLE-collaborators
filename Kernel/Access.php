@@ -203,6 +203,6 @@ class Access
         $search = array('à', 'ä', 'â', 'é', 'è', 'ë', 'ê', 'ï', 'ì', 'î', 'ù', 'û', 'ü', 'ô', 'ö', '&', ' ', '?', '!', 'ç', ';', '/', '.', ',', ':', '(', ')', '=', '\'');
         $replace = array('a', 'a', 'a', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'u', 'u', 'u', 'o', 'o', '', '-', '', '', 'c', '', '-', '', '', '', '', '', '', '-');
 
-        return urlencode(trim(str_replace($search, $replace, strtolower((trim($string, '-')))),'-'));
+        return urlencode(trim(str_ireplace($search, $replace, strtolower((trim($string)))),'-'));
     }
 }
