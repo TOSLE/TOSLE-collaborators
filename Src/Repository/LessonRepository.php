@@ -94,7 +94,6 @@ class LessonRepository extends Lesson
         $routes = Access::getSlugsById();
         $ViewLatestBloc = new DashboardBlocModal();
         $ViewLatestBloc->setTitle("Latest lesson on your Website");
-        $ViewLatestBloc->setIconHeader("modal_view_all_lesson", "modal");
         $ViewLatestBloc->setTableHeader([
             1 => "Title",
             2 => "Create at",
@@ -121,10 +120,94 @@ class LessonRepository extends Lesson
             4 => "td-content-action"
         ]);
         $ViewLatestBloc->setTableBodyContent($this->getLastLesson(), true);
+        $ViewLatestBloc->setActionTargetButton("Chapters", $routes['dashboard_chapter']);
         $ViewLatestBloc->setArrayHref("edit", $routes["class/edit"]);
         return $ViewLatestBloc->getArrayData();
     }
 
+    public function getModalLastArticleByLesson($_urlLesson)
+    {
+        $routes = Access::getSlugsById();
+        $this->getLessonByUrl($_urlLesson);
+        $ViewLatestBloc = new DashboardBlocModal();
+        $ViewLatestBloc->setTitle("Chapter of your lesson : ".$this->getTitle());
+        $ViewLatestBloc->setTableHeader([
+            1 => "Order",
+            2 => "Title",
+            3 => "Create at",
+            4 => "Action"
+        ]);
+        $ViewLatestBloc->setColSizeBloc(12);
+        $ViewLatestBloc->setActionButtonStatus(0, [
+            "color" => "green",
+            "text" => "Publish",
+            "type" => "href",
+            "target" => $routes["chapter/status"]."/".$this->getUrl().'/'
+        ]);
+        $ViewLatestBloc->setActionButtonStatus(1, [
+            "color" => "red",
+            "text" => "Unpublish",
+            "type" => "href",
+            "target" => $routes["chapter/status"]."/".$this->getUrl().'/'
+        ]);
+        $ViewLatestBloc->setActionButtonEdit("Edit");
+
+        $ViewLatestBloc->setTableBodyClass([
+            1 => "td-content-order",
+            2 => "td-content-text",
+            3 => "td-content-date",
+            4 => "td-content-action"
+        ]);
+        $ViewLatestBloc->setTableBodyContent($this->getChapterByUrlLesson($_urlLesson), true);
+        $ViewLatestBloc->setArrayHref("edit", $routes["chapter/edit"]);
+        $ViewLatestBloc->setActionButtonOrder($routes["chapter/order"]);
+        return $ViewLatestBloc->getArrayData();
+    }
+
+    /**
+     * @param int $_number
+     * @return array|string
+     * Retourne les articles d'une lesson
+     */
+    public function getChapterByUrlLesson($_urlLesson)
+    {
+        $Chapter = new ChapterRepository();
+        if(!empty($this->getId())){
+            $target = [
+                'id',
+                'title',
+                'content',
+                'datecreate',
+                'status',
+                'type',
+                'url',
+                "fileid",
+                "_lessonchapter_id"
+            ];
+
+            $joinParameter = [
+                "lessonchapter" => [
+                    "chapter_id"
+                ]
+            ];
+            $whereParameter = [
+                "lessonchapter" => [
+                    "lesson_id" => $this->getId()
+                ]
+            ];
+            $Chapter->setLeftJoin($joinParameter, $whereParameter);
+            $Chapter->setOrderByParameter(["_lessonchapter_order" => "ASC"]);
+            return $Chapter->getData($target);
+        } else {
+            return ["error" => "URL de lesson inconnue"];
+        }
+    }
+
+    /**
+     * @param int $_number
+     * @return array
+     * Retourne les dernières lessons, le nombre dépend du paramètre qui par défaut est à 5
+     */
     public function getLastLesson($_number = 5)
     {
         $target = [
@@ -140,6 +223,7 @@ class LessonRepository extends Lesson
         $this->setLimitParameter($_number);
         return $this->getData($target);
     }
+
     /**
      * @param array $_post
      * @param int|null $_idLesson

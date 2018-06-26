@@ -38,7 +38,9 @@ class ChapterRepository extends Chapter
                         }
                     }
                 } else {
-                    return $errors;
+                    if(!array_key_exists('EXCEPT_ERROR', $errors)){
+                        return $errors;
+                    }
                 }
             }
             $tmpPostArray = $_post;
@@ -87,4 +89,5 @@ class ChapterRepository extends Chapter
         $this->setWhereParameter($parameter);
         $this->getOneData($target);
     }
+
 }

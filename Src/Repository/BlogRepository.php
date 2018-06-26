@@ -407,7 +407,9 @@ class BlogRepository extends Blog
 
                     }
                 } else {
-                    return $errors;
+                    if(!array_key_exists('EXCEPT_ERROR', $errors)){
+                        return $errors;
+                    }
                 }
             }
             $tmpPostArray = $_post;
