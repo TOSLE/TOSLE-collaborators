@@ -80,6 +80,12 @@ class Access
             "action" => "lessons",
             "security" => 2
         ],
+        "dashboard_chapter" => [ // Dashboard blog homepage
+            "slug" => "dashboard-chapter",
+            "controller" => "dashboard",
+            "action" => "chapter",
+            "security" => 2
+        ],
         "add_user" => [ // change status blog
             "slug" => "add-user",
             "controller" => "user",
@@ -102,6 +108,9 @@ class Access
         "class/edit" => 2,
         "class/status" => 2,
         "chapter/add" => 2,
+        "chapter/edit" => 2,
+        "chapter/status" => 2,
+        "chapter/order" => 2,
     ];
 
     /**
@@ -194,6 +203,6 @@ class Access
         $search = array('à', 'ä', 'â', 'é', 'è', 'ë', 'ê', 'ï', 'ì', 'î', 'ù', 'û', 'ü', 'ô', 'ö', '&', ' ', '?', '!', 'ç', ';', '/', '.', ',', ':', '(', ')', '=', '\'');
         $replace = array('a', 'a', 'a', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'u', 'u', 'u', 'o', 'o', '', '-', '', '', 'c', '', '-', '', '', '', '', '', '', '-');
 
-        return urlencode(str_replace($search, $replace, strtolower(trim($string))));
+        return urlencode(trim(str_ireplace($search, $replace, strtolower((trim($string)))),'-'));
     }
 }

@@ -8,6 +8,9 @@ A la racine du repo
 > npm install chart.js --save
 
 > npm install node-sass
+
+Avant de démarrer, il faut s'assurer avoir les bons droits sur le répertoire Static
+> chmod 777 -R Tosle/Static/
  
 Le README sera ridigé d'ici peu de temps :)
 __________________________
