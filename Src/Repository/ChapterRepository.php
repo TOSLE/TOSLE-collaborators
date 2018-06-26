@@ -22,7 +22,7 @@ class ChapterRepository extends Chapter
         $_post = Form::secureData($_post);
         if(empty($errors)){
             $file = null;
-            if(isset($_post["file"])){
+            if(isset($_file)){
                 $errors = Form::checkFiles($_file);
                 if(empty($errors) || is_numeric($errors)){
                     if( $errors != 1) {
@@ -38,7 +38,9 @@ class ChapterRepository extends Chapter
                         }
                     }
                 } else {
-                    return $errors;
+                    if(!array_key_exists('EXCEPT_ERROR', $errors)){
+                        return $errors;
+                    }
                 }
             }
             $tmpPostArray = $_post;

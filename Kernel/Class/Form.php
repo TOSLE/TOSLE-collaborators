@@ -162,8 +162,12 @@ class Form
                         if($value > 0 && $value == UPLOAD_ERR_OK){
                             $errorsMsg[$files['name'][$key]] = "Failed to upload image";
                         }
-                        if ($value == UPLOAD_ERR_NO_FILE){
+                        if ($value == UPLOAD_ERR_NO_FILE && !empty($files['name'][$key])){
                             $errorsMsg[$files['name'][$key]] = "File not found";
+                        } else {
+                            if($value == UPLOAD_ERR_NO_FILE && empty($files['name'][$key])) {
+                                $errorsMsg['EXCEPT_ERROR'] = "No file founded";
+                            }
                         }
                         if ($value == UPLOAD_ERR_INI_SIZE){
                             $errorsMsg[$files['name'][$key]] = "Limit upload file size exceeded";
