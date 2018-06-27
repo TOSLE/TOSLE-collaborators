@@ -1,3 +1,58 @@
-.picture {
-  background-color: red;
+.profile {
+  display: flex;
+  background-color: #FFFFFF;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+  align-items: center;
+  flex-direction: column;
+  .profile-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    .profil-picture {
+      border-radius: 50%;
+      width: 200px;
+      height: 200px;
+      border: solid 1.5px #1A5CCB;
+      display: flex;
+      overflow: hidden;
+      margin-top: 30px;
+      margin-bottom: 30px;
+      img {
+        min-height: 0;
+        min-width: 0;
+      }
+    }
+  }
+  .info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+    section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      span:nth-child(1) {
+        color: #343A40;
+        font-weight: 600;
+        margin-bottom: 10px;
+        font-size: 18px;
+      }
+      span:nth-child(2) {
+        font-size: 16px;
+      }
+
+    }
+    .name {
+      span {
+        color : #1A5CCB!important;
+        font-size: 24px!important;
+        font-weight: 600!important;
+      }
+    }
+
+  }
+
 }
