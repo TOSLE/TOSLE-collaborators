@@ -12,8 +12,12 @@
         <div class="col-4">
             <div>
                 <section class="profil">
-                    <section class="picture"></section>
-                    <section class="info"></section>
+                    <section class="picture">
+                        <div class="profil-picture">
+                            <img src="<?php echo DIRNAME;?>Tosle/Users/Images/475899654133.jpg">
+                        </div>
+                    </section>
+                    <section class="info">info</section>
                 </section>
             </div>
         </div>

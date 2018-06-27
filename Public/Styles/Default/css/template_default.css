@@ -138,6 +138,8 @@ html {
               margin-bottom: 3px; }
       html .article > .content-article .container-editor {
         margin-bottom: 40px; }
+  html .picture {
+    background-color: red; }
 
 #menu-header-section {
   width: 250px;
