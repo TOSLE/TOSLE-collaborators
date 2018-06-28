@@ -110,6 +110,7 @@ class Comment extends CoreSql {
             "config"=> [
                 "method"=>"post",
                 "action"=>"", "submit"=>"Envoyer votre commentaire",
+                "secure" => true,
             ],
             "textarea" => [
                 "label" => "Nouveau commentaire",

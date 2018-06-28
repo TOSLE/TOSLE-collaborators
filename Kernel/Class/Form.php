@@ -49,6 +49,23 @@ class Form
             }
         }
 
+        if(isset($config["captcha"])){
+            if(isset($_SESSION["captcha"]) && isset($data['captcha'])) {
+                if($_SESSION["captcha"] != $data['captcha']){
+                    $errorsMsg["captcha"] = "Le captcha saisi n'est pas valide";
+                }
+            }
+        }
+        
+        echo '<pre>';
+        print_r($config);
+        print_r($data);
+        print_r($_SESSION['secure_form']);
+        echo '</pre>';
+
+        if(isset($config['config']['secure']) && $config['config']['secure']) {
+
+        }
         return $errorsMsg;
     }
 
@@ -69,6 +86,11 @@ class Form
             }
         }
         return $dataReturn;
+    }
+
+    public static function checkSecureForm($data)
+    {
+
     }
 
     /**
@@ -199,5 +221,13 @@ class Form
             return $errorsMsg;
         }
         return 0;
+    }
+
+    public static function secureCSRF()
+    {
+        $timestamp = time();
+        $token = uniqid($timestamp.'_token_', true);
+        $_SESSION['secure_form'] = $token;
+        return $token;
     }
 }
