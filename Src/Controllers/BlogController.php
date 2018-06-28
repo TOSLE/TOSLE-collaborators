@@ -78,15 +78,18 @@ class BlogController
     {
         if(isset($params["URI"][0]) && !empty($params["URI"][0])){
             $View = new View("default", "Blog/view_article");
+            $View->setData('errors', false);
             $Blog = new BlogRepository();
             $Comment = new CommentRepository();
             $Category = new CategoryRepository();
             $configFormComment = $Comment->configFormAdd();
             if($Blog->getArticleByUrl($params["URI"][0])){
                 if(isset($params['POST']) && !empty($params['POST'])){
-                    $Comment->addComment($configFormComment, $params['POST'], 1, $Blog->getId());
-                    // Pour vider la variable POST, on redirige vers la page
-                    header('Location:'.Access::getSlugsById()["view_blog_article"].'/'.$params["URI"][0]);
+                    $errors = $Comment->addComment($configFormComment, $params['POST'], 1, $Blog->getId());
+                    if(empty($errors)){
+                        header('Location:'.Access::getSlugsById()["view_blog_article"].'/'.$params["URI"][0]);
+                    }
+                    $View->setData('errors', $errors);
                 }
                 $article = [
                     "title" => $Blog->getTitle(),

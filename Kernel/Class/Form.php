@@ -56,15 +56,18 @@ class Form
                 }
             }
         }
-        
-        echo '<pre>';
-        print_r($config);
-        print_r($data);
-        print_r($_SESSION['secure_form']);
-        echo '</pre>';
+
 
         if(isset($config['config']['secure']) && $config['config']['secure']) {
-
+            if(isset($_SESSION['secure_form']) && isset($data['_token'])){
+                $returnSecure = self::checkSecureForm($_SESSION['secure_form'], $data['_token']);
+                if($returnSecure === 1){
+                    $errorsMsg["Timeout"] = "délait d'authentification dépassé pour le formulaire. Merci de réessayer l'envoie";
+                }
+                if($returnSecure === 2){
+                    $errorsMsg["Authentification failed"] = "Authentification échoué pour le formulaire. Veuillez réessayer.";
+                }
+            }
         }
         return $errorsMsg;
     }
@@ -88,9 +91,38 @@ class Form
         return $dataReturn;
     }
 
-    public static function checkSecureForm($data)
+    /**
+     * @return string
+     * Fonction retournant un token pour sécurisation des formulaires par CSRF
+     */
+    public static function secureCSRF()
     {
+        $timestamp = time();
+        $token = uniqid($timestamp.'_token_', true);
+        $_SESSION['secure_form'] = $token;
+        return $token;
+    }
 
+    /**
+     * @param string $_token
+     * @param string $_formToken
+     * @return bool
+     * Sécurisation CSRF des formulaires
+     * Règle à respecter :
+     *      - token en $_SESSION et dans le formulaire identique
+     *      - token généré il y a moins de 30 minutes
+     */
+    public static function checkSecureForm($_token, $_formToken)
+    {
+        if($_token === $_formToken){
+            $timestamp = time();
+            $tokenExploded = explode('_', $_token);
+            if($timestamp - $tokenExploded[0] < 2){
+                return 0;
+            }
+            return 1;
+        }
+        return 2;
     }
 
     /**
@@ -221,13 +253,5 @@ class Form
             return $errorsMsg;
         }
         return 0;
-    }
-
-    public static function secureCSRF()
-    {
-        $timestamp = time();
-        $token = uniqid($timestamp.'_token_', true);
-        $_SESSION['secure_form'] = $token;
-        return $token;
     }
 }

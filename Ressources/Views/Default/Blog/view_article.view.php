@@ -110,7 +110,7 @@
                                             </div>
                                         </section>
                                         <section class="container-editor">
-                                            <?php $this->addModal("form", $formAddComment); ?>
+                                            <?php $this->addModal("form", $formAddComment, $errors); ?>
                                         </section>
                                     </div>
                                 </div>
