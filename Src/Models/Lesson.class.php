@@ -1,12 +1,13 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: Mehdi
  * Date: 05/04/2018
  * Time: 23:27
  */
-
-class Lesson extends CoreSql {
+class Lesson extends CoreSql
+{
 
     protected $id;
     protected $title;
@@ -124,6 +125,7 @@ class Lesson extends CoreSql {
     {
         return $this->color;
     }
+
     /**
      * @param string $color
      */
@@ -136,21 +138,35 @@ class Lesson extends CoreSql {
     {
         $slugs = Access::getSlugsById();
         $category = new CategoryRepository;
+        $group = new GroupRepository;
         return [
-            "config"=> [
-                "method"=>"post",
-                "action"=>"",
-                "save"=>"Sauvegarder en brouillon",
-                "submit"=>"Enregistrer le nouveau cours",
-                "form_file"=>false,
+            "config" => [
+                "method" => "post",
+                "action" => "",
+                "save" => "Sauvegarder en brouillon",
+                "submit" => "Enregistrer le nouveau cours",
+                "form_file" => false,
             ],
-            "input"=> [
-                "title"=>[
-                    "type"=>"text",
-                    "placeholder"=>"Intitulé du cours",
-                    "required"=>true,
-                    "maxString"=>100,
-                    "label"=>"Renseignez le titre de votre cours"
+            "input" => [
+                "title" => [
+                    "type" => "text",
+                    "placeholder" => "Intitulé du cours",
+                    "required" => true,
+                    "maxString" => 100,
+                    "label" => "Renseignez le titre de votre cours"
+                ],
+                "topic" => [
+                    "type" => "text",
+                    "placeholder" => "Intitulé du thème",
+                    "required" => true,
+                    "maxString" => 100,
+                    "label" => "Renseignez le thème de votre cours"
+                ],
+                "price" => [
+                    "type" => "number",
+                    "placeholder" => "Prix de votre cours",
+                    "required" => true,
+                    "label" => "Renseignez le prix de votre cours si celui-ci est payant"
                 ]
             ],
             "textarea" => [
@@ -159,7 +175,8 @@ class Lesson extends CoreSql {
                 "description" => "Un maximum de 500 caractères",
                 "placeholder" => "Maximum 500 caractères"
             ],
-            'select_multiple' => $category->configFormCategory(2),
+            //'select_multiple' => $category->configFormCategory(2),
+            'select_multiple' => $group->configFormGroup(),
             'select' => [
                 'select_color' => [
                     'label' => 'Choisissez la couleur de votre cours',
@@ -173,7 +190,26 @@ class Lesson extends CoreSql {
                         '#1A5CCB' => 'Blanc',
                     ],
                     'description' => 'Couleur d\'arrière plan'
-                ]
+                ],
+                'select_type' => [
+                    'label' => 'Choisissez le type de cours',
+                    'required' => true,
+                    'options' => [
+                        'public' => 'Public',
+                        'private' => 'Privé',
+                    ],
+                    'description' => 'Cours privé ou Cours public'
+                ],
+                'select_difficulty' => [
+                    'label' => 'Choisissez la difficulté de votre cours',
+                    'required' => true,
+                    'options' => [
+                        'easy' => 'Facile',
+                        'normal' => 'Normal',
+                        'hard' => 'Difficile',
+                    ],
+                    'description' => 'Difficulté estimé du cours'
+                ],
             ],
             "exit" => $slugs["dashboard_lesson"]
         ];
