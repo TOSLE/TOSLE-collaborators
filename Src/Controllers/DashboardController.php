@@ -32,7 +32,7 @@ class DashboardController
 
         $View->setData("modalAddOption", $Lesson->getModalAdd(12));
         $View->setData("modalStats", $Lesson->getModalStats());
-        $View->setData("modalLastLesson", $Lesson->getModalLatestArticle());
+        $View->setData("modalLastLesson", $Lesson->getModalLatestLesson());
     }
 
     /**
@@ -136,7 +136,7 @@ class DashboardController
 
         /*$View->setData("modalAddOption", $Lesson->getModalAdd(12));
         $View->setData("modalStats", $Lesson->getModalStats());*/
-        $View->setData("modalChapter", $Lesson->getModalLastArticleByLesson($params["URI"][0]));
+        $View->setData("modalChapter", $Lesson->getModalLastChapterByLesson($params["URI"][0]));
     }
 
 }

@@ -76,4 +76,37 @@ class ChapterController
 
         header('Location:'.$routes["dashboard_chapter"].'/'.$params["URI"][0]);
     }
+
+    /**
+     * @param $params
+     * Récupère l'id de l'article et modifie le status
+     */
+    public function orderAction($params)
+    {
+        $routes = Access::getSlugsById();
+        if(is_numeric($params["URI"][1])){
+            $Chapter = new ChapterRepository();
+            $target = [
+                "id",
+                "status"
+            ];
+            $parameter = [
+                "LIKE" => [
+                    "id" => $params["URI"][1]
+                ]
+            ];
+            $Chapter->setWhereParameter($parameter);
+            $Chapter->getOneData($target);
+            if($Chapter->getId()){
+                if($Chapter->getStatus() > 0){
+                    $Chapter->setStatus(0);
+                } else {
+                    $Chapter->setStatus(1);
+                }
+                $Chapter->save();
+            }
+        }
+
+        //header('Location:'.$routes["dashboard_chapter"].'/'.$params["URI"][0]);
+    }
 }
