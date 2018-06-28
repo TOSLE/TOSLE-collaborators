@@ -23,6 +23,7 @@ class CoreFile
         }
         if(!file_exists($directoryPath)){
             mkdir($directoryPath, 0755, true);
+
         }
 
         return [
