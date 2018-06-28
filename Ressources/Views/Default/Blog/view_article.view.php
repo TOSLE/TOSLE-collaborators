@@ -42,7 +42,7 @@
                                                                 comment
                                                             </i>
                                                         </div>
-                                                        <span><?php echo count($commentaires_all); ?></span>
+                                                        <span><?php if(is_array($commentaires_all)) echo count($commentaires_all); ?></span>
                                                         <div class="name-action">comments</div>
                                                     </div>
                                                 </div>
