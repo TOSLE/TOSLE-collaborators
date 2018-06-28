@@ -18,13 +18,9 @@ class FileRepository extends File
      */
     public function addFile($_file, $_configForm, $_destination, $_comment)
     {
-        if(SYSTEM == "LINUX") {
-            $directoryDestination = getcwd() . DIRNAME . 'Tosle/' . ucfirst(strtolower($_destination)) . '/';
-        } else {
-            $directoryDestination = '../..' . DIRNAME . 'Tosle/' . ucfirst(strtolower($_destination)) . '/';
-        }
+        $directoryDestination = CoreFile::testStaticDirectory($_destination);
 
-        $pathDirectory = DIRNAME . 'Tosle/' . ucfirst(strtolower($_destination)) . '/';
+        $pathDirectory = $directoryDestination['SQL_PATH'];
 
         foreach($_configForm as $type => $arrayType) {
             if($type == "input")
@@ -76,17 +72,17 @@ class FileRepository extends File
                 $fileExtension = strtolower(substr(strrchr($file['name'], '.'),1));
                 $fileName = uniqid('file_', false)."_".date("Y-m-d").".".$fileExtension;
                 if (in_array($fileExtension, $authorisedFormat) ) {
-                    if(!move_uploaded_file($file["tmp_name"], $directoryDestination.$fileName) ){
+                    if(!move_uploaded_file($file["tmp_name"], $directoryDestination['SERVER_PATH'].$fileName) ){
                         return [
                             "CODE_ERROR" => 3,
-                            "MESSAGE" => "ERROR_UPLOAD_FILE_IN_FOLDER : ".$directoryDestination,
+                            "MESSAGE" => "ERROR_UPLOAD_FILE_IN_FOLDER : ".$directoryDestination['SERVER_PATH'],
                             "FILE_AFTER_PROCESS" => $files,
                             "FILE_SEND" => $_file
                         ];
                     }
                     $file = new File();
                     $file->setType(1);
-                    $file->setPath($pathDirectory);
+                    $file->setPath($directoryDestination['SQL_PATH']);
                     $file->setName($fileName);
                     $file->setComment($_comment);
                     $file->setTag();
@@ -103,7 +99,6 @@ class FileRepository extends File
 
             }
         }
-
         $returnArrayObject = [];
         foreach($arrayObject as $file){
             $returnArrayObject[] = $this->getFileByTag($file->getTag());

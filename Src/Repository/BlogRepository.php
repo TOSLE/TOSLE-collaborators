@@ -387,6 +387,7 @@ class BlogRepository extends Blog
                 break;
         }
         $errors = Form::checkForm($configForm, $_post);
+        $_post = Form::secureData($_post);
         if(empty($errors)){
             $file = null;
             if(isset($_file)){
@@ -406,7 +407,9 @@ class BlogRepository extends Blog
 
                     }
                 } else {
-                    return $errors;
+                    if(!array_key_exists('EXCEPT_ERROR', $errors)){
+                        return $errors;
+                    }
                 }
             }
             $tmpPostArray = $_post;
