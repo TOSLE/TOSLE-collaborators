@@ -106,6 +106,8 @@ html {
         margin-bottom: 40px; }
         html .article > .content-article .comments-article h5 {
           margin-bottom: 40px; }
+        html .article > .content-article .comments-article .container {
+          border: solid 1px #7d7c7c42; }
         html .article > .content-article .comments-article .comment {
           display: flex;
           flex-direction: row;
@@ -136,6 +138,14 @@ html {
               font-size: 12px; }
             html .article > .content-article .comments-article .comment > div:nth-child(2) div {
               margin-bottom: 3px; }
+          html .article > .content-article .comments-article .comment .signal {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-left: auto; }
+            html .article > .content-article .comments-article .comment .signal .material-icons {
+              cursor: pointer;
+              color: #1A5CCB; }
       html .article > .content-article .container-editor {
         margin-bottom: 40px; }
   html .profile {
