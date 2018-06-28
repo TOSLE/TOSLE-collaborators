@@ -14,7 +14,10 @@ Class Chapter extends CoreSql {
     protected $datecreate;
     protected $status;
     protected $type;
-    protected $fileid; /** à vérif */
+    protected $fileid;
+    protected $url;
+
+    protected $lessonchapter;
 
     public function __construct()
     {
@@ -133,10 +136,45 @@ Class Chapter extends CoreSql {
         $this->fileid = $fileid;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * @param mixed $url
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+    }
+
+
+    /**
+     * @return LessonChapter
+     * Retourne un objet avec les valeurs de Lessonchapter
+     */
+    public function getLessonchapter()
+    {
+        return $this->lessonchapter;
+    }
+
+    /**
+     * @param int $_idForeinKey
+     * Permet de créer l'attribut avec l'id de la clé primaire de la table correspondante
+     */
+    public function setLessonchapter($_idForeinKey)
+    {
+        $this->lessonchapter = new LessonChapter($_idForeinKey);
+    }
+
     public function configFormAdd()
     {
         $slugs = Access::getSlugsById();
-        $category = new CategoryRepository;
+        $lesson = new LessonRepository();
         return [
             "config"=> [
                 "method"=>"post",
@@ -160,7 +198,7 @@ Class Chapter extends CoreSql {
                     "label"=>"Selectionnez le/les fichiers à joindre à ce chapitre",
                     "format"=>"PDF DOCX DOCM DOTX DOTM XLSX XLSM XLSB XLTM",
                     "description"=>"Authorised format (pdf, docx, docm, dotx, dotm, xlsx, xlsm, xlsb, xltm)",
-                    "multiple"=>true
+                    "multiple"=>false
                 ]
             ],
             "ckeditor" => [
@@ -169,7 +207,7 @@ Class Chapter extends CoreSql {
                 "description" => "Pas de limite !",
                 "placeholder" => "Placeholder"
             ],
-            'select_lesson' => $category->configFormCategory(1),
+            'select' => $lesson->getSelectLesson(),
             "exit" => $slugs["dashboard_blog"]
         ];
     }
