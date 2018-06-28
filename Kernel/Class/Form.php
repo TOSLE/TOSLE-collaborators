@@ -48,7 +48,6 @@ class Form
                 }
             }
         }
-
         if(isset($config["captcha"])){
             if(isset($_SESSION["captcha"]) && isset($data['captcha'])) {
                 if($_SESSION["captcha"] != $data['captcha']){
@@ -56,8 +55,6 @@ class Form
                 }
             }
         }
-
-
         if(isset($config['config']['secure']) && $config['config']['secure']) {
             if(isset($_SESSION['secure_form']) && isset($data['_token'])){
                 $returnSecure = self::checkSecureForm($_SESSION['secure_form'], $data['_token']);
@@ -117,7 +114,7 @@ class Form
         if($_token === $_formToken){
             $timestamp = time();
             $tokenExploded = explode('_', $_token);
-            if($timestamp - $tokenExploded[0] < 2){
+            if($timestamp - $tokenExploded[0] < 1800){
                 return 0;
             }
             return 1;
