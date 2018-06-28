@@ -32,11 +32,11 @@
                                         <?php if($className == "td-content-order"):?>
                                         <?php if(isset($config["global"]["column_action_button"]["actionButtonOrder"])):?>
                                             <td class="<?php echo $className;?>">
-                                                <a class="btn-sm btn-tosle material-icons ordered-button">
+                                                <a href="<?php echo $config["global"]["column_action_button"]["actionButtonOrder"].'/down/'.$arrayValue['data_id'];?>" class="btn-sm btn-tosle material-icons ordered-button">
                                                     arrow_downward
                                                 </a>
                                                 <?php echo ($arrayValue["data_order"]) ?>
-                                                <a class="btn-sm btn-tosle material-icons ordered-button">
+                                                <a href="<?php echo $config["global"]["column_action_button"]["actionButtonOrder"].'/up/'.$arrayValue['data_id'];?>" class="btn-sm btn-tosle material-icons ordered-button">
                                                     arrow_upward                                                </a>
                                             </td>
                                         <?php else: ?>

@@ -89,7 +89,7 @@ class LessonRepository extends Lesson
      * Permet de récupérer la configuration de la modal "LastArticle"
      * Le paramètre permet de définir une largeur à notre modal
      */
-    public function getModalLatestArticle($colSize = 12)
+    public function getModalLatestLesson($colSize = 12)
     {
         $routes = Access::getSlugsById();
         $ViewLatestBloc = new DashboardBlocModal();
@@ -125,7 +125,7 @@ class LessonRepository extends Lesson
         return $ViewLatestBloc->getArrayData();
     }
 
-    public function getModalLastArticleByLesson($_urlLesson)
+    public function getModalLastChapterByLesson($_urlLesson)
     {
         $routes = Access::getSlugsById();
         $this->getLessonByUrl($_urlLesson);
@@ -160,7 +160,7 @@ class LessonRepository extends Lesson
         ]);
         $ViewLatestBloc->setTableBodyContent($this->getChapterByUrlLesson($_urlLesson), true);
         $ViewLatestBloc->setArrayHref("edit", $routes["chapter/edit"]);
-        $ViewLatestBloc->setActionButtonOrder($routes["chapter/order"]);
+        $ViewLatestBloc->setActionButtonOrder($routes["chapter/order"]."/".$this->getUrl());
         return $ViewLatestBloc->getArrayData();
     }
 

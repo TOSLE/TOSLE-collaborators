@@ -90,4 +90,37 @@ class ChapterRepository extends Chapter
         $this->getOneData($target);
     }
 
+    /**
+     * @param $_id
+     * @return array Chapter
+     * Retourne les informations d'un chapitre par rapport à un id
+     */
+    public function getChapterById($_id)
+    {
+        $target = [
+            'id',
+            'title',
+            'content',
+            'datecreate',
+            'status',
+            'type',
+            'url',
+            "fileid",
+            "_lessonchapter_id"
+        ];
+
+        $joinParameter = [
+            "lessonchapter" => [
+                "chapter_id"
+            ]
+        ];
+        $whereParameter = [
+            "lessonchapter" => [
+                "chapter_id" => $_id
+            ]
+        ];
+        $this->setLeftJoin($joinParameter, $whereParameter);
+        return $this->getData($target);
+    }
+
 }
