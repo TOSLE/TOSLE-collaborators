@@ -122,11 +122,11 @@ class CommentRepository extends Comment
                 case 2:
                     break;
                 default:
-                    return 1;
+                    return $errors;
                     break;
             }
         }
-        return 0;
+        return $errors;
     }
 
     public function getAuthorComment($_idComment)
