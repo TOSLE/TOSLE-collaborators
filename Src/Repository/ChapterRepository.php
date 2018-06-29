@@ -58,12 +58,15 @@ class ChapterRepository extends Chapter
 
             $this->getChapterByUrl($this->getUrl());
             if($tmpPostArray['select_lesson'] != 'default'){
-                $Lesson = new LessonRepository();
-                $Lesson->addChapter($tmpPostArray['select_lesson'], $this->getId());
+                if($tmpPostArray['select_lesson'] != $this->getLessonchapter()->getLessonId()){
+                    $LessonChapter = new LessonChapter();
+                    $LessonChapter->deleteJoin('id', $this->getLessonchapter()->getId());
+                    $Lesson = new LessonRepository();
+                    $Lesson->addChapter($tmpPostArray['select_lesson'], $this->getId());
+                }
             } else {
                 return ['Lesson' => 'Lesson not found'];
             }
-
             return 1;
         } else {
             return $errors;
@@ -73,13 +76,7 @@ class ChapterRepository extends Chapter
     public function getChapterByUrl($_url)
     {
         $target = [
-            'id',
-            'fileid',
-            'title',
-            'content',
-            'datecreate',
-            'status',
-            'url',
+            'id'
         ];
         $parameter = [
             'LIKE' => [
@@ -88,11 +85,11 @@ class ChapterRepository extends Chapter
         ];
         $this->setWhereParameter($parameter);
         $this->getOneData($target);
+        $this->getChapterById($this->id);
     }
 
     /**
      * @param $_id
-     * @return array Chapter
      * Retourne les informations d'un chapitre par rapport à un id
      */
     public function getChapterById($_id)
@@ -106,12 +103,16 @@ class ChapterRepository extends Chapter
             'type',
             'url',
             "fileid",
-            "_lessonchapter_id"
+            '_lessonchapter_id'
         ];
-
         $joinParameter = [
             "lessonchapter" => [
                 "chapter_id"
+            ]
+        ];
+        $parameter = [
+            'LIKE' => [
+                'id' => $_id
             ]
         ];
         $whereParameter = [
@@ -120,7 +121,31 @@ class ChapterRepository extends Chapter
             ]
         ];
         $this->setLeftJoin($joinParameter, $whereParameter);
-        return $this->getData($target);
+        $this->setWhereParameter($parameter);
+        $this->getOneData($target);
     }
 
+    /**
+     * @param $_idChapter
+     * @return array|int
+     * Cette fonction retourne les éléments nécessaires à l'affichage des formulaires pour editer un article
+     */
+    public function editChapter($_idChapter)
+    {
+        $this->getChapterById($_idChapter);
+        if(!empty($this->id)){
+            $File = null;
+            if(!empty($this->getFileid())){
+                $File = new FileRepository();
+                $File->getFileById($this->getFileid());
+            }
+            return $arrayObject = [
+                "chapter" => $this,
+                "file" => $File,
+                "configForm" => $this->configFormAdd()
+            ];
+        } else {
+            return 0;
+        }
+    }
 }

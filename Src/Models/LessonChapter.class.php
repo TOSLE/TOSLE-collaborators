@@ -97,4 +97,15 @@ class LessonChapter extends CoreSql
         $this->chapterid = $chapterid;
     }
 
+    public function deleteJoin($column, $value)
+    {
+        $parameter = [
+            'LIKE' => [
+                $column => $value
+            ]
+        ];
+        $this->setWhereParameter($parameter);
+        $this->delete();
+    }
+
 }

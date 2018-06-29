@@ -187,7 +187,9 @@ class Blog extends CoreSql {
                 "description" => "Pas de limite !",
                 "placeholder" => "Placeholder"
             ],
-            'select_multiple' => $category->configFormCategory(1),
+            'select_multiple' => [
+                $category->configFormCategory(1)
+            ],
             "exit" => $slugs["dashboard_blog"]
         ];
     }
@@ -225,7 +227,9 @@ class Blog extends CoreSql {
                 "description" => "Un maximum de 500 caractères",
                 "placeholder" => "Maximum 500 caractères"
             ],
-            'select_multiple' => $category->configFormCategory(1),
+            'select_multiple' => [
+                $category->configFormCategory(1)
+            ],
             "exit" => $slugs["dashboard_blog"]
         ];
     }
@@ -257,7 +261,9 @@ class Blog extends CoreSql {
                     "description" => "YouTube is only player supported by our Framework",
                 ]
             ],
-            'select_multiple' => $category->configFormCategory(1),
+            'select_multiple' => [
+                $category->configFormCategory(1)
+            ],
             "exit" => $slugs["dashboard_blog"]
         ];
     }

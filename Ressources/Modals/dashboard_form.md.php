@@ -17,7 +17,6 @@
         <?php endforeach; ?>
     <?php endif;?>
 <?php endif;?>
-
 <form method="<?php echo $config['config']['method'];?>" action="<?php echo $config['config']['action'];?>" <?php echo (isset($config['config']['form_file']) && $config['config']['form_file'])?"enctype='multipart/form-data'":"";?>>
     <div class="form-group-base">
         <?php if(isset($config['input'])):?>
@@ -29,53 +28,62 @@
                     <input id="<?php echo $name;?>" type="<?php echo $attributs["type"];?>" placeholder="<?php echo $attributs["placeholder"];?>" name="<?php echo $name;?>" <?php echo (isset($attributs["required"]))?"required='required'":"";?> value="<?php echo (isset($config["data_content"][$name]))?$config["data_content"][$name]:"";?>">
                 <?php endif;?>
                 <?php if($attributs["type"]=="file"):?>
-                    <?php if(isset($config["data_content"]["file"])):?>
-                        <img src="<?php echo $config["data_content"]["file"];?>" width="200" height="100">
+                    <?php if(isset($config["data_content"]["file_img"])):?>
+                        <img src="<?php echo $config["data_content"]["file_img"];?>" width="200" height="100">
                     <?php endif;?>
                     <input id="<?php echo $name;?>" type="<?php echo $attributs["type"];?>" name="<?php echo $name;?>[]" <?php echo (isset($attributs["required"]) && $attributs["required"])?"required='required'":"";?> <?php echo (isset($attributs["multiple"]) && $attributs["multiple"])?"multiple":"";?>>
+                    <?php if(isset($config["data_content"]["file_path"])):?>
+                        <div class="small-precision-input">
+                            <a href="<?php echo $config["data_content"]["file_path"];?>" class="btn-sm btn-tosle">Télécharger le fichier</a>
+                        </div>
+                    <?php endif;?>
                 <?php endif;?>
                 <?php if(isset($attributs["description"])):?>
-                    <div class="small-precision-input"><?php echo $attributs["description"];?></div>
+                    <div class="small-precision-input">
+                        <?php echo $attributs["description"];?>
+                    </div>
                 <?php endif;?>
             <?php endforeach;?>
         <?php endif;?>
         <?php if(isset($config["select_multiple"])): ?>
-            <?php foreach($config["select_multiple"] as $name => $attributs):?>
-                <?php if($name == "category_select"):?>
-                    <?php if(isset($attributs["label"])):?>
-                        <label for="<?php echo $name;?>"><?php echo $attributs["label"];?></label>
+            <?php foreach ($config["select_multiple"] as $select):?>
+                <?php foreach($select as $name => $attributs):?>
+                    <?php if($name == "category_select"):?>
+                        <?php if(isset($attributs["label"])):?>
+                            <label for="<?php echo $name;?>"><?php echo $attributs["label"];?></label>
+                        <?php endif;?>
+                        <select <?php echo (isset($attributs["multiple"]))?"multiple='multiple'":"";?> size="8" id="<?php echo $name;?>" name="<?php echo $name;?>[]">
+                            <?php foreach($attributs["options"] as $value => $text):?>
+                                <option value="<?php echo $value;?>" <?php echo (isset($config['data_content']['selectedOption'][$value]))?"selected":"";?>><?php echo $text;?></option>
+                            <?php endforeach;?>
+                        </select>
+                        <?php if(isset($attributs["description"])):?>
+                            <div class="small-precision-input"><?php echo $attributs["description"];?></div>
+                        <?php endif;?>
                     <?php endif;?>
-                    <select <?php echo (isset($attributs["multiple"]))?"multiple='multiple'":"";?> size="8" id="<?php echo $name;?>" name="<?php echo $name;?>[]">
-                        <?php foreach($attributs["options"] as $value => $text):?>
-                            <option value="<?php echo $value;?>" <?php echo (isset($config['data_content']['selectedOption'][$value]))?"selected":"";?>><?php echo $text;?></option>
-                        <?php endforeach;?>
-                    </select>
-                    <?php if(isset($attributs["description"])):?>
-                        <div class="small-precision-input"><?php echo $attributs["description"];?></div>
+                    <?php if($name == "group_select"):?>
+                        <?php if(isset($attributs["label"])):?>
+                            <label for="<?php echo $name;?>"><?php echo $attributs["label"];?></label>
+                        <?php endif;?>
+                        <select <?php echo (isset($attributs["multiple"]))?"multiple='multiple'":"";?> size="8" id="<?php echo $name;?>" name="<?php echo $name;?>[]">
+                            <?php foreach($attributs["options"] as $value => $text):?>
+                                <option value="<?php echo $value;?>" <?php echo (isset($config['data_content']['selectedOption'][$value]))?"selected":"";?>><?php echo $text;?></option>
+                            <?php endforeach;?>
+                        </select>
+                        <?php if(isset($attributs["description"])):?>
+                            <div class="small-precision-input"><?php echo $attributs["description"];?></div>
+                        <?php endif;?>
                     <?php endif;?>
-                <?php endif;?>
-                <?php if($name == "group_select"):?>
-                    <?php if(isset($attributs["label"])):?>
-                        <label for="<?php echo $name;?>"><?php echo $attributs["label"];?></label>
+                    <?php if($name == "category_input"):?>
+                        <?php if(isset($attributs["label"])):?>
+                            <label for="<?php echo $name;?>"><?php echo $attributs["label"];?></label>
+                        <?php endif;?>
+                        <input id="<?php echo $name;?>" type="<?php echo $attributs["type"];?>" placeholder="<?php echo $attributs["placeholder"];?>" name="<?php echo $name;?>" <?php echo (isset($attributs["required"]) && $attributs["required"]==true )?"required='required'":"";?> value="<?php echo (isset($config["data_content"][$name]))?$config["data_content"][$name]:"";?>">
+                        <?php if(isset($attributs["description"])):?>
+                            <div class="small-precision-input"><?php echo $attributs["description"];?></div>
+                        <?php endif;?>
                     <?php endif;?>
-                    <select <?php echo (isset($attributs["multiple"]))?"multiple='multiple'":"";?> size="8" id="<?php echo $name;?>" name="<?php echo $name;?>[]">
-                        <?php foreach($attributs["options"] as $value => $text):?>
-                            <option value="<?php echo $value;?>" <?php echo (isset($config['data_content']['selectedOption'][$value]))?"selected":"";?>><?php echo $text;?></option>
-                        <?php endforeach;?>
-                    </select>
-                    <?php if(isset($attributs["description"])):?>
-                        <div class="small-precision-input"><?php echo $attributs["description"];?></div>
-                    <?php endif;?>
-                <?php endif;?>
-                <?php if($name == "category_input"):?>
-                    <?php if(isset($attributs["label"])):?>
-                        <label for="<?php echo $name;?>"><?php echo $attributs["label"];?></label>
-                    <?php endif;?>
-                    <input id="<?php echo $name;?>" type="<?php echo $attributs["type"];?>" placeholder="<?php echo $attributs["placeholder"];?>" name="<?php echo $name;?>" <?php echo (isset($attributs["required"]) && $attributs["required"]==true )?"required='required'":"";?> value="<?php echo (isset($config["data_content"][$name]))?$config["data_content"][$name]:"";?>">
-                    <?php if(isset($attributs["description"])):?>
-                        <div class="small-precision-input"><?php echo $attributs["description"];?></div>
-                    <?php endif;?>
-                <?php endif;?>
+                <?php endforeach;?>
             <?php endforeach;?>
         <?php endif; ?>
         <?php if(isset($config["select"])): ?>

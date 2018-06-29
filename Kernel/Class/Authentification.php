@@ -28,7 +28,7 @@ class Authentification
             return -1;
         }
         $User->setToken();
-        $User->setDateConnection($date->getTimestamp());
+        $User->setDateConnection();
         $User->save();
         $_SESSION["token"]=$User->getToken();
         $_SESSION["email"]=$User->getEmail();
