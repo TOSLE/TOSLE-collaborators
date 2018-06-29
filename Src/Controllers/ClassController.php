@@ -126,7 +126,7 @@ class ClassController
                 $arrayReturn = $Lesson->editLesson($params["URI"][0]);
                 $arrayLesson = $arrayReturn["lesson"];
                 $configForm = $arrayReturn["configForm"];
-                $configForm["content_value"] = [
+                $configForm["data_content"] = [
                     "title" => $arrayLesson->getTitle(),
                     "content" => $arrayLesson->getDescription(),
                     "select_color" => $arrayLesson->getColor(),

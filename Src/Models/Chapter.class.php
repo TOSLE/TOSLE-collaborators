@@ -17,7 +17,7 @@ Class Chapter extends CoreSql {
     protected $fileid;
     protected $url;
 
-    protected $lessonchapter;
+    private $lessonchapter;
 
     public function __construct()
     {

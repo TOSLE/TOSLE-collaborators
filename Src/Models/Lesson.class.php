@@ -154,19 +154,6 @@ class Lesson extends CoreSql
                     "required" => true,
                     "maxString" => 100,
                     "label" => "Renseignez le titre de votre cours"
-                ],
-                "topic" => [
-                    "type" => "text",
-                    "placeholder" => "Intitulé du thème",
-                    "required" => true,
-                    "maxString" => 100,
-                    "label" => "Renseignez le thème de votre cours"
-                ],
-                "price" => [
-                    "type" => "number",
-                    "placeholder" => "Prix de votre cours",
-                    "required" => true,
-                    "label" => "Renseignez le prix de votre cours si celui-ci est payant"
                 ]
             ],
             "textarea" => [
@@ -175,8 +162,10 @@ class Lesson extends CoreSql
                 "description" => "Un maximum de 500 caractères",
                 "placeholder" => "Maximum 500 caractères"
             ],
-            //'select_multiple' => $category->configFormCategory(2),
-            'select_multiple' => $group->configFormGroup(),
+            'select_multiple' => [
+                $category->configFormCategory(2),
+                $group->configFormGroup(),
+            ],
             'select' => [
                 'select_color' => [
                     'label' => 'Choisissez la couleur de votre cours',

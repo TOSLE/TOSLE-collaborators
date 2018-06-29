@@ -159,7 +159,7 @@ class LessonRepository extends Lesson
             4 => "td-content-action"
         ]);
         $ViewLatestBloc->setTableBodyContent($this->getChapterByUrlLesson($_urlLesson), true);
-        $ViewLatestBloc->setArrayHref("edit", $routes["chapter/edit"]);
+        $ViewLatestBloc->setArrayHref("edit", $routes["chapter/edit"]."/".$this->getUrl());
         $ViewLatestBloc->setActionButtonOrder($routes["chapter/order"]."/".$this->getUrl());
         return $ViewLatestBloc->getArrayData();
     }
@@ -269,7 +269,7 @@ class LessonRepository extends Lesson
     }
 
     /**
-     * @param $_idArticle
+     * @param $_idLesson
      * @return array|int
      * Cette fonction retourne les éléments nécessaires à l'affichage des formulaires pour editer un article
      */
@@ -353,6 +353,11 @@ class LessonRepository extends Lesson
         ];
     }
 
+    /**
+     * @param $_idLesson
+     * @param $_idChapter
+     * Ajout d'une jointure entre lesson et chapitre
+     */
     public function addChapter($_idLesson, $_idChapter)
     {
         $LessonChapter = new LessonChapter();

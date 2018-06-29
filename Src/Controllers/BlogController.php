@@ -218,7 +218,7 @@ class BlogController
                     "title" => $arrayBlog->getTitle(),
                     "content" => $arrayBlog->getContent(),
                     "link" => $arrayBlog->getContent(),
-                    "file" => $pathFile,
+                    "file_img" => $pathFile,
                     "selectedOption" => $arrayReturn['selectedOption']
                 ];
                 switch($arrayBlog->getType()){

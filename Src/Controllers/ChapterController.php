@@ -109,4 +109,36 @@ class ChapterController
 
         //header('Location:'.$routes["dashboard_chapter"].'/'.$params["URI"][0]);
     }
+
+    public function editAction($params)
+    {
+        $routes = Access::getSlugsById();
+        if(isset($params["URI"][1])){
+            if(is_numeric($params["URI"][1])) {
+                $errors = "";
+                $Chapter = new ChapterRepository();
+                $View = new View("dashboard", "Dashboard/add_chapter");
+                $arrayReturn = $Chapter->editChapter($params["URI"][1]);
+                $arrayChapter = $arrayReturn["chapter"];
+                $pathFile = (isset($arrayReturn["file"]))?$arrayReturn["file"]->getPath().$arrayReturn["file"]->getName():null;
+                $configForm = $arrayReturn["configForm"];
+                $configForm["data_content"] = [
+                    "title" => $arrayChapter->getTitle(),
+                    "content" => $arrayChapter->getContent(),
+                    "file_path" => $pathFile,
+                    "select_lesson" => $arrayChapter->getLessonchapter()->getLessonId()
+                ];
+                if(isset($params["POST"]) && !empty($params["POST"])){
+                    $errors = $Chapter->addChapter($_FILES, $params["POST"], $params["URI"][1]);
+                    if($errors === 1){
+                        header('Location:'.$routes["dashboard_chapter"].'/'.$params["URI"][0]);
+                    }
+                }
+                $View->setData("errors", $errors);
+                $View->setData("configForm", $configForm);
+            }
+        } else {
+            header('Location:'.$routes["dashboard_chapter"].'/'.$params["URI"][0]);
+        }
+    }
 }

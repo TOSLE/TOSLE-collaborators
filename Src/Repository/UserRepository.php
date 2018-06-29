@@ -12,7 +12,7 @@ class UserRepository extends User
     /**
      * @param string $password
      * @param string $email
-     * @return integer int
+     * @return integer|array
      * verrifyUserLogin va permettre de vérifier l'identification de l'utilisateur grâce au mot de passe et l'email en deux étapes
      */
     function verrifyUserLogin($password, $email)
@@ -47,8 +47,6 @@ class UserRepository extends User
                         return [AUTHENTIFICATION_FAILED_KEY => "Vous n'avez pas valider votre compte"];
                     }
                     else{
-                        $dateSetter = new DateTime();
-                        $this->setDateconnection($dateSetter->getTimestamp());
                         $this->setToken();
                         $this->save();
                         $_SESSION['token'] = $this->token;
@@ -57,6 +55,8 @@ class UserRepository extends User
                     }
                 }
             } else {
+                echo $this->password;
+                die;
                 return [AUTHENTIFICATION_FAILED_KEY => AUTHENTIFICATION_FAILED_MESSAGE];
             }
         } else {

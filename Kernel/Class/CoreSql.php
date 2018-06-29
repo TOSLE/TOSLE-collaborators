@@ -275,9 +275,7 @@ class CoreSql{
 
     public function getOneData($target)
     {
-        foreach ($target as $key => $value){
-            $target[$key] = $this->columnBase.'_'.$value;
-        }
+        $target = $this->getTarget($target);
 
         $query = $this->pdo->prepare("
             SELECT " . implode(',', $target) . " 
@@ -297,8 +295,17 @@ class CoreSql{
         if($resultQuery) {
             foreach ($resultQuery as $key => $value) {
                 if (!is_numeric($key)) {
-                    $tmpString = str_replace($this->columnBase . "_", "", $key);
-                    $this->$tmpString = $value;
+                   /* $tmpString = str_replace($this->columnBase . "_", "", $key);
+                    $this->$tmpString = $value;*/
+                    $explodedContent = explode('_', $key);
+                    if($explodedContent[0] == $this->columnBase){
+                        $tmpString = $explodedContent[1];
+                        $this->$tmpString = $value;
+                    } else {
+                        $foreinTable = ucfirst($explodedContent[0]);
+                        $tmpString = "set".$foreinTable;
+                        $this->$tmpString($value);
+                    }
                 }
             }
         }
