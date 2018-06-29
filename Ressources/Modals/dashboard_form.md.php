@@ -54,6 +54,19 @@
                         <div class="small-precision-input"><?php echo $attributs["description"];?></div>
                     <?php endif;?>
                 <?php endif;?>
+                <?php if($name == "group_select"):?>
+                    <?php if(isset($attributs["label"])):?>
+                        <label for="<?php echo $name;?>"><?php echo $attributs["label"];?></label>
+                    <?php endif;?>
+                    <select <?php echo (isset($attributs["multiple"]))?"multiple='multiple'":"";?> size="8" id="<?php echo $name;?>" name="<?php echo $name;?>[]">
+                        <?php foreach($attributs["options"] as $value => $text):?>
+                            <option value="<?php echo $value;?>" <?php echo (isset($config['data_content']['selectedOption'][$value]))?"selected":"";?>><?php echo $text;?></option>
+                        <?php endforeach;?>
+                    </select>
+                    <?php if(isset($attributs["description"])):?>
+                        <div class="small-precision-input"><?php echo $attributs["description"];?></div>
+                    <?php endif;?>
+                <?php endif;?>
                 <?php if($name == "category_input"):?>
                     <?php if(isset($attributs["label"])):?>
                         <label for="<?php echo $name;?>"><?php echo $attributs["label"];?></label>
