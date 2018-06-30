@@ -48,7 +48,7 @@ class CategoryLesson extends CoreSql
 
     public function setCategoryId($categoryId)
     {
-        $this->categoryid = new Category($categoryId);
+        $this->categoryid = $categoryId;
     }
 
     public function getLessonId()
