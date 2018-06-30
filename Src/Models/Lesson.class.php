@@ -17,6 +17,7 @@ class Lesson extends CoreSql
     protected $url;
     protected $color;
     protected $type;
+    protected $level;
 
     public function __construct()
     {
@@ -143,13 +144,33 @@ class Lesson extends CoreSql
     }
 
     /**
-     * @param string $type
+     * @param int $type
      */
     public function setType($type)
     {
         $this->type = $type;
     }
 
+    /**
+     * @return int
+     */
+    public function getLevel()
+    {
+        return $this->level;
+    }
+
+    /**
+     * @param int $level
+     */
+    public function setLevel($level)
+    {
+        $this->level = $level;
+    }
+
+    /**
+     * @return array
+     * Formulaire d'ajout d'une lesson
+     */
     public function configFormAddLesson()
     {
         $slugs = Access::getSlugsById();
@@ -200,8 +221,8 @@ class Lesson extends CoreSql
                     'label' => 'Choisissez le type de cours',
                     'required' => true,
                     'options' => [
-                        'public' => 'Public',
-                        'private' => 'Privé',
+                        0 => 'Public',
+                        1 => 'Privé',
                     ],
                     'description' => 'Cours privé ou Cours public'
                 ],
@@ -209,9 +230,9 @@ class Lesson extends CoreSql
                     'label' => 'Choisissez la difficulté de votre cours',
                     'required' => true,
                     'options' => [
-                        'easy' => 'Facile',
-                        'normal' => 'Normal',
-                        'hard' => 'Difficile',
+                        0 => 'Facile',
+                        1 => 'Normal',
+                        2 => 'Difficile',
                     ],
                     'description' => 'Difficulté estimé du cours'
                 ],

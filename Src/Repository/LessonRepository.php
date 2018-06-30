@@ -244,8 +244,9 @@ class LessonRepository extends Lesson
             $this->setColor($tmpPostArray["select_color"]);
             (isset($tmpPostArray["publish"]))?$this->setStatus(1):$this->setStatus(0);
             $this->setUrl(Access::constructUrl($this->getTitle()));
+            $this->setType($tmpPostArray["select_type"]);
+            $this->setLevel($tmpPostArray["select_difficulty"]);
             $this->save();
-
             $this->getLessonByUrl($this->getUrl());
             if(isset($tmpPostArray["category_select"]) && !empty($tmpPostArray["category_select"]))
             {
@@ -281,7 +282,9 @@ class LessonRepository extends Lesson
             $categoryFounded = $category->getCategoryByIdentifier('lesson', $this->id);
             return $arrayObject = [
                 "lesson" => $this,
-                "selectedOption" => $categoryFounded,
+                "selectedOption" => [
+                    "category_select" => $categoryFounded,
+                ],
                 "configForm" => $this->configFormAddLesson()
             ];
         } else {
@@ -297,7 +300,7 @@ class LessonRepository extends Lesson
             ]
         ];
         $this->setWhereParameter($parameter);
-        $this->getOneData(["id", "title", "description", "color"]);
+        $this->getOneData(["id", "title", "description", "color", "type", "level"]);
         if(!isset($this->id)){
             return false;
         } else {
