@@ -48,6 +48,7 @@ class UserRepository extends User
                     }
                     else{
                         $this->setToken();
+                        $this->setDateconnection();
                         $this->save();
                         $_SESSION['token'] = $this->token;
                         $_SESSION['email'] = $this->email;

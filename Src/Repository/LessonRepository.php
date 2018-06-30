@@ -369,4 +369,41 @@ class LessonRepository extends Lesson
         $LessonChapter->setLessonId($_idLesson);
         $LessonChapter->save();
     }
+
+    public function getLessons()
+    {
+        /**
+         * protected $id;
+        protected $title;
+        protected $description;
+        protected $datecreate;
+        protected $status;
+        protected $url;
+        protected $color;
+        protected $type;
+        protected $level;
+         */
+        $target = [
+            "id",
+            "title",
+            "description",
+            "datecreate",
+            "status",
+            "url",
+            "color",
+            "type",
+            "level"
+        ];
+        $parameter = [
+            'LIKE' => [
+                'status' => 1
+            ]
+        ];
+        $this->setWhereParameter($parameter);
+        $arrayReturn = $this->getData($target);
+
+        echo '<pre>';
+        print_r($arrayReturn);
+        echo '</pre>';
+    }
 }

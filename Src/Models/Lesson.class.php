@@ -19,6 +19,8 @@ class Lesson extends CoreSql
     protected $type;
     protected $level;
 
+    private $lessonchapter;
+
     public function __construct()
     {
         parent::__construct();
@@ -165,6 +167,24 @@ class Lesson extends CoreSql
     public function setLevel($level)
     {
         $this->level = $level;
+    }
+
+    /**
+     * @return array LessonChapter
+     * Retourne un objet avec les valeurs de Lessonchapter
+     */
+    public function getLessonchapter()
+    {
+        return $this->lessonchapter;
+    }
+
+    /**
+     * @param int $_idForeinKey
+     * Permet de créer l'attribut avec l'id de la clé primaire de la table correspondante
+     */
+    public function setLessonchapter($_idForeinKey)
+    {
+        $this->lessonchapter[] = new LessonChapter($_idForeinKey);
     }
 
     /**
