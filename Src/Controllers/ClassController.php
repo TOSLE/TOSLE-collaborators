@@ -18,8 +18,8 @@ class ClassController
     function indexAction($params)
     {
         $View = new View("default", "Class/home");
-        /*$Lesson = new LessonRepository();
-        //$lessons = $Lesson->getLessons();
+        $Lesson = new LessonRepository();
+        $lessons = $Lesson->getLessons();
         $errors = [];
         if(!empty($params["GET"])){
             echo "Il y a une recherche";
@@ -28,7 +28,7 @@ class ClassController
 
             $View->setData("lessons", $lessons);
             $View->setData("col", "6");
-        }*/
+        }
     }
 
 

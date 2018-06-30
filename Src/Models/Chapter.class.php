@@ -19,9 +19,28 @@ Class Chapter extends CoreSql {
 
     private $lessonchapter;
 
-    public function __construct()
+    public function __construct($_id = null)
     {
         parent::__construct();
+        if(isset($_id)){
+            $target = [
+                'id',
+                'title',
+                'content',
+                'datecreate',
+                'status',
+                'type',
+                'fileid',
+                'url',
+            ];
+            $parameter = [
+                'LIKE' => [
+                    'id' => $_id
+                ]
+            ];
+            $this->setWhereParameter($parameter);
+            $this->getOneData($target);
+        }
     }
 
     /**

@@ -299,8 +299,8 @@ class CoreSql{
                     $this->$tmpString = $value;*/
                     $explodedContent = explode('_', $key);
                     if($explodedContent[0] == $this->columnBase){
-                        $tmpString = $explodedContent[1];
-                        $this->$tmpString = $value;
+                        $tmpString = "set".$explodedContent[1];
+                        $this->$tmpString($value);
                     } else {
                         $foreinTable = ucfirst($explodedContent[0]);
                         $tmpString = "set".$foreinTable;
@@ -355,7 +355,7 @@ class CoreSql{
      *      ]
      * ];
      */
-    public function setLeftJoin($joinParameter, $whereParameter)
+    public function setLeftJoin($joinParameter, $whereParameter = null)
     {
         $arrayTmp = [];
         foreach($joinParameter as $table => $arrayColumn){

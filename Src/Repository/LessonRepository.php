@@ -401,9 +401,15 @@ class LessonRepository extends Lesson
         ];
         $this->setWhereParameter($parameter);
         $arrayReturn = $this->getData($target);
+        foreach($arrayReturn as $lesson){
+            $Category = new CategoryRepository();
+            $LessonChapter = new LessonChapter();
+            $arrayChapter = $LessonChapter->getLessonChapterByIdentifier('lesson', $lesson->getId());
+            $arrayCategory = $Category->getCategoryByIdentifier('lesson', $lesson->getId());
+            $lesson->setCategorylesson($arrayCategory);
+            $lesson->setChapter($arrayChapter);
+        }
 
-        echo '<pre>';
-        print_r($arrayReturn);
-        echo '</pre>';
+        return $arrayReturn;
     }
 }
