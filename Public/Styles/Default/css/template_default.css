@@ -148,6 +148,10 @@ html {
               color: #1A5CCB; }
       html .article > .content-article .container-editor {
         margin-bottom: 40px; }
+  html .lesson-bloc {
+    padding: 5px;
+    height: 300px;
+    background-color: red; }
   html .profile {
     display: flex;
     background-color: #FFFFFF;

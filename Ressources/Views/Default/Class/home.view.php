@@ -14,21 +14,14 @@
 </section>
 <section class="container">
     <div class="row">
-    <?php 
-/*
-    foreach($data as $row => $value):?>
+        <?php foreach($lessons as $lesson):?>
             <div class="col-<?php echo $col;?>">
                 <div>
-                    <div class="-article article-content-text">
-                        <div class="content-article">
-                            <h2><?php echo $value["lesson_title"];?></h2>
-                            <p class="resume"><?php echo $value["lesson_content"];?></p>
-                           
-                            <p class="datecreate"><?php echo $value["lesson_datecreate"];?></p>
-                        </div>
+                    <div class="lesson-bloc">
+
                     </div>
                 </div>
             </div>
-    <?php endforeach;*/?>
+        <?php endforeach;?>
     </div>
 </section>

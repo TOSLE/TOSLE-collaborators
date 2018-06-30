@@ -24,8 +24,6 @@ class ClassController
         if(!empty($params["GET"])){
             echo "Il y a une recherche";
         } else {
-
-
             $View->setData("lessons", $lessons);
             $View->setData("col", "6");
         }
