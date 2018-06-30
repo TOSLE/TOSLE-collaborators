@@ -148,4 +148,9 @@ class ChapterRepository extends Chapter
             return 0;
         }
     }
+
+    public function orderUpdate($type, $_chapterId)
+    {
+
+    }
 }

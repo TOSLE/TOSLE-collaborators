@@ -130,7 +130,9 @@ class ClassController
                     "title" => $arrayLesson->getTitle(),
                     "content" => $arrayLesson->getDescription(),
                     "select_color" => $arrayLesson->getColor(),
-                    "selectedOption" => $arrayReturn['selectedOption']
+                    "selectedOption" => $arrayReturn['selectedOption'],
+                    "select_type" => $arrayLesson->getType(),
+                    "select_difficulty" => $arrayLesson->getLevel(),
                 ];
                 if(isset($params["POST"]) && !empty($params["POST"])){
                     $resultAdd = $Lesson->addLesson($params["POST"], $params["URI"][0]);
