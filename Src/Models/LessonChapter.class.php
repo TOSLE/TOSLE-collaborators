@@ -97,6 +97,11 @@ class LessonChapter extends CoreSql
         $this->chapterid = $chapterid;
     }
 
+    /**
+     * @param string $column
+     * @param mixed $value
+     * Detruit une ligne en fonction d'une colonne et d'une valeur
+     */
     public function deleteJoin($column, $value)
     {
         $parameter = [
@@ -106,6 +111,33 @@ class LessonChapter extends CoreSql
         ];
         $this->setWhereParameter($parameter);
         $this->delete();
+    }
+
+    public function getLessonChapterByIdentifier($_identifier, $_value)
+    {
+        switch($_identifier){
+            case 'lesson': $opposite = 'chapter';
+                break;
+            case 'chapter': $opposite = 'lesson';
+                break;
+            default:
+                return 0;
+                break;
+        }
+        $target = ["id", "lessonid", "chapterid"];
+        $parameter = [
+            "LIKE" => [
+                $_identifier.'id' => $_value
+            ]
+        ];
+        $this->setWhereParameter($parameter);
+        $array = $this->getData($target);
+        $returnArrayId= [];
+        foreach($array as $category) {
+            $tmpString = 'get'.ucfirst(strtolower($opposite)).'Id';
+            $returnArrayId[] = $category->$tmpString();
+        }
+        return $returnArrayId;
     }
 
 }

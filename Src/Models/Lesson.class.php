@@ -19,7 +19,8 @@ class Lesson extends CoreSql
     protected $type;
     protected $level;
 
-    private $lessonchapter;
+    private $chapter;
+    private $categorylesson = [];
 
     public function __construct()
     {
@@ -173,18 +174,39 @@ class Lesson extends CoreSql
      * @return array LessonChapter
      * Retourne un objet avec les valeurs de Lessonchapter
      */
-    public function getLessonchapter()
+    public function getChapter()
     {
-        return $this->lessonchapter;
+        return $this->chapter;
     }
 
     /**
-     * @param int $_idForeinKey
+     * @param array $_idForeinKey
      * Permet de créer l'attribut avec l'id de la clé primaire de la table correspondante
      */
-    public function setLessonchapter($_idForeinKey)
+    public function setChapter($_idForeinKey)
     {
-        $this->lessonchapter[] = new LessonChapter($_idForeinKey);
+        foreach($_idForeinKey as $content){
+            $this->chapter[] = new Chapter($content);
+        }
+    }
+
+    /**
+     * @return array
+     */
+    public function getCategorylesson()
+    {
+        return $this->categorylesson;
+    }
+
+    /**
+     * @param array $categorylesson
+     * Le tableau envoyé doit avoir comme clé l'id de la catégorie. Le contenu n'est pas obligatoire !
+     */
+    public function setCategorylesson($categorylesson)
+    {
+        foreach($categorylesson as $key => $content){
+            $this->categorylesson[] = new Category($key);
+        }
     }
 
     /**

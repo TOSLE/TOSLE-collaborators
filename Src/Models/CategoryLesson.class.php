@@ -12,9 +12,23 @@ class CategoryLesson extends CoreSql
     protected $categoryid;
     protected $lessonid;
 
-    public function __construct()
+    public function __construct($_id = null)
     {
         parent::__construct();
+        if(isset($_id)){
+            $target = [
+                'id',
+                'categoryid',
+                'lessonid'
+            ];
+            $parameter = [
+                'LIKE' => [
+                    'categoryid' => $_id
+                ]
+            ];
+            $this->setWhereParameter($parameter);
+            $this->getOneData($target);
+        }
     }
 
     public function getId()
@@ -34,7 +48,7 @@ class CategoryLesson extends CoreSql
 
     public function setCategoryId($categoryId)
     {
-        $this->categoryid = $categoryId;
+        $this->categoryid = new Category($categoryId);
     }
 
     public function getLessonId()
