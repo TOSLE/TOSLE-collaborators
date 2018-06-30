@@ -208,7 +208,7 @@ Class Chapter extends CoreSql {
                 "placeholder" => "Placeholder"
             ],
             'select' => $lesson->getSelectLesson(),
-            "exit" => $slugs["dashboard_blog"]
+            "exit" => $slugs["dashboard_lesson"]
         ];
     }
 
