@@ -16,6 +16,7 @@ class Lesson extends CoreSql
     protected $status;
     protected $url;
     protected $color;
+    protected $type;
 
     public function __construct()
     {
@@ -132,6 +133,21 @@ class Lesson extends CoreSql
     public function setColor($color)
     {
         $this->color = $color;
+    }
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param string $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
     }
 
     public function configFormAddLesson()
