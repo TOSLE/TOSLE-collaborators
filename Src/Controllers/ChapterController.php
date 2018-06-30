@@ -84,30 +84,19 @@ class ChapterController
     public function orderAction($params)
     {
         $routes = Access::getSlugsById();
-        if(is_numeric($params["URI"][1])){
-            $Chapter = new ChapterRepository();
-            $target = [
-                "id",
-                "status"
-            ];
-            $parameter = [
-                "LIKE" => [
-                    "id" => $params["URI"][1]
-                ]
-            ];
-            $Chapter->setWhereParameter($parameter);
-            $Chapter->getOneData($target);
-            if($Chapter->getId()){
-                if($Chapter->getStatus() > 0){
-                    $Chapter->setStatus(0);
+        if(isset($params["URI"][0]) && isset($params["URI"][1]) && isset($params["URI"][2])){
+            if(is_numeric($params["URI"][2])){
+                $Chapter = new ChapterRepository();
+                if($Chapter->orderUpdate($params["URI"][1], $params["URI"][2])) {
+                    header('Location:'.$routes["dashboard_chapter"].'/'.$params["URI"][0]);
                 } else {
-                    $Chapter->setStatus(1);
+                    header('Location:'.$routes["dashboard_chapter"].'/'.$params["URI"][0].'?error=1');
                 }
-                $Chapter->save();
             }
+        } else {
+            header('Location:'.$routes["dashboard_lesson"].'?error=1');
         }
 
-        //header('Location:'.$routes["dashboard_chapter"].'/'.$params["URI"][0]);
     }
 
     public function editAction($params)

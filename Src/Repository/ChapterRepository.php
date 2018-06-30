@@ -149,8 +149,32 @@ class ChapterRepository extends Chapter
         }
     }
 
+
+    /**
+     * @param string $type
+     * @param int $_chapterId
+     * @return int
+     * En fonction du paramètre type, l'ordre va être incrémenter ou décrémenter
+     * Ne peut pas descendre en dessous de 1
+     */
     public function orderUpdate($type, $_chapterId)
     {
-
+        $this->getChapterById($_chapterId);
+        $order = $this->getLessonchapter()->getOrder();
+        switch ($type){
+            case "up":
+                $this->getLessonchapter()->setOrder($order+1);
+                break;
+            case "down":
+                if($order > 1){
+                    $this->getLessonchapter()->setOrder($order-1);
+                }
+                break;
+            default:
+                return 0;
+                break;
+        }
+        $this->getLessonchapter()->save();
+        return 1;
     }
 }
