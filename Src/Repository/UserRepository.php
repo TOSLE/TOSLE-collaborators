@@ -56,8 +56,6 @@ class UserRepository extends User
                     }
                 }
             } else {
-                echo $this->password;
-                die;
                 return [AUTHENTIFICATION_FAILED_KEY => AUTHENTIFICATION_FAILED_MESSAGE];
             }
         } else {
