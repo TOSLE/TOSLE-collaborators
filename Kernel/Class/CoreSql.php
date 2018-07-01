@@ -273,6 +273,11 @@ class CoreSql{
         return $arrayData;
     }
 
+    /**
+     * @param array $target
+     * Même tableau que la fonction getData, la différence est que cette fonction va retourner directement les données
+     * dans l'objet
+     */
     public function getOneData($target)
     {
         $target = $this->getTarget($target);
