@@ -80,7 +80,8 @@ class Lesson extends CoreSql
      */
     public function getDateCreate()
     {
-        return $this->datecreate;
+        $date = new DateTime($this->datecreate);
+        return $date->format("F j, Y");
     }
 
     /**
