@@ -149,9 +149,56 @@ html {
       html .article > .content-article .container-editor {
         margin-bottom: 40px; }
   html .lesson-bloc {
-    padding: 5px;
     height: 300px;
-    background-color: red; }
+    background-color: #ffffff; }
+    html .lesson-bloc > .fade-background-lesson {
+      position: relative;
+      overflow: hidden;
+      height: 100%;
+      width: 100%; }
+      html .lesson-bloc > .fade-background-lesson > .title-lesson {
+        padding: 7.5px;
+        border-bottom: 1px solid; }
+        html .lesson-bloc > .fade-background-lesson > .title-lesson > .info-datecreate {
+          position: absolute;
+          top: 12.5px;
+          right: 7.5px; }
+      html .lesson-bloc > .fade-background-lesson > .description-lesson {
+        padding: 7.5px; }
+      html .lesson-bloc > .fade-background-lesson > .category-list-lesson {
+        position: absolute;
+        bottom: 0;
+        border-top: 0.5px solid;
+        max-width: 100%;
+        padding: 1%; }
+      html .lesson-bloc > .fade-background-lesson > .more-infos {
+        position: absolute;
+        height: 18%;
+        bottom: -17%;
+        width: 100%;
+        border-radius: 5px 5px 0px 0px;
+        -moz-border-radius: 5px 5px 0px 0px;
+        -webkit-border-radius: 5px 5px 0px 0px;
+        -webkit-box-shadow: 0px 0px 40px -12px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: 0px 0px 40px -12px rgba(0, 0, 0, 0.75);
+        box-shadow: 0px 0px 40px -12px rgba(0, 0, 0, 0.75);
+        border: 0px solid;
+        transition: 0.4s; }
+        html .lesson-bloc > .fade-background-lesson > .more-infos > .info-comment-lesson {
+          position: absolute;
+          bottom: 10px;
+          left: 15px; }
+        html .lesson-bloc > .fade-background-lesson > .more-infos > .info-chapter {
+          position: absolute;
+          bottom: 10px;
+          right: 15px; }
+        html .lesson-bloc > .fade-background-lesson > .more-infos > .info-btn-readmore {
+          position: absolute;
+          bottom: 10px;
+          left: 50%;
+          transform: translateX(-50%); }
+      html .lesson-bloc > .fade-background-lesson:hover > .more-infos {
+        bottom: 0%; }
   html .profile {
     display: flex;
     background-color: #FFFFFF;
