@@ -15,6 +15,7 @@
 <section class="container">
     <div class="row">
         <?php foreach($lessons as $lesson):?>
+            <?php if(!empty($lesson->getChapter())):?>
             <div class="col-<?php echo $col;?>">
                 <div>
                     <div class="lesson-bloc">
@@ -42,16 +43,15 @@
                             <div class="more-infos" style="background-color: <?php echo $lesson->getColor();?>">
                                 <p class="info-comment-lesson">25 <i class="material-icons">comment</i></p>
                                 <a href="<?php echo $this->slugs["view_blog_article"]."/".$lesson->getUrl();?>" class="btn btn-white-outline info-btn-readmore"><?php echo BLOG_BUTTON_READMORE;?></a>
-                                <?php if(!empty($lesson->getChapter())):?>
-                                    <p class="info-chapter">
-                                        <?php echo count($lesson->getChapter());?> <i class="material-icons">import_contacts</i>
-                                    </p>
-                                <?php endif;?>
+                                <p class="info-chapter">
+                                    <?php echo count($lesson->getChapter());?> <i class="material-icons">import_contacts</i>
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <?php endif;?>
         <?php endforeach;?>
     </div>
 </section>

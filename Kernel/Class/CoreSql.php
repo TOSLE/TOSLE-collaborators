@@ -299,8 +299,13 @@ class CoreSql{
                     $this->$tmpString = $value;*/
                     $explodedContent = explode('_', $key);
                     if($explodedContent[0] == $this->columnBase){
-                        $tmpString = "set".$explodedContent[1];
-                        $this->$tmpString($value);
+                        if($explodedContent[1] === "password") {
+                            $tmpString = $explodedContent[1];
+                            $this->$tmpString = $value;
+                        } else {
+                            $tmpString = "set".$explodedContent[1];
+                            $this->$tmpString($value);
+                        }
                     } else {
                         $foreinTable = ucfirst($explodedContent[0]);
                         $tmpString = "set".$foreinTable;
