@@ -29,7 +29,7 @@ class IndexController
     }
     function notfoundAction($params)
     {
-        echo "Oops ! Le lien semple ne pas exister ! :/";
+        new View("default", "accessnotfound");
     }
 
     function installAction($params)
