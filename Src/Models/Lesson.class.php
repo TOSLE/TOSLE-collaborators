@@ -251,12 +251,11 @@ class Lesson extends CoreSql
                     'label' => 'Choisissez la couleur de votre cours',
                     'required' => false,
                     'options' => [
-                        'none' => 'Aucune',
+                        '#1A5CCB' => 'Couleur de base',
                         '#FFFFFF' => 'Blanc',
                         '#F43C3E' => 'Rouge',
                         '#28A745' => 'Vert',
-                        '#FA690E' => 'Orange',
-                        '#1A5CCB' => 'Blanc',
+                        '#FA690E' => 'Orange'
                     ],
                     'description' => 'Couleur d\'arrière plan'
                 ],
