@@ -261,12 +261,21 @@ class LessonRepository extends Lesson
                         return $arrayCategory;
                     }
                 }
-
             }
+            $this->generateXml();
             return 1;
         } else {
             return $errors;
         }
+    }
+
+    /**
+     * Génére le flux RSS pour les cours
+     */
+    public function generateXml()
+    {
+        $GeneratorXML = new GeneratorXML('lessonfeed');
+        $GeneratorXML->setLessonFeed($this->getXmlLesson());
     }
 
     /**
@@ -368,8 +377,16 @@ class LessonRepository extends Lesson
         $LessonChapter->setChapterId($_idChapter);
         $LessonChapter->setLessonId($_idLesson);
         $LessonChapter->save();
+        // On régénère le XML si besoin
+        $this->generateXml();
     }
 
+    /**
+     * @param null $_limit
+     * @param null $_offset
+     * @return array
+     * Permet de retourner les lessons dans un tableau d'objet. Il n'est pas nécessaire de spécifier les paramètres
+     */
     public function getLessons($_limit = null, $_offset = null)
     {
         $target = [
@@ -399,6 +416,40 @@ class LessonRepository extends Lesson
             $arrayChapter = $LessonChapter->getLessonChapterByIdentifier('lesson', $lesson->getId());
             $arrayCategory = $Category->getCategoryByIdentifier('lesson', $lesson->getId());
             $lesson->setCategorylesson($arrayCategory);
+            $lesson->setChapter($arrayChapter);
+        }
+
+        return $arrayReturn;
+    }
+
+    /**
+     * @return array
+     * Permet de retourner les lessons pour les XML dans un tableau d'objet. Il n'est pas nécessaire de spécifier les paramètres
+     */
+    public function getXmlLesson()
+    {
+        $Lesson = new Lesson();
+        $target = [
+            "id",
+            "title",
+            "description",
+            "datecreate",
+            "status",
+            "url",
+            "type",
+            "level"
+        ];
+        $parameter = [
+            'LIKE' => [
+                'status' => 1,
+                'type' => 1,
+            ]
+        ];
+        $Lesson->setWhereParameter($parameter);
+        $arrayReturn = $Lesson->getData($target);
+        foreach($arrayReturn as $lesson){
+            $LessonChapter = new LessonChapter();
+            $arrayChapter = $LessonChapter->getLessonChapterByIdentifier('lesson', $lesson->getId());
             $lesson->setChapter($arrayChapter);
         }
 
