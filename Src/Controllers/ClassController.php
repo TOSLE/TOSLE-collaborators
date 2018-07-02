@@ -37,27 +37,7 @@ class ClassController
      */
     function viewAction($params)
     {
-        $routes = Access::getSlugsById();
-        $View = new View("default", "Class/view_lesson");
-        if(isset($params['URI']) && !empty($params['URI'])){
-            $Lesson = new LessonRepository();
-            if($Lesson->getLesson($params['URI'][0])){
-                $readChapter = $Lesson->getChapter()[0];
-                if(isset($params['URI'][1])){
-                    foreach($Lesson->getChapter() as $Chapter){
-                        if($Chapter->getUrl() == $params['URI'][1]){
-                            $readChapter = $Chapter;
-                        }
-                    }
-                }
-                $View->setData("readChapter", $readChapter);
-                $View->setData("lesson", $Lesson);
-            } else {
-                $View->setData("error_search", 'Il semble y avoir une erreur dans votre URL, le cours n\'est pas trouvé où n\'existe pas !');
-            }
-        } else {
-            header('Location:'.$routes['homepage']);
-        }
+        $View = new View("default");
     }
 
     /**
@@ -139,7 +119,7 @@ class ClassController
 
     /**
      * @param $params
-     * Récupère l'id de la lesson et modifie le status
+     * Récupère l'id de la lesson et modifie le statusz
      */
     public function statusAction($params)
     {
