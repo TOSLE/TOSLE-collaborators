@@ -243,6 +243,32 @@ html {
         color: #1A5CCB !important;
         font-size: 24px !important;
         font-weight: 600 !important; }
+  html .container-message {
+    display: flex;
+    background-color: #ffffff;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+    padding-top: 40px;
+    padding-bottom: 40px;
+    justify-content: center;
+    align-items: center; }
+    html .container-message .message {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column; }
+      html .container-message .message i {
+        font-size: 80px;
+        color: #1A5CCB;
+        margin-bottom: 20px; }
+      html .container-message .message h2 {
+        margin-bottom: 20px; }
+      html .container-message .message p {
+        margin-bottom: 20px; }
+      html .container-message .message a:visited {
+        text-decoration: none; }
+      html .container-message .message a {
+        font-weight: 600;
+        color: #1A5CCB; }
 
 #menu-header-section {
   width: 250px;
