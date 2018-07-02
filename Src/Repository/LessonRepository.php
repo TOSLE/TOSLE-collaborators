@@ -372,17 +372,6 @@ class LessonRepository extends Lesson
 
     public function getLessons()
     {
-        /**
-         * protected $id;
-        protected $title;
-        protected $description;
-        protected $datecreate;
-        protected $status;
-        protected $url;
-        protected $color;
-        protected $type;
-        protected $level;
-         */
         $target = [
             "id",
             "title",
@@ -411,5 +400,53 @@ class LessonRepository extends Lesson
         }
 
         return $arrayReturn;
+    }
+
+    /**
+     * @param string|int $_identifier
+     * @return boolean
+     * Fonction qui va récupérer une lesson
+     * Plusieurs vérifications :
+     * 1. on regarde le type de l'ienditifer, s'il est numérique c'est un ID, si c'est une string, un URL sinon une
+     * erreur
+     * 2. Si après la raquête SELECT on a aucun ID, c'est une erreur
+     * 3. Si les deux premieres vérifications passe, c'est un cours valide, on va chercher les chapitres qui
+     * correspondent
+     */
+    public function getLesson($_identifier)
+    {
+        $LessonChapter = new LessonChapter();
+        if(is_numeric($_identifier)){
+            $params = ['id' => $_identifier];
+        } elseif(is_string($_identifier)){
+            $params = ['url' => $_identifier];
+        } else {
+            return 0;
+        }
+        // Rajout du status qui vaut 1, permet d'éviter qu'un étudiant ayant gardé l'url accède à un cours finalement
+        // remis en brouillon
+        $params['status'] = 1;
+        $target = [
+            "id",
+            "title",
+            "description",
+            "datecreate",
+            "status",
+            "url",
+            "color",
+            "type",
+            "level"
+        ];
+        $parameter = [
+            'LIKE' => $params
+        ];
+        $this->setWhereParameter($parameter);
+        $this->getOneData($target);
+        if(empty($this->getId())){
+           return 0;
+        }
+        $chapters = $LessonChapter->getLessonChapterByIdentifier('lesson', $this->getId());
+        $this->setChapter($chapters);
+        return 1;
     }
 }

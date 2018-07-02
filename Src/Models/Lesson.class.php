@@ -187,7 +187,10 @@ class Lesson extends CoreSql
     public function setChapter($_idForeinKey)
     {
         foreach($_idForeinKey as $content){
-            $this->chapter[] = new Chapter($content);
+            $Chapter = new Chapter($content);
+            if($Chapter->getStatus() == 1) {
+                $this->chapter[] = $Chapter;
+            }
         }
     }
 
@@ -251,12 +254,11 @@ class Lesson extends CoreSql
                     'label' => 'Choisissez la couleur de votre cours',
                     'required' => false,
                     'options' => [
-                        'none' => 'Aucune',
+                        '#1A5CCB' => 'Couleur de base',
                         '#FFFFFF' => 'Blanc',
                         '#F43C3E' => 'Rouge',
                         '#28A745' => 'Vert',
-                        '#FA690E' => 'Orange',
-                        '#1A5CCB' => 'Blanc',
+                        '#FA690E' => 'Orange'
                     ],
                     'description' => 'Couleur d\'arrière plan'
                 ],

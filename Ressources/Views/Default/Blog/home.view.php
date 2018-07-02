@@ -1,13 +1,22 @@
-<section class="main-header container">
+<section class="container header-blog-container">
     <div class="row">
-        <div class="col-6">
+        <div class="col-12">
             <div>
-                <p>Option en attente</p>
-            </div>
-        </div>
-        <div class="col-6">
-            <div>
-                <p>Option en attente</p>
+                <h2>Liens et recherche avancée</h2>
+                <div class="icons-list">
+                    <a href="<?php echo $urlBlogfeed;?>" class="blog-link-icon">
+                        <i class="material-icons">
+                            rss_feed
+                        </i>
+                        <p>Flux RSS</p>
+                    </a>
+                    <a href="#" class="blog-link-icon target-modal" data-type="open-modal" data-target="filter-modal">
+                        <i class="material-icons">
+                            filter_list
+                        </i>
+                        <p>Modifier le filtre</p>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -57,3 +66,38 @@
         </div>
     </section>
 <?php endif;?>
+
+<div id="filter-modal" class="fade-background" data-type="parent-modal">
+    <div class="modal-window">
+        <div class="modal-header">
+            <i class="modal-header-icon material-icons" data-type="close-modal">close</i>
+            <h2>Modifier le filtre d'affichage des blogs</h2>
+        </div>
+        <div class="modal-main">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div>
+                            <form action="" method="get">
+                                <div class="form-group-base">
+                                <label for="colsize">Nombre de blog par ligne</label>
+                                <select id="colsize" name="colsize">
+                                    <option value="default">Votre choix</option>
+                                    <option value="4">3</option>
+                                    <option value="6">2</option>
+                                    <option value="12">1</option>
+                                </select>
+                                </div>
+                                <button type="submit" class="btn btn-green">Submit</button>
+                                <button type="reset" class="btn btn-default">Reset form</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-red" data-type="close-modal">Close modal</button>
+        </div>
+    </div>
+</div>
