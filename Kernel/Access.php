@@ -119,6 +119,10 @@ class Access
         "chapter/order" => 2,
     ];
 
+    private $urlFixe = [
+        'rss_blog' => DIRNAME.'/Tosle/Static/xml/blogfeed.xml'
+    ];
+
     /**
      * @param string|bool $slug
      * @return array
@@ -182,6 +186,15 @@ class Access
 
     /**
      * @return array
+     * Retourne les urls fixes de notre CMS
+     */
+    public function getUrlFixe()
+    {
+        return $this->urlFixe;
+    }
+
+    /**
+     * @return array
      * Retourne un tableau comprenant toutes les routes du Backoffice et et du front office sous la forme
      * key => chemin
      */
@@ -195,6 +208,9 @@ class Access
         }
         foreach ($Acces->getBackoffice() as $key => $value){
             $data[$key] = "".DIRNAME.substr($language,0,2)."/".$key;
+        }
+        foreach ($Acces->getUrlFixe() as $key => $value){
+            $data[$key] = $value;
         }
         return $data;
     }
