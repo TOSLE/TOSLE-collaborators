@@ -16,6 +16,7 @@ class ProfileController
     function indexAction($params)
     {
         $View = new View("default", "Profile/profile");
+        $User = new User();
     }
 
     /**

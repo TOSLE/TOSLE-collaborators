@@ -119,7 +119,7 @@ class ClassController
 
     /**
      * @param $params
-     * Récupère l'id de la lesson et modifie le statusz
+     * Récupère l'id de la lesson et modifie le status
      */
     public function statusAction($params)
     {
