@@ -1,4 +1,7 @@
 /* TEMPLATE DEFAULT TOSLE */
+/**
+BLOG
+ */
 html > body #positionning-box-tosle {
   position: absolute;
   width: 100%;
@@ -148,6 +151,22 @@ html {
               color: #1A5CCB; }
       html .article > .content-article .container-editor {
         margin-bottom: 40px; }
+  html .header-blog-container .icons-list {
+    display: flex; }
+    html .header-blog-container .icons-list > .blog-link-icon {
+      color: #FFF;
+      text-decoration: none;
+      border: 1px solid #FFF;
+      background-color: #1A5CCB;
+      border-radius: 3.5px;
+      padding: 3.5px;
+      text-align: center;
+      display: flex; }
+      html .header-blog-container .icons-list > .blog-link-icon > i {
+        margin: auto;
+        font-size: 1.8em; }
+      html .header-blog-container .icons-list > .blog-link-icon > p {
+        margin: auto; }
   html .lesson-bloc {
     height: 300px;
     background-color: #ffffff; }
