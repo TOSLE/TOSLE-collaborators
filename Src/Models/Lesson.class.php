@@ -187,7 +187,10 @@ class Lesson extends CoreSql
     public function setChapter($_idForeinKey)
     {
         foreach($_idForeinKey as $content){
-            $this->chapter[] = new Chapter($content);
+            $Chapter = new Chapter($content);
+            if($Chapter->getStatus() == 1) {
+                $this->chapter[] = $Chapter;
+            }
         }
     }
 
