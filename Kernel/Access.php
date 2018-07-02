@@ -97,6 +97,12 @@ class Access
             "controller" => "blog",
             "action" => "view",
             "security" => false
+        ],
+        "view_lesson" => [ // change status blog
+            "slug" => "lesson",
+            "controller" => "class",
+            "action" => "view",
+            "security" => false
         ]
     ];
 

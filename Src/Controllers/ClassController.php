@@ -37,7 +37,7 @@ class ClassController
      */
     function viewAction($params)
     {
-        $View = new View("default");
+        $View = new View("default", "Class/view_lesson");
     }
 
     /**
