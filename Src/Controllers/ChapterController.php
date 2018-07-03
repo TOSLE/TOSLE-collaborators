@@ -71,6 +71,8 @@ class ChapterController
                     $Chapter->setStatus(1);
                 }
                 $Chapter->save();
+                $Lesson = new LessonRepository();
+                $Lesson->generateXml();
             }
         }
 

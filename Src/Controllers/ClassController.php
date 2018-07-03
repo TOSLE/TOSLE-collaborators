@@ -19,14 +19,35 @@ class ClassController
     {
         $View = new View("default", "Class/home");
         $Lesson = new LessonRepository();
-        $lessons = $Lesson->getLessons();
+        // Initialisation des parametres
+        $colSize = 6;
+        $numberLesson = 6;
+        $offset = 0;
+        $page = 1;
+        $pagination = $Lesson->getPagination($numberLesson, $params["GET"]);
         $errors = [];
         if(!empty($params["GET"])){
-            echo "Il y a une recherche";
-        } else {
-            $View->setData("lessons", $lessons);
-            $View->setData("col", "6");
+            if(isset($params["GET"]["colsize"])) {
+                if ($params["GET"]["colsize"] == "4" || $params["GET"]["colsize"] == "6" || $params["GET"]["colsize"] == "12"){
+                    $colSize = $params["GET"]["colsize"];
+                }
+            }
+            if(isset($params["GET"]["number"])) {
+                if ($params["GET"]["number"] >= 1 || $params["GET"]["number"] <= 12){
+                    $numberLesson = $params["GET"]["number"];
+                    $pagination = $Lesson->getPagination($numberLesson, $params["GET"]);
+                }
+            }
+            if(isset($params['GET']['page']) && array_key_exists($params['GET']['page'], $pagination)){
+                $page = $params['GET']['page'];
+                $offset = $numberLesson * $page - $numberLesson;
+            }
         }
+        $lessons = $Lesson->getLessons($numberLesson, $offset);
+        $View->setData("pagination", $pagination);
+        $View->setData("page", $page);
+        $View->setData("lessons", $lessons);
+        $View->setData("col", $colSize);
     }
 
 
@@ -37,7 +58,27 @@ class ClassController
      */
     function viewAction($params)
     {
-        $View = new View("default");
+        $routes = Access::getSlugsById();
+        $View = new View("default", "Class/view_lesson");
+        if(isset($params['URI']) && !empty($params['URI'])){
+            $Lesson = new LessonRepository();
+            if($Lesson->getLesson($params['URI'][0])){
+                $readChapter = $Lesson->getChapter()[0];
+                if(isset($params['URI'][1])){
+                    foreach($Lesson->getChapter() as $Chapter){
+                        if($Chapter->getUrl() == $params['URI'][1]){
+                            $readChapter = $Chapter;
+                        }
+                    }
+                }
+                $View->setData("readChapter", $readChapter);
+                $View->setData("lesson", $Lesson);
+            } else {
+                $View->setData("error_search", 'Il semble y avoir une erreur dans votre URL, le cours n\'est pas trouvé où n\'existe pas !');
+            }
+        } else {
+            header('Location:'.$routes['homepage']);
+        }
     }
 
     /**

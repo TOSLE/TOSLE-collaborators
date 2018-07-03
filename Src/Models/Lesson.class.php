@@ -187,7 +187,10 @@ class Lesson extends CoreSql
     public function setChapter($_idForeinKey)
     {
         foreach($_idForeinKey as $content){
-            $this->chapter[] = new Chapter($content);
+            $Chapter = new Chapter($content);
+            if($Chapter->getStatus() == 1) {
+                $this->chapter[] = $Chapter;
+            }
         }
     }
 
@@ -251,12 +254,11 @@ class Lesson extends CoreSql
                     'label' => 'Choisissez la couleur de votre cours',
                     'required' => false,
                     'options' => [
-                        'none' => 'Aucune',
+                        '#1A5CCB' => 'Couleur de base',
                         '#FFFFFF' => 'Blanc',
                         '#F43C3E' => 'Rouge',
                         '#28A745' => 'Vert',
-                        '#FA690E' => 'Orange',
-                        '#1A5CCB' => 'Blanc',
+                        '#FA690E' => 'Orange'
                     ],
                     'description' => 'Couleur d\'arrière plan'
                 ],
@@ -264,8 +266,8 @@ class Lesson extends CoreSql
                     'label' => 'Choisissez le type de cours',
                     'required' => true,
                     'options' => [
-                        0 => 'Public',
-                        1 => 'Privé',
+                        1 => 'Public',
+                        2 => 'Privé',
                     ],
                     'description' => 'Cours privé ou Cours public'
                 ],
@@ -273,9 +275,9 @@ class Lesson extends CoreSql
                     'label' => 'Choisissez la difficulté de votre cours',
                     'required' => true,
                     'options' => [
-                        0 => 'Facile',
-                        1 => 'Normal',
-                        2 => 'Difficile',
+                        1 => 'Facile',
+                        2 => 'Normal',
+                        3 => 'Difficile',
                     ],
                     'description' => 'Difficulté estimé du cours'
                 ],

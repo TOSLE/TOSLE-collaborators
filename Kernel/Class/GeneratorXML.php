@@ -94,6 +94,40 @@ class GeneratorXML
     }
 
     /**
+     * @param array Blog $content
+     * Générateur du fichier XML pour le contenu des cours
+     */
+    public function setLessonFeed($content)
+    {
+        if(isset($content) && !empty($content)){
+            foreach($content as $lesson){
+                if(!empty($lesson->getChapter())){
+                    $item = $this->xmlDoc->createElement('item');
+                    $title = $this->xmlDoc->createElement('title', $lesson->getTitle());
+                    $description = $this->xmlDoc->createElement('description', $this->convertStringToXml($lesson->getDescription()));
+                    $datePub = $this->xmlDoc->createElement('pubDate', $lesson->getDatecreate());
+                    $link = $this->xmlDoc->createElement('link', $_SERVER['SERVER_NAME'].$this->routes['view_blog_article'].'/'.$lesson->getUrl());
+                    $chapter = $this->xmlDoc->createElement('numberChapter', sizeof($lesson->getChapter()));
+                    $item->appendChild($chapter);
+                    $item->appendChild($title);
+                    $item->appendChild($description);
+                    $item->appendChild($datePub);
+                    $item->appendChild($link);
+                    $this->channel->appendChild($item);
+                }
+            }
+        } else {
+            $item = $this->xmlDoc->createElement('item');
+            $title = $this->xmlDoc->createElement('title', 'Aucun cours publié pour le moment');
+            $description = $this->xmlDoc->createElement('description', 'Aucun cours publié pour le moment');
+            $item->appendChild($title);
+            $item->appendChild($description);
+            $this->channel->appendChild($item);
+        }
+        $this->xmlDoc->appendChild($this->channel);
+    }
+
+    /**
      * Lorsqu'on a terminé avec notre objet, on save le XML
      */
     public function __destruct()
