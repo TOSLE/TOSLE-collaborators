@@ -261,12 +261,21 @@ class LessonRepository extends Lesson
                         return $arrayCategory;
                     }
                 }
-
             }
+            $this->generateXml();
             return 1;
         } else {
             return $errors;
         }
+    }
+
+    /**
+     * Génére le flux RSS pour les cours
+     */
+    public function generateXml()
+    {
+        $GeneratorXML = new GeneratorXML('lessonfeed');
+        $GeneratorXML->setLessonFeed($this->getXmlLesson());
     }
 
     /**
@@ -368,9 +377,17 @@ class LessonRepository extends Lesson
         $LessonChapter->setChapterId($_idChapter);
         $LessonChapter->setLessonId($_idLesson);
         $LessonChapter->save();
+        // On régénère le XML si besoin
+        $this->generateXml();
     }
 
-    public function getLessons()
+    /**
+     * @param null $_limit
+     * @param null $_offset
+     * @return array
+     * Permet de retourner les lessons dans un tableau d'objet. Il n'est pas nécessaire de spécifier les paramètres
+     */
+    public function getLessons($_limit = null, $_offset = null)
     {
         $target = [
             "id",
@@ -388,6 +405,9 @@ class LessonRepository extends Lesson
                 'status' => 1
             ]
         ];
+        if(isset($_limit)){
+            $this->setLimitParameter($_limit, $_offset);
+        }
         $this->setWhereParameter($parameter);
         $arrayReturn = $this->getData($target);
         foreach($arrayReturn as $lesson){
@@ -396,6 +416,40 @@ class LessonRepository extends Lesson
             $arrayChapter = $LessonChapter->getLessonChapterByIdentifier('lesson', $lesson->getId());
             $arrayCategory = $Category->getCategoryByIdentifier('lesson', $lesson->getId());
             $lesson->setCategorylesson($arrayCategory);
+            $lesson->setChapter($arrayChapter);
+        }
+
+        return $arrayReturn;
+    }
+
+    /**
+     * @return array
+     * Permet de retourner les lessons pour les XML dans un tableau d'objet. Il n'est pas nécessaire de spécifier les paramètres
+     */
+    public function getXmlLesson()
+    {
+        $Lesson = new Lesson();
+        $target = [
+            "id",
+            "title",
+            "description",
+            "datecreate",
+            "status",
+            "url",
+            "type",
+            "level"
+        ];
+        $parameter = [
+            'LIKE' => [
+                'status' => 1,
+                'type' => 1,
+            ]
+        ];
+        $Lesson->setWhereParameter($parameter);
+        $arrayReturn = $Lesson->getData($target);
+        foreach($arrayReturn as $lesson){
+            $LessonChapter = new LessonChapter();
+            $arrayChapter = $LessonChapter->getLessonChapterByIdentifier('lesson', $lesson->getId());
             $lesson->setChapter($arrayChapter);
         }
 
@@ -448,5 +502,81 @@ class LessonRepository extends Lesson
         $chapters = $LessonChapter->getLessonChapterByIdentifier('lesson', $this->getId());
         $this->setChapter($chapters);
         return 1;
+    }
+
+    /**
+     * @return int
+     * Compte le nombre de lesson possédant un chapitre
+     */
+    public function countNumberOfLesson()
+    {
+        $lessons = $this->getLessons();
+        $returnValue = 0;
+        foreach($lessons as $lesson)
+        {
+            if(!empty($lesson->getChapter())){
+                $returnValue++;
+            }
+        }
+        return $returnValue;
+    }
+
+    /**
+     * @param int $_numberLesson
+     * @param array $_get
+     * @return array|int
+     * Cette fonction retourne une pagination pour les blogs en fonction d'un tableau envoyé
+     */
+    public function getPagination($_numberLesson, $_get)
+    {
+        $pagination = [];
+        $numberTotalOfLesson = $this->countNumberOfLesson();
+        $totalPage = ($numberTotalOfLesson != $_numberLesson)?(int)($numberTotalOfLesson / $_numberLesson):1;
+        if($totalPage < $numberTotalOfLesson / $_numberLesson){
+            $totalPage++;
+        }
+        if($totalPage <= 1) {
+            return 0;
+        }
+        $position = (isset($_get['page']) && ($_get['page'] <= $totalPage && $_get['page'] >= 1))?$_get['page']:1;
+        unset($_get['page']);
+        $href = "";
+        $arrayHref=[];
+        foreach ($_get as $key => $value){
+            $arrayHref[] = $key.'='.$value;
+        }
+        if(isset($_get) && !empty($_get)){
+            $href = implode('&amp;', $arrayHref);
+        }
+        if($position != 1){
+            if(!empty($href)){
+                $pagination['first_page'] = Access::getSlugsById()['homepage'].'?'.$href;
+            } else {
+                $pagination['first_page'] = Access::getSlugsById()['homepage'];
+            }
+        }
+        for($i=1; $i <= $totalPage; $i++){
+            if($i > 1){
+                if(!empty($href)){
+                    $pagination[$i] = Access::getSlugsById()['homepage'].'?page='.$i.'&amp;'.$href;
+                } else {
+                    $pagination[$i] = Access::getSlugsById()['homepage'].'?page='.$i;
+                }
+            } else {
+                if(!empty($href)){
+                    $pagination[$i] = Access::getSlugsById()['homepage'].'?'.$href;
+                } else {
+                    $pagination[$i] = Access::getSlugsById()['homepage'].$href;
+                }
+            }
+        }
+        if($position != $totalPage){
+            if(!empty($href)){
+                $pagination['last_page'] = Access::getSlugsById()['homepage'].'?page='.$totalPage.'&amp;'.$href;
+            } else {
+                $pagination['last_page'] = Access::getSlugsById()['homepage'].'?page='.$totalPage;
+            }
+        }
+        return $pagination;
     }
 }

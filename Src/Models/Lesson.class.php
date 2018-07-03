@@ -266,8 +266,8 @@ class Lesson extends CoreSql
                     'label' => 'Choisissez le type de cours',
                     'required' => true,
                     'options' => [
-                        0 => 'Public',
-                        1 => 'Privé',
+                        1 => 'Public',
+                        2 => 'Privé',
                     ],
                     'description' => 'Cours privé ou Cours public'
                 ],
@@ -275,9 +275,9 @@ class Lesson extends CoreSql
                     'label' => 'Choisissez la difficulté de votre cours',
                     'required' => true,
                     'options' => [
-                        0 => 'Facile',
-                        1 => 'Normal',
-                        2 => 'Difficile',
+                        1 => 'Facile',
+                        2 => 'Normal',
+                        3 => 'Difficile',
                     ],
                     'description' => 'Difficulté estimé du cours'
                 ],
