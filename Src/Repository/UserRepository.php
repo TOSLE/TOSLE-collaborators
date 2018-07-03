@@ -97,4 +97,19 @@ class UserRepository extends User
         $this->setWhereParameter($parameter);
         $this->getOneData($target);
     }
+
+    public function getUserBySession($token, $email)
+    {
+        $target = [
+            'firstname',
+            'lastname',
+            'email',
+            'newsletter'
+        ];
+        $this->setWhereParameter(["LIKE" => [
+            'token' => $token,
+            'email' => $email,
+        ]]);
+        $this->getOneData($target);
+    }
 }

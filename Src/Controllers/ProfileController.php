@@ -15,8 +15,20 @@ class ProfileController
      */
     function indexAction($params)
     {
+        $routes = Access::getSlugsById();
         $View = new View("default", "Profile/profile");
-        $User = new User();
+        $Profile = new ProfileRepository();
+        if(is_null($_SESSION['token']) && is_null($_SESSION['email'])){
+            //header('Location:'.$routes['signin']);
+        }
+        else {
+            echo'<pre>';
+            print_r($Profile->getInfoUser($_SESSION['token'], $_SESSION['email']));
+            echo '</pre>';
+            $ArrayInfoUser = $Profile->getInfoUser($_SESSION['token'], $_SESSION['email']);
+
+            $View->setData("profile_info", $ArrayInfoUser);
+        }
     }
 
     /**

@@ -20,11 +20,11 @@
                         </section>
                         <section class="info">
                             <section class="name">
-                                <span>Julien Domange</span>
+                                <span><?php echo $profile_info['firstname'] . ' ' . $profile_info['lastname']; ?></span>
                             </section>
                             <section class="email">
                                 <span>Contact mail :</span>
-                                <span>julienbg92@gmail.com</span>
+                                <span><?php echo $profile_info['email']; ?></span>
                             </section>
                             <section class="group">
                                 <span>Group:</span>
@@ -32,7 +32,12 @@
                             </section>
                             <section class="newsletter">
                                 <span>Newsletter :</span>
-                                <span>You're suscribing to the Newsletter.</span>
+                                <span><?php if (is_null($profile_info['newsletter']))
+                                            echo 'You\'re not suscribing to the Newsletter';
+                                        else
+                                            echo 'You\'re suscribing to the Newsletter.';
+                                      ?>
+                                </span>
                             </section>
                         </section>
                     </div>
