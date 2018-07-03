@@ -22,6 +22,9 @@
                             <section class="name">
                                 <span><?php echo $profile_info['firstname'] . ' ' . $profile_info['lastname']; ?></span>
                             </section>
+                            <section class="edit-action">
+                                <button class="btn btn-tosle">Edit my profile</button>
+                            </section>
                             <section class="email">
                                 <span>Contact mail :</span>
                                 <span><?php echo $profile_info['email']; ?></span>
@@ -46,9 +49,16 @@
         </div>
         <div class="col-8">
             <div>
-                <section>lessons</section>
-                <section>homework</section>
-                <section>comments</section>
+                <section class="container-content-profile">
+                    <section class="lessons">
+                        <div class="title">
+                            <span>My Class</span>
+                        </div>
+                    </section>
+                    <section><span>My Homework</span></section>
+                    <section><span>My last comments</span></section>
+                </section>
+
             </div>
         </div>
     </div>
