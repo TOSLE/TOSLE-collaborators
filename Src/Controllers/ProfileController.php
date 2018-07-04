@@ -15,7 +15,15 @@ class ProfileController
      */
     function indexAction($params)
     {
-        $View = new View("default", "Profile/profile");
+        $Profile = new ProfileRepository();
+        if(is_null($_SESSION['token']) && is_null($_SESSION['email'])){
+            $View = new View("default", "Profile/notconnect");
+        }
+        else {
+            $View = new View("default", "Profile/profile");
+            $ArrayInfoUser = $Profile->getInfoUser($_SESSION['token'], $_SESSION['email']);
+            $View->setData("profile_info", $ArrayInfoUser);
+        }
     }
 
     /**
