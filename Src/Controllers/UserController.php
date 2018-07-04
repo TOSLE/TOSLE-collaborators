@@ -57,13 +57,15 @@ class UserController
         if(!empty($params["POST"])) {
             $errors = Form::checkForm($form, $params["POST"]);
             $retourValue=$user->checkEmailExist($params["POST"]["email"]);
+
                if(is_numeric($retourValue)){     
                     echo "testt";
-
-                     $user->setEmail($params["POST"]["email"]); // voir pour le selectMultipleResponse + confirmEmail                                        
-                    } else {
+                     $user->setEmail($params["POST"]["email"]);                             
+                    } 
+                else {
                         $errors=$retourValue;                                                
                     }
+
             if (empty($errors)) {
                 $user->setFirstName($params["POST"]["firstname"]);
                 $user->setLastName($params["POST"]["lastname"]);
@@ -140,39 +142,30 @@ class UserController
     }
 
     public function getpasswordAction($params)
-    {        $View = new View("default", "User/newpassword");
-
+    {        
+        $View = new View("default", "User/newpassword");
         $user = new UserRepository();
         $form = $user->passwordFormAdd();
-        $errors = [];
-    
-
+        $errors = [];  
         if(!empty($params["POST"])) {
             $errors = Form::checkForm($form, $params["POST"]);
             if (empty($errors)) {
               /*  $user->checkEmailExist($params["POST"]["email"]);
                 $retourValue=$user->checkEmailExist($params["POST"]["email"]);
                 if(is_numeric($retourValue)){     
-                    echo "testt";
-*/
+                    echo "testt";*/
                      $user->setEmail($params["POST"]["email"]); // voir pour le selectMultipleResponse + confirmEmail                          
                         $user->setToken();              
-
                   /*  } else {
                         $errors=$retourValue;                                                
-
                     }*/
                     $email = $params["POST"]["email"];
                                    $token = $user->getToken();
-
-                   
-                
-              }             Mail::sendMailPassword($email,$token); 
-        }
-        
-  $View->setData("config", $form);
-                    $View->setData("errors", $errors);    
-
+              }           
+              Mail::sendMailPassword($email,$token); 
+        }        
+            $View->setData("config", $form);
+            $View->setData("errors", $errors);    
     }   
 
 

@@ -110,7 +110,7 @@ class Access
             "controller" => "user",
             "action" => "setnewpassword",
             "security" => false
-        ] 
+        ],
   
 
         "view_lesson" => [ // change status blog
