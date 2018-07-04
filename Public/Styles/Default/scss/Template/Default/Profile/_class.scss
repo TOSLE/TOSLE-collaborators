@@ -65,5 +65,22 @@
     box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
     width: 100%;
     margin-bottom: 40px;
+    h2 {
+      margin: 10px 0 10px 20px;
+      color: #1A5CCB;
+    }
+  }
+  .comment {
+    display: flex;
+    flex-direction: column;
+    .container {
+      ul {
+        display: flex;
+        li {
+          list-style: none;
+        }
+
+      }
+    }
   }
 }

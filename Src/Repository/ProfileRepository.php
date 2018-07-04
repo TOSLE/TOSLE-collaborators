@@ -25,14 +25,40 @@ class ProfileRepository extends User
     }
 
     public function getCommentUser($_idUser) {
-        $User = new UserRepository();
         $Comment = new CommentRepository();
 
+        $objectsCommentUserBlog = $Comment->getCommentByUserId('blog',$_idUser);
+        $objectsCommentUserChapter = $Comment->getCommentByUserId('chapter',$_idUser);
 
+        $commentaires = null;
 
+        foreach($objectsCommentUserBlog as $comments){
+            $commentaires[] = [
+                "id" => $comments->getId(),
+                "content" => $comments->getContent(),
+                "date" => $comments->getDatecreate(),
+                "type" => 'Blog',
+            ];
+        }
 
+        foreach($objectsCommentUserChapter as $comments){
+            $commentaires[] = [
+                "id" => $comments->getId(),
+                "content" => $comments->getContent(),
+                "date" => $comments->getDatecreate(),
+                "type" => 'Chapter',
+            ];
+        }
 
+        /**
+         * Tri le tableau par date
+         */
+        foreach ($commentaires as $key => $part) {
+            $sort[$key] = strtotime($part['date']);
+        }
+        array_multisort($sort, SORT_DESC, $commentaires);
 
-
+        return $commentaires;
     }
+
 }

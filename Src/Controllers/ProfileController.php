@@ -20,18 +20,15 @@ class ProfileController
         }
         else {
             $Profile = new ProfileRepository();
-            $User = new UserRepository();
             $View = new View("default", "Profile/profile");
             $ArrayInfoUser = $Profile->getInfoUser($_SESSION['token'], $_SESSION['email']);
 
-            $iduser = $User->getId();
-
-            echo $iduser;
-
-            //$ArrayCommentUser = $Profile->getCommentUser()
-
+            $CurrentUser = Authentification::getUser($_SESSION['token'], $_SESSION['email']);
+            $idUser = $CurrentUser->getId();
+            $ArrayCommentsUser = $Profile->getCommentUser($idUser);
 
             $View->setData("profile_info", $ArrayInfoUser);
+            $View->setData("comments_user", $ArrayCommentsUser);
         }
     }
 

@@ -36,10 +36,10 @@
                             <section class="newsletter">
                                 <span>Newsletter :</span>
                                 <span><?php if (is_null($profile_info['newsletter']))
-                                            echo 'You\'re not suscribing to the Newsletter';
-                                        else
-                                            echo 'You\'re suscribing to the Newsletter.';
-                                      ?>
+                                        echo 'You\'re not suscribing to the Newsletter';
+                                    else
+                                        echo 'You\'re suscribing to the Newsletter.';
+                                    ?>
                                 </span>
                             </section>
                         </section>
@@ -52,16 +52,29 @@
                 <section class="container-content-profile">
                     <section class="lessons">
                         <div class="title">
-                            <span>My Class</span>
+                            <h2>My Class</h2>
                         </div>
                     </section>
-                    <section><span>My Homework</span></section>
-                    <section><span>My last comments</span>
-                    <ul>
-                        <li>contenu</li>
-                        <li>article blog ou lesson</li>
-                        <li>date</li>
-                    </ul>
+                    <section><h2>My Homework</h2></section>
+                    <section class="comment">
+                        <h2>My Last Comment</h2>
+                        <div class="container">
+                            <ul class="title-tab">
+                                <li>Content</li>
+                                <li>Type</li>
+                                <li>Date</li>
+                            </ul>
+                            <?php if (isset($comments_user)): ?>
+                                <?php foreach ($comments_user as $comment): ?>
+                                    <ul>
+                                        <li><?php echo $comment['content']; ?></li>
+                                        <li><?php echo $comment['type'];  ?></li>
+                                        <li><?php echo $comment['date']; ?></li>
+                                    </ul>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                        </div>
+
                     </section>
 
                 </section>
