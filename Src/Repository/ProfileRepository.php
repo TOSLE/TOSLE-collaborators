@@ -23,4 +23,16 @@ class ProfileRepository extends User
             "newsletter" => $User->getNewsletter(),
         ];
     }
+
+    public function getCommentUser($_idUser) {
+        $User = new UserRepository();
+        $Comment = new CommentRepository();
+
+
+
+
+
+
+
+    }
 }

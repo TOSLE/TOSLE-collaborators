@@ -56,7 +56,14 @@
                         </div>
                     </section>
                     <section><span>My Homework</span></section>
-                    <section><span>My last comments</span></section>
+                    <section><span>My last comments</span>
+                    <ul>
+                        <li>contenu</li>
+                        <li>article blog ou lesson</li>
+                        <li>date</li>
+                    </ul>
+                    </section>
+
                 </section>
 
             </div>
