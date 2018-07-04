@@ -409,6 +409,7 @@ class LessonRepository extends Lesson
             $this->setLimitParameter($_limit, $_offset);
         }
         $this->setWhereParameter($parameter);
+        $this->setOrderByParameter(["id" => "DESC"]);
         $arrayReturn = $this->getData($target);
         foreach($arrayReturn as $lesson){
             $Category = new CategoryRepository();
