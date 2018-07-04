@@ -6,7 +6,8 @@
  * Time: 00:29
  */
 
-class ClassController
+
+class ClassController extends CoreController
 {
     /**
      * @Route("/en/class(/index)")
