@@ -34,10 +34,13 @@ class Authentification
         $_SESSION["email"]=$User->getEmail();
         return true;
     }
-    public static function getUserStatus($token, $email)
+    public static function getUser($token, $email)
     {
         $target=[
-            'status'
+            'id',
+            'status',
+            'lastname',
+            'firstname'
         ];
         $User = new User();
         $User->setWhereParameter(["LIKE" => [
@@ -45,6 +48,6 @@ class Authentification
             'email' => $email
         ]]);
         $User->getOneData($target);
-        return intval($User->getStatus());
+        return $User;
     }
 }
