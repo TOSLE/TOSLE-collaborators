@@ -35,6 +35,9 @@
                 <div class="small-precision-input"><?php echo $config["textarea"]["description"];?></div>
             <?php endif;?>
         <?php endif;?>
+        <?php if(isset($config['config']['secure']) && $config['config']['secure']):?>
+            <input type="hidden" name="_token" id="_token" value="<?php echo Form::secureCSRF();?>">
+        <?php endif;?>
         <input type="submit" class="btn btn-tosle" value="<?php echo $config["config"]["submit"];?>">
     </div>
 </form>

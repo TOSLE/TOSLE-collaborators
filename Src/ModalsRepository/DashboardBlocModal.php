@@ -17,6 +17,8 @@ class DashboardBlocModal
     private $actionButtonView = null;
     private $actionButtonEdit = null;
     private $actionButtonStatus = null;
+    private $actionButtonTarget = null;
+    private $actionButtonOrder = null;
     private $typeArrayData = false;
     private $arrayHref = null;
 
@@ -108,7 +110,7 @@ class DashboardBlocModal
     {
         if(isset($tableName)){
             $data = [];
-            foreach($arraysData as $content){
+            foreach($arraysData as $type => $content){
                 $tmpData = [];
                 if(!empty($content->getDatecreate())){
                     $tmpData["data_datecreate"] = $content->getDatecreate();
@@ -122,7 +124,9 @@ class DashboardBlocModal
                 if(!empty($content->getId())){
                     $tmpData["data_id"] = $content->getId();
                 }
-
+                if(is_a($arraysData[0], 'Chapter') && !empty($content->getLessonchapter())){
+                    $tmpData["data_order"] = $content->getLessonchapter()->getOrder();
+                }
                 $data[] = $tmpData;
             }
             $this->typeArrayData = 1;
@@ -157,6 +161,31 @@ class DashboardBlocModal
     }
 
     /**
+     * @param string $_buttonName
+     * @param string $_target
+     * Prend en paramètre le nom du bouton, et l'id de la modal a viser. Cela inclu que la modal soit présente sur la page,
+     * la fonction ne gère pas sa création.
+     */
+    public function setActionTargetButton($_buttonName, $_target)
+    {
+        $this->actionButtonTarget = [
+            "name" => $_buttonName,
+            "target" => $_target
+        ];
+    }
+
+    /**
+     * @param string $_targetUrl
+     * Cette fonction définit l'endroit où sont gérés les order. La modal va de son côté généré deux fleches et rajouter la mention :
+     * - 'up' pour monter dans les ordres
+     * - 'down' pour baisser dans les ordres
+     */
+    public function setActionButtonOrder($_targetUrl)
+    {
+        $this->actionButtonOrder = $_targetUrl;
+    }
+
+    /**
      * @return array
      * Retourne notre tableau à envoyer à notre modal
      */
@@ -170,9 +199,11 @@ class DashboardBlocModal
                 "table_header" => $this->tableHeaderContent,
                 "table_body_class" => $this->tableBodyClass,
                 "column_action_button" => [
+                    "actionButtonTarget" => $this->actionButtonTarget,
                     "actionButtonView" => $this->actionButtonView,
                     "actionButtonEdit" => $this->actionButtonEdit,
-                    "actionButtonStatus" => $this->actionButtonStatus
+                    "actionButtonStatus" => $this->actionButtonStatus,
+                    "actionButtonOrder" => $this->actionButtonOrder,
                 ]
             ],
             "data" => [

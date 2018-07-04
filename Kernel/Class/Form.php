@@ -48,7 +48,24 @@ class Form
                 }
             }
         }
-
+        if(isset($config["captcha"])){
+            if(isset($_SESSION["captcha"]) && isset($data['captcha'])) {
+                if($_SESSION["captcha"] != $data['captcha']){
+                    $errorsMsg["captcha"] = "Le captcha saisi n'est pas valide";
+                }
+            }
+        }
+        if(isset($config['config']['secure']) && $config['config']['secure']) {
+            if(isset($_SESSION['secure_form']) && isset($data['_token'])){
+                $returnSecure = self::checkSecureForm($_SESSION['secure_form'], $data['_token']);
+                if($returnSecure === 1){
+                    $errorsMsg["Timeout"] = "délait d'authentification dépassé pour le formulaire. Merci de réessayer l'envoie";
+                }
+                if($returnSecure === 2){
+                    $errorsMsg["Authentification failed"] = "Authentification échoué pour le formulaire. Veuillez réessayer.";
+                }
+            }
+        }
         return $errorsMsg;
     }
 
@@ -62,13 +79,47 @@ class Form
     {
         $dataReturn = [];
         foreach($arrayData as $name => $content){
-            if(!stristr($name, "ckeditor")){
+            if(!stristr($name, "ckeditor") && !stristr($name, "select")){
                 $dataReturn[$name] = htmlspecialchars($content);
             } else {
                 $dataReturn[$name] = $content;
             }
         }
         return $dataReturn;
+    }
+
+    /**
+     * @return string
+     * Fonction retournant un token pour sécurisation des formulaires par CSRF
+     */
+    public static function secureCSRF()
+    {
+        $timestamp = time();
+        $token = uniqid($timestamp.'_token_', true);
+        $_SESSION['secure_form'] = $token;
+        return $token;
+    }
+
+    /**
+     * @param string $_token
+     * @param string $_formToken
+     * @return bool
+     * Sécurisation CSRF des formulaires
+     * Règle à respecter :
+     *      - token en $_SESSION et dans le formulaire identique
+     *      - token généré il y a moins de 30 minutes
+     */
+    public static function checkSecureForm($_token, $_formToken)
+    {
+        if($_token === $_formToken){
+            $timestamp = time();
+            $tokenExploded = explode('_', $_token);
+            if($timestamp - $tokenExploded[0] < 1800){
+                return 0;
+            }
+            return 1;
+        }
+        return 2;
     }
 
     /**
@@ -162,8 +213,12 @@ class Form
                         if($value > 0 && $value == UPLOAD_ERR_OK){
                             $errorsMsg[$files['name'][$key]] = "Failed to upload image";
                         }
-                        if ($value == UPLOAD_ERR_NO_FILE){
+                        if ($value == UPLOAD_ERR_NO_FILE && !empty($files['name'][$key])){
                             $errorsMsg[$files['name'][$key]] = "File not found";
+                        } else {
+                            if($value == UPLOAD_ERR_NO_FILE && empty($files['name'][$key])) {
+                                $errorsMsg['EXCEPT_ERROR'] = "No file founded";
+                            }
                         }
                         if ($value == UPLOAD_ERR_INI_SIZE){
                             $errorsMsg[$files['name'][$key]] = "Limit upload file size exceeded";

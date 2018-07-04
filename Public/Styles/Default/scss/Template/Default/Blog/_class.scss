@@ -120,6 +120,9 @@
       h5 {
         margin-bottom: 40px;
       }
+      .container {
+        border: solid 1px #7d7c7c42;
+      }
       .comment {
         display: flex;
         flex-direction: row;
@@ -157,10 +160,43 @@
             margin-bottom: 3px;
           }
         }
+        .signal {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          margin-left: auto;
+          .material-icons {
+            cursor: pointer;
+            color: #1A5CCB;
+          }
+        }
       }
     }
     .container-editor {
       margin-bottom: 40px;
+    }
+  }
+}
+
+.header-blog-container {
+  .icons-list {
+    display: flex;
+    > .blog-link-icon {
+      color: $colorBackgroundIcon;
+      text-decoration: none;
+      border: 1px solid $colorBackgroundIcon;
+      background-color: $colorGlobalToslePrimary;
+      border-radius: 3.5px;
+      padding: 3.5px;
+      text-align: center;
+      display: flex;
+      > i {
+        margin: auto;
+        font-size: 1.8em;
+      }
+      > p {
+        margin: auto;
+      }
     }
   }
 }

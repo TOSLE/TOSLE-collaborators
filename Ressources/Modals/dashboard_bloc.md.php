@@ -29,6 +29,20 @@
                             <?php foreach($config["data"]["array_data"] as $key => $arrayValue):?>
                                 <tr>
                                     <?php foreach($config["global"]["table_body_class"] as $className):?>
+                                        <?php if($className == "td-content-order"):?>
+                                        <?php if(isset($config["global"]["column_action_button"]["actionButtonOrder"])):?>
+                                            <td class="<?php echo $className;?>">
+                                                <a href="<?php echo $config["global"]["column_action_button"]["actionButtonOrder"].'/down/'.$arrayValue['data_id'];?>" class="btn-sm btn-tosle material-icons ordered-button">
+                                                    arrow_downward
+                                                </a>
+                                                <?php echo ($arrayValue["data_order"]) ?>
+                                                <a href="<?php echo $config["global"]["column_action_button"]["actionButtonOrder"].'/up/'.$arrayValue['data_id'];?>" class="btn-sm btn-tosle material-icons ordered-button">
+                                                    arrow_upward                                                </a>
+                                            </td>
+                                        <?php else: ?>
+                                            <td class="<?php echo $className;?>"><?php echo $key; ?></td>
+                                        <?php endif;?>
+                                        <?php endif;?>
                                         <?php if($className == "td-content-text"):?>
                                             <td class="<?php echo $className;?>"><?php echo $arrayValue["data_title"];?></td>
                                         <?php endif;?>
@@ -46,6 +60,11 @@
                                                     <?php if($typeButton == "actionButtonView"):?>
                                                         <?php if(isset($content)):?>
                                                             <a href="<?php echo $config["data"]["data_href"]["view"]."/".Access::constructUrl($arrayValue["data_title"]);?>" class="btn-sm btn-tosle"><?php echo $content;?></a>
+                                                        <?php endif;?>
+                                                    <?php endif;?>
+                                                    <?php if($typeButton == "actionButtonTarget"):?>
+                                                        <?php if(isset($content)):?>
+                                                            <a href="<?php echo $content["target"]."/".Access::constructUrl($arrayValue["data_title"]);?>" class="btn-sm btn-tosle"><?php echo $content['name'];?></a>
                                                         <?php endif;?>
                                                     <?php endif;?>
                                                     <?php if($typeButton == "actionButtonStatus"):?>

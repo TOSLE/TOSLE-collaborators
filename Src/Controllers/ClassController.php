@@ -12,52 +12,42 @@ class ClassController
      * @Route("/en/class(/index)")
      * @param array $params
      * Default action of ClassController
+     * Initialisation des paramètres de la vue
+     *      - Interprétation de params pour modifier les paramètres de la vue si nécessaire
      */
     function indexAction($params)
     {
-       // $View = new View("default");
         $View = new View("default", "Class/home");
-        $Class = new Lesson();
+        $Lesson = new LessonRepository();
+        // Initialisation des parametres
+        $colSize = 6;
+        $numberLesson = 6;
+        $offset = 0;
+        $page = 1;
+        $pagination = $Lesson->getPagination($numberLesson, $params["GET"]);
         $errors = [];
         if(!empty($params["GET"])){
-            echo "Il y a une recherche";
-        } else {
-            $target = [
-                "title",
-                "description",
-                "datecreate",
-                "id"
-            ];
-            $parameter = [
-                "LIKE" => [
-                    "status" => 1
-                ]
-            ];
-
-            $Class->setWhereParameter($parameter, null);
-            $Class->setOrderByParameter(["id"=>"DESC"]);
-            $Class->setLimitParameter(5, 0);
-            $array = $Class->getData($target);
-            $data = [];
-
-            foreach($array as $content){
-                $date = new DateTime($content->getDatecreate());
-                $value["lesson_datecreate"] = $date->format("l jS \of F Y H:i");
-                $value["lesson_title"] = $content->getTitle();
-
-                $contentValue = strip_tags($content->getContent(), "<p>");
-                $contentValue = str_replace("&nbsp;", "", $contentValue);
-                $contentValue = str_replace("<p>", "", $contentValue);
-                $contentValue = str_replace("</p>", " ", $contentValue);
-                $value["lesson_description"] = (strlen($contentValue)>200)?substr($contentValue, 0, 200):$contentValue;
-                $value["lesson_status"] = $content->getStatus();
-                $value["lesson_id"] = $content->getId();
-                $data[] = $value;
+            if(isset($params["GET"]["colsize"])) {
+                if ($params["GET"]["colsize"] == "4" || $params["GET"]["colsize"] == "6" || $params["GET"]["colsize"] == "12"){
+                    $colSize = $params["GET"]["colsize"];
+                }
             }
-
-            $View->setData("data", $data);
-            $View->setData("col", "6");
+            if(isset($params["GET"]["number"])) {
+                if ($params["GET"]["number"] >= 1 || $params["GET"]["number"] <= 12){
+                    $numberLesson = $params["GET"]["number"];
+                    $pagination = $Lesson->getPagination($numberLesson, $params["GET"]);
+                }
+            }
+            if(isset($params['GET']['page']) && array_key_exists($params['GET']['page'], $pagination)){
+                $page = $params['GET']['page'];
+                $offset = $numberLesson * $page - $numberLesson;
+            }
         }
+        $lessons = $Lesson->getLessons($numberLesson, $offset);
+        $View->setData("pagination", $pagination);
+        $View->setData("page", $page);
+        $View->setData("lessons", $lessons);
+        $View->setData("col", $colSize);
     }
 
 
@@ -126,11 +116,13 @@ class ClassController
                 $arrayReturn = $Lesson->editLesson($params["URI"][0]);
                 $arrayLesson = $arrayReturn["lesson"];
                 $configForm = $arrayReturn["configForm"];
-                $configForm["content_value"] = [
+                $configForm["data_content"] = [
                     "title" => $arrayLesson->getTitle(),
                     "content" => $arrayLesson->getDescription(),
                     "select_color" => $arrayLesson->getColor(),
-                    "selectedOption" => $arrayReturn['selectedOption']
+                    "selectedOption" => $arrayReturn['selectedOption'],
+                    "select_type" => $arrayLesson->getType(),
+                    "select_difficulty" => $arrayLesson->getLevel(),
                 ];
                 if(isset($params["POST"]) && !empty($params["POST"])){
                     $resultAdd = $Lesson->addLesson($params["POST"], $params["URI"][0]);

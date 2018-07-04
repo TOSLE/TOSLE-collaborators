@@ -32,7 +32,7 @@ class DashboardController
 
         $View->setData("modalAddOption", $Lesson->getModalAdd(12));
         $View->setData("modalStats", $Lesson->getModalStats());
-        $View->setData("modalLastLesson", $Lesson->getModalLatestArticle());
+        $View->setData("modalLastLesson", $Lesson->getModalLatestLesson());
     }
 
     /**
@@ -126,6 +126,17 @@ class DashboardController
     {
         $View = new View("dashboard", "chat");
         $View->setData("PageName", NAV_DASHBOARD . " " . NAV_DASHBOARD_STATISTIC);
+    }
+
+    public function chapterAction($params)
+    {
+        $View = new View("dashboard", "Dashboard/chapter");
+        $View->setData("PageName", NAV_DASHBOARD . " " . NAV_DASHBOARD_LESSON);
+        $Lesson = new LessonRepository();
+
+        /*$View->setData("modalAddOption", $Lesson->getModalAdd(12));
+        $View->setData("modalStats", $Lesson->getModalStats());*/
+        $View->setData("modalChapter", $Lesson->getModalLastChapterByLesson($params["URI"][0]));
     }
 
 }

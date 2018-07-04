@@ -1,4 +1,7 @@
 /* TEMPLATE DEFAULT TOSLE */
+/**
+BLOG
+ */
 html > body #positionning-box-tosle {
   position: absolute;
   width: 100%;
@@ -106,6 +109,8 @@ html {
         margin-bottom: 40px; }
         html .article > .content-article .comments-article h5 {
           margin-bottom: 40px; }
+        html .article > .content-article .comments-article .container {
+          border: solid 1px #7d7c7c42; }
         html .article > .content-article .comments-article .comment {
           display: flex;
           flex-direction: row;
@@ -136,8 +141,166 @@ html {
               font-size: 12px; }
             html .article > .content-article .comments-article .comment > div:nth-child(2) div {
               margin-bottom: 3px; }
+          html .article > .content-article .comments-article .comment .signal {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-left: auto; }
+            html .article > .content-article .comments-article .comment .signal .material-icons {
+              cursor: pointer;
+              color: #1A5CCB; }
       html .article > .content-article .container-editor {
         margin-bottom: 40px; }
+  html .header-blog-container .icons-list {
+    display: flex; }
+    html .header-blog-container .icons-list > .blog-link-icon {
+      color: #FFF;
+      text-decoration: none;
+      border: 1px solid #FFF;
+      background-color: #1A5CCB;
+      border-radius: 3.5px;
+      padding: 3.5px;
+      text-align: center;
+      display: flex; }
+      html .header-blog-container .icons-list > .blog-link-icon > i {
+        margin: auto;
+        font-size: 1.8em; }
+      html .header-blog-container .icons-list > .blog-link-icon > p {
+        margin: auto; }
+  html .lesson-bloc {
+    height: 300px;
+    background-color: #ffffff; }
+    html .lesson-bloc > .fade-background-lesson {
+      position: relative;
+      overflow: hidden;
+      height: 100%;
+      width: 100%; }
+      html .lesson-bloc > .fade-background-lesson > .title-lesson {
+        padding: 7.5px;
+        border-bottom: 1px solid; }
+        html .lesson-bloc > .fade-background-lesson > .title-lesson > .info-datecreate {
+          position: absolute;
+          top: 12.5px;
+          right: 7.5px; }
+      html .lesson-bloc > .fade-background-lesson > .description-lesson {
+        padding: 7.5px; }
+      html .lesson-bloc > .fade-background-lesson > .category-list-lesson {
+        position: absolute;
+        bottom: 0;
+        border-top: 0.5px solid;
+        max-width: 100%;
+        padding: 1%; }
+      html .lesson-bloc > .fade-background-lesson > .more-infos {
+        position: absolute;
+        height: 18%;
+        bottom: -17%;
+        width: 100%;
+        border-radius: 5px 5px 0px 0px;
+        -moz-border-radius: 5px 5px 0px 0px;
+        -webkit-border-radius: 5px 5px 0px 0px;
+        -webkit-box-shadow: 0px 0px 40px -12px transparent;
+        -moz-box-shadow: 0px 0px 40px -12px transparent;
+        box-shadow: 0px 0px 40px -12px transparent;
+        border: 0px solid;
+        transition: 0.4s; }
+        html .lesson-bloc > .fade-background-lesson > .more-infos > .info-comment-lesson {
+          position: absolute;
+          bottom: 10px;
+          left: 15px; }
+        html .lesson-bloc > .fade-background-lesson > .more-infos > .info-chapter {
+          position: absolute;
+          bottom: 10px;
+          right: 15px; }
+        html .lesson-bloc > .fade-background-lesson > .more-infos > .info-btn-readmore {
+          position: absolute;
+          bottom: 10px;
+          left: 50%;
+          transform: translateX(-50%); }
+      html .lesson-bloc > .fade-background-lesson:hover > .more-infos {
+        bottom: 0%;
+        -webkit-box-shadow: 0px 0px 40px -12px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: 0px 0px 40px -12px rgba(0, 0, 0, 0.75);
+        box-shadow: 0px 0px 40px -12px rgba(0, 0, 0, 0.75); }
+  html .profile {
+    display: flex;
+    background-color: #FFFFFF;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+    align-items: center;
+    flex-direction: column; }
+    html .profile .profile-container {
+      display: flex;
+      align-items: center;
+      flex-direction: column; }
+      html .profile .profile-container .profil-picture {
+        border-radius: 50%;
+        width: 200px;
+        height: 200px;
+        border: solid 1.5px #1A5CCB;
+        display: flex;
+        overflow: hidden;
+        margin-top: 30px;
+        margin-bottom: 30px; }
+        html .profile .profile-container .profil-picture img {
+          min-height: 0;
+          min-width: 0; }
+    html .profile .info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 30px; }
+      html .profile .info section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+        margin-bottom: 20px; }
+        html .profile .info section span:nth-child(1) {
+          color: #343A40;
+          font-weight: 600;
+          margin-bottom: 10px;
+          font-size: 18px; }
+        html .profile .info section span:nth-child(2) {
+          font-size: 16px; }
+      html .profile .info .name span {
+        color: #1A5CCB !important;
+        font-size: 24px !important;
+        font-weight: 600 !important; }
+  html .container-content-profile {
+    display: flex;
+    align-items: center;
+    flex-direction: column; }
+    html .container-content-profile section {
+      display: flex;
+      background-color: #FFFFFF;
+      box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+      width: 100%;
+      margin-bottom: 40px; }
+  html .container-message {
+    display: flex;
+    background-color: #ffffff;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+    padding-top: 40px;
+    padding-bottom: 40px;
+    justify-content: center;
+    align-items: center; }
+    html .container-message .message {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column; }
+      html .container-message .message i {
+        font-size: 80px;
+        color: #1A5CCB;
+        margin-bottom: 20px; }
+      html .container-message .message h2 {
+        margin-bottom: 20px; }
+      html .container-message .message p {
+        margin-bottom: 20px; }
+      html .container-message .message a:visited {
+        text-decoration: none; }
+      html .container-message .message a {
+        font-weight: 600;
+        color: #1A5CCB; }
 
 #menu-header-section {
   width: 250px;

@@ -1,12 +1,13 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: Mehdi
  * Date: 05/04/2018
  * Time: 23:27
  */
-
-class Lesson extends CoreSql {
+class Lesson extends CoreSql
+{
 
     protected $id;
     protected $title;
@@ -15,6 +16,11 @@ class Lesson extends CoreSql {
     protected $status;
     protected $url;
     protected $color;
+    protected $type;
+    protected $level;
+
+    private $chapter;
+    private $categorylesson = [];
 
     public function __construct()
     {
@@ -74,7 +80,8 @@ class Lesson extends CoreSql {
      */
     public function getDateCreate()
     {
-        return $this->datecreate;
+        $date = new DateTime($this->datecreate);
+        return $date->format("F j, Y");
     }
 
     /**
@@ -124,6 +131,7 @@ class Lesson extends CoreSql {
     {
         return $this->color;
     }
+
     /**
      * @param string $color
      */
@@ -131,26 +139,104 @@ class Lesson extends CoreSql {
     {
         $this->color = $color;
     }
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
 
+    /**
+     * @param int $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLevel()
+    {
+        return $this->level;
+    }
+
+    /**
+     * @param int $level
+     */
+    public function setLevel($level)
+    {
+        $this->level = $level;
+    }
+
+    /**
+     * @return array LessonChapter
+     * Retourne un objet avec les valeurs de Lessonchapter
+     */
+    public function getChapter()
+    {
+        return $this->chapter;
+    }
+
+    /**
+     * @param array $_idForeinKey
+     * Permet de créer l'attribut avec l'id de la clé primaire de la table correspondante
+     */
+    public function setChapter($_idForeinKey)
+    {
+        foreach($_idForeinKey as $content){
+            $Chapter = new Chapter($content);
+            if($Chapter->getStatus() == 1) {
+                $this->chapter[] = $Chapter;
+            }
+        }
+    }
+
+    /**
+     * @return array
+     */
+    public function getCategorylesson()
+    {
+        return $this->categorylesson;
+    }
+
+    /**
+     * @param array $categorylesson
+     * Le tableau envoyé doit avoir comme clé l'id de la catégorie. Le contenu n'est pas obligatoire !
+     */
+    public function setCategorylesson($categorylesson)
+    {
+        foreach($categorylesson as $key => $content){
+            $this->categorylesson[] = new Category($key);
+        }
+    }
+
+    /**
+     * @return array
+     * Formulaire d'ajout d'une lesson
+     */
     public function configFormAddLesson()
     {
         $slugs = Access::getSlugsById();
         $category = new CategoryRepository;
+        $group = new GroupRepository;
         return [
-            "config"=> [
-                "method"=>"post",
-                "action"=>"",
-                "save"=>"Sauvegarder en brouillon",
-                "submit"=>"Enregistrer le nouveau cours",
-                "form_file"=>false,
+            "config" => [
+                "method" => "post",
+                "action" => "",
+                "save" => "Sauvegarder en brouillon",
+                "submit" => "Enregistrer le nouveau cours",
+                "form_file" => false,
             ],
-            "input"=> [
-                "title"=>[
-                    "type"=>"text",
-                    "placeholder"=>"Intitulé du cours",
-                    "required"=>true,
-                    "maxString"=>100,
-                    "label"=>"Renseignez le titre de votre cours"
+            "input" => [
+                "title" => [
+                    "type" => "text",
+                    "placeholder" => "Intitulé du cours",
+                    "required" => true,
+                    "maxString" => 100,
+                    "label" => "Renseignez le titre de votre cours"
                 ]
             ],
             "textarea" => [
@@ -159,21 +245,42 @@ class Lesson extends CoreSql {
                 "description" => "Un maximum de 500 caractères",
                 "placeholder" => "Maximum 500 caractères"
             ],
-            'select_multiple' => $category->configFormCategory(2),
+            'select_multiple' => [
+                $category->configFormCategory(2),
+                $group->configFormGroup(),
+            ],
             'select' => [
                 'select_color' => [
                     'label' => 'Choisissez la couleur de votre cours',
                     'required' => false,
                     'options' => [
-                        'none' => 'Aucune',
+                        '#1A5CCB' => 'Couleur de base',
                         '#FFFFFF' => 'Blanc',
                         '#F43C3E' => 'Rouge',
                         '#28A745' => 'Vert',
-                        '#FA690E' => 'Orange',
-                        '#1A5CCB' => 'Blanc',
+                        '#FA690E' => 'Orange'
                     ],
                     'description' => 'Couleur d\'arrière plan'
-                ]
+                ],
+                'select_type' => [
+                    'label' => 'Choisissez le type de cours',
+                    'required' => true,
+                    'options' => [
+                        1 => 'Public',
+                        2 => 'Privé',
+                    ],
+                    'description' => 'Cours privé ou Cours public'
+                ],
+                'select_difficulty' => [
+                    'label' => 'Choisissez la difficulté de votre cours',
+                    'required' => true,
+                    'options' => [
+                        1 => 'Facile',
+                        2 => 'Normal',
+                        3 => 'Difficile',
+                    ],
+                    'description' => 'Difficulté estimé du cours'
+                ],
             ],
             "exit" => $slugs["dashboard_lesson"]
         ];

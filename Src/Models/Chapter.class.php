@@ -17,9 +17,30 @@ Class Chapter extends CoreSql {
     protected $fileid;
     protected $url;
 
-    public function __construct()
+    private $lessonchapter;
+
+    public function __construct($_id = null)
     {
         parent::__construct();
+        if(isset($_id)){
+            $target = [
+                'id',
+                'title',
+                'content',
+                'datecreate',
+                'status',
+                'type',
+                'fileid',
+                'url',
+            ];
+            $parameter = [
+                'LIKE' => [
+                    'id' => $_id
+                ]
+            ];
+            $this->setWhereParameter($parameter);
+            $this->getOneData($target);
+        }
     }
 
     /**
@@ -151,6 +172,24 @@ Class Chapter extends CoreSql {
     }
 
 
+    /**
+     * @return LessonChapter
+     * Retourne un objet avec les valeurs de Lessonchapter
+     */
+    public function getLessonchapter()
+    {
+        return $this->lessonchapter;
+    }
+
+    /**
+     * @param int $_idForeinKey
+     * Permet de créer l'attribut avec l'id de la clé primaire de la table correspondante
+     */
+    public function setLessonchapter($_idForeinKey)
+    {
+        $this->lessonchapter = new LessonChapter($_idForeinKey);
+    }
+
     public function configFormAdd()
     {
         $slugs = Access::getSlugsById();
@@ -188,7 +227,7 @@ Class Chapter extends CoreSql {
                 "placeholder" => "Placeholder"
             ],
             'select' => $lesson->getSelectLesson(),
-            "exit" => $slugs["dashboard_blog"]
+            "exit" => $slugs["dashboard_lesson"]
         ];
     }
 

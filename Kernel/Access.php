@@ -80,6 +80,12 @@ class Access
             "action" => "lessons",
             "security" => 2
         ],
+        "dashboard_chapter" => [ // Dashboard blog homepage
+            "slug" => "dashboard-chapter",
+            "controller" => "dashboard",
+            "action" => "chapter",
+            "security" => 2
+        ],
         "add_user" => [ // change status blog
             "slug" => "add-user",
             "controller" => "user",
@@ -92,6 +98,7 @@ class Access
             "action" => "view",
             "security" => false
         ],
+
         "view-newpassword" => [ // change status blog
             "slug" => "view-newpassword",
             "controller" => "user",
@@ -105,6 +112,14 @@ class Access
             "security" => false
         ] 
   
+
+        "view_lesson" => [ // change status blog
+            "slug" => "lesson",
+            "controller" => "class",
+            "action" => "view",
+            "security" => false
+        ]
+
     ];
 
     private $backOffice = [
@@ -113,6 +128,16 @@ class Access
         "blog/edit" => 2,
         "class/add" => 2,
         "class/edit" => 2,
+
+        "class/status" => 2,
+        "chapter/add" => 2,
+        "chapter/edit" => 2,
+        "chapter/status" => 2,
+        "chapter/order" => 2,
+    ];
+
+    private $urlFixe = [
+        'rss_blog' => DIRNAME.'/Tosle/Static/xml/blogfeed.xml'
     ];
 
     /**
@@ -178,6 +203,15 @@ class Access
 
     /**
      * @return array
+     * Retourne les urls fixes de notre CMS
+     */
+    public function getUrlFixe()
+    {
+        return $this->urlFixe;
+    }
+
+    /**
+     * @return array
      * Retourne un tableau comprenant toutes les routes du Backoffice et et du front office sous la forme
      * key => chemin
      */
@@ -192,6 +226,9 @@ class Access
         foreach ($Acces->getBackoffice() as $key => $value){
             $data[$key] = "".DIRNAME.substr($language,0,2)."/".$key;
         }
+        foreach ($Acces->getUrlFixe() as $key => $value){
+            $data[$key] = $value;
+        }
         return $data;
     }
 
@@ -205,6 +242,6 @@ class Access
         $search = array('à', 'ä', 'â', 'é', 'è', 'ë', 'ê', 'ï', 'ì', 'î', 'ù', 'û', 'ü', 'ô', 'ö', '&', ' ', '?', '!', 'ç', ';', '/', '.', ',', ':', '(', ')', '=');
         $replace = array('a', 'a', 'a', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'u', 'u', 'u', 'o', 'o', '', '-', '', '', 'c', '', '-', '', '', '', '', '', '');
 
-        return urlencode(str_replace($search, $replace, strtolower(trim($string))));
+        return urlencode(trim(str_ireplace($search, $replace, strtolower((trim($string)))),'-'));
     }
 }

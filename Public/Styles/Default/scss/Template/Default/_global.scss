@@ -6,4 +6,7 @@ html {
     background-color: $colorBackgroundBody;
   }
   @import "Blog/class";
+  @import "Class/class";
+  @import "Profile/class";
+  @import "Error/class";
 }

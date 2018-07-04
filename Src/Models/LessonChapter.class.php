@@ -13,9 +13,24 @@ class LessonChapter extends CoreSql
     protected $lessonid;
     protected $chapterid;
 
-    public function __construct()
+    public function __construct($_id = null)
     {
         parent::__construct();
+        if(isset($_id)){
+            $target = [
+                'id',
+                'lessonid',
+                'chapterid',
+                'order',
+            ];
+            $parameter = [
+                'LIKE' => [
+                    'id' => $_id
+                ]
+            ];
+            $this->setWhereParameter($parameter);
+            $this->getOneData($target);
+        }
     }
 
     /**
@@ -82,5 +97,49 @@ class LessonChapter extends CoreSql
         $this->chapterid = $chapterid;
     }
 
+    /**
+     * @param string $column
+     * @param mixed $value
+     * Detruit une ligne en fonction d'une colonne et d'une valeur
+     */
+    public function deleteJoin($column, $value)
+    {
+        $parameter = [
+            'LIKE' => [
+                $column => $value
+            ]
+        ];
+        $this->setWhereParameter($parameter);
+        $this->delete();
+    }
+
+    public function getLessonChapterByIdentifier($_identifier, $_value)
+    {
+        switch($_identifier){
+            case 'lesson': $opposite = 'chapter';
+                $this->setOrderByParameter(["order" => "ASC"]);
+                break;
+            case 'chapter':
+                $opposite = 'lesson';
+                break;
+            default:
+                return 0;
+                break;
+        }
+        $target = ["id", "lessonid", "chapterid"];
+        $parameter = [
+            "LIKE" => [
+                $_identifier.'id' => $_value
+            ]
+        ];
+        $this->setWhereParameter($parameter);
+        $array = $this->getData($target);
+        $returnArrayId= [];
+        foreach($array as $category) {
+            $tmpString = 'get'.ucfirst(strtolower($opposite)).'Id';
+            $returnArrayId[] = $category->$tmpString();
+        }
+        return $returnArrayId;
+    }
 
 }
