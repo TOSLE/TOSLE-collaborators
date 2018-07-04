@@ -168,6 +168,28 @@ class User extends CoreSql{
             ],
             "captcha" => true
         ];
+    } 
+    public function setnewpasswordFormAdd()
+    {
+        // FAIRE LES ID ET LES CLASS POUR LE CMS
+        return [
+            "config"=> ["method"=>"post", "action"=>"", "submit"=>"Envoie mot de passe"],
+            "input"=> [
+                
+                "pwd"=>[
+                    "type"=>"password",
+                    "placeholder"=>"Votre nouveau mot de passe",
+                    "required"=>true
+                ],
+                "pwdConfirm"=>[
+                    "type"=>"password",
+                    "placeholder"=>"Confirmez votre nouveau mot de passe",
+                    "required"=>true,
+                    "confirm"=>"pwd"
+            ],
+            "captcha" => true
+        ]
+        ];
     }
 
     public function configFormConnect()

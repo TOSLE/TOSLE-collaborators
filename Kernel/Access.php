@@ -97,7 +97,14 @@ class Access
             "controller" => "user",
             "action" => "getpassword",
             "security" => false
-        ]
+        ],
+        "set-newpassword" => [ // change status blog
+            "slug" => "set-newpassword",
+            "controller" => "user",
+            "action" => "setnewpassword",
+            "security" => false
+        ] 
+  
     ];
 
     private $backOffice = [

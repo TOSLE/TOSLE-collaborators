@@ -55,7 +55,7 @@ class Mail
             echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
         }
     }
-    public static function sendMailPassword($email)
+    public static function sendMailPassword($email,$token)
     {
         $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
         try {
@@ -84,7 +84,7 @@ class Mail
             $mail->isHTML(true);                                  // Set email format to HTML
             $mail->Subject = 'Bienvenue sur le CMS TOSLE ';
             //$mail->Body = 'Veuillez confirmer votre inscription en cliquant sur le lien ci-dessous </br>http://localhost:88/en/verify-mail-register?token='.$token.'';
-            $mail->Body = 'Veuillez confirmer votre inscription en cliquant sur le lien ci-dessous </br>http://'.$_SERVER["SERVER_NAME"].Access::getSlugsById()['view-newpassword'];
+            $mail->Body = 'Veuillez confirmer votre inscription en cliquant sur le lien ci-dessous </br>http://'.$_SERVER["SERVER_NAME"].Access::getSlugsById()['set-newpassword'].'?email='.$email.'&amp;token='.$token.'';
 
             $mail->send();
         } catch (Exception $e) {

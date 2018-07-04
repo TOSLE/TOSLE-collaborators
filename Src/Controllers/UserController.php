@@ -56,20 +56,21 @@ class UserController
         $errors = [];
         if(!empty($params["POST"])) {
             $errors = Form::checkForm($form, $params["POST"]);
-            if (empty($errors)) {
-                $user->setFirstName($params["POST"]["firstname"]);
-                $user->setLastName($params["POST"]["lastname"]);
-                $user->checkEmailExist($params["POST"]["email"]);
-                $retourValue=$user->checkEmailExist($params["POST"]["email"]);
-                if(is_numeric($retourValue)){     
+            $retourValue=$user->checkEmailExist($params["POST"]["email"]);
+               if(is_numeric($retourValue)){     
                     echo "testt";
 
                      $user->setEmail($params["POST"]["email"]); // voir pour le selectMultipleResponse + confirmEmail                                        
                     } else {
                         $errors=$retourValue;                                                
-
                     }
-
+            if (empty($errors)) {
+                $user->setFirstName($params["POST"]["firstname"]);
+                $user->setLastName($params["POST"]["lastname"]);
+                $user->checkEmailExist($params["POST"]["email"]);
+               //print_r($retourValue);
+                //die();
+             
                 $user->setEmail($params["POST"]["emailConfirm"]);
                 $user->setPassword($params["POST"]["pwd"]);
                 $user->setPassword($params["POST"]["pwdConfirm"]);
@@ -154,26 +155,67 @@ class UserController
                 if(is_numeric($retourValue)){     
                     echo "testt";
 */
-                     $user->setEmail($params["POST"]["email"]); // voir pour le selectMultipleResponse + confirmEmail                                        
+                     $user->setEmail($params["POST"]["email"]); // voir pour le selectMultipleResponse + confirmEmail                          
+                        $user->setToken();              
+
                   /*  } else {
                         $errors=$retourValue;                                                
 
                     }*/
                     $email = $params["POST"]["email"];
-                   
+                                   $token = $user->getToken();
+
                    
                 
-              }             Mail::sendMailPassword($email); 
+              }             Mail::sendMailPassword($email,$token); 
         }
         
   $View->setData("config", $form);
                     $View->setData("errors", $errors);    
 
     }   
+
+
+    public function setnewpasswordAction($params)
+    {                             
+        $User = new User();
+        $View = new View("default", "User/setnewpassword");
+        $form = $User->setnewpasswordFormAdd();
+        $errors = [];
+
+           /* if token et mail + ajouter nom
+                $param 3 tableau sl
+                set password */
+print_r($params);
+
+        if (isset($params["GET"]["email"])) {
+
+            $target = [/** Ce que l'on récupère lors de la requête (SELECT) **/
+                "id"
+            ];
+            $parameter = [/** Les parametres pour la condition de la requête **/
+                "LIKE" => [
+                    "email" => $params["GET"]["email"]
+                ]
+            ];
+            $User->setWhereParameter($parameter, null);
+            $User->getOneData($target);
+
+            if (!empty($User->getId())) {
+                $User->setToken();
+                $password = $params["POST"]["password"];
+                $User->setPassword($password);
+                $User->save();
+                echo 'ok';
+            }else{
+                echo "error";
+            }
         
+      }
+$View->setData("config", $form);
+        $View->setData("errors", $errors);
+    }   
 
-
-    
 
     public function disconnectAction($params)
     {
