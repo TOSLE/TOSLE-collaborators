@@ -22,8 +22,8 @@
 
     spl_autoload_register("autoLoader");
 
-	if(file_exists("Kernel/parameter.php")) {
-        require "Kernel/parameter.php";
+	if(file_exists("App/config/parameter.php")) {
+        require "App/config/parameter.php";
         /**
          * @array tempUri
          * Contient un tableau de notre URI. La première cellule vaut l'URI propre et la seconde vaut les variables GET

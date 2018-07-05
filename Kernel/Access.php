@@ -117,6 +117,7 @@ class Access
         "chapter/edit" => 2,
         "chapter/status" => 2,
         "chapter/order" => 2,
+        "index/config" => false,
     ];
 
     private $urlFixe = [
@@ -201,6 +202,9 @@ class Access
     public static function getSlugsById()
     {
         global $language;
+        if(empty($language)){
+            $language = "en-EN";
+        }
         $Acces = new Access();
         $data = [];
         foreach ($Acces->getAccess() as $key => $value){

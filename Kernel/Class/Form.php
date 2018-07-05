@@ -20,7 +20,7 @@ class Form
                         $errorsMsg["email"]= "Format de l'email incorrect";
                     } else if($attributs["type"]=="password" && !self::checkPwd($data[$name])){
                         $errorsMsg["password"]= "Mot de passe incorrect(Maj, Min, Chiffre, au minimum 6 caractères)";
-                    } else if($attributs["type"]=="number" && !self::checkNumber($data[$name])){
+                    } else if($attributs["type"]=="number" && !self::checkNumber($data[$name]) && (isset($attributs['required']) && $attributs['required'])){
                         $errorsMsg["number"]= $name. " n'est pas correct";
                     }
                 }
@@ -57,13 +57,15 @@ class Form
         }
         if(isset($config['config']['secure']) && $config['config']['secure']) {
             if(isset($_SESSION['secure_form']) && isset($data['_token'])){
-                $returnSecure = self::checkSecureForm($_SESSION['secure_form'], $data['_token']);
+                $returnSecure = self::checkSecureForm($_SESSION['secure_form'], $data['_token'], $config['config']['secure']);
                 if($returnSecure === 1){
                     $errorsMsg["Timeout"] = "délait d'authentification dépassé pour le formulaire. Merci de réessayer l'envoie";
                 }
                 if($returnSecure === 2){
                     $errorsMsg["Authentification failed"] = "Authentification échoué pour le formulaire. Veuillez réessayer.";
                 }
+            } else {
+                $errorsMsg["Authentification failed"] = "Authentification échoué pour le formulaire. Veuillez réessayer.";
             }
         }
         return $errorsMsg;
@@ -103,23 +105,41 @@ class Form
     /**
      * @param string $_token
      * @param string $_formToken
+     * @param array $_configSecure
      * @return bool
      * Sécurisation CSRF des formulaires
      * Règle à respecter :
      *      - token en $_SESSION et dans le formulaire identique
      *      - token généré il y a moins de 30 minutes
+     * Autre option, le formulaire possède une configuration qui lui est propre (config['secure'] sous forme de tableau :
+     *      - on compare par rapport au champ duration
      */
-    public static function checkSecureForm($_token, $_formToken)
+    public static function checkSecureForm($_token, $_formToken, $_configSecure)
     {
-        if($_token === $_formToken){
-            $timestamp = time();
-            $tokenExploded = explode('_', $_token);
-            if($timestamp - $tokenExploded[0] < 1800){
-                return 0;
+        if(!is_array($_configSecure)){
+            if($_token === $_formToken){
+                $timestamp = time();
+                $tokenExploded = explode('_', $_token);
+                if($timestamp - $tokenExploded[0] < 1800){
+                    return 0;
+                }
+                return 1;
             }
-            return 1;
+            return 2;
+        } else {
+            if($_configSecure['status']){
+                if($_token === $_formToken){
+                    $timestamp = time();
+                    $tokenExploded = explode('_', $_token);
+                    if($timestamp - $tokenExploded[0] < ($_configSecure['duration']*60)){
+                        return 0;
+                    }
+                    return 1;
+                }
+                return 2;
+            }
+            return 0;
         }
-        return 2;
     }
 
     /**

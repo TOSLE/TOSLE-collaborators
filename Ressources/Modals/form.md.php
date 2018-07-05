@@ -12,8 +12,17 @@
     <div class="form-group-base">
         <?php if(isset($config['input'])):?>
             <?php foreach ($config["input"] as $name => $attributs):?>
+                <?php if(isset($attributs["label"])):?>
+                    <label for="<?php echo $name;?>"><?php echo $attributs["label"];?></label>
+                <?php endif;?>
                 <?php if($attributs["type"]=="text" || $attributs["type"]=="email" || $attributs["type"]=="number" || $attributs["type"]=="password"):?>
-                    <input type="<?php echo $attributs["type"];?>" placeholder="<?php echo $attributs["placeholder"];?>" name="<?php echo $name;?>" <?php echo (isset($attributs["required"]))?"required='required'":"";?> value="<?php echo (isset($config["data_content"][$name]))?$config["data_content"][$name]:"";?>"><br>
+                    <input type="<?php echo $attributs["type"];?>" placeholder="<?php echo $attributs["placeholder"];?>" name="<?php echo $name;?>" <?php echo (isset($attributs["required"]) && $attributs["required"])?"required='required'":"";?> value="<?php echo (isset($config["data_content"][$name]))?$config["data_content"][$name]:"";?>">
+                <?php endif;?>
+                <?php if($attributs["type"]=="password_install"):?>
+                    <input type="password" placeholder="<?php echo $attributs["placeholder"];?>" name="<?php echo $name;?>" <?php echo (isset($attributs["required"]) && $attributs["required"])?"required='required'":"";?> value="<?php echo (isset($config["data_content"][$name]))?$config["data_content"][$name]:"";?>">
+                <?php endif;?>
+                <?php if(isset($attributs["description"])):?>
+                    <div class="small-precision-input"><?php echo $attributs["description"];?></div>
                 <?php endif;?>
             <?php endforeach;?>
         <?php endif;?>
