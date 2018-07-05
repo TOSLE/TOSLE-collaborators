@@ -35,5 +35,9 @@ class IndexController
     function installAction($params)
     {
         echo "Procédure d'installation";
+        $View = new View('installer', 'installer');
+        $Installer = new Installer();
+        $config = $Installer->configFormInstaller();
+
     }
 }

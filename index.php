@@ -1,31 +1,29 @@
 <?php
 	session_start();
 	require "Kernel/globalconfig.php";
+    function autoLoader($parameter)
+    {
+        if (file_exists("Kernel/Class/" . $parameter . ".php")) {
+            include("Kernel/Class/" . $parameter . ".php");
+        }
+        if (file_exists("Src/Models/" . $parameter . ".class.php")) {
+            include("Src/Models/" . $parameter . ".class.php");
+        }
+        if (file_exists("Src/ModalsRepository/" . $parameter . ".php")) {
+            include("Src/ModalsRepository/" . $parameter . ".php");
+        }
+        if (file_exists("Kernel/" . $parameter . ".php")) {
+            include("Kernel/" . $parameter . ".php");
+        }
+        if (file_exists("Src/Repository/" . $parameter . ".php")) {
+            include("Src/Repository/" . $parameter . ".php");
+        }
+    }
+
+    spl_autoload_register("autoLoader");
+
 	if(file_exists("Kernel/parameter.php")) {
         require "Kernel/parameter.php";
-
-
-        function autoLoader($parameter)
-        {
-            if (file_exists("Kernel/Class/" . $parameter . ".php")) {
-                include("Kernel/Class/" . $parameter . ".php");
-            }
-            if (file_exists("Src/Models/" . $parameter . ".class.php")) {
-                include("Src/Models/" . $parameter . ".class.php");
-            }
-            if (file_exists("Src/ModalsRepository/" . $parameter . ".php")) {
-                include("Src/ModalsRepository/" . $parameter . ".php");
-            }
-            if (file_exists("Kernel/" . $parameter . ".php")) {
-                include("Kernel/" . $parameter . ".php");
-            }
-            if (file_exists("Src/Repository/" . $parameter . ".php")) {
-                include("Src/Repository/" . $parameter . ".php");
-            }
-        }
-
-        spl_autoload_register("autoLoader");
-
         /**
          * @array tempUri
          * Contient un tableau de notre URI. La première cellule vaut l'URI propre et la seconde vaut les variables GET
