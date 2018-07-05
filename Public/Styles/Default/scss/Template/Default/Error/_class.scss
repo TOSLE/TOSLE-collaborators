@@ -1,0 +1,33 @@
+.container-message {
+  display: flex;
+  background-color: #ffffff;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+  padding-top: 40px;
+  padding-bottom: 40px;
+  justify-content: center;
+  align-items: center;
+  .message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    i {
+      font-size: 80px;
+      color: #1A5CCB;
+      margin-bottom: 20px;
+    }
+    h2 {
+      margin-bottom: 20px;
+    }
+    p {
+      margin-bottom: 20px;
+    }
+    a:visited {
+      text-decoration: none;
+    }
+    a {
+      font-weight: 600;
+      color: #1A5CCB;
+    }
+  }
+}
