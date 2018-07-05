@@ -38,21 +38,15 @@ class Installer
 
     public function configFormInstaller()
     {
-        /**
-         * define("DBUSER","");
-        define("DBPWD","");
-        define("DBHOST","");
-        define("DBNAME","");
-        define("DBPORT","");
-        define("GUSER", "");
-        define("GPWD", "");
-         */
         return [
             "config"=> [
                 "method"=>"post",
                 "action"=>"",
                 "submit"=>"Tester ma configuration",
-                "secure" => true,
+                "secure" => [
+                    "status" => true,
+                    "duration" => 1
+                ],
             ],
             "input"=> [
                 "dbuser"=>[
@@ -66,7 +60,7 @@ class Installer
                     "type"=>"password",
                     "placeholder"=>"Database password*",
                     "required"=>true,
-                    "maxString"=>100,
+                    "maxString"=>255,
                     "label"=>"We do not collect this information"
                 ],
                 "dbhost"=>[
@@ -80,21 +74,20 @@ class Installer
                     "type"=>"number",
                     "placeholder"=>"Database port",
                     "required"=>false,
-                    "maxString"=>100,
                     "label"=>"We do not collect this information"
                 ],
                 "guser"=>[
-                    "type"=>"number",
+                    "type"=>"text",
                     "placeholder"=>"Email, necessary for our mailing system",
                     "required"=>true,
-                    "maxString"=>100,
+                    "maxString"=>255,
                     "label"=>"We do not collect this information"
                 ],
                 "gpwd"=>[
-                    "type"=>"number",
+                    "type"=>"text",
                     "placeholder"=>"Email password*",
                     "required"=>true,
-                    "maxString"=>100,
+                    "maxString"=>255,
                     "label"=>"We do not collect this information"
                 ],
             ],
