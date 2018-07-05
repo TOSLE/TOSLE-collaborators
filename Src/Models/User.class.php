@@ -176,5 +176,4 @@ class User extends CoreSql{
             ]
         ];
     }
-
 }

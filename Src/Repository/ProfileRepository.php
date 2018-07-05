@@ -61,4 +61,17 @@ class ProfileRepository extends User
         return $commentaires;
     }
 
+    public function editProfile($_idProfile)
+    {
+        $User = new UserRepository();
+        print_r($User);
+        $ArrayInfoUser = $User->getUserById($_idProfile);
+        $configForm = $User->configFormAdd();
+
+        return $arrayObject = [
+            "user" => $ArrayInfoUser,
+            "configFrom" => $configForm,
+        ];
+    }
+
 }

@@ -103,7 +103,13 @@ class Access
             "controller" => "class",
             "action" => "view",
             "security" => false
-        ]
+        ],
+        "edit_profile" => [
+            "slug" => "edit-profile",
+            "controller" => "profile",
+            "action" => "edit",
+            "security" => false
+            ]
     ];
 
     private $backOffice = [

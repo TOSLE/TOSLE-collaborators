@@ -281,10 +281,22 @@ html {
     html .container-content-profile .comment {
       display: flex;
       flex-direction: column; }
-      html .container-content-profile .comment .container ul {
-        display: flex; }
-        html .container-content-profile .comment .container ul li {
-          list-style: none; }
+      html .container-content-profile .comment .container {
+        margin-top: 20px;
+        width: 100%; }
+        html .container-content-profile .comment .container .title-tab {
+          font-size: 20px;
+          color: #1A5CCB;
+          font-weight: 600; }
+        html .container-content-profile .comment .container ul {
+          display: flex; }
+          html .container-content-profile .comment .container ul li {
+            list-style: none;
+            margin: auto;
+            margin-bottom: 10px;
+            overflow: auto; }
+            html .container-content-profile .comment .container ul li span {
+              text-overflow: ellipsis; }
   html .container-message {
     display: flex;
     background-color: #ffffff;

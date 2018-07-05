@@ -47,14 +47,15 @@
     }
     .name {
       span {
-        color : #1A5CCB!important;
-        font-size: 24px!important;
-        font-weight: 600!important;
+        color: #1A5CCB !important;
+        font-size: 24px !important;
+        font-weight: 600 !important;
       }
     }
 
   }
 }
+
 .container-content-profile {
   display: flex;
   align-items: center;
@@ -73,14 +74,28 @@
   .comment {
     display: flex;
     flex-direction: column;
+
     .container {
+      margin-top: 20px;
+      width: 100%;
+      .title-tab {
+        font-size: 20px;
+        color: $colorGlobalToslePrimary;
+        font-weight: 600;
+      }
       ul {
         display: flex;
         li {
           list-style: none;
+          margin: auto;
+          margin-bottom: 10px;
+          overflow: auto;
+          span {
+            text-overflow: ellipsis;
+          }
         }
-
       }
+
     }
   }
 }
