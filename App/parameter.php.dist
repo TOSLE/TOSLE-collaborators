@@ -1,5 +1,10 @@
 <?php
-    // In config folder, please insert new data
+    /**
+    *   Informations à propos de ce fichier :
+    *       * Il est nécessaire de le COPIER dans le répertoire App/config en enlevant l'extension '.dist'
+    *       * Renseignez les informations dans les defines
+    *       * Sinon, utilisez l'installeur
+    */
     define("DBUSER","");
     define("DBPWD","");
     define("DBHOST","");
