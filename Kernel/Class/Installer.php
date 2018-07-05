@@ -22,15 +22,16 @@ class Installer
      */
     public function alertHtaccess()
     {
-        $message[] = "";
-        if(!DIRNAME == '/'){
+        $message = null;
+        if(dirname($_SERVER["SCRIPT_NAME"]) != '/'){
             if(DEV_MODE){
                 $message['Repertoire d\'installation'] = 'Vous êtes sur le point d\'utiliser le CMS TOSLE en mode développeur. Si ce n\'est
                 pas déjà fait, faites attention à bien générer le fichier .htaccess avec le bon RewriteBase.';
+                $message['Rewrite Base'] = 'TOSLE a détecté : "'.dirname($_SERVER["SCRIPT_NAME"]).'". Le RewriteBase de 
+                votre ".htaccess" doit posséder cette valeur pour que tout fonctionne correctement.';
             } else {
                 $message['Repertoire d\'installation'] = 'Attention, le CMS TOSLE n\'est pas adapté à une utilisation sur un environnement
-                 autre que LINUX. L\'Installer a détecté un problème au niveau de votre fichier \'.htaccess\'.
-                  N\'hésitez pas à contacter le support si besoin.';
+                 autre que LINUX. L\'Installeur a détecté un élément qui pourrait entraver le fonctionnement de votre site.';
             }
         }
         return $message;
@@ -80,6 +81,48 @@ class Installer
     }
 
     /**
+     * @param $arrayData
+     * @return array|string
+     */
+    public function setConfiguration($arrayData)
+    {
+        $sqlFilePath = CoreFile::getSqlFile();
+        if(!file_exists($sqlFilePath)){
+            return ['SQL' => 'File : '.$sqlFilePath.' not found'];
+        }
+
+        try {
+            $bdd = new PDO('mysql:host='.DBHOST.';charset=UTF8',DBUSER,DBPWD);
+        } catch(PDOException $e) {
+            return ['SQL' => 'Failed to access at the database'];;
+        }
+
+        $bdd->query(file_get_contents($sqlFilePath));
+
+        $Config = new Config();
+        $Config->setName('website_tile');
+        $Config->setValue($arrayData['website_name']);
+        $Config->save();
+
+
+        $user = new UserRepository();
+        $user->setFirstName($arrayData["firstname"]);
+        $user->setLastName($arrayData["lastname"]);
+        $user->setEmail($arrayData["email"]);
+        $user->setPassword($arrayData["pwd"]);
+        $user->setToken();
+        $user->save();
+
+        $email = $arrayData["email"];
+        $firstName = $arrayData["firstname"];
+        $lastName = $arrayData["lastname"];
+        $token = $user->getToken();
+
+        Mail::sendMailRegister($email, $firstName, $lastName,$token);
+        return "";
+    }
+
+    /**
      * @return array
      * Formulaire d'installation du CMS
      */
@@ -89,16 +132,24 @@ class Installer
             "config"=> [
                 "method"=>"post",
                 "action"=>"",
-                "submit"=>"Tester ma configuration",
+                "submit"=>"Next step",
                 "secure" => [
                     "status" => true,
                     "duration" => 5
                 ],
             ],
             "input"=> [
+                "dbhost"=>[
+                    "type"=>"text",
+                    "placeholder"=>"Example : localhost",
+                    "required"=>true,
+                    "maxString"=>100,
+                    "description"=>"Laissez vide pour laisser la valeur par défaut",
+                    "label" => "Adresse de la base de données*"
+                ],
                 "dbuser"=>[
                     "type"=>"text",
-                    "placeholder"=>"Database username*",
+                    "placeholder"=>"Example : root",
                     "required"=>true,
                     "maxString"=>30,
                     "description"=>"We do not collect this information",
@@ -106,31 +157,23 @@ class Installer
                 ],
                 "dbpwd"=>[
                     "type"=>"password_install",
-                    "placeholder"=>"Database password*",
-                    "required"=>true,
+                    "placeholder"=>"Example : password",
+                    "required"=>false,
                     "maxString"=>255,
                     "description"=>"We do not collect this information",
                     "label" => "Mot de passe de l'utilisateur"
                 ],
                 "dbname"=>[
                     "type"=>"text",
-                    "placeholder"=>"Optional, database name",
+                    "placeholder"=>"Example : my_db - This is an optional input",
                     "required"=>false,
                     "maxString"=>100,
                     "description"=>"Laissez vide si vous n'avez touché aucun fichier '.sql'",
                     "label" => "Nom de la table à utiliser"
                 ],
-                "dbhost"=>[
-                    "type"=>"text",
-                    "placeholder"=>"Database host*",
-                    "required"=>true,
-                    "maxString"=>100,
-                    "description"=>"Laissez vide pour laisser la valeur par défaut",
-                    "label" => "Adresse de la base de données"
-                ],
                 "dbport"=>[
                     "type"=>"number",
-                    "placeholder"=>"Optional, database port",
+                    "placeholder"=>"Example : 3306 - This is an optional input",
                     "required"=>false,
                     "description"=>"Laissez vide pour laisser la valeur par défaut",
                     "label" => "Port de la base de données"
@@ -172,13 +215,58 @@ class Installer
                 ],
             ],
             "input"=> [
-                "titre"=>[
+                "website_name"=>[
                     "type"=>"text",
-                    "placeholder"=>"Name of your Website*",
+                    "placeholder"=>"Example : CMS TOSLE",
                     "required"=>true,
                     "maxString"=>15,
-                    "description"=>"Maxlength 15",
-                    "label" => "Nom de votre site internet"
+                    "description"=>"Maximum de 15 caractères",
+                    "label" => "Nom de votre site internet*"
+                ],
+                "lastname"=>[
+                    "type"=>"text",
+                    "placeholder"=>"Your lastname",
+                    "required"=>true,
+                    "maxString"=>15,
+                    "label" => "Votre nom*"
+                ],
+                "firstname"=>[
+                    "type"=>"text",
+                    "placeholder"=>"Your firstname",
+                    "required"=>true,
+                    "maxString"=>15,
+                    "label" => "Votre prénom*"
+                ],
+                "email"=>[
+                    "type"=>"email",
+                    "placeholder"=>"Your email : contact@domain.com",
+                    "required"=>true,
+                    "maxString"=>15,
+                    "description"=>"Nous ne stockons pas vos données",
+                    "label" => "Votre email*"
+                ],
+                "emailConfirm"=>[
+                    "type"=>"email",
+                    "placeholder"=>"Confirm email",
+                    "required"=>true,
+                    "confirm"=>"email",
+                    "label" => "Confirmez votre email*"
+                ],
+                "pwd"=>[
+                    "type"=>"password",
+                    "placeholder"=>"Your password",
+                    "required"=>true,
+                    "maxString"=>15,
+                    "description"=>"Mot de passe incorrect (doit contenir : Maj, Min, Chiffre, au minimum 6 caractères)",
+                    "label" => "Mot de passe*"
+                ],
+                "pwdConfirm"=>[
+                    "type"=>"password",
+                    "placeholder"=>"Confirm password",
+                    "required"=>true,
+                    "confirm"=>"pwd",
+                    "label" => "Confirmez votre mot de passe*",
+                    "description"=>"Rappel : Maj, Min, Chiffre, au minimum 6 caractères",
                 ],
             ],
         ];

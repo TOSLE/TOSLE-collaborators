@@ -57,4 +57,18 @@ class CoreFile
             'SQL_PATH' => DIRNAME . 'Tosle/Static/' . $relativePath.'/',
         ];
     }
+
+    /**
+     * @return string
+     * Permet d'obtenir l'url du fichier sql peu importe l'OS
+     */
+    static public function getSqlFile()
+    {
+        if(SYSTEM == "LINUX") {
+            $directoryPath = DIRNAME . 'Sql/tosle.sql';
+        } else {
+            $directoryPath = 'Sql/tosle.sql';
+        }
+        return $directoryPath;
+    }
 }
