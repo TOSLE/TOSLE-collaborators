@@ -110,15 +110,9 @@ class Installer
         $user->setLastName($arrayData["lastname"]);
         $user->setEmail($arrayData["email"]);
         $user->setPassword($arrayData["pwd"]);
+        $user->setStatus(2);
         $user->setToken();
         $user->save();
-
-        $email = $arrayData["email"];
-        $firstName = $arrayData["firstname"];
-        $lastName = $arrayData["lastname"];
-        $token = $user->getToken();
-
-        Mail::sendMailRegister($email, $firstName, $lastName,$token);
         return "";
     }
 
