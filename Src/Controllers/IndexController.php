@@ -75,7 +75,7 @@ class IndexController
                 $data = Form::secureData($params["POST"]);
                 $errors = $Installer->setConfiguration($data);
                 if(empty($errors)){
-                    header('Location:'.Access::getSlugsById()['signin'].'/registered');
+                    header('Location:'.Access::getSlugsById()['signin']);
                 }
             }
         }
