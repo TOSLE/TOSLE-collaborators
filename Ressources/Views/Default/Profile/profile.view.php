@@ -20,11 +20,14 @@
                         </section>
                         <section class="info">
                             <section class="name">
-                                <span>Julien Domange</span>
+                                <span><?php echo $profile_info['firstname'] . ' ' . $profile_info['lastname']; ?></span>
+                            </section>
+                            <section class="edit-action">
+                                <button class="btn btn-tosle">Edit my profile</button>
                             </section>
                             <section class="email">
                                 <span>Contact mail :</span>
-                                <span>julienbg92@gmail.com</span>
+                                <span><?php echo $profile_info['email']; ?></span>
                             </section>
                             <section class="group">
                                 <span>Group:</span>
@@ -32,7 +35,12 @@
                             </section>
                             <section class="newsletter">
                                 <span>Newsletter :</span>
-                                <span>You're suscribing to the Newsletter.</span>
+                                <span><?php if (is_null($profile_info['newsletter']))
+                                            echo 'You\'re not suscribing to the Newsletter';
+                                        else
+                                            echo 'You\'re suscribing to the Newsletter.';
+                                      ?>
+                                </span>
                             </section>
                         </section>
                     </div>
@@ -41,9 +49,16 @@
         </div>
         <div class="col-8">
             <div>
-                <section>lessons</section>
-                <section>homework</section>
-                <section>comments</section>
+                <section class="container-content-profile">
+                    <section class="lessons">
+                        <div class="title">
+                            <span>My Class</span>
+                        </div>
+                    </section>
+                    <section><span>My Homework</span></section>
+                    <section><span>My last comments</span></section>
+                </section>
+
             </div>
         </div>
     </div>

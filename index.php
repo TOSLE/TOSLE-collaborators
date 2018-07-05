@@ -62,7 +62,7 @@
          * Récupère le status de l'utilisateur et vérifie si l'authentification est réussie
          */
         $userConnected = false;
-        $GLOBALS['authUser'] = false;
+        $Auth = false;
         $userStatus = 1;
         if (isset($_SESSION['token']) && isset($_SESSION['email'])) {
             if (($userConnected = Authentification::checkAuthentification($_SESSION['token'], $_SESSION['email']))) {
@@ -72,7 +72,9 @@
                 echo "<p>Connection failed</p>";
             }
         }
+
         $GLOBALS['authUser'] = $Auth;
+
         if ($userStatus < $accessParams["security"]) {
             $controller = "IndexController";
             $action = "accessAction";
