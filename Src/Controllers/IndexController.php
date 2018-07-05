@@ -64,6 +64,24 @@ class IndexController
 
     function configAction($params)
     {
-        echo "Deuxième phase";
+        $View = new View('installer', 'installer');
+        $Installer = new Installer();
+        $errors = "";
+        $config = $Installer->configFormConfiguration();
+
+        if(isset($params["POST"]) && !empty($params["POST"])) {
+            $errors = Form::checkForm($config, $params["POST"]);
+            if(empty($errors)){
+                $data = Form::secureData($params["POST"]);
+                $errors = $Installer->setConfiguration($data);
+                if(empty($errors)){
+                    header('Location:'.Access::getSlugsById()['signin'].'/registered');
+                }
+            }
+        }
+
+        $View->setData('config', $config);
+        $View->setData('errors', $errors);
+        $View->setData('stepInstall', 2);
     }
 }
