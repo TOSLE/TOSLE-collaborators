@@ -38,6 +38,10 @@ class IndexController
         $View = new View('installer', 'installer');
         $Installer = new Installer();
         $config = $Installer->configFormInstaller();
+        $errorsParameter = $Installer->alertHtaccess();
 
+        $View->setData('config', $config);
+        $View->setData('errors', "");
+        $View->setData('errorsParameter', $errorsParameter);
     }
 }
