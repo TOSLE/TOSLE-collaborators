@@ -59,6 +59,28 @@ class CommentRepository extends Comment
             $this->setOrderByParameter(["id"=>"DESC"]);
             return $this->getData($target);
         }
+        if($identifier == "chapter"){
+            $target = ["id", "content", "tag", "datecreate", "dateupdated"];
+            $joinParameter = [
+                "chaptercomment" => [
+                        "comment_id"
+                ]
+            ];
+            $whereParameter = [
+                "chaptercomment" => [
+                    "chapter_id" => $value
+                ]
+            ];
+            $this->setLeftJoin($joinParameter, $whereParameter);
+            $this->setOrderByParameter(["id"=>"DESC"]);
+            $arrayData = $this->getData($target);
+            foreach($arrayData as $comment){
+                $ChapterComment = new ChapterComment();
+                $arrayReturn = $ChapterComment->getChapterCommentByIdentifier('getuser', $comment->getId());
+                $comment->setUser($arrayReturn);
+            }
+            return $arrayData;
+        }
         if($identifier == "number_blog"){
             $target = ["id"];
             $joinParameter = [
@@ -120,6 +142,11 @@ class CommentRepository extends Comment
                     $BlogComment->save();
                     break;
                 case 2:
+                    $ChapterComment = new ChapterComment();
+                    $ChapterComment->setChapterid($_targetId);
+                    $ChapterComment->setCommentid($this->getId());
+                    $ChapterComment->setUserid($User->getId());
+                    $ChapterComment->save();
                     break;
                 default:
                     return $errors;

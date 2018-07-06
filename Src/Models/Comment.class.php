@@ -14,6 +14,8 @@ class Comment extends CoreSql {
     protected $datecreate;
     protected $dateupdated;
 
+    private $user;
+
     public function __construct()
     {
         parent::__construct();
@@ -98,6 +100,26 @@ class Comment extends CoreSql {
     {
         $this->dateupdated = $dateupdated;
     }
+
+    /**
+     * @return array Comment
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param array $_arrayUsers
+     */
+    public function setUser($_arrayUsers)
+    {
+        foreach($_arrayUsers as $idUser){
+            $User = new User($idUser);
+            $this->user = $User;
+        }
+    }
+
 
 
 

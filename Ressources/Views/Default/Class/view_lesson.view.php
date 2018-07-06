@@ -48,4 +48,40 @@
             </div>
         </div>
     </section>
+
+    <section class="container footer-section-lesson">
+        <div class="row">
+            <div class="col-12">
+                <div>
+                    <h3>Commentaires</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div>
+                    <?php if(isset($lastComments)):?>
+                        <?php foreach($lastComments as $comment):?>
+                            <p>
+                                <span>
+                                    Ecrit par : <?php echo $comment->getUser()->getFirstname();?> <?php echo $comment->getUser()->getLastname();?>
+                                </span>
+                            </p>
+                            <p>Contenu : <?php echo $comment->getContent();?></p>
+                        <?php endforeach;?>
+                    <?php else:?>
+                        <p>Aucun commentaire pour le moment</p>
+                    <?php endif;?>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-6">
+                <div>
+                    <?php $this->addModal("form", $formAddComment, $errors); ?>
+                </div>
+            </div>
+        </div>
+    </section>
 <?php endif;?>

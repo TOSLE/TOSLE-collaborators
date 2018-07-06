@@ -63,6 +63,9 @@ class ClassController extends CoreController
         $View = new View("default", "Class/view_lesson");
         if(isset($params['URI']) && !empty($params['URI'])){
             $Lesson = new LessonRepository();
+            $Comment = new CommentRepository();
+            $errors = "";
+            $formAddComment = $Comment->configFormAdd();
             if($Lesson->getLesson($params['URI'][0])){
                 $readChapter = $Lesson->getChapter()[0];
                 if(isset($params['URI'][1])){
@@ -72,8 +75,21 @@ class ClassController extends CoreController
                         }
                     }
                 }
+                if(isset($params["POST"]) && !empty($params["POST"])){
+                    $errors = Form::checkForm($formAddComment, $params["POST"]);
+                    $dataForm = Form::secureData($params['POST']);
+                    $Comment->addComment($formAddComment, $dataForm, 2, $readChapter->getId());
+                    header('Location:'.$routes['view_lesson'].'/'.$Lesson->getUrl().'/'.$readChapter->getUrl());
+                }
+                $allComments = $Comment->getAll('chapter', $readChapter->getId());
+
+                if(isset($allComments)){
+                    $View->setData("lastComments", array_slice($allComments, 0, 5));
+                }
                 $View->setData("readChapter", $readChapter);
                 $View->setData("lesson", $Lesson);
+                $View->setData("formAddComment", $formAddComment);
+                $View->setData("errors", $errors);
             } else {
                 $View->setData("error_search", 'Il semble y avoir une erreur dans votre URL, le cours n\'est pas trouvé où n\'existe pas !');
             }
