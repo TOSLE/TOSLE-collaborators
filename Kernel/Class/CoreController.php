@@ -8,10 +8,11 @@
 
 class CoreController
 {
-    protected $Auth;
+    protected $Auth = false;
 
     public function __construct()
     {
-        $this->Auth = $GLOBALS['authUser'];
+        global $Auth;
+        $this->Auth = $Auth;
     }
 }
