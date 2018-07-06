@@ -10,7 +10,8 @@ A la racine du repo
 > npm install node-sass
 
 Avant de démarrer, il faut s'assurer avoir les bons droits sur le répertoire Static
-> chmod 777 -R Tosle/Static/
+> chmod 777 -R Tosle/
+> chmod 777 -R App/
  
 Le README sera ridigé d'ici peu de temps :)
 __________________________
