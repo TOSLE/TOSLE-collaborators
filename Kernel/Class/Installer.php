@@ -80,6 +80,16 @@ class Installer
         return 0;
     }
 
+    public static function checkDatabaseConnexion()
+    {
+        try {
+            $database = new PDO("mysql:host=".DBHOST.";dbname=".DBNAME.";charset=UTF8",DBUSER,DBPWD);
+            return 1;
+        } catch(Exception $e){
+            return 0;
+        }
+    }
+
     /**
      * @param $arrayData
      * @return array|string
@@ -128,8 +138,8 @@ class Installer
                 "action"=>"",
                 "submit"=>"Next step",
                 "secure" => [
-                    "status" => true,
-                    "duration" => 5
+                    "status" => false,
+                    "duration" => 8
                 ],
             ],
             "input"=> [
@@ -204,8 +214,8 @@ class Installer
                 "action"=>"",
                 "submit"=>"Valider la configuration",
                 "secure" => [
-                    "status" => true,
-                    "duration" => 5
+                    "status" => false,
+                    "duration" => 8
                 ],
             ],
             "input"=> [
