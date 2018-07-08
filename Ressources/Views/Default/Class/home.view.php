@@ -21,18 +21,18 @@
 
                     <?php if(isset($newsletter)):?>
                         <?php if($newsletter):?>
-                            <a href="<?php echo $this->slugs['subscribe_lesson'];?>" class="lesson-link-icon">
-                                <i class="material-icons">
-                                    mail
-                                </i>
-                                <p>S'inscrire à la newsletter</p>
-                            </a>
-                        <?php else:?>
                             <a href="<?php echo $this->slugs['subscribe_lesson'];?>" class="lesson-link-icon newsletter-off">
                                 <i class="material-icons">
                                     mail
                                 </i>
                                 <p>Se désinscrire de la newsletter</p>
+                            </a>
+                        <?php else:?>
+                            <a href="<?php echo $this->slugs['subscribe_lesson'];?>" class="lesson-link-icon">
+                                <i class="material-icons">
+                                    mail
+                                </i>
+                                <p>S'inscrire à la newsletter</p>
                             </a>
                         <?php endif;?>
                     <?php endif;?>

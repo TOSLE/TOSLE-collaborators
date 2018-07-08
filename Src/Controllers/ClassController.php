@@ -20,7 +20,6 @@ class ClassController extends CoreController
     {
         $View = new View("default", "Class/home");
         $Lesson = new LessonRepository();
-        $Newsletter = new Newsletter();
         // Initialisation des parametres
         $colSize = 6;
         $numberLesson = 6;
@@ -30,7 +29,10 @@ class ClassController extends CoreController
         $urlClassFeed = CoreFile::testFeedFile('lessonfeed.xml');
         if(isset($this->Auth)){
             $Newsletter = new Newsletter();
-            $newsletter = $Newsletter->getStatusLesson();
+            $newsletter = false;
+            if(!empty($this->Auth->getNewsletter())){
+                $newsletter = $Newsletter->getStatusLesson();
+            }
             $View->setData("newsletter", $newsletter);
         }
         $errors = [];
