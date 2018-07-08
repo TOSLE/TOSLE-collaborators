@@ -19,6 +19,7 @@ class BlogController
         $Blog = new BlogRepository();
         $Comment = new CommentRepository();
         $Category = new CategoryRepository();
+        $routes = Access::getSlugsById();
         /**
          * Default var
          */
@@ -63,6 +64,7 @@ class BlogController
             $value["image"] = $File->getFileById($content->getFileid());
             $data[] = $value;
         }
+        $View->setData("urlBlogfeed", $routes['rss_blog']);
         $View->setData("pagination", $pagination);
         $View->setData("page", $page);
         $View->setData("data", $data);

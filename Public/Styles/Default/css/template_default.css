@@ -1,4 +1,7 @@
 /* TEMPLATE DEFAULT TOSLE */
+/**
+BLOG
+ */
 html > body #positionning-box-tosle {
   position: absolute;
   width: 100%;
@@ -148,6 +151,22 @@ html {
               color: #1A5CCB; }
       html .article > .content-article .container-editor {
         margin-bottom: 40px; }
+  html .header-blog-container .icons-list {
+    display: flex; }
+    html .header-blog-container .icons-list > .blog-link-icon {
+      color: #FFF;
+      text-decoration: none;
+      border: 1px solid #FFF;
+      background-color: #1A5CCB;
+      border-radius: 3.5px;
+      padding: 3.5px;
+      text-align: center;
+      display: flex; }
+      html .header-blog-container .icons-list > .blog-link-icon > i {
+        margin: auto;
+        font-size: 1.8em; }
+      html .header-blog-container .icons-list > .blog-link-icon > p {
+        margin: auto; }
   html .lesson-bloc {
     height: 300px;
     background-color: #ffffff; }
@@ -179,9 +198,9 @@ html {
         border-radius: 5px 5px 0px 0px;
         -moz-border-radius: 5px 5px 0px 0px;
         -webkit-border-radius: 5px 5px 0px 0px;
-        -webkit-box-shadow: 0px 0px 40px -12px rgba(0, 0, 0, 0.75);
-        -moz-box-shadow: 0px 0px 40px -12px rgba(0, 0, 0, 0.75);
-        box-shadow: 0px 0px 40px -12px rgba(0, 0, 0, 0.75);
+        -webkit-box-shadow: 0px 0px 40px -12px transparent;
+        -moz-box-shadow: 0px 0px 40px -12px transparent;
+        box-shadow: 0px 0px 40px -12px transparent;
         border: 0px solid;
         transition: 0.4s; }
         html .lesson-bloc > .fade-background-lesson > .more-infos > .info-comment-lesson {
@@ -198,7 +217,28 @@ html {
           left: 50%;
           transform: translateX(-50%); }
       html .lesson-bloc > .fade-background-lesson:hover > .more-infos {
-        bottom: 0%; }
+        bottom: 0%;
+        -webkit-box-shadow: 0px 0px 40px -12px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: 0px 0px 40px -12px rgba(0, 0, 0, 0.75);
+        box-shadow: 0px 0px 40px -12px rgba(0, 0, 0, 0.75); }
+  html .header-lesson-container .icons-list {
+    display: flex; }
+    html .header-lesson-container .icons-list > .lesson-link-icon {
+      color: #FFF;
+      text-decoration: none;
+      border: 1px solid #FFF;
+      background-color: #1A5CCB;
+      border-radius: 3.5px;
+      padding: 3.5px;
+      text-align: center;
+      display: flex; }
+      html .header-lesson-container .icons-list > .lesson-link-icon > i {
+        margin: auto;
+        font-size: 1.8em; }
+      html .header-lesson-container .icons-list > .lesson-link-icon > p {
+        margin: auto; }
+      html .header-lesson-container .icons-list > .lesson-link-icon.newsletter-off {
+        background-color: #F43C3E; }
   html .profile {
     display: flex;
     background-color: #FFFFFF;
@@ -243,6 +283,42 @@ html {
         color: #1A5CCB !important;
         font-size: 24px !important;
         font-weight: 600 !important; }
+  html .container-content-profile {
+    display: flex;
+    align-items: center;
+    flex-direction: column; }
+    html .container-content-profile section {
+      display: flex;
+      background-color: #FFFFFF;
+      box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+      width: 100%;
+      margin-bottom: 40px; }
+  html .container-message {
+    display: flex;
+    background-color: #ffffff;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+    padding-top: 40px;
+    padding-bottom: 40px;
+    justify-content: center;
+    align-items: center; }
+    html .container-message .message {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column; }
+      html .container-message .message i {
+        font-size: 80px;
+        color: #1A5CCB;
+        margin-bottom: 20px; }
+      html .container-message .message h2 {
+        margin-bottom: 20px; }
+      html .container-message .message p {
+        margin-bottom: 20px; }
+      html .container-message .message a:visited {
+        text-decoration: none; }
+      html .container-message .message a {
+        font-weight: 600;
+        color: #1A5CCB; }
 
 #menu-header-section {
   width: 250px;

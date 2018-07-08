@@ -6,7 +6,8 @@
  * Time: 00:29
  */
 
-class ClassController
+
+class ClassController extends CoreController
 {
     /**
      * @Route("/en/class(/index)")
@@ -19,16 +20,41 @@ class ClassController
     {
         $View = new View("default", "Class/home");
         $Lesson = new LessonRepository();
-        $lessons = $Lesson->getLessons();
+        $Newsletter = new Newsletter();
+        // Initialisation des parametres
+        $colSize = 6;
+        $numberLesson = 6;
+        $offset = 0;
+        $page = 1;
+        $pagination = $Lesson->getPagination($numberLesson, $params["GET"]);
+        $urlClassFeed = CoreFile::testFeedFile('lessonfeed.xml');
+        $newsletter = $Newsletter->getStatusLesson();
         $errors = [];
-        if(!empty($params["GET"])){
-            echo "Il y a une recherche";
-        } else {
-            $View->setData("lessons", $lessons);
-            $View->setData("col", "6");
+        if (!empty($params["GET"])) {
+            if (isset($params["GET"]["colsize"])) {
+                if ($params["GET"]["colsize"] == "4" || $params["GET"]["colsize"] == "6" || $params["GET"]["colsize"] == "12") {
+                    $colSize = $params["GET"]["colsize"];
+                }
+            }
+            if (isset($params["GET"]["number"])) {
+                if ($params["GET"]["number"] >= 1 || $params["GET"]["number"] <= 12) {
+                    $numberLesson = $params["GET"]["number"];
+                    $pagination = $Lesson->getPagination($numberLesson, $params["GET"]);
+                }
+            }
+            if (isset($params['GET']['page']) && array_key_exists($params['GET']['page'], $pagination)) {
+                $page = $params['GET']['page'];
+                $offset = $numberLesson * $page - $numberLesson;
+            }
         }
+        $lessons = $Lesson->getLessons($numberLesson, $offset);
+        $View->setData('urlClassFeed', $urlClassFeed);
+        $View->setData("pagination", $pagination);
+        $View->setData("page", $page);
+        $View->setData("lessons", $lessons);
+        $View->setData("col", $colSize);
+        $View->setData("newsletter", $newsletter);
     }
-
 
     /**
      * @Route("/en/class/{idArticle}")
@@ -37,7 +63,43 @@ class ClassController
      */
     function viewAction($params)
     {
-        $View = new View("default");
+        $routes = Access::getSlugsById();
+        $View = new View("default", "Class/view_lesson");
+        if(isset($params['URI']) && !empty($params['URI'])){
+            $Lesson = new LessonRepository();
+            $Comment = new CommentRepository();
+            $errors = "";
+            $formAddComment = $Comment->configFormAdd();
+            if($Lesson->getLesson($params['URI'][0])){
+                $readChapter = $Lesson->getChapter()[0];
+                if(isset($params['URI'][1])){
+                    foreach($Lesson->getChapter() as $Chapter){
+                        if($Chapter->getUrl() == $params['URI'][1]){
+                            $readChapter = $Chapter;
+                        }
+                    }
+                }
+                if(isset($params["POST"]) && !empty($params["POST"])){
+                    $errors = Form::checkForm($formAddComment, $params["POST"]);
+                    $dataForm = Form::secureData($params['POST']);
+                    $Comment->addComment($formAddComment, $dataForm, 2, $readChapter->getId());
+                    header('Location:'.$routes['view_lesson'].'/'.$Lesson->getUrl().'/'.$readChapter->getUrl());
+                }
+                $allComments = $Comment->getAll('chapter', $readChapter->getId());
+
+                if(isset($allComments)){
+                    $View->setData("lastComments", array_slice($allComments, 0, 5));
+                }
+                $View->setData("readChapter", $readChapter);
+                $View->setData("lesson", $Lesson);
+                $View->setData("formAddComment", $formAddComment);
+                $View->setData("errors", $errors);
+            } else {
+                $View->setData("error_search", 'Il semble y avoir une erreur dans votre URL, le cours n\'est pas trouvé où n\'existe pas !');
+            }
+        } else {
+            header('Location:'.$routes['homepage']);
+        }
     }
 
     /**
@@ -146,8 +208,17 @@ class ClassController
                 }
                 $Lesson->save();
             }
+            $Lesson->generateXml();
         }
 
         header('Location:'.$routes["dashboard_lesson"]);
+    }
+
+    public function subscribeAction()
+    {
+        $routes = Access::getSlugsById();
+        $Newsletter = new Newsletter();
+        $Newsletter->changeLessonNewsletter();
+        header('Location:'.$routes['homepage']);
     }
 }

@@ -117,8 +117,10 @@ class LessonChapter extends CoreSql
     {
         switch($_identifier){
             case 'lesson': $opposite = 'chapter';
+                $this->setOrderByParameter(["order" => "ASC"]);
                 break;
-            case 'chapter': $opposite = 'lesson';
+            case 'chapter':
+                $opposite = 'lesson';
                 break;
             default:
                 return 0;

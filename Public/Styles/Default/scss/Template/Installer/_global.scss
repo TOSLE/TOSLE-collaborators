@@ -1,0 +1,9 @@
+html, body {
+  background-color: $installer_globalBackgroundColor;
+}
+
+main{
+  max-width: 800px;
+  margin: 0 auto;
+}
+@import "class";
