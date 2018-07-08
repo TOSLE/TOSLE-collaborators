@@ -41,6 +41,11 @@
             <div class="col-12">
                 <div>
                     <h2><?php echo $readChapter->getTitle();?></h2>
+                    <?php if(!empty($readChapter->getFileid())):?>
+                        <div class="content-file--chapter">
+                            <p>Pour télécharger le fichier joint à ce chapitre : <a target="_blank" href="<?php echo $readChapter->getFileid()->getPath().'/'.$readChapter->getFileid()->getName();?>" class="btn btn-tosle">Cliquez-ici</a></p>
+                        </div>
+                    <?php endif;?>
                     <div class="content-chapter">
                         <?php echo $readChapter->getContent();?>
                     </div>

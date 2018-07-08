@@ -18,6 +18,7 @@ Class Chapter extends CoreSql {
     protected $url;
 
     private $lessonchapter;
+    private $getFileid = null;
 
     public function __construct($_id = null)
     {
@@ -144,7 +145,7 @@ Class Chapter extends CoreSql {
      */
     public function getFileid()
     {
-        return $this->fileid;
+        return $this->getFileid;
     }
 
     /**
@@ -153,6 +154,9 @@ Class Chapter extends CoreSql {
     public function setFileid($fileid)
     {
         $this->fileid = $fileid;
+        if(isset($fileid)){
+            $this->getFileid = new File($fileid);
+        }
     }
 
     /**
