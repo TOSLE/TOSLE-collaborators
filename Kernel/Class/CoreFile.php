@@ -65,7 +65,7 @@ class CoreFile
     static public function getSqlFile()
     {
         if(SYSTEM == "LINUX") {
-            $directoryPath = DIRNAME . 'Sql/tosle.sql';
+            $directoryPath = getcwd() . DIRNAME . 'Sql/tosle.sql';
         } else {
             $directoryPath = 'Sql/tosle.sql';
         }
