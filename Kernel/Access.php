@@ -103,7 +103,13 @@ class Access
             "controller" => "class",
             "action" => "view",
             "security" => false
-        ]
+        ],
+        "subscribe_lesson" => [
+            "slug" => "subscribe-lesson",
+            "controller" => "class",
+            "action" => "subscribe",
+            "security" => false
+        ],
     ];
 
     private $backOffice = [

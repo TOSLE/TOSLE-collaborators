@@ -1,23 +1,38 @@
-<section class="container header-blog-container">
+<section class="container header-lesson-container">
     <div class="row">
         <div class="col-12">
             <div>
                 <h2>Liens et recherche avancée</h2>
                 <div class="icons-list">
                     <?php if(isset($urlClassFeed)):?>
-                        <a href="<?php echo $urlClassFeed;?>" class="blog-link-icon">
+                        <a href="<?php echo $urlClassFeed;?>" class="lesson-link-icon">
                             <i class="material-icons">
                                 rss_feed
                             </i>
                             <p>Flux RSS</p>
                         </a>
                     <?php endif;?>
-                    <a href="#" class="blog-link-icon target-modal" data-type="open-modal" data-target="filter-modal">
+                    <a href="#" class="lesson-link-icon target-modal" data-type="open-modal" data-target="filter-modal">
                         <i class="material-icons">
                             filter_list
                         </i>
                         <p>Modifier le filtre</p>
                     </a>
+                    <?php if($newsletter):?>
+                        <a href="<?php echo $this->slugs['subscribe_lesson'];?>" class="lesson-link-icon">
+                            <i class="material-icons">
+                                mail
+                            </i>
+                            <p>S'inscrire à la newsletter</p>
+                        </a>
+                    <?php else:?>
+                        <a href="<?php echo $this->slugs['subscribe_lesson'];?>" class="lesson-link-icon newsletter-off">
+                            <i class="material-icons">
+                                mail
+                            </i>
+                            <p>Se désinscrire de la newsletter</p>
+                        </a>
+                    <?php endif;?>
                 </div>
             </div>
         </div>

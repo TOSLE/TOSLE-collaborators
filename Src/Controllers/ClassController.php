@@ -20,6 +20,7 @@ class ClassController extends CoreController
     {
         $View = new View("default", "Class/home");
         $Lesson = new LessonRepository();
+        $Newsletter = new Newsletter();
         // Initialisation des parametres
         $colSize = 6;
         $numberLesson = 6;
@@ -27,20 +28,21 @@ class ClassController extends CoreController
         $page = 1;
         $pagination = $Lesson->getPagination($numberLesson, $params["GET"]);
         $urlClassFeed = CoreFile::testFeedFile('lessonfeed.xml');
+        $newsletter = $Newsletter->getStatusLesson();
         $errors = [];
-        if(!empty($params["GET"])){
-            if(isset($params["GET"]["colsize"])) {
-                if ($params["GET"]["colsize"] == "4" || $params["GET"]["colsize"] == "6" || $params["GET"]["colsize"] == "12"){
+        if (!empty($params["GET"])) {
+            if (isset($params["GET"]["colsize"])) {
+                if ($params["GET"]["colsize"] == "4" || $params["GET"]["colsize"] == "6" || $params["GET"]["colsize"] == "12") {
                     $colSize = $params["GET"]["colsize"];
                 }
             }
-            if(isset($params["GET"]["number"])) {
-                if ($params["GET"]["number"] >= 1 || $params["GET"]["number"] <= 12){
+            if (isset($params["GET"]["number"])) {
+                if ($params["GET"]["number"] >= 1 || $params["GET"]["number"] <= 12) {
                     $numberLesson = $params["GET"]["number"];
                     $pagination = $Lesson->getPagination($numberLesson, $params["GET"]);
                 }
             }
-            if(isset($params['GET']['page']) && array_key_exists($params['GET']['page'], $pagination)){
+            if (isset($params['GET']['page']) && array_key_exists($params['GET']['page'], $pagination)) {
                 $page = $params['GET']['page'];
                 $offset = $numberLesson * $page - $numberLesson;
             }
@@ -51,8 +53,8 @@ class ClassController extends CoreController
         $View->setData("page", $page);
         $View->setData("lessons", $lessons);
         $View->setData("col", $colSize);
+        $View->setData("newsletter", $newsletter);
     }
-
 
     /**
      * @Route("/en/class/{idArticle}")
@@ -210,5 +212,13 @@ class ClassController extends CoreController
         }
 
         header('Location:'.$routes["dashboard_lesson"]);
+    }
+
+    public function subscribeAction()
+    {
+        $routes = Access::getSlugsById();
+        $Newsletter = new Newsletter();
+        $Newsletter->changeLessonNewsletter();
+        header('Location:'.$routes['homepage']);
     }
 }
