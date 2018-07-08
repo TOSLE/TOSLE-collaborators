@@ -65,3 +65,29 @@
     }
   }
 }
+
+.header-lesson-container {
+  .icons-list {
+    display: flex;
+    > .lesson-link-icon {
+      color: $colorBackgroundIcon;
+      text-decoration: none;
+      border: 1px solid $colorBackgroundIcon;
+      background-color: $colorGlobalToslePrimary;
+      border-radius: 3.5px;
+      padding: 3.5px;
+      text-align: center;
+      display: flex;
+      > i {
+        margin: auto;
+        font-size: 1.8em;
+      }
+      > p {
+        margin: auto;
+      }
+      &.newsletter-off {
+        background-color: #F43C3E;
+      }
+    }
+  }
+}

@@ -41,7 +41,8 @@ class Authentification
             'id',
             'status',
             'lastname',
-            'firstname'
+            'firstname',
+            'newsletter'
         ];
         $User = new User();
         $User->setWhereParameter(["LIKE" => [
