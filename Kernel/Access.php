@@ -127,7 +127,7 @@ class Access
     ];
 
     private $urlFixe = [
-        'rss_blog' => DIRNAME.'/Tosle/Static/xml/blogfeed.xml'
+        'rss_blog' => DIRNAME.'Tosle/Static/xml/blogfeed.xml'
     ];
 
     /**
@@ -218,6 +218,23 @@ class Access
         }
         foreach ($Acces->getBackoffice() as $key => $value){
             $data[$key] = "".DIRNAME.substr($language,0,2)."/".$key;
+        }
+        foreach ($Acces->getUrlFixe() as $key => $value){
+            $data[$key] = $value;
+        }
+        return $data;
+    }
+
+    public static function getPublicSlugs()
+    {
+        global $language;
+        if(empty($language)){
+            $language = "en-EN";
+        }
+        $Acces = new Access();
+        $data = [];
+        foreach ($Acces->getAccess() as $key => $value){
+            $data[$key] = "".DIRNAME.substr($language,0,2)."/".$value["slug"];
         }
         foreach ($Acces->getUrlFixe() as $key => $value){
             $data[$key] = $value;
