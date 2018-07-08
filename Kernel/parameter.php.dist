@@ -1,8 +1,0 @@
-<?php
-    define("DBUSER","");
-    define("DBPWD","");
-    define("DBHOST","");
-    define("DBNAME","");
-    define("DBPORT","");
-    define("GUSER", "");
-    define("GPWD", "");

@@ -62,6 +62,7 @@ class ChapterRepository extends Chapter
                     $LessonChapter = new LessonChapter();
                     $LessonChapter->deleteJoin('id', $this->getLessonchapter()->getId());
                     $Lesson = new LessonRepository();
+                    $Lesson->generateXml();
                     $Lesson->addChapter($tmpPostArray['select_lesson'], $this->getId());
                 }
             } else {

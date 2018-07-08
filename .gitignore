@@ -5,5 +5,5 @@
 node_modules/
 
 #Partie des fichiers à copier coller et où il faut enlever l'extension '.dist'
-Kernel/parameter.php
+App/config/parameter.php
 .htaccess
