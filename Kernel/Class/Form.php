@@ -55,17 +55,17 @@ class Form
                 }
             }
         }
-        if(isset($config['config']['secure']) && $config['config']['secure']) {
-            if(isset($_SESSION['secure_form']) && isset($data['_token'])){
-                $returnSecure = self::checkSecureForm($_SESSION['secure_form'], $data['_token'], $config['config']['secure']);
+        if(isset($config['config']['secure']['status']) && $config['config']['secure']['status']) {
+            if(isset($_SESSION['csrf_token_tosle']) && isset($data['_token'])){
+                $returnSecure = self::checkSecureForm($_SESSION['csrf_token_tosle'], $data['_token'], $config['config']['secure']);
                 if($returnSecure === 1){
-                    $errorsMsg["Timeout"] = "délait d'authentification dépassé pour le formulaire. Merci de réessayer l'envoie";
+                    $errorsMsg["Timeout"] = "Délait d'authentification dépassé pour le formulaire. Merci de réessayer l'envoie";
                 }
                 if($returnSecure === 2){
-                    $errorsMsg["Authentification failed"] = "Authentification échoué pour le formulaire. Veuillez réessayer.";
+                    $errorsMsg["Authentification failed"] = "Authentification non reconnue. Veuillez réessayer.";
                 }
             } else {
-                $errorsMsg["Authentification failed"] = "Authentification échoué pour le formulaire. Veuillez réessayer.";
+                $errorsMsg["Authentification error"] = "Authentification échoué pour le formulaire. Veuillez réessayer.";
             }
         }
         return $errorsMsg;
@@ -98,8 +98,8 @@ class Form
     {
         $timestamp = time();
         $token = uniqid($timestamp.'_token_', true);
-        $_SESSION['secure_form'] = $token;
-        return $token;
+        $_SESSION['csrf_token_tosle'] = $token;
+        return $_SESSION['csrf_token_tosle'];
     }
 
     /**
@@ -116,30 +116,18 @@ class Form
      */
     public static function checkSecureForm($_token, $_formToken, $_configSecure)
     {
-        if(!is_array($_configSecure)){
-            if($_token === $_formToken){
+        if($_configSecure['status']){
+            if($_token == $_formToken){
                 $timestamp = time();
                 $tokenExploded = explode('_', $_token);
-                if($timestamp - $tokenExploded[0] < 1800){
+                if($timestamp - $tokenExploded[0] < ($_configSecure['duration']*60)){
                     return 0;
                 }
                 return 1;
             }
             return 2;
-        } else {
-            if($_configSecure['status']){
-                if($_token === $_formToken){
-                    $timestamp = time();
-                    $tokenExploded = explode('_', $_token);
-                    if($timestamp - $tokenExploded[0] < ($_configSecure['duration']*60)){
-                        return 0;
-                    }
-                    return 1;
-                }
-                return 2;
-            }
-            return 0;
         }
+        return 1;
     }
 
     /**
