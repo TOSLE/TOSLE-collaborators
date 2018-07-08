@@ -26,6 +26,7 @@ class ClassController extends CoreController
         $offset = 0;
         $page = 1;
         $pagination = $Lesson->getPagination($numberLesson, $params["GET"]);
+        $urlClassFeed = CoreFile::testFeedFile('lessonfeed.xml');
         $errors = [];
         if(!empty($params["GET"])){
             if(isset($params["GET"]["colsize"])) {
@@ -45,6 +46,7 @@ class ClassController extends CoreController
             }
         }
         $lessons = $Lesson->getLessons($numberLesson, $offset);
+        $View->setData('urlClassFeed', $urlClassFeed);
         $View->setData("pagination", $pagination);
         $View->setData("page", $page);
         $View->setData("lessons", $lessons);
@@ -204,6 +206,7 @@ class ClassController extends CoreController
                 }
                 $Lesson->save();
             }
+            $Lesson->generateXml();
         }
 
         header('Location:'.$routes["dashboard_lesson"]);

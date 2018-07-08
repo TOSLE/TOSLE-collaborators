@@ -71,4 +71,17 @@ class CoreFile
         }
         return $directoryPath;
     }
+
+    static public function testFeedFile($relativePath)
+    {
+        if(SYSTEM == "LINUX") {
+            $directoryPath = getcwd() . DIRNAME . 'Tosle/Static/xml/' . $relativePath;
+        } else {
+            $directoryPath = '../..' . DIRNAME . 'Tosle/Static/xml/' . $relativePath;
+        }
+        if(!file_exists($directoryPath)){
+            return null;
+        }
+        return DIRNAME . 'Tosle/Static/xml/' . $relativePath;
+    }
 }
