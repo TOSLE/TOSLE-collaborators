@@ -57,7 +57,6 @@ class ClassController extends CoreController
         $View->setData("page", $page);
         $View->setData("lessons", $lessons);
         $View->setData("col", $colSize);
-        $View->setData("newsletter", $newsletter);
     }
 
     /**
