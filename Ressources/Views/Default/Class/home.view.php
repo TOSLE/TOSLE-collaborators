@@ -18,20 +18,22 @@
                         </i>
                         <p>Modifier le filtre</p>
                     </a>
-                    <?php if($newsletter):?>
-                        <a href="<?php echo $this->slugs['subscribe_lesson'];?>" class="lesson-link-icon">
-                            <i class="material-icons">
-                                mail
-                            </i>
-                            <p>S'inscrire à la newsletter</p>
-                        </a>
-                    <?php else:?>
-                        <a href="<?php echo $this->slugs['subscribe_lesson'];?>" class="lesson-link-icon newsletter-off">
-                            <i class="material-icons">
-                                mail
-                            </i>
-                            <p>Se désinscrire de la newsletter</p>
-                        </a>
+                    <?php if(isset($newsletter)):?>
+                        <?php if($newsletter):?>
+                            <a href="<?php echo $this->slugs['subscribe_lesson'];?>" class="lesson-link-icon">
+                                <i class="material-icons">
+                                    mail
+                                </i>
+                                <p>S'inscrire à la newsletter</p>
+                            </a>
+                        <?php else:?>
+                            <a href="<?php echo $this->slugs['subscribe_lesson'];?>" class="lesson-link-icon newsletter-off">
+                                <i class="material-icons">
+                                    mail
+                                </i>
+                                <p>Se désinscrire de la newsletter</p>
+                            </a>
+                        <?php endif;?>
                     <?php endif;?>
                 </div>
             </div>
@@ -40,45 +42,53 @@
 </section>
 <section class="container">
     <div class="row">
-        <?php foreach($lessons as $lesson):?>
-            <?php if(!empty($lesson->getChapter())):?>
-            <div class="col-<?php echo $col;?>">
-                <div>
-                    <div class="lesson-bloc">
-                        <div class="fade-background-lesson">
-                            <div class="title-lesson" style="border-color: <?php echo $lesson->getColor();?>;">
-                                <h2>
-                                    <?php echo $lesson->getTitle();?>
-                                </h2>
-                                <p class="info-datecreate"><?php echo $lesson->getDatecreate();?></p>
-                            </div>
-                            <div class="description-lesson">
-                                <p>
-                                    <?php echo $lesson->getDescription();?>
-                                </p>
-                            </div>
-                            <?php if(!empty($lesson->getCategorylesson())):?>
-                                <ul class="tag-list category-list-lesson" style="border-color: <?php echo $lesson->getColor();?>;">
-                                <?php foreach($lesson->getCategorylesson() as $category):?>
-                                        <li class="item tosle">
-                                            <?php echo $category->getName();?>
-                                        </li>
-                                <?php endforeach;?>
-                                </ul>
-                            <?php endif;?>
-                            <div class="more-infos" style="background-color: <?php echo $lesson->getColor();?>">
-                                <p class="info-comment-lesson">25 <i class="material-icons">comment</i></p>
-                                <a href="<?php echo $this->slugs["view_lesson"]."/".$lesson->getUrl();?>" class="btn btn-white-outline info-btn-readmore"><?php echo BLOG_BUTTON_READMORE;?></a>
-                                <p class="info-chapter">
-                                    <?php echo count($lesson->getChapter());?> <i class="material-icons">import_contacts</i>
-                                </p>
+        <?php if(isset($lessons)):?>
+            <?php foreach($lessons as $lesson):?>
+                <?php if(!empty($lesson->getChapter())):?>
+                <div class="col-<?php echo $col;?>">
+                    <div>
+                        <div class="lesson-bloc">
+                            <div class="fade-background-lesson">
+                                <div class="title-lesson" style="border-color: <?php echo $lesson->getColor();?>;">
+                                    <h2>
+                                        <?php echo $lesson->getTitle();?>
+                                    </h2>
+                                    <p class="info-datecreate"><?php echo $lesson->getDatecreate();?></p>
+                                </div>
+                                <div class="description-lesson">
+                                    <p>
+                                        <?php echo $lesson->getDescription();?>
+                                    </p>
+                                </div>
+                                <?php if(!empty($lesson->getCategorylesson())):?>
+                                    <ul class="tag-list category-list-lesson" style="border-color: <?php echo $lesson->getColor();?>;">
+                                    <?php foreach($lesson->getCategorylesson() as $category):?>
+                                            <li class="item tosle">
+                                                <?php echo $category->getName();?>
+                                            </li>
+                                    <?php endforeach;?>
+                                    </ul>
+                                <?php endif;?>
+                                <div class="more-infos" style="background-color: <?php echo $lesson->getColor();?>">
+                                    <p class="info-comment-lesson">25 <i class="material-icons">comment</i></p>
+                                    <a href="<?php echo $this->slugs["view_lesson"]."/".$lesson->getUrl();?>" class="btn btn-white-outline info-btn-readmore"><?php echo BLOG_BUTTON_READMORE;?></a>
+                                    <p class="info-chapter">
+                                        <?php echo count($lesson->getChapter());?> <i class="material-icons">import_contacts</i>
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <?php endif;?>
+            <?php endforeach;?>
+        <?php else:?>
+            <div class="col-12">
+                <div>
+                    <p>Aucun cours pour le moment</p>
+                </div>
             </div>
-            <?php endif;?>
-        <?php endforeach;?>
+        <?php endif;?>
     </div>
 </section>
 

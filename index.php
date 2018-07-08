@@ -64,7 +64,7 @@
              */
             $userConnected = false;
             $userStatus = 1;
-            $Auth = false;
+            $Auth = null;
             if (isset($_SESSION['token']) && isset($_SESSION['email'])) {
                 if (($userConnected = Authentification::checkAuthentification($_SESSION['token'], $_SESSION['email']))) {
                     $Auth = Authentification::getUser($_SESSION['token'], $_SESSION['email']);
