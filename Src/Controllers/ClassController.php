@@ -28,7 +28,11 @@ class ClassController extends CoreController
         $page = 1;
         $pagination = $Lesson->getPagination($numberLesson, $params["GET"]);
         $urlClassFeed = CoreFile::testFeedFile('lessonfeed.xml');
-        $newsletter = $Newsletter->getStatusLesson();
+        if(isset($this->Auth)){
+            $Newsletter = new Newsletter();
+            $newsletter = $Newsletter->getStatusLesson();
+            $View->setData("newsletter", $newsletter);
+        }
         $errors = [];
         if (!empty($params["GET"])) {
             if (isset($params["GET"]["colsize"])) {

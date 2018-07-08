@@ -17,7 +17,7 @@ class Newsletter
      * 6 -> Nouveau message / Lesson
      * 7 -> Nouveau message / Blog / Lesson
      */
-    private $Auth = null;
+    private $Auth = false;
     private $binaryCode;
 
     public function __construct()
