@@ -25,8 +25,6 @@
 	if(file_exists("App/config/parameter.php")) {
         require "App/config/parameter.php";
 	    if(Installer::checkDatabaseConnexion()){
-	        $xml = new GeneratorXML('sitemap');
-	        $xml->setSitemap();
             /**
              * @array tempUri
              * Contient un tableau de notre URI. La première cellule vaut l'URI propre et la seconde vaut les variables GET
