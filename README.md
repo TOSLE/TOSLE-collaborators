@@ -28,7 +28,7 @@ Il faut avoir :
 Sur le serveur, vous devrez définir votre 'timezone'. Pour ce faire, rendez-vous dans :
 `nano /etc/php5/cli/php.ini`
 
-Avec nano, vous pouvez utiliser la commande de recherche suivante : `date.`
+Avec nano, vous pouvez utiliser la commande de recherche suivante 'CTRL + W' : `date.`
 
 L'élément à remplacer est fait ainsi par défaut :
 
