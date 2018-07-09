@@ -1,11 +1,11 @@
 <?php
-
 /**
  * Created by PhpStorm.
  * User: backin
  * Date: 30/05/2018
  * Time: 10:47
  */
+
 class CommentRepository extends Comment
 {
     /**
@@ -22,7 +22,7 @@ class CommentRepository extends Comment
             "content",
             "tag"
         ];
-        if ($identifier === "tag") {
+        if($identifier === "tag"){
             $parameter = [
                 "LIKE" => [
                     "tag" => $value
@@ -43,11 +43,11 @@ class CommentRepository extends Comment
      */
     public function getAll($identifier, $value)
     {
-        if ($identifier == "blog") {
+        if($identifier == "blog"){
             $target = ["id", "content", "tag", "datecreate", "dateupdated"];
             $joinParameter = [
                 "blogcomment" => [
-                    "comment_id"
+                        "comment_id"
                 ]
             ];
             $whereParameter = [
@@ -56,14 +56,36 @@ class CommentRepository extends Comment
                 ]
             ];
             $this->setLeftJoin($joinParameter, $whereParameter);
-            $this->setOrderByParameter(["id" => "DESC"]);
+            $this->setOrderByParameter(["id"=>"DESC"]);
             return $this->getData($target);
         }
-        if ($identifier == "number_blog") {
+        if($identifier == "chapter"){
+            $target = ["id", "content", "tag", "datecreate", "dateupdated"];
+            $joinParameter = [
+                "chaptercomment" => [
+                        "comment_id"
+                ]
+            ];
+            $whereParameter = [
+                "chaptercomment" => [
+                    "chapter_id" => $value
+                ]
+            ];
+            $this->setLeftJoin($joinParameter, $whereParameter);
+            $this->setOrderByParameter(["id"=>"DESC"]);
+            $arrayData = $this->getData($target);
+            foreach($arrayData as $comment){
+                $ChapterComment = new ChapterComment();
+                $arrayReturn = $ChapterComment->getChapterCommentByIdentifier('getuser', $comment->getId());
+                $comment->setUser($arrayReturn);
+            }
+            return $arrayData;
+        }
+        if($identifier == "number_blog"){
             $target = ["id"];
             $joinParameter = [
                 "blogcomment" => [
-                    "comment_id"
+                        "comment_id"
                 ]
             ];
             $whereParameter = [
@@ -74,11 +96,11 @@ class CommentRepository extends Comment
             $this->setLeftJoin($joinParameter, $whereParameter);
             return $this->countData($target)[0];
         }
-        if ($identifier == "number_all") {
+        if($identifier == "number_all"){
             $target = ["id"];
             $joinParameter = [
                 "blogcomment" => [
-                    "comment_id"
+                        "comment_id"
                 ]
             ];
             $whereParameter = null;
@@ -103,14 +125,14 @@ class CommentRepository extends Comment
     {
         $errors = Form::checkForm($_config, $_post);
         $_post = Form::secureData($_post);
-        if (empty($errors)) {
+        if(empty($errors)){
             $User = new UserRepository();
             $User->getUser();
             $this->setContent($_post['textarea_comment']);
             $this->setTag();
             $this->save();
             $this->getComment('tag', $this->getTag());
-            switch ($_type) {
+            switch($_type){
                 case 1:
                     $BlogComment = new BlogComment();
                     $BlogComment->setBlogid($_targetId);
@@ -120,6 +142,11 @@ class CommentRepository extends Comment
                     $BlogComment->save();
                     break;
                 case 2:
+                    $ChapterComment = new ChapterComment();
+                    $ChapterComment->setChapterid($_targetId);
+                    $ChapterComment->setCommentid($this->getId());
+                    $ChapterComment->setUserid($User->getId());
+                    $ChapterComment->save();
                     break;
                 default:
                     return $errors;

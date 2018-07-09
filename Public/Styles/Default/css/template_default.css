@@ -221,6 +221,24 @@ html {
         -webkit-box-shadow: 0px 0px 40px -12px rgba(0, 0, 0, 0.75);
         -moz-box-shadow: 0px 0px 40px -12px rgba(0, 0, 0, 0.75);
         box-shadow: 0px 0px 40px -12px rgba(0, 0, 0, 0.75); }
+  html .header-lesson-container .icons-list {
+    display: flex; }
+    html .header-lesson-container .icons-list > .lesson-link-icon {
+      color: #FFF;
+      text-decoration: none;
+      border: 1px solid #FFF;
+      background-color: #1A5CCB;
+      border-radius: 3.5px;
+      padding: 3.5px;
+      text-align: center;
+      display: flex; }
+      html .header-lesson-container .icons-list > .lesson-link-icon > i {
+        margin: auto;
+        font-size: 1.8em; }
+      html .header-lesson-container .icons-list > .lesson-link-icon > p {
+        margin: auto; }
+      html .header-lesson-container .icons-list > .lesson-link-icon.newsletter-off {
+        background-color: #F43C3E; }
   html .profile {
     display: flex;
     background-color: #FFFFFF;

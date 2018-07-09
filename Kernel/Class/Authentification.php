@@ -26,7 +26,7 @@ class Authentification
         $interval = $date->diff($dateCompare);
         if($interval->i > 30){
             session_destroy();
-            return -1;
+            return null;
         }
         $User->setToken();
         $User->setDateConnection();
@@ -41,7 +41,8 @@ class Authentification
             'id',
             'status',
             'lastname',
-            'firstname'
+            'firstname',
+            'newsletter'
         ];
         $User = new User();
         $User->setWhereParameter(["LIKE" => [
