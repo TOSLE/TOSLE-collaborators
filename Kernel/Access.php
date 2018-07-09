@@ -127,7 +127,7 @@ class Access
     ];
 
     private $urlFixe = [
-        'rss_blog' => DIRNAME.'Tosle/Static/xml/blogfeed.xml'
+        'rss_blog' => 'Tosle/Static/xml/blogfeed.xml'
     ];
 
     /**
@@ -237,7 +237,7 @@ class Access
             $data[$key] = "".DIRNAME.substr($language,0,2)."/".$value["slug"];
         }
         foreach ($Acces->getUrlFixe() as $key => $value){
-            $data[$key] = $value;
+            $data[$key] = "".DIRNAME.$value;
         }
         return $data;
     }
