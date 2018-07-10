@@ -24,15 +24,16 @@ class ProfileRepository extends User
         ];
     }
 
-    public function getCommentUser($_idUser) {
+    public function getCommentUser($_idUser)
+    {
         $Comment = new CommentRepository();
 
-        $objectsCommentUserBlog = $Comment->getCommentByUserId('blog',$_idUser);
-        $objectsCommentUserChapter = $Comment->getCommentByUserId('chapter',$_idUser);
+        $objectsCommentUserBlog = $Comment->getCommentByUserId('blog', $_idUser);
+        $objectsCommentUserChapter = $Comment->getCommentByUserId('chapter', $_idUser);
 
         $commentaires = null;
 
-        foreach($objectsCommentUserBlog as $comments){
+        foreach ($objectsCommentUserBlog as $comments) {
             $commentaires[] = [
                 "id" => $comments->getId(),
                 "content" => $comments->getContent(),
@@ -41,7 +42,7 @@ class ProfileRepository extends User
             ];
         }
 
-        foreach($objectsCommentUserChapter as $comments){
+        foreach ($objectsCommentUserChapter as $comments) {
             $commentaires[] = [
                 "id" => $comments->getId(),
                 "content" => $comments->getContent(),
@@ -53,13 +54,25 @@ class ProfileRepository extends User
         /**
          * Tri le tableau par date
          */
-        foreach ($commentaires as $key => $part) {
-            $sort[$key] = strtotime($part['date']);
-        }
-        array_multisort($sort, SORT_DESC, $commentaires);
+        if (isset($commentaires)) {
+            foreach ($commentaires as $key => $part) {
+                $sort[$key] = strtotime($part['date']);
+            }
+            array_multisort($sort, SORT_DESC, $commentaires);
 
-        return $commentaires;
+            return $commentaires;
+        }
+        else {
+            $commentaires[] = [
+                "content" => "Aucun commentaires pour le moment",
+                "date" => " ",
+                "type" => " ",
+            ];
+
+            return $commentaires;
+        }
     }
+
 
     public function editProfile($_idProfile)
     {
