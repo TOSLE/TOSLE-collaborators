@@ -116,6 +116,12 @@ class Access
             "action" => "subscribe",
             "security" => false
         ],
+        "dashboard_student" => [
+            "slug" => "dashboard-student",
+            "controller" => "dashboard",
+            "action" => "student",
+            "security" => 2
+        ],
     ];
 
     private $backOffice = [

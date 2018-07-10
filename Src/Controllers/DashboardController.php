@@ -54,7 +54,7 @@ class DashboardController extends CoreController
      */
     function studentAction($params)
     {
-        $View = new View("dashboard", "student");
+        $View = new View("dashboard", "Dashboard/student");
         $View->setData("PageName", NAV_DASHBOARD . " " . NAV_DASHBOARD_STUDENT);
     }
 
