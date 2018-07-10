@@ -1,0 +1,74 @@
+/* TEMPLATE TOSLE MESSAGING PAGE */
+.title-page h1 {
+  color: #F8F8FF;
+  text-shadow: 0 0 3px #000000,
+  3px 0 0 #000000,
+  3px 3px 0 #000000,
+  0 3px 0 #000000,
+  -3px 3px #000000,
+  -3px 0 0 #000000,
+  -3px -3px 0 #F8F8FF,
+  0 -3px 0 #F8F8FF,
+  3px -3px 0 #F8F8FF;
+  font-family: roboto, serif;
+  font-size: 75px;
+  line-height: 60px;
+
+  Letter-spacing: 17px;
+  margin-top: 300px;
+  margin-bottom: 300px;
+  background-color: #1c1f2b;
+  }
+
+.block-portfolio{
+  display: flex;
+  height: 300px;
+
+  flex-direction: column;
+  align-items: center;
+  background-color: #FFFFFF;}
+
+  .block-portfolio span {
+
+    color: #FRFRFR;
+    Letter-spacing: 20px;
+    margin-top: 100px;
+    margin-bottom:100px;}
+  .block-portfolio H1 {
+    display: flex;
+    color: #FRFRFR; }
+  .block-portfolio .title {
+    margin-bottom: 10px;
+    margin-top: 22px; }
+
+.content p {
+  margin-top:30px;
+  margin-bottom: 50px;
+  position: center;
+  margin-left: 10px;
+  margin-right: 10px;
+
+
+}
+.block-portfolio form{
+  margin-left: 20px;
+  margin-right: 20px;
+
+
+}
+.block-portfolio input{
+  margin-left: 20px;
+  margin-right: 20px;
+  display: flex;
+
+
+}
+
+.container{
+  background: #1c1f2b;
+}
+
+.col-6{
+margin:auto;
+  width:250px;
+}

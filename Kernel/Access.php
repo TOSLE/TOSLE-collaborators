@@ -97,16 +97,47 @@ class Access
             "controller" => "portfolio",
             "action" => "index",
             "security" => false
-        ]
-    ];
+        ],
 
+       "portfoliohome" => [ // portfolio homemepage
+            "slug" => "portfolio-homepage",
+            "controller" => "Portfolio",
+            "action" => "index",
+            "security" => false
+        ],
+       "portfolio_add" => [ // change status blog
+            "slug" => "portfolio-view-add",
+            "controller" => "Portfolio",
+            "action" => "add",
+            "security" => false
+        ],
+
+        "dashboard_portfolio" => [ // Dashboard blog homepage
+            "slug" => "dashboard-portfolio",
+            "controller" => "Portfolio",
+            "action" => "",
+            "security" => 2
+        ],
+
+
+    ];
     private $backOffice = [
         "blog/status" => 2,
         "blog/add" => 2,
         "blog/edit" => 2,
         "class/add" => 2,
         "class/edit" => 2,
+        "class/status" => 2,
+        "chapter/add" => 2,
+        "chapter/edit" => 2,
+        "chapter/status" => 2,
+        "chapter/order" => 2,
+        "portfolio/status" => 2,
+        "portfolio/add" => 2,
+        "portfolio/edit" => 2,
     ];
+
+
 
     /**
      * @param string|bool $slug
