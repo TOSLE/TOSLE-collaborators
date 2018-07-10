@@ -156,4 +156,41 @@ class CommentRepository extends Comment
         ];
 
     }
+
+    public function getCommentByUserId($identifier, $id)
+    {
+        if ($identifier == "blog") {
+            $target = ["id", "content", "tag", "datecreate", "dateupdated"];
+            $joinParameter = [
+                "blogcomment" => [
+                    "comment_id"
+                ]
+            ];
+            $whereParameter = [
+                "blogcomment" => [
+                    "userid" => $id
+                ]
+            ];
+            $this->setLeftJoin($joinParameter, $whereParameter);
+            $this->setOrderByParameter(["id" => "DESC"]);
+            return $this->getData($target);
+        }
+        if ($identifier == "chapter") {
+            $target = ["id", "content", "tag", "datecreate", "dateupdated"];
+            $joinParameter = [
+                "chaptercomment" => [
+                    "comment_id"
+                ]
+            ];
+            $whereParameter = [
+                "chaptercomment" => [
+                    "userid" => $id
+                ]
+            ];
+            $this->setLeftJoin($joinParameter, $whereParameter);
+            $this->setOrderByParameter(["id" => "DESC"]);
+            return $this->getData($target);
+        }
+
+    }
 }
