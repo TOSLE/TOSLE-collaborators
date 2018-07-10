@@ -13,7 +13,7 @@
                     <div class="col-12">
                         <div>
                             <h2>Bienvenue sur l'installation de votre CMS TOSLE</h2>
-                            <p>Procédature d'installation, étape <?php echo (isset($stepInstall))?$stepInstall:"1";?>/3</p>
+                            <p>Procédature d'installation, étape <?php echo (isset($stepInstall))?$stepInstall:"1";?> / 2</p>
                         </div>
                     </div>
                 </div>

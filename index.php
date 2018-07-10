@@ -1,5 +1,6 @@
 <?php
 	session_start();
+    date_default_timezone_set('Europe/Paris');
 	require "Kernel/globalconfig.php";
     function autoLoader($parameter)
     {
@@ -25,8 +26,6 @@
 	if(file_exists("App/config/parameter.php")) {
         require "App/config/parameter.php";
 	    if(Installer::checkDatabaseConnexion()){
-	        $xml = new GeneratorXML('sitemap');
-	        $xml->setSitemap();
             /**
              * @array tempUri
              * Contient un tableau de notre URI. La première cellule vaut l'URI propre et la seconde vaut les variables GET

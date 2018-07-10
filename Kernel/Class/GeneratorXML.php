@@ -25,7 +25,6 @@ class GeneratorXML
         $this->fileName = $fileName.'.xml';
         $this->dirPath = CoreFile::testStaticDirectory($dirPath);
         $this->xmlDoc = new DOMDocument('1.0', 'utf-8');
-        $this->getWebSiteData();
     }
 
     /**
