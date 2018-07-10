@@ -154,15 +154,15 @@ class UserController
                 $retourValue=$user->checkEmailExist($params["POST"]["email"]);
                 if(is_numeric($retourValue)){     
                     echo "testt";*/
-                     $user->setEmail($params["POST"]["email"]); // voir pour le selectMultipleResponse + confirmEmail                          
-                        $user->setToken();              
+                    $user->setEmail($params["POST"]["email"]); // voir pour le selectMultipleResponse + confirmEmail                          
+                    $user->setToken();                               
                   /*  } else {
                         $errors=$retourValue;                                                
                     }*/
                     $email = $params["POST"]["email"];
-                                   $token = $user->getToken();
+                    $token = $user->getToken();
               }           
-              Mail::sendMailPassword($email,$token); 
+            Mail::sendMailPassword($email,$token); 
         }        
             $View->setData("config", $form);
             $View->setData("errors", $errors);    
@@ -179,9 +179,9 @@ class UserController
            /* if token et mail + ajouter nom
                 $param 3 tableau sl
                 set password */
-print_r($params);
+        print_r($params);
 
-        if (isset($params["GET"]["email"])) {
+        if (isset($params["GET"]["email"])/* & isset($params["GET"]["token"])*/) {
 
             $target = [/** Ce que l'on récupère lors de la requête (SELECT) **/
                 "id"
@@ -189,6 +189,7 @@ print_r($params);
             $parameter = [/** Les parametres pour la condition de la requête **/
                 "LIKE" => [
                     "email" => $params["GET"]["email"]
+                   // "token" => $params["GET"]["token"]
                 ]
             ];
             $User->setWhereParameter($parameter, null);
@@ -196,7 +197,7 @@ print_r($params);
 
             if (!empty($User->getId())) {
                 $User->setToken();
-                $password = $params["POST"]["password"];
+                $password = $params["POST"]["pwd"];
                 $User->setPassword($password);
                 $User->save();
                 echo 'ok';
@@ -205,7 +206,7 @@ print_r($params);
             }
         
       }
-$View->setData("config", $form);
+        $View->setData("config", $form);
         $View->setData("errors", $errors);
     }   
 
