@@ -323,13 +323,11 @@ class CoreSql{
 
     /**
      * @param array $target
-     * @return array
+     * @return int
      */
     public function countData($target)
     {
-        foreach ($target as $key => $value){
-            $target[$key] = $this->columnBase.'_'.$value;
-        }
+        $target = $this->getTarget($target);
 
         $query = $this->pdo->prepare("
             SELECT count(" . implode(',', $target) . ") 
@@ -348,7 +346,7 @@ class CoreSql{
         $this->limitParameter = "";
         $this->leftJoin = "";
 
-        return $query->fetch();
+        return $query->fetch()[0];
     }
 
     /**

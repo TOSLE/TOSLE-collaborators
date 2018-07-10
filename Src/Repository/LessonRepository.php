@@ -73,16 +73,33 @@ class LessonRepository extends Lesson
         $StatsBlog->setTableBodyContent([
             0 => [
                 1 => "Nombre de cours",
-                2 => 1
+                2 => $this->countLesson()
             ],
             1 => [
                 1 => "Nombre de chapitre",
-                2 => 2
+                2 => $this->countChapter()
             ],
         ]);
         return $StatsBlog->getArrayData();
     }
 
+    /**
+     * @return int
+     * Retourne le nombre de lesson
+     */
+    public function countLesson()
+    {
+        return  $this->countData(['id']);
+    }
+
+    /**
+     * @return int
+     */
+    public function countChapter()
+    {
+        $Chapter = new ChapterRepository();
+        return $Chapter->countData(['id']);
+    }
     /**
      * @param int $colSize
      * @return array
