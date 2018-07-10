@@ -36,12 +36,12 @@ class CommentRepository extends Comment
     /**
      * @param string $identifier
      * @param int $value
-     * @return array
+     * @return array|int
      * Permet de récupérer l'ensemble des commentaires d'un blog ou cours
      * Liste des identifiants :
      * - blog
      */
-    public function getAll($identifier, $value)
+    public function getAll($identifier, $value = null)
     {
         if($identifier == "blog"){
             $target = ["id", "content", "tag", "datecreate", "dateupdated"];
@@ -94,18 +94,7 @@ class CommentRepository extends Comment
                 ]
             ];
             $this->setLeftJoin($joinParameter, $whereParameter);
-            return $this->countData($target)[0];
-        }
-        if($identifier == "number_all"){
-            $target = ["id"];
-            $joinParameter = [
-                "blogcomment" => [
-                        "comment_id"
-                ]
-            ];
-            $whereParameter = null;
-            $this->setLeftJoin($joinParameter, $whereParameter);
-            return $this->countData($target)[0];
+            return $this->countData($target);
         }
     }
 
@@ -165,6 +154,43 @@ class CommentRepository extends Comment
             "firstname" => $User->getFirstName(),
             "lastname" => $User->getLastName(),
         ];
+
+    }
+
+    public function getCommentByUserId($identifier, $id)
+    {
+        if ($identifier == "blog") {
+            $target = ["id", "content", "tag", "datecreate", "dateupdated"];
+            $joinParameter = [
+                "blogcomment" => [
+                    "comment_id"
+                ]
+            ];
+            $whereParameter = [
+                "blogcomment" => [
+                    "userid" => $id
+                ]
+            ];
+            $this->setLeftJoin($joinParameter, $whereParameter);
+            $this->setOrderByParameter(["id" => "DESC"]);
+            return $this->getData($target);
+        }
+        if ($identifier == "chapter") {
+            $target = ["id", "content", "tag", "datecreate", "dateupdated"];
+            $joinParameter = [
+                "chaptercomment" => [
+                    "comment_id"
+                ]
+            ];
+            $whereParameter = [
+                "chaptercomment" => [
+                    "userid" => $id
+                ]
+            ];
+            $this->setLeftJoin($joinParameter, $whereParameter);
+            $this->setOrderByParameter(["id" => "DESC"]);
+            return $this->getData($target);
+        }
 
     }
 }

@@ -11,6 +11,8 @@ class CoreSql{
     private $orderByParameter;
     private $leftJoin = "";
 
+    private $requestSend = [];
+
     /**
      * CoreSql constructor.
      * Ne prend aucun paramètre
@@ -241,6 +243,7 @@ class CoreSql{
             ".$this->limitParameter."
         ");
         $query->execute();
+        $this->setRequestsend($query);
 
         // On vide le parameter WHERE pour éviter tout problème sur requête qui viendrait après et où on ne veut pas de parametre
         $this->whereParameter = "";
@@ -291,6 +294,7 @@ class CoreSql{
             ".$this->limitParameter."
         ");
         $query->execute();
+        $this->setRequestsend($query);
         $resultQuery = $query->fetch();
         // On vide le parameter WHERE pour éviter tout problème sur requête qui viendrait après et où on ne veut pas de parametre
         $this->whereParameter = "";
@@ -323,13 +327,11 @@ class CoreSql{
 
     /**
      * @param array $target
-     * @return array
+     * @return int
      */
     public function countData($target)
     {
-        foreach ($target as $key => $value){
-            $target[$key] = $this->columnBase.'_'.$value;
-        }
+        $target = $this->getTarget($target);
 
         $query = $this->pdo->prepare("
             SELECT count(" . implode(',', $target) . ") 
@@ -341,6 +343,7 @@ class CoreSql{
         ");
 
         $query->execute();
+        $this->setRequestsend($query);
 
         // On vide le parameter WHERE pour éviter tout problème sur requête qui viendrait après et où on ne veut pas de parametre
         $this->whereParameter = "";
@@ -348,7 +351,7 @@ class CoreSql{
         $this->limitParameter = "";
         $this->leftJoin = "";
 
-        return $query->fetch();
+        return $query->fetch()[0];
     }
 
     /**
@@ -395,6 +398,10 @@ class CoreSql{
         }
     }
 
+    /**
+     * Cette fonction va deleter un élément en BDD
+     * Elle utilise le WHERE parameter pour identifier ce qu'elle va DELETE
+     */
     public function delete()
     {
         $query = $this->pdo->prepare("
@@ -405,6 +412,24 @@ class CoreSql{
         $query->execute();
 
         $this->whereParameter = "";
+    }
+
+
+    /**
+     * @param $request
+     * Ajout la requête envoyé au tableau
+     */
+    public function setRequestsend($request)
+    {
+        $this->requestSend[] = $request;
+    }
+
+    /**
+     * @return array
+     */
+    public function getRequestsend()
+    {
+        return $this->requestSend;
     }
 
 }

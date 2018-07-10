@@ -104,6 +104,12 @@ class Access
             "action" => "view",
             "security" => false
         ],
+        "edit_profile" => [
+            "slug" => "edit-profile",
+            "controller" => "profile",
+            "action" => "edit",
+            "security" => false
+        ],
         "subscribe_lesson" => [
             "slug" => "subscribe-lesson",
             "controller" => "class",

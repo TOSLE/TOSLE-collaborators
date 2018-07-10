@@ -15,14 +15,26 @@ class ProfileController
      */
     function indexAction($params)
     {
-        $Profile = new ProfileRepository();
-        if(is_null($_SESSION['token']) && is_null($_SESSION['email'])){
+        if(!array_key_exists('token',$_SESSION) && !array_key_exists('email', $_SESSION)){
             $View = new View("default", "Profile/notconnect");
         }
         else {
-            $View = new View("default", "Profile/profile");
-            $ArrayInfoUser = $Profile->getInfoUser($_SESSION['token'], $_SESSION['email']);
-            $View->setData("profile_info", $ArrayInfoUser);
+            if(is_null($_SESSION['token']) && is_null($_SESSION['email'])){
+                $View = new View("default", "Profile/notconnect");
+            }
+            else {
+                $Profile = new ProfileRepository();
+                $View = new View("default", "Profile/profile");
+                $ArrayInfoUser = $Profile->getInfoUser($_SESSION['token'], $_SESSION['email']);
+
+                $CurrentUser = Authentification::getUser($_SESSION['token'], $_SESSION['email']);
+                $idUser = $CurrentUser->getId();
+                $ArrayCommentsUser = $Profile->getCommentUser($idUser);
+
+                $View->setData("profile_info", $ArrayInfoUser);
+                $View->setData("comments_user", $ArrayCommentsUser);
+            }
+
         }
     }
 
@@ -44,6 +56,9 @@ class ProfileController
     function editAction($params)
     {
         $View = new View("default");
+        $Profile = new ProfileRepository();
+
+        $Profile->editProfile();
     }
 
     /**

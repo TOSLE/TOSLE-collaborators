@@ -6,7 +6,7 @@
  * Time: 11:22
  */
 
-class DashboardController
+class DashboardController extends CoreController
 {
     /**
      * @Route("/en/dashboard(/index)")
@@ -67,6 +67,7 @@ class DashboardController
     {
         $View = new View("dashboard", "Dashboard/blog");
         $BlogRepository = new BlogRepository();
+
         /**
          * On set les variables importantes de la vue (le pagename)
          */
@@ -88,6 +89,11 @@ class DashboardController
 
         $modalAllUnpublishPost = $BlogRepository->getModalAllArticle(12, 0);
         $View->setData('modalAllUnpublishPost', $modalAllUnpublishPost);
+
+        $request = $BlogRepository->getRequestsend();
+        echo '<pre>';
+        print_r($request);
+        echo '</pre>';
 
         /**
          * Affectation des données pour la vue
