@@ -36,15 +36,15 @@ class CommentRepository extends Comment
     /**
      * @param string $identifier
      * @param int $value
-     * @return array
+     * @return array|int
      * Permet de récupérer l'ensemble des commentaires d'un blog ou cours
      * Liste des identifiants :
      * - blog
      */
-    public function getAll($identifier, $value)
+    public function getAll($identifier, $value = null)
     {
         if($identifier == "blog"){
-            $target = ["id", "content", "tag"];
+            $target = ["id", "content", "tag", "datecreate", "dateupdated"];
             $joinParameter = [
                 "blogcomment" => [
                         "comment_id"
@@ -56,7 +56,30 @@ class CommentRepository extends Comment
                 ]
             ];
             $this->setLeftJoin($joinParameter, $whereParameter);
+            $this->setOrderByParameter(["id"=>"DESC"]);
             return $this->getData($target);
+        }
+        if($identifier == "chapter"){
+            $target = ["id", "content", "tag", "datecreate", "dateupdated"];
+            $joinParameter = [
+                "chaptercomment" => [
+                        "comment_id"
+                ]
+            ];
+            $whereParameter = [
+                "chaptercomment" => [
+                    "chapter_id" => $value
+                ]
+            ];
+            $this->setLeftJoin($joinParameter, $whereParameter);
+            $this->setOrderByParameter(["id"=>"DESC"]);
+            $arrayData = $this->getData($target);
+            foreach($arrayData as $comment){
+                $ChapterComment = new ChapterComment();
+                $arrayReturn = $ChapterComment->getChapterCommentByIdentifier('getuser', $comment->getId());
+                $comment->setUser($arrayReturn);
+            }
+            return $arrayData;
         }
         if($identifier == "number_blog"){
             $target = ["id"];
@@ -71,18 +94,7 @@ class CommentRepository extends Comment
                 ]
             ];
             $this->setLeftJoin($joinParameter, $whereParameter);
-            return $this->countData($target)[0];
-        }
-        if($identifier == "number_all"){
-            $target = ["id"];
-            $joinParameter = [
-                "blogcomment" => [
-                        "comment_id"
-                ]
-            ];
-            $whereParameter = null;
-            $this->setLeftJoin($joinParameter, $whereParameter);
-            return $this->countData($target)[0];
+            return $this->countData($target);
         }
     }
 
@@ -98,8 +110,87 @@ class CommentRepository extends Comment
      *
      * $_targetId correspond à l'identifiant du type
      */
-    public function addComment($_post, $_type, $_targetId)
+    public function addComment($_config, $_post, $_type, $_targetId)
     {
+        $errors = Form::checkForm($_config, $_post);
+        $_post = Form::secureData($_post);
+        if(empty($errors)){
+            $User = new UserRepository();
+            $User->getUser();
+            $this->setContent($_post['textarea_comment']);
+            $this->setTag();
+            $this->save();
+            $this->getComment('tag', $this->getTag());
+            switch($_type){
+                case 1:
+                    $BlogComment = new BlogComment();
+                    $BlogComment->setBlogid($_targetId);
+                    $BlogComment->setCommentid($this->getId());
+
+                    $BlogComment->setUserid($User->getId());
+                    $BlogComment->save();
+                    break;
+                case 2:
+                    $ChapterComment = new ChapterComment();
+                    $ChapterComment->setChapterid($_targetId);
+                    $ChapterComment->setCommentid($this->getId());
+                    $ChapterComment->setUserid($User->getId());
+                    $ChapterComment->save();
+                    break;
+                default:
+                    return $errors;
+                    break;
+            }
+        }
+        return $errors;
+    }
+
+    public function getAuthorComment($_idComment)
+    {
+        $User = new UserRepository();
+        $BlogComment = new BlogComment();
+        $User->getUserById($BlogComment->getUserid($_idComment));
+        return [
+            "firstname" => $User->getFirstName(),
+            "lastname" => $User->getLastName(),
+        ];
+
+    }
+
+    public function getCommentByUserId($identifier, $id)
+    {
+        if ($identifier == "blog") {
+            $target = ["id", "content", "tag", "datecreate", "dateupdated"];
+            $joinParameter = [
+                "blogcomment" => [
+                    "comment_id"
+                ]
+            ];
+            $whereParameter = [
+                "blogcomment" => [
+                    "userid" => $id
+                ]
+            ];
+            $this->setLeftJoin($joinParameter, $whereParameter);
+            $this->setOrderByParameter(["id" => "DESC"]);
+            return $this->getData($target);
+        }
+        if ($identifier == "chapter") {
+            $target = ["id", "content", "tag", "datecreate", "dateupdated"];
+            $joinParameter = [
+                "chaptercomment" => [
+                    "comment_id"
+                ]
+            ];
+            $whereParameter = [
+                "chaptercomment" => [
+                    "userid" => $id
+                ]
+            ];
+            $this->setLeftJoin($joinParameter, $whereParameter);
+            $this->setOrderByParameter(["id" => "DESC"]);
+            return $this->getData($target);
+        }
 
     }
 }

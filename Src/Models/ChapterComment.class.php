@@ -82,5 +82,37 @@ class ChapterComment extends CoreSql
         $this->chapterid = $chapterid;
     }
 
+    /**
+     * @param $_identifier
+     * @param $_value
+     * @return array|int
+     * Permet de récupérer une jointure par rapport à un critère.
+     */
+    public function getChapterCommentByIdentifier($_identifier, $_value)
+    {
+        switch($_identifier){
+            case 'getuser':
+                $paramIdentifier = 'comment';
+                $opposite = 'user';
+                break;
+            default:
+                return 0;
+                break;
+        };
+        $target = ["id", "chapterid", "userid", "commentid"];
+        $parameter = [
+            "LIKE" => [
+                $paramIdentifier.'id' => $_value
+            ]
+        ];
+        $this->setWhereParameter($parameter);
+        $array = $this->getData($target);
+        $returnArrayId= [];
+        foreach($array as $category) {
+            $tmpString = 'get'.ucfirst(strtolower($opposite)).'Id';
+            $returnArrayId[] = $category->$tmpString();
+        }
+        return $returnArrayId;
+    }
 
 }

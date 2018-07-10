@@ -42,6 +42,7 @@
                                                                 comment
                                                             </i>
                                                         </div>
+                                                        <span><?php if (is_array($commentaires_all)) echo count($commentaires_all); ?></span>
                                                         <div class="name-action">comments</div>
                                                     </div>
                                                 </div>
@@ -65,32 +66,56 @@
                                                         <div class="name-action">integrate</div>
                                                     </div>
                                                 </div>
-                                                <div class="action">
-                                                    <div class="container">
-                                                        <div class="svg-action">
-                                                            <i class="material-icons">
-                                                                create
-                                                            </i>
-                                                        </div>
-                                                        <div class="name-action">write a comment</div>
-                                                    </div>
-                                                </div>
                                             </nav>
                                         </section>
                                         <section class="comments-article">
                                             <h5>Last comments</h5>
                                             <div class="container">
+                                                <?php if (isset($commentaires_last)): ?>
+                                                    <?php foreach ($commentaires_last as $comment): ?>
+                                                        <div class="comment">
+                                                            <div class="picture-user">
+                                                                <span></span>
+                                                            </div>
+                                                            <div>
+                                                                <div class="name-user">
+                                                                    <?php echo $comment["firstname"] . ' ' . $comment["lastname"]; ?>
+                                                                </div>
+                                                                <div class="content">
+                                                                    <span><?php echo $comment["content"]; ?></span>
+                                                                </div>
+                                                                <div class="info">
+                                                                    <span><?php echo $comment["date"]; ?></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    <?php endforeach; ?>
+                                                <?php endif; ?>
                                                 <div class="comment">
                                                     <div class="picture-user">
+                                                        <span></span>
                                                     </div>
-                                                    <div class="name-user">
+                                                    <div>
+                                                        <div class="name-user">
+                                                            Julien Domange
+                                                        </div>
+                                                        <div class="content">
+                                                            <span>Whaou ! C’est impressionnant comme article, merci pour celui-ci ! Maintenant, les maquettes !</span>
+                                                        </div>
+                                                        <div class="info">
+                                                            <span>February 28 at 6:33pm</span>
+                                                        </div>
                                                     </div>
-                                                    <div class="content">
-                                                    </div>
-                                                    <div class="info">
+                                                    <div class="signal">
+                                                            <i class="material-icons">
+                                                                more_vert
+                                                            </i>
                                                     </div>
                                                 </div>
                                             </div>
+                                        </section>
+                                        <section class="container-editor">
+                                            <?php $this->addModal("form", $formAddComment, $errors); ?>
                                         </section>
                                     </div>
                                 </div>
@@ -101,3 +126,4 @@
             </div>
         </div>
     </div>
+</div>

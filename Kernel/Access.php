@@ -80,6 +80,12 @@ class Access
             "action" => "lessons",
             "security" => 2
         ],
+        "dashboard_chapter" => [ // Dashboard blog homepage
+            "slug" => "dashboard-chapter",
+            "controller" => "dashboard",
+            "action" => "chapter",
+            "security" => 2
+        ],
         "add_user" => [ // change status blog
             "slug" => "add-user",
             "controller" => "user",
@@ -119,8 +125,28 @@ class Access
             "security" => 2
         ],
 
+        "view_lesson" => [ // change status blog
+            "slug" => "lesson",
+            "controller" => "class",
+            "action" => "view",
+            "security" => false
+        ],
 
+        "edit_profile" => [
+            "slug" => "edit-profile",
+            "controller" => "profile",
+            "action" => "edit",
+            "security" => false
+        ],
+
+        "subscribe_lesson" => [
+            "slug" => "subscribe-lesson",
+            "controller" => "class",
+            "action" => "subscribe",
+            "security" => false
+        ],
     ];
+
     private $backOffice = [
         "blog/status" => 2,
         "blog/add" => 2,
@@ -132,12 +158,20 @@ class Access
         "chapter/edit" => 2,
         "chapter/status" => 2,
         "chapter/order" => 2,
+        "index/config" => false,
+    ];
+
+    private $urlFixe = [
+        'rss_blog' => 'Tosle/Static/xml/blogfeed.xml',
+        "class/status" => 2,
+        "chapter/add" => 2,
+        "chapter/edit" => 2,
+        "chapter/status" => 2,
+        "chapter/order" => 2,
         "portfolio/status" => 2,
         "portfolio/add" => 2,
         "portfolio/edit" => 2,
     ];
-
-
 
     /**
      * @param string|bool $slug
@@ -202,12 +236,24 @@ class Access
 
     /**
      * @return array
+     * Retourne les urls fixes de notre CMS
+     */
+    public function getUrlFixe()
+    {
+        return $this->urlFixe;
+    }
+
+    /**
+     * @return array
      * Retourne un tableau comprenant toutes les routes du Backoffice et et du front office sous la forme
      * key => chemin
      */
     public static function getSlugsById()
     {
         global $language;
+        if(empty($language)){
+            $language = "en-EN";
+        }
         $Acces = new Access();
         $data = [];
         foreach ($Acces->getAccess() as $key => $value){
@@ -215,6 +261,26 @@ class Access
         }
         foreach ($Acces->getBackoffice() as $key => $value){
             $data[$key] = "".DIRNAME.substr($language,0,2)."/".$key;
+        }
+        foreach ($Acces->getUrlFixe() as $key => $value){
+            $data[$key] = $value;
+        }
+        return $data;
+    }
+
+    public static function getPublicSlugs()
+    {
+        global $language;
+        if(empty($language)){
+            $language = "en-EN";
+        }
+        $Acces = new Access();
+        $data = [];
+        foreach ($Acces->getAccess() as $key => $value){
+            $data[$key] = "".DIRNAME.substr($language,0,2)."/".$value["slug"];
+        }
+        foreach ($Acces->getUrlFixe() as $key => $value){
+            $data[$key] = "".DIRNAME.$value;
         }
         return $data;
     }
@@ -226,9 +292,9 @@ class Access
      */
     public static function constructUrl($string = "url to encode")
     {
-        $search = array('à', 'ä', 'â', 'é', 'è', 'ë', 'ê', 'ï', 'ì', 'î', 'ù', 'û', 'ü', 'ô', 'ö', '&', ' ', '?', '!', 'ç', ';', '/', '.', ',', ':', '(', ')', '=');
-        $replace = array('a', 'a', 'a', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'u', 'u', 'u', 'o', 'o', '', '-', '', '', 'c', '', '-', '', '', '', '', '', '');
+        $search = array('à', 'ä', 'â', 'é', 'è', 'ë', 'ê', 'ï', 'ì', 'î', 'ù', 'û', 'ü', 'ô', 'ö', '&', ' ', '?', '!', 'ç', ';', '/', '.', ',', ':', '(', ')', '=', '\'');
+        $replace = array('a', 'a', 'a', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'u', 'u', 'u', 'o', 'o', '', '-', '', '', 'c', '', '-', '', '', '', '', '', '', '-');
 
-        return urlencode(str_replace($search, $replace, strtolower(trim($string))));
+        return urlencode(trim(str_ireplace($search, $replace, strtolower((trim($string)))),'-'));
     }
 }

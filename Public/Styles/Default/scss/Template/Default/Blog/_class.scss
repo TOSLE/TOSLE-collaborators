@@ -11,7 +11,7 @@
       padding: 15px 15px;
       height: 100%;
       width: 100%;
-      background-color: rgba(255,255,255, 0.8);
+      background-color: rgba(255, 255, 255, 0.8);
       > h2 {
         text-align: center;
       }
@@ -98,6 +98,10 @@
           margin: auto;
           justify-content: center;
           align-items: center;
+          span {
+            margin-left: 5px;
+            font-size: 14px;
+          }
           .svg-action {
             i {
               font-size: 16px;
@@ -105,15 +109,93 @@
           }
           .name-action {
             padding-left: 5px;
-            padding-right: 5px;
+            padding-right: 2px;
 
           }
         }
       }
     }
     .comments-article {
+      margin-bottom: 40px;
       h5 {
         margin-bottom: 40px;
+      }
+      .container {
+        border: solid 1px #7d7c7c42;
+      }
+      .comment {
+        display: flex;
+        flex-direction: row;
+        padding: 5px;
+        .picture-user {
+          display: flex;
+          align-items: center;
+        }
+        .picture-user > span {
+          border-radius: 50%;
+          border: solid 1px #919191;
+          width: 42px;
+          height: 42px;
+          display: block;
+        }
+        > div:nth-child(2) {
+          display: flex;
+          flex-direction: column;
+          margin-left: 10px;
+          .name-user {
+            color: #1A5CCB;
+            font-size: 16px;
+            font-weight: 600;
+          }
+          .content {
+            font-size: 14px;
+          }
+          .info {
+            display: flex;
+            align-self: flex-end;
+            color: #919191;
+            font-size: 12px;
+          }
+          div {
+            margin-bottom: 3px;
+          }
+        }
+        .signal {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          margin-left: auto;
+          .material-icons {
+            cursor: pointer;
+            color: #1A5CCB;
+          }
+        }
+      }
+    }
+    .container-editor {
+      margin-bottom: 40px;
+    }
+  }
+}
+
+.header-blog-container {
+  .icons-list {
+    display: flex;
+    > .blog-link-icon {
+      color: $colorBackgroundIcon;
+      text-decoration: none;
+      border: 1px solid $colorBackgroundIcon;
+      background-color: $colorGlobalToslePrimary;
+      border-radius: 3.5px;
+      padding: 3.5px;
+      text-align: center;
+      display: flex;
+      > i {
+        margin: auto;
+        font-size: 1.8em;
+      }
+      > p {
+        margin: auto;
       }
     }
   }

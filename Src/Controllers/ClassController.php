@@ -6,58 +6,59 @@
  * Time: 00:29
  */
 
-class ClassController
+
+class ClassController extends CoreController
 {
     /**
      * @Route("/en/class(/index)")
      * @param array $params
      * Default action of ClassController
+     * Initialisation des paramètres de la vue
+     *      - Interprétation de params pour modifier les paramètres de la vue si nécessaire
      */
     function indexAction($params)
     {
-       // $View = new View("default");
         $View = new View("default", "Class/home");
-        $Class = new Lesson();
-        $errors = [];
-        if(!empty($params["GET"])){
-            echo "Il y a une recherche";
-        } else {
-            $target = [
-                "title",
-                "description",
-                "datecreate",
-                "id"
-            ];
-            $parameter = [
-                "LIKE" => [
-                    "status" => 1
-                ]
-            ];
-
-            $Class->setWhereParameter($parameter, null);
-            $Class->setOrderByParameter(["id"=>"DESC"]);
-            $Class->setLimitParameter(5, 0);
-            $array = $Class->getData($target);
-            $data = [];
-
-            foreach($array as $content){
-                $date = new DateTime($content->getDatecreate());
-                $value["lesson_datecreate"] = $date->format("l jS \of F Y H:i");
-                $value["lesson_title"] = $content->getTitle();
-
-                $contentValue = strip_tags($content->getContent(), "<p>");
-                $contentValue = str_replace("&nbsp;", "", $contentValue);
-                $contentValue = str_replace("<p>", "", $contentValue);
-                $contentValue = str_replace("</p>", " ", $contentValue);
-                $value["lesson_description"] = (strlen($contentValue)>200)?substr($contentValue, 0, 200):$contentValue;
-                $value["lesson_status"] = $content->getStatus();
-                $value["lesson_id"] = $content->getId();
-                $data[] = $value;
+        $Lesson = new LessonRepository();
+        // Initialisation des parametres
+        $colSize = 6;
+        $numberLesson = 6;
+        $offset = 0;
+        $page = 1;
+        $pagination = $Lesson->getPagination($numberLesson, $params["GET"]);
+        $urlClassFeed = CoreFile::testFeedFile('lessonfeed.xml');
+        if(isset($this->Auth)){
+            $Newsletter = new Newsletter();
+            $newsletter = false;
+            if(!empty($this->Auth->getNewsletter())){
+                $newsletter = $Newsletter->getStatusLesson();
             }
-
-            $View->setData("data", $data);
-            $View->setData("col", "6");
+            $View->setData("newsletter", $newsletter);
         }
+        $errors = [];
+        if (!empty($params["GET"])) {
+            if (isset($params["GET"]["colsize"])) {
+                if ($params["GET"]["colsize"] == "4" || $params["GET"]["colsize"] == "6" || $params["GET"]["colsize"] == "12") {
+                    $colSize = $params["GET"]["colsize"];
+                }
+            }
+            if (isset($params["GET"]["number"])) {
+                if ($params["GET"]["number"] >= 1 || $params["GET"]["number"] <= 12) {
+                    $numberLesson = $params["GET"]["number"];
+                    $pagination = $Lesson->getPagination($numberLesson, $params["GET"]);
+                }
+            }
+            if (isset($params['GET']['page']) && array_key_exists($params['GET']['page'], $pagination)) {
+                $page = $params['GET']['page'];
+                $offset = $numberLesson * $page - $numberLesson;
+            }
+        }
+        $lessons = $Lesson->getLessons($numberLesson, $offset);
+        $View->setData('urlClassFeed', $urlClassFeed);
+        $View->setData("pagination", $pagination);
+        $View->setData("page", $page);
+        $View->setData("lessons", $lessons);
+        $View->setData("col", $colSize);
     }
 
     /**
@@ -67,7 +68,43 @@ class ClassController
      */
     function viewAction($params)
     {
-        $View = new View("default");
+        $routes = Access::getSlugsById();
+        $View = new View("default", "Class/view_lesson");
+        if(isset($params['URI']) && !empty($params['URI'])){
+            $Lesson = new LessonRepository();
+            $Comment = new CommentRepository();
+            $errors = "";
+            $formAddComment = $Comment->configFormAdd();
+            if($Lesson->getLesson($params['URI'][0])){
+                $readChapter = $Lesson->getChapter()[0];
+                if(isset($params['URI'][1])){
+                    foreach($Lesson->getChapter() as $Chapter){
+                        if($Chapter->getUrl() == $params['URI'][1]){
+                            $readChapter = $Chapter;
+                        }
+                    }
+                }
+                if(isset($params["POST"]) && !empty($params["POST"])){
+                    $errors = Form::checkForm($formAddComment, $params["POST"]);
+                    $dataForm = Form::secureData($params['POST']);
+                    $Comment->addComment($formAddComment, $dataForm, 2, $readChapter->getId());
+                    header('Location:'.$routes['view_lesson'].'/'.$Lesson->getUrl().'/'.$readChapter->getUrl());
+                }
+                $allComments = $Comment->getAll('chapter', $readChapter->getId());
+
+                if(isset($allComments)){
+                    $View->setData("lastComments", array_slice($allComments, 0, 5));
+                }
+                $View->setData("readChapter", $readChapter);
+                $View->setData("lesson", $Lesson);
+                $View->setData("formAddComment", $formAddComment);
+                $View->setData("errors", $errors);
+            } else {
+                $View->setData("error_search", 'Il semble y avoir une erreur dans votre URL, le cours n\'est pas trouvé où n\'existe pas !');
+            }
+        } else {
+            header('Location:'.$routes['homepage']);
+        }
     }
 
     /**
@@ -113,5 +150,80 @@ class ClassController
         } else {
             header('Location:'.$routes['dashboard_lesson']);
         }
+    }
+
+    public function editAction($params)
+    {
+        $routes = Access::getSlugsById();
+        if(isset($params["URI"][0])){
+            if(is_numeric($params["URI"][0])) {
+                $Lesson = new LessonRepository();
+                $View = new View("dashboard", "Dashboard/add_lesson");
+                $arrayReturn = $Lesson->editLesson($params["URI"][0]);
+                $arrayLesson = $arrayReturn["lesson"];
+                $configForm = $arrayReturn["configForm"];
+                $configForm["data_content"] = [
+                    "title" => $arrayLesson->getTitle(),
+                    "content" => $arrayLesson->getDescription(),
+                    "select_color" => $arrayLesson->getColor(),
+                    "selectedOption" => $arrayReturn['selectedOption'],
+                    "select_type" => $arrayLesson->getType(),
+                    "select_difficulty" => $arrayLesson->getLevel(),
+                ];
+                if(isset($params["POST"]) && !empty($params["POST"])){
+                    $resultAdd = $Lesson->addLesson($params["POST"], $params["URI"][0]);
+                    if($resultAdd == 1){
+                        header('Location:'.$routes['dashboard_lesson']);
+                    }
+                }
+                $View->setData("errors", "");
+                $View->setData("configForm", $configForm);
+            }
+        } else {
+            header('Location:'.$routes['dashboard_lesson']);
+        }
+    }
+
+    /**
+     * @param $params
+     * Récupère l'id de la lesson et modifie le status
+     */
+    public function statusAction($params)
+    {
+        $routes = Access::getSlugsById();
+        if(is_numeric($params["URI"][0])){
+            $Lesson = new LessonRepository();
+
+            $target = [
+                "id",
+                "status"
+            ];
+            $parameter = [
+                "LIKE" => [
+                    "id" => $params["URI"][0]
+                ]
+            ];
+            $Lesson->setWhereParameter($parameter);
+            $Lesson->getOneData($target);
+            if($Lesson->getId()){
+                if($Lesson->getStatus() > 0){
+                    $Lesson->setStatus(0);
+                } else {
+                    $Lesson->setStatus(1);
+                }
+                $Lesson->save();
+            }
+            $Lesson->generateXml();
+        }
+
+        header('Location:'.$routes["dashboard_lesson"]);
+    }
+
+    public function subscribeAction()
+    {
+        $routes = Access::getSlugsById();
+        $Newsletter = new Newsletter();
+        $Newsletter->changeLessonNewsletter();
+        header('Location:'.$routes['homepage']);
     }
 }

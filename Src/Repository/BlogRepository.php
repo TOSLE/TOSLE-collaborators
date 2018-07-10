@@ -19,7 +19,7 @@ class BlogRepository extends Blog
      */
     public function countNumberOfBlog()
     {
-        return $this->countData(["id"])[0];
+        return $this->countData(["id"]);
     }
 
     /**
@@ -34,7 +34,7 @@ class BlogRepository extends Blog
                 "status" => $status
             ]
         ]);
-        return $this->countData(["id"])[0];
+        return $this->countData(["id"]);
     }
 
     /**
@@ -58,13 +58,22 @@ class BlogRepository extends Blog
      */
     public function getArticleByUrl($url)
     {
+        $target = [
+            "id",
+            "title",
+            "content",
+            "type",
+            "url",
+            "datecreate",
+            "fileid"
+        ];
         $parameter = [
             "LIKE" => [
                 "url" => $url
             ]
         ];
         $this->setWhereParameter($parameter);
-        $this->getOneData(["id", "title", "content", "type", "url", "datecreate"]);
+        $this->getOneData($target);
         if(!isset($this->id)){
             return false;
         } else {
@@ -227,7 +236,6 @@ class BlogRepository extends Blog
     public function getModalStats()
     {
         $StatsBlog = new DashboardBlocModal();
-        $Comment = new CommentRepository();
         $StatsBlog->setTitle("Blog Analytics");
         $StatsBlog->setTableHeader([
             1 => "Type",
@@ -253,7 +261,7 @@ class BlogRepository extends Blog
             ],
             3 => [
                 1 => "Nombre de commentaires",
-                2 => $Comment->getAll("number_all", null)
+                2 => $this->getAllComment()
             ],
             4 => [
                 1 => "Nombre d'articles avec fichier",
@@ -261,6 +269,17 @@ class BlogRepository extends Blog
             ]
         ]);
         return $StatsBlog->getArrayData();
+    }
+
+    public function getAllComment()
+    {
+        $joinParameter = [
+            'blogcomment' => [
+                'blog_id'
+            ]
+        ];
+        $this->setLeftJoin($joinParameter);
+        return $this->countData(['id']);
     }
 
     /**
@@ -344,7 +363,7 @@ class BlogRepository extends Blog
             ]
         ];
         $this->setWhereParameter($parameter);
-        return $this->countData($target)[0];
+        return $this->countData($target);
     }
 
     /**
@@ -378,6 +397,7 @@ class BlogRepository extends Blog
                 break;
         }
         $errors = Form::checkForm($configForm, $_post);
+        $_post = Form::secureData($_post);
         if(empty($errors)){
             $file = null;
             if(isset($_file)){
@@ -386,15 +406,20 @@ class BlogRepository extends Blog
                     if( $errors != 1) {
                         $File = new FileRepository();
                         $arrayFile = $File->addFile($_FILES, $configForm, "Blog/Article", "Background image");
-                        if(array_key_exists('CODE_ERROR', $arrayFile)){
-                            return $arrayFile;
+                        if(!is_numeric($arrayFile)){
+                            if(array_key_exists('CODE_ERROR', $arrayFile)){
+                                return $arrayFile;
+                            }
+                            foreach ($arrayFile as $fileId) {
+                                $file = $fileId;
+                            }
                         }
-                        foreach ($arrayFile as $fileId) {
-                            $file = $fileId;
-                        }
+
                     }
                 } else {
-                    return $errors;
+                    if(!array_key_exists('EXCEPT_ERROR', $errors)){
+                        return $errors;
+                    }
                 }
             }
             $tmpPostArray = $_post;
@@ -531,5 +556,27 @@ class BlogRepository extends Blog
             }
         }
         return $pagination;
+    }
+
+    public function getPlayerVideo($_contentArticle)
+    {
+        $parseUrl = parse_url($_contentArticle);
+        switch($parseUrl['host']){
+            case 'www.youtube.com':
+                $query = explode('=', $parseUrl['query'])[1];
+                return '<iframe width="800" height="500" src="https://www.youtube.com/embed/'.$query.'" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
+                break;
+            case 'www.dailymotion.com':
+                $query = $parseUrl['path'];
+                return '<iframe frameborder="0" width="800" height="500" src="//www.dailymotion.com/embed/'.$query.'" allowfullscreen allow="autoplay"></iframe>';
+                break;
+            case 'vimeo.com':
+                $query = explode('/', $parseUrl['path'])[3];
+                return '<iframe src="https://player.vimeo.com/video/'.$query.'" width="800" height="500" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
+                break;
+            default:
+                return $_contentArticle;
+                break;
+        }
     }
 }

@@ -13,9 +13,24 @@ class Category extends CoreSql {
     protected $type;
     protected $tag;
 
-    public function __construct()
+    public function __construct($_id = null)
     {
         parent::__construct();
+        if(isset($_id)){
+            $target = [
+                'id',
+                'name',
+                'type',
+                'tag'
+            ];
+            $parameter = [
+                'LIKE' => [
+                    'id' => $_id
+                ]
+            ];
+            $this->setWhereParameter($parameter);
+            $this->getOneData($target);
+        }
     }
 
     /**

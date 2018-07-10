@@ -45,7 +45,7 @@ class View
 
     function __destruct()
     {
-        global $controller, $action, $language, $userConnected;
+        global $controller, $action, $language, $Auth;
 
         extract($this->data);
         include $this->tpl;

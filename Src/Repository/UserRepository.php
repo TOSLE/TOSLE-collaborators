@@ -12,7 +12,7 @@ class UserRepository extends User
     /**
      * @param string $password
      * @param string $email
-     * @return integer int
+     * @return integer|array
      * verrifyUserLogin va permettre de vérifier l'identification de l'utilisateur grâce au mot de passe et l'email en deux étapes
      */
     function verrifyUserLogin($password, $email)
@@ -29,7 +29,8 @@ class UserRepository extends User
                 $target = [
                     "id",
                     "email",
-                    "token"
+                    "token",
+                    "status"
                 ];
                 $parameter = [
                     "LIKE" => [
@@ -40,19 +41,25 @@ class UserRepository extends User
                 $this->setWhereParameter($parameter);
                 $this->getOneData($target);
                 if(!empty($this->token) && !empty($this->email)){
-                    $dateSetter = new DateTime();
-                    $this->setDateconnection($dateSetter->getTimestamp());
-                    $this->setToken();
-                    $this->save();
-                    $_SESSION['token'] = $this->token;
-                    $_SESSION['email'] = $this->email;
-                    return 1;
+
+                    if(empty($this->status))
+                    {
+                        return [AUTHENTIFICATION_FAILED_KEY => "Vous n'avez pas valider votre compte"];
+                    }
+                    else{
+                        $this->setToken();
+                        $this->setDateconnection();
+                        $this->save();
+                        $_SESSION['token'] = $this->token;
+                        $_SESSION['email'] = $this->email;
+                        return 1;
+                    }
                 }
             } else {
-                return 0;
+                return [AUTHENTIFICATION_FAILED_KEY => AUTHENTIFICATION_FAILED_MESSAGE];
             }
         } else {
-            return 0;
+           return [AUTHENTIFICATION_FAILED_KEY => AUTHENTIFICATION_FAILED_MESSAGE];
         }
     }
     function verrifyAuthentificationSession()
@@ -70,6 +77,39 @@ class UserRepository extends User
             ]
         ];
         $this->setWhereParameter($parameter);
+        $this->getOneData($target);
+    }
+
+    public function getUserById($_id)
+    {
+        $target = [
+            "id",
+            "firstname",
+            "lastname",
+            "email",
+            "status"
+        ];
+        $parameter = [
+            "LIKE" => [
+                "id" => $_id
+            ]
+        ];
+        $this->setWhereParameter($parameter);
+        $this->getOneData($target);
+    }
+
+    public function getUserBySession($token, $email)
+    {
+        $target = [
+            'firstname',
+            'lastname',
+            'email',
+            'newsletter'
+        ];
+        $this->setWhereParameter(["LIKE" => [
+            'token' => $token,
+            'email' => $email,
+        ]]);
         $this->getOneData($target);
     }
 }

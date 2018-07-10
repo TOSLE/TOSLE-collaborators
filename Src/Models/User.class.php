@@ -14,8 +14,23 @@ class User extends CoreSql{
 
     protected $status = null;
 
-    public function __construct(){
+    public function __construct($_id = null){
         parent::__construct();
+        if(isset($_id) && is_numeric($_id)){
+            $target = [
+                'id',
+                'firstname',
+                'lastname',
+                'email',
+            ];
+            $parameter = [
+                'LIKE' => [
+                    'id' => $_id
+                ]
+            ];
+            $this->setWhereParameter($parameter);
+            $this->getOneData($target);
+        }
     }
 
     public function setId($id)
@@ -46,9 +61,9 @@ class User extends CoreSql{
     {
         $this->status=$status;
     }
-    public function setDateconnection($dateconnection)
+    public function setDateconnection()
     {
-        $this->dateconnection = date("Y-m-d H:i:s", $dateconnection);
+        $this->dateconnection = date("Y-m-d H:i:s", time());
     }
     public function setNewsLetter($newsletter)
     {
@@ -176,5 +191,4 @@ class User extends CoreSql{
             ]
         ];
     }
-
 }

@@ -5,6 +5,7 @@
  * Date: 11/04/2018
  * Time: 11:35
  */
+
 class Authentification
 {
     public static function checkAuthentification($token, $email)
@@ -25,19 +26,23 @@ class Authentification
         $interval = $date->diff($dateCompare);
         if($interval->i > 30){
             session_destroy();
-            return -1;
+            return null;
         }
         $User->setToken();
-        $User->setDateConnection($date->getTimestamp());
+        $User->setDateConnection();
         $User->save();
         $_SESSION["token"]=$User->getToken();
         $_SESSION["email"]=$User->getEmail();
         return true;
     }
-    public static function getUserStatus($token, $email)
+    public static function getUser($token, $email)
     {
         $target=[
-            'status'
+            'id',
+            'status',
+            'lastname',
+            'firstname',
+            'newsletter'
         ];
         $User = new User();
         $User->setWhereParameter(["LIKE" => [
@@ -45,6 +50,6 @@ class Authentification
             'email' => $email
         ]]);
         $User->getOneData($target);
-        return intval($User->getStatus());
+        return $User;
     }
 }

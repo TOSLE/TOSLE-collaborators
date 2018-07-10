@@ -14,11 +14,34 @@ Class Chapter extends CoreSql {
     protected $datecreate;
     protected $status;
     protected $type;
-    protected $fileid; /** à vérif */
+    protected $fileid;
+    protected $url;
 
-    public function __construct()
+    private $lessonchapter;
+    private $getFileid = null;
+
+    public function __construct($_id = null)
     {
         parent::__construct();
+        if(isset($_id)){
+            $target = [
+                'id',
+                'title',
+                'content',
+                'datecreate',
+                'status',
+                'type',
+                'fileid',
+                'url',
+            ];
+            $parameter = [
+                'LIKE' => [
+                    'id' => $_id
+                ]
+            ];
+            $this->setWhereParameter($parameter);
+            $this->getOneData($target);
+        }
     }
 
     /**
@@ -122,7 +145,7 @@ Class Chapter extends CoreSql {
      */
     public function getFileid()
     {
-        return $this->fileid;
+        return $this->getFileid;
     }
 
     /**
@@ -131,10 +154,85 @@ Class Chapter extends CoreSql {
     public function setFileid($fileid)
     {
         $this->fileid = $fileid;
+        if(isset($fileid)){
+            $this->getFileid = new File($fileid);
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * @param mixed $url
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+    }
+
+
+    /**
+     * @return LessonChapter
+     * Retourne un objet avec les valeurs de Lessonchapter
+     */
+    public function getLessonchapter()
+    {
+        return $this->lessonchapter;
+    }
+
+    /**
+     * @param int $_idForeinKey
+     * Permet de créer l'attribut avec l'id de la clé primaire de la table correspondante
+     */
+    public function setLessonchapter($_idForeinKey)
+    {
+        $this->lessonchapter = new LessonChapter($_idForeinKey);
     }
 
     public function configFormAdd()
     {
+        $slugs = Access::getSlugsById();
+        $lesson = new LessonRepository();
+        return [
+            "config"=> [
+                "method"=>"post",
+                "action"=>"",
+                "submit"=>"Publier le chapitre",
+                "save"=>"Sauvegarder en brouillon",
+                "form_file"=>true,
+            ],
+            "input"=> [
+                "title"=>[
+                    "type"=>"text",
+                    "placeholder"=>"Titre du chapitre",
+                    "required"=>true,
+                    "maxString"=>100,
+                    "label"=>"Insert title of your chapter",
+                    "description"=>"Max 100 character"
+                ],
+                "file"=>[
+                    "type"=>"file",
+                    "required"=>false,
+                    "label"=>"Selectionnez le/les fichiers à joindre à ce chapitre",
+                    "format"=>"PDF DOCX DOCM DOTX DOTM XLSX XLSM XLSB XLTM",
+                    "description"=>"Authorised format (pdf, docx, docm, dotx, dotm, xlsx, xlsm, xlsb, xltm)",
+                    "multiple"=>false
+                ]
+            ],
+            "ckeditor" => [
+                "label" => "Edition de votre chapitre",
+                "name" => "ckeditor_chapter",
+                "description" => "Pas de limite !",
+                "placeholder" => "Placeholder"
+            ],
+            'select' => $lesson->getSelectLesson(),
+            "exit" => $slugs["dashboard_lesson"]
+        ];
     }
 
 

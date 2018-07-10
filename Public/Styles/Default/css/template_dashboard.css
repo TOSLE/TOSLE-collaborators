@@ -199,6 +199,8 @@ main {
               text-align: center; }
             main .content-backoffice > .main-content > table > tbody > tr > td.td-content-action {
               text-align: center; }
+            main .content-backoffice > .main-content > table > tbody > tr > td .ordered-button {
+              font-size: 0.9em; }
   main .bold-text {
     font-weight: 500; }
   main .additional-message-title {
