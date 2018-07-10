@@ -1,0 +1,25 @@
+main {
+  max-width: $sizeMaxWidthSection;
+  margin: 0 auto;
+  min-height: 90%;
+  > .container {
+    > .row {
+      margin-bottom: 27px !important;
+      > .title-page {
+        margin: 26px 0 0 0;
+        > .marg-container {
+          margin-left: 15px;
+        }
+        h2 {
+          font-weight: 300;
+          color: #3D3F3E;
+          > .additional-message-title {
+            font-size: 0.7em;
+          }
+        }
+
+      }
+    }
+  }
+
+}

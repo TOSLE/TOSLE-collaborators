@@ -9,91 +9,121 @@
 class PortfolioController
 {
     /**
-     * @Route("/en/Portfolio(/index)")
+     * @Route("/en/portfolio-view")
      * @param array $params
      * Default action of PortfolioController
      */
     function indexAction($params)
     {
-        $View = new View("default", "Portfolio/portfolio");
-
-
+        $View = new View("Portfolio", "portfolio/portfolio");
+        $View->setData("PageName", NAV_DASHBOARD . " " . GLOBAL_HOME_TEXT);
     }
 
+
     /**
-     * @Route("/en/Portfolio/edit")
+     * @Route("/en/portfolio/add/{params}")
      * @param array $params
-     * Edit Portfolio action
+     * Add Block
      */
-    function editAction($params)
+
+
+    function addAction($params)
     {
-        $View = new View("default");
+        $routes = Access::getSlugsById();
+        $portfolio=New PortfolioRepository();
+        $form=$portfolio->configFormAddPortfolio();
+        if(!empty($params["POST"])) {
+            $errors = Form::checkForm($form,$params["POST"]);
+        }
+        $View = new View("portfolio", "Portfolio/add_article_portfolio");
+        $View ->setData("config",$form);
+        $View->setData("errors","");
 
 
+        /* if (isset($params["URI"][0])) {
+             $getTypeURI = $params["URI"][0];
+             /*
+             $View->setData("errors", "");
+             if ((isset($params["POST"]) && !empty($params["POST"]))) {
+                 $resultAdd = $portfolio->addportfolio($params["POST"]);
+                 if ($resultAdd === 1) {
+                     header('Location:' . $routes['portfolio-view/add']);
+                 } else {
+                     $View->setData("errors", $resultAdd);
+                 }
+             }
+
+             if ($getTypeURI == "lesson") {
+                 $View->setData("configForm", $portfolio->configFormAddPortfolio());
+             } else {
+                 header('Location:' . $routes['portfolio-view/add'] . '/error');
+             }
+         } else {
+             header('Location:' . $routes['portfolio_add']);
+         } */
     }
-    /**
-     * @Route("/en/Portfolio/add")
-     * @param array $params
-     * Edit Portfolio action
-     */
-}
-    /*
 
-    function addfileAction($params)
+
+    public function editAction($params)
     {
-
-        $View = new view("default","Portfolio/Portfolio");
-        $fileaddportfolio->setId('Id');
-        $fileaddportfolio->setName('Name');
-        $fileaddportfolio->setValue("Value");
-        $fileaddportfolio->save();
-
- 
-if(isset($_POST['Id'])&& isset($_POST['Name']) && isset($_POST['Value'])) {
- 
- 
-   if(isset($fileaddportofolio['photo1']) && $fileaddportofolio['photo1']['error']==0) { 
-    move_uploaded_file($fileaddportofio['photo1']['Name'],
-    'tosle.fr/en/portofolio/portofolio'.basename($fileaddportfolio['photo1']['Name']));
-    echo 'L\'envoi a bien été effectué';
- 
- 
- 
-    } 
- 
- 
-          try{ // Connexion à la BDD
-          $bdd=new PDO('mysql:host=root;dbname=tosle_database', 'tosle_file','file_path');
- 
-          }
- 
-          catch(Exception $e){
-          die ('Erreur:'.$e->getMessage());
- 
-          }
- 
- 
- 
-            
-        $stockage='tosle.fr/en/portofolio/portofolio'.$_['photo1']['Name'].'';
-        $insertion=$bdd->prepare('INSERT INTO () VALUES ()');       
-        $insertion->execute(array(
- 'Id' => $_POST['Id'],
- 'Name' => $_POST['Name'],
- 'Value' => $_POST['Value'],
-
-));                          
-            if($insertion==true) {
-            echo '<p> Les données ont bien été enregistrées</p>';
+        $routes = Access::getSlugsById();
+        if(isset($params["URI"][0])){
+            if(is_numeric($params["URI"][0])) {
+                $Lesson = new LessonRepository();
+                $View = new View("dashboard", "Dashboard/add_lesson");
+                $arrayReturn = $Lesson->editLesson($params["URI"][0]);
+                $arrayLesson = $arrayReturn["lesson"];
+                $configForm = $arrayReturn["configForm"];
+                $configForm["data_content"] = [
+                    "title" => $arrayLesson->getTitle(),
+                    "content" => $arrayLesson->getDescription(),
+                    "select_color" => $arrayLesson->getColor(),
+                    "selectedOption" => $arrayReturn['selectedOption'],
+                    "select_type" => $arrayLesson->getType(),
+                    "select_difficulty" => $arrayLesson->getLevel(),
+                ];
+                if(isset($params["POST"]) && !empty($params["POST"])){
+                    $resultAdd = $Lesson->addLesson($params["POST"], $params["URI"][0]);
+                    if($resultAdd == 1){
+                        header('Location:'.$routes['dashboard_lesson']);
+                    }
+                }
+                $View->setData("errors", "");
+                $View->setData("configForm", $configForm);
             }
-            else {
-            echo 'Erreur dans l\'enregistrement des données </p>';
-                } 
- 
- 
- 
- 
- 
-            $insertion->closeCursor(); // déconnexion
+        } else {
+            header('Location:'.$routes['dashboard_lesson']);
+        }
 
-?>
+    }
+
+    /*  function statusAction($params)
+      {
+          $routes = Access::getSlugsById();
+          $Portfolio = new Portfolio();
+
+          $target = [
+              "id",
+              "status"
+          ];
+          $parameter = [
+              "LIKE" => [
+                  "id" => $params["URI"][0]
+              ]
+          ];
+          $Portfolio->setWhereParameter($parameter);
+          $Portfolio->getOneData($target);
+          if ($Portfolio->getId()) {
+              if ($Portfolio->getStatus() > 0) {
+                  $Portfolio->setStatus(0);
+              } else {
+                  $Portfolio->setStatus(1);
+              }
+              $Portfolio->save();
+          }
+
+          header('Location:' . $routes["dashboard_portfolio"]);
+      }
+  */
+
+}
