@@ -55,10 +55,22 @@ class ProfileController
      */
     function editAction($params)
     {
-        $View = new View("default");
-        $Profile = new ProfileRepository();
+        if (!array_key_exists('token', $_SESSION) && !array_key_exists('email', $_SESSION)) {
+            $View = new View("default", "Profile/notconnect");
+        } else {
+            if (is_null($_SESSION['token']) && is_null($_SESSION['email'])) {
+                $View = new View("default", "Profile/notconnect");
+            } else {
+                $View = new View("default", "Profile/edit");
+                $Profile = new ProfileRepository();
+                $User = new UserRepository();
+                $User->getUser();
+                $Profile->editProfile($User->getId());
 
-        $Profile->editProfile();
+                $View->setData("config", $form);
+                $View->setData("errors", $errors);
+            }
+        }
     }
 
     /**

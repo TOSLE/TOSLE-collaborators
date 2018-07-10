@@ -77,14 +77,19 @@ class ProfileRepository extends User
     public function editProfile($_idProfile)
     {
         $User = new UserRepository();
-        //print_r($User);
-        $ArrayInfoUser = $User->getUserById($_idProfile);
+        echo $_idProfile;
+        $User->getUserById($_idProfile);
+        echo '<pre>';
+        print_r($User);
+        echo '</pre>';
         $configForm = $User->configFormAdd();
 
+        /*
         return $arrayObject = [
             "user" => $ArrayInfoUser,
             "configFrom" => $configForm,
         ];
+        */
     }
 
 }
