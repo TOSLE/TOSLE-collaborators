@@ -1,7 +1,12 @@
 html {
     background: #F1F1F1;
 }
-
+input {
+    margin-top: 15px;
+}
+input:first-child{
+    margin-top: 0;
+}
 .bloc-login-container, .bloc-signup-container {
     width: 900px;
     margin: 0 auto;

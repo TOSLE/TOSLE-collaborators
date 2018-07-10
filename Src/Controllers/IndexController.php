@@ -34,6 +34,54 @@ class IndexController
 
     function installAction($params)
     {
-        echo "Procédure d'installation";
+        $View = new View('installer', 'installer');
+        $Installer = new Installer();
+        $config = $Installer->configFormInstaller();
+        $errorsParameter = $Installer->alertHtaccess();
+        $errors = "";
+        if(isset($params["POST"]) && !empty($params["POST"])) {
+            $errors = Form::checkForm($config, $params["POST"]);
+            if(empty($errors)){
+                $data = Form::secureData($params["POST"]);
+                $status = $Installer->testConnectionBDD($data);
+                if(!$status) {
+                    $errors['BDD Connexion'] = "Il semble que la connexion à la BDD est échouée.";
+                } else {
+                    $status = $Installer->setParameterFile($data);
+                    if(!$status) {
+                        $errors['Parameter'] = "Il semble que la création du fichier a échoué.";
+                    } else {
+                        $Routes = Access::getSlugsById();
+                        header('Location:'.$Routes['index/config']);
+                    }
+                }
+            }
+        }
+        $View->setData('config', $config);
+        $View->setData('errors', $errors);
+        $View->setData('errorsParameter', $errorsParameter);
+    }
+
+    function configAction($params)
+    {
+        $View = new View('installer', 'installer');
+        $Installer = new Installer();
+        $errors = "";
+        $config = $Installer->configFormConfiguration();
+
+        if(isset($params["POST"]) && !empty($params["POST"])) {
+            $errors = Form::checkForm($config, $params["POST"]);
+            if(empty($errors)){
+                $data = Form::secureData($params["POST"]);
+                $errors = $Installer->setConfiguration($data);
+                if(empty($errors)){
+                    header('Location:'.Access::getSlugsById()['signin']);
+                }
+            }
+        }
+
+        $View->setData('config', $config);
+        $View->setData('errors', $errors);
+        $View->setData('stepInstall', 2);
     }
 }

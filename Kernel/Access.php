@@ -111,15 +111,19 @@ class Access
             "action" => "setnewpassword",
             "security" => false
         ],
-  
-
         "view_lesson" => [ // change status blog
             "slug" => "lesson",
             "controller" => "class",
             "action" => "view",
             "security" => false
-        ]
 
+        ],
+        "subscribe_lesson" => [
+            "slug" => "subscribe-lesson",
+            "controller" => "class",
+            "action" => "subscribe",
+            "security" => false
+        ],
     ];
 
     private $backOffice = [
@@ -134,10 +138,11 @@ class Access
         "chapter/edit" => 2,
         "chapter/status" => 2,
         "chapter/order" => 2,
+        "index/config" => false,
     ];
 
     private $urlFixe = [
-        'rss_blog' => DIRNAME.'/Tosle/Static/xml/blogfeed.xml'
+        'rss_blog' => 'Tosle/Static/xml/blogfeed.xml'
     ];
 
     /**
@@ -218,6 +223,9 @@ class Access
     public static function getSlugsById()
     {
         global $language;
+        if(empty($language)){
+            $language = "en-EN";
+        }
         $Acces = new Access();
         $data = [];
         foreach ($Acces->getAccess() as $key => $value){
@@ -228,6 +236,23 @@ class Access
         }
         foreach ($Acces->getUrlFixe() as $key => $value){
             $data[$key] = $value;
+        }
+        return $data;
+    }
+
+    public static function getPublicSlugs()
+    {
+        global $language;
+        if(empty($language)){
+            $language = "en-EN";
+        }
+        $Acces = new Access();
+        $data = [];
+        foreach ($Acces->getAccess() as $key => $value){
+            $data[$key] = "".DIRNAME.substr($language,0,2)."/".$value["slug"];
+        }
+        foreach ($Acces->getUrlFixe() as $key => $value){
+            $data[$key] = "".DIRNAME.$value;
         }
         return $data;
     }

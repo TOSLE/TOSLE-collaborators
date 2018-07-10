@@ -25,7 +25,28 @@ class GeneratorXML
         $this->fileName = $fileName.'.xml';
         $this->dirPath = CoreFile::testStaticDirectory($dirPath);
         $this->xmlDoc = new DOMDocument('1.0', 'utf-8');
-        $this->getWebSiteData();
+    }
+
+    /**
+     * Cette fonction génére le sitemap
+     */
+    public function setSitemap()
+    {
+        $urlset = $this->xmlDoc->createElement('urlset');
+        $urlset->setAttribute('xmlns', "http://www.google.com/schemas/sitemap/0.84");
+        $Routes = Access::getPublicSlugs();
+        foreach($Routes as $id => $route){
+            if($id != "default"){
+                $url = $this->xmlDoc->createElement('url');
+                $loc = $this->xmlDoc->createElement('loc', $_SERVER['SERVER_NAME'].$route);
+                $priority = $this->xmlDoc->createElement('priority', "0.5");
+                $url->appendChild($loc);
+                $url->appendChild($priority);
+                $urlset->appendChild($url);
+            }
+        }
+        $this->xmlDoc->appendChild($urlset);
+
     }
 
     /**
@@ -68,6 +89,7 @@ class GeneratorXML
      */
     public function setBlogFeed($content)
     {
+        $this->getWebSiteData();
         $BlogRepository = new BlogRepository();
         if(isset($content) && !empty($content)){
             foreach($content as $blog){
@@ -99,6 +121,7 @@ class GeneratorXML
      */
     public function setLessonFeed($content)
     {
+        $this->getWebSiteData();
         if(isset($content) && !empty($content)){
             foreach($content as $lesson){
                 if(!empty($lesson->getChapter())){

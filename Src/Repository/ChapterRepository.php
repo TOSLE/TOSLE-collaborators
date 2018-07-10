@@ -137,8 +137,7 @@ class ChapterRepository extends Chapter
         if(!empty($this->id)){
             $File = null;
             if(!empty($this->getFileid())){
-                $File = new FileRepository();
-                $File->getFileById($this->getFileid());
+                $File = $this->getFileid();
             }
             return $arrayObject = [
                 "chapter" => $this,
