@@ -57,7 +57,13 @@ class CommentRepository extends Comment
             ];
             $this->setLeftJoin($joinParameter, $whereParameter);
             $this->setOrderByParameter(["id"=>"DESC"]);
-            return $this->getData($target);
+            $arrayData = $this->getData($target);
+            foreach($arrayData as $comment){
+                $BlogComment = new BlogComment();
+                $arrayReturn = $BlogComment->getBlogCommentByIdentifier('getuser', $comment->getId());
+                $comment->setUser($arrayReturn);
+            }
+            return $arrayData;
         }
         if($identifier == "chapter"){
             $target = ["id", "content", "tag", "datecreate", "dateupdated"];

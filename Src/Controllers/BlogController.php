@@ -107,6 +107,8 @@ class BlogController
                 }
                 $commentaires = null;
                 $comments = $Comment->getAll("blog", $Blog->getId());
+
+                $allComments = $Comment->getAll('blog', $Blog->getId());
                 foreach($comments as $comment){
                     $author = $Comment->getAuthorComment($comment->getId());
                     $date = new DateTime($comment->getDateupdated());
@@ -120,11 +122,10 @@ class BlogController
 
                     ];
                 }
-
                 $View->setData("article_content", $article);
-                $View->setData("commentaires_all", $commentaires);
+                $View->setData("commentaires_all", $allComments);
                 if(isset($commentaires)){
-                    $View->setData("commentaires_last", array_slice($commentaires, 0, 5));
+                    $View->setData("commentaires_last", array_slice($allComments, 0, 5));
                 }
                 $View->setData("formAddComment", $configFormComment);
 
