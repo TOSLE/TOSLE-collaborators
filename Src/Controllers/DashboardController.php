@@ -91,9 +91,6 @@ class DashboardController extends CoreController
         $View->setData('modalAllUnpublishPost', $modalAllUnpublishPost);
 
         $request = $BlogRepository->getRequestsend();
-        echo '<pre>';
-        print_r($request);
-        echo '</pre>';
 
         /**
          * Affectation des données pour la vue

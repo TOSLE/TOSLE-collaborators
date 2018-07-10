@@ -11,6 +11,7 @@
 <section id="right-column" class="container">
     <div class="row">
             <?php $this->addModal("dashboard_bloc", $blocGeneral);?>
+            <div class="col-3"></div>
             <?php $this->addModal("dashboard_bloc", $statsBlog);?>
             <?php $this->addModal("dashboard_bloc", $latestBlogArticle);?>
     </div>

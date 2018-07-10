@@ -294,40 +294,35 @@ class BlogRepository extends Blog
 
         $BlocGeneral->setTitle("Principal menu");
         $BlocGeneral->setTableHeader([
-            1 => "Name of action",
-            2 => "Action"
+            1 => "Action",
         ]);
         $BlocGeneral->setTableBodyClass([
             1 => "td-content-text",
-            2 => "td-content-action"
         ]);
-        $BlocGeneral->setColSizeBloc(6);
+        $BlocGeneral->setColSizeBloc(3);
         $BlocGeneral->setTableBodyContent([
             0 => [
-                1 => "Nouveau post de type texte",
                 "button_action" => [
                     "type" => "href",
                     "target" => $routes["blog/add"]."/text",
                     "color" => "tosle",
-                    "text" => "New post"
+                    "text" => "Add article"
                 ]
             ],
             1 => [
-                1 => "Nouveau post de type image",
                 "button_action" => [
                     "type" => "href",
                     "target" => $routes["blog/add"]."/image",
                     "color" => "tosle",
-                    "text" => "New post"
+                    "text" => "Add image"
                 ]
             ],
             2 => [
-                1 => "Nouveau post de type vidéo",
                 "button_action" => [
                     "type" => "href",
                     "target" => $routes["blog/add"]."/video",
                     "color" => "tosle",
-                    "text" => "New post"
+                    "text" => "Add video"
                 ]
             ]
         ]);
