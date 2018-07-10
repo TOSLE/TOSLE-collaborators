@@ -163,14 +163,6 @@ class Access
 
     private $urlFixe = [
         'rss_blog' => 'Tosle/Static/xml/blogfeed.xml',
-        "class/status" => 2,
-        "chapter/add" => 2,
-        "chapter/edit" => 2,
-        "chapter/status" => 2,
-        "chapter/order" => 2,
-        "portfolio/status" => 2,
-        "portfolio/add" => 2,
-        "portfolio/edit" => 2,
     ];
 
     /**
