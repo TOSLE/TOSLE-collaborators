@@ -105,30 +105,14 @@ class BlogController
                 if($Blog->getType() == 3){
                     $article['content'] = $Blog->getPlayerVideo($Blog->getContent());
                 }
-                $commentaires = null;
-                $comments = $Comment->getAll("blog", $Blog->getId());
 
                 $allComments = $Comment->getAll('blog', $Blog->getId());
-                foreach($comments as $comment){
-                    $author = $Comment->getAuthorComment($comment->getId());
-                    $date = new DateTime($comment->getDateupdated());
-
-                    $commentaires[] = [
-                        "id" => $comment->getId(),
-                        "content" => $comment->getContent(),
-                        "firstname" => $author['firstname'],
-                        "lastname" => $author['lastname'],
-                        "date" => $date->format("l jS \of F Y H:i"),
-
-                    ];
-                }
                 $View->setData("article_content", $article);
                 $View->setData("commentaires_all", $allComments);
-                if(isset($commentaires)){
+                if(isset($allComments)){
                     $View->setData("commentaires_last", array_slice($allComments, 0, 5));
                 }
                 $View->setData("formAddComment", $configFormComment);
-
             } else {
                 echo "L'article demandé n'est pas disponible ou n'existe pas";
             }
