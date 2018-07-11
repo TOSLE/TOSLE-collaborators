@@ -136,5 +136,7 @@ class UserController
         header("Location:" . DIRNAME);
         $_SESSION["token"] = null;
         $_SESSION["email"] = null;
+        $_SESSION["auth"] = null;
+        session_destroy();
     }
 }

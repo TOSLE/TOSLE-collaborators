@@ -22,6 +22,7 @@ class User extends CoreSql{
                 'firstname',
                 'lastname',
                 'email',
+                'newsletter',
             ];
             $parameter = [
                 'LIKE' => [

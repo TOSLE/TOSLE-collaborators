@@ -13,7 +13,8 @@ class CoreController
     public function __construct()
     {
         if(isset($_SESSION['auth'])){
-            $this->Auth = json_decode($_SESSION['auth']);
+            $tmpAuth = json_decode($_SESSION['auth']);
+            $this->Auth = new UserRepository($tmpAuth->{'id'});
         }
     }
 }
