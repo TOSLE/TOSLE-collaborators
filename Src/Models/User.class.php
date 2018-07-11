@@ -8,11 +8,15 @@ class User extends CoreSql{
     protected $password;
     protected $token;
     protected $dateconnection;
+    protected $pseudo;
     protected $newsletter = null;
     protected $fileid = null;
     protected $birthday = null;
 
     protected $status = null;
+
+    private $dateInscription;
+    private $dateUpdated;
 
     public function __construct($_id = null){
         parent::__construct();
@@ -123,6 +127,36 @@ class User extends CoreSql{
     public function getStatus()
     {
         return $this->status;
+    }
+
+    public function setPseudo($pseudo)
+    {
+        $this->pseudo = $pseudo;
+    }
+
+    public function getPseudo()
+    {
+        return $this->pseudo;
+    }
+
+    public function setDateinscription($dateInscription)
+    {
+        $this->dateInscription = $dateInscription;
+    }
+
+    public function getDateinscription()
+    {
+        return $this->dateInscription;
+    }
+
+    public function setDateupdated($dateUpdated)
+    {
+        $this->dateUpdated = $dateUpdated;
+    }
+
+    public function getDateupdated()
+    {
+        return $this->dateUpdated;
     }
 
     public function configFormAdd()

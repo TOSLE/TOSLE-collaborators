@@ -202,21 +202,24 @@ class CoreSql{
 
     /**
      * @param array $_target
-     * @return array
+     * @return int|array
      * Permet de traiter la gestion des targets
      */
     public function getTarget($_target)
     {
-        $arrayTarget = [];
-        foreach ($_target as $key => $value){
-            if(substr($value, 0,1) === '_'){
-                $arrayTarget[$key] = substr($value, 1);
-            } else {
-                $arrayTarget[$key] = $this->columnBase.'_'.$value;
+        if(is_array($_target)){
+            $arrayTarget = [];
+            foreach ($_target as $key => $value){
+                if(substr($value, 0,1) === '_'){
+                    $arrayTarget[$key] = substr($value, 1);
+                } else {
+                    $arrayTarget[$key] = $this->columnBase.'_'.$value;
+                }
             }
+            return $arrayTarget;
         }
+        return ["*"];
 
-        return $arrayTarget;
     }
     /**
      * function getData
@@ -230,7 +233,7 @@ class CoreSql{
      *
      * Cette fonction nous retourne un array contenant le résultat de la requête. Le reste est trié par les Repository
      */
-    public function getData($target)
+    public function getData($target = "*")
     {
         $target = $this->getTarget($target);
 
@@ -281,7 +284,7 @@ class CoreSql{
      * Même tableau que la fonction getData, la différence est que cette fonction va retourner directement les données
      * dans l'objet
      */
-    public function getOneData($target)
+    public function getOneData($target = "*")
     {
         $target = $this->getTarget($target);
 

@@ -56,6 +56,8 @@ class DashboardController extends CoreController
     {
         $View = new View("dashboard", "Dashboard/student");
         $View->setData("PageName", NAV_DASHBOARD . " " . NAV_DASHBOARD_STUDENT);
+        $Dashboard = new DashboardRepository();
+        $Dashboard->getAllUsers();
     }
 
     /**
