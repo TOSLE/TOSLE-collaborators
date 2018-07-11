@@ -12,7 +12,8 @@ class CoreController
 
     public function __construct()
     {
-        global $Auth;
-        $this->Auth = $Auth;
+        if(isset($_SESSION['auth'])){
+            $this->Auth = json_decode($_SESSION['auth']);
+        }
     }
 }

@@ -22,10 +22,11 @@ class Newsletter
 
     public function __construct()
     {
-        global $Auth;
-        $this->Auth = $Auth;
-        if(isset($this->Auth) && !empty($this->Auth->getNewsletter())){
-            $this->binaryCode = decbin($Auth->getNewsletter());
+        if(isset($_SESSION['auth'])){
+            $this->Auth = json_decode($_SESSION['auth']);
+        }
+        if(isset($this->Auth) && !empty($this->Auth->{'newsletter'})){
+            $this->binaryCode = decbin($this->Auth->{'newsletter'});
         } else {
             $this->binaryCode = gmp_init("0000", 2);
         }

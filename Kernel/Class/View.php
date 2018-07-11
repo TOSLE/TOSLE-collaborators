@@ -14,6 +14,7 @@ class View
     private $themeTpl = "Default";
     private $themeView = "Default";
     private $slugs;
+    private $Auth = false;
 
     function __construct($tpl="default", $view = "default", $themeTpl = "Default", $themeView = "Default")
     {
@@ -29,6 +30,9 @@ class View
             echo ERROR_01_VIEW_CALL;
         }
 
+        if(isset($_SESSION['auth'])){
+            $this->Auth = json_decode($_SESSION['auth']);
+        }
         $this->slugs = Access::getSlugsById();
     }
 
@@ -45,7 +49,7 @@ class View
 
     function __destruct()
     {
-        global $controller, $action, $language, $Auth;
+        global $controller, $action, $language;
         extract($this->data);
         include $this->tpl;
     }

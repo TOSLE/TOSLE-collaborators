@@ -6,7 +6,7 @@
  * Time: 12:10
  */
 
-class ProfileController
+class ProfileController extends CoreController
 {
     /**
      * @Route("/en/profile(/index)")
@@ -24,11 +24,11 @@ class ProfileController
             }
             else {
                 $Profile = new ProfileRepository();
+                $User = new UserRepository($this->Auth->{'id'});
                 $View = new View("default", "Profile/profile");
                 $ArrayInfoUser = $Profile->getInfoUser($_SESSION['token'], $_SESSION['email']);
 
-                $CurrentUser = Authentification::getUser($_SESSION['token'], $_SESSION['email']);
-                $idUser = $CurrentUser->getId();
+                $idUser = $User->getId();
                 $ArrayCommentsUser = $Profile->getCommentUser($idUser);
 
                 $View->setData("profile_info", $ArrayInfoUser);

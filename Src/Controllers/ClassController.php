@@ -30,7 +30,7 @@ class ClassController extends CoreController
         if(isset($this->Auth)){
             $Newsletter = new Newsletter();
             $newsletter = false;
-            if(!empty($this->Auth->getNewsletter())){
+            if(!empty($this->Auth->{'newsletter'})){
                 $newsletter = $Newsletter->getStatusLesson();
             }
             $View->setData("newsletter", $newsletter);
