@@ -433,8 +433,10 @@ class LessonRepository extends Lesson
             $LessonChapter = new LessonChapter();
             $arrayChapter = $LessonChapter->getLessonChapterByIdentifier('lesson', $lesson->getId());
             $arrayCategory = $Category->getCategoryByIdentifier('lesson', $lesson->getId());
+            $numberComment = $Category->getComments(array_keys($arrayCategory)[0]);
             $lesson->setCategorylesson($arrayCategory);
             $lesson->setChapter($arrayChapter);
+            $lesson->setNumberComment(sizeof($numberComment));
         }
 
         return $arrayReturn;
@@ -596,5 +598,10 @@ class LessonRepository extends Lesson
             }
         }
         return $pagination;
+    }
+
+    public function getNumberLesson()
+    {
+
     }
 }
