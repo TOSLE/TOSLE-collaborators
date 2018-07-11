@@ -17,10 +17,18 @@ class DashboardRepository
             ]
         ];
         $User->setWhereParameter($parameter);
-        $Users = $User->getData();
-        /*echo '<pre>';
-        print_r($Users);
-        print_r($User->getRequestsend());
-        echo '</pre>';*/
+        $users = $User->getData();
+        $arrayForJson = [];
+        $tmpArray = [];
+        foreach($users as $user){
+            $tmpArray['firstname'] = $user->getFirstname();
+            $tmpArray['lastname'] = $user->getLastname();
+            $tmpArray['email'] = $user->getEmail();
+            $tmpArray['dateInscription'] = $user->getDateinscription();
+            $arrayForJson[] = $tmpArray;
+        }
+        echo '<pre>';
+        print_r($arrayForJson);
+        echo '</pre>';
     }
 }
