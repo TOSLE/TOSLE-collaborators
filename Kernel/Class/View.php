@@ -14,7 +14,7 @@ class View
     private $themeTpl = "Default";
     private $themeView = "Default";
     private $slugs;
-    private $Auth = false;
+    private $Auth = null;
 
     function __construct($tpl="default", $view = "default", $themeTpl = "Default", $themeView = "Default")
     {

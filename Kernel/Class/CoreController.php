@@ -8,7 +8,7 @@
 
 class CoreController
 {
-    protected $Auth = false;
+    protected $Auth = null;
 
     public function __construct()
     {
