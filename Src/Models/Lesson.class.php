@@ -21,6 +21,7 @@ class Lesson extends CoreSql
 
     private $chapter;
     private $categorylesson = [];
+    private $numberComment = 0;
 
     public function __construct()
     {
@@ -211,6 +212,22 @@ class Lesson extends CoreSql
         foreach($categorylesson as $key => $content){
             $this->categorylesson[] = new Category($key);
         }
+    }
+
+    /**
+     * @return int
+     */
+    public function getNumberComment()
+    {
+        return $this->numberComment;
+    }
+
+    /**
+     * @param int $numberComment
+     */
+    public function setNumberComment($numberComment)
+    {
+        $this->numberComment += $numberComment;
     }
 
     /**

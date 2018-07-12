@@ -116,6 +116,12 @@ class Access
             "action" => "subscribe",
             "security" => false
         ],
+        "dashboard_student" => [
+            "slug" => "dashboard-student",
+            "controller" => "dashboard",
+            "action" => "student",
+            "security" => 2
+        ],
     ];
 
     private $backOffice = [
@@ -130,6 +136,11 @@ class Access
         "chapter/status" => 2,
         "chapter/order" => 2,
         "index/config" => false,
+        "user/delete" => 2,
+        "user/group" => 2,
+        "group/delete" => 2,
+        "group/manage" => 2,
+        "group/edit" => 2,
     ];
 
     private $urlFixe = [

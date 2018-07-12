@@ -6,7 +6,7 @@
  * Time: 12:10
  */
 
-class ProfileController
+class ProfileController extends CoreController
 {
     /**
      * @Route("/en/profile(/index)")
@@ -27,8 +27,7 @@ class ProfileController
                 $View = new View("default", "Profile/profile");
                 $ArrayInfoUser = $Profile->getInfoUser($_SESSION['token'], $_SESSION['email']);
 
-                $CurrentUser = Authentification::getUser($_SESSION['token'], $_SESSION['email']);
-                $idUser = $CurrentUser->getId();
+                $idUser = $this->Auth->getId();
                 $ArrayCommentsUser = $Profile->getCommentUser($idUser);
 
                 $View->setData("profile_info", $ArrayInfoUser);

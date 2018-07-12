@@ -68,8 +68,11 @@
             $Auth = null;
             if (isset($_SESSION['token']) && isset($_SESSION['email'])) {
                 if (($userConnected = Authentification::checkAuthentification($_SESSION['token'], $_SESSION['email']))) {
-                    $Auth = Authentification::getUser($_SESSION['token'], $_SESSION['email']);
-                    $userStatus = $Auth->getStatus();
+                    Authentification::getUser($_SESSION['token'], $_SESSION['email']);
+                    if(isset($_SESSION['auth']) && !empty($_SESSION['auth'])){
+                        $Auth = json_decode($_SESSION['auth']);
+                        $userStatus = $Auth->{'status'};
+                    }
                 } else {
                     echo "<p>Connection failed</p>";
                 }
