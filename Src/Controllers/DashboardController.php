@@ -58,8 +58,13 @@ class DashboardController extends CoreController
         $View->setData("PageName", NAV_DASHBOARD . " " . NAV_DASHBOARD_STUDENT);
         $Dashboard = new DashboardRepository();
         $configBlocUsers = $Dashboard->getAllUsers();
+        $configBlocGroups = $Dashboard->getAllGroups();
+        $Group = new GroupRepository();
+        $configFormGroupAdd = $Group->configFormAdd();
 
         $View->setData("configBlocUsers", $configBlocUsers);
+        $View->setData("configBlocGroups", $configBlocGroups);
+        $View->setData("configFormGroupAdd", $configFormGroupAdd);
     }
 
     /**

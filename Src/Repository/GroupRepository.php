@@ -9,6 +9,10 @@
 class GroupRepository extends Group
 {
 
+    /**
+     * @return array
+     * Retourne le tableau SELECT pour les configForm
+     */
     public function configFormGroup()
     {
         $option = [];
@@ -25,11 +29,16 @@ class GroupRepository extends Group
         ];
     }
 
+    /**
+     * @return array
+     * Retourne la liste des groupes
+     */
     public function getGroup()
     {
         $target = [
             "id",
-            "name"
+            "name",
+            "fileid"
         ];
         return $this->getData($target);
     }

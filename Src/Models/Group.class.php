@@ -64,11 +64,16 @@ class Group extends CoreSql {
      */
     public function setFileid($fileid)
     {
-        $this->fileid = new File($fileid);
+        if(!empty($fileid) && is_numeric($fileid)){
+            $this->fileid = new File($fileid);
+        } else {
+            $this->fileid = null;
+        }
     }
 
     public function configFormAdd()
     {
+        $User = new UserRepository();
         return [
             "config"=> [
                 "method"=>"post",
@@ -93,6 +98,9 @@ class Group extends CoreSql {
                     "description"=>"Authorised format (JPEG, PNG, JPG)",
                     "multiple"=>false
                 ]
+            ],
+            'select_multiple' => [
+                $User->getSelectUsers(),
             ],
             "exit" => $this->routes["dashboard_student"]
         ];

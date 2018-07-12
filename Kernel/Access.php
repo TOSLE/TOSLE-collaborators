@@ -138,6 +138,8 @@ class Access
         "index/config" => false,
         "user/delete" => 2,
         "user/group" => 2,
+        "group/delete" => 2,
+        "group/manage" => 2,
     ];
 
     private $urlFixe = [

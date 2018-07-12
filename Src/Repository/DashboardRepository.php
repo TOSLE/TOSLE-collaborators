@@ -9,6 +9,11 @@
 class DashboardRepository
 {
     private $routes = null;
+
+    /**
+     * DashboardRepository constructor.
+     * Initialise les variables du Repository
+     */
     public function __construct()
     {
         $this->routes = Access::getSlugsById();
@@ -33,7 +38,7 @@ class DashboardRepository
         $arrayForJson['config']['col'] = 12;
         $arrayForJson['config']['idBloc'] = "bloc-users";
         $arrayForJson['config']['title'] = "Liste des utilisateurs";
-        $arrayForJson['config']['action'] = null;
+        $arrayForJson['config']['action']['add'] = null;
         $arrayForJson['table']['header'] = [
             [
                 "text" => "Nom",
@@ -53,9 +58,6 @@ class DashboardRepository
         ];
         if(isset($users) && !empty($users)){
             foreach($users as $user){
-                $tmpArray['lastname'] = $user->getLastname();
-                $tmpArray['email'] = $user->getEmail();
-                $tmpArray['dateInscription'] = $user->getDateinscription();
                 $arrayForJson['table']['body'][] = [
                     [
                         "text" => $user->getLastname()
@@ -94,6 +96,55 @@ class DashboardRepository
     public function getAllGroups()
     {
         $Group = new GroupRepository();
+        $groups = $Group->getGroup();
+        $arrayForJson = [];
+        $arrayForJson['config']['col'] = 12;
+        $arrayForJson['config']['idBloc'] = "bloc-users";
+        $arrayForJson['config']['title'] = "Liste des groupes";
+        $arrayForJson['config']['action']['add'] = "addGroupModal";
+        $arrayForJson['table']['header'] = [
+            [
+                "text" => "Avatar",
+            ],
+            [
+                "text" => "Nom",
+            ],
+            [
+                "action" => "Action",
+            ],
+        ];
+        if(isset($groups) && !empty($groups)){
+            foreach($groups as $group){
+                $filePath = "";
+                if(!empty($group->getFileid())){
+                    $filePath = $group->getFileid()->getPath().'/'.$group->getFileid()->getName();
+                }
+                $arrayForJson['table']['body'][] = [
+                    [
+                        "avatar" => $filePath
+                    ],
+                    [
+                        "text" => $group->getName()
+                    ],
+                    [
+                        "button" => [
+                            [
+                                "value" => "Supprimer",
+                                "action" => $this->routes['group/delete'].'/'.$group->getId(),
+                                "color" => "red",
+                                "confirm" => true
+                            ],
+                            [
+                                "value" => "Groupes",
+                                "action" => $this->routes['group/manage'].'/'.$group->getId(),
+                                "color" => "tosle"
+                            ],
+                        ]
+                    ],
+                ];
+            }
+        }
 
+        return $arrayForJson;
     }
 }
