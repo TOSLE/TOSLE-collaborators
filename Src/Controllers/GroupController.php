@@ -42,10 +42,14 @@ class GroupController extends CoreController
             $Group = new GroupRepository($params['URI'][0]);
             $View = new View("dashboard", "Dashboard/add_group");
             $configForm = $Group->configFormAdd();
+            $file_img = null;
+            if(!empty($Group->getFileid())){
+                $file_img = $Group->getFileid()->getPath().'/'.$Group->getFileid()->getName();
+            }
             $configForm['data_content'] = [
                 "name" => $Group->getName(),
                 "selectedOption" => $Group->getUserForSelect($Group->getId()),
-                "file_img" => $Group->getFileid()->getPath().'/'.$Group->getFileid()->getName()
+                "file_img" => $file_img
             ];
             $errors = "";
             if(isset($params['POST']) && !empty($params['POST'])){
