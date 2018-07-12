@@ -60,20 +60,24 @@ class ProfileController extends CoreController
             if (is_null($_SESSION['token']) && is_null($_SESSION['email'])) {
                 $View = new View("default", "Profile/notconnect");
             } else {
+                $routes = Access::getSlugsById();
                 $View = new View("default", "Profile/edit");
                 $Profile = new ProfileRepository();
                 $User = new UserRepository();
-                $User->getUser();
-                $Profile->editProfile($User->getId());
-
-                //$User = new User();
-
-                $form = $User->configFormAdd();
                 $errors = [];
+                $User->getUser();
+                $configFormEditUser = $Profile->editProfile($User->getId());
 
-                
+                if(isset($params["POST"]) && !empty($params["POST"])){
+                    $resultAdd = $User->addUser($params["POST"], $User->getId());
+                    if($resultAdd == 1){
+                        header('Location:'.$routes['profilehome']);
+                    }
+                    else {
 
-                $View->setData("config", $form);
+                    }
+                }
+                $View->setData("config", $configFormEditUser);
                 $View->setData("errors", $errors);
             }
         }

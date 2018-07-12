@@ -88,30 +88,14 @@
                                                                     <span><?php echo $comment->getDatecreate(); ?></span>
                                                                 </div>
                                                             </div>
+                                                            <div class="signal">
+                                                                <i class="material-icons">
+                                                                    more_vert
+                                                                </i>
+                                                            </div>
                                                         </div>
                                                     <?php endforeach; ?>
                                                 <?php endif; ?>
-                                                <div class="comment">
-                                                    <div class="picture-user">
-                                                        <span></span>
-                                                    </div>
-                                                    <div>
-                                                        <div class="name-user">
-                                                            Julien Domange
-                                                        </div>
-                                                        <div class="content">
-                                                            <span>Whaou ! C’est impressionnant comme article, merci pour celui-ci ! Maintenant, les maquettes !</span>
-                                                        </div>
-                                                        <div class="info">
-                                                            <span>February 28 at 6:33pm</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="signal">
-                                                            <i class="material-icons">
-                                                                more_vert
-                                                            </i>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </section>
                                         <section class="container-editor">

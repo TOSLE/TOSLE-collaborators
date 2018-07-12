@@ -145,4 +145,34 @@ class UserRepository extends User
             ]
         ];
     }
+
+    public function addUser($_post, $_idUser = null) {
+
+        $errors = Form::checkForm($this->configFormAdd(), $_post);
+        $_post = Form::secureData($_post);
+
+        if(empty($errors)) {
+            $tmpPostArray = $_post;
+            if (isset($_idUser)) {
+                $this->setId($_idUser);
+            }
+            $this->setFirstName($tmpPostArray['firstname']);
+            $this->setLastName($tmpPostArray['lastname']);
+            $this->setEmail($tmpPostArray['email']);
+            $this->setEmail($tmpPostArray['emailConfirm']);
+            $this->setPassword($tmpPostArray['pwd']);
+            $this->setPassword($tmpPostArray['pwdConfirm']);
+            $this->setToken();
+            $this->save();
+
+            $_SESSION['token'] = $this->getToken();
+
+            return 1;
+        } else {
+            echo'<pre>';
+            print_r($errors);
+            echo'</pre>';
+            return $errors;
+        }
+    }
 }
