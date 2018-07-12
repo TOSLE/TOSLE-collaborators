@@ -130,7 +130,7 @@ class DashboardRepository
                         "text" => $group->getName()
                     ],
                     [
-                        "number" => 0
+                        "number" => $Group->countUserGroup($group->getId())
                     ],
                     [
                         "button" => [

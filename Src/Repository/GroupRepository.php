@@ -94,6 +94,18 @@ class GroupRepository extends Group
         }
     }
 
+    public function countUserGroup($_idGroup)
+    {
+        $UserGroup = new UserGroup();
+        $parameter = [
+            'LIKE' => [
+                'groupid' => $_idGroup
+            ]
+        ];
+        $UserGroup->setWhereParameter($parameter);
+        return $UserGroup->countData(['id']);
+    }
+
     /**
      * @param $_name
      * @return bool
