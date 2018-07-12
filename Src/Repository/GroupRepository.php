@@ -63,7 +63,7 @@ class GroupRepository extends Group
                     if(empty($errors) || is_numeric($errors)){
                         if( $errors != 1) {
                             $File = new FileRepository();
-                            $arrayFile = $File->addFile($_FILES, $configForm, "Lesson/Chapter", "File attach to chapter");
+                            $arrayFile = $File->addFile($_FILES, $configForm, "Group/Avatar", "File attach to group");
                             if(!is_numeric($arrayFile)){
                                 if(array_key_exists('CODE_ERROR', $arrayFile)){
                                     return $arrayFile;
