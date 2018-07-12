@@ -43,10 +43,17 @@ class GroupRepository extends Group
         return $this->getData($target);
     }
 
+    /**
+     * @param $_file
+     * @param $_post
+     * @param null $_idGroup
+     * @return array|int
+     * Permet de rajouter un groupe avec des utilisateurs, cette fonction est aussi utilisé pour l'edit !
+     */
     public function addGroup($_file, $_post, $_idGroup = null)
     {
         $configForm = $this->configFormAdd();
-        if($this->checkGroupExist($_post['name'])){
+        if(!$this->checkGroupExist($_post['name']) || isset($_idGroup)){
             $errors = Form::checkForm($configForm, $_post);
             $_post = Form::secureData($_post);
             if(empty($errors)){
@@ -74,8 +81,11 @@ class GroupRepository extends Group
                 }
                 if(isset($_idGroup)) {
                     $this->setId($_idGroup);
+                    $this->deleteUserGroup();
                 }
-                $this->setName($_post['name']);
+                if(!$this->checkGroupExist($_post['name'])){
+                    $this->setName($_post['name']);
+                }
                 $this->setFileid($file);
                 $this->save();
                 $this->getGroupByName($_post['name']);
@@ -94,6 +104,35 @@ class GroupRepository extends Group
         }
     }
 
+    public function deleteUserGroup($_idUser = null)
+    {
+        if(isset($_idUser) && is_numeric($_idUser)) {
+            $UserGroup = new UserGroup();
+            $parameter = [
+                'LIKE' => [
+                    'groupid' => $this->id,
+                    'userid' => $_idUser,
+                ]
+            ];
+            $UserGroup->setWhereParameter($parameter);
+            $UserGroup->delete();
+        } else {
+            $UserGroup = new UserGroup();
+            $parameter = [
+                'LIKE' => [
+                    'groupid' => $this->id
+                ]
+            ];
+            $UserGroup->setWhereParameter($parameter);
+            $UserGroup->delete();
+        }
+    }
+
+    /**
+     * @param $_idGroup
+     * @return int
+     * Compte le nombre d'utilisateur dans un groupe
+     */
     public function countUserGroup($_idGroup)
     {
         $UserGroup = new UserGroup();
@@ -120,9 +159,9 @@ class GroupRepository extends Group
         ];
         $this->setWhereParameter($parameter);
         if($this->countData() > 0){
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
     /***
@@ -150,5 +189,28 @@ class GroupRepository extends Group
         $UserGroup->setGroupId($_idGroup);
         $UserGroup->setUserId($_idUser);
         $UserGroup->save();
+    }
+
+    public function getUserForSelect($_id)
+    {
+        $User = new UserRepository();
+        $target = ["id", "firstname" , "lastname"];
+        $joinParameter = [
+            "usergroup" => [
+                "user_id"
+            ]
+        ];
+        $whereParameter = [
+            "usergroup" => [
+                "group_id" => $_id
+            ]
+        ];
+        $User->setLeftJoin($joinParameter, $whereParameter);
+        $array = $User->getData($target);
+        $returnArrayId= [];
+        foreach($array as $user) {
+            $returnArrayId[$user->getId()] = $user->getLastname(). ' ' . $user->getFirstname();
+        }
+        return $returnArrayId;
     }
 }

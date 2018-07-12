@@ -94,6 +94,11 @@
       height: 50px;
       td {
         border: 1px solid $colorBorderTableHeader;
+        &.avatar {
+          img {
+            height: 60px;
+          }
+        }
       }
     }
   }

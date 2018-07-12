@@ -150,7 +150,7 @@ class DashboardRepository
                                 "color" => "orange"
                             ],
                             [
-                                "value" => "Groupes",
+                                "value" => "Utilisateurs",
                                 "action" => $this->routes['group/manage'].'/'.$group->getId(),
                                 "color" => "tosle"
                             ],

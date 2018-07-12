@@ -215,6 +215,8 @@ main {
         height: 50px; }
         main .dashboard-bloc .table-dashboard tr td {
           border: 1px solid #BDBDBD; }
+          main .dashboard-bloc .table-dashboard tr td.avatar img {
+            height: 60px; }
     main .dashboard-bloc .icons-dashboard {
       float: right;
       color: #1A5CCB; }
