@@ -93,6 +93,10 @@ class DashboardRepository
         return $arrayForJson;
     }
 
+    /**
+     * @return array
+     * Récupère la liste des groupes et permet la création d'un tableau pour l'affichage
+     */
     public function getAllGroups()
     {
         $Group = new GroupRepository();

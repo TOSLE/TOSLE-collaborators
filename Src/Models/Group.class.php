@@ -14,9 +14,18 @@ class Group extends CoreSql {
 
     private $image = null;
 
-    public function __construct()
+    public function __construct($_id = null)
     {
         parent::__construct();
+        if(isset($_id) && is_numeric($_id)){
+            $parameter = [
+                'LIKE' => [
+                    'id' => $_id
+                ]
+            ];
+            $this->setWhereParameter($parameter);
+            $this->getOneData();
+        }
     }
 
     /**
@@ -105,5 +114,18 @@ class Group extends CoreSql {
             ],
             "exit" => $this->routes["dashboard_student"]
         ];
+    }
+
+    public function deleteGroup()
+    {
+        if(isset($this->id) && !empty($this->id)){
+            $parameter = [
+                'LIKE' => [
+                    'id' => $this->id
+                ]
+            ];
+            $this->setWhereParameter($parameter);
+            $this->delete();
+        }
     }
 }

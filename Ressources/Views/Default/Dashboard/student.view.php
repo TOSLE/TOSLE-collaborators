@@ -51,7 +51,7 @@
                                                 <?php if($class == "button"):?>
                                                     <td class="action">
                                                         <?php foreach($content as $button):?>
-                                                            <a class="btn btn-<?php echo $button['color'];?>" <?php echo (isset($button['confirm']) && $button['confirm'])?'onclick="return confirm(\'Voulez-vous vraiment supprimer cet utilisateur\');"':'';?> href="<?php echo $button['action'];?>"><?php echo $button['value'];?></a>
+                                                            <a class="btn btn-<?php echo $button['color'];?>" <?php echo (isset($button['confirm']) && $button['confirm'])?'onclick="return confirm(\'Voulez-vous vraiment supprimer ce groupe ?\');"':'';?> href="<?php echo $button['action'];?>"><?php echo $button['value'];?></a>
                                                         <?php endforeach;?>
                                                     </td>
                                                 <?php elseif($class == "avatar"):?>
@@ -69,7 +69,7 @@
                                 <?php endforeach;?>
                             <?php else:?>
                                 <tr>
-                                    <td colspan="<?php echo sizeof($configBlocGroups['table']['header']);?>">Aucun utilisateur pour le moment</td>
+                                    <td colspan="<?php echo sizeof($configBlocGroups['table']['header']);?>">Aucun groupe pour le moment</td>
                                 </tr>
                             <?php endif;?>
                             </tbody>

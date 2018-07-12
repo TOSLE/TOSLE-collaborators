@@ -65,6 +65,9 @@ class DashboardController extends CoreController
 
         if(isset($params['POST']) && !empty($params['POST'])){
             $errors_group_add = $Group->addGroup($_FILES, $params["POST"]);
+            if($errors_group_add === 1){
+                header('Location:'.$this->Routes['dashboard_student']);
+            }
         }
         $View->setData("configBlocUsers", $configBlocUsers);
         $View->setData("configBlocGroups", $configBlocGroups);
