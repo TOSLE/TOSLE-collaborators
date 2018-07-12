@@ -41,6 +41,8 @@ class Newsletter
         $this->binaryCode = decbin(bindec($this->binaryCode) ^ bindec($_binaryCode));
         $this->Auth->setNewsletter(bindec($this->binaryCode));
         $this->Auth->save();
+        // Correctif lié au bug déconnectant l'utilisateur
+        $_SESSION['token'] = $this->Auth->getToken();
     }
 
     /**
