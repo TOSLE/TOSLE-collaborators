@@ -17,15 +17,17 @@ class Newsletter
      * 6 -> Nouveau message / Lesson
      * 7 -> Nouveau message / Blog / Lesson
      */
-    private $Auth = false;
+    private $Auth = null;
     private $binaryCode;
 
     public function __construct()
     {
-        global $Auth;
-        $this->Auth = $Auth;
+        if(isset($_SESSION['auth'])){
+            $tmpAuth = json_decode($_SESSION['auth']);
+            $this->Auth = new UserRepository($tmpAuth->{'id'});
+        }
         if(isset($this->Auth) && !empty($this->Auth->getNewsletter())){
-            $this->binaryCode = decbin($Auth->getNewsletter());
+            $this->binaryCode = decbin($this->Auth->getNewsletter());
         } else {
             $this->binaryCode = gmp_init("0000", 2);
         }

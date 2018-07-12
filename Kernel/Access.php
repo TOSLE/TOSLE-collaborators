@@ -118,11 +118,23 @@ class Access
             "security" => false
 
         ],
+        "edit_profile" => [
+            "slug" => "edit-profile",
+            "controller" => "profile",
+            "action" => "edit",
+            "security" => false
+        ],
         "subscribe_lesson" => [
             "slug" => "subscribe-lesson",
             "controller" => "class",
             "action" => "subscribe",
             "security" => false
+        ],
+        "dashboard_student" => [
+            "slug" => "dashboard-student",
+            "controller" => "dashboard",
+            "action" => "student",
+            "security" => 2
         ],
     ];
 

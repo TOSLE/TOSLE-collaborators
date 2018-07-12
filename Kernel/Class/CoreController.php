@@ -8,11 +8,13 @@
 
 class CoreController
 {
-    protected $Auth = false;
+    protected $Auth = null;
 
     public function __construct()
     {
-        global $Auth;
-        $this->Auth = $Auth;
+        if(isset($_SESSION['auth'])){
+            $tmpAuth = json_decode($_SESSION['auth']);
+            $this->Auth = new UserRepository($tmpAuth->{'id'});
+        }
     }
 }

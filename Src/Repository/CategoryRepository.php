@@ -187,4 +187,17 @@ class CategoryRepository extends Category
         }
         return $returnArrayId;
     }
+
+
+    public function getComments($_id = null)
+    {
+        if(isset($_id)){
+            $idChapter = $_id;
+        } else {
+            $idChapter = $this->getId();
+        }
+        $Comment = new CommentRepository();
+        $allComments = $Comment->getAll('chapter', $idChapter);
+        return $allComments;
+    }
 }
