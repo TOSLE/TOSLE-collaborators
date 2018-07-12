@@ -137,7 +137,7 @@ class UserRepository extends User
             $option[$user->getId()] = $user->getLastname().' '.$user->getFirstname();
         }
         return [
-            "select_add_users" => [
+            "select_users" => [
                 "label" => "Ajouter des utilisateurs",
                 "description" => "Vous avez le droit à plusieurs choix (\"CTRL + Clic\" pour réaliser un choix multiple)",
                 "multiple" => true,

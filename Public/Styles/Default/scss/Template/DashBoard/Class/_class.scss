@@ -97,4 +97,11 @@
       }
     }
   }
+  .icons-dashboard {
+    float: right;
+    color: $colorGlobalToslePrimary;
+    i {
+      font-size: 1.8em;
+    }
+  }
 }

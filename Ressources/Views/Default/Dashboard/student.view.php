@@ -62,12 +62,12 @@
             <div class="col-<?php echo $configBlocGroups['config']['col']?>">
                 <div>
                     <div class="dashboard-bloc blocUsers">
-                        <h2><?php echo $configBlocGroups['config']['title']?></h2>
                         <?php if(isset($configBlocGroups['config']['action']['add'])):?>
-                            <a class="target-modal" data-type="open-modal" data-target="<?php echo $configBlocGroups['config']['action']['add'];?>">
+                            <a class="target-modal icons-dashboard" data-type="open-modal" data-target="<?php echo $configBlocGroups['config']['action']['add'];?>">
                                 <i class="material-icons">add</i>
                             </a>
                         <?php endif;?>
+                        <h2><?php echo $configBlocGroups['config']['title']?></h2>
                         <table id="<?php echo $configBlocGroups['config']['idBloc']?>" class="table-dashboard">
                             <thead>
                                 <tr>
@@ -128,7 +128,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div>
-                            <?php $this->addModal("dashboard_form", $configFormGroupAdd); ?>
+                            <?php $this->addModal("dashboard_form", $configFormGroupAdd, $errors); ?>
                         </div>
                     </div>
                 </div>

@@ -100,7 +100,7 @@ class Group extends CoreSql {
                 ]
             ],
             'select_multiple' => [
-                $User->getSelectUsers(),
+                $User->getSelectUsers()
             ],
             "exit" => $this->routes["dashboard_student"]
         ];

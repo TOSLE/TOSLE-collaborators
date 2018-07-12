@@ -215,6 +215,11 @@ main {
         height: 50px; }
         main .dashboard-bloc .table-dashboard tr td {
           border: 1px solid #BDBDBD; }
+    main .dashboard-bloc .icons-dashboard {
+      float: right;
+      color: #1A5CCB; }
+      main .dashboard-bloc .icons-dashboard i {
+        font-size: 1.8em; }
 
 footer {
   background-color: #74858D; }

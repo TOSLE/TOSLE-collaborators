@@ -61,10 +61,11 @@ class DashboardController extends CoreController
         $configBlocGroups = $Dashboard->getAllGroups();
         $Group = new GroupRepository();
         $configFormGroupAdd = $Group->configFormAdd();
-
+        $errors = "";
         $View->setData("configBlocUsers", $configBlocUsers);
         $View->setData("configBlocGroups", $configBlocGroups);
         $View->setData("configFormGroupAdd", $configFormGroupAdd);
+        $View->setData("errors", $errors);
     }
 
     /**
