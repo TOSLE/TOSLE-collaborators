@@ -61,11 +61,15 @@ class DashboardController extends CoreController
         $configBlocGroups = $Dashboard->getAllGroups();
         $Group = new GroupRepository();
         $configFormGroupAdd = $Group->configFormAdd();
-        $errors = "";
+        $errors_group_add = "";
+
+        if(isset($params['POST']) && !empty($params['POST'])){
+            $errors_group_add = $Group->addGroup($_FILES, $params["POST"]);
+        }
         $View->setData("configBlocUsers", $configBlocUsers);
         $View->setData("configBlocGroups", $configBlocGroups);
         $View->setData("configFormGroupAdd", $configFormGroupAdd);
-        $View->setData("errors", $errors);
+        $View->setData("errors_group_add", $errors_group_add);
     }
 
     /**

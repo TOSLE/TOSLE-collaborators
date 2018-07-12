@@ -56,7 +56,12 @@ class Group extends CoreSql {
      */
     public function getFileid()
     {
-        return $this->fileid;
+        if(!empty($this->fileid)){
+            return new File($this->fileid);
+        } else {
+            return null;
+        }
+
     }
 
     /**
@@ -64,11 +69,7 @@ class Group extends CoreSql {
      */
     public function setFileid($fileid)
     {
-        if(!empty($fileid) && is_numeric($fileid)){
-            $this->fileid = new File($fileid);
-        } else {
-            $this->fileid = null;
-        }
+        $this->fileid = $fileid;
     }
 
     public function configFormAdd()
@@ -82,7 +83,7 @@ class Group extends CoreSql {
                 "form_file"=>true,
             ],
             "input"=> [
-                "title"=>[
+                "name"=>[
                     "type"=>"text",
                     "placeholder"=>"Nom du groupe",
                     "required"=>true,

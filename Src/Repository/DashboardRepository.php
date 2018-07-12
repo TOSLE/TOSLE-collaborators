@@ -110,6 +110,9 @@ class DashboardRepository
                 "text" => "Nom",
             ],
             [
+                "number" => "Nombre d'utilisateur",
+            ],
+            [
                 "action" => "Action",
             ],
         ];
@@ -127,12 +130,20 @@ class DashboardRepository
                         "text" => $group->getName()
                     ],
                     [
+                        "number" => 0
+                    ],
+                    [
                         "button" => [
                             [
                                 "value" => "Supprimer",
                                 "action" => $this->routes['group/delete'].'/'.$group->getId(),
                                 "color" => "red",
                                 "confirm" => true
+                            ],
+                            [
+                                "value" => "Modifier",
+                                "action" => $this->routes['group/edit'].'/'.$group->getId(),
+                                "color" => "orange"
                             ],
                             [
                                 "value" => "Groupes",

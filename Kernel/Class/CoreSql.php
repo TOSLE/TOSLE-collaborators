@@ -336,7 +336,7 @@ class CoreSql{
      * @param array $target
      * @return int
      */
-    public function countData($target)
+    public function countData($target = "*")
     {
         $target = $this->getTarget($target);
 
