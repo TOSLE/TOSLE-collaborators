@@ -18,6 +18,7 @@ class DashboardRepository
             ]
         ];
         $User->setWhereParameter($parameter);
+        $User->setOrderByParameter(['lastname' => 'ASC']);
         $users = $User->getData();
         $arrayForJson = [];
         $arrayForJson['config']['col'] = 12;
@@ -40,31 +41,43 @@ class DashboardRepository
                 "action" => "Action",
             ],
         ];
-
-        foreach($users as $user){
-            $tmpArray['lastname'] = $user->getLastname();
-            $tmpArray['email'] = $user->getEmail();
-            $tmpArray['dateInscription'] = $user->getDateinscription();
-            $arrayForJson['table']['body'][] = [
-                [
-                    "text" => $user->getFirstname()
-                ],
-                [
-                    "text" => $user->getLastname()
-                ],
-                [
-                    "text" => $user->getEmail()
-                ],
-                [
-                    "date" => $user->getDateinscription()
-                ],
-                [
-                    "button" => [
-                        $Routes['user/delete'].'/'.$user->getId() => "Supprimer"
-                    ]
-                ],
-            ];
+        if(isset($users) && !empty($users)){
+            foreach($users as $user){
+                $tmpArray['lastname'] = $user->getLastname();
+                $tmpArray['email'] = $user->getEmail();
+                $tmpArray['dateInscription'] = $user->getDateinscription();
+                $arrayForJson['table']['body'][] = [
+                    [
+                        "text" => $user->getLastname()
+                    ],
+                    [
+                        "text" => $user->getFirstname()
+                    ],
+                    [
+                        "text" => $user->getEmail()
+                    ],
+                    [
+                        "date" => $user->getDateinscription()
+                    ],
+                    [
+                        "button" => [
+                            [
+                                "value" => "Supprimer",
+                                "action" => $Routes['user/delete'].'/'.$user->getId(),
+                                "color" => "red",
+                                "confirm" => true
+                            ],
+                            [
+                                "value" => "Groupes",
+                                "action" => $Routes['user/group'].'/'.$user->getId(),
+                                "color" => "tosle"
+                            ],
+                        ]
+                    ],
+                ];
+            }
         }
+
         return $arrayForJson;
     }
 }

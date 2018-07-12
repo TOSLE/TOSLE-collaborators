@@ -66,6 +66,7 @@ class CoreSql{
 
             $query = $this->pdo->prepare("UPDATE ".$this->table." SET "
                 . implode(',', $set) ." WHERE ".$this->columnBase."_id='".$this->id."'");
+            $this->setRequestsend($query);
             $query->execute($this->columns);
         }	else {
             unset($this->columns["id"]);
@@ -81,7 +82,7 @@ class CoreSql{
                 . implode(',', $columnName) .") VALUES (:"
                 . implode(',:', array_keys($this->columns)) .
                 ")");
-
+            $this->setRequestsend($query);
             $query->execute($this->columns);
         }
     }
@@ -412,6 +413,7 @@ class CoreSql{
             FROM " . $this->table . " 
             ".$this->whereParameter."
         ");
+        $this->setRequestsend($query);
         $query->execute();
 
         $this->whereParameter = "";

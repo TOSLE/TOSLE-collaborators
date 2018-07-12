@@ -146,4 +146,14 @@ class DashboardController extends CoreController
         $View->setData("modalChapter", $Lesson->getModalLastChapterByLesson($params["URI"][0]));
     }
 
+    /**
+     * @param $params
+     * Gestion des groupes en lien avec un ID
+     */
+    public function groupAction($params)
+    {
+
+        header('Location:'.$this->Routes['dashboard_student']);
+    }
+
 }

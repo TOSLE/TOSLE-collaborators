@@ -26,14 +26,17 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            <?php if(isset($configBlocUsers['table']['body'])):?>
                                 <?php foreach($configBlocUsers['table']['body'] as $row):?>
                                     <tr>
                                         <?php foreach($row as $col):?>
                                                 <?php foreach($col as $class => $content):?>
                                                     <?php if($class == "button"):?>
-                                                        <?php foreach($content as $action => $value):?>
-                                                            <td class="action"><a class="btn btn-red" onclick="return confirm('Voulez-vous vraiment supprimer cet utilisateur');" href="<?php echo $action;?>"><?php echo $value;?></a></td>
-                                                        <?php endforeach;?>
+                                                        <td class="action">
+                                                            <?php foreach($content as $button):?>
+                                                                <a class="btn btn-<?php echo $button['color'];?>" <?php echo (isset($button['confirm']) && $button['confirm'])?'onclick="return confirm(\'Voulez-vous vraiment supprimer cet utilisateur\');"':'';?> href="<?php echo $button['action'];?>"><?php echo $button['value'];?></a>
+                                                            <?php endforeach;?>
+                                                        </td>
                                                     <?php else:?>
                                                         <td class="<?php echo $class;?>"><?php echo $content;?></td>
                                                     <?php endif;?>
@@ -41,6 +44,11 @@
                                         <?php endforeach;?>
                                     </tr>
                                 <?php endforeach;?>
+                            <?php else:?>
+                                <tr>
+                                    <td colspan="<?php echo sizeof($configBlocUsers['table']['header']);?>">Aucun utilisateur pour le moment</td>
+                                </tr>
+                            <?php endif;?>
                             </tbody>
                         </table>
                     </div>
