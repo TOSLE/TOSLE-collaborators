@@ -21,20 +21,13 @@ class User extends CoreSql{
     public function __construct($_id = null){
         parent::__construct();
         if(isset($_id) && is_numeric($_id)){
-            $target = [
-                'id',
-                'firstname',
-                'lastname',
-                'email',
-                'newsletter',
-            ];
             $parameter = [
                 'LIKE' => [
                     'id' => $_id
                 ]
             ];
             $this->setWhereParameter($parameter);
-            $this->getOneData($target);
+            $this->getOneData();
         }
     }
 

@@ -6,7 +6,7 @@
  * Time: 23:32
  */
 
-class UserController
+class UserController extends CoreController
 {
     public function indexAction($params)
     {
@@ -138,5 +138,33 @@ class UserController
         $_SESSION["email"] = null;
         $_SESSION["auth"] = null;
         session_destroy();
+    }
+
+    public function deleteAction($params)
+    {
+        if(isset($params['URI'][0]) && !empty($params['URI'][0]) && is_numeric($params['URI'][0])){
+            $User = new UserRepository($params['URI'][0]);
+            $BlogComment = new BlogComment();
+            $ChapterComment = new ChapterComment();
+            $parameterTable = [
+                'LIKE' => [
+                    'userid' => $User->getId()
+                ]
+            ];
+            $parameter = [
+                'LIKE' => [
+                    'id' => $User->getId()
+                ]
+            ];
+            $BlogComment->setWhereParameter($parameterTable);
+            $ChapterComment->setWhereParameter($parameterTable);
+            $BlogComment->delete();
+            $ChapterComment->delete();
+
+            // Une fois que tout est supprimé
+            $User->setWhereParameter($parameter);
+            $User->delete();
+        }
+        header('Location:'.$this->Routes['dashboard_student']);
     }
 }
