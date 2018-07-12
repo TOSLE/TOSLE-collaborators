@@ -11,6 +11,7 @@ class CoreSql{
     private $orderByParameter;
     private $leftJoin = "";
 
+    protected $routes = null;
     private $requestSend = [];
 
     /**
@@ -29,6 +30,8 @@ class CoreSql{
         }
         $this->table = "tosle_".strtolower(str_ireplace("Repository","",get_called_class()));
         $this->columnBase = strtolower(str_ireplace("Repository","",get_called_class()));
+
+        $this->routes = Access::getSlugsById();
     }
 
     /**

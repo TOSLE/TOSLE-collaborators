@@ -12,6 +12,8 @@ class Group extends CoreSql {
     protected $name;
     protected $fileid; /** a verif */
 
+    private $image = null;
+
     public function __construct()
     {
         parent::__construct();
@@ -62,10 +64,37 @@ class Group extends CoreSql {
      */
     public function setFileid($fileid)
     {
-        $this->fileid = $fileid;
+        $this->fileid = new File($fileid);
     }
 
     public function configFormAdd()
     {
+        return [
+            "config"=> [
+                "method"=>"post",
+                "action"=>"",
+                "submit"=>"Enregistrer",
+                "form_file"=>true,
+            ],
+            "input"=> [
+                "title"=>[
+                    "type"=>"text",
+                    "placeholder"=>"Nom du groupe",
+                    "required"=>true,
+                    "maxString"=>20,
+                    "label"=>"Nom du groupe",
+                    "description"=>"20 caractères maximum"
+                ],
+                "file"=>[
+                    "type"=>"file",
+                    "required"=>false,
+                    "label"=>"Ajouter un avatar au groupe",
+                    "format"=>"JPEG JPG PNG",
+                    "description"=>"Authorised format (JPEG, PNG, JPG)",
+                    "multiple"=>false
+                ]
+            ],
+            "exit" => $this->routes["dashboard_student"]
+        ];
     }
 }

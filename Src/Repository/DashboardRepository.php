@@ -8,9 +8,18 @@
 
 class DashboardRepository
 {
+    private $routes = null;
+    public function __construct()
+    {
+        $this->routes = Access::getSlugsById();
+    }
+
+    /**
+     * @return array
+     * Cette fonction retourne un tableau permettant la création du Dashboard bloc des utilisateurs
+     */
     public function getAllUsers()
     {
-        $Routes = Access::getSlugsById();
         $User = new UserRepository();
         $parameter = [
             'LIKE' => [
@@ -24,6 +33,7 @@ class DashboardRepository
         $arrayForJson['config']['col'] = 12;
         $arrayForJson['config']['idBloc'] = "bloc-users";
         $arrayForJson['config']['title'] = "Liste des utilisateurs";
+        $arrayForJson['config']['action'] = null;
         $arrayForJson['table']['header'] = [
             [
                 "text" => "Nom",
@@ -63,13 +73,13 @@ class DashboardRepository
                         "button" => [
                             [
                                 "value" => "Supprimer",
-                                "action" => $Routes['user/delete'].'/'.$user->getId(),
+                                "action" => $this->routes['user/delete'].'/'.$user->getId(),
                                 "color" => "red",
                                 "confirm" => true
                             ],
                             [
                                 "value" => "Groupes",
-                                "action" => $Routes['user/group'].'/'.$user->getId(),
+                                "action" => $this->routes['user/group'].'/'.$user->getId(),
                                 "color" => "tosle"
                             ],
                         ]
@@ -80,39 +90,10 @@ class DashboardRepository
 
         return $arrayForJson;
     }
+
+    public function getAllGroups()
+    {
+        $Group = new GroupRepository();
+
+    }
 }
-/*
-array : {
-    'config' : {
-        'col' : '6',
-		'title' : 'titre'
-	},
-	'table' : {
-        'header' : {
-            0 : {
-                'class' : 'nom'
-			},
-			1 : {
-                'class' : 'nom'
-			},
-			2 : {
-                'class' : 'nom'
-			},
-			3 : {
-                'class' : 'nom'
-			}
-		},
-		'body' : {
-            0 : {
-                'text' : 'content'
-			},
-			1 : {
-                'button' : {
-                    0 : {
-                        'acton' : 'content'
-					}
-				}
-			}
-		}
-	}
-}*/
