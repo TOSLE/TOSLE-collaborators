@@ -205,6 +205,16 @@ main {
     font-weight: 500; }
   main .additional-message-title {
     font-size: 0.7em; }
+  main .dashboard-bloc {
+    background-color: #FFF;
+    padding: 15px; }
+    main .dashboard-bloc .table-dashboard {
+      width: 100%;
+      border-collapse: collapse; }
+      main .dashboard-bloc .table-dashboard tr {
+        height: 50px; }
+        main .dashboard-bloc .table-dashboard tr td {
+          border: 1px solid #BDBDBD; }
 
 footer {
   background-color: #74858D; }

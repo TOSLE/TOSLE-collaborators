@@ -136,6 +136,7 @@ class Access
         "chapter/status" => 2,
         "chapter/order" => 2,
         "index/config" => false,
+        "user/delete" => 2,
     ];
 
     private $urlFixe = [
