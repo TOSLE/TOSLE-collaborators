@@ -21,7 +21,7 @@ class DashboardTable
     private $buttonColor = [];
     private $buttonValue = [];
     private $buttonAction = [];
-    private $buttonConfirm;
+    private $buttonConfirm = "";
 
     /**
      * DashboardTable constructor.
@@ -110,6 +110,11 @@ class DashboardTable
             'color' => $this->buttonColor,
             'confirm' => $this->buttonConfirm
         ];
+        $this->buttonValue = null;
+        $this->buttonAction = null;
+        $this->buttonColor = null;
+        $this->buttonConfirm = null;
+
     }
 
     /**

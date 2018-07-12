@@ -51,7 +51,7 @@
                                                 <?php if($class == "button"):?>
                                                     <td class="action">
                                                         <?php foreach($content as $button):?>
-                                                            <a class="btn btn-<?php echo $button['color'];?>" <?php echo (isset($button['confirm']) && $button['confirm'])?'onclick="return confirm(\'Voulez-vous vraiment supprimer ce groupe ?\');"':'';?> href="<?php echo $button['action'];?>"><?php echo $button['value'];?></a>
+                                                            <a class="btn btn-<?php echo $button['color'];?>" <?php echo (isset($button['confirm']) && !empty($button['confirm']))?'onclick="return confirm(\''.$button['confirm'].'\');"':'';?> href="<?php echo $button['action'];?>"><?php echo $button['value'];?></a>
                                                         <?php endforeach;?>
                                                     </td>
                                                 <?php elseif($class == "avatar"):?>
