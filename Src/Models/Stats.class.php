@@ -40,7 +40,7 @@ class Stats extends CoreSql {
     }
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getId()
     {
@@ -48,7 +48,7 @@ class Stats extends CoreSql {
     }
 
     /**
-     * @param mixed $id
+     * @param int $id
      */
     public function setId($id)
     {
@@ -56,39 +56,131 @@ class Stats extends CoreSql {
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getName()
+    public function getType()
     {
-        return $this->name;
+        return $this->type;
     }
 
     /**
-     * @param mixed $name
+     * @param string $type
      */
-    public function setName($name)
+    public function setType($type)
     {
-        $this->name = $name;
+        $this->type = $type;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getValue()
+    public function getToken()
     {
-        return $this->value;
+        return $this->token;
     }
 
     /**
-     * @param mixed $value
+     * @param string $token
      */
-    public function setValue($value)
+    public function setToken($token = null)
     {
-        $this->value = $value;
+        if(isset($token)){
+            $this->token = $token;
+        } else {
+            $this->token = uniqid(time().'_token_', true);
+        }
     }
 
-    public function configFormAdd()
+    /**
+     * @return int
+     */
+    public function getDay()
     {
+        return $this->day;
+    }
+
+    /**
+     * @param int $day
+     */
+    public function setDay($day)
+    {
+        $this->day = intval($day);
+    }
+
+    /**
+     * @return int
+     */
+    public function getMonth()
+    {
+        return $this->month;
+    }
+
+    /**
+     * @param int $month
+     */
+    public function setMonth($month)
+    {
+        $this->month = intval($month);
+    }
+
+    /**
+     * @return int
+     */
+    public function getYear()
+    {
+        return $this->year;
+    }
+
+    /**
+     * @param int $year
+     */
+    public function setYear($year)
+    {
+        $this->year = intval($year);
+    }
+
+    /**
+     * @return string
+     */
+    public function getTarget()
+    {
+        return $this->target;
+    }
+
+    /**
+     * @param string $target
+     */
+    public function setTarget($target)
+    {
+        $this->target = $target;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSource()
+    {
+        return $this->source;
+    }
+
+    /**
+     * @param string $source
+     */
+    public function setSource($source)
+    {
+        $this->source = $source;
+    }
+
+    public function getStatsView($_token, $_target)
+    {
+        $parameter = [
+            'LIKE' => [
+                'token' => $_token,
+                'target' => $_target
+            ]
+        ];
+        $this->setWhereParameter($parameter);
+        $this->getOneData();
     }
 
 }

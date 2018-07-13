@@ -26,6 +26,7 @@
 	if(file_exists("App/config/parameter.php")) {
         require "App/config/parameter.php";
 	    if(Installer::checkDatabaseConnexion()){
+            require "App/config/configuration.php";
             /**
              * @array tempUri
              * Contient un tableau de notre URI. La première cellule vaut l'URI propre et la seconde vaut les variables GET
@@ -81,6 +82,15 @@
             if ($userStatus < $accessParams["security"]) {
                 $controller = "IndexController";
                 $action = "accessAction";
+            }
+
+            /**
+             * Il n'est pas nécessaire d'avoir les statistiques de vue sur les routes avec accès admin
+             */
+            if($accessParams['security'] < 2) {
+                $cookieAnalytics = (isset($_COOKIE['TOSLE_ANALYTICS']))?$_COOKIE['TOSLE_ANALYTICS']:null;
+                $Analytics = new Analytics();
+                $Analytics->setViewStats($cookieAnalytics);
             }
 
             /**
