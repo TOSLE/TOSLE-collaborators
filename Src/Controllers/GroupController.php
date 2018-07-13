@@ -83,6 +83,10 @@ class GroupController extends CoreController
         }
     }
 
+    /**
+     * @param $params
+     * Retire un utilisateur du group
+     */
     public function unsetAction($params)
     {
         if(isset($params['URI'][0]) && !empty($params['URI'][0]) && is_numeric($params['URI'][0]) && is_numeric($params['URI'][1])) {
@@ -97,5 +101,45 @@ class GroupController extends CoreController
             $UserGroup->delete();
         }
         header('Location:'.$this->Routes['group/manage'].'/'.$params['URI'][0]);
+    }
+
+    /**
+     * @param $params
+     * Permet de gérer les groupes d'un utilisateur
+     */
+    public function umanageAction($params)
+    {
+        $View = new View("dashboard", "Dashboard/manage_group");
+        if(isset($params['URI'][0]) && !empty($params['URI'][0]) && is_numeric($params['URI'][0])) {
+            $Group = new GroupRepository();
+            $config = $Group->getUserManage($params['URI'][0]);
+            $errors = "";
+            if(key_exists('NO_GROUP', $config)){
+                $errors = $config;
+                $config = null;
+            }
+            $View->setData('errors', $errors);
+            $View->setData('config', $config);
+        }
+    }
+
+    /**
+     * @param $params
+     * Suppression d'un utilisateur d'un group et retour sur sa page de gestion
+     */
+    public function gunsetAction($params)
+    {
+        if(isset($params['URI'][0]) && !empty($params['URI'][0]) && is_numeric($params['URI'][0]) && is_numeric($params['URI'][1])) {
+            $UserGroup = new UserGroup();
+            $parameter = [
+                'LIKE' => [
+                    'userid' => $params['URI'][1],
+                    'groupid' => $params['URI'][0],
+                ]
+            ];
+            $UserGroup->setWhereParameter($parameter);
+            $UserGroup->delete();
+        }
+        header('Location:'.$this->Routes['group/umanage'].'/'.$params['URI'][1]);
     }
 }

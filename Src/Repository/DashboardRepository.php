@@ -55,7 +55,7 @@ class DashboardRepository
                 $Table->saveButton();
 
                 $Table->setValueButton('Groupes');
-                $Table->setActionButton($this->routes['user/group'].'/'.$user->getId());
+                $Table->setActionButton($this->routes['group/umanage'].'/'.$user->getId());
                 $Table->setColorButton("tosle");
                 $Table->saveButton();
                 $Table->saveTrBody();

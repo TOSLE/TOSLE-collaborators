@@ -242,13 +242,13 @@ class GroupRepository extends Group
                     $Table->setValueButton('Supprimer du groupe');
                     $Table->setActionButton($this->routes['group/unset'].'/'.$this->id.'/'.$user->getId());
                     $Table->setColorButton("red");
-                    $Table->setConfirmButton('Voulez-vous vraiment supprimer cet utilisateur : '.$user->getLastname().' '.$user->getFirstname().' ?');
+                    $Table->setConfirmButton('Voulez-vous vraiment supprimer cet utilisateur : '.$user->getLastname().' '.$user->getFirstname().' du groupe ?');
                     $Table->saveButton();
                     $Table->saveTrBody();
                 }
             }
 
-            return $Table->getArrayPHP();;
+            return $Table->getArrayPHP();
         }
         return ['NO_GROUP' => 'Aucun groupe renseigné'];
     }
@@ -279,5 +279,53 @@ class GroupRepository extends Group
         ];
         $User->setLeftJoin($joinParameter, $whereParameter);
         return $User->getData($target);
+    }
+
+    /**
+     * @param $_id
+     * @return array
+     * Récupère les groupes d'un utilisateurs
+     */
+    public function getGroupsUser($_id)
+    {
+        $target = [
+            'id',
+            'name'
+        ];
+        $joinParameter = [
+            'usergroup' => [
+                'group_id'
+            ]
+        ];
+        $whereParameter = [
+            'usergroup' => [
+                'user_id' => $_id
+            ]
+        ];
+        $this->setLeftJoin($joinParameter, $whereParameter);
+        return $this->getData($target);
+    }
+
+    public function getUserManage($_idUser)
+    {
+        $User = new UserRepository($_idUser);
+        $groups = $this->getGroupsUser($_idUser);
+        $Table = new DashboardTable('group-users', 'Liste des groupes de : '.$User->getLastname(). ' ' . $User->getFirstName(), 12);
+        $Table->setTableHeader("text", "Nom du groupe");
+        $Table->setTableHeader("date", "Action");
+
+        if(isset($groups) && !empty($groups)){
+            foreach($groups as $group){
+                $Table->setColumnBody('text', $group->getName());
+                $Table->setValueButton('Supprimer du groupe');
+                $Table->setActionButton($this->routes['group/gunset'].'/'.$group->getId().'/'.$User->getId());
+                $Table->setColorButton("red");
+                $Table->setConfirmButton('Voulez-vous vraiment supprimer cet utilisateur : '.$User->getLastname().' '.$User->getFirstname().' du groupe ?');
+                $Table->saveButton();
+                $Table->saveTrBody();
+            }
+        }
+
+        return $Table->getArrayPHP();
     }
 }

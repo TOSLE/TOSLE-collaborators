@@ -137,11 +137,12 @@ class Access
         "chapter/order" => 2,
         "index/config" => false,
         "user/delete" => 2,
-        "user/group" => 2,
         "group/delete" => 2,
         "group/manage" => 2,
         "group/edit" => 2,
         "group/unset" => 2,
+        "group/gunset" => 2,
+        "group/umanage" => 2,
     ];
 
     private $urlFixe = [
