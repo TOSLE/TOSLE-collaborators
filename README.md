@@ -61,6 +61,22 @@ apt-get install php5-gmp
 service apache2 restart
 </pre>
 
+### Configuration de l'éditeur
+
+Le CMS TOSLE utilise **CKEDITOR** et la version **KCFINDER** pour apporter un éditeur de texte riche en option.
+
+Néanmoins, il est nécessaire d'apporter une modification de droit pour un fichier :
+<pre>
+cd Public/Libraries/ckeditor/kcfinder
+</pre>
+
+A partir de la, il y a deux possibilités, le dossier `upload` n'existe pas ou il existe. S'il existe, 
+n'effectuez pas la première commande.
+
+<pre>
+mkdir upload
+chmod 0777 -R upload/
+</pre>
 
 Le README sera ridigé d'ici peu de temps :)
 __________________________
