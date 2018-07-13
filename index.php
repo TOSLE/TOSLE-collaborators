@@ -50,12 +50,12 @@
              * Contient les données de la route que l'on a trouvé grâce à l'URI
              */
             $slug = null;
-            if (isset($uriExploded[1])) {
-                $slug = $uriExploded[1];
+            if (isset($uriExploded[0])) {
+                $slug = $uriExploded[0];
             }
             $accessParams = $Acces->getRoute(strtolower($slug));
 
-            $language = (empty($uriExploded[0])) ? "en-EN" : strtolower($uriExploded[0]) . "-" . strtoupper($uriExploded[0]);
+            $language = (isset($_COOKIE['TOSLE_LANG'])) ? strtolower($_COOKIE['TOSLE_LANG']) . "-" . strtoupper($_COOKIE['TOSLE_LANG']) : "no-cookie";
             $controller = (empty($accessParams["controller"])) ? "ClassController" : ucfirst(strtolower($accessParams["controller"])) . "Controller";
             $action = (empty($accessParams["action"])) ? "indexAction" : strtolower($accessParams["action"]) . "Action";
 
@@ -87,21 +87,21 @@
              * Il est possible que l'URI renseigné soit sous le format domaine/langue/controller/action
              * On va donc tester s'il ne s'agit pas de ce genre d'URI
              */
-            if (isset($uriExploded[1]) && isset($uriExploded[2]) && $accessParams["slug"] == $Acces->getSlug("default")["slug"]) {
+            if (isset($uriExploded[0]) && isset($uriExploded[1]) && $accessParams["slug"] == $Acces->getSlug("default")["slug"]) {
                 $backOfficeRoute = $Acces->getBackOfficeRoute(strtolower($uriExploded[1]) . '/' . strtolower($uriExploded[2]));
                 if (!(intval($userStatus) < intval($backOfficeRoute)) && $backOfficeRoute != -1) {
-                    $controller = ucfirst(strtolower($uriExploded[1])) . "Controller";
-                    $action = strtolower($uriExploded[2]) . "Action";
-                    unset($uriExploded[2]);
+                    $controller = ucfirst(strtolower($uriExploded[0])) . "Controller";
+                    $action = strtolower($uriExploded[1]) . "Action";
+                    unset($uriExploded[1]);
                 } else {
                     if (!($backOfficeRoute == -1)) {
                         $controller = "IndexController";
                         $action = "accessAction";
-                        unset($uriExploded[2]);
+                        unset($uriExploded[1]);
                     } else {
                         $controller = "IndexController";
                         $action = "notfoundAction";
-                        unset($uriExploded[2]);
+                        unset($uriExploded[1]);
                     }
                 }
             }
@@ -116,8 +116,9 @@
             if (file_exists("Kernel/Language/" . $language . "/conf.lang.php")) {
                 include "Kernel/Language/" . $language . "/conf.lang.php";
             } else {
+                setcookie('TOSLE_LANG', 'en', time()+(3600*24*30*12));
                 $language = "en-EN";
-                include "Kernel/Language/en-EN/conf.lang.php";
+                include "Kernel/Language/".$language."/conf.lang.php";
             }
 
             if (file_exists("Src/Controllers/" . $controller . ".php")) {
