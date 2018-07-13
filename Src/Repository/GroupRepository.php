@@ -191,6 +191,11 @@ class GroupRepository extends Group
         $UserGroup->save();
     }
 
+    /**
+     * @param $_id
+     * @return array
+     * Génère le tableau utiliser par un autre fonction pour affecter le "selected" sur les
+     */
     public function getUserForSelect($_id)
     {
         $User = new UserRepository();

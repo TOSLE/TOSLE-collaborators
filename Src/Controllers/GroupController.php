@@ -62,4 +62,9 @@ class GroupController extends CoreController
             $View->setData("configForm", $configForm);
         }
     }
+
+    public function manageAction($params)
+    {
+        $View = new View("dashboard", "Dashboard/manage_group");
+    }
 }
