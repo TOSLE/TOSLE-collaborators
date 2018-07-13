@@ -84,11 +84,11 @@
             }
 
             /**
-             * Il est possible que l'URI renseigné soit sous le format domaine/langue/controller/action
+             * Il est possible que l'URI renseigné soit sous le format domaine/controller/action
              * On va donc tester s'il ne s'agit pas de ce genre d'URI
              */
             if (isset($uriExploded[0]) && isset($uriExploded[1]) && $accessParams["slug"] == $Acces->getSlug("default")["slug"]) {
-                $backOfficeRoute = $Acces->getBackOfficeRoute(strtolower($uriExploded[1]) . '/' . strtolower($uriExploded[2]));
+                $backOfficeRoute = $Acces->getBackOfficeRoute(strtolower($uriExploded[0]) . '/' . strtolower($uriExploded[1]));
                 if (!(intval($userStatus) < intval($backOfficeRoute)) && $backOfficeRoute != -1) {
                     $controller = ucfirst(strtolower($uriExploded[0])) . "Controller";
                     $action = strtolower($uriExploded[1]) . "Action";
@@ -110,7 +110,6 @@
              * On créer notre tableau de paramètre qui contiendra nos GET, POST et paramètres en URI
              */
             unset($uriExploded[0]);
-            unset($uriExploded[1]);
             $parameter = ["POST" => $_POST, "GET" => $_GET, "URI" => array_values($uriExploded)];
 
             if (file_exists("Kernel/Language/" . $language . "/conf.lang.php")) {
