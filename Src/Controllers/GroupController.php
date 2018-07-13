@@ -82,4 +82,20 @@ class GroupController extends CoreController
             $View->setData('config', $config);
         }
     }
+
+    public function unsetAction($params)
+    {
+        if(isset($params['URI'][0]) && !empty($params['URI'][0]) && is_numeric($params['URI'][0]) && is_numeric($params['URI'][1])) {
+            $UserGroup = new UserGroup();
+            $parameter = [
+                'LIKE' => [
+                    'userid' => $params['URI'][1],
+                    'groupid' => $params['URI'][0],
+                ]
+            ];
+            $UserGroup->setWhereParameter($parameter);
+            $UserGroup->delete();
+        }
+        header('Location:'.$this->Routes['group/manage'].'/'.$params['URI'][0]);
+    }
 }
