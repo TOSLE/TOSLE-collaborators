@@ -484,7 +484,8 @@ main {
           font-size: 0.7em; }
 
 footer {
-  background-color: #74858D; }
+  background-color: #74858D;
+  margin-top: 15px; }
   footer > .footer-section {
     max-width: 1230px;
     margin: 0 auto;
