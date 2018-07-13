@@ -84,14 +84,6 @@
                 $action = "accessAction";
             }
 
-            /**
-             * Il n'est pas nécessaire d'avoir les statistiques de vue sur les routes avec accès admin
-             */
-            if($accessParams['security'] < 2) {
-                $cookieAnalytics = (isset($_COOKIE['TOSLE_ANALYTICS']))?$_COOKIE['TOSLE_ANALYTICS']:null;
-                $Analytics = new Analytics();
-                $Analytics->setViewStats($cookieAnalytics);
-            }
 
             /**
              * Il est possible que l'URI renseigné soit sous le format domaine/controller/action
@@ -114,6 +106,15 @@
                         unset($uriExploded[1]);
                     }
                 }
+            }
+
+            /**
+             * Il n'est pas nécessaire d'avoir les statistiques de vue sur les routes avec accès admin
+             */
+            if($accessParams['security'] < 2 && !isset($backOfficeRoute)) {
+                $cookieAnalytics = (isset($_COOKIE['TOSLE_ANALYTICS']))?$_COOKIE['TOSLE_ANALYTICS']:null;
+                $Analytics = new Analytics();
+                $Analytics->setViewStats($cookieAnalytics);
             }
 
             /**
