@@ -141,6 +141,7 @@ class Access
         "group/delete" => 2,
         "group/manage" => 2,
         "group/edit" => 2,
+        "group/unset" => 2,
     ];
 
     private $urlFixe = [

@@ -63,8 +63,23 @@ class GroupController extends CoreController
         }
     }
 
+    /**
+     * @param $params
+     * Gestion d'un groupe où il est possible de supprimer un utilisateur du groupe
+     */
     public function manageAction($params)
     {
         $View = new View("dashboard", "Dashboard/manage_group");
+        if(isset($params['URI'][0]) && !empty($params['URI'][0]) && is_numeric($params['URI'][0])) {
+            $Group = new GroupRepository($params['URI'][0]);
+            $config = $Group->getGroupManage();
+            $errors = "";
+            if(key_exists('NO_GROUP', $config)){
+                $errors = $config;
+                $config = null;
+            }
+            $View->setData('errors', $errors);
+            $View->setData('config', $config);
+        }
     }
 }

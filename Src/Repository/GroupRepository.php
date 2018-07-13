@@ -218,4 +218,66 @@ class GroupRepository extends Group
         }
         return $returnArrayId;
     }
+
+
+    /**
+     * @return array
+     */
+    public function getGroupManage()
+    {
+        if(!empty($this->id)){
+            $users = $this->getUsersGroup($this->id);
+            $Table = new DashboardTable('group-users', 'Liste des utilisateurs du groupe : '.$this->name, 12);
+            $Table->setTableHeader("text", "Nom");
+            $Table->setTableHeader("text", "Prénom");
+            $Table->setTableHeader("text", "Email");
+            $Table->setTableHeader("date", "Action");
+
+            if(isset($users) && !empty($users)){
+                foreach($users as $user){
+                    $Table->setColumnBody('text', $user->getLastname());
+                    $Table->setColumnBody('text', $user->getFirstname());
+                    $Table->setColumnBody('text', $user->getEmail());
+
+                    $Table->setValueButton('Supprimer du groupe');
+                    $Table->setActionButton($this->routes['group/unset'].'/'.$this->id.'/'.$user->getId());
+                    $Table->setColorButton("red");
+                    $Table->setConfirmButton('Voulez-vous vraiment supprimer cet utilisateur : '.$user->getLastname().' '.$user->getFirstname().' ?');
+                    $Table->saveButton();
+                    $Table->saveTrBody();
+                }
+            }
+
+            return $Table->getArrayPHP();;
+        }
+        return ['NO_GROUP' => 'Aucun groupe renseigné'];
+    }
+
+    /**
+     * @param $_id
+     * @return array
+     * Récupère la liste des utilisateurs en fonction de l'id d'un groupe
+     */
+    public function getUsersGroup($_id)
+    {
+        $User = new UserRepository();
+        $target = [
+            'id',
+            'lastname',
+            'firstname',
+            'email',
+        ];
+        $joinParameter = [
+            'usergroup' => [
+                'user_id'
+            ]
+        ];
+        $whereParameter = [
+            'usergroup' => [
+                'group_id' => $_id
+            ]
+        ];
+        $User->setLeftJoin($joinParameter, $whereParameter);
+        return $User->getData($target);
+    }
 }
