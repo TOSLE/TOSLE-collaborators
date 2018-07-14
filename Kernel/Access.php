@@ -143,6 +143,7 @@ class Access
         "group/unset" => 2,
         "group/gunset" => 2,
         "group/umanage" => 2,
+        "class/follow" => 1,
     ];
 
     private $urlFixe = [

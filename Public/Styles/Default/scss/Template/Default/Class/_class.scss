@@ -109,3 +109,13 @@
     }
   }
 }
+
+/**
+Override buttons OSPAF
+ */
+.btn {
+  > i {
+    position: relative;
+    top: 5px;
+  }
+}

@@ -221,11 +221,20 @@ class ClassController extends CoreController
         header('Location:'.$routes["dashboard_lesson"]);
     }
 
-    public function subscribeAction()
+    /**
+     * @param $params
+     * Permet d'inscrire ou non l'utilisateur à la newsletter
+     */
+    public function subscribeAction($params)
     {
         $routes = Access::getSlugsById();
         $Newsletter = new Newsletter();
         $Newsletter->changeLessonNewsletter();
         header('Location:'.$routes['homepage']);
+    }
+
+    public function followAction($params)
+    {
+        
     }
 }
