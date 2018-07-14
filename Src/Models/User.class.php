@@ -17,10 +17,12 @@ class User extends CoreSql{
 
     private $dateInscription;
     private $dateUpdated;
+    private $groups = [];
 
     public function __construct($_id = null){
         parent::__construct();
         if(isset($_id) && is_numeric($_id)){
+            $Group = new GroupRepository();
             $parameter = [
                 'LIKE' => [
                     'id' => $_id
@@ -28,6 +30,7 @@ class User extends CoreSql{
             ];
             $this->setWhereParameter($parameter);
             $this->getOneData();
+            $this->groups = $Group->getGroupsUser($this->id);
         }
     }
 
@@ -150,6 +153,22 @@ class User extends CoreSql{
     public function getDateupdated()
     {
         return $this->dateUpdated;
+    }
+
+    public function getGroups()
+    {
+        return $this->groups;
+    }
+
+    public function setGroups($_arrayGroups)
+    {
+        if(isset($_arrayGroups) && is_array($_arrayGroups)){
+            foreach($_arrayGroups as $groupId){
+                $this->groups[] = new Group($groupId);
+            }
+        } else {
+            $this->groups = null;
+        }
     }
 
     public function configFormAdd()

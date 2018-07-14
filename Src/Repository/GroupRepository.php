@@ -306,6 +306,11 @@ class GroupRepository extends Group
         return $this->getData($target);
     }
 
+    /**
+     * @param $_idUser
+     * @return array
+     * Retourne le tableau de mangement d'un utilisateur et ses groupes
+     */
     public function getUserManage($_idUser)
     {
         $User = new UserRepository($_idUser);
