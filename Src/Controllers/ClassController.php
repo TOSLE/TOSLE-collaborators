@@ -74,9 +74,11 @@ class ClassController extends CoreController
             $Lesson = new LessonRepository();
             $Comment = new CommentRepository();
             $errors = "";
+            $subscribe = null;
             $formAddComment = $Comment->configFormAdd();
             if($Lesson->getLesson($params['URI'][0])){
                 $readChapter = $Lesson->getChapter()[0];
+                $subscribe = $Lesson->getSubscribe($this->Auth);
                 if(isset($params['URI'][1])){
                     foreach($Lesson->getChapter() as $Chapter){
                         if($Chapter->getUrl() == $params['URI'][1]){
@@ -96,6 +98,7 @@ class ClassController extends CoreController
                     $View->setData("lastComments", array_slice($allComments, 0, 5));
                 }
                 $View->setData("readChapter", $readChapter);
+                $View->setData("subscribe", $subscribe);
                 $View->setData("lesson", $Lesson);
                 $View->setData("formAddComment", $formAddComment);
                 $View->setData("errors", $errors);
@@ -233,8 +236,35 @@ class ClassController extends CoreController
         header('Location:'.$routes['homepage']);
     }
 
+    /**
+     * @param $params
+     * Permet de suivre l'évolution d'un cours, s'y inscrire
+     */
     public function followAction($params)
     {
-        
+        if(isset($params['URI'][0]) && !empty($params['URI'][0]) && is_numeric($params['URI'][0])){
+            $Lesson = new LessonRepository($params['URI'][0]);
+            if(isset($this->Auth) && !empty($this->Auth->getId())){
+                $UserLesson = new UserLesson();
+                if($Lesson->getSubscribe($this->Auth)){
+                    $parameter = [
+                        'LIKE' => [
+                            'userid' => $this->Auth->getId(),
+                            'lessonid' => $Lesson->getId()
+                        ]
+                    ];
+                    $UserLesson->setWhereParameter($parameter);
+
+                    $UserLesson->delete();
+                } else {
+                    $UserLesson->setUserid($this->Auth->getId());
+                    $UserLesson->setLessonid($params['URI'][0]);
+                    $UserLesson->save();
+                }
+            }
+            header('Location:'.$this->Routes['view_lesson'].'/'.$Lesson->getUrl());
+        } else {
+            header('Location:'.$this->Routes['homepage']);
+        }
     }
 }

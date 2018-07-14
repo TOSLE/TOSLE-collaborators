@@ -23,9 +23,18 @@ class Lesson extends CoreSql
     private $categorylesson = [];
     private $numberComment = 0;
 
-    public function __construct()
+    public function __construct($_id = null)
     {
         parent::__construct();
+        if(isset($_id) && is_numeric($_id)){
+            $parameter = [
+                'LIKE' => [
+                    'id' => $_id
+                ]
+            ];
+            $this->setWhereParameter($parameter);
+            $this->getOneData();
+        }
     }
 
     /**
@@ -302,6 +311,28 @@ class Lesson extends CoreSql
             ],
             "exit" => $slugs["dashboard_lesson"]
         ];
+    }
+
+    public function getSubscribe($_auth)
+    {
+        if(isset($this->id)){
+            if(isset($_auth) && !empty($_auth->getId())){
+                $UserLesson = new UserLesson();
+                $parameter = [
+                    'LIKE' => [
+                        'userid' => $_auth->getId(),
+                        'lessonid' => $this->id
+                    ]
+                ];
+                $UserLesson->setWhereParameter($parameter);
+                if($UserLesson->countData(['id']) > 0){
+                    return true;
+                } else {
+                    return null;
+                }
+            }
+        }
+        return false;
     }
 
 }
