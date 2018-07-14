@@ -184,6 +184,20 @@ html {
           right: 7.5px; }
       html .lesson-bloc > .fade-background-lesson > .description-lesson {
         padding: 7.5px; }
+      html .lesson-bloc > .fade-background-lesson > .difficult {
+        display: flex; }
+        html .lesson-bloc > .fade-background-lesson > .difficult > .arrow-difficult {
+          width: 10px;
+          border-bottom: 10px solid transparent;
+          border-left: 10px solid;
+          border-top: 10px solid transparent; }
+        html .lesson-bloc > .fade-background-lesson > .difficult > p {
+          padding: 7.5px;
+          font-weight: 600; }
+        html .lesson-bloc > .fade-background-lesson > .difficult > span {
+          width: 25px;
+          line-height: 100%;
+          margin-top: 4px; }
       html .lesson-bloc > .fade-background-lesson > .category-list-lesson {
         position: absolute;
         bottom: 0;

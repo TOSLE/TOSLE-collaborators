@@ -221,11 +221,10 @@ class LessonRepository extends Lesson
     }
 
     /**
-     * @param int $_number
      * @return array
      * Retourne les dernières lessons, le nombre dépend du paramètre qui par défaut est à 5
      */
-    public function getLastLesson($_number = 5)
+    public function getLastLesson()
     {
         $target = [
             'id',
@@ -237,7 +236,6 @@ class LessonRepository extends Lesson
             'datecreate'
         ];
         $this->setOrderByParameter(["id" => "DESC"]);
-        $this->setLimitParameter($_number);
         return $this->getData($target);
     }
 
@@ -404,7 +402,7 @@ class LessonRepository extends Lesson
      * @return array
      * Permet de retourner les lessons dans un tableau d'objet. Il n'est pas nécessaire de spécifier les paramètres
      */
-    public function getLessons($_limit = null, $_offset = null)
+    public function getLessons($Auth, $_limit = null, $_offset = null)
     {
         $target = [
             "id",
@@ -417,11 +415,20 @@ class LessonRepository extends Lesson
             "type",
             "level"
         ];
-        $parameter = [
-            'LIKE' => [
-                'status' => 1
-            ]
-        ];
+        if(isset($Auth)){
+            $parameter = [
+                'LIKE' => [
+                    'status' => 1
+                ]
+            ];
+        } else {
+            $parameter = [
+                'LIKE' => [
+                    'status' => 1,
+                    'type' => 1
+                ]
+            ];
+        }
         if(isset($_limit)){
             $this->setLimitParameter($_limit, $_offset);
         }
@@ -529,9 +536,9 @@ class LessonRepository extends Lesson
      * @return int
      * Compte le nombre de lesson possédant un chapitre
      */
-    public function countNumberOfLesson()
+    public function countNumberOfLesson($Auth)
     {
-        $lessons = $this->getLessons();
+        $lessons = $this->getLessons($Auth);
         $returnValue = 0;
         foreach($lessons as $lesson)
         {
@@ -548,10 +555,10 @@ class LessonRepository extends Lesson
      * @return array|int
      * Cette fonction retourne une pagination pour les blogs en fonction d'un tableau envoyé
      */
-    public function getPagination($_numberLesson, $_get)
+    public function getPagination($_numberLesson, $_get, $Auth)
     {
         $pagination = [];
-        $numberTotalOfLesson = $this->countNumberOfLesson();
+        $numberTotalOfLesson = $this->countNumberOfLesson($Auth);
         $totalPage = ($numberTotalOfLesson != $_numberLesson)?(int)($numberTotalOfLesson / $_numberLesson):1;
         if($totalPage < $numberTotalOfLesson / $_numberLesson){
             $totalPage++;

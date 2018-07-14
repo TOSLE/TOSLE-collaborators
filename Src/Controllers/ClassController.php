@@ -25,7 +25,7 @@ class ClassController extends CoreController
         $numberLesson = 6;
         $offset = 0;
         $page = 1;
-        $pagination = $Lesson->getPagination($numberLesson, $params["GET"]);
+        $pagination = $Lesson->getPagination($numberLesson, $params["GET"], $this->Auth);
         $urlClassFeed = CoreFile::testFeedFile('lessonfeed.xml');
         if(isset($this->Auth)){
             $Newsletter = new Newsletter();
@@ -45,7 +45,7 @@ class ClassController extends CoreController
             if (isset($params["GET"]["number"])) {
                 if ($params["GET"]["number"] >= 1 || $params["GET"]["number"] <= 12) {
                     $numberLesson = $params["GET"]["number"];
-                    $pagination = $Lesson->getPagination($numberLesson, $params["GET"]);
+                    $pagination = $Lesson->getPagination($numberLesson, $params["GET"], $this->Auth);
                 }
             }
             if (isset($params['GET']['page']) && array_key_exists($params['GET']['page'], $pagination)) {
@@ -53,7 +53,7 @@ class ClassController extends CoreController
                 $offset = $numberLesson * $page - $numberLesson;
             }
         }
-        $lessons = $Lesson->getLessons($numberLesson, $offset);
+        $lessons = $Lesson->getLessons($this->Auth, $numberLesson, $offset);
         $View->setData('urlClassFeed', $urlClassFeed);
         $View->setData("pagination", $pagination);
         $View->setData("page", $page);
