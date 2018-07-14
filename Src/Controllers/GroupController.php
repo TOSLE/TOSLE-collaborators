@@ -61,6 +61,7 @@ class GroupController extends CoreController
             $View->setData("errors", $errors);
             $View->setData("configForm", $configForm);
         }
+        $View->setData('controller', "DashboardController");
     }
 
     /**
@@ -81,6 +82,7 @@ class GroupController extends CoreController
             $View->setData('errors', $errors);
             $View->setData('config', $config);
         }
+        $View->setData('controller', "DashboardController");
     }
 
     /**
@@ -121,6 +123,7 @@ class GroupController extends CoreController
             $View->setData('errors', $errors);
             $View->setData('config', $config);
         }
+        $View->setData('controller', "DashboardController");
     }
 
     /**

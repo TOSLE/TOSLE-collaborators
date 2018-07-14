@@ -150,6 +150,7 @@ class ClassController extends CoreController
         } else {
             header('Location:'.$routes['dashboard_lesson']);
         }
+        $View->setData('controller', "DashboardController");
     }
 
     public function editAction($params)
@@ -182,6 +183,7 @@ class ClassController extends CoreController
         } else {
             header('Location:'.$routes['dashboard_lesson']);
         }
+        $View->setData('controller', "DashboardController");
     }
 
     /**

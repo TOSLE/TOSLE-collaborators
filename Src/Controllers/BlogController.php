@@ -188,6 +188,7 @@ class BlogController
         } else {
             header('Location:'.$routes['dashboard_blog']);
         }
+        $View->setData('controller', "DashboardController");
     }
 
     function editAction($params)
@@ -234,6 +235,7 @@ class BlogController
         } else {
             header('Location:'.$routes['dashboard_blog']);
         }
+        $View->setData('controller', "DashboardController");
     }
 
     function statusAction($params)
