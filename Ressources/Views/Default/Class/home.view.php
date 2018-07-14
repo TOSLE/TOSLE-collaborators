@@ -64,7 +64,7 @@
                                 <?php if(!empty($lesson->getCategorylesson())):?>
                                     <ul class="tag-list category-list-lesson" style="border-color: <?php echo $lesson->getColor();?>;">
                                     <?php foreach($lesson->getCategorylesson() as $category):?>
-                                            <li class="item tosle">
+                                            <li class="item tosle" style="background-color: <?php echo $lesson->getColor();?>">
                                                 <?php echo $category->getName();?>
                                             </li>
                                     <?php endforeach;?>
@@ -72,7 +72,7 @@
                                 <?php endif;?>
                                 <div class="more-infos" style="background-color: <?php echo $lesson->getColor();?>">
                                     <p class="info-comment-lesson"><?php echo $lesson->getNumbercomment();?> <i class="material-icons">comment</i></p>
-                                    <a href="<?php echo $this->slugs["view_lesson"]."/".$lesson->getUrl();?>" class="btn btn-white-outline info-btn-readmore"><?php echo BLOG_BUTTON_READMORE;?></a>
+                                    <a href="<?php echo $this->slugs["view_lesson"]."/".$lesson->getUrl();?>" class="btn btn-dark-outline info-btn-readmore"><?php echo BLOG_BUTTON_READMORE;?></a>
                                     <p class="info-chapter">
                                         <?php echo count($lesson->getChapter());?> <i class="material-icons">import_contacts</i>
                                     </p>

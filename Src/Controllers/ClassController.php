@@ -84,7 +84,7 @@ class ClassController extends CoreController
                         }
                     }
                 }
-                if(isset($params["POST"]) && !empty($params["POST"])){
+                if(isset($this->Auth) && isset($params["POST"]) && !empty($params["POST"])){
                     $errors = Form::checkForm($formAddComment, $params["POST"]);
                     $dataForm = Form::secureData($params['POST']);
                     $Comment->addComment($formAddComment, $dataForm, 2, $readChapter->getId());

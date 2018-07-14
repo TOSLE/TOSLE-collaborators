@@ -431,14 +431,15 @@ class LessonRepository extends Lesson
         foreach($arrayReturn as $lesson){
             $Category = new CategoryRepository();
             $LessonChapter = new LessonChapter();
+            $Chapter = new ChapterRepository();
             $arrayChapter = $LessonChapter->getLessonChapterByIdentifier('lesson', $lesson->getId());
             $arrayCategory = $Category->getCategoryByIdentifier('lesson', $lesson->getId());
-            $numberComment = $Category->getComments(array_keys($arrayCategory)[0]);
+            foreach ($arrayChapter as $id){
+                $lesson->setNumberComment(sizeof($Chapter->getComments($id)));
+            }
             $lesson->setCategorylesson($arrayCategory);
             $lesson->setChapter($arrayChapter);
-            $lesson->setNumberComment(sizeof($numberComment));
         }
-
         return $arrayReturn;
     }
 

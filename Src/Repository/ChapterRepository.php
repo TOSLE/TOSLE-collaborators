@@ -177,4 +177,22 @@ class ChapterRepository extends Chapter
         $this->getLessonchapter()->save();
         return 1;
     }
+
+
+    /**
+     * @param null $_id
+     * @return array|int
+     * Récupère les commentaires du chapitres
+     */
+    public function getComments($_id = null)
+    {
+        if(isset($_id)){
+            $idChapter = $_id;
+        } else {
+            $idChapter = $this->getId();
+        }
+        $Comment = new CommentRepository();
+        $allComments = $Comment->getAll('chapter', $idChapter);
+        return $allComments;
+    }
 }

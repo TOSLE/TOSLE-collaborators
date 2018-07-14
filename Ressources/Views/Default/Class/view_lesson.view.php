@@ -80,13 +80,15 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-3"></div>
-            <div class="col-6">
-                <div>
-                    <?php $this->addModal("form", $formAddComment, $errors); ?>
+        <?php if(isset($this->Auth)):?>
+            <div class="row">
+                <div class="col-3"></div>
+                <div class="col-6">
+                    <div>
+                        <?php $this->addModal("form", $formAddComment, $errors); ?>
+                    </div>
                 </div>
             </div>
-        </div>
+        <?php endif;?>
     </section>
 <?php endif;?>
