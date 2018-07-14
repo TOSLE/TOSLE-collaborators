@@ -263,10 +263,24 @@ class LessonRepository extends Lesson
             $this->setLevel($tmpPostArray["select_difficulty"]);
             $this->save();
             $this->getLessonByUrl($this->getUrl());
+            $LessonGroup = new LessonGroup();
+            $parameter = [
+                'LIKE' => [
+                    'lessonid' => $this->id
+                ]
+            ];
+            $LessonGroup->setWhereParameter($parameter);
+            $LessonGroup->delete();
             if(isset($tmpPostArray["category_select"]) && !empty($tmpPostArray["category_select"]))
             {
                 $category = new CategoryRepository();
                 $arrayCategory = $category->addCategoryBySelect($tmpPostArray["category_select"], 'lesson', $this->getId());
+            }
+            if(isset($tmpPostArray["group_select"]) && !empty($tmpPostArray["group_select"]))
+            {
+                foreach($tmpPostArray["group_select"] as $id){
+                    $LessonGroup->addLessonGroup($this->getId(), $id);
+                }
             }
             if(isset($tmpPostArray["category_input"]) && !empty($tmpPostArray["category_input"])){
                 $category = new CategoryRepository();
@@ -302,12 +316,15 @@ class LessonRepository extends Lesson
     {
         $this->getLessonById($_idLesson);
         if(!empty($this->id)){
+            $LessonGroup = new LessonGroup();
             $category = new CategoryRepository();
             $categoryFounded = $category->getCategoryByIdentifier('lesson', $this->id);
+            $groupFounded = $LessonGroup->getGroupsLesson($this->id);
             return $arrayObject = [
                 "lesson" => $this,
                 "selectedOption" => [
                     "category_select" => $categoryFounded,
+                    "group_select" => $groupFounded
                 ],
                 "configForm" => $this->configFormAddLesson()
             ];

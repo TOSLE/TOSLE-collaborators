@@ -67,7 +67,7 @@
                         <?php endif;?>
                         <select <?php echo (isset($attributs["multiple"]))?"multiple='multiple'":"";?> size="8" id="<?php echo $name;?>" name="<?php echo $name;?>[]">
                             <?php foreach($attributs["options"] as $value => $text):?>
-                                <option value="<?php echo $value;?>" <?php echo (isset($config['data_content']['selectedOption'][$value]))?"selected":"";?>><?php echo $text;?></option>
+                                <option value="<?php echo $value;?>" <?php echo (isset($config['data_content']['selectedOption']["group_select"][$value]))?"selected":"";?>><?php echo $text;?></option>
                             <?php endforeach;?>
                         </select>
                         <?php if(isset($attributs["description"])):?>
