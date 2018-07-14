@@ -404,6 +404,10 @@ body > header {
         text-align: right; }
         body > header > section > div > .right-block .tosle-btn {
           line-height: 60px; }
+        body > header > section > div > .right-block #modal-signin {
+          text-align: left; }
+          body > header > section > div > .right-block #modal-signin input {
+            margin-top: 15px; }
         body > header > section > div > .right-block > i {
           font-size: 1.5em;
           margin-right: 50px;

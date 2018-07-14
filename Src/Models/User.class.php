@@ -197,13 +197,17 @@ class User extends CoreSql{
         ];
     }
 
-    public function configFormConnect()
+    public function configFormConnect($action = "")
     {
         return [
             "config"=> [
                 "method"=>"post",
-                "action"=>"",
-                "submit"=>"Se connecter"
+                "action"=>$action,
+                "submit"=>"Se connecter",
+                "secure" => [
+                    "status" => true,
+                    "duration" => 5
+                ],
             ],
             "input"=> [
                 "email"=>[

@@ -42,6 +42,7 @@
         <!-- INCLUDE SCRIPT -->
         <script src="<?php echo DIRNAME;?>Public/Javascripts/Default/menuprofil.js"></script>
         <script src="<?php echo DIRNAME;?>Public/Javascripts/Default/Messaging/burgermenu.js"></script>
+        <script src="<?php echo DIRNAME;?>Public/Libraries/Framework/ospaf/js/modals.js"></script>
         <!-- INCLUDE SCRIPT -->
     </body>
 </html>
