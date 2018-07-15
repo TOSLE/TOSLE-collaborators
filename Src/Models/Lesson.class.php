@@ -309,7 +309,8 @@ class Lesson extends CoreSql
                         '#ff8383' => 'Rouge',
                         '#97ca74' => 'Vert',
                         '#f1c97c' => 'Orange',
-                        '#fde583' => 'Jaune',
+                        '#61c0bf' => 'Bleu pastel',
+                        '#f8a3d3' => 'Rose pastel',
                     ],
                     'description' => 'Couleur d\'arrière plan'
                 ],
