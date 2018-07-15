@@ -422,15 +422,8 @@ class LessonRepository extends Lesson
     public function getLessons($Auth, $_limit = null, $_offset = null)
     {
         $target = [
-            "id",
-            "title",
-            "description",
-            "datecreate",
-            "status",
-            "url",
-            "color",
-            "type",
-            "level"
+            "id", "title", "description", "datecreate",
+            "status", "url", "color", "type", "level"
         ];
         if(isset($Auth)){
             $parameter = [
@@ -438,6 +431,9 @@ class LessonRepository extends Lesson
                     'status' => 1
                 ]
             ];
+            foreach($Auth->getGroups() as $group){
+                $userGroups[$group->getId()] = $group->getName();
+            }
         } else {
             $parameter = [
                 'LIKE' => [
@@ -452,17 +448,38 @@ class LessonRepository extends Lesson
         $this->setWhereParameter($parameter);
         $this->setOrderByParameter(["id" => "DESC"]);
         $arrayReturn = $this->getData($target);
-        foreach($arrayReturn as $lesson){
+        $arrayUnset = [];
+        foreach($arrayReturn as $key => $lesson){
             $Category = new CategoryRepository();
             $LessonChapter = new LessonChapter();
             $Chapter = new ChapterRepository();
+            $Groups = new LessonGroup();
+            $arrayGroups = $Groups->getGroupsLesson($lesson->getId());
+            if(is_array($arrayGroups) && isset($userGroups) && $lesson->getType() == 2){
+                $temporaryTab = array_diff_key($arrayGroups,$userGroups);
+                if(isset($temporaryTab) && is_array($temporaryTab)){
+                    if(sizeof($arrayGroups) == sizeof($temporaryTab)){
+                        $arrayUnset[] = $key;
+                    }
+                }
+            }
             $arrayChapter = $LessonChapter->getLessonChapterByIdentifier('lesson', $lesson->getId());
             $arrayCategory = $Category->getCategoryByIdentifier('lesson', $lesson->getId());
             foreach ($arrayChapter as $id){
                 $lesson->setNumberComment(sizeof($Chapter->getComments($id)));
             }
+            if(isset($arrayGroups) && !empty($arrayGroups)){
+                foreach ($arrayGroups as $idGroup => $value) {
+                    $lesson->setGroups($idGroup);
+                }
+            }
             $lesson->setCategorylesson($arrayCategory);
             $lesson->setChapter($arrayChapter);
+        }
+        if(isset($arrayUnset) && !empty($arrayUnset)){
+            foreach($arrayUnset as $keyToUnset){
+                unset($arrayReturn[$keyToUnset]);
+            }
         }
         return $arrayReturn;
     }

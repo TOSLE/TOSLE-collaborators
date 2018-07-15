@@ -22,6 +22,7 @@ class Lesson extends CoreSql
     private $chapter;
     private $categorylesson = [];
     private $numberComment = 0;
+    private $groups = [];
 
     public function __construct($_id = null)
     {
@@ -238,6 +239,29 @@ class Lesson extends CoreSql
     {
         $this->numberComment += $numberComment;
     }
+
+    /**
+     * @return array
+     */
+    public function getGroups()
+    {
+        return $this->groups;
+    }
+
+    /**
+     * @param int $groupId
+     * Nécessite l'id du groupe à ajouter
+     */
+    public function setGroups($groupId)
+    {
+        if(isset($groupId) && is_numeric($groupId)){
+            $this->groups[] = new Group($groupId);
+        } else {
+            $this->groups = null;
+        }
+    }
+
+
 
     /**
      * @return array
