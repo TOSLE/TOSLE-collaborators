@@ -65,5 +65,30 @@ class MessageConversation extends CoreSql
         $this->conversationid = $conversationid;
     }
 
+    public function getMessageConversation($_origin, $_value)
+    {
+        switch($_origin){
+            case 'conversation':
+                $opposite = 'messageid';
+                break;
+            case 'message':
+                $opposite = 'conversationid';
+                break;
+        }
+        $parameter = [
+            'LIKE' => [
+                $_origin.'id' => $_value
+            ]
+        ];
+        $array = [];
+        $this->setWhereParameter($parameter);
+        $this->setOrderByParameter(['id' => 'DESC']);
+        foreach($this->getData() as $messageconversation){
+            $tmpString = 'get'.ucfirst(strtolower($opposite));
+            $array[] = $messageconversation->$tmpString();
+        }
+        return $array;
+    }
+
     
 }

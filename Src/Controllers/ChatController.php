@@ -18,6 +18,10 @@ class ChatController extends CoreController
         if(isset($this->Auth)){
             $View = new View("messaging", "chat");
             $View->setData("PageName", NAVBAR_MESSAGING." ".GLOBAL_HOME_TEXT);
+
+            $Conversation = new ConversationRepository();
+            $conversations = $Conversation->getConversations();
+            $View->setData('conversations', $conversations);
         } else {
             $User = new UserRepository();
             $View = new View("default", "Chat/connect");

@@ -10,8 +10,8 @@
     </div>
     <div class="content-box-left">
         <div class="profil-info">
-            <p class="identity">LastName FirstName</p>
-            <p class="contact"><a href="mailto:contact.tosle@gmail.com">lastname.firstname@domain.com</a></p>
+            <p class="identity"><?php echo $this->Auth->getFirstname().' '.$this->Auth->getLastname();?></p>
+            <p class="contact"><?php echo $this->Auth->getEmail();?></p>
         </div>
         <div class="profil-stats">
             <div class="conversation">
@@ -30,7 +30,7 @@
     </div>
     <div class="footer-infos">
         <div class="more-infos">
-            <a href="#"><?php echo GLOBAL_FOOTER_LEGAL;?></a> - <a href="#"><?php echo GLOBAL_FOOTER_RSS;?></a> - <a href="#"><?php echo GLOBAL_FOOTER_PRIVACY;?></a>
+            <a href="#"><?php echo GLOBAL_FOOTER_LEGAL;?></a> - <a href="#"><?php echo GLOBAL_FOOTER_PRIVACY;?></a>
         </div>
         <div class="global-infos">
             <p>TOSLE <i class="material-icons">&#xE90C;</i> 2018</p>
@@ -99,6 +99,29 @@
                 <p>3 <?php echo MIDDLE_COLUMN_MESSAGING_MESSAGE_MONTH_AGO;?></p>
             </div>
         </a>
+        <?php if(isset($conversations)):?>
+            <?php foreach($conversations as $key => $conversation):?>
+                <a href="<?php echo $this->slugs['chathome'].'/'.$conversation->getId();?>" class="message-info <?php echo ($key == 0)?'':'';?>">
+                    <div class="parameter-message">
+                        <i class="material-icons">&#xE8B8;</i>
+                    </div>
+                    <div class="header-message">
+                        <div class="logo-header-message">
+                            <?php echo $conversation->getDestination()->getFirstname()[0];?>
+                        </div>
+                        <div class="id-header-message">
+                            <?php echo $conversation->getDestination()->getFirstname().' '.$conversation->getDestination()->getLastname();?>
+                        </div>
+                    </div>
+                    <div class="main-message">
+                        <p><?php echo $conversation->getMessages()[0]->getContent();?></p>
+                    </div>
+                    <div class="footer-message">
+                        <p><?php echo $conversation->getMessages()[0]->getDatecreate();?></p>
+                    </div>
+                </a>
+            <?php endforeach;?>
+        <?php endif;?>
     </div>
 </section>
 <section class="right-column">

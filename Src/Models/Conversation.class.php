@@ -11,8 +11,11 @@ class Conversation extends CoreSql {
     protected $id;
     protected $iddest;
     protected $type;
-    protected $dateCreate;
     protected $status;
+    protected $datecreate;
+
+    private $messages = [];
+    private $destination;
 
     public function __construct()
     {
@@ -98,6 +101,43 @@ class Conversation extends CoreSql {
     {
         $this->status = $status;
     }
+
+    /**
+     * @return array
+     */
+    public function getMessages()
+    {
+        return $this->messages;
+    }
+
+    /**
+     * @param array $messages
+     */
+    public function setMessages($messages)
+    {
+        foreach($messages as $id){
+            $this->messages[] = new Message($id);
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDestination()
+    {
+        return $this->destination;
+    }
+
+    /**
+     * @param mixed $destination
+     */
+    public function setDestination($destination)
+    {
+        $this->destination = new User($destination);
+    }
+
+
+
 
 
     public function configFormAdd()
