@@ -171,11 +171,11 @@ class User extends CoreSql{
         }
     }
 
-    public function configFormAdd()
+    public function configFormAdd($action = "")
     {
         // FAIRE LES ID ET LES CLASS POUR LE CMS
         return [
-            "config"=> ["method"=>"post", "action"=>"", "submit"=>"S'inscrire"],
+            "config"=> ["method"=>"post", "action"=>$action, "submit"=>"S'inscrire"],
             "input"=> [
                 "firstname"=>[
                     "type"=>"text",

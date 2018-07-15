@@ -6,7 +6,7 @@
  * Time: 23:44
  */
 
-class ChatController
+class ChatController extends CoreController
 {
     /**
      * @Route("/en/chat(/index)")
@@ -15,8 +15,21 @@ class ChatController
      */
     function indexAction($params)
     {
-        $View = new View("messaging", "chat");
-        $View->setData("PageName", NAVBAR_MESSAGING." ".GLOBAL_HOME_TEXT);
+        if(isset($this->Auth)){
+            $View = new View("messaging", "chat");
+            $View->setData("PageName", NAVBAR_MESSAGING." ".GLOBAL_HOME_TEXT);
+        } else {
+            $User = new UserRepository();
+            $View = new View("default", "Chat/connect");
+            $configConnect = $User->configFormConnect($this->Routes['signin']);
+            $configInscrip = $User->configFormAdd($this->Routes['signup']);
+            $errorsConnect = '';
+            $errorsInscrip = '';
+            $View->setData('configConnect', $configConnect);
+            $View->setData('errorsConnect', $errorsConnect);
+            $View->setData('errorsInscrip', $errorsInscrip);
+            $View->setData('configInscrip', $configInscrip);
+        }
     }
 
     /**
