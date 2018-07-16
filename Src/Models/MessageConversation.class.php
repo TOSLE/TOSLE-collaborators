@@ -82,7 +82,6 @@ class MessageConversation extends CoreSql
         ];
         $array = [];
         $this->setWhereParameter($parameter);
-        $this->setOrderByParameter(['id' => 'DESC']);
         foreach($this->getData() as $messageconversation){
             $tmpString = 'get'.ucfirst(strtolower($opposite));
             $array[] = $messageconversation->$tmpString();
