@@ -209,7 +209,7 @@ class CoreSql{
      * @return int|array
      * Permet de traiter la gestion des targets
      */
-    public function getTarget($_target)
+    private function setSelectedTarget($_target)
     {
         if(is_array($_target)){
             $arrayTarget = [];
@@ -239,7 +239,7 @@ class CoreSql{
      */
     public function getData($target = "*")
     {
-        $target = $this->getTarget($target);
+        $target = $this->setSelectedTarget($target);
 
         $query = $this->pdo->prepare("
             SELECT " . implode(',', $target) . " 
@@ -290,7 +290,7 @@ class CoreSql{
      */
     public function getOneData($target = "*")
     {
-        $target = $this->getTarget($target);
+        $target = $this->setSelectedTarget($target);
 
         $query = $this->pdo->prepare("
             SELECT " . implode(',', $target) . " 
@@ -338,7 +338,7 @@ class CoreSql{
      */
     public function countData($target = "*")
     {
-        $target = $this->getTarget($target);
+        $target = $this->setSelectedTarget($target);
 
         $query = $this->pdo->prepare("
             SELECT count(" . implode(',', $target) . ") 

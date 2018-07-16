@@ -8,6 +8,7 @@ $(".target-modal").click(function(){
 			$("#"+modalTarget).css("opacity", "1");
 			$("#"+modalTarget).children("div").css("top", "20%");
 		},100);
+		return false;
 	}
 });
 $("body").click(function(targetDiv){

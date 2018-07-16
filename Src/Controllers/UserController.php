@@ -209,14 +209,4 @@ class UserController extends CoreController
         }
         header('Location:'.$this->Routes['dashboard_student']);
     }
-
-    /**
-     * @param $params
-     * Gestion des groupes en lien avec un ID
-     */
-    public function groupAction($params)
-    {
-
-        header('Location:'.$this->Routes['dashboard_student']);
-    }
 }

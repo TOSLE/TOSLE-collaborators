@@ -1,9 +1,16 @@
 <?php if(isset($error_search)):?>
     <?php echo $error_search;?>
 <?php else:?>
-    <!--
-        Ce qui va suivre est l'affichage du tableau descriptif des cours
-    -->
+    <div class="container">
+        <div class="row">
+            <section class="title-page col-12">
+                <div class="marg-container">
+                    <h2><a class="btn-sm btn-dark" href="<?php echo $this->slugs["homepage"]; ?>">Back home</a>
+                        <span class="additional-message-title"> / <?php echo $lesson->getTitle(); ?></span></h2>
+                </div>
+            </section>
+        </div>
+    </div>
     <section class="container header-section-lesson">
         <div class="row">
             <div class="col-12">
@@ -19,6 +26,13 @@
                     <p>
                         <?php echo $lesson->getDescription();?>
                     </p>
+                    <?php if(isset($this->Auth)):?>
+                        <?php if(isset($subscribe)):?>
+                            <a href="<?php echo $this->slugs['class/follow'].'/'.$lesson->getId();?>" class="btn btn-red-outline"><i class="material-icons">notifications_off</i><span>Unsubscribe</span></a>
+                        <?php else:?>
+                            <a href="<?php echo $this->slugs['class/follow'].'/'.$lesson->getId();?>" class="btn btn-tosle-outline"><i class="material-icons">notifications</i><span>Subscribe</span></a>
+                        <?php endif;?>
+                    <?php endif;?>
                 </div>
             </div>
             <div class="col-6">
@@ -80,13 +94,15 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-3"></div>
-            <div class="col-6">
-                <div>
-                    <?php $this->addModal("form", $formAddComment, $errors); ?>
+        <?php if(isset($this->Auth)):?>
+            <div class="row">
+                <div class="col-3"></div>
+                <div class="col-6">
+                    <div>
+                        <?php $this->addModal("form", $formAddComment, $errors); ?>
+                    </div>
                 </div>
             </div>
-        </div>
+        <?php endif;?>
     </section>
 <?php endif;?>

@@ -34,63 +34,35 @@ class DashboardRepository
         $User->setWhereParameter($parameter);
         $User->setOrderByParameter(['lastname' => 'ASC']);
         $users = $User->getData();
-        $arrayForJson = [];
-        $arrayForJson['config']['col'] = 12;
-        $arrayForJson['config']['idBloc'] = "bloc-users";
-        $arrayForJson['config']['title'] = "Liste des utilisateurs";
-        $arrayForJson['config']['action']['add'] = null;
-        $arrayForJson['table']['header'] = [
-            [
-                "text" => "Nom",
-            ],
-            [
-                "text" => "Prénom",
-            ],
-            [
-                "text" => "Email",
-            ],
-            [
-                "date" => "Inscription",
-            ],
-            [
-                "action" => "Action",
-            ],
-        ];
+        $Table = new DashboardTable('bloc-users', 'Liste des utilisateurs', 12);
+        $Table->setTableHeader("text", "Nom");
+        $Table->setTableHeader("text", "Prénom");
+        $Table->setTableHeader("text", "Email");
+        $Table->setTableHeader("date", "Inscription");
+        $Table->setTableHeader("date", "Action");
+
         if(isset($users) && !empty($users)){
             foreach($users as $user){
-                $arrayForJson['table']['body'][] = [
-                    [
-                        "text" => $user->getLastname()
-                    ],
-                    [
-                        "text" => $user->getFirstname()
-                    ],
-                    [
-                        "text" => $user->getEmail()
-                    ],
-                    [
-                        "date" => $user->getDateinscription()
-                    ],
-                    [
-                        "button" => [
-                            [
-                                "value" => "Supprimer",
-                                "action" => $this->routes['user/delete'].'/'.$user->getId(),
-                                "color" => "red",
-                                "confirm" => true
-                            ],
-                            [
-                                "value" => "Groupes",
-                                "action" => $this->routes['user/group'].'/'.$user->getId(),
-                                "color" => "tosle"
-                            ],
-                        ]
-                    ],
-                ];
+                $Table->setColumnBody('text', $user->getLastname());
+                $Table->setColumnBody('text', $user->getFirstname());
+                $Table->setColumnBody('text', $user->getEmail());
+                $Table->setColumnBody('date', $user->getDateinscription());
+
+                $Table->setValueButton('Supprimer');
+                $Table->setActionButton($this->routes['user/delete'].'/'.$user->getId());
+                $Table->setColorButton("red");
+                $Table->setConfirmButton('Voulez-vous vraiment supprimer ce groupe : '.$user->getLastname().' '.$user->getFirstname().' ?');
+                $Table->saveButton();
+
+                $Table->setValueButton('Groupes');
+                $Table->setActionButton($this->routes['group/umanage'].'/'.$user->getId());
+                $Table->setColorButton("tosle");
+                $Table->saveButton();
+                $Table->saveTrBody();
             }
         }
 
-        return $arrayForJson;
+        return $Table->getArrayPHP();;
     }
 
     /**
@@ -101,65 +73,42 @@ class DashboardRepository
     {
         $Group = new GroupRepository();
         $groups = $Group->getGroup();
-        $arrayForJson = [];
-        $arrayForJson['config']['col'] = 12;
-        $arrayForJson['config']['idBloc'] = "bloc-users";
-        $arrayForJson['config']['title'] = "Liste des groupes";
-        $arrayForJson['config']['action']['add'] = "addGroupModal";
-        $arrayForJson['table']['header'] = [
-            [
-                "text" => "Avatar",
-            ],
-            [
-                "text" => "Nom",
-            ],
-            [
-                "number" => "Nombre d'utilisateur",
-            ],
-            [
-                "action" => "Action",
-            ],
-        ];
+        $Table = new DashboardTable('bloc-groups', 'Liste des groupes', 12);
+        $Table->setAction('add', 'addGroupModal');
+        $Table->setTableHeader("text", "Avatar");
+        $Table->setTableHeader("text", "Nom");
+        $Table->setTableHeader("text", "Nombre d'utilisateur");
+        $Table->setTableHeader("date", "Action");
+
         if(isset($groups) && !empty($groups)){
             foreach($groups as $group){
                 $filePath = "";
                 if(!empty($group->getFileid())){
                     $filePath = $group->getFileid()->getPath().'/'.$group->getFileid()->getName();
                 }
-                $arrayForJson['table']['body'][] = [
-                    [
-                        "avatar" => $filePath
-                    ],
-                    [
-                        "text" => $group->getName()
-                    ],
-                    [
-                        "number" => $Group->countUserGroup($group->getId())
-                    ],
-                    [
-                        "button" => [
-                            [
-                                "value" => "Supprimer",
-                                "action" => $this->routes['group/delete'].'/'.$group->getId(),
-                                "color" => "red",
-                                "confirm" => true
-                            ],
-                            [
-                                "value" => "Modifier",
-                                "action" => $this->routes['group/edit'].'/'.$group->getId(),
-                                "color" => "orange"
-                            ],
-                            [
-                                "value" => "Groupes",
-                                "action" => $this->routes['group/manage'].'/'.$group->getId(),
-                                "color" => "tosle"
-                            ],
-                        ]
-                    ],
-                ];
+                $Table->setColumnBody('avatar', $filePath);
+                $Table->setColumnBody('text', $group->getName());
+                $Table->setColumnBody('number', $Group->countUserGroup($group->getId()));
+
+                $Table->setValueButton('Supprimer');
+                $Table->setActionButton($this->routes['group/delete'].'/'.$group->getId());
+                $Table->setColorButton("red");
+                $Table->setConfirmButton('Voulez-vous vraiment supprimer ce groupe : '.$group->getName().' ?');
+                $Table->saveButton();
+
+                $Table->setValueButton('Modifier');
+                $Table->setActionButton($this->routes['group/edit'].'/'.$group->getId());
+                $Table->setColorButton("orange");
+                $Table->saveButton();
+
+                $Table->setValueButton('Utilisateurs');
+                $Table->setActionButton($this->routes['group/manage'].'/'.$group->getId());
+                $Table->setColorButton("tosle");
+                $Table->saveButton();
+                $Table->saveTrBody();
             }
         }
 
-        return $arrayForJson;
+        return $Table->getArrayPHP();
     }
 }
