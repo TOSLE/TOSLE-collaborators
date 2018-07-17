@@ -42,68 +42,11 @@
         <p><i class="material-icons">&#xE152;</i> <?php echo MIDDLE_COLUMN_MESSAGING_HEADER_FILTER;?> <strong>Newest</strong></p>
     </div>
     <div class="content-message">
-        <a href="#" class="message-info active">
-            <div class="parameter-message">
-                <i class="material-icons">&#xE8B8;</i>
-            </div>
-            <div class="header-message">
-                <div class="logo-header-message">
-                    J
-                </div>
-                <div class="id-header-message">
-                    Julien Domange
-                </div>
-            </div>
-            <div class="main-message">
-                <p>Mais ça me fais plaisir ! C'est noté !</p>
-            </div>
-            <div class="footer-message">
-                <p>3 <?php echo MIDDLE_COLUMN_MESSAGING_MESSAGE_MIN_AGO;?></p>
-            </div>
-        </a>
-        <a href="#" class="message-info notification">
-            <div class="parameter-message">
-                <i class="material-icons">&#xE8B8;</i>
-            </div>
-            <div class="header-message">
-                <div class="logo-header-message">
-                    J
-                </div>
-                <div class="id-header-message">
-                    Julien Domange
-                </div>
-            </div>
-            <div class="main-message">
-                <p>Bonjour monsieur, j'aurais aimé avoir des rens...</p>
-            </div>
-            <div class="footer-message">
-                <p>3 <?php echo MIDDLE_COLUMN_MESSAGING_MESSAGE_HOUR_AGO;?></p>
-            </div>
-        </a>
-        <a href="#" class="message-info">
-            <div class="parameter-message">
-                <i class="material-icons">&#xE8B8;</i>
-            </div>
-            <div class="header-message">
-                <div class="logo-header-message">
-                    J
-                </div>
-                <div class="id-header-message">
-                    Julien Domange
-                </div>
-            </div>
-            <div class="main-message">
-                <p>Bonjour monsieur, j'aurais aimé avoir des rens...</p>
-            </div>
-            <div class="footer-message">
-                <p>3 <?php echo MIDDLE_COLUMN_MESSAGING_MESSAGE_MONTH_AGO;?></p>
-            </div>
-        </a>
         <?php if(isset($conversations)):?>
             <?php foreach($conversations as $key => $conversation):?>
-                <a href="<?php echo $this->slugs['chathome'].'/'.$conversation->getId();?>" class="message-info <?php echo (isset($conversationView) && $conversation->getId() == $conversationView->getId())?'active':'';?>">
+                <a href="<?php echo $this->slugs['chathome'].'/'.$conversation->getId();?>" class="message-info <?php echo (isset($conversationView) && $conversation->getId() == $conversationView->getId())?'active':'';?> <?php echo ($conversation->getMessages()[count($conversation->getMessages())-1]->getStatus() == 2)?'notification':'';?>">
                     <div class="parameter-message">
-                        <i class="material-icons">&#xE8B8;</i>
+                        <i class="material-icons">delete</i>
                     </div>
                     <div class="header-message">
                         <div class="logo-header-message">
@@ -114,10 +57,10 @@
                         </div>
                     </div>
                     <div class="main-message">
-                        <p><?php echo $conversation->getMessages()[0]->getContent();?></p>
+                        <p><?php echo $conversation->getMessages()[count($conversation->getMessages())-1]->getContent();?></p>
                     </div>
                     <div class="footer-message">
-                        <p><?php echo $conversation->getMessages()[0]->getDatecreate();?></p>
+                        <p><?php echo $conversation->getMessages()[count($conversation->getMessages())-1]->getDatecreate();?></p>
                     </div>
                 </a>
             <?php endforeach;?>
@@ -126,6 +69,18 @@
 </section>
 <section class="right-column">
     <div class="content-right-column">
+        <?php if(isset($errorsAdd)):?>
+            <div class="error-add-message">
+                <?php foreach($errorsAdd as $type => $content):?>
+                    <h3 class="type-error">
+                        <?php echo $type;?>
+                    </h3>
+                    <p class="content-error">
+                        <?php echo $content;?>
+                    </p>
+                <?php endforeach;?>
+            </div>
+        <?php endif;?>
         <?php if(isset($conversationView)):?>
             <div class="content-infos-message">
                 <h2><?php echo $conversationView->getDestination()->getFirstname().' '.$conversationView->getDestination()->getLastname();?></h2>
@@ -147,12 +102,14 @@
                 <?php endif;?>
             </div>
             <div class="edit-new-message">
-                <div class="content-input">
-                    <textarea type="text" placeholder="<?php echo RIGHT_COLUMN_MESSAGING_NEWMESSAGE_PLACEHOLDER;?>..."></textarea>
-                </div>
-                <div class="content-button">
-                    <button class="btn btn-dark"><?php echo RIGHT_COLUMN_MESSAGING_NEWMESSAGE_BUTTON;?></button>
-                </div>
+                <form action="" method="post">
+                    <div class="content-input">
+                        <textarea name="message" placeholder="<?php echo RIGHT_COLUMN_MESSAGING_NEWMESSAGE_PLACEHOLDER;?>..."></textarea>
+                    </div>
+                    <div class="content-button">
+                        <input type="submit" class="btn btn-dark" name="submitMessage" value="<?php echo RIGHT_COLUMN_MESSAGING_NEWMESSAGE_BUTTON;?>">
+                    </div>
+                </form>
             </div>
             <div class="container-message">
                 <?php if(!empty($conversationView->getMessages())):?>

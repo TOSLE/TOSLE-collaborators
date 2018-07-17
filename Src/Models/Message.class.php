@@ -14,6 +14,7 @@ class Message extends CoreSql {
     protected $status;
     protected $dateupdated;
     protected $userid;
+    protected $tag;
 
     private $autor;
 
@@ -143,6 +144,23 @@ class Message extends CoreSql {
     {
         $this->autor = new User($autor);
     }
+
+    /**
+     * @return mixed
+     */
+    public function getTag()
+    {
+        return $this->tag;
+    }
+
+    /**
+     * @param mixed $tag
+     */
+    public function setTag()
+    {
+        $this->tag = uniqid();
+    }
+
 
 
 
