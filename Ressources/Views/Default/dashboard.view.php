@@ -58,6 +58,11 @@
                                                             <i class="material-icons blue">keyboard_arrow_right</i>
                                                         </a>
                                                     </li>
+                                                    <li><a href="<?php echo $this->slugs["dashboard_stat"]?>">
+                                                            <p>Statistics</p>
+                                                            <i class="material-icons blue">keyboard_arrow_right</i>
+                                                        </a>
+                                                    </li>
                                                 </ul>
                                             </nav>
                                         </section>

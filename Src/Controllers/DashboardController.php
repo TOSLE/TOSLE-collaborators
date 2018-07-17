@@ -144,8 +144,13 @@ class DashboardController extends CoreController
      */
     function statsAction($params)
     {
-        $View = new View("dashboard", "chat");
+        $View = new View("dashboard", "Dashboard/stats");
         $View->setData("PageName", NAV_DASHBOARD . " " . NAV_DASHBOARD_STATISTIC);
+
+        $Stat = new StatsRepository();
+
+        $resultViewTosle = $Stat->getStatViewTosle();
+
     }
 
     public function chapterAction($params)

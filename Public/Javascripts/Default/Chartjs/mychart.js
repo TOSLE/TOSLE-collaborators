@@ -2,7 +2,7 @@
  * Created by Mehdi on 27/03/2018.
  */
 var ctx = document.getElementById("myChart");
-console.log(ctx);
+//console.log(ctx);
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
@@ -37,5 +37,28 @@ var myChart = new Chart(ctx, {
                 }
             }]
         }
+    }
+});
+
+
+$.getJSON("./json/test.json", function (data) {
+    console.log('getjson');
+    $.each(data, function (index, value) {
+        console.log(value);
+    });
+});
+
+
+var containerStatTosle = document.getElementById('chart-view-tosle');
+var chartViewTosle = new Chart(containerStatTosle, {
+    type: 'line',
+    data: {
+        labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+        datasets: [{
+            data: [30, 50, 29, 12, 26]
+        }]
+    },
+    options: {
+        showLines: true
     }
 });

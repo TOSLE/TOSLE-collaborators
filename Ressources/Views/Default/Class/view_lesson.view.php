@@ -5,7 +5,7 @@
         <div class="row">
             <section class="title-page col-12">
                 <div class="marg-container">
-                    <h2><a class="btn-sm btn-dark" href="<?php echo $this->slugs["homepage"]; ?>">Back home</a>
+                    <h2><a class="btn-sm btn-dark" href="<?php echo $this->slugs["homepage"]; ?>">All class</a>
                         <span class="additional-message-title"> / <?php echo $lesson->getTitle(); ?></span></h2>
                 </div>
             </section>
