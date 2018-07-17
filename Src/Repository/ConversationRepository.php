@@ -53,7 +53,7 @@ class ConversationRepository extends Conversation
                 $MessageConversation->setMessageid($Message->getId());
                 $MessageConversation->setConversationid($Conversation->getId());
                 $MessageConversation->save();
-                return null;
+                return "";
             }
             return ['Erreur Message' => 'Message vide'];
         }
