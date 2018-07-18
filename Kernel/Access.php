@@ -122,6 +122,12 @@ class Access
             "action" => "student",
             "security" => 2
         ],
+        "chatdraft" => [
+            "slug" => "messaging-draft",
+            "controller" => "chat",
+            "action" => "draft",
+            "security" => 2
+        ],
     ];
 
     private $backOffice = [
@@ -145,6 +151,7 @@ class Access
         "group/umanage" => 2,
         "class/follow" => 1,
         "chat/addconv" => 1,
+        "chat/trash" => 2
     ];
 
     private $urlFixe = [

@@ -369,6 +369,12 @@ main {
         width: 100%; }
         main .right-column > .content-right-column > .content-infos-message > h2 {
           text-align: center; }
+        main .right-column > .content-right-column > .content-infos-message > .trash-icon {
+          color: black;
+          position: absolute;
+          transition: color 0.2s; }
+          main .right-column > .content-right-column > .content-infos-message > .trash-icon:hover {
+            color: red; }
         main .right-column > .content-right-column > .content-infos-message > .more-infos {
           text-align: center;
           display: flex;

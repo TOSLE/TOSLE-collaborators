@@ -3,8 +3,8 @@
         <button id="close-burgermenu" class="btn-tosle btn-close-window btn-dark"><i class="material-icons">&#xE5CD;</i><p><?php echo LEFT_COLUMN_MESSAGING_CLOSEMENU;?></p></button>
         <a href="#" class="btn-tosle new-message target-modal" data-type="open-modal" data-target="newConversation"><i class="material-icons">&#xE158;</i> <p><?php echo LEFT_COLUMN_MESSAGING_NEWMESSAGE;?></p></a>
         <ul>
-            <li class="<?php echo (isset($page) && $page == "index")?'active':'';?>"><a href="#"><i class="material-icons">&#xE0CB;</i><p><?php echo LEFT_COLUMN_MESSAGING_MENU_INBOX;?></p><span class="notif-active"><?php echo (isset($inBoxNumber))?$inBoxNumber:'';?></span></a></li>
-            <li class="<?php echo (isset($page) && $page == "draft")?'active':'';?>"><a href="#"><i class="material-icons">&#xE254;</i><p><?php echo LEFT_COLUMN_MESSAGING_MENU_DRAFTS;?></p><span class="notif-active"><?php echo (isset($draftNumber))?$draftNumber:'';?></span></a></li>
+            <li class="<?php echo (isset($page) && $page == "index")?'active':'';?>"><a href="<?php echo $this->slugs['chathome'];?>"><i class="material-icons">&#xE0CB;</i><p><?php echo LEFT_COLUMN_MESSAGING_MENU_INBOX;?></p><span class="notif-active"><?php echo (isset($inBoxNumber))?$inBoxNumber:'';?></span></a></li>
+            <li class="<?php echo (isset($page) && $page == "draft")?'active':'';?>"><a href="<?php echo $this->slugs['chatdraft'];?>"><i class="material-icons">&#xE254;</i><p><?php echo LEFT_COLUMN_MESSAGING_MENU_DRAFTS;?></p><span class="notif-active"><?php echo (isset($draftNumber))?$draftNumber:'';?></span></a></li>
             <li class="<?php echo (isset($page) && $page == "trash")?'active':'';?>"><a href="#"><i class="material-icons">delete</i><p>Trash</p><span class="notif-active"><?php echo (isset($tashNumber))?$tashNumber:'';?></span></a></li>
         </ul>
     </div>
@@ -45,9 +45,6 @@
         <?php if(isset($conversations)):?>
             <?php foreach($conversations as $key => $conversation):?>
                 <a href="<?php echo $this->slugs['chathome'].'/'.$conversation->getId();?>" class="message-info <?php echo (isset($conversationView) && $conversation->getId() == $conversationView->getId())?'active':'';?> <?php echo ($conversation->getMessages()[count($conversation->getMessages())-1]->getStatus() == 2)?'notification':'';?>">
-                    <div class="parameter-message">
-                        <i class="material-icons">delete</i>
-                    </div>
                     <div class="header-message">
                         <div class="logo-header-message">
                             <?php echo $conversation->getDestination()->getFirstname()[0];?>
@@ -83,6 +80,9 @@
         <?php endif;?>
         <?php if(isset($conversationView)):?>
             <div class="content-infos-message">
+                <a href="<?php echo $this->slugs['chat/trash'].'/'.$conversationView->getId();?>" class="trash-icon">
+                    <i class="material-icons">delete</i>
+                </a>
                 <h2><?php echo $conversationView->getDestination()->getFirstname().' '.$conversationView->getDestination()->getLastname();?></h2>
                 <?php if(!empty($conversationView->getDestination()->getGroups())):?>
                     <div class="more-infos">

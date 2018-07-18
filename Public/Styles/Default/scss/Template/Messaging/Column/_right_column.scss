@@ -30,6 +30,14 @@
       > h2 {
         text-align: center;
       }
+      > .trash-icon {
+        color: black;
+        position: absolute;
+        transition: color 0.2s;
+        &:hover {
+          color: red;
+        }
+      }
       > .more-infos {
         text-align: center;
         display: flex;

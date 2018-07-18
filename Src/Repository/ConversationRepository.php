@@ -10,16 +10,17 @@ class ConversationRepository extends Conversation
 {
     /**
      * @param null $_filter
+     * @param int|null $_status
      * @return array Conversation
      * Cette fonction va chercher toutes les conversations et récupérer toutes les informations de la conversation
      */
-    public function getConversations($_filter = null)
+    public function getConversations($_status = 1, $_filter = null)
     {
         if(!isset($_filter)){
             $parameter = [
                 'LIKE' => [
                     'type' => 1,
-                    'status' => 1
+                    'status' => $_status
                 ]
             ];
             $this->setWhereParameter($parameter);
