@@ -162,12 +162,6 @@ class Conversation extends CoreSql {
         $this->tag = uniqid();
     }
 
-
-
-
-
-
-
     public function configFormAdd($Auth = null)
     {
         $User = new UserRepository();

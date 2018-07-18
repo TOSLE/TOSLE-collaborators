@@ -70,25 +70,46 @@ class ConversationRepository extends Conversation
         $errors = Form::checkForm($this->configFormAdd($_auth), $_post);
         if(empty($errors)){
             $_post = Form::secureData($_post);
-            $Message = new MessageRepository();
-            $MessageConversation = new MessageConversation();
-            $Message->addMessage($_auth->getId(), $_post['message']);
-            $Message->getMessageByTag($Message->getTag());
+            if($this->checkIdDestConversation($_post['select_user'], 1)) {
+                $Message = new MessageRepository();
+                $MessageConversation = new MessageConversation();
+                $Message->addMessage($_auth->getId(), $_post['message']);
+                $Message->getMessageByTag($Message->getTag());
 
-            (isset($tmpPostArray["publish"]))?$this->setStatus(1):$this->setStatus(0);
-            $this->setType(1);
-            $this->setIddest($_post['select_user']);
-            $this->setTag();
-            $this->save();
+                (isset($tmpPostArray["publish"]))?$this->setStatus(1):$this->setStatus(0);
+                $this->setType(1);
+                $this->setIddest($_post['select_user']);
+                $this->setTag();
+                $this->save();
 
-            $this->getConversationByTag($this->getTag());
-            $MessageConversation->setConversationid($this->getId());
-            $MessageConversation->setMessageid($Message->getId());
-            $MessageConversation->save();
-
+                $this->getConversationByTag($this->getTag());
+                $MessageConversation->setConversationid($this->getId());
+                $MessageConversation->setMessageid($Message->getId());
+                $MessageConversation->save();
+            }
         }
     }
 
+    public function checkIdDestConversation($_iddest, $_type)
+    {
+        $parameter = [
+            'LIKE' => [
+                'iddest' => $_iddest,
+                'type' => $_type,
+            ]
+        ];
+        $this->setWhereParameter($parameter);
+        if($this->countData() > 0){
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
+     * @param $_tag
+     * Récupère une conversation en fonction du tag
+     */
     public function getConversationByTag($_tag)
     {
         $parameter = [
