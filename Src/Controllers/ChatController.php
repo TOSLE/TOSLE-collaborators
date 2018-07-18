@@ -158,7 +158,7 @@ class ChatController extends CoreController
             $conversations = $Conversation->getConversations(0);
             if(isset($params['POST']) && !empty($params['POST'])){
                 $idConv = (isset($params['URI'][0]) && is_numeric($params['URI'][0]))?$params['URI'][0]:$conversations[0]->getId();
-                $errorsAdd = $Conversation->addConversationMessage($idConv, $this->Auth->getId(), $params['POST']);
+                $errorsAdd = $Conversation->editConversationMessage($idConv, $this->Auth->getId(), $params['POST']);
                 if(empty($errorsAdd)){
                     header('Location:'.$this->Routes['chathome'].'/'.$params['URI'][0]);
                 }

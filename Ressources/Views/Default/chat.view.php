@@ -104,7 +104,11 @@
             <div class="edit-new-message">
                 <form action="" method="post">
                     <div class="content-input">
-                        <textarea name="message" placeholder="<?php echo RIGHT_COLUMN_MESSAGING_NEWMESSAGE_PLACEHOLDER;?>..."></textarea>
+                        <?php if($page == 'draft'):?>
+                        <textarea name="message" placeholder="<?php echo RIGHT_COLUMN_MESSAGING_NEWMESSAGE_PLACEHOLDER;?>..."><?php echo $conversationView->getMessages()[0]->getContent();?></textarea>
+                        <?php else:?>
+                            <textarea name="message" placeholder="<?php echo RIGHT_COLUMN_MESSAGING_NEWMESSAGE_PLACEHOLDER;?>..."></textarea>
+                        <?php endif;?>
                     </div>
                     <div class="content-button">
                         <input type="submit" class="btn btn-dark" name="submitMessage" value="<?php echo RIGHT_COLUMN_MESSAGING_NEWMESSAGE_BUTTON;?>">

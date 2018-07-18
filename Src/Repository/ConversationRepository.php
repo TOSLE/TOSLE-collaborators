@@ -134,4 +134,27 @@ class ConversationRepository extends Conversation
         $this->setWhereParameter($parameter);
         return $this->countData(['id']);
     }
+
+    public function editConversationMessage($_idConv, $_idUser, $_post)
+    {
+        $Conversation = new Conversation($_idConv);
+        if(!empty($Conversation->getId())) {
+            $_post = Form::secureData($_post);
+            if(isset($_post['message']) && !empty($_post['message'])){
+                $message = htmlspecialchars($_post['message']);
+                $Message = new MessageRepository();
+                $MessageConversation = new MessageConversation();
+                $arrayMessageId = $MessageConversation->getMessageConversation('conversation', $Conversation->getId());
+                $Conversation->setMessages($arrayMessageId);
+                $Conversation->getMessages()[0]->setContent($message);
+                $Conversation->getMessages()[0]->save();
+
+                $Conversation->setStatus(1);
+                $Conversation->save();
+                return "";
+            }
+            return ['Erreur Message' => 'Message vide'];
+        }
+        return ['Erreur Conversation' => 'Conversation non trouvée'];
+    }
 }
