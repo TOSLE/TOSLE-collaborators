@@ -13,6 +13,7 @@ class Conversation extends CoreSql {
     protected $type;
     protected $status;
     protected $datecreate;
+    protected $tag;
 
     private $messages = [];
     private $destination;
@@ -50,7 +51,7 @@ class Conversation extends CoreSql {
     /**
      * @return mixed
      */
-    public function getiddest()
+    public function getIddest()
     {
         return $this->iddest;
     }
@@ -58,7 +59,7 @@ class Conversation extends CoreSql {
     /**
      * @param mixed $iddest
      */
-    public function setiddest($iddest)
+    public function setIddest($iddest)
     {
         $this->iddest = $iddest;
     }
@@ -145,6 +146,24 @@ class Conversation extends CoreSql {
         $this->destination = new User($destination);
     }
 
+    /**
+     * @return mixed
+     */
+    public function getTag()
+    {
+        return $this->tag;
+    }
+
+    /**
+     * @param mixed $tag
+     */
+    public function setTag()
+    {
+        $this->tag = uniqid();
+    }
+
+
+
 
 
 
@@ -152,10 +171,11 @@ class Conversation extends CoreSql {
     public function configFormAdd($Auth = null)
     {
         $User = new UserRepository();
+        $Routes = Access::getSlugsById();
         return [
             "config" => [
                 "method" => "post",
-                "action" => "",
+                "action" => $Routes['chat/addconv'],
                 "save" => "Draft",
                 "submit" => "Send",
                 "form_file" => false,

@@ -27,7 +27,7 @@ class Access
             "security" => false
         ],
         "chathome" => [ // Chat  homepage
-            "slug" => "chat",
+            "slug" => "messaging",
             "controller" => "chat",
             "action" => "index",
             "security" => false
@@ -144,6 +144,7 @@ class Access
         "group/gunset" => 2,
         "group/umanage" => 2,
         "class/follow" => 1,
+        "chat/addconv" => 1,
     ];
 
     private $urlFixe = [

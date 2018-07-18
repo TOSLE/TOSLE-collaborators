@@ -60,4 +60,43 @@ class ConversationRepository extends Conversation
         }
         return ['Erreur Conversation' => 'Conversation non trouvée'];
     }
+
+    /**
+     * @param $_auth
+     * @param $_post
+     */
+    public function startConversation($_auth, $_post)
+    {
+        $errors = Form::checkForm($this->configFormAdd($_auth), $_post);
+        if(empty($errors)){
+            $_post = Form::secureData($_post);
+            $Message = new MessageRepository();
+            $MessageConversation = new MessageConversation();
+            $Message->addMessage($_auth->getId(), $_post['message']);
+            $Message->getMessageByTag($Message->getTag());
+
+            (isset($tmpPostArray["publish"]))?$this->setStatus(1):$this->setStatus(0);
+            $this->setType(1);
+            $this->setIddest($_post['select_user']);
+            $this->setTag();
+            $this->save();
+
+            $this->getConversationByTag($this->getTag());
+            $MessageConversation->setConversationid($this->getId());
+            $MessageConversation->setMessageid($Message->getId());
+            $MessageConversation->save();
+
+        }
+    }
+
+    public function getConversationByTag($_tag)
+    {
+        $parameter = [
+            'LIKE' => [
+                'tag' => $_tag
+            ]
+        ];
+        $this->setWhereParameter($parameter);
+        $this->getOneData();
+    }
 }

@@ -99,4 +99,13 @@ class ChatController extends CoreController
         $View = new View("messaging", "chat");
         $View->setData("PageName", NAVBAR_MESSAGING." ".HEAD_TITLE_MESSAGING_NEWACTION);
     }
+
+    function addconvAction($params)
+    {
+        if(isset($params['POST']) && !empty($params['POST'])){
+            $Conversation = new ConversationRepository();
+            $Conversation->startConversation($this->Auth, $params['POST']);
+        }
+        header('Location:'.$this->Routes['chathome']);
+    }
 }
