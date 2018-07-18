@@ -70,7 +70,7 @@ class ConversationRepository extends Conversation
         $errors = Form::checkForm($this->configFormAdd($_auth), $_post);
         if(empty($errors)){
             $_post = Form::secureData($_post);
-            if($this->checkIdDestConversation($_post['select_user'], 1)) {
+            if($this->checkIdDestConversation($_post['select_user'], 1) && !empty($_post['message'])) {
                 $Message = new MessageRepository();
                 $MessageConversation = new MessageConversation();
                 $Message->addMessage($_auth->getId(), $_post['message']);
@@ -80,6 +80,7 @@ class ConversationRepository extends Conversation
                 $this->setType(1);
                 $this->setIddest($_post['select_user']);
                 $this->setTag();
+                $this->setIdowner($_auth->getId());
                 $this->save();
 
                 $this->getConversationByTag($this->getTag());

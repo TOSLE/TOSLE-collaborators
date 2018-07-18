@@ -14,6 +14,7 @@ class Conversation extends CoreSql {
     protected $status;
     protected $datecreate;
     protected $tag;
+    protected $idowner;
 
     private $messages = [];
     private $destination;
@@ -160,6 +161,27 @@ class Conversation extends CoreSql {
     public function setTag()
     {
         $this->tag = uniqid();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIdowner()
+    {
+        return $this->idowner;
+    }
+
+    /**
+     * @param mixed $idowner
+     */
+    public function setIdowner($idowner)
+    {
+        $this->idowner = $idowner;
+    }
+
+    public function getOwner()
+    {
+        return new User($this->idowner);
     }
 
     public function configFormAdd($Auth = null)
