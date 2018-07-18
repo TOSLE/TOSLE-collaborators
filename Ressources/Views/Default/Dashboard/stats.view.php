@@ -26,3 +26,23 @@
         </div>
     </div>
 </div>
+<?php
+echo '<pre>';
+//print_r($statUserRegisteredDay);
+echo '</pre>';
+?>
+<script>
+    var containerStatTosle = document.getElementById('chart-view-tosle');
+    var chartViewTosle = new Chart(containerStatTosle, {
+        type: 'line',
+        data: {
+            labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+            datasets: [{
+                data: <?php echo '['.implode(' ,', $statViewTosle).']'; ?>
+            }]
+        },
+        options: {
+            showLines: true
+        }
+    });
+</script>

@@ -199,4 +199,31 @@ class CommentRepository extends Comment
         }
 
     }
+
+    public function getStatComment($sort)
+    {
+        switch ($sort) {
+            case 'year':
+                echo 'year';
+                $currentYear = date("Y");
+                $target = [
+                    "id",
+                    "dateinscription"
+                ];
+                $parameter = [
+                    "LIKE" => [
+                        "MONTH('user_dateinscription')" => "MONTH(CURRENT_DATE())"
+                    ]
+                ];
+                $this->setWhereParameter($parameter);
+                return $this->getData($target);
+                break;
+            case 'month':
+                echo 'month';
+                break;
+            case 'day':
+                echo 'day';
+                break;
+        }
+    }
 }

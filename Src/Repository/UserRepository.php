@@ -1,11 +1,11 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: backin
  * Date: 15/05/2018
  * Time: 11:51
  */
-
 class UserRepository extends User
 {
 
@@ -24,8 +24,8 @@ class UserRepository extends User
         ];
         $this->setWhereParameter($parameter);
         $this->getOneData(["password"]);
-        if(!empty($this->password)){
-            if(password_verify($password, $this->password)){
+        if (!empty($this->password)) {
+            if (password_verify($password, $this->password)) {
                 $target = [
                     "id",
                     "email",
@@ -40,13 +40,11 @@ class UserRepository extends User
                 ];
                 $this->setWhereParameter($parameter);
                 $this->getOneData($target);
-                if(!empty($this->token) && !empty($this->email)){
+                if (!empty($this->token) && !empty($this->email)) {
 
-                    if(empty($this->status))
-                    {
+                    if (empty($this->status)) {
                         return [AUTHENTIFICATION_FAILED_KEY => "Vous n'avez pas valider votre compte"];
-                    }
-                    else{
+                    } else {
                         $this->setToken();
                         $this->setDateconnection();
                         $this->save();
@@ -59,9 +57,10 @@ class UserRepository extends User
                 return [AUTHENTIFICATION_FAILED_KEY => AUTHENTIFICATION_FAILED_MESSAGE];
             }
         } else {
-           return [AUTHENTIFICATION_FAILED_KEY => AUTHENTIFICATION_FAILED_MESSAGE];
+            return [AUTHENTIFICATION_FAILED_KEY => AUTHENTIFICATION_FAILED_MESSAGE];
         }
     }
+
     function verrifyAuthentificationSession()
     {
 
@@ -134,7 +133,7 @@ class UserRepository extends User
 
         $option = [];
         foreach ($users as $user) {
-            $option[$user->getId()] = $user->getLastname().' '.$user->getFirstname();
+            $option[$user->getId()] = $user->getLastname() . ' ' . $user->getFirstname();
         }
         return [
             "select_users" => [
@@ -146,12 +145,13 @@ class UserRepository extends User
         ];
     }
 
-    public function addUser($_post, $_idUser = null) {
+    public function addUser($_post, $_idUser = null)
+    {
 
         $errors = Form::checkForm($this->configFormAdd(), $_post);
         $_post = Form::secureData($_post);
 
-        if(empty($errors)) {
+        if (empty($errors)) {
             $tmpPostArray = $_post;
             if (isset($_idUser)) {
                 $this->setId($_idUser);
@@ -169,10 +169,77 @@ class UserRepository extends User
 
             return 1;
         } else {
-            echo'<pre>';
+            echo '<pre>';
             print_r($errors);
-            echo'</pre>';
+            echo '</pre>';
             return $errors;
         }
+    }
+
+    public function getStatUser($sort)
+    {
+        switch ($sort) {
+
+            case 'year':
+                $target = [
+                    "dateinscription"
+                ];
+                $resultStatUserYear = $this->getData($target);
+
+                $countYearUser = 0;
+                if (isset($resultStatUserYear)) {
+                    $currentYear = date('Y');
+                    foreach ($resultStatUserYear as $row) {
+                        $resultRowYear = date('Y', strtotime($row->getDateInscription()));
+                        if ($resultRowYear == $currentYear)
+                            $countYearUser += 1;
+                    }
+                }
+                return $countYearUser;
+                break;
+
+            case 'month':
+                $target = [
+                    "dateinscription"
+                ];
+                $resultStatUserMonth = $this->getData($target);
+
+                $arrayStatUserRegisteredMonth = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                if (isset($resultStatUserMonth)) {
+                    $currentYear = date('Y');
+                    foreach ($resultStatUserMonth as $row) {
+                        if (date('Y', strtotime($row->getDateInscription())) == $currentYear) {
+                            for ($i = 1; $i < 13; $i += 1) {
+                                if ($i == date('m', strtotime($row->getDateInscription()))) {
+                                    $arrayStatUserRegisteredMonth[$i] += 1;
+                                }
+                            }
+                        }
+                    }
+                }
+                return $arrayStatUserRegisteredMonth;
+                break;
+
+            case 'day':
+                $target = [
+                    "dateinscription"
+                ];
+                $resultStatUserMonth = $this->getData($target);
+
+                $countDayUser = 0;
+                if (isset($resultStatUserMonth)) {
+                    $currentYear = date('Y');
+                    $currentMonth = date('m');
+                    foreach ($resultStatUserMonth as $row) {
+                        if (date('Y', strtotime($row->getDateInscription())) == $currentYear && date('m', strtotime($row->getDateInscription())) == $currentMonth) {
+                            $countDayUser +=1;
+                        }
+                    }
+                }
+                return $countDayUser;
+                break;
+        }
+
+
     }
 }

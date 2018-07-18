@@ -1,11 +1,11 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: julien
  * Date: 16/02/2018
  * Time: 11:22
  */
-
 class DashboardController extends CoreController
 {
     /**
@@ -63,10 +63,10 @@ class DashboardController extends CoreController
         $configFormGroupAdd = $Group->configFormAdd();
         $errors_group_add = "";
 
-        if(isset($params['POST']) && !empty($params['POST'])){
+        if (isset($params['POST']) && !empty($params['POST'])) {
             $errors_group_add = $Group->addGroup($_FILES, $params["POST"]);
-            if($errors_group_add === 1){
-                header('Location:'.$this->Routes['dashboard_student']);
+            if ($errors_group_add === 1) {
+                header('Location:' . $this->Routes['dashboard_student']);
             }
         }
         $View->setData("configBlocUsers", $configBlocUsers);
@@ -112,7 +112,7 @@ class DashboardController extends CoreController
         /**
          * Affectation des données pour la vue
          */
-            $View->setData("idModalViewAllPosts", $latestArticles["global"]["icon_header"]["modal"]["target"]);
+        $View->setData("idModalViewAllPosts", $latestArticles["global"]["icon_header"]["modal"]["target"]);
     }
 
     /**
@@ -147,11 +147,27 @@ class DashboardController extends CoreController
         $View = new View("dashboard", "Dashboard/stats");
         $View->setData("PageName", NAV_DASHBOARD . " " . NAV_DASHBOARD_STATISTIC);
 
-        $Stat = new StatsRepository();
+        $Stats = new StatsRepository();
+        $resultStatMonth = $Stats->getStatViewTosle();
+        $View->setData("statViewTosle", $resultStatMonth);
 
-        $resultViewTosle = $Stat->getStatViewTosle();
+        $User = new UserRepository();
+        $resultStatUserYear = $User->getStatUser('year');
+        $View->setData("statUserRegisteredYear", $resultStatUserYear);
+
+        $resultStatUserMonth = $User->getStatUser('month');
+        $View->setData("statUserRegisteredMonth", $resultStatUserMonth);
+
+        $resultStatUserDay = $User->getStatUser('day');
+        $View->setData("statUserRegisteredDay", $resultStatUserDay);
+
+//        print_r($User);
+        echo '<pre>';
+        //print_r($resultStatUserDay);
+        echo '</pre>';
 
     }
+
 
     public function chapterAction($params)
     {
@@ -171,7 +187,7 @@ class DashboardController extends CoreController
     public function groupAction($params)
     {
 
-        header('Location:'.$this->Routes['dashboard_student']);
+        header('Location:' . $this->Routes['dashboard_student']);
     }
 
 }

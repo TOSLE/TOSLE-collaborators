@@ -1,23 +1,25 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: Mehdi
  * Date: 17/07/2018
  * Time: 23:25
  */
-
-class StatsRepository extends Stats {
+class StatsRepository extends Stats
+{
 
     public function __construct()
     {
         parent::__construct();
     }
 
-    public function getStatViewTosle () {
+    public function getStatViewTosle()
+    {
 
         $currentYear = date("Y");
-
         $target = [
+            "id",
             "month",
             "year"
         ];
@@ -27,36 +29,45 @@ class StatsRepository extends Stats {
             ]
         ];
         $this->setWhereParameter($parameter);
-        $result = $this->getData($target);
+        $resultStatMonth =  $this->getData($target);
 
-        echo '<pre>';
-        print_r($result);
-        echo '</pre>';
+        $arrayStatViewTosle = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        if (isset($resultStatMonth)) {
+            foreach ($resultStatMonth as $row) {
+                for ($i = 0; $i < 12; $i += 1) {
+                    if ($i === $row->getMonth()) {
+                        $arrayStatViewTosle[$row->getMonth() - 1] += 1;
+                    }
+                }
+            }
+        }
+        return $arrayStatViewTosle;
     }
 
-    public function getStatComment() {
+    public function getStatViewClass()
+    {
 
-    }
-
-    public function getStatViewClass() {
-
-    }
-
-    public function getStatViewArticle() {
-
-    }
-    public function getStatViewBlog() {
-
-    }
-
-    public function getStatMessage() {
 
     }
 
-    public function getStatUser(){
+    public function getStatViewArticle()
+    {
+
     }
 
-    public function formalizeJson(){
+    public function getStatViewBlog()
+    {
+
+    }
+
+    public function getStatMessage()
+    {
+
+    }
+
+
+    public function formalizeJson()
+    {
 
     }
 
