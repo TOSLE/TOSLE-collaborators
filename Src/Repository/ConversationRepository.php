@@ -44,6 +44,7 @@ class ConversationRepository extends Conversation
     {
         $Conversation = new Conversation($_idConv);
         if(!empty($Conversation->getId())) {
+            $_post = Form::secureData($_post);
             if(isset($_post['message']) && !empty($_post['message'])){
                 $message = htmlspecialchars($_post['message']);
                 $Message = new MessageRepository();

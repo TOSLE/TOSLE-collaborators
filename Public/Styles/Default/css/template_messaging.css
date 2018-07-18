@@ -223,6 +223,8 @@ main {
             flex-basis: 100%; }
           main > .left-column > .content-box-left > ul > li > a:hover {
             color: #1A5CCB; }
+        main > .left-column > .content-box-left > ul > li.active > a {
+          color: #1A5CCB; }
       main > .left-column > .content-box-left:nth-child(2) {
         margin-top: 15px; }
       main > .left-column > .content-box-left > .profil-info {
@@ -406,6 +408,10 @@ main {
           font-size: 0.8em; }
         main .right-column > .content-right-column > .container-message > div > p:first-child {
           font-size: 1em; }
+        main .right-column > .content-right-column > .container-message.no-conversation {
+          text-align: center; }
+          main .right-column > .content-right-column > .container-message.no-conversation button {
+            margin: 0 auto; }
       main .right-column > .content-right-column > .edit-new-message {
         border-top: 1px solid #E5E5E5;
         padding: 5px;

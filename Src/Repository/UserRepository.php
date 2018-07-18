@@ -145,4 +145,37 @@ class UserRepository extends User
             ]
         ];
     }
+
+    /**
+     * @return array
+     * Retourne le tableau pour ajout du SELECT des utilisateurs dans un confirgForm
+     */
+    public function getSelectSimpleUser($Auth = null)
+    {
+        $target = [
+            'id',
+            'firstname',
+            'lastname'
+        ];
+        $parameter = [
+            'LIKE' => [
+                'status' => 1
+            ]
+        ];
+        $this->setWhereParameter($parameter);
+        $users = $this->getData($target);
+
+        $option = [];
+        foreach ($users as $user) {
+            if($Auth->getId() != $user->getId()){
+                $option[$user->getId()] = $user->getLastname().' '.$user->getFirstname();
+            }
+        }
+        $return['select_user'] = [
+            'label' => 'Choisir un destinataire',
+            'required' => false,
+            'options' => $option
+        ];
+        return $return;
+    }
 }

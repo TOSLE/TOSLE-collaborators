@@ -149,8 +149,24 @@ class Conversation extends CoreSql {
 
 
 
-    public function configFormAdd()
+    public function configFormAdd($Auth = null)
     {
+        $User = new UserRepository();
+        return [
+            "config" => [
+                "method" => "post",
+                "action" => "",
+                "save" => "Draft",
+                "submit" => "Send",
+                "form_file" => false,
+            ],
+            "textarea" => [
+                "label" => "Message",
+                "name" => "message",
+                "placeholder" => "Your message"
+            ],
+            'select' => $User->getSelectSimpleUser($Auth)
+        ];
     }
 
 

@@ -83,6 +83,12 @@
       > div > p:first-child {
         font-size: 1em;
       }
+      &.no-conversation {
+        text-align: center;
+        button {
+          margin: 0 auto;
+        }
+      }
     }
     > .edit-new-message {
       border-top: 1px solid $colorBorderBottomSection;

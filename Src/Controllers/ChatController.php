@@ -16,12 +16,14 @@ class ChatController extends CoreController
     function indexAction($params)
     {
         if(isset($this->Auth)){
+            $Conversation = new ConversationRepository();
             $View = new View("messaging", "chat");
             $View->setData("PageName", NAVBAR_MESSAGING." ".GLOBAL_HOME_TEXT);
-            $conversationView = false;
+            $conversationView = null;
             $errorsAdd = null;
+            $page = "index";
+            $configFormNew = $Conversation->configFormAdd($this->Auth);
 
-            $Conversation = new ConversationRepository();
             $conversations = $Conversation->getConversations();
             if(isset($params['POST']) && !empty($params['POST'])){
                 $idConv = (isset($params['URI'][0]) && is_numeric($params['URI'][0]))?$params['URI'][0]:$conversations[0]->getId();
@@ -30,7 +32,7 @@ class ChatController extends CoreController
                     header('Location:'.$this->Routes['chathome'].'/'.$params['URI'][0]);
                 }
             }
-            if(isset($conversations)){
+            if(isset($conversations) && !empty($conversations)){
                 $conversationView = $conversations[0];
                 if(isset($params['URI'][0]) && is_numeric($params['URI'][0])) {
                     foreach ($conversations as $conversation){
@@ -47,8 +49,10 @@ class ChatController extends CoreController
                 }
             }
             $View->setData('errorsAdd', $errorsAdd);
+            $View->setData('configFormNew', $configFormNew);
             $View->setData('conversations', $conversations);
             $View->setData('conversationView', $conversationView);
+            $View->setData('page', $page);
         } else {
             $User = new UserRepository();
             $View = new View("default", "Chat/connect");

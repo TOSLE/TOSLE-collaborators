@@ -3,9 +3,9 @@
         <button id="close-burgermenu" class="btn-tosle btn-close-window btn-dark"><i class="material-icons">&#xE5CD;</i><p><?php echo LEFT_COLUMN_MESSAGING_CLOSEMENU;?></p></button>
         <a href="#" class="btn-tosle new-message"><i class="material-icons">&#xE158;</i> <p><?php echo LEFT_COLUMN_MESSAGING_NEWMESSAGE;?></p></a>
         <ul>
-            <li><a href="#"><i class="material-icons">&#xE0CB;</i><p><?php echo LEFT_COLUMN_MESSAGING_MENU_INBOX;?></p><span class="notif-active">3</span></a></li>
-            <li><a href="#"><i class="material-icons">&#xE254;</i><p><?php echo LEFT_COLUMN_MESSAGING_MENU_DRAFTS;?></p></a></li>
-            <li><a href="#"><i class="material-icons">&#xE152;</i><p><?php echo LEFT_COLUMN_MESSAGING_MENU_FILTER;?></p></a></li>
+            <li class="<?php echo (isset($page) && $page == "index")?'active':'';?>"><a href="#"><i class="material-icons">&#xE0CB;</i><p><?php echo LEFT_COLUMN_MESSAGING_MENU_INBOX;?></p><span class="notif-active">3</span></a></li>
+            <li class="<?php echo (isset($page) && $page == "draft")?'active':'';?>"><a href="#"><i class="material-icons">&#xE254;</i><p><?php echo LEFT_COLUMN_MESSAGING_MENU_DRAFTS;?></p></a></li>
+            <li class="<?php echo (isset($page) && $page == "trash")?'active':'';?>"><a href="#"><i class="material-icons">delete</i><p>Trash</p></a></li>
         </ul>
     </div>
     <div class="content-box-left">
@@ -129,5 +129,38 @@
             </div>
         </div>
     <?php else:?>
+        <div class="content-infos-message">
+            <div class="more-infos">
+                <p>
+                    Il n'y a aucun message pour le moment
+                </p>
+            </div>
+        </div>
+        <div class="container-message no-conversation">
+            <button class="btn btn-tosle target-modal" data-type="open-modal" data-target="newConversation">Démarrer une conversation</button>
+        </div>
     <?php endif;?>
 </section>
+
+<div id="newConversation" class="fade-background" data-type="parent-modal">
+    <div class="modal-window">
+        <div class="modal-header">
+            <i class="modal-header-icon material-icons" data-type="close-modal">close</i>
+            <h2>Ajout d'un groupe</h2>
+        </div>
+        <div class="modal-main">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div>
+                            <?php $this->addModal("dashboard_form", $configFormNew);?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-red" data-type="close-modal">Close modal</button>
+        </div>
+    </div>
+</div>
