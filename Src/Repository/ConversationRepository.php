@@ -18,7 +18,8 @@ class ConversationRepository extends Conversation
         if(!isset($_filter)){
             $parameter = [
                 'LIKE' => [
-                    'type' => 1
+                    'type' => 1,
+                    'status' => 1
                 ]
             ];
             $this->setWhereParameter($parameter);
@@ -120,5 +121,16 @@ class ConversationRepository extends Conversation
         ];
         $this->setWhereParameter($parameter);
         $this->getOneData();
+    }
+
+    public function getNumberConversation($_identifier, $_value)
+    {
+        $parameter = [
+            'LIKE' => [
+                $_identifier => $_value
+            ]
+        ];
+        $this->setWhereParameter($parameter);
+        return $this->countData(['id']);
     }
 }

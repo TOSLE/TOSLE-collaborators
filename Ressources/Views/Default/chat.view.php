@@ -3,9 +3,9 @@
         <button id="close-burgermenu" class="btn-tosle btn-close-window btn-dark"><i class="material-icons">&#xE5CD;</i><p><?php echo LEFT_COLUMN_MESSAGING_CLOSEMENU;?></p></button>
         <a href="#" class="btn-tosle new-message target-modal" data-type="open-modal" data-target="newConversation"><i class="material-icons">&#xE158;</i> <p><?php echo LEFT_COLUMN_MESSAGING_NEWMESSAGE;?></p></a>
         <ul>
-            <li class="<?php echo (isset($page) && $page == "index")?'active':'';?>"><a href="#"><i class="material-icons">&#xE0CB;</i><p><?php echo LEFT_COLUMN_MESSAGING_MENU_INBOX;?></p><span class="notif-active">3</span></a></li>
-            <li class="<?php echo (isset($page) && $page == "draft")?'active':'';?>"><a href="#"><i class="material-icons">&#xE254;</i><p><?php echo LEFT_COLUMN_MESSAGING_MENU_DRAFTS;?></p></a></li>
-            <li class="<?php echo (isset($page) && $page == "trash")?'active':'';?>"><a href="#"><i class="material-icons">delete</i><p>Trash</p></a></li>
+            <li class="<?php echo (isset($page) && $page == "index")?'active':'';?>"><a href="#"><i class="material-icons">&#xE0CB;</i><p><?php echo LEFT_COLUMN_MESSAGING_MENU_INBOX;?></p><span class="notif-active"><?php echo (isset($inBoxNumber))?$inBoxNumber:'';?></span></a></li>
+            <li class="<?php echo (isset($page) && $page == "draft")?'active':'';?>"><a href="#"><i class="material-icons">&#xE254;</i><p><?php echo LEFT_COLUMN_MESSAGING_MENU_DRAFTS;?></p><span class="notif-active"><?php echo (isset($draftNumber))?$draftNumber:'';?></span></a></li>
+            <li class="<?php echo (isset($page) && $page == "trash")?'active':'';?>"><a href="#"><i class="material-icons">delete</i><p>Trash</p><span class="notif-active"><?php echo (isset($tashNumber))?$tashNumber:'';?></span></a></li>
         </ul>
     </div>
     <div class="content-box-left">
@@ -15,7 +15,7 @@
         </div>
         <div class="profil-stats">
             <div class="conversation">
-                <p class="number">5</p>
+                <p class="number"><?php echo (isset($totalConv))?$totalConv:'';?></p>
                 <p class="description"><?php echo LEFT_COLUMN_MESSAGING_PROFILINFOS_NUMBERCHAT;?></p>
             </div>
             <div class="number-message">

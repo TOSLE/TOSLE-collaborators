@@ -23,6 +23,10 @@ class ChatController extends CoreController
             $errorsAdd = null;
             $page = "index";
             $configFormNew = $Conversation->configFormAdd($this->Auth);
+            $inBoxNumber = $Conversation->getNumberConversation('status', 1);
+            $draftNumber = $Conversation->getNumberConversation('status', 0);
+            $tashNumber = $Conversation->getNumberConversation('status', -1);
+            $totalConv = $inBoxNumber + $draftNumber + $tashNumber;
 
             $conversations = $Conversation->getConversations();
             if(isset($params['POST']) && !empty($params['POST'])){
@@ -48,6 +52,10 @@ class ChatController extends CoreController
                     }
                 }
             }
+            $View->setData('inBoxNumber', $inBoxNumber);
+            $View->setData('draftNumber', $draftNumber);
+            $View->setData('tashNumber', $tashNumber);
+            $View->setData('totalConv', $totalConv);
             $View->setData('errorsAdd', $errorsAdd);
             $View->setData('configFormNew', $configFormNew);
             $View->setData('conversations', $conversations);
