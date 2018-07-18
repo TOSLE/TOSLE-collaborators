@@ -5,7 +5,7 @@
         <ul>
             <li class="<?php echo (isset($page) && $page == "index")?'active':'';?>"><a href="<?php echo $this->slugs['chathome'];?>"><i class="material-icons">&#xE0CB;</i><p><?php echo LEFT_COLUMN_MESSAGING_MENU_INBOX;?></p><span class="notif-active"><?php echo (isset($inBoxNumber))?$inBoxNumber:'';?></span></a></li>
             <li class="<?php echo (isset($page) && $page == "draft")?'active':'';?>"><a href="<?php echo $this->slugs['chatdraft'];?>"><i class="material-icons">&#xE254;</i><p><?php echo LEFT_COLUMN_MESSAGING_MENU_DRAFTS;?></p><span class="notif-active"><?php echo (isset($draftNumber))?$draftNumber:'';?></span></a></li>
-            <li class="<?php echo (isset($page) && $page == "trash")?'active':'';?>"><a href="#"><i class="material-icons">delete</i><p>Trash</p><span class="notif-active"><?php echo (isset($tashNumber))?$tashNumber:'';?></span></a></li>
+            <li class="<?php echo (isset($page) && $page == "trash")?'active':'';?>"><a href="<?php echo $this->slugs['chattrash'];?>"><i class="material-icons">delete</i><p>Trash</p><span class="notif-active"><?php echo (isset($tashNumber))?$tashNumber:'';?></span></a></li>
         </ul>
     </div>
     <div class="content-box-left">
@@ -102,18 +102,22 @@
                 <?php endif;?>
             </div>
             <div class="edit-new-message">
-                <form action="" method="post">
-                    <div class="content-input">
-                        <?php if($page == 'draft'):?>
-                        <textarea name="message" placeholder="<?php echo RIGHT_COLUMN_MESSAGING_NEWMESSAGE_PLACEHOLDER;?>..."><?php echo $conversationView->getMessages()[0]->getContent();?></textarea>
-                        <?php else:?>
-                            <textarea name="message" placeholder="<?php echo RIGHT_COLUMN_MESSAGING_NEWMESSAGE_PLACEHOLDER;?>..."></textarea>
-                        <?php endif;?>
-                    </div>
-                    <div class="content-button">
-                        <input type="submit" class="btn btn-dark" name="submitMessage" value="<?php echo RIGHT_COLUMN_MESSAGING_NEWMESSAGE_BUTTON;?>">
-                    </div>
-                </form>
+                <?php if($page == 'trash'):?>
+                    <a href="<?php echo $this->slugs['chat/untrash'].'/'.$conversationView->getId();?>" class="btn btn-green">Réactiver la conversation</a>
+                <?php else:?>
+                    <form action="" method="post">
+                        <div class="content-input">
+                            <?php if($page == 'draft'):?>
+                            <textarea name="message" placeholder="<?php echo RIGHT_COLUMN_MESSAGING_NEWMESSAGE_PLACEHOLDER;?>..."><?php echo $conversationView->getMessages()[0]->getContent();?></textarea>
+                            <?php else:?>
+                                <textarea name="message" placeholder="<?php echo RIGHT_COLUMN_MESSAGING_NEWMESSAGE_PLACEHOLDER;?>..."></textarea>
+                            <?php endif;?>
+                        </div>
+                        <div class="content-button">
+                            <input type="submit" class="btn btn-dark" name="submitMessage" value="<?php echo RIGHT_COLUMN_MESSAGING_NEWMESSAGE_BUTTON;?>">
+                        </div>
+                    </form>
+                <?php endif;?>
             </div>
             <div class="container-message">
                 <?php if(!empty($conversationView->getMessages())):?>
@@ -133,16 +137,26 @@
             </div>
         </div>
     <?php else:?>
-        <div class="content-infos-message">
-            <div class="more-infos">
-                <p>
-                    Il n'y a aucun message pour le moment
-                </p>
+        <?php if($page == 'index'):?>
+            <div class="content-infos-message">
+                <div class="more-infos">
+                    <p>
+                        Il n'y a aucun message pour le moment
+                    </p>
+                </div>
             </div>
-        </div>
-        <div class="container-message no-conversation">
-            <button class="btn btn-tosle target-modal" data-type="open-modal" data-target="newConversation">Démarrer une conversation</button>
-        </div>
+            <div class="container-message no-conversation">
+                <button class="btn btn-tosle target-modal" data-type="open-modal" data-target="newConversation">Démarrer une conversation</button>
+            </div>
+        <?php else:?>
+            <div class="content-infos-message">
+                <div class="more-infos">
+                    <p>
+                        Aucune conversation dans la catégorie
+                    </p>
+                </div>
+            </div>
+        <?php endif;?>
     <?php endif;?>
 </section>
 

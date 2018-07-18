@@ -126,6 +126,12 @@ class Access
             "slug" => "messaging-draft",
             "controller" => "chat",
             "action" => "draft",
+            "security" => 1
+        ],
+        "chattrash" => [
+            "slug" => "messaging-trash",
+            "controller" => "chat",
+            "action" => "viewtrash",
             "security" => 2
         ],
     ];
@@ -151,7 +157,8 @@ class Access
         "group/umanage" => 2,
         "class/follow" => 1,
         "chat/addconv" => 1,
-        "chat/trash" => 2
+        "chat/trash" => 2,
+        "chat/untrash" => 2,
     ];
 
     private $urlFixe = [
