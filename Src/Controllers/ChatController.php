@@ -294,8 +294,15 @@ class ChatController extends CoreController
         if(isset($params['URI'][0]) && is_numeric($params['URI'][0])){
             $Conversation = new ConversationRepository($params['URI'][0]);
             $MessageConversation = new MessageConversation();
-            $arrayIdMessage = $MessageConversation->getMessageConversation($Conversation->getId());
+            $arrayIdMessage = $MessageConversation->getMessageConversation('conversation', $Conversation->getId());
             $Message = new MessageRepository();
+            $paramater = [
+                'LIKE' => [
+                    'conversationid' => $Conversation->getId()
+                ]
+            ];
+            $MessageConversation->setWhereParameter($paramater);
+            $MessageConversation->delete();
             foreach($arrayIdMessage as $id){
                 $paramater = [
                     'LIKE' => [
@@ -305,13 +312,6 @@ class ChatController extends CoreController
                 $Message->setWhereParameter($paramater);
                 $Message->delete();
             }
-            $paramater = [
-                'LIKE' => [
-                    'conversationid' => $Conversation->getId()
-                ]
-            ];
-            $MessageConversation->setWhereParameter($paramater);
-            $MessageConversation->delete();
             $paramater = [
                 'LIKE' => [
                     'id' => $Conversation->getId()
