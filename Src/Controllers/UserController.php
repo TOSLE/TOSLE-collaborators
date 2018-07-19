@@ -152,7 +152,7 @@ class UserController extends CoreController
         $View = new View("default", "User/newpassword");
         $user = new UserRepository();
         $form = $user->passwordFormAdd();
-        $errors = [];  
+        $errors = [];
         if(!empty($params["POST"])) {
             $errors = Form::checkForm($form, $params["POST"]);
             if (empty($errors)) {
@@ -190,8 +190,8 @@ class UserController extends CoreController
 
 
             Mail::sendMailPassword($email,$token); 
-        }        
-            $View->setData("config", $form);
+        }
+            $View->setData("configFormEmail", $form);
             $View->setData("errors", $errors);    
     }   
 
@@ -236,7 +236,7 @@ class UserController extends CoreController
                 $errors["AUTHENTIFICATION FAILED"] = "Erreur d'authentification";
             }
         }
-        $View->setData("config", $form);
+        $View->setData("configSetPassword", $form);
         $View->setData("errors", $errors);
 
     }

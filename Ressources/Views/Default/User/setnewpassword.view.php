@@ -31,7 +31,7 @@
                         </p>
                     </article>
                     <section>
-                        <?php $this->addModal("password_form", $config, $errors); ?>
+                        <?php $this->addModal("password_form", $configSetPassword, $errors); ?>
                     </section>
                 </section>
             </div>
