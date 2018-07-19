@@ -148,10 +148,32 @@ class DashboardController extends CoreController
         $View->setData("PageName", NAV_DASHBOARD . " " . NAV_DASHBOARD_STATISTIC);
 
         $Stats = new StatsRepository();
+
         $resultStatMonth = $Stats->getStatViewTosle();
         $View->setData("statViewTosle", $resultStatMonth);
 
+        $resultStatClassYear = $Stats->getStatViewClass('year');
+        $labelStatClassYear = '["'.implode('" ,"', array_keys($resultStatClassYear)).'"]';
+        $statClassYear = '['.implode(' ,', $resultStatClassYear).']';
+        $View->setData("labelStatClassYear", $labelStatClassYear);
+        $View->setData("statClassYear", $statClassYear);
+
+        $resultStatClassMonth = $Stats->getStatViewClass('month');
+        $labelStatClassMonth = '["'.implode('" ,"', array_keys($resultStatClassMonth)).'"]';
+        $statClassMonth = '['.implode(' ,', $resultStatClassMonth).']';
+        $View->setData("labelStatClassMonth", $labelStatClassMonth);
+        $View->setData("statClassMonth", $statClassMonth);
+
+        $resultStatClassDay = $Stats->getStatViewClass('day');
+        $labelStatClassDay = '["'.implode('" ,"', array_keys($resultStatClassDay)).'"]';
+        $statClassDay = '['.implode(' ,', $resultStatClassDay).']';
+        $View->setData("labelStatClassDay", $labelStatClassDay);
+        $View->setData("statClassDay", $statClassDay);
+
+
+
         $User = new UserRepository();
+
         $resultStatUserYear = $User->getStatUser('year');
         $View->setData("statUserRegisteredYear", $resultStatUserYear);
 
@@ -161,9 +183,12 @@ class DashboardController extends CoreController
         $resultStatUserDay = $User->getStatUser('day');
         $View->setData("statUserRegisteredDay", $resultStatUserDay);
 
-//        print_r($User);
+
+
+
         echo '<pre>';
-        //print_r($resultStatUserDay);
+        //print_r($Stats);
+        print_r($resultStatClassDay);
         echo '</pre>';
 
     }
