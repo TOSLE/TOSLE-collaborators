@@ -22,6 +22,7 @@ class ChatController extends CoreController
             $conversationView = null;
             $errorsAdd = null;
             $page = "index";
+            $routeChat = $this->Routes['chathome'];
             $configFormNew = $Conversation->configFormAdd($this->Auth);
             $inBoxNumber = $Conversation->getNumberConversation('status', 1);
             $draftNumber = $Conversation->getNumberConversation('status', 0);
@@ -52,6 +53,7 @@ class ChatController extends CoreController
                     }
                 }
             }
+            $View->setData('routeChat', $routeChat);
             $View->setData('inBoxNumber', $inBoxNumber);
             $View->setData('draftNumber', $draftNumber);
             $View->setData('tashNumber', $tashNumber);
@@ -163,6 +165,7 @@ class ChatController extends CoreController
             $conversationView = null;
             $errorsAdd = null;
             $page = "draft";
+            $routeChat = $this->Routes['chatdraft'];
             $configFormNew = $Conversation->configFormAdd($this->Auth);
             $inBoxNumber = $Conversation->getNumberConversation('status', 1);
             $draftNumber = $Conversation->getNumberConversation('status', 0);
@@ -174,7 +177,7 @@ class ChatController extends CoreController
                 $idConv = (isset($params['URI'][0]) && is_numeric($params['URI'][0]))?$params['URI'][0]:$conversations[0]->getId();
                 $errorsAdd = $Conversation->editConversationMessage($idConv, $this->Auth->getId(), $params['POST']);
                 if(empty($errorsAdd)){
-                    header('Location:'.$this->Routes['chathome'].'/'.$params['URI'][0]);
+                    header('Location:'.$this->Routes['chathome']);
                 }
             }
             if(isset($conversations) && !empty($conversations)){
@@ -193,6 +196,7 @@ class ChatController extends CoreController
                     }
                 }
             }
+            $View->setData('routeChat', $routeChat);
             $View->setData('inBoxNumber', $inBoxNumber);
             $View->setData('draftNumber', $draftNumber);
             $View->setData('tashNumber', $tashNumber);
@@ -230,6 +234,7 @@ class ChatController extends CoreController
             $conversationView = null;
             $errorsAdd = null;
             $page = "trash";
+            $routeChat = $this->Routes['chattrash'];
             $configFormNew = $Conversation->configFormAdd($this->Auth);
             $inBoxNumber = $Conversation->getNumberConversation('status', 1);
             $draftNumber = $Conversation->getNumberConversation('status', 0);
@@ -260,6 +265,7 @@ class ChatController extends CoreController
                     }
                 }
             }
+            $View->setData('routeChat', $routeChat);
             $View->setData('inBoxNumber', $inBoxNumber);
             $View->setData('draftNumber', $draftNumber);
             $View->setData('tashNumber', $tashNumber);

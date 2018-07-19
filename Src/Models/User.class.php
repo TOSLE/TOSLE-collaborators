@@ -224,7 +224,7 @@ class User extends CoreSql{
                 "action"=>$action,
                 "submit"=>"Se connecter",
                 "secure" => [
-                    "status" => true,
+                    "status" => false,
                     "duration" => 5
                 ],
             ],

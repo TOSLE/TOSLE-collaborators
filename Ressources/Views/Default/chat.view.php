@@ -44,7 +44,7 @@
     <div class="content-message">
         <?php if(isset($conversations)):?>
             <?php foreach($conversations as $key => $conversation):?>
-                <a href="<?php echo $this->slugs['chathome'].'/'.$conversation->getId();?>" class="message-info <?php echo (isset($conversationView) && $conversation->getId() == $conversationView->getId())?'active':'';?> <?php echo ($conversation->getMessages()[count($conversation->getMessages())-1]->getStatus() == 2)?'notification':'';?>">
+                <a href="<?php echo $routeChat.'/'.$conversation->getId();?>" class="message-info <?php echo (isset($conversationView) && $conversation->getId() == $conversationView->getId())?'active':'';?> <?php echo ($conversation->getMessages()[count($conversation->getMessages())-1]->getStatus() == 2)?'notification':'';?>">
                     <div class="header-message">
                         <div class="logo-header-message">
                             <?php echo $conversation->getDestination()->getFirstname()[0];?>

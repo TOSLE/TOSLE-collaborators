@@ -84,7 +84,6 @@ class ConversationRepository extends Conversation
                 $this->setTag();
                 $this->setIdowner($_auth->getId());
                 $this->save();
-
                 $this->getConversationByTag($this->getTag());
                 $MessageConversation->setConversationid($this->getId());
                 $MessageConversation->setMessageid($Message->getId());
