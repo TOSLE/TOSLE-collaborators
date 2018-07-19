@@ -183,7 +183,6 @@ class UserController extends CoreController
            /* if token et mail + ajouter nom
                 $param 3 tableau sl
                 set password */
-        print_r($params);
 
         if (isset($params["GET"]["email"])/* & isset($params["GET"]["token"])*/) {
 
@@ -204,7 +203,7 @@ class UserController extends CoreController
                 $password = $params["POST"]["pwd"];
                 $User->setPassword($password);
                 $User->save();
-                echo 'ok';
+                header('Location:'.$this->Routes['signin']);
             }else{
                 echo "error";
             }
