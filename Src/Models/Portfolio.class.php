@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Created by PhpStorm.
  * User: Najla
@@ -11,9 +10,10 @@ class Portfolio extends CoreSql
 {
 
     protected $id;
+    protected $name;
     protected $title;
     protected $description;
-    protected $datecreate;
+   // protected $datecreate;
     protected $status;
     protected $url;
 
@@ -41,6 +41,22 @@ class Portfolio extends CoreSql
     /**
      * @return mixed
      */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param mixed $title
+     */
+    public function setName($name)
+    {
+        $this->name =$name;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getTitle()
     {
         return $this->title;
@@ -57,17 +73,17 @@ class Portfolio extends CoreSql
     /**
      * @return mixed
      */
-    public function getDescription()
+    public function getContent()
     {
-        return $this->description;
+        return $this->content;
     }
 
     /**
      * @param mixed $description
      */
-    public function setDescription($description)
+    public function setDescription($content)
     {
-        $this->description = $description;
+        $this->content = $content;
     }
 
     /**
@@ -121,32 +137,133 @@ class Portfolio extends CoreSql
     public function configFormAddPortfolio()
     {
         $slugs = Access::getSlugsById();
-
+        //$category = new CategoryRepository;
+        $file=new FileRepository();
         return [
             "config" => [
                 "method" => "post",
                 "action" => "",
+                "submit"=>"Publier l'article",
                 "save" => "Sauvegarder en brouillon",
-                "submit" => "Enregistrer ",
-                "form_file" => false,
+                "form_file" => true,
             ],
+
             "input" => [
                 "title" => [
                     "type" => "text",
-                    "placeholder" => "Intitulé",
-                    "required" => true,
+                    "placeholder" => "title",
+                    "required"=> true,
                     "maxString" => 100,
-                    "label" => "titre"
+                    "label" => "titre",
+                    "description"=>100,
+                ],
+
+            "image"=>[
+        "type"=>"file",
+        "required"=>false,
+        "label"=>"Select your background image",
+        "format"=>"PNG JPG JPEG",
+        "description"=>"Authorised format (png, jpg, jpeg)",
+        "multiple"=>false
+    ]
+
+            ],
+            "textarea" => [
+        "label" => " description",
+        "name" => "textarea_portfolio",
+        "description" => "Un maximum de 500 caractères",
+        "placeholder" => "Maximum 500 caractères"
+    ],
+             "ckeditor" => [
+        "label" => "Edition de votre article",
+        "name" => "ckeditor_article",
+        "description" => "Pas de limite !",
+        "placeholder" => "Placeholder"
+    ],
+            'select_multiple' => [
+       // $category->configFormCategory(1)
+    ],
+
+
+
+            "exit" => $slugs["portfolio_add"]
+
+
+        ];
+    }
+
+    public function configFormAddArticleImagePortfolio()
+    {
+        $slugs = Access::getSlugsById();
+        //$category = new CategoryRepository;
+        return [
+            "config"=> [
+                "method"=>"post",
+                "action"=>"", "submit"=>"Publier l'article",
+                "save"=>"Sauvegarder sans publier",
+                "form_file"=>true,
+            ],
+            "input"=> [
+                "title"=>[
+                    "type"=>"text",
+                    "placeholder"=>"Your title",
+                    "required"=>true,
+                    "maxString"=>100,
+                    "label"=>"Insert title of your article"
+                ],
+                "image"=>[
+                    "type"=>"file",
+                    "required"=>true,
+                    "label"=>"Select your image",
+                    "format"=>"PNG JPG JPEG",
+                    "description"=>"Authorised format (png, jpg, jpeg)",
+                    "multiple"=>false
                 ]
             ],
             "textarea" => [
-                "label" => " description",
-                "name" => "textarea_portfolio",
+                "label" => "Image description",
+                "name" => "textarea_articleImage",
                 "description" => "Un maximum de 500 caractères",
                 "placeholder" => "Maximum 500 caractères"
             ],
+           // 'select_multiple' => [
+              //  $category->configFormCategory(1)
+           // ],
+            "exit" => $slugs["dashboard_portfolio"]
+        ];
+    }
+
+    public function configFormAddArticleVideoPortfolio()
+    {
+        $slugs = Access::getSlugsById();
+       // $category = new CategoryRepository;
+        return [
+            "config"=> [
+                "method"=>"post",
+                "action"=>"", "submit"=>"Publier l'article",
+                "save"=>"Sauvegarder sans publier",
+                "form_file"=>true,
+            ],
+            "input"=> [
+                "title"=>[
+                    "type"=>"text",
+                    "placeholder"=>"Your title",
+                    "required"=>true,
+                    "maxString"=>100,
+                    "label"=>"Insert title of your article"
+                ],
+                "link"=>[
+                    "type"=>"text",
+                    "required"=>true,
+                    "label"=>"Insert link of your video",
+                    "placeholder"=>"Link of your video",
+                    "description" => "YouTube is only player supported by our Framework",
+                ]
+            ],
+
             "exit" => $slugs["portfolio_add"]
         ];
     }
+
 
 }

@@ -106,9 +106,9 @@ class DashboardController extends CoreController
      * @param array $params
      * View Portfolio dashboard action
      */
-    function portofolioAction($params)
+    function portfolioAction($params)
     {
-        $View = new View("dashboard", "portofolio");
+        $View = new View("portfolio", "portfolio");
         $View->setData("PageName", NAV_DASHBOARD . " " . NAV_DASHBOARD_PORTOFOLIO);
     }
 

@@ -48,8 +48,8 @@
                                                             <i class="material-icons blue">keyboard_arrow_right</i>
                                                         </a>
                                                     </li>
-                                                    <li><a href="<?php echo DIRNAME . substr($language, 0, 2) . "/dashboard/"; ?>">
-                                                            <p>Portofolio</p>
+                                                    <li><a href="<?php echo $this->slugs["Portfolio"]?>">
+                                                            <p>Portfolio</p>
                                                             <i class="material-icons blue">keyboard_arrow_right</i>
                                                         </a>
                                                     </li>

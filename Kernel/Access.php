@@ -100,12 +100,12 @@ class Access
         ],
         "Portfolio" => [
             "slug" => "portfolio-view",
-            "controller" => "portfolio",
+            "controller" => "Portfolio",
             "action" => "index",
             "security" => false
         ],
 
-       "portfoliohome" => [ // portfolio homemepage
+       "portfolio_home" => [ // portfolio homemepage
             "slug" => "portfolio-homepage",
             "controller" => "Portfolio",
             "action" => "index",
@@ -158,7 +158,10 @@ class Access
         "chapter/edit" => 2,
         "chapter/status" => 2,
         "chapter/order" => 2,
+        "portfolio/add "=>2,
+        "portfolio/edit"=>2,
         "index/config" => false,
+
     ];
 
     private $urlFixe = [

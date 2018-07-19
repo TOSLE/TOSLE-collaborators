@@ -69,33 +69,33 @@ class PortfolioController
         $routes = Access::getSlugsById();
         if(isset($params["URI"][0])){
             if(is_numeric($params["URI"][0])) {
-                $Lesson = new LessonRepository();
-                $View = new View("dashboard", "Dashboard/add_lesson");
-                $arrayReturn = $Lesson->editLesson($params["URI"][0]);
-                $arrayLesson = $arrayReturn["lesson"];
+                $File= new FileRepository();
+                $View = new View("portfolio", "portfolio-view");
+                $arrayReturn = $File->editFile($params["URI"][0]);
+                $arrayFile = $arrayReturn["portfolio"];
                 $configForm = $arrayReturn["configForm"];
                 $configForm["data_content"] = [
-                    "title" => $arrayLesson->getTitle(),
-                    "content" => $arrayLesson->getDescription(),
-                    "select_color" => $arrayLesson->getColor(),
+                    "title" => $arrayFile->getTitle(),
+                    "content" => $arrayFile->getDescription(),
+                    "select_color" => $arrayFile->getColor(),
                     "selectedOption" => $arrayReturn['selectedOption'],
-                    "select_type" => $arrayLesson->getType(),
-                    "select_difficulty" => $arrayLesson->getLevel(),
+                    "select_type" => $arrayFile->getType(),
+
                 ];
                 if(isset($params["POST"]) && !empty($params["POST"])){
-                    $resultAdd = $Lesson->addLesson($params["POST"], $params["URI"][0]);
+                    $resultAdd = $File->addFile($params["POST"], $params["URI"][0]);
                     if($resultAdd == 1){
-                        header('Location:'.$routes['dashboard_lesson']);
+                        header('Location:'.$routes['portfolio-view']);
                     }
                 }
                 $View->setData("errors", "");
                 $View->setData("configForm", $configForm);
             }
         } else {
-            header('Location:'.$routes['dashboard_lesson']);
+            header('Location:'.$routes['portfolio-view']);
         }
 
-    }
+    }}
 
     /*  function statusAction($params)
       {
@@ -126,4 +126,3 @@ class PortfolioController
       }
   */
 
-}
