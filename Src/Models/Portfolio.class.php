@@ -18,6 +18,7 @@ class Portfolio extends CoreSql
     protected $status;
     protected $url;
 
+
     public function __construct()
     {
         parent::__construct();
@@ -253,7 +254,7 @@ class Portfolio extends CoreSql
            // 'select_multiple' => [
               //  $category->configFormCategory(1)
            // ],
-            "exit" => $slugs["dashboard_portfolio"]
+            "exit" => $slugs["portfolio_add"]
         ];
     }
 

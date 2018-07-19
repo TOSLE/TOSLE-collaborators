@@ -15,7 +15,7 @@ class PortfolioRepository extends Portfolio
 
     /**
      * @return integer
-     * Retourne le nombre d'article de la table Blog
+     * Retourne le nombre d'article de la table Portfolio
      */
     public function countNumberOfBloc()
     {
@@ -25,7 +25,7 @@ class PortfolioRepository extends Portfolio
     /**
      * @param integer $status
      * @return integer
-     * Retourne le nombre d'article de la table Blog en fonction du status (par défaut vaut 1 (publié))
+     * Retourne le nombre d'article de la table Portfolio en fonction du status (par défaut vaut 1 (publié))
      */
     public function countNumberOfBlogByStatus($status = 1)
     {

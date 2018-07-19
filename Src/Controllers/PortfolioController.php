@@ -33,35 +33,29 @@ class PortfolioController
         $portfolio = New PortfolioRepository();
         $form = $portfolio->configFormAddPortfolio();
         if (!empty($params["POST"])) {
-            $errors = Form::checkForm($form, $params["POST"])
-                if (empty($errors)) {
-                    $portfolio->setId($params["id"]);
-                    $portfolio->setName($params["Name"]);
-                    $portfolio->setValue($params["value"]); // voir pour le selectMultipleResponse + confirmEmail
-                    $portfolio->settype($params["Type"]);
-                    $portfolio->setContent($params["Content"]);
-                    $portfolio->setStatus($params["Status"]);
-                    $portfolio->setUrl($params["Url"]);
-                    $portfolio->settitle($params["Title"]);
-                    $portfolio->save();
+            $errors = Form::checkForm($form, $params["POST"]);
+            if (empty($errors)) {
+                $portfolio->setId($params["id"]);
+                $portfolio->setName($params["name"]);
+                $portfolio->setValue($params["value"]);
+                $portfolio->settype($params["type"]);
+                $portfolio->setContent($params["content"]);
+                $portfolio->setStatus($params["status"]);
+                $portfolio->setUrl($params["url"]);
+                $portfolio->settitle($params["title"]);
+                $portfolio->save();
 
-                    $Content= $params["email"];
-                    $firstName = $_post["firstname"];
-                    $lastName = $_post["lastname"];
-                    $token = $->getToken();
 
-                    Mail::sendMailRegister($email, $firstName, $lastName, $token);
-                    header('Location:' . Access::getSlugsById()['signin'] . '/registered');
-                } else {
-                    $form["data_content"] = [
-                        "email" => $_post["email"],
-                        "firstname" => $_post["firstname"],
-                        "lastname" => $_post["lastname"],
-                    ];
-                }
-        };
-    }
-}
+            } else {
+                $form["data_content"] = [
+                    "content" => $params["content"],
+                    "title" => $params["title"],
+                    "type" => $params["type"],
+
+
+];                    $View = new View("portfolio", "Portfolio/add_article_portfolio");
+                $View ->setData("config",$form);
+                $View->setData("errors","");}}}
 
 
 
@@ -85,10 +79,6 @@ class PortfolioController
 
 
 
-        $View = new View("portfolio", "Portfolio/add_article_portfolio");
-        $View ->setData("config",$form);
-
-        $View->setData("errors"," ")
 
 
 
@@ -125,7 +115,7 @@ class PortfolioController
         if(isset($params["URI"][0])){
             if(is_numeric($params["URI"][0])) {
                 $File= new FileRepository();
-                $View = new View("portfolio", "portfolio-view");
+                $View = new View("Portfolio", "Portfolio-add_article_portfolio");
                 $arrayReturn = $File->editFile($params["URI"][0]);
                 $arrayFile = $arrayReturn["portfolio"];
                 $configForm = $arrayReturn["configForm"];
@@ -147,10 +137,10 @@ class PortfolioController
                 $View->setData("configForm", $configForm);
             }
         } else {
-            header('Location:'.$routes['portfolio-view']);
-        }
+            header('Location:'.$routes['portfolio-view-add']);
+        }}}
 
-    }}
+
 
     /*  function statusAction($params)
       {
