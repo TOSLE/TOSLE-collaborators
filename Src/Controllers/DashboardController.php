@@ -149,8 +149,16 @@ class DashboardController extends CoreController
 
         $Stats = new StatsRepository();
 
-        $resultStatMonth = $Stats->getStatViewTosle();
-        $View->setData("statViewTosle", $resultStatMonth);
+        /**
+         * Stat visite cms Tosle
+         */
+
+        $resultStatYear = $Stats->getStatViewTosle();
+        $View->setData("statViewTosle", $resultStatYear);
+
+        /**
+         * Stat consultation des cours
+         */
 
         $resultStatClassYear = $Stats->getStatViewClass('year');
         $labelStatClassYear = '["'.implode('" ,"', array_keys($resultStatClassYear)).'"]';
@@ -170,7 +178,32 @@ class DashboardController extends CoreController
         $View->setData("labelStatClassDay", $labelStatClassDay);
         $View->setData("statClassDay", $statClassDay);
 
+        /**
+         * Stat consultation des articles du blog
+         */
 
+        $resultStatBlogYear = $Stats->getStatViewArticle('year');
+        $labelStatBlogYear = '["'.implode('" ,"', array_keys($resultStatBlogYear)).'"]';
+        $statBlogYear = '['.implode(' ,', $resultStatBlogYear).']';
+        $View->setData("labelStatBlogYear", $labelStatBlogYear);
+        $View->setData("statBlogYear", $statBlogYear);
+
+        $resultStatBlogMonth = $Stats->getStatViewArticle('month');
+        $labelStatBlogMonth = '["'.implode('" ,"', array_keys($resultStatBlogMonth)).'"]';
+        $statBlogMonth = '['.implode(' ,', $resultStatBlogMonth).']';
+        $View->setData("labelStatBlogMonth", $labelStatBlogMonth);
+        $View->setData("statBlogMonth", $statBlogMonth);
+
+        $resultStatBlogDay = $Stats->getStatViewArticle('day');
+        $labelStatBlogDay = '["'.implode('" ,"', array_keys($resultStatBlogDay)).'"]';
+        $statBlogDay = '['.implode(' ,', $resultStatBlogDay).']';
+        $View->setData("labelStatBlogDay", $labelStatBlogDay);
+        $View->setData("statBlogDay", $statBlogDay);
+
+
+        /**
+         * Stat inscription utilisateur au cms
+         */
 
         $User = new UserRepository();
 
@@ -188,7 +221,7 @@ class DashboardController extends CoreController
 
         echo '<pre>';
         //print_r($Stats);
-        print_r($resultStatClassDay);
+        print_r($resultStatBlogDay);
         echo '</pre>';
 
     }

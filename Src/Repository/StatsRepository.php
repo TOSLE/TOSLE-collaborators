@@ -201,11 +201,162 @@ class StatsRepository extends Stats
         }
     }
 
-
-    public function getStatViewArticle()
+    public function getStatViewArticle($sort)
     {
 
+        switch ($sort) {
+            case "year" :
+                $currentYear = date("Y");
+                $target = [
+                    "id",
+                    "target",
+                    "year"
+                ];
+                $parameter = [
+                    "LIKE" => [
+                        "year" => $currentYear
+                    ]
+                ];
+                $this->setWhereParameter($parameter);
+                $resultQuery = $this->getData($target);
 
+
+                if(isset($resultQuery)) {
+                    $arrayGetArticle = [];
+                    foreach($resultQuery as $row) {
+                        array_push($arrayGetArticle, $row->getTarget());
+                    }
+                    if(isset($arrayGetArticle)) {
+                        $arrayArticle = [];
+                        for($i = 0; $i < sizeof($arrayGetArticle); $i+=1){
+                            $rowDecoupe = explode("/",$arrayGetArticle[$i]);
+                            if($rowDecoupe[2] === "view-article"){
+                                array_push($arrayArticle,$arrayGetArticle[$i]);
+                            }
+                        }
+                        if(isset($arrayArticle)) {
+                            $arrayKeyArticleName = [];
+                            for($i = 0; $i < sizeof($arrayArticle); $i+=1){
+                                $getClass = explode("/", $arrayArticle[$i]);
+                                if(!isset($getClass[4])){
+                                    array_push($arrayKeyArticleName, $getClass[3]);
+                                }
+                            }
+                            $statArrayArticle = array_count_values($arrayKeyArticleName);
+                            return $statArrayArticle;
+
+                        }
+
+                    }
+                }
+                break;
+
+            case "month" : {
+
+                $currentYear = date("Y");
+                $currentMonth = date("n");
+                $target = [
+                    "id",
+                    "target",
+                    "month",
+                    "year"
+                ];
+                $parameter = [
+                    "LIKE" => [
+                        "year" => $currentYear,
+                        "month" => $currentMonth
+                    ]
+                ];
+
+                $this->setWhereParameter($parameter);
+                $resultQuery = $this->getData($target);
+
+                if(isset($resultQuery)) {
+                    $arrayGetArticle = [];
+                    foreach($resultQuery as $row) {
+                        array_push($arrayGetArticle, $row->getTarget());
+                    }
+                    if(isset($arrayGetArticle)) {
+                        $arrayArticle = [];
+                        for($i = 0; $i < sizeof($arrayGetArticle); $i+=1){
+                            $rowDecoupe = explode("/",$arrayGetArticle[$i]);
+                            if($rowDecoupe[2] === "view-article"){
+                                array_push($arrayArticle,$arrayGetArticle[$i]);
+                            }
+                        }
+                        if(isset($arrayArticle)) {
+                            $arrayKeyArticleName = [];
+                            for($i = 0; $i < sizeof($arrayArticle); $i+=1){
+                                $getClass = explode("/", $arrayArticle[$i]);
+                                if(!isset($getClass[4])){
+                                    array_push($arrayKeyArticleName, $getClass[3]);
+                                }
+                            }
+                            $statArrayArticle = array_count_values($arrayKeyArticleName);
+                            return $statArrayArticle;
+
+                        }
+
+                    }
+                }
+                break;
+            }
+
+            case "day" : {
+
+                $currentYear = date("Y");
+                $currentMonth = date("n");
+                $currentDay = date("j");
+                $target = [
+                    "id",
+                    "target",
+                    "month",
+                    "year",
+                    "day"
+                ];
+                $parameter = [
+                    "LIKE" => [
+                        "year" => $currentYear,
+                        "month" => $currentMonth,
+                        "day" => $currentDay,
+                    ]
+                ];
+
+                $this->setWhereParameter($parameter);
+                $resultQuery = $this->getData($target);
+
+                if(isset($resultQuery)) {
+                    $arrayGetArticle = [];
+                    foreach($resultQuery as $row) {
+                        array_push($arrayGetArticle, $row->getTarget());
+                    }
+                    if(isset($arrayGetArticle)) {
+                        $arrayArticle = [];
+                        for($i = 0; $i < sizeof($arrayGetArticle); $i+=1){
+                            $rowDecoupe = explode("/",$arrayGetArticle[$i]);
+                            if($rowDecoupe[2] === "view-article"){
+                                array_push($arrayArticle,$arrayGetArticle[$i]);
+                            }
+                        }
+                        if(isset($arrayArticle)) {
+                            $arrayKeyArticleName = [];
+                            for($i = 0; $i < sizeof($arrayArticle); $i+=1){
+                                $getClass = explode("/", $arrayArticle[$i]);
+                                if(!isset($getClass[4])){
+                                    array_push($arrayKeyArticleName, $getClass[3]);
+                                }
+                            }
+                            $statArrayArticle = array_count_values($arrayKeyArticleName);
+                            return $statArrayArticle;
+
+                        }
+                    }
+                }
+                break;
+            }
+
+
+        }
     }
 
     public function getStatMessage($sort)
