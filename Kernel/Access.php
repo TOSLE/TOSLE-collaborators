@@ -157,6 +157,14 @@ class Access
         "chapter/status" => 2,
         "chapter/order" => 2,
         "index/config" => false,
+        "user/delete" => 2,
+        "group/delete" => 2,
+        "group/manage" => 2,
+        "group/edit" => 2,
+        "group/unset" => 2,
+        "group/gunset" => 2,
+        "group/umanage" => 2,
+        "class/follow" => 1,
     ];
 
     private $urlFixe = [
@@ -247,10 +255,10 @@ class Access
         $Acces = new Access();
         $data = [];
         foreach ($Acces->getAccess() as $key => $value){
-            $data[$key] = "".DIRNAME.substr($language,0,2)."/".$value["slug"];
+            $data[$key] = "".DIRNAME.$value["slug"];
         }
         foreach ($Acces->getBackoffice() as $key => $value){
-            $data[$key] = "".DIRNAME.substr($language,0,2)."/".$key;
+            $data[$key] = "".DIRNAME.$key;
         }
         foreach ($Acces->getUrlFixe() as $key => $value){
             $data[$key] = $value;

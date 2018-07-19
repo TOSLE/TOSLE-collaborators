@@ -56,6 +56,23 @@ class DashboardController extends CoreController
     {
         $View = new View("dashboard", "Dashboard/student");
         $View->setData("PageName", NAV_DASHBOARD . " " . NAV_DASHBOARD_STUDENT);
+        $Dashboard = new DashboardRepository();
+        $configBlocUsers = $Dashboard->getAllUsers();
+        $configBlocGroups = $Dashboard->getAllGroups();
+        $Group = new GroupRepository();
+        $configFormGroupAdd = $Group->configFormAdd();
+        $errors_group_add = "";
+
+        if(isset($params['POST']) && !empty($params['POST'])){
+            $errors_group_add = $Group->addGroup($_FILES, $params["POST"]);
+            if($errors_group_add === 1){
+                header('Location:'.$this->Routes['dashboard_student']);
+            }
+        }
+        $View->setData("configBlocUsers", $configBlocUsers);
+        $View->setData("configBlocGroups", $configBlocGroups);
+        $View->setData("configFormGroupAdd", $configFormGroupAdd);
+        $View->setData("errors_group_add", $errors_group_add);
     }
 
     /**
@@ -140,6 +157,16 @@ class DashboardController extends CoreController
         /*$View->setData("modalAddOption", $Lesson->getModalAdd(12));
         $View->setData("modalStats", $Lesson->getModalStats());*/
         $View->setData("modalChapter", $Lesson->getModalLastChapterByLesson($params["URI"][0]));
+    }
+
+    /**
+     * @param $params
+     * Gestion des groupes en lien avec un ID
+     */
+    public function groupAction($params)
+    {
+
+        header('Location:'.$this->Routes['dashboard_student']);
     }
 
 }

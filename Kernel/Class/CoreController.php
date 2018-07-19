@@ -9,6 +9,7 @@
 class CoreController
 {
     protected $Auth = null;
+    protected $Routes = null;
 
     public function __construct()
     {
@@ -16,5 +17,6 @@ class CoreController
             $tmpAuth = json_decode($_SESSION['auth']);
             $this->Auth = new UserRepository($tmpAuth->{'id'});
         }
+        $this->Routes = Access::getSlugsById();
     }
 }

@@ -1,4 +1,5 @@
 .idea/*
-upload/*
+upload/images/*
+upload/.thumbs/*
 [Tt]humbs.db
 *.DS_Store

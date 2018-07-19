@@ -134,4 +134,37 @@ class UserRepository extends User
         ]]);
         $this->getOneData($target);
     }
+
+    /**
+     * @return array
+     * Retourne le tableau pour ajout du SELECT des utilisateurs dans un confirgForm
+     */
+    public function getSelectUsers()
+    {
+        $target = [
+            'id',
+            'firstname',
+            'lastname'
+        ];
+        $parameter = [
+            'LIKE' => [
+                'status' => 1
+            ]
+        ];
+        $this->setWhereParameter($parameter);
+        $users = $this->getData($target);
+
+        $option = [];
+        foreach ($users as $user) {
+            $option[$user->getId()] = $user->getLastname().' '.$user->getFirstname();
+        }
+        return [
+            "select_users" => [
+                "label" => "Ajouter des utilisateurs",
+                "description" => "Vous avez le droit à plusieurs choix (\"CTRL + Clic\" pour réaliser un choix multiple)",
+                "multiple" => true,
+                "options" => $option
+            ]
+        ];
+    }
 }
