@@ -102,6 +102,7 @@ class ClassController extends CoreController
             } else {
                 $View->setData("error_search", 'Il semble y avoir une erreur dans votre URL, le cours n\'est pas trouvé où n\'existe pas !');
             }
+           
         } else {
             header('Location:'.$routes['homepage']);
         }
@@ -115,6 +116,29 @@ class ClassController extends CoreController
     function searchAction($params)
     {
         $View = new View("default");
+    }
+
+    function SignalementAction($params)
+    {
+                $routes = Access::getSlugsById();
+                $comment = new CommentRepository();
+              /*  $variable=
+                       $target = [
+                            "datecreate",
+                            "content",
+                            "id"
+                        ];
+                        $parameter = [
+                            "LIKE" => [
+                                "id" => $params["URI"][0]
+                            ]
+                        ];
+                        $comment->setWhereParameter($parameter);
+                        $comment->getOneData();*/
+                
+                Mail::sendMailSignalement();
+
+                header('Location:'.$routes['view_lesson']);
     }
 
     /**
@@ -150,7 +174,8 @@ class ClassController extends CoreController
         } else {
             header('Location:'.$routes['dashboard_lesson']);
         }
-    }
+    
+}
 
     public function editAction($params)
     {

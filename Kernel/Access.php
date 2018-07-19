@@ -136,6 +136,12 @@ class Access
             "action" => "student",
             "security" => 2
         ],
+        "comment_signalement" => [
+            "slug" => "comment-signalement",
+            "controller" => "Class",
+            "action" => "Signalement",
+            "security" => 2
+        ],
     ];
 
     private $backOffice = [

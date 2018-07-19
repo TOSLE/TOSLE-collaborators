@@ -62,7 +62,6 @@ class UserController
             $retourValue=$user->checkEmailExist($params["POST"]["email"]);
 
                if(is_numeric($retourValue)){     
-                    echo "testt";
                      $user->setEmail($params["POST"]["email"]);                             
                     } 
                 else {
