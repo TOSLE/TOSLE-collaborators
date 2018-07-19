@@ -126,7 +126,7 @@ class Access
             "slug" => "messaging-draft",
             "controller" => "chat",
             "action" => "draft",
-            "security" => 1
+            "security" => 2
         ],
         "chattrash" => [
             "slug" => "messaging-trash",
