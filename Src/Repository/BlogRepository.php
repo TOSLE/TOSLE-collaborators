@@ -19,7 +19,7 @@ class BlogRepository extends Blog
      */
     public function countNumberOfBlog()
     {
-        return $this->countData(["id"])[0];
+        return $this->countData(["id"]);
     }
 
     /**
@@ -34,7 +34,7 @@ class BlogRepository extends Blog
                 "status" => $status
             ]
         ]);
-        return $this->countData(["id"])[0];
+        return $this->countData(["id"]);
     }
 
     /**
@@ -236,7 +236,6 @@ class BlogRepository extends Blog
     public function getModalStats()
     {
         $StatsBlog = new DashboardBlocModal();
-        $Comment = new CommentRepository();
         $StatsBlog->setTitle("Blog Analytics");
         $StatsBlog->setTableHeader([
             1 => "Type",
@@ -262,7 +261,7 @@ class BlogRepository extends Blog
             ],
             3 => [
                 1 => "Nombre de commentaires",
-                2 => $Comment->getAll("number_all", null)
+                2 => $this->getAllComment()
             ],
             4 => [
                 1 => "Nombre d'articles avec fichier",
@@ -270,6 +269,17 @@ class BlogRepository extends Blog
             ]
         ]);
         return $StatsBlog->getArrayData();
+    }
+
+    public function getAllComment()
+    {
+        $joinParameter = [
+            'blogcomment' => [
+                'blog_id'
+            ]
+        ];
+        $this->setLeftJoin($joinParameter);
+        return $this->countData(['id']);
     }
 
     /**
@@ -284,40 +294,35 @@ class BlogRepository extends Blog
 
         $BlocGeneral->setTitle("Principal menu");
         $BlocGeneral->setTableHeader([
-            1 => "Name of action",
-            2 => "Action"
+            1 => "Action",
         ]);
         $BlocGeneral->setTableBodyClass([
             1 => "td-content-text",
-            2 => "td-content-action"
         ]);
-        $BlocGeneral->setColSizeBloc(6);
+        $BlocGeneral->setColSizeBloc(3);
         $BlocGeneral->setTableBodyContent([
             0 => [
-                1 => "Nouveau post de type texte",
                 "button_action" => [
                     "type" => "href",
                     "target" => $routes["blog/add"]."/text",
                     "color" => "tosle",
-                    "text" => "New post"
+                    "text" => "Add article"
                 ]
             ],
             1 => [
-                1 => "Nouveau post de type image",
                 "button_action" => [
                     "type" => "href",
                     "target" => $routes["blog/add"]."/image",
                     "color" => "tosle",
-                    "text" => "New post"
+                    "text" => "Add image"
                 ]
             ],
             2 => [
-                1 => "Nouveau post de type vidéo",
                 "button_action" => [
                     "type" => "href",
                     "target" => $routes["blog/add"]."/video",
                     "color" => "tosle",
-                    "text" => "New post"
+                    "text" => "Add video"
                 ]
             ]
         ]);
@@ -353,7 +358,7 @@ class BlogRepository extends Blog
             ]
         ];
         $this->setWhereParameter($parameter);
-        return $this->countData($target)[0];
+        return $this->countData($target);
     }
 
     /**

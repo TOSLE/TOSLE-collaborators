@@ -41,6 +41,7 @@ class ChapterController
         } else {
             header('Location:'.$routes['dashboard_lesson']);
         }
+        $View->setData('controller', "DashboardController");
     }
 
     /**
@@ -131,5 +132,6 @@ class ChapterController
         } else {
             header('Location:'.$routes["dashboard_chapter"].'/'.$params["URI"][0]);
         }
+        $View->setData('controller', "DashboardController");
     }
 }

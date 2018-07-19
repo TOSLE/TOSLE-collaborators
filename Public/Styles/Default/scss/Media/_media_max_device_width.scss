@@ -38,6 +38,7 @@ body {
       bottom: 0;
       width: 100%;
       background-color: white;
+      z-index: 10000;
       > ul {
         > li {
           > a {

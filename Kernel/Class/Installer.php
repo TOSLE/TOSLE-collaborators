@@ -80,6 +80,14 @@ class Installer
         return 0;
     }
 
+    /**
+     * @return int
+     * Retourne l'état de la connexion avec le DBNAME
+     * Contexte, on peut partir du principe que l'utilisateur à valider le premier formulaire de l'installeur, mais
+     * pas le second. Du coup, la logique a été d'insérer la table TOSLE à la fin du SECOND formulaire et que celui-ci
+     * soit réussie. Du coup, tant que le second formulaire n'est pas passé, il n'y a pas de table en base et on
+     * peut redirriger l'utilisateur vers la seconde partie de l'installation
+     */
     public static function checkDatabaseConnexion()
     {
         try {

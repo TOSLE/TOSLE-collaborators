@@ -37,14 +37,8 @@ class BlogComment extends CoreSql
     /**
      * @return mixed
      */
-    public function getUserid($_idComment)
+    public function getUserid()
     {
-        $parameter = [
-            'LIKE' => [
-                'commentid' => $_idComment
-            ]
-        ];
-        $this->getOneData(['userid']);
         return $this->userid;
     }
 
@@ -88,5 +82,36 @@ class BlogComment extends CoreSql
         $this->blogid = $blogid;
     }
 
-
+    /**
+     * @param $_identifier
+     * @param $_value
+     * @return array|int
+     * Permet de récupérer une jointure par rapport à un critère.
+     */
+    public function getBlogCommentByIdentifier($_identifier, $_value)
+    {
+        switch($_identifier){
+            case 'getuser':
+                $paramIdentifier = 'comment';
+                $opposite = 'user';
+                break;
+            default:
+                return 0;
+                break;
+        };
+        $target = ["id", "blogid", "userid", "commentid"];
+        $parameter = [
+            "LIKE" => [
+                $paramIdentifier.'id' => $_value
+            ]
+        ];
+        $this->setWhereParameter($parameter);
+        $array = $this->getData($target);
+        $returnArrayId= [];
+        foreach($array as $category) {
+            $tmpString = 'get'.ucfirst(strtolower($opposite)).'Id';
+            $returnArrayId[] = $category->$tmpString();
+        }
+        return $returnArrayId;
+    }
 }

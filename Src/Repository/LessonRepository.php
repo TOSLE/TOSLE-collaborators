@@ -73,16 +73,33 @@ class LessonRepository extends Lesson
         $StatsBlog->setTableBodyContent([
             0 => [
                 1 => "Nombre de cours",
-                2 => 1
+                2 => $this->countLesson()
             ],
             1 => [
                 1 => "Nombre de chapitre",
-                2 => 2
+                2 => $this->countChapter()
             ],
         ]);
         return $StatsBlog->getArrayData();
     }
 
+    /**
+     * @return int
+     * Retourne le nombre de lesson
+     */
+    public function countLesson()
+    {
+        return  $this->countData(['id']);
+    }
+
+    /**
+     * @return int
+     */
+    public function countChapter()
+    {
+        $Chapter = new ChapterRepository();
+        return $Chapter->countData(['id']);
+    }
     /**
      * @param int $colSize
      * @return array
@@ -204,11 +221,10 @@ class LessonRepository extends Lesson
     }
 
     /**
-     * @param int $_number
      * @return array
      * Retourne les dernières lessons, le nombre dépend du paramètre qui par défaut est à 5
      */
-    public function getLastLesson($_number = 5)
+    public function getLastLesson()
     {
         $target = [
             'id',
@@ -220,7 +236,6 @@ class LessonRepository extends Lesson
             'datecreate'
         ];
         $this->setOrderByParameter(["id" => "DESC"]);
-        $this->setLimitParameter($_number);
         return $this->getData($target);
     }
 
@@ -248,10 +263,24 @@ class LessonRepository extends Lesson
             $this->setLevel($tmpPostArray["select_difficulty"]);
             $this->save();
             $this->getLessonByUrl($this->getUrl());
+            $LessonGroup = new LessonGroup();
+            $parameter = [
+                'LIKE' => [
+                    'lessonid' => $this->id
+                ]
+            ];
+            $LessonGroup->setWhereParameter($parameter);
+            $LessonGroup->delete();
             if(isset($tmpPostArray["category_select"]) && !empty($tmpPostArray["category_select"]))
             {
                 $category = new CategoryRepository();
                 $arrayCategory = $category->addCategoryBySelect($tmpPostArray["category_select"], 'lesson', $this->getId());
+            }
+            if(isset($tmpPostArray["group_select"]) && !empty($tmpPostArray["group_select"]))
+            {
+                foreach($tmpPostArray["group_select"] as $id){
+                    $LessonGroup->addLessonGroup($this->getId(), $id);
+                }
             }
             if(isset($tmpPostArray["category_input"]) && !empty($tmpPostArray["category_input"])){
                 $category = new CategoryRepository();
@@ -287,12 +316,15 @@ class LessonRepository extends Lesson
     {
         $this->getLessonById($_idLesson);
         if(!empty($this->id)){
+            $LessonGroup = new LessonGroup();
             $category = new CategoryRepository();
             $categoryFounded = $category->getCategoryByIdentifier('lesson', $this->id);
+            $groupFounded = $LessonGroup->getGroupsLesson($this->id);
             return $arrayObject = [
                 "lesson" => $this,
                 "selectedOption" => [
                     "category_select" => $categoryFounded,
+                    "group_select" => $groupFounded
                 ],
                 "configForm" => $this->configFormAddLesson()
             ];
@@ -387,39 +419,68 @@ class LessonRepository extends Lesson
      * @return array
      * Permet de retourner les lessons dans un tableau d'objet. Il n'est pas nécessaire de spécifier les paramètres
      */
-    public function getLessons($_limit = null, $_offset = null)
+    public function getLessons($Auth, $_limit = null, $_offset = null)
     {
         $target = [
-            "id",
-            "title",
-            "description",
-            "datecreate",
-            "status",
-            "url",
-            "color",
-            "type",
-            "level"
+            "id", "title", "description", "datecreate",
+            "status", "url", "color", "type", "level"
         ];
-        $parameter = [
-            'LIKE' => [
-                'status' => 1
-            ]
-        ];
+        if(isset($Auth)){
+            $parameter = [
+                'LIKE' => [
+                    'status' => 1
+                ]
+            ];
+            foreach($Auth->getGroups() as $group){
+                $userGroups[$group->getId()] = $group->getName();
+            }
+        } else {
+            $parameter = [
+                'LIKE' => [
+                    'status' => 1,
+                    'type' => 1
+                ]
+            ];
+        }
         if(isset($_limit)){
             $this->setLimitParameter($_limit, $_offset);
         }
         $this->setWhereParameter($parameter);
         $this->setOrderByParameter(["id" => "DESC"]);
         $arrayReturn = $this->getData($target);
-        foreach($arrayReturn as $lesson){
+        $arrayUnset = [];
+        foreach($arrayReturn as $key => $lesson){
             $Category = new CategoryRepository();
             $LessonChapter = new LessonChapter();
+            $Chapter = new ChapterRepository();
+            $Groups = new LessonGroup();
+            $arrayGroups = $Groups->getGroupsLesson($lesson->getId());
+            if(is_array($arrayGroups) && isset($userGroups) && $lesson->getType() == 2){
+                $temporaryTab = array_diff_key($arrayGroups,$userGroups);
+                if(isset($temporaryTab) && is_array($temporaryTab)){
+                    if(sizeof($arrayGroups) == sizeof($temporaryTab)){
+                        $arrayUnset[] = $key;
+                    }
+                }
+            }
             $arrayChapter = $LessonChapter->getLessonChapterByIdentifier('lesson', $lesson->getId());
             $arrayCategory = $Category->getCategoryByIdentifier('lesson', $lesson->getId());
+            foreach ($arrayChapter as $id){
+                $lesson->setNumberComment(sizeof($Chapter->getComments($id)));
+            }
+            if(isset($arrayGroups) && !empty($arrayGroups)){
+                foreach ($arrayGroups as $idGroup => $value) {
+                    $lesson->setGroups($idGroup);
+                }
+            }
             $lesson->setCategorylesson($arrayCategory);
             $lesson->setChapter($arrayChapter);
         }
-
+        if(isset($arrayUnset) && !empty($arrayUnset)){
+            foreach($arrayUnset as $keyToUnset){
+                unset($arrayReturn[$keyToUnset]);
+            }
+        }
         return $arrayReturn;
     }
 
@@ -509,9 +570,9 @@ class LessonRepository extends Lesson
      * @return int
      * Compte le nombre de lesson possédant un chapitre
      */
-    public function countNumberOfLesson()
+    public function countNumberOfLesson($Auth)
     {
-        $lessons = $this->getLessons();
+        $lessons = $this->getLessons($Auth);
         $returnValue = 0;
         foreach($lessons as $lesson)
         {
@@ -528,10 +589,10 @@ class LessonRepository extends Lesson
      * @return array|int
      * Cette fonction retourne une pagination pour les blogs en fonction d'un tableau envoyé
      */
-    public function getPagination($_numberLesson, $_get)
+    public function getPagination($_numberLesson, $_get, $Auth)
     {
         $pagination = [];
-        $numberTotalOfLesson = $this->countNumberOfLesson();
+        $numberTotalOfLesson = $this->countNumberOfLesson($Auth);
         $totalPage = ($numberTotalOfLesson != $_numberLesson)?(int)($numberTotalOfLesson / $_numberLesson):1;
         if($totalPage < $numberTotalOfLesson / $_numberLesson){
             $totalPage++;
@@ -579,5 +640,10 @@ class LessonRepository extends Lesson
             }
         }
         return $pagination;
+    }
+
+    public function getNumberLesson()
+    {
+
     }
 }

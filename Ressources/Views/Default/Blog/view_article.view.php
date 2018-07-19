@@ -79,13 +79,13 @@
                                                             </div>
                                                             <div>
                                                                 <div class="name-user">
-                                                                    <?php echo $comment["firstname"] . ' ' . $comment["lastname"]; ?>
+                                                                    <?php echo $comment->getUser()->getFirstname() . ' ' . $comment->getUser()->getLastname(); ?>
                                                                 </div>
                                                                 <div class="content">
-                                                                    <span><?php echo $comment["content"]; ?></span>
+                                                                    <span><?php echo $comment->getContent(); ?></span>
                                                                 </div>
                                                                 <div class="info">
-                                                                    <span><?php echo $comment["date"]; ?></span>
+                                                                    <span><?php echo $comment->getDatecreate(); ?></span>
                                                                 </div>
                                                             </div>
                                                         </div>

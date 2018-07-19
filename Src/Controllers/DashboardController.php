@@ -6,7 +6,7 @@
  * Time: 11:22
  */
 
-class DashboardController
+class DashboardController extends CoreController
 {
     /**
      * @Route("/en/dashboard(/index)")
@@ -54,8 +54,25 @@ class DashboardController
      */
     function studentAction($params)
     {
-        $View = new View("dashboard", "student");
+        $View = new View("dashboard", "Dashboard/student");
         $View->setData("PageName", NAV_DASHBOARD . " " . NAV_DASHBOARD_STUDENT);
+        $Dashboard = new DashboardRepository();
+        $configBlocUsers = $Dashboard->getAllUsers();
+        $configBlocGroups = $Dashboard->getAllGroups();
+        $Group = new GroupRepository();
+        $configFormGroupAdd = $Group->configFormAdd();
+        $errors_group_add = "";
+
+        if(isset($params['POST']) && !empty($params['POST'])){
+            $errors_group_add = $Group->addGroup($_FILES, $params["POST"]);
+            if($errors_group_add === 1){
+                header('Location:'.$this->Routes['dashboard_student']);
+            }
+        }
+        $View->setData("configBlocUsers", $configBlocUsers);
+        $View->setData("configBlocGroups", $configBlocGroups);
+        $View->setData("configFormGroupAdd", $configFormGroupAdd);
+        $View->setData("errors_group_add", $errors_group_add);
     }
 
     /**
@@ -67,6 +84,7 @@ class DashboardController
     {
         $View = new View("dashboard", "Dashboard/blog");
         $BlogRepository = new BlogRepository();
+
         /**
          * On set les variables importantes de la vue (le pagename)
          */
@@ -88,6 +106,8 @@ class DashboardController
 
         $modalAllUnpublishPost = $BlogRepository->getModalAllArticle(12, 0);
         $View->setData('modalAllUnpublishPost', $modalAllUnpublishPost);
+
+        $request = $BlogRepository->getRequestsend();
 
         /**
          * Affectation des données pour la vue
@@ -137,6 +157,16 @@ class DashboardController
         /*$View->setData("modalAddOption", $Lesson->getModalAdd(12));
         $View->setData("modalStats", $Lesson->getModalStats());*/
         $View->setData("modalChapter", $Lesson->getModalLastChapterByLesson($params["URI"][0]));
+    }
+
+    /**
+     * @param $params
+     * Gestion des groupes en lien avec un ID
+     */
+    public function groupAction($params)
+    {
+
+        header('Location:'.$this->Routes['dashboard_student']);
     }
 
 }

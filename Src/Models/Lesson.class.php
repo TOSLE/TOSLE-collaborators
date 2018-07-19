@@ -21,10 +21,21 @@ class Lesson extends CoreSql
 
     private $chapter;
     private $categorylesson = [];
+    private $numberComment = 0;
+    private $groups = [];
 
-    public function __construct()
+    public function __construct($_id = null)
     {
         parent::__construct();
+        if(isset($_id) && is_numeric($_id)){
+            $parameter = [
+                'LIKE' => [
+                    'id' => $_id
+                ]
+            ];
+            $this->setWhereParameter($parameter);
+            $this->getOneData();
+        }
     }
 
     /**
@@ -214,6 +225,45 @@ class Lesson extends CoreSql
     }
 
     /**
+     * @return int
+     */
+    public function getNumberComment()
+    {
+        return $this->numberComment;
+    }
+
+    /**
+     * @param int $numberComment
+     */
+    public function setNumberComment($numberComment)
+    {
+        $this->numberComment += $numberComment;
+    }
+
+    /**
+     * @return array
+     */
+    public function getGroups()
+    {
+        return $this->groups;
+    }
+
+    /**
+     * @param int $groupId
+     * Nécessite l'id du groupe à ajouter
+     */
+    public function setGroups($groupId)
+    {
+        if(isset($groupId) && is_numeric($groupId)){
+            $this->groups[] = new Group($groupId);
+        } else {
+            $this->groups = null;
+        }
+    }
+
+
+
+    /**
      * @return array
      * Formulaire d'ajout d'une lesson
      */
@@ -255,10 +305,12 @@ class Lesson extends CoreSql
                     'required' => false,
                     'options' => [
                         '#1A5CCB' => 'Couleur de base',
-                        '#FFFFFF' => 'Blanc',
-                        '#F43C3E' => 'Rouge',
-                        '#28A745' => 'Vert',
-                        '#FA690E' => 'Orange'
+                        '#7a76ff' => 'Violet',
+                        '#ff8383' => 'Rouge',
+                        '#97ca74' => 'Vert',
+                        '#f1c97c' => 'Orange',
+                        '#61c0bf' => 'Bleu pastel',
+                        '#f8a3d3' => 'Rose pastel',
                     ],
                     'description' => 'Couleur d\'arrière plan'
                 ],
@@ -284,6 +336,28 @@ class Lesson extends CoreSql
             ],
             "exit" => $slugs["dashboard_lesson"]
         ];
+    }
+
+    public function getSubscribe($_auth)
+    {
+        if(isset($this->id)){
+            if(isset($_auth) && !empty($_auth->getId())){
+                $UserLesson = new UserLesson();
+                $parameter = [
+                    'LIKE' => [
+                        'userid' => $_auth->getId(),
+                        'lessonid' => $this->id
+                    ]
+                ];
+                $UserLesson->setWhereParameter($parameter);
+                if($UserLesson->countData(['id']) > 0){
+                    return true;
+                } else {
+                    return null;
+                }
+            }
+        }
+        return false;
     }
 
 }

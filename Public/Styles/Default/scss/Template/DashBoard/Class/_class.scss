@@ -83,3 +83,30 @@
 .additional-message-title {
   font-size: 0.7em;
 }
+
+.dashboard-bloc {
+  background-color: #FFF;
+  padding: 15px;
+  .table-dashboard {
+    width: 100%;
+    border-collapse: collapse;
+    tr {
+      height: 50px;
+      td {
+        border: 1px solid $colorBorderTableHeader;
+        &.avatar {
+          img {
+            height: 60px;
+          }
+        }
+      }
+    }
+  }
+  .icons-dashboard {
+    float: right;
+    color: $colorGlobalToslePrimary;
+    i {
+      font-size: 1.8em;
+    }
+  }
+}

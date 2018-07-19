@@ -27,7 +27,7 @@ class Access
             "security" => false
         ],
         "chathome" => [ // Chat  homepage
-            "slug" => "chat",
+            "slug" => "messaging",
             "controller" => "chat",
             "action" => "index",
             "security" => false
@@ -118,11 +118,35 @@ class Access
             "security" => false
 
         ],
+        "edit_profile" => [
+            "slug" => "edit-profile",
+            "controller" => "profile",
+            "action" => "edit",
+            "security" => false
+        ],
         "subscribe_lesson" => [
             "slug" => "subscribe-lesson",
             "controller" => "class",
             "action" => "subscribe",
             "security" => false
+        ],
+        "dashboard_student" => [
+            "slug" => "dashboard-student",
+            "controller" => "dashboard",
+            "action" => "student",
+            "security" => 2
+        ],
+        "chatdraft" => [
+            "slug" => "messaging-draft",
+            "controller" => "chat",
+            "action" => "draft",
+            "security" => 2
+        ],
+        "chattrash" => [
+            "slug" => "messaging-trash",
+            "controller" => "chat",
+            "action" => "viewtrash",
+            "security" => 2
         ],
     ];
 
@@ -139,6 +163,18 @@ class Access
         "chapter/status" => 2,
         "chapter/order" => 2,
         "index/config" => false,
+        "user/delete" => 2,
+        "group/delete" => 2,
+        "group/manage" => 2,
+        "group/edit" => 2,
+        "group/unset" => 2,
+        "group/gunset" => 2,
+        "group/umanage" => 2,
+        "class/follow" => 1,
+        "chat/addconv" => 1,
+        "chat/trash" => 2,
+        "chat/untrash" => 2,
+        "chat/delete" => 2,
     ];
 
     private $urlFixe = [
@@ -229,10 +265,10 @@ class Access
         $Acces = new Access();
         $data = [];
         foreach ($Acces->getAccess() as $key => $value){
-            $data[$key] = "".DIRNAME.substr($language,0,2)."/".$value["slug"];
+            $data[$key] = "".DIRNAME.$value["slug"];
         }
         foreach ($Acces->getBackoffice() as $key => $value){
-            $data[$key] = "".DIRNAME.substr($language,0,2)."/".$key;
+            $data[$key] = "".DIRNAME.$key;
         }
         foreach ($Acces->getUrlFixe() as $key => $value){
             $data[$key] = $value;

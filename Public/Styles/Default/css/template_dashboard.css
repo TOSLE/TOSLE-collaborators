@@ -39,6 +39,10 @@ body > header {
         text-align: right; }
         body > header > section > div > .right-block .tosle-btn {
           line-height: 60px; }
+        body > header > section > div > .right-block #modal-signin {
+          text-align: left; }
+          body > header > section > div > .right-block #modal-signin input {
+            margin-top: 15px; }
         body > header > section > div > .right-block > i {
           font-size: 1.5em;
           margin-right: 50px;
@@ -205,9 +209,27 @@ main {
     font-weight: 500; }
   main .additional-message-title {
     font-size: 0.7em; }
+  main .dashboard-bloc {
+    background-color: #FFF;
+    padding: 15px; }
+    main .dashboard-bloc .table-dashboard {
+      width: 100%;
+      border-collapse: collapse; }
+      main .dashboard-bloc .table-dashboard tr {
+        height: 50px; }
+        main .dashboard-bloc .table-dashboard tr td {
+          border: 1px solid #BDBDBD; }
+          main .dashboard-bloc .table-dashboard tr td.avatar img {
+            height: 60px; }
+    main .dashboard-bloc .icons-dashboard {
+      float: right;
+      color: #1A5CCB; }
+      main .dashboard-bloc .icons-dashboard i {
+        font-size: 1.8em; }
 
 footer {
-  background-color: #74858D; }
+  background-color: #74858D;
+  margin-top: 15px; }
   footer > .footer-section {
     max-width: 1230px;
     margin: 0 auto;
@@ -267,7 +289,8 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
-    background-color: white; }
+    background-color: white;
+    z-index: 10000; }
     body > header > nav > ul > li > a {
       font-size: 1.4em;
       padding: 30px 0; }
