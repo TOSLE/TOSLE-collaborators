@@ -166,7 +166,7 @@ class PortfolioRepository extends Portfolio
             "color" => "red",
             "text" => "Unpublish",
             "type" => "href",
-            "target" => $routes["blog/status"]."/"
+            "target" => $routes["portfolio/status"]."/"
         ]);
         $ViewLatestBloc->setActionButtonEdit("Edit");
         $ViewLatestBloc->setActionButtonView("View");
@@ -224,8 +224,8 @@ class PortfolioRepository extends Portfolio
             3 => "td-content-action"
         ]);
         $ViewArticleBloc->setTableBodyContent($this->getAllArticleByStatus($status), true);
-        $ViewArticleBloc->setArrayHref("edit", $routes["blog/edit"]);
-        $ViewArticleBloc->setArrayHref("view", $routes["view_blog_article"]);
+        $ViewArticleBloc->setArrayHref("edit", $routes["portfolio/edit"]);
+        $ViewArticleBloc->setArrayHref("view", $routes["view_portfolio_article"]);
         return $ViewArticleBloc->getArrayData();
     }
 
@@ -307,7 +307,7 @@ class PortfolioRepository extends Portfolio
                 1 => "Nouveau post de type texte",
                 "button_action" => [
                     "type" => "href",
-                    "target" => $routes["blog/add"]."/text",
+                    "target" => $routes["portfolio/add"]."/text",
                     "color" => "tosle",
                     "text" => "New post"
                 ]
@@ -316,7 +316,7 @@ class PortfolioRepository extends Portfolio
                 1 => "Nouveau post de type image",
                 "button_action" => [
                     "type" => "href",
-                    "target" => $routes["blog/add"]."/image",
+                    "target" => $routes["portfolio/add"]."/image",
                     "color" => "tosle",
                     "text" => "New post"
                 ]
@@ -325,7 +325,7 @@ class PortfolioRepository extends Portfolio
                 1 => "Nouveau post de type vidéo",
                 "button_action" => [
                     "type" => "href",
-                    "target" => $routes["blog/add"]."/video",
+                    "target" => $routes["portfolio/add"]."/video",
                     "color" => "tosle",
                     "text" => "New post"
                 ]

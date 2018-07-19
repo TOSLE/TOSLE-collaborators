@@ -12,8 +12,9 @@ class Portfolio extends CoreSql
     protected $id;
     protected $name;
     protected $title;
-    protected $description;
-   // protected $datecreate;
+    protected $value;
+    protected $type;
+    protected $content;
     protected $status;
     protected $url;
 
@@ -47,7 +48,7 @@ class Portfolio extends CoreSql
     }
 
     /**
-     * @param mixed $title
+     * @param mixed $name
      */
     public function setName($name)
     {
@@ -79,43 +80,29 @@ class Portfolio extends CoreSql
     }
 
     /**
-     * @param mixed $description
+     * @param mixed $content
      */
-    public function setDescription($content)
+    public function setContent($content)
     {
         $this->content = $content;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getDateCreate()
-    {
-        return $this->datecreate;
-    }
 
-    /**
-     * @param mixed $datecreate
-     */
-    public function setDateCreate($datecreate)
-    {
-        $this->datecreate = $datecreate;
-    }
 
     /**
      * @return mixed
      */
-    public function getStatus()
+    public function getValue()
     {
-        return $this->status;
+        return $this->value;
     }
 
     /**
-     * @param mixed $status
+     * @param mixed $value
      */
-    public function setStatus($status)
+    public function setValue($value)
     {
-        $this->status = $status;
+        $this->status = $value;
     }
 
     /**
@@ -133,6 +120,43 @@ class Portfolio extends CoreSql
     {
         return $this->url;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param mixed $type
+     */
+    public function setType($type)
+    {
+        $this->status = $type;
+    }
+    /**
+     * @return mixed
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param mixed $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
+
+
+
+
+
 
     public function configFormAddPortfolio()
     {
@@ -170,7 +194,7 @@ class Portfolio extends CoreSql
             ],
             "textarea" => [
         "label" => " description",
-        "name" => "textarea_portfolio",
+        "name" => "textarea",
         "description" => "Un maximum de 500 caractères",
         "placeholder" => "Maximum 500 caractères"
     ],
