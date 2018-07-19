@@ -42,6 +42,9 @@ class UserController extends CoreController
             if($params['URI'][0] == 'registered'){
                 $registerMessage = 'Inscription réussie, à présent, veuillez confirmer votre inscription pour valider votre adresse email.';
             }
+             if($params['URI'][0] == 'passchanged'){
+                $registerMessage = 'Mot de passe modifié avec succès';
+            }
         }
      //   $errors["error status"]=" status invalide";
         $View->setData('textConfirm', $registerMessage);
@@ -59,7 +62,6 @@ class UserController extends CoreController
             $retourValue=$user->checkEmailExist($params["POST"]["email"]);
 
                if(is_numeric($retourValue)){     
-                    echo "testt";
                      $user->setEmail($params["POST"]["email"]);                             
                     } 
                 else {
@@ -158,14 +160,35 @@ class UserController extends CoreController
                 $retourValue=$user->checkEmailExist($params["POST"]["email"]);
                 if(is_numeric($retourValue)){     
                     echo "testt";*/
-                    $user->setEmail($params["POST"]["email"]); // voir pour le selectMultipleResponse + confirmEmail                          
-                    $user->setToken();                               
+
+                     $target = [/** Ce que l'on récupère lors de la requête (SELECT) **/
+                        "id",
+                        "token"
+                    ];
+                    $parameter = [/** Les parametres pour la condition de la requête **/
+                        "LIKE" => [
+                            "email" => $params["POST"]["email"],
+                        ]
+                    ];
+                    $user->setWhereParameter($parameter, null);
+                    $user->getOneData($target);
+
+                    $user->setEmail($params["POST"]["email"]); // voir pour le selectMultipleResponse + confirmEmail               
+                    $user->setToken(); 
+
+                    $user->save();
+
+
+
                   /*  } else {
                         $errors=$retourValue;                                                
                     }*/
                     $email = $params["POST"]["email"];
                     $token = $user->getToken();
-              }           
+              }
+
+
+
             Mail::sendMailPassword($email,$token); 
         }        
             $View->setData("config", $form);
@@ -184,33 +207,38 @@ class UserController extends CoreController
                 $param 3 tableau sl
                 set password */
 
-        if (isset($params["GET"]["email"])/* & isset($params["GET"]["token"])*/) {
+        if (isset($params["POST"]) & !empty($params["POST"])) {
+            if (isset($params["GET"]["email"]) & isset($params["GET"]["token"])) {
+                $errors = Form::checkForm($form, $params["POST"]);
+                if (empty($errors)) {
+                    $target = [/** Ce que l'on récupère lors de la requête (SELECT) **/
+                        "id",
+                        "password"
+                    ];
+                    $parameter = [/** Les parametres pour la condition de la requête **/
+                        "LIKE" => [
+                            "email" => $params["GET"]["email"],
+                            "token" => $params["GET"]["token"]
+                        ]
+                    ];
+                    $User->setWhereParameter($parameter, null);
+                    $User->getOneData($target);
 
-            $target = [/** Ce que l'on récupère lors de la requête (SELECT) **/
-                "id"
-            ];
-            $parameter = [/** Les parametres pour la condition de la requête **/
-                "LIKE" => [
-                    "email" => $params["GET"]["email"]
-                   // "token" => $params["GET"]["token"]
-                ]
-            ];
-            $User->setWhereParameter($parameter, null);
-            $User->getOneData($target);
-
-            if (!empty($User->getId())) {
-                $User->setToken();
-                $password = $params["POST"]["pwd"];
-                $User->setPassword($password);
-                $User->save();
-                header('Location:'.$this->Routes['signin']);
-            }else{
-                echo "error";
+                    if (!empty($User->getId())) {
+                        $User->setToken();
+                        $password = $params["POST"]["pwd"];
+                        $User->setPassword($password);
+                        $User->save();
+                        header('Location:' . Access::getSlugsById()['signin'] . '/passchanged');
+                    }
+                }
+            } else {
+                $errors["AUTHENTIFICATION FAILED"] = "Erreur d'authentification";
             }
-        
-      }
+        }
         $View->setData("config", $form);
         $View->setData("errors", $errors);
+
     }
     /**
      * @param $params

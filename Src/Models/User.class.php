@@ -219,7 +219,7 @@ class User extends CoreSql{
     {
         // FAIRE LES ID ET LES CLASS POUR LE CMS
         return [
-            "config"=> ["method"=>"post", "action"=>"", "submit"=>"Envoie mot de passe"],
+            "config"=> ["method"=>"post", "action"=>"", "submit"=>"Envoie lien pour mot de passe"],
             "input"=> [
                 
                 "email"=>[
@@ -235,7 +235,7 @@ class User extends CoreSql{
     {
         // FAIRE LES ID ET LES CLASS POUR LE CMS
         return [
-            "config"=> ["method"=>"post", "action"=>"", "submit"=>"Envoie mot de passe"],
+            "config"=> ["method"=>"post", "action"=>"", "submit"=>"Modifier mot de passe"],
             "input"=> [
                 
                 "pwd"=>[
