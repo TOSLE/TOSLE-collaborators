@@ -26,6 +26,11 @@
                                     <section>
                                         <?php $this->addModal("form", $config); ?>
                                     </section>
+                                    <div>
+                                        <p>
+                                            Mot de passe oublié ? <a href="<?php echo $this->slugs['view-newpassword'];?>" class="btn-sm btn-tosle-outline">Cliquez-ici</a>
+                                        </p>
+                                    </div>
                                 </section>
                             </div>
                         </div>

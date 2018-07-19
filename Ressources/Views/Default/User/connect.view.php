@@ -32,6 +32,11 @@
                     </article>
                     <section>
                         <?php $this->addModal("form", $config, $errors); ?>
+                        <div>
+                            <p>
+                                Mot de passe oublié ? <a href="<?php echo $this->slugs['view-newpassword'];?>" class="btn-sm btn-tosle-outline">Cliquez-ici</a>
+                            </p>
+                        </div>
                     </section>
                 </section>
             </div>
@@ -46,7 +51,6 @@
                         <p>
                             <a href="<?php echo DIRNAME;?>" class="btn btn-blue">Revenir à l'accueil</a>
                             <a href="<?php echo $this->slugs['signup'];?>" class="btn btn-tosle-outline">Cliquez-ici pour s'inscrire</a>
-                            <a href="<?php echo $this->slugs['view-newpassword'];?>" class="btn btn-tosle-outline">Mot de passe oublié ?</a>
                         </p>
                     </article>
                 </section>
