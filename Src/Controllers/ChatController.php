@@ -288,4 +288,38 @@ class ChatController extends CoreController
             $View->setData('configInscrip', $configInscrip);
         }
     }
+
+    public function deleteAction($params)
+    {
+        if(isset($params['URI'][0]) && is_numeric($params['URI'][0])){
+            $Conversation = new ConversationRepository($params['URI'][0]);
+            $MessageConversation = new MessageConversation();
+            $arrayIdMessage = $MessageConversation->getMessageConversation($Conversation->getId());
+            $Message = new MessageRepository();
+            foreach($arrayIdMessage as $id){
+                $paramater = [
+                    'LIKE' => [
+                        'id' => $id
+                    ]
+                ];
+                $Message->setWhereParameter($paramater);
+                $Message->delete();
+            }
+            $paramater = [
+                'LIKE' => [
+                    'conversationid' => $Conversation->getId()
+                ]
+            ];
+            $MessageConversation->setWhereParameter($paramater);
+            $MessageConversation->delete();
+            $paramater = [
+                'LIKE' => [
+                    'id' => $Conversation->getId()
+                ]
+            ];
+            $Conversation->setWhereParameter($paramater);
+            $Conversation->delete();
+        }
+        header('Location:'.$this->Routes['chathome']);
+    }
 }

@@ -80,7 +80,7 @@
         <?php endif;?>
         <?php if(isset($conversationView)):?>
             <div class="content-infos-message">
-                <a href="<?php echo $this->slugs['chat/trash'].'/'.$conversationView->getId();?>" class="trash-icon">
+                <a href="<?php echo ($page == 'trash')?$this->slugs['chat/delete'].'/'.$conversationView->getId():$this->slugs['chat/trash'].'/'.$conversationView->getId();?>" class="trash-icon">
                     <i class="material-icons">delete</i>
                 </a>
                 <h2><?php echo $conversationView->getDestination()->getFirstname().' '.$conversationView->getDestination()->getLastname();?></h2>
