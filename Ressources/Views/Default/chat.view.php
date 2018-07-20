@@ -5,7 +5,9 @@
         <ul>
             <li class="<?php echo (isset($page) && $page == "index")?'active':'';?>"><a href="<?php echo $this->slugs['chathome'];?>"><i class="material-icons">&#xE0CB;</i><p><?php echo LEFT_COLUMN_MESSAGING_MENU_INBOX;?></p><span class="notif-active"><?php echo (isset($inBoxNumber))?$inBoxNumber:'';?></span></a></li>
             <li class="<?php echo (isset($page) && $page == "draft")?'active':'';?>"><a href="<?php echo $this->slugs['chatdraft'];?>"><i class="material-icons">&#xE254;</i><p><?php echo LEFT_COLUMN_MESSAGING_MENU_DRAFTS;?></p><span class="notif-active"><?php echo (isset($draftNumber))?$draftNumber:'';?></span></a></li>
+            <?php if($this->Auth->getStatus() > 1):?>
             <li class="<?php echo (isset($page) && $page == "trash")?'active':'';?>"><a href="<?php echo $this->slugs['chattrash'];?>"><i class="material-icons">delete</i><p>Trash</p><span class="notif-active"><?php echo (isset($tashNumber))?$tashNumber:'';?></span></a></li>
+            <?php endif;?>
         </ul>
     </div>
     <div class="content-box-left">

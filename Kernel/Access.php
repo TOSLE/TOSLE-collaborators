@@ -140,7 +140,7 @@ class Access
             "slug" => "messaging-draft",
             "controller" => "chat",
             "action" => "draft",
-            "security" => 2
+            "security" => 1
         ],
         "chattrash" => [
             "slug" => "messaging-trash",
