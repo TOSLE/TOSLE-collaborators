@@ -78,7 +78,7 @@ class ConversationRepository extends Conversation
                 $Message->addMessage($_auth->getId(), $_post['message']);
                 $Message->getMessageByTag($Message->getTag());
 
-                (isset($tmpPostArray["publish"]))?$this->setStatus(1):$this->setStatus(0);
+                (isset($_post["publish"]))?$this->setStatus(1):$this->setStatus(0);
                 $this->setType(1);
                 $this->setIddest($_post['select_user']);
                 $this->setTag();

@@ -146,6 +146,7 @@ class Access
             "slug" => "messaging-trash",
             "controller" => "chat",
             "action" => "viewtrash",
+            "security" => 2
         ],
         "comment_signalement" => [
             "slug" => "comment-signalement",

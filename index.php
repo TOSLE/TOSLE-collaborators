@@ -78,7 +78,6 @@
                     echo "<p>Connection failed</p>";
                 }
             }
-
             if ($userStatus < $accessParams["security"]) {
                 $controller = "IndexController";
                 $action = "accessAction";
