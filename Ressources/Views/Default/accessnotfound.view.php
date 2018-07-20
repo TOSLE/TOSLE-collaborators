@@ -12,14 +12,13 @@
                                     </i>
                                     <h2>404</h2>
                                     <p>That's an error.</p>
-                                    <p>The requested URL /linkamettre was not found.</p>
+                                    <p>The requested URL <b><?php echo $_SERVER['REQUEST_URI']; ?></b> was not found.</p>
                                     <a href="<?php echo DIRNAME ?>">Click here to be redirected to the homepage.</a>
                                 </section>
                             </section>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: backin
@@ -73,7 +74,7 @@ class UserRepository extends User
             "LIKE" => [
                 "email" => $email
             ]
-        ];    
+        ];
         $entree=$email;
         $tableau=$this->getData($target);
         foreach ($tableau as $cle) {
@@ -87,7 +88,7 @@ class UserRepository extends User
             }
         }
     }
-    
+
 
     public function getUser()
     {
@@ -166,6 +167,104 @@ class UserRepository extends User
                 "options" => $option
             ]
         ];
+    }
+
+    public function addUser($_post, $_idUser = null)
+    {
+
+        $errors = Form::checkForm($this->configFormAdd(), $_post);
+        $_post = Form::secureData($_post);
+
+        if (empty($errors)) {
+            $tmpPostArray = $_post;
+            if (isset($_idUser)) {
+                $this->setId($_idUser);
+            }
+            $this->setFirstName($tmpPostArray['firstname']);
+            $this->setLastName($tmpPostArray['lastname']);
+            $this->setEmail($tmpPostArray['email']);
+            $this->setEmail($tmpPostArray['emailConfirm']);
+            $this->setPassword($tmpPostArray['pwd']);
+            $this->setPassword($tmpPostArray['pwdConfirm']);
+            $this->setToken();
+            $this->save();
+
+            $_SESSION['token'] = $this->getToken();
+
+            return 1;
+        } else {
+            echo '<pre>';
+            print_r($errors);
+            echo '</pre>';
+            return $errors;
+        }
+    }
+
+    public function getStatUser($sort)
+    {
+        switch ($sort) {
+
+            case 'year':
+                $target = [
+                    "dateinscription"
+                ];
+                $resultStatUserYear = $this->getData($target);
+
+                $countYearUser = 0;
+                if (isset($resultStatUserYear)) {
+                    $currentYear = date('Y');
+                    foreach ($resultStatUserYear as $row) {
+                        $resultRowYear = date('Y', strtotime($row->getDateInscription()));
+                        if ($resultRowYear == $currentYear)
+                            $countYearUser += 1;
+                    }
+                }
+                return $countYearUser;
+                break;
+
+            case 'month':
+                $target = [
+                    "dateinscription"
+                ];
+                $resultStatUserMonth = $this->getData($target);
+
+                $arrayStatUserRegisteredMonth = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                if (isset($resultStatUserMonth)) {
+                    $currentYear = date('Y');
+                    foreach ($resultStatUserMonth as $row) {
+                        if (date('Y', strtotime($row->getDateInscription())) == $currentYear) {
+                            for ($i = 1; $i < 13; $i += 1) {
+                                if ($i == date('m', strtotime($row->getDateInscription()))) {
+                                    $arrayStatUserRegisteredMonth[$i] += 1;
+                                }
+                            }
+                        }
+                    }
+                }
+                return $arrayStatUserRegisteredMonth;
+                break;
+
+            case 'day':
+                $target = [
+                    "dateinscription"
+                ];
+                $resultStatUserMonth = $this->getData($target);
+
+                $countDayUser = 0;
+                if (isset($resultStatUserMonth)) {
+                    $currentYear = date('Y');
+                    $currentMonth = date('m');
+                    foreach ($resultStatUserMonth as $row) {
+                        if (date('Y', strtotime($row->getDateInscription())) == $currentYear && date('m', strtotime($row->getDateInscription())) == $currentMonth) {
+                            $countDayUser +=1;
+                        }
+                    }
+                }
+                return $countDayUser;
+                break;
+        }
+
+
     }
 
     /**

@@ -116,7 +116,6 @@ class Access
             "controller" => "class",
             "action" => "view",
             "security" => false
-
         ],
         "edit_profile" => [
             "slug" => "edit-profile",
@@ -134,6 +133,12 @@ class Access
             "slug" => "dashboard-student",
             "controller" => "dashboard",
             "action" => "student",
+            "security" => 2
+        ],
+        "dashboard_stat" => [
+            "slug" => "dashboard-statistic",
+            "controller" => "dashboard",
+            "action" => "stats",
             "security" => 2
         ],
         "chatdraft" => [
