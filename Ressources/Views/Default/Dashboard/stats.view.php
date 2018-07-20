@@ -120,7 +120,7 @@
         data: {
             labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
             datasets: [{
-                label: "Bumber of visitor",
+                label: "Number of visitor",
                 data: <?php echo '[' . implode(' ,', $statViewTosle) . ']'; ?>,
                 fill: false,
                 borderColor: "#1A5CCB",

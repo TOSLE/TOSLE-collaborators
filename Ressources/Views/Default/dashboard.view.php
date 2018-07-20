@@ -84,7 +84,6 @@
                             <div class="col-4">
                                 <div>
                                     <section id="stat-cms" class="block-dash">
-                                        <div class="marg-container">
                                             <div class="title">
                                                 <h4>Statistiques cms</h4>
                                                 <a href="#">
@@ -94,30 +93,29 @@
                                             <div class="container">
                                                 <ul>
                                                     <li><p>Nombre d'inscrits</p>
-                                                        <p id="stat-register" class="blue">12</p></li>
+                                                        <p class="blue stat-register">12</p></li>
                                                 </ul>
                                                 <ul>
                                                     <li><p>Nombre de cours</p>
-                                                        <p id="stat-register" class="blue">22</p></li>
+                                                        <p class="blue stat-register">22</p></li>
                                                 </ul>
                                                 <ul>
                                                     <li><p>Nombre de commentaires</p>
-                                                        <p id="stat-register" class="blue">62</p></li>
+                                                        <p class="blue stat-register">62</p></li>
                                                 </ul>
                                                 <ul>
                                                     <li><p>Nombre de messages envoyés</p>
-                                                        <p id="stat-register" class="blue">150</p></li>
+                                                        <p class="blue stat-register">150</p></li>
                                                 </ul>
                                                 <ul>
                                                     <li><p>Nombre de participation à un cours</p>
-                                                        <p id="stat-register" class="blue">7</p></li>
+                                                        <p class="blue stat-register">7</p></li>
                                                 </ul>
                                                 <ul>
                                                     <li><p>Nombre de ?</p>
-                                                        <p id="stat-register" class="blue">2</p></li>
+                                                        <p class="blue stat-register">2</p></li>
                                                 </ul>
                                             </div>
-                                        </div>
                                     </section>
                                 </div>
                             </div>
