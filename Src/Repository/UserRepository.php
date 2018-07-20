@@ -280,7 +280,7 @@ class UserRepository extends User
         ];
         $parameter = [
             'LIKE' => [
-                'status' => 1
+                'status' => ($Auth->getStatus() > 1)?1:2
             ]
         ];
         $this->setWhereParameter($parameter);
