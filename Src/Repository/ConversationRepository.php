@@ -14,8 +14,35 @@ class ConversationRepository extends Conversation
      * @return array Conversation
      * Cette fonction va chercher toutes les conversations et récupérer toutes les informations de la conversation
      */
-    public function getConversations($_status = 1, $_filter = null)
+    public function getConversations($_Auth, $_status = 1, $_filter = null)
     {
+        if($_Auth->getStatus() < 2){
+            if(!isset($_filter)){
+                $parameter = [
+                    'LIKE' => [
+                        'type' => 1,
+                        'status' => $_status
+                    ]
+                ];
+                $this->setWhereParameter($parameter);
+                $array = $this->getData();
+                $arrayKey = [];
+                foreach($array as $key => $conversation){
+                    if(!($conversation->getIdowner() == $_Auth->getId() || $conversation->getIddest() == $_Auth->getId())){
+                        unset($array[$key]);
+                    }
+                }
+                foreach($array as $conversation){
+                    $destination = ($conversation->getIddest() == $_Auth->getId())?$conversation->getIdowner():$conversation->getIddest();
+                    $conversation->setDestination($destination);
+                    $MessageConversation = new MessageConversation();
+                    $arrayMessageId = $MessageConversation->getMessageConversation('conversation', $conversation->getId());
+                    $conversation->setMessages($arrayMessageId);
+                }
+
+                return $array;
+            }
+        }
         if(!isset($_filter)){
             $parameter = [
                 'LIKE' => [

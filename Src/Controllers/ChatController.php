@@ -31,7 +31,7 @@ class ChatController extends CoreController
             $tashNumber = $Conversation->getNumberConversation('status', -1);
             $totalConv = $inBoxNumber + $draftNumber + $tashNumber;
 
-            $conversations = $Conversation->getConversations(1);
+            $conversations = $Conversation->getConversations($this->Auth, 1);
             if(isset($params['POST']) && !empty($params['POST'])){
                 $idConv = (isset($params['URI'][0]) && is_numeric($params['URI'][0]))?$params['URI'][0]:$conversations[0]->getId();
                 $errorsAdd = $Conversation->addConversationMessage($idConv, $this->Auth->getId(), $params['POST']);
@@ -179,7 +179,7 @@ class ChatController extends CoreController
             $tashNumber = $Conversation->getNumberConversation('status', -1);
             $totalConv = $inBoxNumber + $draftNumber + $tashNumber;
 
-            $conversations = $Conversation->getConversations(0);
+            $conversations = $Conversation->getConversations($this->Auth, 0);
             if(isset($params['POST']) && !empty($params['POST'])){
                 $idConv = (isset($params['URI'][0]) && is_numeric($params['URI'][0]))?$params['URI'][0]:$conversations[0]->getId();
                 $errorsAdd = $Conversation->editConversationMessage($idConv, $this->Auth->getId(), $params['POST']);
@@ -252,7 +252,7 @@ class ChatController extends CoreController
             $tashNumber = $Conversation->getNumberConversation('status', -1);
             $totalConv = $inBoxNumber + $draftNumber + $tashNumber;
 
-            $conversations = $Conversation->getConversations(-1);
+            $conversations = $Conversation->getConversations($this->Auth, -1);
             if(isset($params['POST']) && !empty($params['POST'])){
                 $idConv = (isset($params['URI'][0]) && is_numeric($params['URI'][0]))?$params['URI'][0]:$conversations[0]->getId();
                 $errorsAdd = $Conversation->editConversationMessage($idConv, $this->Auth->getId(), $params['POST']);
