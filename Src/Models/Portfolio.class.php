@@ -183,6 +183,7 @@ class Portfolio extends CoreSql
                     "description"=>100,
                 ],
 
+
             "image"=>[
         "type"=>"file",
         "required"=>false,
