@@ -40,7 +40,7 @@ class ConversationRepository extends Conversation
                     $conversation->setMessages($arrayMessageId);
                 }
 
-                return $array;
+                return array_values($array);
             }
         }
         if(!isset($_filter)){
