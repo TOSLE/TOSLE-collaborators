@@ -22,6 +22,8 @@ class ChatController extends CoreController
             $conversationView = null;
             $errorsAdd = null;
             $page = "index";
+            $numberStudent = UserRepository::countUser();
+            $numberMessage = MessageRepository::countMessage();
             $routeChat = $this->Routes['chathome'];
             $configFormNew = $Conversation->configFormAdd($this->Auth);
             $inBoxNumber = $Conversation->getNumberConversation('status', 1);
@@ -55,6 +57,8 @@ class ChatController extends CoreController
                 }
             }
             $View->setData('routeChat', $routeChat);
+            $View->setData('numberStudent', $numberStudent);
+            $View->setData('numberMessage', $numberMessage);
             $View->setData('inBoxNumber', $inBoxNumber);
             $View->setData('draftNumber', $draftNumber);
             $View->setData('tashNumber', $tashNumber);
@@ -166,6 +170,8 @@ class ChatController extends CoreController
             $conversationView = null;
             $errorsAdd = null;
             $page = "draft";
+            $numberStudent = UserRepository::countUser();
+            $numberMessage = MessageRepository::countMessage();
             $routeChat = $this->Routes['chatdraft'];
             $configFormNew = $Conversation->configFormAdd($this->Auth);
             $inBoxNumber = $Conversation->getNumberConversation('status', 1);
@@ -198,6 +204,8 @@ class ChatController extends CoreController
                 }
             }
             $View->setData('routeChat', $routeChat);
+            $View->setData('numberStudent', $numberStudent);
+            $View->setData('numberMessage', $numberMessage);
             $View->setData('inBoxNumber', $inBoxNumber);
             $View->setData('draftNumber', $draftNumber);
             $View->setData('tashNumber', $tashNumber);
@@ -235,6 +243,8 @@ class ChatController extends CoreController
             $conversationView = null;
             $errorsAdd = null;
             $page = "trash";
+            $numberStudent = UserRepository::countUser();
+            $numberMessage = MessageRepository::countMessage();
             $routeChat = $this->Routes['chattrash'];
             $configFormNew = $Conversation->configFormAdd($this->Auth);
             $inBoxNumber = $Conversation->getNumberConversation('status', 1);
@@ -267,6 +277,8 @@ class ChatController extends CoreController
                 }
             }
             $View->setData('routeChat', $routeChat);
+            $View->setData('numberStudent', $numberStudent);
+            $View->setData('numberMessage', $numberMessage);
             $View->setData('inBoxNumber', $inBoxNumber);
             $View->setData('draftNumber', $draftNumber);
             $View->setData('tashNumber', $tashNumber);

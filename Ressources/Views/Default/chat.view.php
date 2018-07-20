@@ -19,11 +19,11 @@
                 <p class="description"><?php echo LEFT_COLUMN_MESSAGING_PROFILINFOS_NUMBERCHAT;?></p>
             </div>
             <div class="number-message">
-                <p class="number">150</p>
+                <p class="number"><?php echo $numberMessage;?></p>
                 <p class="description"><?php echo LEFT_COLUMN_MESSAGING_PROFILINFOS_NUMBERMESSAGE;?></p>
             </div>
             <div class="number-user">
-                <p class="number">33</p>
+                <p class="number"><?php echo $numberStudent;?></p>
                 <p class="description"><?php echo LEFT_COLUMN_MESSAGING_PROFILINFOS_NUMBERSTUDENT;?></p>
             </div>
         </div>

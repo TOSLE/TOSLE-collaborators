@@ -200,4 +200,19 @@ class UserRepository extends User
         ];
         return $return;
     }
+
+    /**
+     * @return int
+     */
+    public static function countUser()
+    {
+        $User = new User();
+        $paramater = [
+            'LIKE' => [
+                'status' => 1
+            ]
+        ];
+        $User->setWhereParameter($paramater);
+        return $User->countData(['id']);
+    }
 }
