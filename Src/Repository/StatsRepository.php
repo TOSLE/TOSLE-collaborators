@@ -73,7 +73,7 @@ class StatsRepository extends Stats
                         $arrayLesson = [];
                         for($i = 0; $i < sizeof($arrayGetClass); $i+=1){
                             $rowDecoupe = explode("/",$arrayGetClass[$i]);
-                            if($rowDecoupe[2] === "lesson"){
+                            if(isset($rowDecoupe[2]) && $rowDecoupe[2] === "lesson"){
                                 array_push($arrayLesson,$arrayGetClass[$i]);
                             }
                         }
@@ -124,7 +124,7 @@ class StatsRepository extends Stats
                         $arrayLesson = [];
                         for($i = 0; $i < sizeof($arrayGetClass); $i+=1){
                             $rowDecoupe = explode("/",$arrayGetClass[$i]);
-                            if($rowDecoupe[2] === "lesson"){
+                            if(isset($rowDecoupe[2]) && $rowDecoupe[2] === "lesson"){
                                 array_push($arrayLesson,$arrayGetClass[$i]);
                             }
                         }
@@ -177,7 +177,7 @@ class StatsRepository extends Stats
                         $arrayLesson = [];
                         for($i = 0; $i < sizeof($arrayGetClass); $i+=1){
                             $rowDecoupe = explode("/",$arrayGetClass[$i]);
-                            if($rowDecoupe[2] === "lesson"){
+                            if(isset($rowDecoupe[2]) && $rowDecoupe[2] === "lesson"){
                                 array_push($arrayLesson,$arrayGetClass[$i]);
                             }
                         }
@@ -230,7 +230,7 @@ class StatsRepository extends Stats
                         $arrayArticle = [];
                         for($i = 0; $i < sizeof($arrayGetArticle); $i+=1){
                             $rowDecoupe = explode("/",$arrayGetArticle[$i]);
-                            if($rowDecoupe[2] === "view-article"){
+                            if(isset($rowDecoupe[2]) && $rowDecoupe[2] === "view-article"){
                                 array_push($arrayArticle,$arrayGetArticle[$i]);
                             }
                         }
@@ -280,7 +280,7 @@ class StatsRepository extends Stats
                         $arrayArticle = [];
                         for($i = 0; $i < sizeof($arrayGetArticle); $i+=1){
                             $rowDecoupe = explode("/",$arrayGetArticle[$i]);
-                            if($rowDecoupe[2] === "view-article"){
+                            if(isset($rowDecoupe[2]) && $rowDecoupe[2] === "view-article"){
                                 array_push($arrayArticle,$arrayGetArticle[$i]);
                             }
                         }
@@ -334,7 +334,7 @@ class StatsRepository extends Stats
                         $arrayArticle = [];
                         for($i = 0; $i < sizeof($arrayGetArticle); $i+=1){
                             $rowDecoupe = explode("/",$arrayGetArticle[$i]);
-                            if($rowDecoupe[2] === "view-article"){
+                            if(isset($rowDecoupe[2]) && $rowDecoupe[2] === "view-article"){
                                 array_push($arrayArticle,$arrayGetArticle[$i]);
                             }
                         }
