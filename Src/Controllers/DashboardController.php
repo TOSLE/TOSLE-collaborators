@@ -216,15 +216,6 @@ class DashboardController extends CoreController
         $resultStatUserDay = $User->getStatUser('day');
         $View->setData("statUserRegisteredDay", $resultStatUserDay);
 
-
-
-
-        echo '<pre>';
-        //print_r($Stats);
-        print_r($labelStatClassDay);
-        print_r($statClassDay);
-        echo '</pre>';
-
     }
 
 

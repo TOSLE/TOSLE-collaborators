@@ -26,7 +26,7 @@
             <div>
                 <section class="block-stat" id="stat-visit">
                     <div class="title">
-                        <h4>New user per</h4>
+                        <h4>Registration to the site</h4>
                         <select id="select-user-registered" onchange="statUserRegistered()">
                             <option value="month">month</option>
                             <option value="year">year</option>
@@ -47,7 +47,7 @@
             <div>
                 <section class="block-stat" id="stat-visit">
                     <div class="title">
-                        <h4>Lessons consulted</h4>
+                        <h4>Lesson consulted</h4>
                         <select id="select-class" onchange="statClassConsulted()">
                             <option value="month">month</option>
                             <option value="year">year</option>
@@ -83,12 +83,6 @@
         </div>
     </div>
 </div>
-
-<?php
-echo '<pre>';
-//print_r($statUserRegisteredDay);
-echo '</pre>';
-?>
 <script>
 
     function getMonth() {
@@ -114,7 +108,7 @@ echo '</pre>';
     function getDay() {
         var d = new Date();
         var dayIndex = d.getDay();
-        return ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"][dayIndex];
+        return ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"][dayIndex];
     }
 
     var currentTime = new Date();
@@ -126,7 +120,11 @@ echo '</pre>';
         data: {
             labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
             datasets: [{
-                data: <?php echo '[' . implode(' ,', $statViewTosle) . ']'; ?>
+                label: "Bumber of visitor",
+                data: <?php echo '[' . implode(' ,', $statViewTosle) . ']'; ?>,
+                fill: false,
+                borderColor: "#1A5CCB",
+                lineTension: 0.1
             }]
         },
         options: {
@@ -145,31 +143,31 @@ echo '</pre>';
             datasets: [
                 {
                     label: "User registered",
-                    data: <?php echo '[' . $statUserRegisteredYear . ']';?>,
+                    data: <?php if (isset($statUserRegisteredYear)) echo '[' . $statUserRegisteredYear . ']'; else echo '[0]'; ?>,
                     backgroundColor: ["#3e95cd"]
                 }
             ]
         },
-            options: {
-                title: {
-                    display: true,
-                    text: 'Number of user registered this year'
-                },
-                animation: {
-                    segmentShowStroke : true,
-                    segmentStrokeColor : "#fff",
-                    segmentStrokeWidth : 2,
-                    percentageInnerCutout : 50,
-                    animationSteps : 100,
-                    animationEasing : "easeOutBounce",
-                    animateRotate : true,
-                    responsive: true,
-                    maintainAspectRatio: true,
-                    showScale: true,
-                    animateScale: true
-                }
-
+        options: {
+            title: {
+                display: true,
+                text: 'Number of user registered this year'
+            },
+            animation: {
+                segmentShowStroke: true,
+                segmentStrokeColor: "#fff",
+                segmentStrokeWidth: 2,
+                percentageInnerCutout: 50,
+                animationSteps: 100,
+                animationEasing: "easeOutBounce",
+                animateRotate: true,
+                responsive: true,
+                maintainAspectRatio: true,
+                showScale: true,
+                animateScale: true
             }
+
+        }
     });
     var chartUserRegisteredByMonth = new Chart(statUserRegisteredMonth, {
         type: 'doughnut',
@@ -179,30 +177,30 @@ echo '</pre>';
                 {
                     label: "User registered",
                     data: <?php echo '[' . implode(' ,', $statUserRegisteredMonth) . ']'; ?>,
-                    backgroundColor: ["#a6cee3", "#1f78b4","#b2df8a", "#33a02c", "#fb9a99", "#e31a1c", "#fdbf6f", "#ff7f00", "#cab2d6", "#6a3d9a", "#ffff99", "#b15928"],
+                    backgroundColor: ["#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99", "#e31a1c", "#fdbf6f", "#ff7f00", "#cab2d6", "#6a3d9a", "#ffff99", "#b15928"],
                 }
             ]
         },
-            options: {
-                title: {
-                    display: true,
-                    text: 'Number of user registered this month'
-                },
-                animation: {
-                    segmentShowStroke : true,
-                    segmentStrokeColor : "#fff",
-                    segmentStrokeWidth : 2,
-                    percentageInnerCutout : 50,
-                    animationSteps : 100,
-                    animationEasing : "easeOutBounce",
-                    animateRotate : true,
-                    responsive: true,
-                    maintainAspectRatio: true,
-                    showScale: true,
-                    animateScale: true
-                }
-
+        options: {
+            title: {
+                display: true,
+                text: 'Number of user registered this month'
+            },
+            animation: {
+                segmentShowStroke: true,
+                segmentStrokeColor: "#fff",
+                segmentStrokeWidth: 2,
+                percentageInnerCutout: 50,
+                animationSteps: 100,
+                animationEasing: "easeOutBounce",
+                animateRotate: true,
+                responsive: true,
+                maintainAspectRatio: true,
+                showScale: true,
+                animateScale: true
             }
+
+        }
     });
     var chartUserRegisteredByDay = new Chart(statUserRegisteredDay, {
         type: 'doughnut',
@@ -211,31 +209,31 @@ echo '</pre>';
             datasets: [
                 {
                     label: "User registered",
-                    data: <?php echo '[' . $statUserRegisteredDay . ']';?>,
+                    data: <?php if (isset($statUserRegisteredDay)) echo '[' . $statUserRegisteredDay . ']'; else echo '[0]'; ?>,
                     backgroundColor: ["#5AD3D1"]
                 }
             ]
         },
-            options: {
-                title: {
-                    display: true,
-                    text: 'Number of user registered this day'
-                },
-                animation: {
-                    segmentShowStroke : true,
-                    segmentStrokeColor : "#fff",
-                    segmentStrokeWidth : 2,
-                    percentageInnerCutout : 50,
-                    animationSteps : 100,
-                    animationEasing : "easeOutBounce",
-                    animateRotate : true,
-                    responsive: true,
-                    maintainAspectRatio: true,
-                    showScale: true,
-                    animateScale: true
-                }
-
+        options: {
+            title: {
+                display: true,
+                text: 'Number of user registered this day'
+            },
+            animation: {
+                segmentShowStroke: true,
+                segmentStrokeColor: "#fff",
+                segmentStrokeWidth: 2,
+                percentageInnerCutout: 50,
+                animationSteps: 100,
+                animationEasing: "easeOutBounce",
+                animateRotate: true,
+                responsive: true,
+                maintainAspectRatio: true,
+                showScale: true,
+                animateScale: true
             }
+
+        }
     });
 
     function statUserRegistered() {
@@ -270,12 +268,12 @@ echo '</pre>';
     var chartClassMonth = new Chart(chartClassByMonth, {
         type: 'pie',
         data: {
-            labels: <?php echo $labelStatClassMonth; ?>,
+            labels: <?php if (isset($labelStatClassMonth)) echo $labelStatClassMonth; else echo '["empty"]'; ?>,
             datasets: [
                 {
                     label: "Consulted class",
-                    data: <?php echo  $statClassMonth; ?>,
-                    backgroundColor: ["#a6cee3", "#1f78b4","#b2df8a", "#33a02c", "#fb9a99", "#e31a1c", "#fdbf6f", "#ff7f00", "#cab2d6", "#6a3d9a", "#ffff99", "#b15928"],
+                    data: <?php if (isset($statClassMonth)) echo $statClassMonth; else echo '[0]'; ?>,
+                    backgroundColor: ["#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99", "#e31a1c", "#fdbf6f", "#ff7f00", "#cab2d6", "#6a3d9a", "#ffff99", "#b15928"]
                 }
             ]
         },
@@ -285,13 +283,13 @@ echo '</pre>';
                 text: 'Number of consultation of a class this month'
             },
             animation: {
-                segmentShowStroke : true,
-                segmentStrokeColor : "#fff",
-                segmentStrokeWidth : 2,
-                percentageInnerCutout : 50,
-                animationSteps : 100,
-                animationEasing : "easeOutBounce",
-                animateRotate : true,
+                segmentShowStroke: true,
+                segmentStrokeColor: "#fff",
+                segmentStrokeWidth: 2,
+                percentageInnerCutout: 50,
+                animationSteps: 100,
+                animationEasing: "easeOutBounce",
+                animateRotate: true,
                 responsive: true,
                 maintainAspectRatio: true,
                 showScale: true,
@@ -303,12 +301,12 @@ echo '</pre>';
     var chartClassYear = new Chart(chartClassByYear, {
         type: 'pie',
         data: {
-            labels: <?php echo $labelStatClassYear; ?>,
+            labels: <?php if (isset($labelStatClassYear)) echo $labelStatClassYear; else echo '["empty"]'; ?>,
             datasets: [
                 {
                     label: "Consulted class",
-                    data: <?php echo  $statClassYear; ?>,
-                    backgroundColor: ["#a6cee3", "#1f78b4","#b2df8a", "#33a02c", "#fb9a99", "#e31a1c", "#fdbf6f", "#ff7f00", "#cab2d6", "#6a3d9a", "#ffff99", "#b15928"],
+                    data: <?php if (isset($statClassYear)) echo $statClassYear; else echo '[0]'; ?>,
+                    backgroundColor: ["#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99", "#e31a1c", "#fdbf6f", "#ff7f00", "#cab2d6", "#6a3d9a", "#ffff99", "#b15928"]
                 }
             ]
         },
@@ -318,13 +316,13 @@ echo '</pre>';
                 text: 'Number of consultation of a class this year'
             },
             animation: {
-                segmentShowStroke : true,
-                segmentStrokeColor : "#fff",
-                segmentStrokeWidth : 2,
-                percentageInnerCutout : 50,
-                animationSteps : 100,
-                animationEasing : "easeOutBounce",
-                animateRotate : true,
+                segmentShowStroke: true,
+                segmentStrokeColor: "#fff",
+                segmentStrokeWidth: 2,
+                percentageInnerCutout: 50,
+                animationSteps: 100,
+                animationEasing: "easeOutBounce",
+                animateRotate: true,
                 responsive: true,
                 maintainAspectRatio: true,
                 showScale: true,
@@ -336,18 +334,12 @@ echo '</pre>';
     var chartClassDay = new Chart(chartClassByDay, {
         type: 'pie',
         data: {
-            labels: <?php if(isset($labelStatClassDay))
-                            echo $labelStatClassDay;
-                            else
-                                echo '["empty"]'; ?>,
+            labels: <?php if (isset($labelStatClassDay)) echo $labelStatClassDay; else echo '["empty"]'; ?>,
             datasets: [
                 {
                     label: "Consulted class",
-                    data: <?php if(isset($statClassDay))
-                                    echo $statClassDay;
-                                else
-                                    echo '[0]'; ?>,
-                    backgroundColor: ["#a6cee3", "#1f78b4","#b2df8a", "#33a02c", "#fb9a99", "#e31a1c", "#fdbf6f", "#ff7f00", "#cab2d6", "#6a3d9a", "#ffff99", "#b15928"],
+                    data: <?php if (isset($statClassDay)) echo $statClassDay; else echo '[0]'; ?>,
+                    backgroundColor: ["#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99", "#e31a1c", "#fdbf6f", "#ff7f00", "#cab2d6", "#6a3d9a", "#ffff99", "#b15928"],
                 }
             ]
         },
@@ -357,13 +349,13 @@ echo '</pre>';
                 text: 'Number of consultation of a class this day'
             },
             animation: {
-                segmentShowStroke : true,
-                segmentStrokeColor : "#fff",
-                segmentStrokeWidth : 2,
-                percentageInnerCutout : 50,
-                animationSteps : 100,
-                animationEasing : "easeOutBounce",
-                animateRotate : true,
+                segmentShowStroke: true,
+                segmentStrokeColor: "#fff",
+                segmentStrokeWidth: 2,
+                percentageInnerCutout: 50,
+                animationSteps: 100,
+                animationEasing: "easeOutBounce",
+                animateRotate: true,
                 responsive: true,
                 maintainAspectRatio: true,
                 showScale: true,
@@ -405,12 +397,12 @@ echo '</pre>';
     var chartArticleMonth = new Chart(chartArticleByMonth, {
         type: 'pie',
         data: {
-            labels: <?php echo $labelStatBlogMonth; ?>,
+            labels: <?php if (isset($labelStatBlogMonth)) echo $labelStatBlogMonth; else echo '["empty"]'; ?>,
             datasets: [
                 {
                     label: "Consulted article",
-                    data: <?php echo  $statBlogMonth; ?>,
-                    backgroundColor: ["#F6511D", "#F3A712","#073475", "#8EA604", "#FF006E", "#8338EC", "#3A86FF", "#ff7f00", "#cab2d6", "#6a3d9a", "#ffff99", "#b15928"],
+                    data: <?php if (isset($statBlogMonth)) echo $statBlogMonth; else echo '[0]'; ?>,
+                    backgroundColor: ["#F6511D", "#F3A712", "#073475", "#8EA604", "#FF006E", "#8338EC", "#3A86FF", "#ff7f00", "#cab2d6", "#6a3d9a", "#ffff99", "#b15928"],
                 }
             ]
         },
@@ -420,13 +412,13 @@ echo '</pre>';
                 text: 'Number of consultation of a article this month'
             },
             animation: {
-                segmentShowStroke : true,
-                segmentStrokeColor : "#fff",
-                segmentStrokeWidth : 2,
-                percentageInnerCutout : 50,
-                animationSteps : 100,
-                animationEasing : "easeOutBounce",
-                animateRotate : true,
+                segmentShowStroke: true,
+                segmentStrokeColor: "#fff",
+                segmentStrokeWidth: 2,
+                percentageInnerCutout: 50,
+                animationSteps: 100,
+                animationEasing: "easeOutBounce",
+                animateRotate: true,
                 responsive: true,
                 maintainAspectRatio: true,
                 showScale: true,
@@ -438,12 +430,12 @@ echo '</pre>';
     var chartArticleYear = new Chart(chartArticleByYear, {
         type: 'pie',
         data: {
-            labels: <?php echo $labelStatBlogYear; ?>,
+            labels: <?php if (isset($labelStatBlogYear)) echo $labelStatBlogYear; else echo '["empty"]'; ?>,
             datasets: [
                 {
                     label: "Consulted class",
-                    data: <?php echo  $statBlogYear; ?>,
-                    backgroundColor: ["#F6511D", "#F3A712","#073475", "#8EA604", "#FF006E", "#8338EC", "#3A86FF", "#ff7f00", "#cab2d6", "#6a3d9a", "#ffff99", "#b15928"],
+                    data: <?php if (isset($statBlogYear)) echo $statBlogYear; else echo '[0]'; ?>,
+                    backgroundColor: ["#F6511D", "#F3A712", "#073475", "#8EA604", "#FF006E", "#8338EC", "#3A86FF", "#ff7f00", "#cab2d6", "#6a3d9a", "#ffff99", "#b15928"],
                 }
             ]
         },
@@ -453,13 +445,13 @@ echo '</pre>';
                 text: 'Number of consultation of a article this year'
             },
             animation: {
-                segmentShowStroke : true,
-                segmentStrokeColor : "#fff",
-                segmentStrokeWidth : 2,
-                percentageInnerCutout : 50,
-                animationSteps : 100,
-                animationEasing : "easeOutBounce",
-                animateRotate : true,
+                segmentShowStroke: true,
+                segmentStrokeColor: "#fff",
+                segmentStrokeWidth: 2,
+                percentageInnerCutout: 50,
+                animationSteps: 100,
+                animationEasing: "easeOutBounce",
+                animateRotate: true,
                 responsive: true,
                 maintainAspectRatio: true,
                 showScale: true,
@@ -471,12 +463,12 @@ echo '</pre>';
     var chartArticleDay = new Chart(chartArticleByDay, {
         type: 'polarArea',
         data: {
-            labels: <?php echo $labelStatBlogDay; ?>,
+            labels: <?php if (isset($labelStatBlogDay)) echo $labelStatBlogDay; else echo '["empty"]'; ?>,
             datasets: [
                 {
                     label: "Consulted class",
-                    data: <?php echo  $statBlogDay; ?>,
-                    backgroundColor: ["#F6511D", "#F3A712","#073475", "#8EA604", "#FF006E", "#8338EC", "#3A86FF", "#ff7f00", "#cab2d6", "#6a3d9a", "#ffff99", "#b15928"],
+                    data: <?php if (isset($statBlogDay)) echo $statBlogDay; else echo '[0]'; ?>,
+                    backgroundColor: ["#F6511D", "#F3A712", "#073475", "#8EA604", "#FF006E", "#8338EC", "#3A86FF", "#ff7f00", "#cab2d6", "#6a3d9a", "#ffff99", "#b15928"],
                 }
             ]
         },
@@ -486,13 +478,13 @@ echo '</pre>';
                 text: 'Number of consultation of a article this day'
             },
             animation: {
-                segmentShowStroke : true,
-                segmentStrokeColor : "#fff",
-                segmentStrokeWidth : 2,
-                percentageInnerCutout : 50,
-                animationSteps : 100,
-                animationEasing : "easeOutBounce",
-                animateRotate : true,
+                segmentShowStroke: true,
+                segmentStrokeColor: "#fff",
+                segmentStrokeWidth: 2,
+                percentageInnerCutout: 50,
+                animationSteps: 100,
+                animationEasing: "easeOutBounce",
+                animateRotate: true,
                 responsive: true,
                 maintainAspectRatio: true,
                 showScale: true,
