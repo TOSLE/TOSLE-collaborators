@@ -221,7 +221,8 @@ class DashboardController extends CoreController
 
         echo '<pre>';
         //print_r($Stats);
-        print_r($resultStatBlogDay);
+        print_r($labelStatClassDay);
+        print_r($statClassDay);
         echo '</pre>';
 
     }
