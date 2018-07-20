@@ -26,9 +26,9 @@ class ChatController extends CoreController
             $numberMessage = MessageRepository::countMessage();
             $routeChat = $this->Routes['chathome'];
             $configFormNew = $Conversation->configFormAdd($this->Auth);
-            $inBoxNumber = $Conversation->getNumberConversation('status', 1);
-            $draftNumber = $Conversation->getNumberConversation('status', 0);
-            $tashNumber = $Conversation->getNumberConversation('status', -1);
+            $inBoxNumber = $Conversation->getNumberConversation('status', 1, $this->Auth);
+            $draftNumber = $Conversation->getNumberConversation('status', 0, $this->Auth);
+            $tashNumber = $Conversation->getNumberConversation('status', -1, $this->Auth);
             $totalConv = $inBoxNumber + $draftNumber + $tashNumber;
 
             $conversations = $Conversation->getConversations($this->Auth, 1);

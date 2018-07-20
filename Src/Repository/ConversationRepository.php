@@ -150,7 +150,7 @@ class ConversationRepository extends Conversation
         $this->getOneData();
     }
 
-    public function getNumberConversation($_identifier, $_value)
+    public function getNumberConversation($_identifier, $_value, $_Auth)
     {
         $parameter = [
             'LIKE' => [
@@ -158,7 +158,16 @@ class ConversationRepository extends Conversation
             ]
         ];
         $this->setWhereParameter($parameter);
-        return $this->countData(['id']);
+        if($_Auth->getStatus() > 1){
+            return $this->countData(['id']);
+        }
+        $data = $this->getData();
+        foreach($data as $key => $conversation){
+            if(!($conversation->getIdowner() == $_Auth->getId() || $conversation->getIddest() == $_Auth->getId())){
+                unset($data[$key]);
+            }
+        }
+        return count($data);
     }
 
     public function editConversationMessage($_idConv, $_idUser, $_post)
