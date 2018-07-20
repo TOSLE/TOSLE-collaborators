@@ -27,16 +27,11 @@
                     <h2>Bienvenue sur le CMS Tosle</h2>
                     <article class="register-login">
                         <p>
-                            Veuillez entrer vos informations de connexion ci-dessous.
+                            Veuillez entrer votre nouveau mot de passe.
                         </p>
                     </article>
                     <section>
-                        <?php $this->addModal("form", $config, $errors); ?>
-                        <div>
-                            <p>
-                                Mot de passe oublié ? <a href="<?php echo $this->slugs['view-newpassword'];?>" class="btn-sm btn-tosle-outline">Cliquez-ici</a>
-                            </p>
-                        </div>
+                        <?php $this->addModal("password_form", $configSetPassword, $errors); ?>
                     </section>
                 </section>
             </div>

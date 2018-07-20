@@ -83,6 +83,7 @@ class Group extends CoreSql {
 
     public function configFormAdd()
     {
+        $routes = Access::getSlugsById();
         $User = new UserRepository();
         return [
             "config"=> [
@@ -112,7 +113,7 @@ class Group extends CoreSql {
             'select_multiple' => [
                 $User->getSelectUsers()
             ],
-            "exit" => $this->routes["dashboard_student"]
+            "exit" => $routes["dashboard_student"]
         ];
     }
 

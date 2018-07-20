@@ -6,6 +6,7 @@
  * Date: 15/05/2018
  * Time: 11:51
  */
+
 class UserRepository extends User
 {
 
@@ -24,8 +25,8 @@ class UserRepository extends User
         ];
         $this->setWhereParameter($parameter);
         $this->getOneData(["password"]);
-        if (!empty($this->password)) {
-            if (password_verify($password, $this->password)) {
+        if(!empty($this->password)){
+            if(password_verify($password, $this->password)){
                 $target = [
                     "id",
                     "email",
@@ -40,11 +41,13 @@ class UserRepository extends User
                 ];
                 $this->setWhereParameter($parameter);
                 $this->getOneData($target);
-                if (!empty($this->token) && !empty($this->email)) {
+                if(!empty($this->token) && !empty($this->email)){
 
-                    if (empty($this->status)) {
+                    if(empty($this->status))
+                    {
                         return [AUTHENTIFICATION_FAILED_KEY => "Vous n'avez pas valider votre compte"];
-                    } else {
+                    }
+                    else{
                         $this->setToken();
                         $this->setDateconnection();
                         $this->save();
@@ -57,14 +60,35 @@ class UserRepository extends User
                 return [AUTHENTIFICATION_FAILED_KEY => AUTHENTIFICATION_FAILED_MESSAGE];
             }
         } else {
-            return [AUTHENTIFICATION_FAILED_KEY => AUTHENTIFICATION_FAILED_MESSAGE];
+           return [AUTHENTIFICATION_FAILED_KEY => AUTHENTIFICATION_FAILED_MESSAGE];
         }
     }
-
     function verrifyAuthentificationSession()
     {
 
     }
+     function checkEmailExist($email)
+    {
+        $target = ["email"];
+        $parameter = [
+            "LIKE" => [
+                "email" => $email
+            ]
+        ];
+        $entree=$email;
+        $tableau=$this->getData($target);
+        foreach ($tableau as $cle) {
+            $result =  $cle->getEmail();
+            if($result == $entree)
+            {
+                return [AUTHENTIFICATION_FAILED_KEY => "Mail déjà utilisé"];
+            }
+            else{
+                return 1;
+            }
+        }
+    }
+
 
     public function getUser()
     {
@@ -133,7 +157,7 @@ class UserRepository extends User
 
         $option = [];
         foreach ($users as $user) {
-            $option[$user->getId()] = $user->getLastname() . ' ' . $user->getFirstname();
+            $option[$user->getId()] = $user->getLastname().' '.$user->getFirstname();
         }
         return [
             "select_users" => [
@@ -241,5 +265,38 @@ class UserRepository extends User
         }
 
 
+    }
+
+    /**
+     * @return array
+     * Retourne le tableau pour ajout du SELECT des utilisateurs dans un confirgForm
+     */
+    public function getSelectSimpleUser($Auth = null)
+    {
+        $target = [
+            'id',
+            'firstname',
+            'lastname'
+        ];
+        $parameter = [
+            'LIKE' => [
+                'status' => 1
+            ]
+        ];
+        $this->setWhereParameter($parameter);
+        $users = $this->getData($target);
+
+        $option = [];
+        foreach ($users as $user) {
+            if($Auth->getId() != $user->getId()){
+                $option[$user->getId()] = $user->getLastname().' '.$user->getFirstname();
+            }
+        }
+        $return['select_user'] = [
+            'label' => 'Choisir un destinataire',
+            'required' => false,
+            'options' => $option
+        ];
+        return $return;
     }
 }

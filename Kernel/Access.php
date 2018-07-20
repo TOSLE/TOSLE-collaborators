@@ -27,7 +27,7 @@ class Access
             "security" => false
         ],
         "chathome" => [ // Chat  homepage
-            "slug" => "chat",
+            "slug" => "messaging",
             "controller" => "chat",
             "action" => "index",
             "security" => false
@@ -98,6 +98,19 @@ class Access
             "action" => "view",
             "security" => false
         ],
+
+        "view-newpassword" => [ // change status blog
+            "slug" => "view-newpassword",
+            "controller" => "user",
+            "action" => "getpassword",
+            "security" => false
+        ],
+        "set-newpassword" => [ // change status blog
+            "slug" => "set-newpassword",
+            "controller" => "user",
+            "action" => "setnewpassword",
+            "security" => false
+        ],
         "view_lesson" => [ // change status blog
             "slug" => "lesson",
             "controller" => "class",
@@ -128,7 +141,23 @@ class Access
             "action" => "stats",
             "security" => 2
         ],
-
+        "chatdraft" => [
+            "slug" => "messaging-draft",
+            "controller" => "chat",
+            "action" => "draft",
+            "security" => 2
+        ],
+        "chattrash" => [
+            "slug" => "messaging-trash",
+            "controller" => "chat",
+            "action" => "viewtrash",
+        ],
+        "comment_signalement" => [
+            "slug" => "comment-signalement",
+            "controller" => "Class",
+            "action" => "Signalement",
+            "security" => 2
+        ],
     ];
 
     private $backOffice = [
@@ -137,6 +166,7 @@ class Access
         "blog/edit" => 2,
         "class/add" => 2,
         "class/edit" => 2,
+
         "class/status" => 2,
         "chapter/add" => 2,
         "chapter/edit" => 2,
@@ -151,6 +181,10 @@ class Access
         "group/gunset" => 2,
         "group/umanage" => 2,
         "class/follow" => 1,
+        "chat/addconv" => 1,
+        "chat/trash" => 2,
+        "chat/untrash" => 2,
+        "chat/delete" => 2,
     ];
 
     private $urlFixe = [
@@ -276,8 +310,8 @@ class Access
      */
     public static function constructUrl($string = "url to encode")
     {
-        $search = array('à', 'ä', 'â', 'é', 'è', 'ë', 'ê', 'ï', 'ì', 'î', 'ù', 'û', 'ü', 'ô', 'ö', '&', ' ', '?', '!', 'ç', ';', '/', '.', ',', ':', '(', ')', '=', '\'');
-        $replace = array('a', 'a', 'a', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'u', 'u', 'u', 'o', 'o', '', '-', '', '', 'c', '', '-', '', '', '', '', '', '', '-');
+        $search = array('à', 'ä', 'â', 'é', 'è', 'ë', 'ê', 'ï', 'ì', 'î', 'ù', 'û', 'ü', 'ô', 'ö', '&', ' ', '?', '!', 'ç', ';', '/', '.', ',', ':', '(', ')', '=');
+        $replace = array('a', 'a', 'a', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'u', 'u', 'u', 'o', 'o', '', '-', '', '', 'c', '', '-', '', '', '', '', '', '');
 
         return urlencode(trim(str_ireplace($search, $replace, strtolower((trim($string)))),'-'));
     }

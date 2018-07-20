@@ -87,6 +87,8 @@
                                 </span>
                             </p>
                             <p>Contenu : <?php echo $comment->getContent();?></p>
+                            <a href="<?php echo $this->slugs['comment_signalement'] ?>" >Signaler</a>
+                            <?php $this->addModal("comment", $lastComments); ?>
                         <?php endforeach;?>
                     <?php else:?>
                         <p>Aucun commentaire pour le moment</p>

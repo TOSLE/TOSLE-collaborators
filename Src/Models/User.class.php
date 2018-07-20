@@ -171,11 +171,11 @@ class User extends CoreSql{
         }
     }
 
-    public function configFormAdd()
+    public function configFormAdd($action = "")
     {
         // FAIRE LES ID ET LES CLASS POUR LE CMS
         return [
-            "config"=> ["method"=>"post", "action"=>"", "submit"=>"S'inscrire"],
+            "config"=> ["method"=>"post", "action"=>$action, "submit"=>"S'inscrire"],
             "input"=> [
                 "firstname"=>[
                     "type"=>"text",
@@ -214,6 +214,44 @@ class User extends CoreSql{
             ],
             "captcha" => true
         ];
+    } 
+    public function passwordFormAdd()
+    {
+        // FAIRE LES ID ET LES CLASS POUR LE CMS
+        return [
+            "config"=> ["method"=>"post", "action"=>"", "submit"=>"Envoie lien pour mot de passe"],
+            "input"=> [
+                
+                "email"=>[
+                    "type"=>"email",
+                    "placeholder"=>"Votre email",
+                    "required"=>true
+                ]
+            ],
+            "captcha" => true
+        ];
+    } 
+    public function setnewpasswordFormAdd()
+    {
+        // FAIRE LES ID ET LES CLASS POUR LE CMS
+        return [
+            "config"=> ["method"=>"post", "action"=>"", "submit"=>"Modifier mot de passe"],
+            "input"=> [
+                
+                "pwd"=>[
+                    "type"=>"password",
+                    "placeholder"=>"Votre nouveau mot de passe",
+                    "required"=>true
+                ],
+                "pwdConfirm"=>[
+                    "type"=>"password",
+                    "placeholder"=>"Confirmez votre nouveau mot de passe",
+                    "required"=>true,
+                    "confirm"=>"pwd"
+            ],
+            "captcha" => true
+        ]
+        ];
     }
 
     public function configFormConnect($action = "")
@@ -224,7 +262,7 @@ class User extends CoreSql{
                 "action"=>$action,
                 "submit"=>"Se connecter",
                 "secure" => [
-                    "status" => true,
+                    "status" => false,
                     "duration" => 5
                 ],
             ],

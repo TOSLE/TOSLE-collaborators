@@ -19,12 +19,10 @@ class UserController extends CoreController
         $form = $User->configFormConnect();
         $errors = [];
         if(!empty($params["POST"])) {
-            $_post = $params["POST"];
-            $errors = Form::checkForm($form, $_post);
-            $_post = Form::secureData($_post);
+            $errors = Form::checkForm($form, $params["POST"]);
             if(empty($errors)){
-                if(isset($_post["email"]) && isset($_post["pwd"])){
-                    $returnValue=$User->verrifyUserLogin($_post["pwd"], $_post["email"]);
+                if(isset($params["POST"]["email"]) && isset($params["POST"]["pwd"])){
+                    $returnValue=$User->verrifyUserLogin($params["POST"]["pwd"], $params["POST"]["email"]);
                     if(is_numeric($returnValue)){                                             
                             header("Location:" . DIRNAME);                        
                     } else {
@@ -44,6 +42,9 @@ class UserController extends CoreController
             if($params['URI'][0] == 'registered'){
                 $registerMessage = 'Inscription réussie, à présent, veuillez confirmer votre inscription pour valider votre adresse email.';
             }
+             if($params['URI'][0] == 'passchanged'){
+                $registerMessage = 'Mot de passe modifié avec succès';
+            }
         }
      //   $errors["error status"]=" status invalide";
         $View->setData('textConfirm', $registerMessage);
@@ -52,35 +53,46 @@ class UserController extends CoreController
     }
 
     public function registerAction($params) {
-        $user = new User();
+        $user = new UserRepository();
+
         $form = $user->configFormAdd();
         $errors = [];
         if(!empty($params["POST"])) {
-            $_post = $params["POST"];
-            $errors = Form::checkForm($form, $_post);
-            $_post = Form::secureData($_post);
+            $errors = Form::checkForm($form, $params["POST"]);
+            $retourValue=$user->checkEmailExist($params["POST"]["email"]);
+
+               if(is_numeric($retourValue)){     
+                     $user->setEmail($params["POST"]["email"]);                             
+                    } 
+                else {
+                        $errors=$retourValue;                                                
+                    }
+
             if (empty($errors)) {
-                $user->setFirstName($_post["firstname"]);
-                $user->setLastName($_post["lastname"]);
-                $user->setEmail($_post["email"]); // voir pour le selectMultipleResponse + confirmEmail
-                $user->setEmail($_post["emailConfirm"]);
-                $user->setPassword($_post["pwd"]);
-                $user->setPassword($_post["pwdConfirm"]);
+                $user->setFirstName($params["POST"]["firstname"]);
+                $user->setLastName($params["POST"]["lastname"]);
+                $user->checkEmailExist($params["POST"]["email"]);
+               //print_r($retourValue);
+                //die();
+             
+                $user->setEmail($params["POST"]["emailConfirm"]);
+                $user->setPassword($params["POST"]["pwd"]);
+                $user->setPassword($params["POST"]["pwdConfirm"]);
                 $user->setToken();
                 $user->save();
 
-                $email = $_post["email"];
-                $firstName = $_post["firstname"];
-                $lastName = $_post["lastname"];
+                $email = $params["POST"]["email"];
+                $firstName = $params["POST"]["firstname"];
+                $lastName = $params["POST"]["lastname"];
                 $token = $user->getToken();
 
                 Mail::sendMailRegister($email, $firstName, $lastName,$token);
                 header('Location:'.Access::getSlugsById()['signin'].'/registered');
             } else {
                 $form["data_content"] = [
-                    "email" => $_post["email"],
-                    "firstname" => $_post["firstname"],
-                    "lastname" => $_post["lastname"],
+                    "email" => $params["POST"]["email"],
+                    "firstname" => $params["POST"]["firstname"],
+                    "lastname" => $params["POST"]["lastname"],
                 ];
             }
         }
@@ -135,6 +147,99 @@ class UserController extends CoreController
         }
     }
 
+    public function getpasswordAction($params)
+    {        
+        $View = new View("default", "User/newpassword");
+        $user = new UserRepository();
+        $form = $user->passwordFormAdd();
+        $errors = [];
+        if(!empty($params["POST"])) {
+            $errors = Form::checkForm($form, $params["POST"]);
+            if (empty($errors)) {
+              /*  $user->checkEmailExist($params["POST"]["email"]);
+                $retourValue=$user->checkEmailExist($params["POST"]["email"]);
+                if(is_numeric($retourValue)){     
+                    echo "testt";*/
+
+                     $target = [/** Ce que l'on récupère lors de la requête (SELECT) **/
+                        "id",
+                        "token"
+                    ];
+                    $parameter = [/** Les parametres pour la condition de la requête **/
+                        "LIKE" => [
+                            "email" => $params["POST"]["email"],
+                        ]
+                    ];
+                    $user->setWhereParameter($parameter, null);
+                    $user->getOneData($target);
+
+                    $user->setEmail($params["POST"]["email"]); // voir pour le selectMultipleResponse + confirmEmail               
+                    $user->setToken(); 
+
+                    $user->save();
+
+
+
+                  /*  } else {
+                        $errors=$retourValue;                                                
+                    }*/
+                    $email = $params["POST"]["email"];
+                    $token = $user->getToken();
+              }
+
+
+
+            Mail::sendMailPassword($email,$token); 
+        }
+            $View->setData("configFormEmail", $form);
+            $View->setData("errors", $errors);    
+    }   
+
+
+    public function setnewpasswordAction($params)
+    {                             
+        $User = new User();
+        $View = new View("default", "User/setnewpassword");
+        $form = $User->setnewpasswordFormAdd();
+        $errors = [];
+
+           /* if token et mail + ajouter nom
+                $param 3 tableau sl
+                set password */
+
+        if (isset($params["POST"]) & !empty($params["POST"])) {
+            if (isset($params["GET"]["email"]) & isset($params["GET"]["token"])) {
+                $errors = Form::checkForm($form, $params["POST"]);
+                if (empty($errors)) {
+                    $target = [/** Ce que l'on récupère lors de la requête (SELECT) **/
+                        "id",
+                        "password"
+                    ];
+                    $parameter = [/** Les parametres pour la condition de la requête **/
+                        "LIKE" => [
+                            "email" => $params["GET"]["email"],
+                            "token" => $params["GET"]["token"]
+                        ]
+                    ];
+                    $User->setWhereParameter($parameter, null);
+                    $User->getOneData($target);
+
+                    if (!empty($User->getId())) {
+                        $User->setToken();
+                        $password = $params["POST"]["pwd"];
+                        $User->setPassword($password);
+                        $User->save();
+                        header('Location:' . Access::getSlugsById()['signin'] . '/passchanged');
+                    }
+                }
+            } else {
+                $errors["AUTHENTIFICATION FAILED"] = "Erreur d'authentification";
+            }
+        }
+        $View->setData("configSetPassword", $form);
+        $View->setData("errors", $errors);
+
+    }
     /**
      * @param $params
      * Permet de détruire la Session d'un utilisateur

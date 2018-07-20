@@ -225,6 +225,7 @@ class GroupRepository extends Group
      */
     public function getGroupManage()
     {
+        $routes = Access::getSlugsById();
         if(!empty($this->id)){
             $users = $this->getUsersGroup($this->id);
             $Table = new DashboardTable('group-users', 'Liste des utilisateurs du groupe : '.$this->name, 12);
@@ -240,7 +241,7 @@ class GroupRepository extends Group
                     $Table->setColumnBody('text', $user->getEmail());
 
                     $Table->setValueButton('Supprimer du groupe');
-                    $Table->setActionButton($this->routes['group/unset'].'/'.$this->id.'/'.$user->getId());
+                    $Table->setActionButton($routes['group/unset'].'/'.$this->id.'/'.$user->getId());
                     $Table->setColorButton("red");
                     $Table->setConfirmButton('Voulez-vous vraiment supprimer cet utilisateur : '.$user->getLastname().' '.$user->getFirstname().' du groupe ?');
                     $Table->saveButton();
@@ -313,6 +314,7 @@ class GroupRepository extends Group
      */
     public function getUserManage($_idUser)
     {
+        $routes = Access::getSlugsById();
         $User = new UserRepository($_idUser);
         $groups = $this->getGroupsUser($_idUser);
         $Table = new DashboardTable('group-users', 'Liste des groupes de : '.$User->getLastname(). ' ' . $User->getFirstName(), 12);
@@ -323,7 +325,7 @@ class GroupRepository extends Group
             foreach($groups as $group){
                 $Table->setColumnBody('text', $group->getName());
                 $Table->setValueButton('Supprimer du groupe');
-                $Table->setActionButton($this->routes['group/gunset'].'/'.$group->getId().'/'.$User->getId());
+                $Table->setActionButton($routes['group/gunset'].'/'.$group->getId().'/'.$User->getId());
                 $Table->setColorButton("red");
                 $Table->setConfirmButton('Voulez-vous vraiment supprimer cet utilisateur : '.$User->getLastname().' '.$User->getFirstname().' du groupe ?');
                 $Table->saveButton();

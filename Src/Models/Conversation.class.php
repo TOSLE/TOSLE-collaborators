@@ -11,12 +11,26 @@ class Conversation extends CoreSql {
     protected $id;
     protected $iddest;
     protected $type;
-    protected $dateCreate;
     protected $status;
+    protected $datecreate;
+    protected $tag;
+    protected $idowner;
 
-    public function __construct()
+    private $messages = [];
+    private $destination;
+
+    public function __construct($_id = null)
     {
-        //parent::__construct();
+        parent::__construct();
+        if(isset($_id) && is_numeric($_id)){
+            $parameter = [
+                'LIKE' => [
+                    'id' => $_id
+                ]
+            ];
+            $this->setWhereParameter($parameter);
+            $this->getOneData();
+        }
     }
 
     /**
@@ -38,7 +52,7 @@ class Conversation extends CoreSql {
     /**
      * @return mixed
      */
-    public function getiddest()
+    public function getIddest()
     {
         return $this->iddest;
     }
@@ -46,7 +60,7 @@ class Conversation extends CoreSql {
     /**
      * @param mixed $iddest
      */
-    public function setiddest($iddest)
+    public function setIddest($iddest)
     {
         $this->iddest = $iddest;
     }
@@ -99,9 +113,96 @@ class Conversation extends CoreSql {
         $this->status = $status;
     }
 
-
-    public function configFormAdd()
+    /**
+     * @return array
+     */
+    public function getMessages()
     {
+        return $this->messages;
+    }
+
+    /**
+     * @param array $messages
+     */
+    public function setMessages($messages)
+    {
+        foreach($messages as $id){
+            $this->messages[] = new Message($id);
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDestination()
+    {
+        return $this->destination;
+    }
+
+    /**
+     * @param mixed $destination
+     */
+    public function setDestination($destination)
+    {
+        $this->destination = new User($destination);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTag()
+    {
+        return $this->tag;
+    }
+
+    /**
+     * @param mixed $tag
+     */
+    public function setTag()
+    {
+        $this->tag = uniqid();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIdowner()
+    {
+        return $this->idowner;
+    }
+
+    /**
+     * @param mixed $idowner
+     */
+    public function setIdowner($idowner)
+    {
+        $this->idowner = $idowner;
+    }
+
+    public function getOwner()
+    {
+        return new User($this->idowner);
+    }
+
+    public function configFormAdd($Auth = null)
+    {
+        $User = new UserRepository();
+        $Routes = Access::getSlugsById();
+        return [
+            "config" => [
+                "method" => "post",
+                "action" => $Routes['chat/addconv'],
+                "save" => "Draft",
+                "submit" => "Send",
+                "form_file" => false,
+            ],
+            "textarea" => [
+                "label" => "Message",
+                "name" => "message",
+                "placeholder" => "Your message"
+            ],
+            'select' => $User->getSelectSimpleUser($Auth)
+        ];
     }
 
 
