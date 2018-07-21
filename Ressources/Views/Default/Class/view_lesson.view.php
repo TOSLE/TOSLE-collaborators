@@ -72,18 +72,7 @@
         <div class="row">
             <div class="col-12">
                 <div>
-                    <h3>Commentaires</h3>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <div>
-                    <?php if(isset($lastComments)):?>
-                        <?php $this->addModal("comment", $lastComments); ?>
-                    <?php else:?>
-                        <p>Aucun commentaire pour le moment</p>
-                    <?php endif;?>
+
                 </div>
             </div>
         </div>
@@ -92,6 +81,11 @@
                 <div class="col-3"></div>
                 <div class="col-6">
                     <div>
+                        <?php if(isset($lastComments)):?>
+                            <?php $this->addModal("comment", $lastComments); ?>
+                        <?php else:?>
+                            <p>Aucun commentaire pour le moment</p>
+                        <?php endif;?>
                         <?php $this->addModal("form", $formAddComment, $errors); ?>
                     </div>
                 </div>

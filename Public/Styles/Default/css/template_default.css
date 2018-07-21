@@ -307,6 +307,35 @@ Override buttons OSPAF
     border: 1px solid #000; }
   html input {
     margin-top: 15px; }
+  html .encaps-comment {
+    background-color: white;
+    max-width: 700px;
+    margin: 0 auto; }
+  html .content-comment {
+    border-bottom: 1px solid; }
+    html .content-comment > .fade-comment {
+      padding: 15px;
+      position: relative;
+      width: 100%; }
+      html .content-comment > .fade-comment > .comment-content-infos {
+        padding: 5px 0; }
+      html .content-comment > .fade-comment > .comment-autor-infos {
+        font-size: 0.8em;
+        color: #787878; }
+      html .content-comment > .fade-comment > .comment-content-option {
+        font-size: 0.8em;
+        position: absolute;
+        bottom: 15px;
+        right: 15px; }
+        html .content-comment > .fade-comment > .comment-content-option > a {
+          color: black;
+          text-decoration: none;
+          transition: 0.2s; }
+          html .content-comment > .fade-comment > .comment-content-option > a:hover {
+            text-decoration: underline;
+            color: #1A5CCB; }
+    html .content-comment:last-child {
+      border-bottom: none; }
   html .profile {
     display: flex;
     background-color: #FFFFFF;
