@@ -646,4 +646,16 @@ class LessonRepository extends Lesson
     {
 
     }
+
+    public function getLessonOfChapter($_idChapter)
+    {
+        $LessonChapter = new LessonChapter();
+        $parameter = [
+            'LIKE' => [
+                'chapterid' => $_idChapter
+            ]
+        ];
+        $LessonChapter->getOneData(['lessonid']);
+        return $LessonChapter->getLessonId();
+    }
 }

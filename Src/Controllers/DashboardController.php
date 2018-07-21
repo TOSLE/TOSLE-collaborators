@@ -1,11 +1,11 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: julien
  * Date: 16/02/2018
  * Time: 11:22
  */
-
 class DashboardController extends CoreController
 {
     /**
@@ -63,10 +63,10 @@ class DashboardController extends CoreController
         $configFormGroupAdd = $Group->configFormAdd();
         $errors_group_add = "";
 
-        if(isset($params['POST']) && !empty($params['POST'])){
+        if (isset($params['POST']) && !empty($params['POST'])) {
             $errors_group_add = $Group->addGroup($_FILES, $params["POST"]);
-            if($errors_group_add === 1){
-                header('Location:'.$this->Routes['dashboard_student']);
+            if ($errors_group_add === 1) {
+                header('Location:' . $this->Routes['dashboard_student']);
             }
         }
         $View->setData("configBlocUsers", $configBlocUsers);
@@ -112,7 +112,7 @@ class DashboardController extends CoreController
         /**
          * Affectation des données pour la vue
          */
-            $View->setData("idModalViewAllPosts", $latestArticles["global"]["icon_header"]["modal"]["target"]);
+        $View->setData("idModalViewAllPosts", $latestArticles["global"]["icon_header"]["modal"]["target"]);
     }
 
     /**
@@ -144,9 +144,80 @@ class DashboardController extends CoreController
      */
     function statsAction($params)
     {
-        $View = new View("dashboard", "chat");
+        $View = new View("dashboard", "Dashboard/stats");
         $View->setData("PageName", NAV_DASHBOARD . " " . NAV_DASHBOARD_STATISTIC);
+
+        $Stats = new StatsRepository();
+
+        /**
+         * Stat visite cms Tosle
+         */
+
+        $resultStatYear = $Stats->getStatViewTosle();
+        $View->setData("statViewTosle", $resultStatYear);
+
+        /**
+         * Stat consultation des cours
+         */
+
+        $resultStatClassYear = $Stats->getStatViewClass('year');
+        $labelStatClassYear = '["'.implode('" ,"', array_keys($resultStatClassYear)).'"]';
+        $statClassYear = '['.implode(' ,', $resultStatClassYear).']';
+        $View->setData("labelStatClassYear", $labelStatClassYear);
+        $View->setData("statClassYear", $statClassYear);
+
+        $resultStatClassMonth = $Stats->getStatViewClass('month');
+        $labelStatClassMonth = '["'.implode('" ,"', array_keys($resultStatClassMonth)).'"]';
+        $statClassMonth = '['.implode(' ,', $resultStatClassMonth).']';
+        $View->setData("labelStatClassMonth", $labelStatClassMonth);
+        $View->setData("statClassMonth", $statClassMonth);
+
+        $resultStatClassDay = $Stats->getStatViewClass('day');
+        $labelStatClassDay = '["'.implode('" ,"', array_keys($resultStatClassDay)).'"]';
+        $statClassDay = '['.implode(' ,', $resultStatClassDay).']';
+        $View->setData("labelStatClassDay", $labelStatClassDay);
+        $View->setData("statClassDay", $statClassDay);
+
+        /**
+         * Stat consultation des articles du blog
+         */
+
+        $resultStatBlogYear = $Stats->getStatViewArticle('year');
+        $labelStatBlogYear = '["'.implode('" ,"', array_keys($resultStatBlogYear)).'"]';
+        $statBlogYear = '['.implode(' ,', $resultStatBlogYear).']';
+        $View->setData("labelStatBlogYear", $labelStatBlogYear);
+        $View->setData("statBlogYear", $statBlogYear);
+
+        $resultStatBlogMonth = $Stats->getStatViewArticle('month');
+        $labelStatBlogMonth = '["'.implode('" ,"', array_keys($resultStatBlogMonth)).'"]';
+        $statBlogMonth = '['.implode(' ,', $resultStatBlogMonth).']';
+        $View->setData("labelStatBlogMonth", $labelStatBlogMonth);
+        $View->setData("statBlogMonth", $statBlogMonth);
+
+        $resultStatBlogDay = $Stats->getStatViewArticle('day');
+        $labelStatBlogDay = '["'.implode('" ,"', array_keys($resultStatBlogDay)).'"]';
+        $statBlogDay = '['.implode(' ,', $resultStatBlogDay).']';
+        $View->setData("labelStatBlogDay", $labelStatBlogDay);
+        $View->setData("statBlogDay", $statBlogDay);
+
+
+        /**
+         * Stat inscription utilisateur au cms
+         */
+
+        $User = new UserRepository();
+
+        $resultStatUserYear = $User->getStatUser('year');
+        $View->setData("statUserRegisteredYear", $resultStatUserYear);
+
+        $resultStatUserMonth = $User->getStatUser('month');
+        $View->setData("statUserRegisteredMonth", $resultStatUserMonth);
+
+        $resultStatUserDay = $User->getStatUser('day');
+        $View->setData("statUserRegisteredDay", $resultStatUserDay);
+
     }
+
 
     public function chapterAction($params)
     {
@@ -166,7 +237,7 @@ class DashboardController extends CoreController
     public function groupAction($params)
     {
 
-        header('Location:'.$this->Routes['dashboard_student']);
+        header('Location:' . $this->Routes['dashboard_student']);
     }
 
 }

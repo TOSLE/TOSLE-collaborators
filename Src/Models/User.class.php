@@ -280,4 +280,47 @@ class User extends CoreSql{
             ]
         ];
     }
+
+    public function configFormEdit()
+    {
+        return [
+            "config"=> ["method"=>"post", "action"=>"", "submit"=>"S'inscrire"],
+            "input"=> [
+                "firstname"=>[
+                    "type"=>"text",
+                    "placeholder"=>"Votre prénom",
+                    "required"=>true,
+                    "maxString"=>100
+                ],
+                "lastname"=>[
+                    "type"=>"text",
+                    "placeholder"=>"Votre nom",
+                    "required"=>true,
+                    "maxString"=>100
+                ],
+                "email"=>[
+                    "type"=>"email",
+                    "placeholder"=>"Votre email",
+                    "required"=>true
+                ],
+                "emailConfirm"=>[
+                    "type"=>"email",
+                    "placeholder"=>"Confirmez votre email",
+                    "required"=>true,
+                    "confirm"=>"email"
+                ],
+                "pwd"=>[
+                    "type"=>"password",
+                    "placeholder"=>"Votre mot de passe",
+                    "required"=>true
+                ],
+                "pwdConfirm"=>[
+                    "type"=>"password",
+                    "placeholder"=>"Confirmez votre mot de passe",
+                    "required"=>true,
+                    "confirm"=>"pwd"
+                ]
+            ],
+        ];
+    }
 }

@@ -22,19 +22,22 @@ class ChatController extends CoreController
             $conversationView = null;
             $errorsAdd = null;
             $page = "index";
+            $numberStudent = UserRepository::countUser();
+            $numberMessage = MessageRepository::countMessage();
             $routeChat = $this->Routes['chathome'];
             $configFormNew = $Conversation->configFormAdd($this->Auth);
-            $inBoxNumber = $Conversation->getNumberConversation('status', 1);
-            $draftNumber = $Conversation->getNumberConversation('status', 0);
-            $tashNumber = $Conversation->getNumberConversation('status', -1);
+            $inBoxNumber = $Conversation->getNumberConversation('status', 1, $this->Auth);
+            $draftNumber = $Conversation->getNumberConversation('status', 0, $this->Auth);
+            $tashNumber = $Conversation->getNumberConversation('status', -1, $this->Auth);
             $totalConv = $inBoxNumber + $draftNumber + $tashNumber;
 
-            $conversations = $Conversation->getConversations(1);
+            $conversations = $Conversation->getConversations($this->Auth, 1);
             if(isset($params['POST']) && !empty($params['POST'])){
                 $idConv = (isset($params['URI'][0]) && is_numeric($params['URI'][0]))?$params['URI'][0]:$conversations[0]->getId();
                 $errorsAdd = $Conversation->addConversationMessage($idConv, $this->Auth->getId(), $params['POST']);
                 if(empty($errorsAdd)){
-                    header('Location:'.$this->Routes['chathome'].'/'.$params['URI'][0]);
+                    $tmpString = (isset($params['URI'][0]))?$params['URI'][0]:'';
+                    header('Location:'.$this->Routes['chathome'].'/'.$tmpString);
                 }
             }
             if(isset($conversations) && !empty($conversations)){
@@ -54,6 +57,8 @@ class ChatController extends CoreController
                 }
             }
             $View->setData('routeChat', $routeChat);
+            $View->setData('numberStudent', $numberStudent);
+            $View->setData('numberMessage', $numberMessage);
             $View->setData('inBoxNumber', $inBoxNumber);
             $View->setData('draftNumber', $draftNumber);
             $View->setData('tashNumber', $tashNumber);
@@ -165,6 +170,8 @@ class ChatController extends CoreController
             $conversationView = null;
             $errorsAdd = null;
             $page = "draft";
+            $numberStudent = UserRepository::countUser();
+            $numberMessage = MessageRepository::countMessage();
             $routeChat = $this->Routes['chatdraft'];
             $configFormNew = $Conversation->configFormAdd($this->Auth);
             $inBoxNumber = $Conversation->getNumberConversation('status', 1);
@@ -172,7 +179,7 @@ class ChatController extends CoreController
             $tashNumber = $Conversation->getNumberConversation('status', -1);
             $totalConv = $inBoxNumber + $draftNumber + $tashNumber;
 
-            $conversations = $Conversation->getConversations(0);
+            $conversations = $Conversation->getConversations($this->Auth, 0);
             if(isset($params['POST']) && !empty($params['POST'])){
                 $idConv = (isset($params['URI'][0]) && is_numeric($params['URI'][0]))?$params['URI'][0]:$conversations[0]->getId();
                 $errorsAdd = $Conversation->editConversationMessage($idConv, $this->Auth->getId(), $params['POST']);
@@ -197,6 +204,8 @@ class ChatController extends CoreController
                 }
             }
             $View->setData('routeChat', $routeChat);
+            $View->setData('numberStudent', $numberStudent);
+            $View->setData('numberMessage', $numberMessage);
             $View->setData('inBoxNumber', $inBoxNumber);
             $View->setData('draftNumber', $draftNumber);
             $View->setData('tashNumber', $tashNumber);
@@ -234,6 +243,8 @@ class ChatController extends CoreController
             $conversationView = null;
             $errorsAdd = null;
             $page = "trash";
+            $numberStudent = UserRepository::countUser();
+            $numberMessage = MessageRepository::countMessage();
             $routeChat = $this->Routes['chattrash'];
             $configFormNew = $Conversation->configFormAdd($this->Auth);
             $inBoxNumber = $Conversation->getNumberConversation('status', 1);
@@ -241,7 +252,7 @@ class ChatController extends CoreController
             $tashNumber = $Conversation->getNumberConversation('status', -1);
             $totalConv = $inBoxNumber + $draftNumber + $tashNumber;
 
-            $conversations = $Conversation->getConversations(-1);
+            $conversations = $Conversation->getConversations($this->Auth, -1);
             if(isset($params['POST']) && !empty($params['POST'])){
                 $idConv = (isset($params['URI'][0]) && is_numeric($params['URI'][0]))?$params['URI'][0]:$conversations[0]->getId();
                 $errorsAdd = $Conversation->editConversationMessage($idConv, $this->Auth->getId(), $params['POST']);
@@ -266,6 +277,8 @@ class ChatController extends CoreController
                 }
             }
             $View->setData('routeChat', $routeChat);
+            $View->setData('numberStudent', $numberStudent);
+            $View->setData('numberMessage', $numberMessage);
             $View->setData('inBoxNumber', $inBoxNumber);
             $View->setData('draftNumber', $draftNumber);
             $View->setData('tashNumber', $tashNumber);

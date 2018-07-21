@@ -116,7 +116,6 @@ class Access
             "controller" => "class",
             "action" => "view",
             "security" => false
-
         ],
         "edit_profile" => [
             "slug" => "edit-profile",
@@ -136,24 +135,30 @@ class Access
             "action" => "student",
             "security" => 2
         ],
+        "dashboard_stat" => [
+            "slug" => "dashboard-statistic",
+            "controller" => "dashboard",
+            "action" => "stats",
+            "security" => 2
+        ],
         "chatdraft" => [
             "slug" => "messaging-draft",
             "controller" => "chat",
             "action" => "draft",
-            "security" => 2
+            "security" => 1
         ],
         "chattrash" => [
             "slug" => "messaging-trash",
             "controller" => "chat",
             "action" => "viewtrash",
+            "security" => 2
         ],
         "comment_signalement" => [
             "slug" => "comment-signalement",
-            "controller" => "Class",
-            "action" => "Signalement",
-            "security" => 2
-        ],
-        
+            "controller" => "index",
+            "action" => "signalement",
+            "security" => false
+        ]
     ];
 
     private $backOffice = [
@@ -181,6 +186,7 @@ class Access
         "chat/trash" => 2,
         "chat/untrash" => 2,
         "chat/delete" => 2,
+        "index/deletecom" => 1,
     ];
 
     private $urlFixe = [

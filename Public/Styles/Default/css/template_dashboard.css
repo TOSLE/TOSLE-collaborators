@@ -205,6 +205,157 @@ main {
               text-align: center; }
             main .content-backoffice > .main-content > table > tbody > tr > td .ordered-button {
               font-size: 0.9em; }
+  main main {
+    /* display: flex; */
+    flex-direction: row;
+    max-width: 1230px;
+    margin: 0 auto;
+    min-height: 100%; }
+  main li {
+    text-decoration: none;
+    list-style: none; }
+  main .container > .row {
+    margin-bottom: 27px !important; }
+  main #nav-dashboard ul li a {
+    text-decoration: none;
+    display: inline-flex;
+    width: 100%;
+    height: 100%;
+    align-items: center; }
+  main section .marg-container {
+    margin-left: 15px; }
+  main .title-page {
+    margin: 26px 0 0 0; }
+    main .title-page h2 {
+      font-weight: 300;
+      color: #3D3F3E; }
+  main #left-side {
+    display: flex;
+    flex-direction: column; }
+  main #right-side {
+    flex-direction: row; }
+  main #nav-dashboard {
+    background-color: #FFFFFF;
+    border: solid 0.5px #BDBDBDBD;
+    margin-bottom: 27px; }
+    main #nav-dashboard li {
+      height: 60px;
+      border-right: solid 0.5px #BDBDBDBD;
+      border-top: solid 0.5px #BDBDBDBD;
+      border-left: solid 1.5px #BDBDBDBD; }
+      main #nav-dashboard li:last-child {
+        border-bottom: solid 0.5px #BDBDBDBD; }
+    main #nav-dashboard p {
+      font-weight: 400;
+      color: #1A5CCB;
+      margin-left: 20px; }
+    main #nav-dashboard i {
+      /** todo a mofidier **/
+      margin: auto;
+      margin-right: 29px; }
+  main .block-dash {
+    background-color: #FFFFFF;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+    border: solid 0.5px #BDBDBDBD; }
+    main .block-dash .title {
+      display: flex;
+      color: #343A40;
+      padding-top: 15px;
+      padding-bottom: 15px;
+      border-top: solid 0.5px #BDBDBDBD;
+      border-left: solid 0.5px #BDBDBDBD;
+      border-right: solid 0.5px #BDBDBDBD;
+      flex-direction: row; }
+      main .block-dash .title a {
+        display: flex;
+        align-self: flex-end;
+        margin-left: auto;
+        padding-right: 15px; }
+      main .block-dash .title a:link {
+        text-decoration: none; }
+      main .block-dash .title > h4 {
+        margin-left: 16px;
+        font-weight: 500; }
+    main .block-dash .container {
+      width: 100%;
+      border: solid 0.5px #BDBDBDBD; }
+  main #stat-cms {
+    display: flex;
+    flex-direction: column; }
+    main #stat-cms ul {
+      font-size: 14px;
+      height: 40px;
+      border-bottom: solid 0.5px #BDBDBDBD;
+      width: 100%; }
+    main #stat-cms li {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      flex-direction: row; }
+      main #stat-cms li .stat-register {
+        font-weight: 600;
+        display: flex;
+        align-items: flex-end;
+        margin-left: auto;
+        padding-right: 20px; }
+    main #stat-cms ul > li > p:nth-child(1) {
+      margin-left: 16px;
+      font-size: 14px; }
+  main .blue {
+    fill: #1A5CCB;
+    color: #1A5CCB; }
+  main .column-col-5 ul {
+    display: flex;
+    flex-direction: row;
+    align-items: center; }
+  main .column-col-5 > ul > li {
+    /** todo a modifier essayer de tout regrouper column + row**/
+    width: 100%;
+    max-width: 211px;
+    height: 30px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    border-bottom: solid 0.5px #C4C4C4;
+    color: #8C8C8C; }
+    main .column-col-5 > ul > li > span {
+      width: 100%;
+      text-align: center; }
+    main .column-col-5 > ul > li:nth-child(2), main .column-col-5 > ul > li:nth-child(3), main .column-col-5 > ul > li:nth-child(4) {
+      max-width: 96px; }
+  main .row-col-5 ul {
+    display: flex;
+    flex-direction: row;
+    align-items: center; }
+  main .row-col-5 > ul > li {
+    /** todo a modifier essayer de tout regrouper column + row**/
+    width: 100%;
+    max-width: 211px;
+    height: 60px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    border-bottom: solid 0.5px #C4C4C4;
+    color: #3D3F3E; }
+    main .row-col-5 > ul > li:nth-child(1) {
+      max-width: 196px;
+      font-size: 12px; }
+    main .row-col-5 > ul > li:nth-child(2), main .row-col-5 > ul > li:nth-child(3), main .row-col-5 > ul > li:nth-child(4) {
+      max-width: 96px; }
+    main .row-col-5 > ul > li > span {
+      width: 100%;
+      text-align: center; }
+  main #last-blog-post .column-col-5 > ul > li:nth-child(1), main #last-blog-post .row-col-5 > ul > li:nth-child(1) {
+    max-width: 300px; }
+  main #last-chat-message .column-col-5 > ul > li:nth-child(1), main #last-chat-message .row-col-5 > ul > li:nth-child(1) {
+    max-width: 70px; }
+  main #last-chat-message .column-col-5 > ul > li:nth-child(2), main #last-chat-message .row-col-5 > ul > li:nth-child(2) {
+    max-width: 300px; }
+  main .stat-small {
+    margin-bottom: 27px;
+    height: 254px;
+    background-color: #ffffff; }
   main .bold-text {
     font-weight: 500; }
   main .additional-message-title {
@@ -226,6 +377,35 @@ main {
       color: #1A5CCB; }
       main .dashboard-bloc .icons-dashboard i {
         font-size: 1.8em; }
+  main .row-stat .container .row {
+    flex-direction: row; }
+  main .block-stat {
+    background-color: #FFFFFF;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+    border: solid 0.5px #BDBDBDBD;
+    max-height: 600px; }
+    main .block-stat .title {
+      display: flex;
+      color: #343A40;
+      padding-top: 15px;
+      padding-bottom: 15px;
+      border-top: solid 0.5px #BDBDBDBD;
+      border-left: solid 0.5px #BDBDBDBD;
+      border-right: solid 0.5px #BDBDBDBD; }
+      main .block-stat .title h4 {
+        font-size: 16px;
+        font-weight: 600;
+        margin-left: 16px; }
+      main .block-stat .title select {
+        align-self: flex-end;
+        margin-left: auto;
+        margin-right: 20px; }
+    main .block-stat .container {
+      border: solid 0.5px #BDBDBDBD; }
+      main .block-stat .container canvas {
+        height: 500px;
+        width: 500px;
+        padding: 10px; }
 
 footer {
   background-color: #74858D;
