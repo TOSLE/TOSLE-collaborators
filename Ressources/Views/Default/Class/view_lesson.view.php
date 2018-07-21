@@ -73,40 +73,6 @@
     </section>
 
     <section class="container footer-section-lesson">
-       <?php/* <div class="row">
-            <div class="col-12">
-                <div>
-                    <h3>Commentaires</h3>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <div>
-                    <?php if(isset($lastComments)):?>
-                       
-                        <?php foreach($lastComments as $comment):
-                            $test=$comment->getId();?>
-                            <div id=<?php echo $test; ?>>
-                                <p>
-                                    <span>
-                                        Ecrit par : <?php echo $comment->getUser()->getFirstname();?> <?php echo $comment->getUser()->getLastname();?>
-                                    </span>
-                                </p>
-                                <p>Contenu : <?php echo $comment->getContent();?></p>
-                                <a href="<?php echo $this->slugs['comment_signalement'] ?>" >Signaler</a>
-                                <?php $this->addModal("comment", $lastComments); ?>
-
-                            </div>
-                        <?php endforeach;?>
-                    <?php else:?>
-                        <p>Aucun commentaire pour le moment</p>
-                    <?php endif;?>
-                </div>
-            </div>
-        </div> */ ?>
-        <?php if(isset($this->Auth)):?>
-
             <div class="row">
                 <div class="col-3"></div>
                 <div class="col-6">

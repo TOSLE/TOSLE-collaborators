@@ -119,7 +119,6 @@ class ClassController extends CoreController
         $View = new View("default");
     }
 
-    
     /**
      * @Route("/en/class/{params}")
      * @param array $params
