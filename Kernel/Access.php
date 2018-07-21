@@ -155,9 +155,9 @@ class Access
         ],
         "comment_signalement" => [
             "slug" => "comment-signalement",
-            "controller" => "Class",
-            "action" => "Signalement",
-            "security" => 2
+            "controller" => "index",
+            "action" => "signalement",
+            "security" => false
         ],
     ];
 

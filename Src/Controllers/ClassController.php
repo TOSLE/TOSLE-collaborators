@@ -121,29 +121,6 @@ class ClassController extends CoreController
         $View = new View("default");
     }
 
-    function SignalementAction($params)
-    {
-                $routes = Access::getSlugsById();
-                $comment = new CommentRepository();
-              /*  $variable=
-                       $target = [
-                            "datecreate",
-                            "content",
-                            "id"
-                        ];
-                        $parameter = [
-                            "LIKE" => [
-                                "id" => $params["URI"][0]
-                            ]
-                        ];
-                        $comment->setWhereParameter($parameter);
-                        $comment->getOneData();*/
-                
-                Mail::sendMailSignalement();
-
-                header('Location:'.$routes['view_lesson']);
-    }
-
     /**
      * @Route("/en/class/{params}")
      * @param array $params

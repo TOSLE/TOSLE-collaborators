@@ -11,7 +11,7 @@
  * Class IndexController
  * Controller not use
  */
-class IndexController
+class IndexController extends CoreController
 {
     /**
      * @Route("/en/index(/index)")
@@ -62,6 +62,10 @@ class IndexController
         $View->setData('errorsParameter', $errorsParameter);
     }
 
+    /**
+     * @param $params
+     * Configuration du CMS
+     */
     function configAction($params)
     {
         $View = new View('installer', 'installer');
@@ -83,5 +87,37 @@ class IndexController
         $View->setData('config', $config);
         $View->setData('errors', $errors);
         $View->setData('stepInstall', 2);
+    }
+
+
+    /**
+     * @param $params
+     * Signalement d'un commentaire
+     */
+    function SignalementAction($params)
+    {
+        if(isset($params['URI'][0]) && is_numeric($params['URI'][0])){
+            $comment = new CommentRepository($params['URI'][0]);
+            $Object = $comment->getInfoAboutComment($comment->getId());
+            if($Object['type'] == 'chapter'){
+                $data['url'] = $_SERVER['SERVER_NAME'].$this->Routes['view_lesson'].'/'.$Object['object']->getLesson()->getUrl().'/'.$Object['object']->getUrl();
+                $data['content'] = $comment->getContent();
+                $data['user'] = $comment->getUser()->getFirstname().' '.$comment->getUser()->getLastname();
+                $data['sendBy'] = 'visitor';
+                if($this->Auth){
+                    $data['sendBy'] = $this->Auth->getFirstname().' '.$this->Auth->getLastname();
+                }
+            } else {
+                $data['url'] = $_SERVER['SERVER_NAME'].$this->Routes['view_blog_article'].'/'.$Object['object']->getUrl();
+                $data['content'] = $comment->getContent();
+                $data['user'] = $comment->getUser()->getFirstname().' '.$comment->getUser()->getLastname();
+                $data['sendBy'] = 'visitor';
+                if($this->Auth){
+                    $data['sendBy'] = $this->Auth->getFirstname().' '.$this->Auth->getLastname();
+                }
+            }
+            Mail::sendMailSignalement($data);
+        }
+        header('Location:'.$this->Routes['homepage']);
     }
 }
