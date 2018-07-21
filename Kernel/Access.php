@@ -153,6 +153,7 @@ class Access
             "action" => "Signalement",
             "security" => 2
         ],
+        
     ];
 
     private $backOffice = [

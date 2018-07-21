@@ -80,15 +80,20 @@
             <div class="col-12">
                 <div>
                     <?php if(isset($lastComments)):?>
-                        <?php foreach($lastComments as $comment):?>
-                            <p>
-                                <span>
-                                    Ecrit par : <?php echo $comment->getUser()->getFirstname();?> <?php echo $comment->getUser()->getLastname();?>
-                                </span>
-                            </p>
-                            <p>Contenu : <?php echo $comment->getContent();?></p>
-                            <a href="<?php echo $this->slugs['comment_signalement'] ?>" >Signaler</a>
-                            <?php $this->addModal("comment", $lastComments); ?>
+                       
+                        <?php foreach($lastComments as $comment):
+                            $test=$comment->getId();?>
+                            <div id=<?php echo $test; ?>>
+                                <p>
+                                    <span>
+                                        Ecrit par : <?php echo $comment->getUser()->getFirstname();?> <?php echo $comment->getUser()->getLastname();?>
+                                    </span>
+                                </p>
+                                <p>Contenu : <?php echo $comment->getContent();?></p>
+                                <a href="<?php echo $this->slugs['comment_signalement'] ?>" >Signaler</a>
+                                <?php $this->addModal("comment", $lastComments); ?>
+
+                            </div>
                         <?php endforeach;?>
                     <?php else:?>
                         <p>Aucun commentaire pour le moment</p>

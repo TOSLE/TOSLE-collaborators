@@ -121,7 +121,7 @@ class ClassController extends CoreController
         $View = new View("default");
     }
 
-    function SignalementAction($params)
+       function SignalementAction($params)
     {
                 $routes = Access::getSlugsById();
                 $comment = new CommentRepository();

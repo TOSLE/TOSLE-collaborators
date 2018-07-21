@@ -152,5 +152,4 @@ class Comment extends CoreSql {
             ],
         ];
     }
-
 }
