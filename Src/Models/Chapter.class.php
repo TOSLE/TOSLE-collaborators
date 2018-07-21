@@ -18,6 +18,7 @@ Class Chapter extends CoreSql {
     protected $url;
 
     private $lesson;
+    private $lessonchapter;
     private $getFileid = null;
 
     public function __construct($_id = null)
@@ -194,6 +195,25 @@ Class Chapter extends CoreSql {
     public function setLesson($_idForeinKey)
     {
         $this->lesson = new Lesson($_idForeinKey);
+    }
+
+
+    /**
+     * @return LessonChapter
+     * Retourne un objet avec les valeurs de Lessonchapter
+     */
+    public function getLessonchapter()
+    {
+        return $this->lessonchapter;
+    }
+
+    /**
+     * @param int $_idForeinKey
+     * Permet de créer l'attribut avec l'id de la clé primaire de la table correspondante
+     */
+    public function setLessonchapter($_idForeinKey)
+    {
+        $this->lessonchapter = new LessonChapter($_idForeinKey);
     }
 
     public function configFormAdd()
