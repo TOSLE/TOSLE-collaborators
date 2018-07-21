@@ -92,12 +92,10 @@ class ClassController extends CoreController
                     $Comment->addComment($formAddComment, $dataForm, 2, $readChapter->getId());
                     header('Location:'.$routes['view_lesson'].'/'.$Lesson->getUrl().'/'.$readChapter->getUrl());
                 }
-                $allComments = $Comment->getAll('chapter', $readChapter->getId());
+                $comments = $Comment->getAll('chapter', $readChapter->getId());
 
-                if(isset($allComments)){
-                    $View->setData("lastComments", array_slice($allComments, 0, 5));
-                }
                 $View->setData("readChapter", $readChapter);
+                $View->setData("comments", $comments);
                 $View->setData("subscribe", $subscribe);
                 $View->setData("lesson", $Lesson);
                 $View->setData("formAddComment", $formAddComment);

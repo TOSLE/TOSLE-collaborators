@@ -81,8 +81,8 @@
                 <div class="col-3"></div>
                 <div class="col-6">
                     <div>
-                        <?php if(isset($lastComments)):?>
-                            <?php $this->addModal("comment", $lastComments); ?>
+                        <?php if(isset($comments)):?>
+                            <?php $this->addModal("comment", $comments); ?>
                         <?php else:?>
                             <p>Aucun commentaire pour le moment</p>
                         <?php endif;?>
