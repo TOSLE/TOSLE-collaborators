@@ -18,6 +18,24 @@
     > .description-lesson {
       padding: 7.5px;
     }
+    > .difficult {
+      display: flex;
+      > .arrow-difficult {
+        width: 10px;
+        border-bottom: 10px solid transparent;
+        border-left: 10px solid;
+        border-top: 10px solid transparent;
+      }
+      > p {
+        padding: 7.5px;
+        font-weight: 600;
+      }
+      > span {
+        width: 25px;
+        line-height: 100%;
+        margin-top: 4px;
+      }
+    }
     > .category-list-lesson {
         position: absolute;
         bottom: 0;
@@ -40,13 +58,27 @@
       transition: 0.4s;
       > .info-comment-lesson {
         position: absolute;
-        bottom: 10px;
+        font-weight: bold;
+        color: white;
+        text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+        bottom: 16px;
         left: 15px;
+        > i {
+          position: relative;
+          top: 7px;
+        }
       }
       > .info-chapter {
         position: absolute;
-        bottom: 10px;
+        font-weight: bold;
+        color: white;
+        text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+        bottom: 15px;
         right: 15px;
+        > i {
+          position: relative;
+          top: 5px;
+        }
       }
       > .info-btn-readmore {
         position: absolute;
@@ -89,5 +121,157 @@
         background-color: #F43C3E;
       }
     }
+  }
+}
+
+/**
+Override buttons OSPAF
+ */
+.btn {
+  > i {
+    position: relative;
+    top: 5px;
+  }
+}
+
+.bg-white {
+  background-color: #FFFFFF;
+  -webkit-box-shadow: 0px 0px 8px 0px rgba(143,143,143,0.59);
+  -moz-box-shadow: 0px 0px 8px 0px rgba(143,143,143,0.59);
+  box-shadow: 0px 0px 8px 0px rgba(143,143,143,0.59);
+  border: solid 0.5px #3b3f5442;
+}
+.bg-message-blog {
+  background-color: #FFFFFF;
+  -webkit-box-shadow: 0px 0px 8px 0px rgba(143,143,143,0.59);
+  -moz-box-shadow: 0px 0px 8px 0px rgba(143,143,143,0.59);
+  box-shadow: 0px 0px 8px 0px rgba(143,143,143,0.59);
+  border: solid 0.5px #3b3f5442;
+  border-radius: 5px;
+}
+
+.bloc-login-container h2, .bloc-signup-container h2 {
+  text-align: center;
+  color: #1A5CCB;
+}
+.bloc-login-container p, .bloc-signup-container p {
+  text-align: center;
+  font-size: 0.9em;
+  padding: 20px 0;
+}
+
+.login-bloc {
+  padding: 15px;
+}
+body > main .message-bloc > .login-message {
+  color: #0000cc;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.errors-message {
+  font-size: 0.9em;
+  color: red;
+  margin-bottom: 15px;
+}
+
+.errors-message .error-type {
+  font-weight: 500;
+}
+
+.captcha_img img {
+  border: 1px solid #000;
+}
+input {
+  margin-top: 15px;
+}
+
+
+.encaps-comment {
+  background-color: white;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.content-comment {
+  border-bottom: 1px solid;
+  > .fade-comment {
+    padding: 15px;
+    position: relative;
+    width: 100%;
+    > .comment-content-infos {
+      padding: 5px 0;
+    }
+    > .comment-autor-infos {
+      font-size: 0.8em;
+      color: rgb(120, 120, 120);
+    }
+    > .comment-content-option {
+      font-size: 0.8em;
+      position: absolute;
+      bottom: 15px;
+      right: 15px;
+      > a {
+        color: black;
+        text-decoration: none;
+        transition: 0.2s;
+        &:hover {
+          text-decoration: underline;
+          color: $colorGlobalToslePrimary;
+        }
+      }
+    }
+  }
+  &:last-child{
+    border-bottom: none;
+  }
+}
+
+.lesson-description {
+  background-color: white;
+  padding: 15px;
+  padding-bottom: 20px;
+  > p {
+    margin: 10px 0;
+  }
+}
+
+.lesson-chapters {
+  background-color: white;
+  > h3 {
+    padding: 7.5px;
+    border-bottom: 1px solid;
+  }
+  > ul {
+    list-style: none;
+    > a {
+      color: black;
+      text-decoration: none;
+      > li {
+        padding: 7.5px 15px;
+        border-left: 2px solid $colorGlobalToslePrimary;
+        opacity: 0.7;
+        transition: 0.2s;
+        &.active, &:hover {
+          padding: 7.5px 15px;
+          border-left: 15px solid $colorGlobalToslePrimary;
+          opacity: 1;
+        }
+        &.active {
+          color: $colorGlobalToslePrimary;
+        }
+      }
+    }
+  }
+}
+
+.chapter-bloc {
+  background-color: white;
+  padding: 15px;
+  .content-file-chapter {
+    padding: 10px 0;
+    border-bottom: 1px solid;
+  }
+  .content-chapter {
+    margin-top: 25px;
   }
 }

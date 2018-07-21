@@ -12,9 +12,20 @@ class Group extends CoreSql {
     protected $name;
     protected $fileid; /** a verif */
 
-    public function __construct()
+    private $image = null;
+
+    public function __construct($_id = null)
     {
         parent::__construct();
+        if(isset($_id) && is_numeric($_id)){
+            $parameter = [
+                'LIKE' => [
+                    'id' => $_id
+                ]
+            ];
+            $this->setWhereParameter($parameter);
+            $this->getOneData();
+        }
     }
 
     /**
@@ -54,7 +65,12 @@ class Group extends CoreSql {
      */
     public function getFileid()
     {
-        return $this->fileid;
+        if(!empty($this->fileid)){
+            return new File($this->fileid);
+        } else {
+            return null;
+        }
+
     }
 
     /**
@@ -67,5 +83,50 @@ class Group extends CoreSql {
 
     public function configFormAdd()
     {
+        $routes = Access::getSlugsById();
+        $User = new UserRepository();
+        return [
+            "config"=> [
+                "method"=>"post",
+                "action"=>"",
+                "submit"=>"Enregistrer",
+                "form_file"=>true,
+            ],
+            "input"=> [
+                "name"=>[
+                    "type"=>"text",
+                    "placeholder"=>"Nom du groupe",
+                    "required"=>true,
+                    "maxString"=>20,
+                    "label"=>"Nom du groupe",
+                    "description"=>"20 caractères maximum"
+                ],
+                "file"=>[
+                    "type"=>"file",
+                    "required"=>false,
+                    "label"=>"Ajouter un avatar au groupe",
+                    "format"=>"JPEG JPG PNG",
+                    "description"=>"Authorised format (JPEG, PNG, JPG)",
+                    "multiple"=>false
+                ]
+            ],
+            'select_multiple' => [
+                $User->getSelectUsers()
+            ],
+            "exit" => $routes["dashboard_student"]
+        ];
+    }
+
+    public function deleteGroup()
+    {
+        if(isset($this->id) && !empty($this->id)){
+            $parameter = [
+                'LIKE' => [
+                    'id' => $this->id
+                ]
+            ];
+            $this->setWhereParameter($parameter);
+            $this->delete();
+        }
     }
 }

@@ -57,7 +57,13 @@ class CommentRepository extends Comment
             ];
             $this->setLeftJoin($joinParameter, $whereParameter);
             $this->setOrderByParameter(["id"=>"DESC"]);
-            return $this->getData($target);
+            $arrayData = $this->getData($target);
+            foreach($arrayData as $comment){
+                $BlogComment = new BlogComment();
+                $arrayReturn = $BlogComment->getBlogCommentByIdentifier('getuser', $comment->getId());
+                $comment->setUser($arrayReturn);
+            }
+            return $arrayData;
         }
         if($identifier == "chapter"){
             $target = ["id", "content", "tag", "datecreate", "dateupdated"];
@@ -192,5 +198,64 @@ class CommentRepository extends Comment
             return $this->getData($target);
         }
 
+    }
+
+    /**
+     * @param $sort
+     * @return array
+     */
+    public function getStatComment($sort)
+    {
+        switch ($sort) {
+            case 'year':
+                echo 'year';
+                $currentYear = date("Y");
+                $target = [
+                    "id",
+                    "dateinscription"
+                ];
+                $parameter = [
+                    "LIKE" => [
+                        "MONTH('user_dateinscription')" => "MONTH(CURRENT_DATE())"
+                    ]
+                ];
+                $this->setWhereParameter($parameter);
+                return $this->getData($target);
+                break;
+            case 'month':
+                echo 'month';
+                break;
+            case 'day':
+                echo 'day';
+                break;
+        }
+    }
+
+    public function getInfoAboutComment($_idComment)
+    {
+        $parameter = [
+            'LIKE' => [
+                'commentid' => $_idComment
+            ]
+        ];
+        $BlogComment = new BlogComment();
+        $ChapterComment = new ChapterComment();
+        $BlogComment->setWhereParameter($parameter);
+        if($BlogComment->countData(['id']) > 0){
+            $BlogComment->getOneData(['blogid', 'userid']);
+            $this->setUser([$BlogComment->getUserid()]);
+            $object =  new Blog($BlogComment->getBlogid());
+            $type = 'blog';
+        } else {
+            $ChapterComment->setWhereParameter($parameter);
+            $ChapterComment->getOneData(['chapterid', 'userid']);
+            $this->setUser([$ChapterComment->getUserid()]);
+            $object =  new Chapter($ChapterComment->getChapterid());
+            $type = 'chapter';
+        }
+        return [
+            'type' => $type,
+            'object' => $object
+        ];
     }
 }

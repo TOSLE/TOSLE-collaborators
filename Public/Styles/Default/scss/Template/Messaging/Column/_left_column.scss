@@ -63,6 +63,11 @@
             color: $colorGlobalToslePrimary;
           }
         }
+        &.active {
+          > a {
+            color: $colorGlobalToslePrimary;
+          }
+        }
       }
     }
     &:nth-child(2){
