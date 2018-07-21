@@ -23,7 +23,7 @@
         <div class="option">
             <a href="<?php echo $this->slugs['comment_signalement'].'/'.$comment->getId();?>" >Signaler</a>
             <?php if(isset($this->Auth) && ($this->Auth->getStatus() > 1 ||($this->Auth->getId() == $comment->getUser()->getId()))):?>
-                <a href="<?php echo $this->slugs['comment_signalement'].'/'.$comment->getId();?>" >Supprimer</a>
+                <a href="<?php echo $this->slugs['index/deletecom'].'/'.$comment->getId();?>" >Supprimer</a>
             <?php endif;?>
         </div>
     <?php endforeach;?>

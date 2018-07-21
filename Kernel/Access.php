@@ -158,7 +158,7 @@ class Access
             "controller" => "index",
             "action" => "signalement",
             "security" => false
-        ],
+        ]
     ];
 
     private $backOffice = [
@@ -186,6 +186,7 @@ class Access
         "chat/trash" => 2,
         "chat/untrash" => 2,
         "chat/delete" => 2,
+        "index/deletecom" => 1,
     ];
 
     private $urlFixe = [

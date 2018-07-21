@@ -120,4 +120,38 @@ class IndexController extends CoreController
         }
         header('Location:'.$this->Routes['homepage']);
     }
+
+    function deletecomAction($params)
+    {
+        if(isset($params['URI'][0]) && is_numeric($params['URI'][0])){
+            $comment = new CommentRepository($params['URI'][0]);
+            if(isset($this->Auth) && (($this->Auth->getStatus() > 1 ||($this->Auth->getId() == $comment->getUser()->getId())))){
+                $Object = $comment->getInfoAboutComment($comment->getId());
+                $parameterJoin = [
+                    'LIKE' => [
+                        'commentid' => $comment->getId()
+                    ]
+                ];
+                $parameter = [
+                    'LIKE' => [
+                        'id' => $comment->getId()
+                    ]
+                ];
+                if($Object['type'] == 'chapter'){
+                    $ChapterComment = new ChapterComment();
+                    $ChapterComment->setWhereParameter($parameterJoin);
+                    $ChapterComment->delete();
+                    $comment->setWhereParameter($parameter);
+                    $comment->delete();
+                } else {
+                    $BlogComment = new BlogComment();
+                    $BlogComment->setWhereParameter($parameterJoin);
+                    $BlogComment->delete();
+                    $comment->setWhereParameter($parameter);
+                    $comment->delete();
+                }
+            }
+        }
+        header('Location:'.$this->Routes['homepage']);
+    }
 }
