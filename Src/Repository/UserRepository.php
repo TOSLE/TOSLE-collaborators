@@ -76,17 +76,21 @@ class UserRepository extends User
             ]
         ];
         $entree=$email;
+                print_r($entree);
+
         $tableau=$this->getData($target);
         foreach ($tableau as $cle) {
             $result =  $cle->getEmail();
+            print_r($result);
+
             if($result == $entree)
             {
                 return [AUTHENTIFICATION_FAILED_KEY => "Mail déjà utilisé"];
             }
             else{
-                return 1;
             }
         }
+        return 1;
     }
 
 
