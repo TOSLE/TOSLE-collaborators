@@ -15,8 +15,28 @@ class DashboardController extends CoreController
      */
     function indexAction($params)
     {
+        $User = new UserRepository();
+        $Lesson = new LessonRepository();
+        $Comment = new CommentRepository();
+        $Message = new MessageRepository();
+        $Blog = new BlogRepository();
+        $Group = new GroupRepository();
+
+        $totalUser = $User->getAllUser();
+        $totalLesson = $Lesson->getAllLesson();
+        $totalComment = $Comment->getAllComment();
+        $totalMessage = $Message->getAllMessage();
+        $totalArticle = $Blog->getAllArticle();
+        $totalGroup = $Group->getAllGroup();
+
         $View = new View("dashboard", "dashboard");
         $View->setData("PageName", NAV_DASHBOARD . " " . GLOBAL_HOME_TEXT);
+        $View->setData("totalUser", $totalUser);
+        $View->setData("totalLesson", $totalLesson);
+        $View->setData("totalComment", $totalComment);
+        $View->setData("totalMessage", $totalMessage);
+        $View->setData("totalArticle", $totalArticle);
+        $View->setData("totalGroup", $totalGroup);
     }
 
     /**

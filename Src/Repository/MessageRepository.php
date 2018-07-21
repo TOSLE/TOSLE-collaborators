@@ -27,4 +27,14 @@ class MessageRepository extends Message
         $this->setWhereParameter($parameter);
         $this->getOneData();
     }
+
+    public function getAllMessage(){
+
+        $target = [
+            "id"
+        ];
+
+        $arrayAllMessage = $this->getData();
+        return count($arrayAllMessage);
+    }
 }

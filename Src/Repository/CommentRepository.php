@@ -226,4 +226,14 @@ class CommentRepository extends Comment
                 break;
         }
     }
+
+    public function getAllComment() {
+
+        $target = [
+            "id"
+        ];
+
+        $arrayComment = $this->getData();
+        return count($arrayComment);
+    }
 }
