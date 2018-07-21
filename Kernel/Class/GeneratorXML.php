@@ -32,18 +32,41 @@ class GeneratorXML
      */
     public function setSitemap()
     {
+        $Lesson = new LessonRepository();
+        $Blog = new BlogRepository();
         $urlset = $this->xmlDoc->createElement('urlset');
         $urlset->setAttribute('xmlns', "http://www.google.com/schemas/sitemap/0.84");
         $Routes = Access::getPublicSlugs();
         foreach($Routes as $id => $route){
             if($id != "default"){
                 $url = $this->xmlDoc->createElement('url');
-                $loc = $this->xmlDoc->createElement('loc', $_SERVER['SERVER_NAME'].$route);
+                $loc = $this->xmlDoc->createElement('loc', Installer::url().$route);
                 $priority = $this->xmlDoc->createElement('priority', "0.5");
                 $url->appendChild($loc);
                 $url->appendChild($priority);
                 $urlset->appendChild($url);
             }
+        }
+        $lessons = $Lesson->getLessons(null);
+        foreach ($lessons as $lesson){
+            foreach ($lesson->getChapter() as $chapter){
+                $url = $this->xmlDoc->createElement('url');
+                $loc = $this->xmlDoc->createElement('loc', Installer::url().'/'.$lesson->getUrl().'/'.$chapter->getUrl());
+                $priority = $this->xmlDoc->createElement('priority', "1");
+                $url->appendChild($loc);
+                $url->appendChild($priority);
+                $urlset->appendChild($url);
+            }
+        }
+
+        $blogs = $Blog->getAllArticleByStatus(1);
+        foreach($blogs as $blog){
+            $url = $this->xmlDoc->createElement('url');
+            $loc = $this->xmlDoc->createElement('loc', Installer::url().'/'.$blog->getUrl());
+            $priority = $this->xmlDoc->createElement('priority', "0.8");
+            $url->appendChild($loc);
+            $url->appendChild($priority);
+            $urlset->appendChild($url);
         }
         $this->xmlDoc->appendChild($urlset);
 
