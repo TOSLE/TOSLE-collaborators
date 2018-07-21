@@ -123,10 +123,10 @@ class IndexController extends CoreController
 
     function deletecomAction($params)
     {
-        if(isset($params['URI'][0]) && is_numeric($params['URI'][0])){
+        if(isset($this->Auth) && isset($params['URI'][0]) && is_numeric($params['URI'][0])){
             $comment = new CommentRepository($params['URI'][0]);
-            if(isset($this->Auth) && (($this->Auth->getStatus() > 1 ||($this->Auth->getId() == $comment->getUser()->getId())))){
-                $Object = $comment->getInfoAboutComment($comment->getId());
+            $Object = $comment->getInfoAboutComment($comment->getId());
+            if(($this->Auth->getStatus() > 1 || ($this->Auth->getId() == $comment->getUser()->getId()))){
                 $parameterJoin = [
                     'LIKE' => [
                         'commentid' => $comment->getId()
