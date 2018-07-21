@@ -336,6 +336,41 @@ Override buttons OSPAF
             color: #1A5CCB; }
     html .content-comment:last-child {
       border-bottom: none; }
+  html .lesson-description {
+    background-color: white;
+    padding: 15px;
+    padding-bottom: 20px; }
+    html .lesson-description > p {
+      margin: 10px 0; }
+  html .lesson-chapters {
+    background-color: white; }
+    html .lesson-chapters > h3 {
+      padding: 7.5px;
+      border-bottom: 1px solid; }
+    html .lesson-chapters > ul {
+      list-style: none; }
+      html .lesson-chapters > ul > a {
+        color: black;
+        text-decoration: none; }
+        html .lesson-chapters > ul > a > li {
+          padding: 7.5px 15px;
+          border-left: 2px solid #1A5CCB;
+          opacity: 0.7;
+          transition: 0.2s; }
+          html .lesson-chapters > ul > a > li.active, html .lesson-chapters > ul > a > li:hover {
+            padding: 7.5px 15px;
+            border-left: 15px solid #1A5CCB;
+            opacity: 1; }
+          html .lesson-chapters > ul > a > li.active {
+            color: #1A5CCB; }
+  html .chapter-bloc {
+    background-color: white;
+    padding: 15px; }
+    html .chapter-bloc .content-file-chapter {
+      padding: 10px 0;
+      border-bottom: 1px solid; }
+    html .chapter-bloc .content-chapter {
+      margin-top: 25px; }
   html .profile {
     display: flex;
     background-color: #FFFFFF;

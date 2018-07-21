@@ -225,3 +225,53 @@ input {
     border-bottom: none;
   }
 }
+
+.lesson-description {
+  background-color: white;
+  padding: 15px;
+  padding-bottom: 20px;
+  > p {
+    margin: 10px 0;
+  }
+}
+
+.lesson-chapters {
+  background-color: white;
+  > h3 {
+    padding: 7.5px;
+    border-bottom: 1px solid;
+  }
+  > ul {
+    list-style: none;
+    > a {
+      color: black;
+      text-decoration: none;
+      > li {
+        padding: 7.5px 15px;
+        border-left: 2px solid $colorGlobalToslePrimary;
+        opacity: 0.7;
+        transition: 0.2s;
+        &.active, &:hover {
+          padding: 7.5px 15px;
+          border-left: 15px solid $colorGlobalToslePrimary;
+          opacity: 1;
+        }
+        &.active {
+          color: $colorGlobalToslePrimary;
+        }
+      }
+    }
+  }
+}
+
+.chapter-bloc {
+  background-color: white;
+  padding: 15px;
+  .content-file-chapter {
+    padding: 10px 0;
+    border-bottom: 1px solid;
+  }
+  .content-chapter {
+    margin-top: 25px;
+  }
+}
