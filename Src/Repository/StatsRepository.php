@@ -18,22 +18,21 @@ class StatsRepository extends Stats
     {
 
         $currentYear = date("Y");
-        $target = [
-            "id",
-            "month",
-            "year"
-        ];
         $parameter = [
             "LIKE" => [
                 "year" => $currentYear
             ]
         ];
         $this->setWhereParameter($parameter);
-        $resultStatMonth =  $this->getData($target);
+        $resultStatMonth =  $this->getData();
+        $arrayTmp = [];
+        foreach($resultStatMonth as $row){
+            $arrayTmp[$row->getToken()] = $row;
+        }
 
         $arrayStatViewTosle = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-        if (isset($resultStatMonth)) {
-            foreach ($resultStatMonth as $row) {
+        if (isset($arrayTmp)) {
+            foreach ($arrayTmp as $row) {
                 for ($i = 0; $i < 12; $i += 1) {
                     if ($i === $row->getMonth()) {
                         $arrayStatViewTosle[$row->getMonth() - 1] += 1;
