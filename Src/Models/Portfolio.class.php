@@ -17,6 +17,7 @@ class Portfolio extends CoreSql
     protected $content;
     protected $status;
     protected $url;
+    protected $fileid;
 
 
     public function __construct()
@@ -152,7 +153,21 @@ class Portfolio extends CoreSql
     {
         $this->status = $status;
     }
+    /**
+     * @return mixed
+     */
+    public function getFileid()
+    {
+        return $this->fileid;
+    }
 
+    /**
+     * @param mixed $fileid
+     */
+    public function setFileid($fileid)
+    {
+        $this->fileid = $fileid;
+    }
 
 
 
@@ -162,8 +177,8 @@ class Portfolio extends CoreSql
     public function configFormAddPortfolio()
     {
         $slugs = Access::getSlugsById();
-        //$category = new CategoryRepository;
-        $file=new FileRepository();
+        $category = new CategoryRepository;
+
         return [
             "config" => [
                 "method" => "post",
@@ -180,39 +195,39 @@ class Portfolio extends CoreSql
                     "required"=> true,
                     "maxString" => 100,
                     "label" => "titre",
-                    "description"=>100,
+                    "description"=>"Max 100 character",
                 ],
 
 
-            "image"=>[
-        "type"=>"file",
-        "required"=>false,
-        "label"=>"Select your background image",
-        "format"=>"PNG JPG JPEG",
-        "description"=>"Authorised format (png, jpg, jpeg)",
-        "multiple"=>false
-    ]
+                "image"=>[
+                    "type"=>"file",
+                    "required"=>false,
+                    "label"=>"Select your background image",
+                    "format"=>"PNG JPG JPEG",
+                    "description"=>"Authorised format (png, jpg, jpeg)",
+                    "multiple"=>false
+                ]
 
+                /*],
+                "textarea" => [
+                    "label" => " description",
+                    "name" => "textarea",
+                    "description" => "Un maximum de 500 caractères",
+                    "placeholder" => "Maximum 500 caractères"*/
             ],
-            "textarea" => [
-        "label" => " description",
-        "name" => "textarea",
-        "description" => "Un maximum de 500 caractères",
-        "placeholder" => "Maximum 500 caractères"
-    ],
-             "ckeditor" => [
-        "label" => "Edition de votre article",
-        "name" => "ckeditor_article",
-        "description" => "Pas de limite !",
-        "placeholder" => "Placeholder"
-    ],
+            "ckeditor" => [
+                "label" => "Edition de votre article",
+                "name" => "ckeditor_article",
+                "description" => "Pas de limite !",
+                "placeholder" => "Placeholder"
+            ],
             'select_multiple' => [
-       // $category->configFormCategory(1)
-    ],
+                $category->configFormCategory(1)
+            ],
 
 
 
-            "exit" => $slugs["portfolio_add"]
+            "exit" => $slugs["dashboard_portfolio"]
 
 
         ];
@@ -221,7 +236,8 @@ class Portfolio extends CoreSql
     public function configFormAddArticleImagePortfolio()
     {
         $slugs = Access::getSlugsById();
-        //$category = new CategoryRepository;
+        $category = new CategoryRepository;
+        $Portfolio= new PortfolioRepository();
         return [
             "config"=> [
                 "method"=>"post",
@@ -252,17 +268,17 @@ class Portfolio extends CoreSql
                 "description" => "Un maximum de 500 caractères",
                 "placeholder" => "Maximum 500 caractères"
             ],
-           // 'select_multiple' => [
-              //  $category->configFormCategory(1)
-           // ],
-            "exit" => $slugs["portfolio_add"]
+            'select_multiple' => [
+                $category->configFormCategory(1)
+            ],
+            "exit" => $slugs["dashboard_portfolio"]
         ];
     }
 
     public function configFormAddArticleVideoPortfolio()
     {
         $slugs = Access::getSlugsById();
-       // $category = new CategoryRepository;
+        $category = new CategoryRepository;
         return [
             "config"=> [
                 "method"=>"post",
@@ -287,9 +303,16 @@ class Portfolio extends CoreSql
                 ]
             ],
 
-            "exit" => $slugs["portfolio_add"]
+            'select_multiple' => [
+                $category->configFormCategory(1)
+            ],
+
+
+
+            "exit" => $slugs["dashboard_portfolio"]
         ];
     }
+
 
 
 }

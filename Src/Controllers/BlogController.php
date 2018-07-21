@@ -53,8 +53,6 @@ class BlogController
             $date = new DateTime($content->getDatecreate());
             $value["blog_datecreate"] = $date->format("l jS \of F Y H:i");
             $value["blog_title"] = $content->getTitle();
-
-
             $value["blog_content"] = $Blog->getResumeContent($content->getContent());
             $value["blog_status"] = $content->getStatus();
             $value["blog_id"] = $content->getId();

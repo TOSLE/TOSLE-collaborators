@@ -1,8 +1,8 @@
 <div class="container">
     <div class="row">
         <section class="title-page col-12">
-            <div class="marg-container">
-                <h2><a class="btn-sm btn-dark" href="<?php echo $this->slugs["bloghome"]; ?>">Blog</a><span
+            <div class="marge-container">
+                <h2><a class="btn-sm btn-dark" href="<?php echo $this->slugs["portfoliohome"]; ?>">Portfolio</a><span
                             class="additional-message-title"> / <?php echo $article_content['title']; ?></span></h2>
             </div>
         </section>
@@ -29,9 +29,7 @@
                                             </div>
                                         </section>
                                         <section class="info-article">
-                                            <div>
-                                                <span>Created <?php echo $article_content['datecreate'] ?></span>
-                                            </div>
+
                                         </section>
                                         <section class="action-article">
                                             <nav>
@@ -42,7 +40,6 @@
                                                                 comment
                                                             </i>
                                                         </div>
-                                                        <span><?php if (is_array($commentaires_all)) echo count($commentaires_all); ?></span>
                                                         <div class="name-action">comments</div>
                                                     </div>
                                                 </div>
@@ -68,52 +65,7 @@
                                                 </div>
                                             </nav>
                                         </section>
-                                        <section class="comments-article">
-                                            <h5>Last comments</h5>
-                                            <div class="container">
-                                                <?php if (isset($commentaires_last)): ?>
-                                                    <?php foreach ($commentaires_last as $comment): ?>
-                                                        <div class="comment">
-                                                            <div class="picture-user">
-                                                                <span></span>
-                                                            </div>
-                                                            <div>
-                                                                <div class="name-user">
-                                                                    <?php echo $comment["firstname"] . ' ' . $comment["lastname"]; ?>
-                                                                </div>
-                                                                <div class="content">
-                                                                    <span><?php echo $comment["content"]; ?></span>
-                                                                </div>
-                                                                <div class="info">
-                                                                    <span><?php echo $comment["date"]; ?></span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    <?php endforeach; ?>
-                                                <?php endif; ?>
-                                                <div class="comment">
-                                                    <div class="picture-user">
-                                                        <span></span>
-                                                    </div>
-                                                    <div>
-                                                        <div class="name-user">
-                                                            Julien Domange
-                                                        </div>
-                                                        <div class="content">
-                                                            <span>Whaou ! C’est impressionnant comme article, merci pour celui-ci ! Maintenant, les maquettes !</span>
-                                                        </div>
-                                                        <div class="info">
-                                                            <span>February 28 at 6:33pm</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="signal">
-                                                            <i class="material-icons">
-                                                                more_vert
-                                                            </i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </section>
+
                                         <section class="container-editor">
                                             <?php $this->addModal("form", $formAddComment, $errors); ?>
                                         </section>

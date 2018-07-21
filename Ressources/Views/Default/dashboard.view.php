@@ -48,7 +48,7 @@
                                                             <i class="material-icons blue">keyboard_arrow_right</i>
                                                         </a>
                                                     </li>
-                                                    <li><a href="<?php echo $this->slugs["Portfolio"]?>">
+                                                    <li><a href="<?php echo $this->slugs["dashboard_portfolio"]?>">
                                                             <p>Portfolio</p>
                                                             <i class="material-icons blue">keyboard_arrow_right</i>
                                                         </a>

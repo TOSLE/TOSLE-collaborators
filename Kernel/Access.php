@@ -86,6 +86,13 @@ class Access
             "action" => "chapter",
             "security" => 2
         ],
+
+        "dashboard_portfolio" => [ // Dashboard blog homepage
+            "slug" => "dashboard-portfolio",
+            "controller" => "dashboard",
+            "action" => "portfolio",
+            "security" => 2
+        ],
         "add_user" => [ // change status blog
             "slug" => "add-user",
             "controller" => "user",
@@ -100,27 +107,34 @@ class Access
         ],
         "Portfolio" => [
             "slug" => "portfolio-view",
-            "controller" => "Portfolio",
+            "controller" => "portfolio",
             "action" => "index",
             "security" => false
         ],
+        "view_portfolio_article" => [ // change status blog
+            "slug" => "view-article",
+            "controller" => "portfolio",
+            "action" => "view",
+            "security" => false
+        ],
 
-       "portfolio_home" => [ // portfolio homemepage
+
+       "portfoliohome" => [ // portfolio homemepage
             "slug" => "portfolio-homepage",
-            "controller" => "Portfolio",
+            "controller" => "portfolio",
             "action" => "index",
             "security" => false
         ],
        "portfolio_add" => [ // change status blog
             "slug" => "portfolio-view-add",
-            "controller" => "Portfolio",
+            "controller" => "portfolio",
             "action" => "add",
             "security" => false
         ],
 
         "dashboard_portfolio" => [ // Dashboard blog homepage
             "slug" => "dashboard-portfolio",
-            "controller" => "Portfolio",
+            "controller" => "portfolio",
             "action" => "",
             "security" => 2
         ],

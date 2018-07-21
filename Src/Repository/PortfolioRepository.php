@@ -13,30 +13,22 @@ class PortfolioRepository extends Portfolio
         parent::__construct();
     }
 
-    /**
-     * @return integer
-     * Retourne le nombre d'article de la table Portfolio
-     */
-    public function countNumberOfBloc()
-    {
-        return $this->countData(["id"]);
-    }
-
-    /**
-     * @param integer $status
-     * @return integer
-     * Retourne le nombre d'article de la table Portfolio en fonction du status (par défaut vaut 1 (publié))
-     */
-    public function countNumberOfBlogByStatus($status = 1)
-    {
-        $this->setWhereParameter([
-            "LIKE" => [
-                "status" => $status
-            ]
-        ]);
-        return $this->countData(["id"]);
-    }
-
+    /*
+        /**
+         * @param integer $status
+         * @return integer
+         * Retourne le nombre d'article de la table Portfolio en fonction du status (par défaut vaut 1 (publié))
+         */
+    /* public function countNumberOfBlogByStatus($status = 1)
+     {
+         $this->setWhereParameter([
+             "LIKE" => [
+                 "status" => $status
+             ]
+         ]);
+         return $this->countData(["id"]);
+     }
+ */
     /**
      * @param integer $id
      * Retourne tous les éléments d'un article en fonction de son id
@@ -49,8 +41,9 @@ class PortfolioRepository extends Portfolio
             ]
         ];
         $this->setWhereParameter($parameter);
-        $this->getOneData(["id", "title", "content", "type", "url", "fileid"]);
+        $this->getOneData(["id", "name", "value", "type", "title", "content", "url", "status", "fileid"]);
     }
+
     /**
      * @param integer $id
      * @return bool
@@ -60,12 +53,15 @@ class PortfolioRepository extends Portfolio
     {
         $target = [
             "id",
+            "name",
             "title",
+            "value",
+            "type",
             "content",
             "type",
             "url",
-            "datecreate",
             "fileid"
+
         ];
         $parameter = [
             "LIKE" => [
@@ -74,34 +70,18 @@ class PortfolioRepository extends Portfolio
         ];
         $this->setWhereParameter($parameter);
         $this->getOneData($target);
-        if(!isset($this->id)){
+        if (!isset($this->id)) {
             return false;
         } else {
             return true;
         }
     }
 
-    /**
-     * @param int $number
-     * @return array|boolean
-     */
-    public function getLatestArticle($number)
-    {
-        if(is_numeric($number))
-        {
-            $target = [
-                "title",
-                "datecreate",
-                "id",
-                "status",
-                "type"
-            ];
-            $this->setOrderByParameter(["id" => "DESC"]);
-            $this->setLimitParameter($number);
-            return $this->getData($target);
-        }
-        return false;
-    }
+
+
+
+
+
     /**
      * @param int $status
      * @param int $max
@@ -109,33 +89,35 @@ class PortfolioRepository extends Portfolio
      * @return array|boolean
      * Retourne tous les articles par rapport à un status
      */
-    public function getAllArticleByStatus($status = 1, $max = null, $min = 0)
-    {
-        if(is_numeric($status))
-        {
-            $target = [
-                "title",
-                "datecreate",
-                "id",
-                "status",
-                "type",
-                "content",
-                "url",
-                "fileid"
-            ];
-            $this->setOrderByParameter(["id" => "DESC"]);
-            if(isset($max)) {
-                $this->setLimitParameter($max, $min);
-            }
-            $this->setWhereParameter([
-                "LIKE" => [
-                    "status" => $status
-                ]
-            ]);
-            return $this->getData($target);
-        }
-        return false;
-    }
+      public function getAllArticleByStatus($status = 1, $max = null, $min = 0)
+      {
+          if(is_numeric($status))
+          {
+              $target = [
+                  "title",
+                  "id",
+                  "name",
+                  "value",
+                  "status",
+                  "type",
+                  "content",
+                  "url",
+                  "fileid"
+
+              ];
+              $this->setOrderByParameter(["id" => "DESC"]);
+              if(isset($max)) {
+                  $this->setLimitParameter($max, $min);
+              }
+              $this->setWhereParameter([
+                  "LIKE" => [
+                      "status" => $status
+                  ]
+              ]);
+              return $this->getData($target);
+          }
+          return false;
+      }
 
 
     /**
@@ -160,13 +142,13 @@ class PortfolioRepository extends Portfolio
             "color" => "green",
             "text" => "Publish",
             "type" => "href",
-            "target" => $routes["blog/status"]."/"
+            "target" => $routes["portfolio/status"] . "/"
         ]);
         $ViewLatestBloc->setActionButtonStatus(1, [
             "color" => "red",
             "text" => "Unpublish",
             "type" => "href",
-            "target" => $routes["portfolio/status"]."/"
+            "target" => $routes["portfolio/status"] . "/"
         ]);
         $ViewLatestBloc->setActionButtonEdit("Edit");
         $ViewLatestBloc->setActionButtonView("View");
@@ -177,8 +159,8 @@ class PortfolioRepository extends Portfolio
             3 => "td-content-action"
         ]);
         $ViewLatestBloc->setTableBodyContent($this->getLatestArticle(5), true);
-        $ViewLatestBloc->setArrayHref("edit", $routes["blog/edit"]);
-        $ViewLatestBloc->setArrayHref("view", $routes["view_blog_article"]);
+        $ViewLatestBloc->setArrayHref("edit", $routes["portfolio/edit"]);
+        $ViewLatestBloc->setArrayHref("view", $routes["view_portfolio_article"]);
         return $ViewLatestBloc->getArrayData();
     }
 
@@ -193,7 +175,7 @@ class PortfolioRepository extends Portfolio
     {
         $routes = Access::getSlugsById();
         $ViewArticleBloc = new DashboardBlocModal();
-        if($status === 1)
+        if ($status === 1)
             $ViewArticleBloc->setTitle("View article with the status : Publish");
         else if ($status === 0)
             $ViewArticleBloc->setTitle("View article with the status : Unpublish");
@@ -207,13 +189,13 @@ class PortfolioRepository extends Portfolio
             "color" => "green",
             "text" => "Publish",
             "type" => "href",
-            "target" => $routes["blog/status"]."/"
+            "target" => $routes["portfolio/status"] . "/"
         ]);
         $ViewArticleBloc->setActionButtonStatus(1, [
             "color" => "red",
             "text" => "Unpublish",
             "type" => "href",
-            "target" => $routes["blog/status"]."/"
+            "target" => $routes["portfolio/status"] . "/"
         ]);
         $ViewArticleBloc->setActionButtonEdit("Edit");
         $ViewArticleBloc->setActionButtonView("View");
@@ -229,59 +211,7 @@ class PortfolioRepository extends Portfolio
         return $ViewArticleBloc->getArrayData();
     }
 
-    /**
-     * @return array object
-     * Permet de récupérer la modal statistique
-     */
-    public function getModalStats()
-    {
-        $StatsBlog = new DashboardBlocModal();
-        $StatsBlog->setTitle("Blog Analytics");
-        $StatsBlog->setTableHeader([
-            1 => "Type",
-            2 => "Value"
-        ]);
-        $StatsBlog->setTableBodyClass([
-            1 => "td-content-text",
-            2 => "td-content-number"
-        ]);
-        $StatsBlog->setColSizeBloc(6);
-        $StatsBlog->setTableBodyContent([
-            0 => [
-                1 => "Nombre d'article",
-                2 => $this->countNumberOfBlog()
-            ],
-            1 => [
-                1 => "Nombre d'article publié",
-                2 => $this->countNumberOfBlogByStatus(1)
-            ],
-            2 => [
-                1 => "Nombre d'article dépublié",
-                2 => $this->countNumberOfBlogByStatus(0)
-            ],
-            3 => [
-                1 => "Nombre de commentaires",
-                2 => $this->getAllComment()
-            ],
-            4 => [
-                1 => "Nombre d'articles avec fichier",
-                2 => $this->getNumberArticleWithFile()
-            ]
-        ]);
-        return $StatsBlog->getArrayData();
-    }
 
-    /*public function getAllComment()
-    {
-        $joinParameter = [
-            'blogcomment' => [
-                'blog_id'
-            ]
-        ];
-        $this->setLeftJoin($joinParameter);
-        return $this->countData(['id']);
-    }
-*/
     /**
      * @return array object
      * Permet de récupérer la configuration d'une modal pour ajouter un poste
@@ -307,7 +237,7 @@ class PortfolioRepository extends Portfolio
                 1 => "Nouveau post de type texte",
                 "button_action" => [
                     "type" => "href",
-                    "target" => $routes["portfolio/add"]."/text",
+                    "target" => $routes["portfolio/add"] . "/text",
                     "color" => "tosle",
                     "text" => "New post"
                 ]
@@ -316,7 +246,7 @@ class PortfolioRepository extends Portfolio
                 1 => "Nouveau post de type image",
                 "button_action" => [
                     "type" => "href",
-                    "target" => $routes["portfolio/add"]."/image",
+                    "target" => $routes["portfolio/add"] . "/image",
                     "color" => "tosle",
                     "text" => "New post"
                 ]
@@ -325,7 +255,7 @@ class PortfolioRepository extends Portfolio
                 1 => "Nouveau post de type vidéo",
                 "button_action" => [
                     "type" => "href",
-                    "target" => $routes["portfolio/add"]."/video",
+                    "target" => $routes["portfolio/add"] . "/video",
                     "color" => "tosle",
                     "text" => "New post"
                 ]
@@ -339,13 +269,14 @@ class PortfolioRepository extends Portfolio
      * @return string
      * Permet de récupérer un résumé de 200 caractères au maximum d'un contenu, le tout en enlevant certaines balises
      */
-    public function getResumeContent($content){
+    public function getResumeContent($content)
+    {
         $contentValue = strip_tags($content, "<p>");
         $contentValue = str_replace("&nbsp;", "", $contentValue);
         $contentValue = str_replace("<p>", "", $contentValue);
         $contentValue = str_replace("</p>", " ", $contentValue);
 
-        return (strlen($contentValue)>200)?substr($contentValue, 0, 200).'...':$contentValue;
+        return (strlen($contentValue) > 200) ? substr($contentValue, 0, 200) . '...' : $contentValue;
     }
 
     /**
@@ -374,11 +305,11 @@ class PortfolioRepository extends Portfolio
      * @return array|int
      * Permet d'ajouter un article et vérifie les informations. Retourne un tableau d'erreur s'il y en a une
      */
-    public function addArticlePortfolio($_file, $_post, $_type, $_idArticle = null)
+    public function addArticleP($_file, $_post, $_type, $_idArticle = null)
     {
-        switch($_type) {
+        switch ($_type) {
             case "text":
-                $configForm = $this->configFormAddArticleTextPortfolio();
+                $configForm = $this->configFormAddAPortfolio();
                 $typeBlog = 1;
                 $inputContentName = "ckeditor_article";
                 break;
@@ -398,16 +329,16 @@ class PortfolioRepository extends Portfolio
         }
         $errors = Form::checkForm($configForm, $_post);
         $_post = Form::secureData($_post);
-        if(empty($errors)){
+        if (empty($errors)) {
             $file = null;
-            if(isset($_file)){
+            if (isset($_file)) {
                 $errors = Form::checkFiles($_file);
-                if(empty($errors) || is_numeric($errors)){
-                    if( $errors != 1) {
+                if (empty($errors) || is_numeric($errors)) {
+                    if ($errors != 1) {
                         $File = new FileRepository();
-                        $arrayFile = $File->addFile($_FILES, $configForm, "Portfolio-view", "Background image");
-                        if(!is_numeric($arrayFile)){
-                            if(array_key_exists('CODE_ERROR', $arrayFile)){
+                        $arrayFile = $File->addFile($_FILES, $configForm, "portfolio-view", "Background image");
+                        if (!is_numeric($arrayFile)) {
+                            if (array_key_exists('CODE_ERROR', $arrayFile)) {
                                 return $arrayFile;
                             }
                             foreach ($arrayFile as $fileId) {
@@ -417,36 +348,37 @@ class PortfolioRepository extends Portfolio
 
                     }
                 } else {
-                    if(!array_key_exists('EXCEPT_ERROR', $errors)){
+                    if (!array_key_exists('EXCEPT_ERROR', $errors)) {
                         return $errors;
                     }
                 }
             }
             $tmpPostArray = $_post;
-            if(isset($_idArticle)) {
+            if (isset($_idArticle)) {
                 $this->setId($_idArticle);
             }
 
             $this->setTitle($tmpPostArray["title"]);
             $this->setContent($tmpPostArray[$inputContentName]);
-            (isset($tmpPostArray["publish"]))?$this->setStatus(1):$this->setStatus(0);
+            (isset($tmpPostArray["publish"])) ? $this->setStatus(1) : $this->setStatus(0);
             $this->setType($typeBlog);
+            $this->setName();
             $this->setUrl(Access::constructUrl($this->getTitle()));
+            $this->setValue();
             $this->setFileid($file);
             $this->save();
 
             $this->getArticleByUrl($this->getUrl());
 
-            if(isset($tmpPostArray["category_select"]) && !empty($tmpPostArray["category_select"]))
-            {
+            if (isset($tmpPostArray["category_select"]) && !empty($tmpPostArray["category_select"])) {
                 $category = new CategoryRepository();
-                $arrayCategory = $category->addCategoryBySelect($tmpPostArray["category_select"], 'Portfolio', $this->getId());
+                $arrayCategory = $category->addCategoryBySelect($tmpPostArray["category_select"], 'portfolio', $this->getId());
             }
-            if(isset($tmpPostArray["category_input"]) && !empty($tmpPostArray["category_input"])){
+            if (isset($tmpPostArray["category_input"]) && !empty($tmpPostArray["category_input"])) {
                 $category = new CategoryRepository();
-                $arrayCategory = $category->addCategoryByInput($tmpPostArray["category_input"], 'Portfolio', $this->getId());
-                if(!is_numeric($arrayCategory)){
-                    if(array_key_exists('CODE_ERROR', $arrayCategory)){
+                $arrayCategory = $category->addCategoryByInput($tmpPostArray["category_input"], 'portfolio', $this->getId());
+                if (!is_numeric($arrayCategory)) {
+                    if (array_key_exists('CODE_ERROR', $arrayCategory)) {
                         return $arrayCategory;
                     }
                 }
@@ -466,17 +398,17 @@ class PortfolioRepository extends Portfolio
     public function editArticle($_idArticle)
     {
         $this->getArticle($_idArticle);
-        if(!empty($this->id)){
+        if (!empty($this->id)) {
             $File = null;
-            if(!empty($this->getFileid())){
+            if (!empty($this->getFileid())) {
                 $File = new FileRepository();
                 $File->getFileById($this->getFileid());
             }
             $category = new CategoryRepository();
-            $categoryFounded = $category->getCategoryByIdentifier('Portfolio', $this->id);
-            switch($this->getType()){
+            $categoryFounded = $category->getCategoryByIdentifier('portfolio', $this->id);
+            switch ($this->getType()) {
                 case 1:
-                    $configForm = $this->configFormAddArticleTextPortfolio();
+                    $configForm = $this->configFormAddPortfolio();
                     break;
                 case 2:
                     $configForm = $this->configFormAddArticleImagePortfolio();
@@ -489,7 +421,7 @@ class PortfolioRepository extends Portfolio
                     break;
             }
             return $arrayObject = [
-                "Portfolio" => $this,
+                "portfolio" => $this,
                 "file" => $File,
                 "selectedOption" => $categoryFounded,
                 "configForm" => $configForm
@@ -498,19 +430,19 @@ class PortfolioRepository extends Portfolio
             return 0;
         }
     }
-
-    /**
+}
+  /*  /**
      * @param int $_numberArticle
      * @param array $_get
      * @return array
      * Cette fonction retourne une pagination pour les blogs en fonction d'un tableau envoyé
      */
-    public function getPagination($_numberArticle, $_get = null)
+   /* public function getPagination($_numberArticle, $_get = null)
     {
         $pagination = [];
-        $numberTotalOfBlog = $this->countNumberOfBlogByStatus();
-        $totalPage = ($numberTotalOfBlog != $_numberArticle)?(int)($numberTotalOfBlog / $_numberArticle):1;
-        if($totalPage < $numberTotalOfBlog / $_numberArticle){
+        $numberTotalOfPortfolio = $this->countNumberOfPortfolioByStatus();
+        $totalPage = ($numberTotalOfPortfolio != $_numberArticle)?(int)($numberTotalOfPortfolio / $_numberArticle):1;
+        if($totalPage < $numberTotalOfPortfolio / $_numberArticle){
             $totalPage++;
         }
         if($totalPage <= 1) {
@@ -528,31 +460,31 @@ class PortfolioRepository extends Portfolio
         }
         if($position != 1){
             if(!empty($href)){
-                $pagination['first_page'] = Access::getSlugsById()['Portfolio'].'?'.$href;
+                $pagination['first_page'] = Access::getSlugsById()['portfoliohome'].'?'.$href;
             } else {
-                $pagination['first_page'] = Access::getSlugsById()['Portfolio'];
+                $pagination['first_page'] = Access::getSlugsById()['portfoliohome'];
             }
         }
         for($i=1; $i <= $totalPage; $i++){
             if($i > 1){
                 if(!empty($href)){
-                    $pagination[$i] = Access::getSlugsById()['Portfolio'].'?page='.$i.'&amp;'.$href;
+                    $pagination[$i] = Access::getSlugsById()['portfoliohome'].'?page='.$i.'&amp;'.$href;
                 } else {
-                    $pagination[$i] = Access::getSlugsById()['Portfolio'].'?page='.$i;
+                    $pagination[$i] = Access::getSlugsById()['portfoliohome'].'?page='.$i;
                 }
             } else {
                 if(!empty($href)){
-                    $pagination[$i] = Access::getSlugsById()['Portfolio'].'?'.$href;
+                    $pagination[$i] = Access::getSlugsById()['portfoliohome'].'?'.$href;
                 } else {
-                    $pagination[$i] = Access::getSlugsById()['Portfolio'].$href;
+                    $pagination[$i] = Access::getSlugsById()['portfoliohome'].$href;
                 }
             }
         }
         if($position != $totalPage){
             if(!empty($href)){
-                $pagination['last_page'] = Access::getSlugsById()['Portfolio'].'?page='.$totalPage.'&amp;'.$href;
+                $pagination['last_page'] = Access::getSlugsById()['portfoliohome'].'?page='.$totalPage.'&amp;'.$href;
             } else {
-                $pagination['last_page'] = Access::getSlugsById()['Portfolio'].'?page='.$totalPage;
+                $pagination['last_page'] = Access::getSlugsById()['portfoliohome'].'?page='.$totalPage;
             }
         }
         return $pagination;
@@ -578,5 +510,5 @@ class PortfolioRepository extends Portfolio
                 return $_contentArticle;
                 break;
         }
-    }
-}
+    }}
+   */
