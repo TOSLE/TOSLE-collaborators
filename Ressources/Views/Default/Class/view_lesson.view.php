@@ -69,18 +69,12 @@
     </section>
 
     <section class="container footer-section-lesson">
-        <div class="row">
-            <div class="col-12">
-                <div>
-
-                </div>
-            </div>
-        </div>
         <?php if(isset($this->Auth)):?>
             <div class="row">
                 <div class="col-3"></div>
                 <div class="col-6">
                     <div>
+                        <h3>Commentaires</h3>
                         <?php if(isset($comments)):?>
                             <?php $this->addModal("comment", $comments); ?>
                         <?php else:?>
