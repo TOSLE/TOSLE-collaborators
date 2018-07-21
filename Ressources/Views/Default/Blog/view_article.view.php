@@ -33,19 +33,8 @@
                                                 <span>Created <?php echo $article_content['datecreate'] ?></span>
                                             </div>
                                         </section>
-                                        <section class="action-article">
+                                        <!--<section class="action-article">
                                             <nav>
-                                                <div class="action">
-                                                    <div class="container">
-                                                        <div class="svg-action">
-                                                            <i class="material-icons">
-                                                                comment
-                                                            </i>
-                                                        </div>
-                                                        <span><?php if (is_array($commentaires_all)) echo count($commentaires_all); ?></span>
-                                                        <div class="name-action">comments</div>
-                                                    </div>
-                                                </div>
                                                 <div class="action">
                                                     <div class="container">
                                                         <div class="svg-action">
@@ -67,40 +56,24 @@
                                                     </div>
                                                 </div>
                                             </nav>
-                                        </section>
-                                        <section class="comments-article">
-                                            <h5>Last comments</h5>
-                                            <div class="container">
-                                                <?php if (isset($commentaires_last)): ?>
-                                                    <?php foreach ($commentaires_last as $comment): ?>
-                                                        <div class="comment">
-                                                            <div class="picture-user">
-                                                                <span></span>
-                                                            </div>
-                                                            <div>
-                                                                <div class="name-user">
-                                                                    <?php echo $comment->getUser()->getFirstname() . ' ' . $comment->getUser()->getLastname(); ?>
-                                                                </div>
-                                                                <div class="content">
-                                                                    <span><?php echo $comment->getContent(); ?></span>
-                                                                </div>
-                                                                <div class="info">
-                                                                    <span><?php echo $comment->getDatecreate(); ?></span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="signal">
-                                                                <i class="material-icons">
-                                                                    more_vert
-                                                                </i>
-                                                            </div>
-                                                        </div>
-                                                    <?php endforeach; ?>
-                                                <?php endif; ?>
-                                            </div>
-                                        </section>
-                                        <section class="container-editor">
-                                            <?php $this->addModal("form", $formAddComment, $errors); ?>
-                                        </section>
+                                        </section>-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div>
+                                        <h3>Comments</h3>
+                                        <div class="container">
+                                            <?php if(isset($comments)):?>
+                                                <?php $this->addModal("comment", $comments); ?>
+                                            <?php else:?>
+                                                <p>Aucun commentaire pour le moment</p>
+                                            <?php endif;?>
+                                            <?php if(isset($this->Auth)):?>
+                                                <?php $this->addModal("form", $formAddComment, $errors); ?>
+                                            <?php endif;?>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

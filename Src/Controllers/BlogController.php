@@ -106,12 +106,9 @@ class BlogController
                     $article['content'] = $Blog->getPlayerVideo($Blog->getContent());
                 }
 
-                $allComments = $Comment->getAll('blog', $Blog->getId());
+                $comments = $Comment->getAll('blog', $Blog->getId());
                 $View->setData("article_content", $article);
-                $View->setData("commentaires_all", $allComments);
-                if(isset($allComments)){
-                    $View->setData("commentaires_last", array_slice($allComments, 0, 5));
-                }
+                $View->setData("comments", $comments);
                 $View->setData("formAddComment", $configFormComment);
             } else {
                 echo "L'article demandé n'est pas disponible ou n'existe pas";
