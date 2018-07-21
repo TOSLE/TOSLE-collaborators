@@ -89,6 +89,20 @@ class CoreFile
         return $directoryPath;
     }
 
+    /**
+     * @return string
+     * Permet d'obtenir l'url du fichier sql peu importe l'OS
+     */
+    static public function getRobotFile()
+    {
+        if(SYSTEM == "LINUX") {
+            $directoryPath = getcwd() . DIRNAME . '/robots.txt';
+        } else {
+            $directoryPath = 'robots.txt';
+        }
+        return $directoryPath;
+    }
+
     static public function testFeedFile($relativePath)
     {
         if(SYSTEM == "LINUX") {

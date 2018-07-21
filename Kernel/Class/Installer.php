@@ -59,12 +59,25 @@ class Installer
     public function setParameterFile($arrayData)
     {
         CoreFile::testAppDirectory('config');
+
         if(empty($arrayData['dbport'])){
             $arrayData['dbport'] = 3306;
         }
         if(empty($arrayData['dbname'])){
             $arrayData['dbname'] = "tosle_database";
         }
+
+        $robotFile = CoreFile::getRobotFile();
+        if(!file_exists($robotFile)){
+            if(!($file = fopen($robotFile, 'w+'))){
+                return 0;
+            }
+        }
+        $file = fopen($robotFile, 'w');
+        $line = 'Sitemap: <lien url="'.self::url().'/Tosle/Static/xml/sitemap.xml">'.self::url().'/Tosle/Static/xml/sitemap.xml</lien>';
+        fputs($file, $line);
+        fclose($file);
+
         if($file = fopen("App/config/parameter.php", 'w')){
             fputs($file, '<?php'.PHP_EOL);
             fputs($file, '	define(\'DBUSER\', \''.$arrayData['dbuser'].'\');'.PHP_EOL);
@@ -282,5 +295,16 @@ class Installer
                 ],
             ],
         ];
+    }
+
+    /**
+     * @return string
+     */
+    public static function url(){
+        return sprintf(
+            "%s://%s",
+            isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https' : 'http',
+            $_SERVER['SERVER_NAME']
+        );
     }
 }
