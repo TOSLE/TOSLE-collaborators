@@ -42,6 +42,11 @@
                                         <i class="material-icons blue">image</i>
                                     </a>
                                 </li>
+                                <li><a href="<?php echo $this->slugs["edit_profile"]; ?>">
+                                        <p>My account</p>
+                                        <i class="material-icons blue">build</i>
+                                    </a>
+                                </li>
                                 <li><a href="<?php echo $this->slugs["dashboard_stat"] ?>">
                                         <p>Statistics</p>
                                         <i class="material-icons blue">insert_chart_outlined</i>
