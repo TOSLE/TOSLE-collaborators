@@ -3,7 +3,7 @@
         <div class="dashboard-bloc blocUsers">
             <?php if(isset($config['config']['action']['add'])):?>
                 <a class="target-modal icons-dashboard" data-type="open-modal" data-target="<?php echo $config['config']['action']['add'];?>">
-                    <i class="material-icons">add</i>
+                    <i class="material-icons">arrow_forward</i>
                 </a>
             <?php endif;?>
             <h2><?php echo $config['config']['title']?></h2>
