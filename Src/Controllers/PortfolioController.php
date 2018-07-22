@@ -16,7 +16,7 @@ class PortfolioController
     function indexAction($params)
     {
         $View = new View("default", "Portfolio/home");
-        $Portfolio = new PortfolioRepository();
+        $portfolio = new PortfolioRepository();
         $Comment = new CommentRepository();
         $Category = new CategoryRepository();
         $routes = Access::getSlugsById();
@@ -27,7 +27,7 @@ class PortfolioController
         $numberPortfolio = 6;
         $page = 1;
         $offset = 0;
-      //  $pagination = $Portfolio->getPagination($numberPortfolio, $params["GET"]);
+        //  $pagination = $Portfolio->getPagination($numberPortfolio, $params["GET"]);
         $errors = [];
         if (!empty($params["GET"])) {
             if (isset($params["GET"]["colsize"])) {
@@ -38,22 +38,22 @@ class PortfolioController
             if (isset($params["GET"]["number"])) {
                 if ($params["GET"]["number"] >= 1 || $params["GET"]["number"] <= 12) {
                     $numberPortfolio = $params["GET"]["number"];
-                   // $pagination = $Portfolio->getPagination($numberPortfolio, $params["GET"]);
+                    // $pagination = $Portfolio->getPagination($numberPortfolio, $params["GET"]);
                 }
             }
-            if (isset($params['GET']['page']) && array_key_exists($params['GET']['page'], $pagination)) {
+            if (isset($params['GET']['page']) && array_key_exists($params['GET']['page'])) {
                 $page = $params['GET']['page'];
                 $offset = $numberPortfolio * $page - $numberPortfolio;
             }
         }
-        $array = $Portfolio->getAllArticleByStatus(1, $numberPortfolio, $offset);
+        $array = $portfolio->getAllArticleByStatus(1, $numberPortfolio, $offset);
         $data = [];
         foreach ($array as $content) {
             $File = new FileRepository();
-            $portfolio= new PortfolioRepository();
+            $portfolio = new PortfolioRepository();
 
             $value["portfolio_title"] = $content->getTitle();
-            $value["portfolio_content"] = $Portfolio->getResumeContent($content->getContent());
+            $value["portfolio_content"] = $portfolio->getResumeContent($content->getContent());
             $value["portfolio_status"] = $content->getStatus();
             $value["portfolio_id"] = $content->getId();
             $value["portfolio_url"] = $content->getUrl();
@@ -63,8 +63,8 @@ class PortfolioController
             $value["image"] = $File->getFileById($content->getFileid());
             $data[] = $value;
         }
-       // $View->setData("urlPortfoliofeed", $routes['rss_portfolio']);
-      //  $View->setData("pagination", $pagination);
+        // $View->setData("urlPortfoliofeed", $routes['rss_portfolio']);
+        //  $View->setData("pagination", $pagination);
         $View->setData("page", $page);
         $View->setData("data", $data);
         $View->setData("col", $colSize);
@@ -83,33 +83,33 @@ class PortfolioController
         if(isset($params["URI"][0]) && !empty($params["URI"][0])){
             $View = new View("default", "Portfolio/view_article");
             $View->setData('errors', false);
-            $Portfolio = new PortfolioRepository();
+            $portfolio = new PortfolioRepository();
             $Comment = new CommentRepository();
             $Category = new CategoryRepository();
             $configFormComment = $Comment->configFormAdd();
-            if($Portfolio->getArticleByUrl($params["URI"][0])){
+            if($portfolio->getArticleByUrl($params["URI"][0])){
                 if(isset($params['POST']) && !empty($params['POST'])){
-                    $errors = $Comment->addComment($configFormComment, $params['POST'], 1, $Portfolio->getId());
+                    $errors = $Comment->addComment($configFormComment, $params['POST'], 1, $portfolio->getId());
                     if(empty($errors)){
                         header('Location:'.Access::getSlugsById()["view_portfolio_article"].'/'.$params["URI"][0]);
                     }
                     $View->setData('errors', $errors);
                 }
                 $article = [
-                    "title" => $Portfolio->getTitle(),
-                    "content" => $Portfolio->getContent(),
-                    "value"=>$Portfolio->getValue(),
-                    "image"=>$Portfolio->getFileid(),
-                    "url" => $Portfolio->getUrl(),
-                    "status" => $Portfolio->getStatus(),
-                    "type"=> $Portfolio->getType(),
-                    "category"=> $Category->getCategoryByIdentifier('portfolio', $Portfolio->getId()),
+                    "title" => $portfolio->getTitle(),
+                    "content" => $portfolio->getContent(),
+                    "value"=>$portfolio->getValue(),
+                    "image"=>$portfolio->getFileid(),
+                    "url" => $portfolio->getUrl(),
+                    "status" => $portfolio->getStatus(),
+                    "type"=> $portfolio->getType(),
+                    "category"=> $Category->getCategoryByIdentifier('portfolio', $portfolio->getId()),
                 ];
-                if($Portfolio->getType() == 3){
-                    $article['content'] = $Portfolio->getPlayerVideo($Portfolio->getContent());
+                if($portfolio->getType() == 3){
+                    $article['content'] = $portfolio->getPlayerVideo($portfolio->getContent());
                 }
                 $commentaires = null;
-                $comments = $Comment->getAll("portfolio", $Portfolio->getId());
+                $comments = $Comment->getAll("portfolio", $portfolio->getId());
                 foreach($comments as $comment){
                     $author = $Comment->getAuthorComment($comment->getId());
                     $date = new DateTime($comment->getDateupdated());
@@ -134,7 +134,7 @@ class PortfolioController
             } else {
                 echo "L'article demandé n'est pas disponible ou n'existe pas";
             }
-        } else {
+        } else {git
             header('Location:'.Access::getSlugsById()["portfoliohome"]);
         }
 
@@ -186,22 +186,22 @@ class PortfolioController
         $View->setData("config", $form);
         $View->setData("errors", "");
     }
-        if(isset($params["URI"][0])){
+       if(isset($params["URI"][0])){
             $getTypeNewArticle = $params["URI"][0];
-            $Portfolio = New PortfolioRepository();
+            $portfolio = New PortfolioRepository();
 
             if($getTypeNewArticle == "text"){
-                $configForm = $Portfolio->configFormAddPortfolio();
+                $configForm = $portfolio->configFormAddPortfolio();
                 if(isset($params["POST"]["ckeditor_article"])){
                     $contentInputName = $params["POST"]["ckeditor_article"];
                 }
             } elseif ($getTypeNewArticle == "image"){
-                $configForm = $Portfolio->configFormAddArticleImagePortfolio();
+                $configForm = $portfolio->configFormAddArticleImagePortfolio();
                 if(isset($params["POST"]["textarea_articleImage"])){
                     $contentInputName = $params["POST"]["textarea_articleImage"];
                 }
             } elseif ($getTypeNewArticle == "video"){
-                $configForm = $Portfolio->configFormAddArticleVideoPortfolio();
+                $configForm = $portfolio->configFormAddArticleVideoPortfolio();
                 if(isset($params["POST"]["link"])){
                     $contentInputName = $params["POST"]["link"];
                 }
@@ -213,10 +213,10 @@ class PortfolioController
             $View = new View("Dashboard", "Dashboard/add_article_portfolio");
             $View->setData("errors", "");
             if((isset($_FILES) && !empty($_FILES)) || (isset($params["POST"]) && !empty($params["POST"]))){
-                $resultAdd = $Portfolio->addArticle($_FILES, $params["POST"], $getTypeNewArticle);
+                $resultAdd = $portfolio->addArticle($_FILES, $params["POST"], $getTypeNewArticle);
                 if($resultAdd === 1){
                     $GeneratorXML = new GeneratorXML('portfoliofeed');
-                    $GeneratorXML->setBlogFeed($Portfolio->getAllArticleByStatus(1));
+                    $GeneratorXML->setBlogFeed($portfolio->getAllArticleByStatus(1));
                     header('Location:'.$routes['dashboard_portfolio']);
                 } else {
                     $View->setData("errors", $resultAdd);
