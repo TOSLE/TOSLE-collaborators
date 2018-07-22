@@ -102,11 +102,13 @@ class LessonRepository extends Lesson
     }
     /**
      * @param int $colSize
+     * @param int|null $limit
+     * @param bool|null $access
      * @return array
      * Permet de récupérer la configuration de la modal "LastArticle"
      * Le paramètre permet de définir une largeur à notre modal
      */
-    public function getModalLatestLesson($colSize = 12)
+    public function getModalLatestLesson($colSize = 12, $limit = null, $access = null)
     {
         $routes = Access::getSlugsById();
         $ViewLatestBloc = new DashboardBlocModal();
@@ -136,7 +138,10 @@ class LessonRepository extends Lesson
             2 => "td-content-date",
             4 => "td-content-action"
         ]);
-        $ViewLatestBloc->setTableBodyContent($this->getLastLesson(), true);
+        if(isset($access)){
+            $ViewLatestBloc->setIconHeader("dashboard_lesson", "access");
+        }
+        $ViewLatestBloc->setTableBodyContent($this->getLastLesson($limit), true);
         $ViewLatestBloc->setActionTargetButton("Chapters", $routes['dashboard_chapter']);
         $ViewLatestBloc->setArrayHref("edit", $routes["class/edit"]);
         return $ViewLatestBloc->getArrayData();
@@ -221,10 +226,11 @@ class LessonRepository extends Lesson
     }
 
     /**
+     * @param int|null $limit
      * @return array
      * Retourne les dernières lessons, le nombre dépend du paramètre qui par défaut est à 5
      */
-    public function getLastLesson()
+    public function getLastLesson($limit = null)
     {
         $target = [
             'id',
@@ -236,6 +242,7 @@ class LessonRepository extends Lesson
             'datecreate'
         ];
         $this->setOrderByParameter(["id" => "DESC"]);
+        $this->setLimitParameter($limit);
         return $this->getData($target);
     }
 

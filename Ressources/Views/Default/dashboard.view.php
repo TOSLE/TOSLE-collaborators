@@ -153,18 +153,7 @@
                                     </section>
                                 </div>
                             </div>
-                            <div class="col-8">
-                                <div>
-                                    <section id="stat-visit" class="block-dash">
-                                        <div class="title">
-                                            <h4>Number of visitor</h4>
-                                        </div>
-                                        <div class="container">
-                                            <canvas id="myChart" width="600" height="220"></canvas>
-                                        </div>
-                                    </section>
-                                </div>
-                            </div>
+                            <?php $this->addModal("dashboard_bloc", $configTableLesson);?>
                         </div>
                         <div class="row">
                             <div class="col-6">
