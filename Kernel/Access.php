@@ -195,7 +195,8 @@ class Access
     ];
 
     private $urlFixe = [
-        'rss_blog' => 'Tosle/Static/xml/blogfeed.xml'
+        'rss_blog' => 'Tosle/Static/xml/blogfeed.xml',
+        'rss_lesson' => 'Tosle/Static/xml/lessonfeed.xml'
     ];
 
     /**
