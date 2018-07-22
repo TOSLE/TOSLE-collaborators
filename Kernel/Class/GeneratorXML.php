@@ -100,7 +100,7 @@ class GeneratorXML
         $language = $this->xmlDoc->createElement('language', 'fr');
         $copyright = $this->xmlDoc->createElement('copyright', 'TOSLE');
         $generator = $this->xmlDoc->createElement('generator', 'TOSLE');
-        $lastBuildDate = $this->xmlDoc->createElement('lastBuildDate', date('D, d M y H:i:s O'));
+        $lastBuildDate = $this->xmlDoc->createElement('lastBuildDate', date('D, d M Y H:i:s O'));
         $this->channel->appendChild($this->atom);
         $this->channel->appendChild($title);
         $this->channel->appendChild($link);
@@ -136,8 +136,8 @@ class GeneratorXML
                 $title = $this->xmlDoc->createElement('title', $blog->getTitle());
                 $description = $this->xmlDoc->createElement('description', $this->convertStringToXml($BlogRepository->getResumeContent($blog->getContent())));
                 $datePub = $this->xmlDoc->createElement('pubDate', $blog->getDatecreatefeed());
-                $link = $this->xmlDoc->createElement('link', Installer::url().'/'.$this->routes['view_blog_article'].'/'.$blog->getUrl());
-                $guid = $this->xmlDoc->createElement('guid', Installer::url().'/'.$this->routes['view_blog_article'].'/'.$blog->getUrl());
+                $link = $this->xmlDoc->createElement('link', Installer::url().$this->routes['view_blog_article'].'/'.$blog->getUrl());
+                $guid = $this->xmlDoc->createElement('guid', Installer::url().$this->routes['view_blog_article'].'/'.$blog->getUrl());
                 $item->appendChild($title);
                 $item->appendChild($description);
                 $item->appendChild($datePub);
@@ -171,8 +171,8 @@ class GeneratorXML
                     $title = $this->xmlDoc->createElement('title', $lesson->getTitle());
                     $description = $this->xmlDoc->createElement('description', $this->convertStringToXml($lesson->getDescription()));
                     $datePub = $this->xmlDoc->createElement('pubDate', $lesson->getDatecreatefeed());
-                    $link = $this->xmlDoc->createElement('link', $_SERVER['SERVER_NAME'].$this->routes['view_blog_article'].'/'.$lesson->getUrl());
-                    $guid = $this->xmlDoc->createElement('guid', $_SERVER['SERVER_NAME'].$this->routes['view_blog_article'].'/'.$lesson->getUrl());
+                    $link = $this->xmlDoc->createElement('link', Installer::url().$this->routes['view_lesson'].'/'.$lesson->getUrl());
+                    $guid = $this->xmlDoc->createElement('guid', Installer::url().$this->routes['view_lesson'].'/'.$lesson->getUrl());
                     //$chapter = $this->xmlDoc->createElement('numberChapter', sizeof($lesson->getChapter()));
                     //$item->appendChild($chapter);
                     $item->appendChild($title);
