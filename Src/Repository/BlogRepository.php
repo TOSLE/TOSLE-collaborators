@@ -109,7 +109,7 @@ class BlogRepository extends Blog
      * @return array|boolean
      * Retourne tous les articles par rapport à un status
      */
-    public function getAllArticleByStatus($status = 1, $max = null, $min = 0)
+    public function getAllArticleByStatus($status = null, $max = null, $min = 0)
     {
         if(is_numeric($status))
         {
