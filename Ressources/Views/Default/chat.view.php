@@ -32,7 +32,7 @@
     </div>
     <div class="footer-infos">
         <div class="more-infos">
-            <a href="#"><?php echo GLOBAL_FOOTER_LEGAL;?></a> - <a href="#"><?php echo GLOBAL_FOOTER_PRIVACY;?></a>
+            <a href="<?php echo $this->slugs["edit_profile"]; ?>"><?php echo GLOBAL_FOOTER_LEGAL;?></a> - <a href="#"><?php echo GLOBAL_FOOTER_PRIVACY;?></a>
         </div>
         <div class="global-infos">
             <p>TOSLE <i class="material-icons">&#xE90C;</i> 2018</p>

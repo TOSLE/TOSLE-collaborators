@@ -164,6 +164,12 @@ class Access
             "controller" => "index",
             "action" => "deletecom",
             "security" => 1
+        ],
+        "legal_notice" => [
+            "slug" => "legal",
+            "controller" => "index",
+            "action" => "legal",
+            "security" => 0
         ]
     ];
 
