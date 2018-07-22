@@ -263,8 +263,6 @@ class UserRepository extends User
                 return $countDayUser;
                 break;
         }
-
-
     }
 
     /**
@@ -298,6 +296,21 @@ class UserRepository extends User
             'options' => $option
         ];
         return $return;
+    }
+
+    public function getAllUser() {
+        $target = [
+            "id"
+        ];
+        $parameter = [
+            'LIKE' => [
+                'status' => 1
+            ]
+        ];
+        $this->setWhereParameter($parameter);
+        $arrayUser = $this->getData($target);
+
+        return count($arrayUser);
     }
 
     /**

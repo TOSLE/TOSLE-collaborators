@@ -335,4 +335,14 @@ class GroupRepository extends Group
 
         return $Table->getArrayPHP();
     }
+
+    public function getAllGroup() {
+
+        $target = [
+            "id"
+        ];
+
+        $arrayAllGroup = $this->getData();
+        return count($arrayAllGroup);
+    }
 }

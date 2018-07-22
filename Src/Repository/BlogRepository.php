@@ -574,4 +574,13 @@ class BlogRepository extends Blog
                 break;
         }
     }
+    public function getAllArticle(){
+
+        $target = [
+            "id"
+        ];
+
+        $arrayAllArticle = $this->getData();
+        return count($arrayAllArticle);
+    }
 }
