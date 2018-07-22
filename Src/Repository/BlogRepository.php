@@ -127,6 +127,14 @@ class BlogRepository extends Blog
             if(isset($max)) {
                 $this->setLimitParameter($max, $min);
             }
+            if(isset($status)){
+                $parameter = [
+                    'LIKE' => [
+                        'status' => $status
+                    ]
+                ];
+                $this->setWhereParameter($parameter);
+            }
             return $this->getData($target);
         }
         return false;
