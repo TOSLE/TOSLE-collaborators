@@ -38,7 +38,7 @@ class CoreFile
         if(SYSTEM == "LINUX") {
             $directoryPath = getcwd() . DIRNAME . 'Tosle/Static/' . $relativePath;
         } else {
-            $directoryPath = self::getParamWindows() . DIRNAME . 'Tosle/Static/' . $relativePath;
+            $directoryPath = getcwd() . '/Tosle/Static/' . $relativePath;
         }
         if(!file_exists($directoryPath)){
             mkdir($directoryPath, 0755, true);
