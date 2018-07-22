@@ -14,8 +14,35 @@ class ConversationRepository extends Conversation
      * @return array Conversation
      * Cette fonction va chercher toutes les conversations et récupérer toutes les informations de la conversation
      */
-    public function getConversations($_status = 1, $_filter = null)
+    public function getConversations($_Auth, $_status = 1, $_filter = null)
     {
+        if($_Auth->getStatus() < 2){
+            if(!isset($_filter)){
+                $parameter = [
+                    'LIKE' => [
+                        'type' => 1,
+                        'status' => $_status
+                    ]
+                ];
+                $this->setWhereParameter($parameter);
+                $array = $this->getData();
+                $arrayKey = [];
+                foreach($array as $key => $conversation){
+                    if(!($conversation->getIdowner() == $_Auth->getId() || $conversation->getIddest() == $_Auth->getId())){
+                        unset($array[$key]);
+                    }
+                }
+                foreach($array as $conversation){
+                    $destination = ($conversation->getIddest() == $_Auth->getId())?$conversation->getIdowner():$conversation->getIddest();
+                    $conversation->setDestination($destination);
+                    $MessageConversation = new MessageConversation();
+                    $arrayMessageId = $MessageConversation->getMessageConversation('conversation', $conversation->getId());
+                    $conversation->setMessages($arrayMessageId);
+                }
+
+                return array_values($array);
+            }
+        }
         if(!isset($_filter)){
             $parameter = [
                 'LIKE' => [
@@ -78,7 +105,7 @@ class ConversationRepository extends Conversation
                 $Message->addMessage($_auth->getId(), $_post['message']);
                 $Message->getMessageByTag($Message->getTag());
 
-                (isset($tmpPostArray["publish"]))?$this->setStatus(1):$this->setStatus(0);
+                (isset($_post["publish"]))?$this->setStatus(1):$this->setStatus(0);
                 $this->setType(1);
                 $this->setIddest($_post['select_user']);
                 $this->setTag();
@@ -123,7 +150,7 @@ class ConversationRepository extends Conversation
         $this->getOneData();
     }
 
-    public function getNumberConversation($_identifier, $_value)
+    public function getNumberConversation($_identifier, $_value, $_Auth)
     {
         $parameter = [
             'LIKE' => [
@@ -131,7 +158,16 @@ class ConversationRepository extends Conversation
             ]
         ];
         $this->setWhereParameter($parameter);
-        return $this->countData(['id']);
+        if($_Auth->getStatus() > 1){
+            return $this->countData(['id']);
+        }
+        $data = $this->getData();
+        foreach($data as $key => $conversation){
+            if(!($conversation->getIdowner() == $_Auth->getId() || $conversation->getIddest() == $_Auth->getId())){
+                unset($data[$key]);
+            }
+        }
+        return count($data);
     }
 
     public function editConversationMessage($_idConv, $_idUser, $_post)

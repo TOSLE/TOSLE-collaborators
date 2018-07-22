@@ -12,7 +12,7 @@ class MessageRepository extends Message
     {
         $this->setUserid($_userid);
         $this->setContent($_message);
-        $this->setStatus(2);
+        $this->setStatus(1);
         $this->setTag();
         $this->save();
     }
@@ -26,6 +26,18 @@ class MessageRepository extends Message
         ];
         $this->setWhereParameter($parameter);
         $this->getOneData();
+    }
+
+    public static function countMessage()
+    {
+        $Message = new Message();
+        $paramater = [
+            'LIKE' => [
+                'status' => 1
+            ]
+        ];
+        $Message->setWhereParameter($paramater);
+        return $Message->countData(['id']);
     }
 
     public function getAllMessage(){

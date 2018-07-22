@@ -96,7 +96,7 @@ class Mail
         /// /* /en/verify-mail-register?token=blablablablab
 
     }
-public static function sendMailSignalement()
+public static function sendMailSignalement($data)
     {
         $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
         try {
@@ -111,9 +111,9 @@ public static function sendMailSignalement()
             $mail->Port = 587;                                    // TCP port to connect to
 
             //Recipients
-            $mail->setFrom('tosle.contact@gmail.com', 'Tosle Contact');
-            $mail->addAddress('tosle.contact@gmail.com');    
-            $mail->addReplyTo('tosle.contact@gmail.com');
+            $mail->setFrom(GUSER, 'TOSLE CMS');
+            $mail->addAddress(GUSER);
+            $mail->addReplyTo(GUSER);
              // Add a recipient
             //$mail->addCC('cc@example.com');
             //$mail->addBCC('bcc@example.com');
@@ -121,12 +121,16 @@ public static function sendMailSignalement()
             //Attachments
             //$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
             //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
-
+            $bodyMessage = 'Un commentaire a été signalé, voici les informations : <br><br>';
+            $bodyMessage .= '<strong>Url du commentaire : </strong>http://' .$data['url'].'<br>';
+            $bodyMessage .= '<strong>Contenu du commentaire : </strong>' .$data['content'].'<br>';
+            $bodyMessage .= '<strong>Auteur du commentaire : </strong>' .$data['user'].'<br>';
+            $bodyMessage .= '<strong>Signalé par : </strong>' .$data['sendBy'].'<br>';
             //Content
             $mail->isHTML(true);                                  // Set email format to HTML
-            $mail->Subject = 'Bienvenue sur le CMS TOSLE ';
+            $mail->Subject = '[URGENT] - Signalement d\'un commentaire';
             //$mail->Body = 'Veuillez confirmer votre inscription en cliquant sur le lien ci-dessous </br>http://localhost:88/en/verify-mail-register?token='.$token.'';
-            $mail->Body = 'Un commentaire a été signalé';
+            $mail->Body = $bodyMessage;
             $mail->send();
         } catch (Exception $e) {
             echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;

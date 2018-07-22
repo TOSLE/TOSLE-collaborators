@@ -83,7 +83,8 @@ class Comment extends CoreSql {
      */
     public function getDatecreate()
     {
-        return $this->datecreate;
+        $date = new DateTime($this->datecreate);
+        return $date->format("F j, Y");
     }
 
     /**

@@ -200,6 +200,10 @@ class CommentRepository extends Comment
 
     }
 
+    /**
+     * @param $sort
+     * @return array
+     */
     public function getStatComment($sort)
     {
         switch ($sort) {
@@ -225,6 +229,34 @@ class CommentRepository extends Comment
                 echo 'day';
                 break;
         }
+    }
+
+    public function getInfoAboutComment($_idComment)
+    {
+        $parameter = [
+            'LIKE' => [
+                'commentid' => $_idComment
+            ]
+        ];
+        $BlogComment = new BlogComment();
+        $ChapterComment = new ChapterComment();
+        $BlogComment->setWhereParameter($parameter);
+        if($BlogComment->countData(['id']) > 0){
+            $BlogComment->getOneData(['blogid', 'userid']);
+            $this->setUser([$BlogComment->getUserid()]);
+            $object =  new Blog($BlogComment->getBlogid());
+            $type = 'blog';
+        } else {
+            $ChapterComment->setWhereParameter($parameter);
+            $ChapterComment->getOneData(['chapterid', 'userid']);
+            $this->setUser([$ChapterComment->getUserid()]);
+            $object =  new Chapter($ChapterComment->getChapterid());
+            $type = 'chapter';
+        }
+        return [
+            'type' => $type,
+            'object' => $object
+        ];
     }
 
     public function getAllComment() {

@@ -5,7 +5,9 @@
         <ul>
             <li class="<?php echo (isset($page) && $page == "index")?'active':'';?>"><a href="<?php echo $this->slugs['chathome'];?>"><i class="material-icons">&#xE0CB;</i><p><?php echo LEFT_COLUMN_MESSAGING_MENU_INBOX;?></p><span class="notif-active"><?php echo (isset($inBoxNumber))?$inBoxNumber:'';?></span></a></li>
             <li class="<?php echo (isset($page) && $page == "draft")?'active':'';?>"><a href="<?php echo $this->slugs['chatdraft'];?>"><i class="material-icons">&#xE254;</i><p><?php echo LEFT_COLUMN_MESSAGING_MENU_DRAFTS;?></p><span class="notif-active"><?php echo (isset($draftNumber))?$draftNumber:'';?></span></a></li>
+            <?php if($this->Auth->getStatus() > 1):?>
             <li class="<?php echo (isset($page) && $page == "trash")?'active':'';?>"><a href="<?php echo $this->slugs['chattrash'];?>"><i class="material-icons">delete</i><p>Trash</p><span class="notif-active"><?php echo (isset($tashNumber))?$tashNumber:'';?></span></a></li>
+            <?php endif;?>
         </ul>
     </div>
     <div class="content-box-left">
@@ -19,11 +21,11 @@
                 <p class="description"><?php echo LEFT_COLUMN_MESSAGING_PROFILINFOS_NUMBERCHAT;?></p>
             </div>
             <div class="number-message">
-                <p class="number">150</p>
+                <p class="number"><?php echo $numberMessage;?></p>
                 <p class="description"><?php echo LEFT_COLUMN_MESSAGING_PROFILINFOS_NUMBERMESSAGE;?></p>
             </div>
             <div class="number-user">
-                <p class="number">33</p>
+                <p class="number"><?php echo $numberStudent;?></p>
                 <p class="description"><?php echo LEFT_COLUMN_MESSAGING_PROFILINFOS_NUMBERSTUDENT;?></p>
             </div>
         </div>
@@ -80,9 +82,11 @@
         <?php endif;?>
         <?php if(isset($conversationView)):?>
             <div class="content-infos-message">
-                <a href="<?php echo ($page == 'trash')?$this->slugs['chat/delete'].'/'.$conversationView->getId():$this->slugs['chat/trash'].'/'.$conversationView->getId();?>" class="trash-icon">
-                    <i class="material-icons">delete</i>
-                </a>
+                <?php if($this->Auth->getStatus() > 1):?>
+                    <a href="<?php echo ($page == 'trash')?$this->slugs['chat/delete'].'/'.$conversationView->getId():$this->slugs['chat/trash'].'/'.$conversationView->getId();?>" class="trash-icon">
+                        <i class="material-icons">delete</i>
+                    </a>
+                <?php endif;?>
                 <h2><?php echo $conversationView->getDestination()->getFirstname().' '.$conversationView->getDestination()->getLastname();?></h2>
                 <?php if(!empty($conversationView->getDestination()->getGroups())):?>
                     <div class="more-infos">

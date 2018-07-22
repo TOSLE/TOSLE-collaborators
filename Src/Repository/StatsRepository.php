@@ -18,22 +18,21 @@ class StatsRepository extends Stats
     {
 
         $currentYear = date("Y");
-        $target = [
-            "id",
-            "month",
-            "year"
-        ];
         $parameter = [
             "LIKE" => [
                 "year" => $currentYear
             ]
         ];
         $this->setWhereParameter($parameter);
-        $resultStatMonth =  $this->getData($target);
+        $resultStatMonth =  $this->getData();
+        $arrayTmp = [];
+        foreach($resultStatMonth as $row){
+            $arrayTmp[$row->getToken()] = $row;
+        }
 
         $arrayStatViewTosle = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-        if (isset($resultStatMonth)) {
-            foreach ($resultStatMonth as $row) {
+        if (isset($arrayTmp)) {
+            foreach ($arrayTmp as $row) {
                 for ($i = 0; $i < 12; $i += 1) {
                     if ($i === $row->getMonth()) {
                         $arrayStatViewTosle[$row->getMonth() - 1] += 1;
@@ -73,7 +72,7 @@ class StatsRepository extends Stats
                         $arrayLesson = [];
                         for($i = 0; $i < sizeof($arrayGetClass); $i+=1){
                             $rowDecoupe = explode("/",$arrayGetClass[$i]);
-                            if($rowDecoupe[2] === "lesson"){
+                            if(isset($rowDecoupe[2]) && $rowDecoupe[2] === "lesson"){
                                 array_push($arrayLesson,$arrayGetClass[$i]);
                             }
                         }
@@ -124,7 +123,7 @@ class StatsRepository extends Stats
                         $arrayLesson = [];
                         for($i = 0; $i < sizeof($arrayGetClass); $i+=1){
                             $rowDecoupe = explode("/",$arrayGetClass[$i]);
-                            if($rowDecoupe[2] === "lesson"){
+                            if(isset($rowDecoupe[2]) && $rowDecoupe[2] === "lesson"){
                                 array_push($arrayLesson,$arrayGetClass[$i]);
                             }
                         }
@@ -177,7 +176,7 @@ class StatsRepository extends Stats
                         $arrayLesson = [];
                         for($i = 0; $i < sizeof($arrayGetClass); $i+=1){
                             $rowDecoupe = explode("/",$arrayGetClass[$i]);
-                            if($rowDecoupe[2] === "lesson"){
+                            if(isset($rowDecoupe[2]) && $rowDecoupe[2] === "lesson"){
                                 array_push($arrayLesson,$arrayGetClass[$i]);
                             }
                         }
@@ -230,7 +229,7 @@ class StatsRepository extends Stats
                         $arrayArticle = [];
                         for($i = 0; $i < sizeof($arrayGetArticle); $i+=1){
                             $rowDecoupe = explode("/",$arrayGetArticle[$i]);
-                            if($rowDecoupe[2] === "view-article"){
+                            if(isset($rowDecoupe[2]) && $rowDecoupe[2] === "view-article"){
                                 array_push($arrayArticle,$arrayGetArticle[$i]);
                             }
                         }
@@ -280,7 +279,7 @@ class StatsRepository extends Stats
                         $arrayArticle = [];
                         for($i = 0; $i < sizeof($arrayGetArticle); $i+=1){
                             $rowDecoupe = explode("/",$arrayGetArticle[$i]);
-                            if($rowDecoupe[2] === "view-article"){
+                            if(isset($rowDecoupe[2]) && $rowDecoupe[2] === "view-article"){
                                 array_push($arrayArticle,$arrayGetArticle[$i]);
                             }
                         }
@@ -334,7 +333,7 @@ class StatsRepository extends Stats
                         $arrayArticle = [];
                         for($i = 0; $i < sizeof($arrayGetArticle); $i+=1){
                             $rowDecoupe = explode("/",$arrayGetArticle[$i]);
-                            if($rowDecoupe[2] === "view-article"){
+                            if(isset($rowDecoupe[2]) && $rowDecoupe[2] === "view-article"){
                                 array_push($arrayArticle,$arrayGetArticle[$i]);
                             }
                         }

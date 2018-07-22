@@ -278,7 +278,7 @@ class UserRepository extends User
         ];
         $parameter = [
             'LIKE' => [
-                'status' => 1
+                'status' => ($Auth->getStatus() > 1)?1:2
             ]
         ];
         $this->setWhereParameter($parameter);
@@ -311,5 +311,20 @@ class UserRepository extends User
         $arrayUser = $this->getData($target);
 
         return count($arrayUser);
+    }
+
+    /**
+     * @return int
+     */
+    public static function countUser()
+    {
+        $User = new User();
+        $paramater = [
+            'LIKE' => [
+                'status' => 1
+            ]
+        ];
+        $User->setWhereParameter($paramater);
+        return $User->countData(['id']);
     }
 }
