@@ -29,7 +29,8 @@ class DashboardController extends CoreController
         $totalArticle = $Blog->getAllArticle();
         $totalGroup = $Group->getAllGroup();
 
-        $configTableLesson = $Lesson->getModalLatestLesson(8, 5, true);
+        $configTableLesson = $Lesson->getModalLatestLesson(12, 5, true);
+        $configTableBlog = $Blog->getModalLatestArticle(8, 5,true);
 
         $View = new View("dashboard", "dashboard");
         $View->setData("PageName", NAV_DASHBOARD . " " . GLOBAL_HOME_TEXT);
@@ -40,6 +41,7 @@ class DashboardController extends CoreController
         $View->setData("totalArticle", $totalArticle);
         $View->setData("totalGroup", $totalGroup);
         $View->setData("configTableLesson", $configTableLesson);
+        $View->setData("configTableBlog", $configTableBlog);
     }
 
     /**

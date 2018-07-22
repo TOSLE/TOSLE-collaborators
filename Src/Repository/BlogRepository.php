@@ -140,11 +140,13 @@ class BlogRepository extends Blog
 
     /**
      * @param int $colSize
+     * @param int|null $limit
+     * @param bool|null $access
      * @return array
      * Permet de récupérer la configuration de la modal "LastArticle"
      * Le paramètre permet de définir une largeur à notre modal
      */
-    public function getModalLatestArticle($colSize = 12)
+    public function getModalLatestArticle($colSize = 12, $limit = 5,$access= null)
     {
         $routes = Access::getSlugsById();
         $ViewLatestBloc = new DashboardBlocModal();
@@ -176,7 +178,10 @@ class BlogRepository extends Blog
             2 => "td-content-date",
             3 => "td-content-action"
         ]);
-        $ViewLatestBloc->setTableBodyContent($this->getLatestArticle(5), true);
+        if(isset($access)){
+            $ViewLatestBloc->setIconHeader("dashboard_blog", "access");
+        }
+        $ViewLatestBloc->setTableBodyContent($this->getLatestArticle($limit), true);
         $ViewLatestBloc->setArrayHref("edit", $routes["blog/edit"]);
         $ViewLatestBloc->setArrayHref("view", $routes["view_blog_article"]);
         return $ViewLatestBloc->getArrayData();
