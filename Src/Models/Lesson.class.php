@@ -96,6 +96,15 @@ class Lesson extends CoreSql
     }
 
     /**
+     * @return mixed
+     */
+    public function getDatecreatefeed()
+    {
+        $date = new DateTime($this->datecreate);
+        return $date->format("D, d M y H:i:s O");
+    }
+
+    /**
      * @param mixed $datecreate
      */
     public function setDateCreate($datecreate)
