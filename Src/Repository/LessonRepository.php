@@ -21,33 +21,29 @@ class LessonRepository extends Lesson
         $routes = Access::getSlugsById();
 
         $BlocGeneral->setColSizeBloc($_colsize);
-        $BlocGeneral->setTitle("Menu général");
+        $BlocGeneral->setTitle("Menu general");
         $BlocGeneral->setTableHeader([
-            1 => "Name of action",
             2 => "Action"
         ]);
         $BlocGeneral->setTableBodyClass([
-            1 => "td-content-text",
             2 => "td-content-action"
         ]);
         $BlocGeneral->setColSizeBloc(6);
         $BlocGeneral->setTableBodyContent([
             0 => [
-                1 => "Créer un nouveau cours",
                 "button_action" => [
                     "type" => "href",
                     "target" => $routes["class/add"]."/lesson",
                     "color" => "tosle",
-                    "text" => "New post"
+                    "text" => "Add lesson"
                 ]
             ],
             1 => [
-                1 => "Créer un chapitre",
                 "button_action" => [
                     "type" => "href",
                     "target" => $routes["chapter/add"]."/chapter",
                     "color" => "tosle",
-                    "text" => "New post"
+                    "text" => "Add chapter"
                 ]
             ]
         ]);
