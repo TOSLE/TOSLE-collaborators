@@ -355,4 +355,21 @@ class UserRepository extends User
         $User->setWhereParameter($paramater);
         return $User->countData(['id']);
     }
+
+    public function getAdminInfos()
+    {
+        $target = [
+            'firstname',
+            'lastname',
+            'email'
+        ];
+        $paramater = [
+            'LIKE' => [
+                'status' => 2
+            ]
+        ];
+        $this->setWhereParameter($paramater);
+        $this->getOneData($target);
+        return $this;
+    }
 }

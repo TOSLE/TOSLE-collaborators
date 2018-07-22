@@ -111,6 +111,12 @@ class Blog extends CoreSql {
         $this->datecreate = $datecreate;
     }
 
+    public function getDatecreatefeed()
+    {
+        $date = new DateTime($this->datecreate);
+        return $date->format("D, d M y H:i:s O");
+    }
+
     /**
      * @return mixed
      */
