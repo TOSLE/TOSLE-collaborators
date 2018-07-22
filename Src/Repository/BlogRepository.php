@@ -111,33 +111,29 @@ class BlogRepository extends Blog
      */
     public function getAllArticleByStatus($status = null, $max = null, $min = 0)
     {
-        if(is_numeric($status))
-        {
-            $target = [
-                "title",
-                "datecreate",
-                "id",
-                "status",
-                "type",
-                "content",
-                "url",
-                "fileid"
-            ];
-            $this->setOrderByParameter(["id" => "DESC"]);
-            if(isset($max)) {
-                $this->setLimitParameter($max, $min);
-            }
-            if(isset($status)){
-                $parameter = [
-                    'LIKE' => [
-                        'status' => $status
-                    ]
-                ];
-                $this->setWhereParameter($parameter);
-            }
-            return $this->getData($target);
+        $target = [
+            "title",
+            "datecreate",
+            "id",
+            "status",
+            "type",
+            "content",
+            "url",
+            "fileid"
+        ];
+        $this->setOrderByParameter(["id" => "DESC"]);
+        if(isset($max)) {
+            $this->setLimitParameter($max, $min);
         }
-        return false;
+        if(isset($status)){
+            $parameter = [
+                'LIKE' => [
+                    'status' => $status
+                ]
+            ];
+            $this->setWhereParameter($parameter);
+        }
+        return $this->getData($target);
     }
 
 
