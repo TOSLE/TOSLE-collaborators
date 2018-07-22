@@ -9,6 +9,10 @@
                             <a href="#" class="target-modal active" data-type="open-modal" data-target="<?php echo $value["target"];?>"><i class="material-icons">&#xE145;</i></a>
                         <?php elseif($key == "href"): ?>
                             <a href="<?php echo $value["location"];?>" class="active"><i class="material-icons">&#xE145;</i></a>
+                        <?php elseif($key == "access"): ?>
+                            <a href="<?php echo $this->slugs[$value] ?>" class="active">
+                                <i class="material-icons blue">arrow_forward</i>
+                            </a>
                         <?php else: ?>
                             <a href="#" class="desactive"><i class="material-icons">&#xE145;</i></a>
                         <?php endif; ?>

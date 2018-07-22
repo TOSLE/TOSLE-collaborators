@@ -38,7 +38,7 @@ class CoreFile
         if(SYSTEM == "LINUX") {
             $directoryPath = getcwd() . DIRNAME . 'Tosle/Static/' . $relativePath;
         } else {
-            $directoryPath = self::getParamWindows() . DIRNAME . 'Tosle/Static/' . $relativePath;
+            $directoryPath = getcwd() . '/Tosle/Static/' . $relativePath;
         }
         if(!file_exists($directoryPath)){
             mkdir($directoryPath, 0755, true);
@@ -85,6 +85,20 @@ class CoreFile
             $directoryPath = getcwd() . DIRNAME . 'Sql/tosle.sql';
         } else {
             $directoryPath = 'Sql/tosle.sql';
+        }
+        return $directoryPath;
+    }
+
+    /**
+     * @return string
+     * Permet d'obtenir l'url du fichier sql peu importe l'OS
+     */
+    static public function getRobotFile()
+    {
+        if(SYSTEM == "LINUX") {
+            $directoryPath = getcwd() . DIRNAME . '/robots.txt';
+        } else {
+            $directoryPath = 'robots.txt';
         }
         return $directoryPath;
     }

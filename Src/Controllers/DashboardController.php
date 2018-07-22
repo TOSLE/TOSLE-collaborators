@@ -29,6 +29,9 @@ class DashboardController extends CoreController
         $totalArticle = $Blog->getAllArticle();
         $totalGroup = $Group->getAllGroup();
 
+        $configTableLesson = $Lesson->getModalLatestLesson(12, 5, true);
+        $configTableBlog = $Blog->getModalLatestArticle(12, 5,true);
+
         $View = new View("dashboard", "dashboard");
         $View->setData("PageName", NAV_DASHBOARD . " " . GLOBAL_HOME_TEXT);
         $View->setData("totalUser", $totalUser);
@@ -37,6 +40,8 @@ class DashboardController extends CoreController
         $View->setData("totalMessage", $totalMessage);
         $View->setData("totalArticle", $totalArticle);
         $View->setData("totalGroup", $totalGroup);
+        $View->setData("configTableLesson", $configTableLesson);
+        $View->setData("configTableBlog", $configTableBlog);
     }
 
     /**
@@ -111,7 +116,7 @@ class DashboardController extends CoreController
         $View->setData("PageName", NAV_DASHBOARD . " " . NAV_DASHBOARD_BLOG);
 
 
-        $latestArticles = $BlogRepository->getModalLatestArticle(12);
+        $latestArticles = $BlogRepository->getModalAllArticle(12, null);
         $View->setData("latestBlogArticle", $latestArticles);
 
 
@@ -121,18 +126,9 @@ class DashboardController extends CoreController
         $modalStatBlog = $BlogRepository->getModalStats();
         $View->setData("statsBlog", $modalStatBlog);
 
-        $modalAllPublishPost = $BlogRepository->getModalAllArticle(12, 1);
-        $View->setData('modalAllPublishPost', $modalAllPublishPost);
-
-        $modalAllUnpublishPost = $BlogRepository->getModalAllArticle(12, 0);
-        $View->setData('modalAllUnpublishPost', $modalAllUnpublishPost);
-
-        $request = $BlogRepository->getRequestsend();
-
         /**
          * Affectation des données pour la vue
          */
-        $View->setData("idModalViewAllPosts", $latestArticles["global"]["icon_header"]["modal"]["target"]);
     }
 
     /**

@@ -94,7 +94,7 @@ class IndexController extends CoreController
      * @param $params
      * Signalement d'un commentaire
      */
-    function SignalementAction($params)
+    function signalementAction($params)
     {
         if(isset($params['URI'][0]) && is_numeric($params['URI'][0])){
             $comment = new CommentRepository($params['URI'][0]);
