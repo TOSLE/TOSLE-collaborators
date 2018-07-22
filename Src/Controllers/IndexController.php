@@ -154,4 +154,9 @@ class IndexController extends CoreController
         }
         header('Location:'.$this->Routes['homepage']);
     }
+
+    function legalAction($params)
+    {
+        $View = new View('default', 'Others/legalnotice');
+    }
 }
