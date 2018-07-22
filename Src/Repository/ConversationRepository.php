@@ -33,7 +33,7 @@ class ConversationRepository extends Conversation
                     }
                 }
                 foreach($array as $conversation){
-                    $destination = ($conversation->getIddest() == $_Auth->getId())?$conversation->getIdowner():$conversation->getIddest();
+                    $destination = ($_Auth->getStatus() < 2 && $conversation->getIddest() == $_Auth->getId())?$conversation->getIdowner():$conversation->getIddest();
                     $conversation->setDestination($destination);
                     $MessageConversation = new MessageConversation();
                     $arrayMessageId = $MessageConversation->getMessageConversation('conversation', $conversation->getId());
