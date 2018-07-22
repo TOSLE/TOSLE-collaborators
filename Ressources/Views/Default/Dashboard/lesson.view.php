@@ -9,7 +9,13 @@
 </div>
 <section id="right-column" class="container">
     <div class="row">
-        <?php $this->addModal("dashboard_bloc", $modalAddOption);?>
+        <div class="col-6">
+            <div class="container">
+                <div class="row">
+                    <?php $this->addModal("dashboard_bloc", $modalAddOption);?>
+                </div>
+            </div>
+        </div>
         <?php $this->addModal("dashboard_bloc", $modalStats);?>
         <?php $this->addModal("dashboard_bloc", $modalLastLesson);?>
     </div>
