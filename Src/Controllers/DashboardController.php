@@ -30,7 +30,7 @@ class DashboardController extends CoreController
         $totalGroup = $Group->getAllGroup();
 
         $configTableLesson = $Lesson->getModalLatestLesson(12, 5, true);
-        $configTableBlog = $Blog->getModalLatestArticle(8, 5,true);
+        $configTableBlog = $Blog->getModalLatestArticle(12, 5,true);
 
         $View = new View("dashboard", "dashboard");
         $View->setData("PageName", NAV_DASHBOARD . " " . GLOBAL_HOME_TEXT);

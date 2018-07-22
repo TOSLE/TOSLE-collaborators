@@ -143,10 +143,10 @@
                                     </section>
                                 </div>
                             </div>
-                            <?php $this->addModal("dashboard_bloc", $configTableBlog);?>
                         </div>
                         <div class="row">
                             <?php $this->addModal("dashboard_bloc", $configTableLesson);?>
+                            <?php $this->addModal("dashboard_bloc", $configTableBlog);?>
                         </div>
                     </div>
                 </section>
