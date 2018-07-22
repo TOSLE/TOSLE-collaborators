@@ -158,6 +158,12 @@ class Access
             "controller" => "index",
             "action" => "signalement",
             "security" => false
+        ],
+        "comment_delete" => [
+            "slug" => "delete-comment",
+            "controller" => "index",
+            "action" => "deletecom",
+            "security" => 1
         ]
     ];
 
@@ -185,8 +191,7 @@ class Access
         "chat/addconv" => 1,
         "chat/trash" => 2,
         "chat/untrash" => 2,
-        "chat/delete" => 2,
-        "index/deletecom" => 1,
+        "chat/delete" => 2
     ];
 
     private $urlFixe = [
