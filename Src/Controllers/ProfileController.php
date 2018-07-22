@@ -69,7 +69,7 @@ class ProfileController extends CoreController
                 $configFormEditUser = $Profile->editProfile($User->getId());
 
                 if(isset($params["POST"]) && !empty($params["POST"])){
-                    $resultAdd = $User->addUser($params["POST"], $User->getId());
+                    $resultAdd = $User->addUser($params["POST"], $User->getId(), $_FILES);
                     if($resultAdd == 1){
                         header('Location:'.$routes['profilehome']);
                     }

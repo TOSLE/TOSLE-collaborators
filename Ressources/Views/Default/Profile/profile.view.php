@@ -15,7 +15,7 @@
                     <div class="profile-container">
                         <section class="picture">
                             <div class="profil-picture">
-                                <img src="<?php echo DIRNAME; ?>Tosle/Users/Images/475899654133.jpg">
+                                <img src="<?php echo (!empty($this->Auth->getFileid()))?$this->Auth->getAvatar()->getPath().'/'.$this->Auth->getAvatar()->getName():DIRNAME.'Tosle/Users/Images/475899654133.jpg';?>">
                             </div>
                         </section>
                         <section class="info">

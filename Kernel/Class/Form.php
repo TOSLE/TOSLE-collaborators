@@ -81,7 +81,7 @@ class Form
     {
         $dataReturn = [];
         foreach($arrayData as $name => $content){
-            if(!stristr($name, "ckeditor") && !stristr($name, "select")){
+            if(!stristr($name, "ckeditor") && !stristr($name, "select") && !stristr($name, "image")){
                 $dataReturn[$name] = htmlspecialchars($content);
             } else {
                 $dataReturn[$name] = $content;

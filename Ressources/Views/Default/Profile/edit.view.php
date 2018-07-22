@@ -8,4 +8,4 @@
         </section>
     </div>
 </section>
-<?php $this->addModal("form", $config, $errors); ?>
+<?php $this->addModal("dashboard_form", $config, $errors); ?>

@@ -18,7 +18,7 @@ class User extends CoreSql{
     private $dateInscription;
     private $dateUpdated;
     private $groups = [];
-
+    private $avatar;
     public function __construct($_id = null){
         parent::__construct();
         if(isset($_id) && is_numeric($_id)){
@@ -30,6 +30,7 @@ class User extends CoreSql{
             ];
             $this->setWhereParameter($parameter);
             $this->getOneData();
+            $this->setAvatar($this->fileid);
             $this->groups = $Group->getGroupsUser($this->id);
         }
     }
@@ -70,13 +71,21 @@ class User extends CoreSql{
     {
         $this->newsletter = $newsletter;
     }
-    public function setFileId($fileid)
+    public function setFileid($fileid)
     {
         $this->fileid = $fileid;
     }
     public function setBirthDay($birthday)
     {
         $this->birthday = $birthday;
+    }
+    public function setAvatar($_id)
+    {
+        $this->avatar = new File($_id);
+    }
+    public function getAvatar()
+    {
+        return $this->avatar;
     }
 
 
@@ -284,8 +293,21 @@ class User extends CoreSql{
     public function configFormEdit()
     {
         return [
-            "config"=> ["method"=>"post", "action"=>"", "submit"=>"S'inscrire"],
+            "config"=> [
+                "method"=>"post",
+                "action"=>"",
+                "submit"=>"Sauvegarder",
+                "form_file"=>true,
+            ],
             "input"=> [
+                "image"=>[
+                    "type"=>"file",
+                    "required"=>false,
+                    "label"=>"Select your background image",
+                    "format"=>"PNG JPG JPEG",
+                    "description"=>"Authorised format (png, jpg, jpeg)",
+                    "multiple"=>false
+                ],
                 "firstname"=>[
                     "type"=>"text",
                     "placeholder"=>"Votre prénom",
