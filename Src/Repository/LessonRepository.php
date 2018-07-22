@@ -642,9 +642,13 @@ class LessonRepository extends Lesson
         return $pagination;
     }
 
-    public function getNumberLesson()
+    public function getAllLesson()
     {
-
+        $target = [
+            "id"
+        ];
+        $arrayAllLesson = $this->getData();
+        return count($arrayAllLesson);
     }
 
     public function getLessonOfChapter($_idChapter)

@@ -218,7 +218,8 @@ main {
     margin-bottom: 27px !important; }
   main #nav-dashboard ul li a {
     text-decoration: none;
-    display: inline-flex;
+    display: flex;
+    flex-direction: row;
     width: 100%;
     height: 100%;
     align-items: center; }
@@ -231,18 +232,20 @@ main {
       color: #3D3F3E; }
   main #left-side {
     display: flex;
-    flex-direction: column; }
-  main #right-side {
-    flex-direction: row; }
+    flex-direction: column;
+    max-width: 175px; }
+  main .right-side {
+    margin-top: -15px; }
   main #nav-dashboard {
     background-color: #FFFFFF;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
     border: solid 0.5px #BDBDBDBD;
     margin-bottom: 27px; }
     main #nav-dashboard li {
       height: 60px;
       border-right: solid 0.5px #BDBDBDBD;
       border-top: solid 0.5px #BDBDBDBD;
-      border-left: solid 1.5px #BDBDBDBD; }
+      width: 100%; }
       main #nav-dashboard li:last-child {
         border-bottom: solid 0.5px #BDBDBDBD; }
     main #nav-dashboard p {
@@ -250,9 +253,8 @@ main {
       color: #1A5CCB;
       margin-left: 20px; }
     main #nav-dashboard i {
-      /** todo a mofidier **/
-      margin: auto;
-      margin-right: 29px; }
+      margin-left: auto;
+      padding-right: 15px; }
   main .block-dash {
     background-color: #FFFFFF;
     box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
@@ -270,7 +272,7 @@ main {
         display: flex;
         align-self: flex-end;
         margin-left: auto;
-        padding-right: 15px; }
+        padding-right: 10px; }
       main .block-dash .title a:link {
         text-decoration: none; }
       main .block-dash .title > h4 {
@@ -310,7 +312,6 @@ main {
     flex-direction: row;
     align-items: center; }
   main .column-col-5 > ul > li {
-    /** todo a modifier essayer de tout regrouper column + row**/
     width: 100%;
     max-width: 211px;
     height: 30px;
@@ -406,6 +407,17 @@ main {
         height: 500px;
         width: 500px;
         padding: 10px; }
+  main .responsive-menu {
+    display: none; }
+  @media screen and (max-width: 1407px) {
+    main .responsive-menu {
+      display: block; }
+    main .large-menu {
+      display: none; }
+    main #left-side {
+      max-width: 480px;
+      justify-content: center;
+      margin: auto; } }
 
 footer {
   background-color: #74858D;
