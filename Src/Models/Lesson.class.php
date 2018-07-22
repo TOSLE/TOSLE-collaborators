@@ -101,7 +101,7 @@ class Lesson extends CoreSql
     public function getDatecreatefeed()
     {
         $date = new DateTime($this->datecreate);
-        return $date->format("D, d M y H:i:s O");
+        return $date->format("D, d M Y H:i:s O");
     }
 
     /**
