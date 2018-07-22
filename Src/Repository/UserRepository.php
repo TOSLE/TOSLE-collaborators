@@ -171,7 +171,11 @@ class UserRepository extends User
 
     public function addUser($_post, $_idUser = null, $_file = null)
     {
-        $configForm = $this->configFormAdd();
+        if(isset($_file)){
+            $configForm = $this->configFormEdit();
+        } else {
+            $configForm = $this->configFormAdd();
+        }
         $errors = Form::checkForm($configForm, $_post);
         $_post = Form::secureData($_post);
 
@@ -186,7 +190,7 @@ class UserRepository extends User
                 if(empty($errors) || is_numeric($errors)){
                     if( $errors != 1) {
                         $File = new FileRepository();
-                        $arrayFile = $File->addFile($_file, $this->configFormEdit(), "Profile/Avatar", "Avatar");
+                        $arrayFile = $File->addFile($_file, $configForm, "Profile/Avatar", "Avatar");
                         if(!is_numeric($arrayFile)){
                             if(array_key_exists('CODE_ERROR', $arrayFile)){
                                 return $arrayFile;

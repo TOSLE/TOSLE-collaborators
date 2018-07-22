@@ -12,9 +12,20 @@
         </div>
     </section>
     <?php else:?>
-        <?php foreach($errors as $name => $value):?>
-            <?php echo $name. " ".$value;?>
-        <?php endforeach; ?>
+        <section class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div>
+                        <h2>Une erreur est détectée sur votre fichier</h2>
+                        <?php foreach($errors as $name => $value):?>
+                            <p> Type d'erreur : <?php echo $name;?></p>
+                            <p>Message d'erreur : <?php echo $value;?></p>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     <?php endif;?>
 <?php endif;?>
 <form method="<?php echo $config['config']['method'];?>" action="<?php echo $config['config']['action'];?>" <?php echo (isset($config['config']['form_file']) && $config['config']['form_file'])?"enctype='multipart/form-data'":"";?>>
