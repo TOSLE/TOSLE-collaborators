@@ -127,11 +127,6 @@ class BlogRepository extends Blog
             if(isset($max)) {
                 $this->setLimitParameter($max, $min);
             }
-            $this->setWhereParameter([
-                "LIKE" => [
-                    "status" => $status
-                ]
-            ]);
             return $this->getData($target);
         }
         return false;
@@ -140,11 +135,13 @@ class BlogRepository extends Blog
 
     /**
      * @param int $colSize
+     * @param int|null $limit
+     * @param bool|null $access
      * @return array
      * Permet de récupérer la configuration de la modal "LastArticle"
      * Le paramètre permet de définir une largeur à notre modal
      */
-    public function getModalLatestArticle($colSize = 12)
+    public function getModalLatestArticle($colSize = 12, $limit = 5,$access= null)
     {
         $routes = Access::getSlugsById();
         $ViewLatestBloc = new DashboardBlocModal();
@@ -176,7 +173,10 @@ class BlogRepository extends Blog
             2 => "td-content-date",
             3 => "td-content-action"
         ]);
-        $ViewLatestBloc->setTableBodyContent($this->getLatestArticle(5), true);
+        if(isset($access)){
+            $ViewLatestBloc->setIconHeader("dashboard_blog", "access");
+        }
+        $ViewLatestBloc->setTableBodyContent($this->getLatestArticle($limit), true);
         $ViewLatestBloc->setArrayHref("edit", $routes["blog/edit"]);
         $ViewLatestBloc->setArrayHref("view", $routes["view_blog_article"]);
         return $ViewLatestBloc->getArrayData();
@@ -193,10 +193,7 @@ class BlogRepository extends Blog
     {
         $routes = Access::getSlugsById();
         $ViewArticleBloc = new DashboardBlocModal();
-        if($status === 1)
-            $ViewArticleBloc->setTitle("View article with the status : Publish");
-        else if ($status === 0)
-            $ViewArticleBloc->setTitle("View article with the status : Unpublish");
+        $ViewArticleBloc->setTitle("Your articles");
         $ViewArticleBloc->setTableHeader([
             1 => "Titre",
             2 => "Date de publication",
@@ -223,7 +220,7 @@ class BlogRepository extends Blog
             2 => "td-content-date",
             3 => "td-content-action"
         ]);
-        $ViewArticleBloc->setTableBodyContent($this->getAllArticleByStatus($status), true);
+        $ViewArticleBloc->setTableBodyContent($this->getAllArticleByStatus(), true);
         $ViewArticleBloc->setArrayHref("edit", $routes["blog/edit"]);
         $ViewArticleBloc->setArrayHref("view", $routes["view_blog_article"]);
         return $ViewArticleBloc->getArrayData();
@@ -573,5 +570,14 @@ class BlogRepository extends Blog
                 return $_contentArticle;
                 break;
         }
+    }
+    public function getAllArticle(){
+
+        $target = [
+            "id"
+        ];
+
+        $arrayAllArticle = $this->getData();
+        return count($arrayAllArticle);
     }
 }

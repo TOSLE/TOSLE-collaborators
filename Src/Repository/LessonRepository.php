@@ -21,33 +21,29 @@ class LessonRepository extends Lesson
         $routes = Access::getSlugsById();
 
         $BlocGeneral->setColSizeBloc($_colsize);
-        $BlocGeneral->setTitle("Menu général");
+        $BlocGeneral->setTitle("Menu general");
         $BlocGeneral->setTableHeader([
-            1 => "Name of action",
             2 => "Action"
         ]);
         $BlocGeneral->setTableBodyClass([
-            1 => "td-content-text",
             2 => "td-content-action"
         ]);
         $BlocGeneral->setColSizeBloc(6);
         $BlocGeneral->setTableBodyContent([
             0 => [
-                1 => "Créer un nouveau cours",
                 "button_action" => [
                     "type" => "href",
                     "target" => $routes["class/add"]."/lesson",
                     "color" => "tosle",
-                    "text" => "New post"
+                    "text" => "Add lesson"
                 ]
             ],
             1 => [
-                1 => "Créer un chapitre",
                 "button_action" => [
                     "type" => "href",
                     "target" => $routes["chapter/add"]."/chapter",
                     "color" => "tosle",
-                    "text" => "New post"
+                    "text" => "Add chapter"
                 ]
             ]
         ]);
@@ -102,11 +98,13 @@ class LessonRepository extends Lesson
     }
     /**
      * @param int $colSize
+     * @param int|null $limit
+     * @param bool|null $access
      * @return array
      * Permet de récupérer la configuration de la modal "LastArticle"
      * Le paramètre permet de définir une largeur à notre modal
      */
-    public function getModalLatestLesson($colSize = 12)
+    public function getModalLatestLesson($colSize = 12, $limit = null, $access = null)
     {
         $routes = Access::getSlugsById();
         $ViewLatestBloc = new DashboardBlocModal();
@@ -136,7 +134,10 @@ class LessonRepository extends Lesson
             2 => "td-content-date",
             4 => "td-content-action"
         ]);
-        $ViewLatestBloc->setTableBodyContent($this->getLastLesson(), true);
+        if(isset($access)){
+            $ViewLatestBloc->setIconHeader("dashboard_lesson", "access");
+        }
+        $ViewLatestBloc->setTableBodyContent($this->getLastLesson($limit), true);
         $ViewLatestBloc->setActionTargetButton("Chapters", $routes['dashboard_chapter']);
         $ViewLatestBloc->setArrayHref("edit", $routes["class/edit"]);
         return $ViewLatestBloc->getArrayData();
@@ -221,10 +222,11 @@ class LessonRepository extends Lesson
     }
 
     /**
+     * @param int|null $limit
      * @return array
      * Retourne les dernières lessons, le nombre dépend du paramètre qui par défaut est à 5
      */
-    public function getLastLesson()
+    public function getLastLesson($limit = null)
     {
         $target = [
             'id',
@@ -236,6 +238,7 @@ class LessonRepository extends Lesson
             'datecreate'
         ];
         $this->setOrderByParameter(["id" => "DESC"]);
+        $this->setLimitParameter($limit);
         return $this->getData($target);
     }
 
@@ -642,9 +645,13 @@ class LessonRepository extends Lesson
         return $pagination;
     }
 
-    public function getNumberLesson()
+    public function getAllLesson()
     {
-
+        $target = [
+            "id"
+        ];
+        $arrayAllLesson = $this->getData();
+        return count($arrayAllLesson);
     }
 
     public function getLessonOfChapter($_idChapter)

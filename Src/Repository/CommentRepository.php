@@ -258,4 +258,14 @@ class CommentRepository extends Comment
             'object' => $object
         ];
     }
+
+    public function getAllComment() {
+
+        $target = [
+            "id"
+        ];
+
+        $arrayComment = $this->getData();
+        return count($arrayComment);
+    }
 }

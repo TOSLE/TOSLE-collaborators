@@ -134,7 +134,7 @@ class PortfolioController
             } else {
                 echo "L'article demandé n'est pas disponible ou n'existe pas";
             }
-        } else {git
+        } else {
             header('Location:'.Access::getSlugsById()["portfoliohome"]);
         }
 

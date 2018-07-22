@@ -346,10 +346,12 @@ class Access
         $Acces = new Access();
         $data = [];
         foreach ($Acces->getAccess() as $key => $value){
-            $data[$key] = "".DIRNAME.substr($language,0,2)."/".$value["slug"];
+            if($value['security'] < 2){
+                $data[$key] = "/".$value["slug"];
+            }
         }
         foreach ($Acces->getUrlFixe() as $key => $value){
-            $data[$key] = "".DIRNAME.$value;
+            $data[$key] = $value;
         }
         return $data;
     }
