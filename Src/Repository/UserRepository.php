@@ -221,6 +221,7 @@ class UserRepository extends User
             $this->save();
 
             $_SESSION['token'] = $this->getToken();
+            $_SESSION['email'] = $this->getEmail();
             return 1;
         } else {
             return $errors;
