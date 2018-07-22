@@ -110,7 +110,8 @@ class UserRepository extends User
             "firstname",
             "lastname",
             "email",
-            "status"
+            "status",
+            "fileid"
         ];
         $parameter = [
             "LIKE" => [
