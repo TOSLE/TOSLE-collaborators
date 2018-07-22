@@ -33,7 +33,7 @@ class ConversationRepository extends Conversation
                     }
                 }
                 foreach($array as $conversation){
-                    $destination = ($_Auth->getStatus() < 2 && $conversation->getIddest() == $_Auth->getId())?$conversation->getIdowner():$conversation->getIddest();
+                    $destination = ($conversation->getIddest() == $_Auth->getId())?$conversation->getIdowner():$conversation->getIddest();
                     $conversation->setDestination($destination);
                     $MessageConversation = new MessageConversation();
                     $arrayMessageId = $MessageConversation->getMessageConversation('conversation', $conversation->getId());
@@ -53,7 +53,8 @@ class ConversationRepository extends Conversation
             $this->setWhereParameter($parameter);
             $array = $this->getData();
             foreach($array as $conversation){
-                $conversation->setDestination($conversation->getIddest());
+                $destination = ($conversation->getIddest() == $_Auth->getId())?$conversation->getIdowner():$conversation->getIddest();
+                $conversation->setDestination($destination);
                 $MessageConversation = new MessageConversation();
                 $arrayMessageId = $MessageConversation->getMessageConversation('conversation', $conversation->getId());
                 $conversation->setMessages($arrayMessageId);
