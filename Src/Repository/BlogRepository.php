@@ -127,11 +127,6 @@ class BlogRepository extends Blog
             if(isset($max)) {
                 $this->setLimitParameter($max, $min);
             }
-            $this->setWhereParameter([
-                "LIKE" => [
-                    "status" => $status
-                ]
-            ]);
             return $this->getData($target);
         }
         return false;
@@ -198,10 +193,7 @@ class BlogRepository extends Blog
     {
         $routes = Access::getSlugsById();
         $ViewArticleBloc = new DashboardBlocModal();
-        if($status === 1)
-            $ViewArticleBloc->setTitle("View article with the status : Publish");
-        else if ($status === 0)
-            $ViewArticleBloc->setTitle("View article with the status : Unpublish");
+        $ViewArticleBloc->setTitle("Your articles");
         $ViewArticleBloc->setTableHeader([
             1 => "Titre",
             2 => "Date de publication",
@@ -228,7 +220,7 @@ class BlogRepository extends Blog
             2 => "td-content-date",
             3 => "td-content-action"
         ]);
-        $ViewArticleBloc->setTableBodyContent($this->getAllArticleByStatus($status), true);
+        $ViewArticleBloc->setTableBodyContent($this->getAllArticleByStatus(), true);
         $ViewArticleBloc->setArrayHref("edit", $routes["blog/edit"]);
         $ViewArticleBloc->setArrayHref("view", $routes["view_blog_article"]);
         return $ViewArticleBloc->getArrayData();

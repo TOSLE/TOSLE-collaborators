@@ -116,7 +116,7 @@ class DashboardController extends CoreController
         $View->setData("PageName", NAV_DASHBOARD . " " . NAV_DASHBOARD_BLOG);
 
 
-        $latestArticles = $BlogRepository->getModalLatestArticle(12);
+        $latestArticles = $BlogRepository->getModalAllArticle(12, null);
         $View->setData("latestBlogArticle", $latestArticles);
 
 
@@ -126,18 +126,9 @@ class DashboardController extends CoreController
         $modalStatBlog = $BlogRepository->getModalStats();
         $View->setData("statsBlog", $modalStatBlog);
 
-        $modalAllPublishPost = $BlogRepository->getModalAllArticle(12, 1);
-        $View->setData('modalAllPublishPost', $modalAllPublishPost);
-
-        $modalAllUnpublishPost = $BlogRepository->getModalAllArticle(12, 0);
-        $View->setData('modalAllUnpublishPost', $modalAllUnpublishPost);
-
-        $request = $BlogRepository->getRequestsend();
-
         /**
          * Affectation des données pour la vue
          */
-        $View->setData("idModalViewAllPosts", $latestArticles["global"]["icon_header"]["modal"]["target"]);
     }
 
     /**
