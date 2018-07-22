@@ -12,7 +12,9 @@ class GeneratorXML
     private $fileName;
     private $xmlDoc;
     private $channel;
+    private $rss;
     private $routes;
+    private $atom;
 
     /**
      * GeneratorXML constructor.
@@ -75,8 +77,18 @@ class GeneratorXML
     /**
      * Initialise les données du site internet en cours
      */
-    public function getWebSiteData()
+    public function getWebSiteData($key_link = null)
     {
+        $this->rss = $this->xmlDoc->createElement('rss');
+        $this->rss->setAttribute('xmlns:atom', 'http://www.w3.org/2005/Atom');
+        $this->rss->setAttribute('version', '2.0');
+
+        $this->atom = $this->xmlDoc->createElement('atom:link');
+        $this->atom->setAttribute('type', 'application/rss+xml');
+        if(isset($key_link)){
+            $this->atom->setAttribute('href', Installer::url().'/'.$this->routes[$key_link]);
+        }
+        $this->atom->setAttribute('rel', 'self');
         $this->channel = $this->xmlDoc->createElement('channel');
         $title = $this->xmlDoc->createElement('title', 'Le site de tosle');
         $link = $this->xmlDoc->createElement('link', $_SERVER['SERVER_NAME']);
@@ -86,6 +98,7 @@ class GeneratorXML
         $copyright = $this->xmlDoc->createElement('copyright', 'TOSLE');
         $generator = $this->xmlDoc->createElement('generator', 'TOSLE');
         $lastBuildDate = $this->xmlDoc->createElement('lastBuildDate', date('c'));
+        $this->channel->appendChild($this->atom);
         $this->channel->appendChild($title);
         $this->channel->appendChild($link);
         $this->channel->appendChild($description);
@@ -112,7 +125,7 @@ class GeneratorXML
      */
     public function setBlogFeed($content)
     {
-        $this->getWebSiteData();
+        $this->getWebSiteData('rss_blog');
         $BlogRepository = new BlogRepository();
         if(isset($content) && !empty($content)){
             foreach($content as $blog){
@@ -135,7 +148,8 @@ class GeneratorXML
             $item->appendChild($description);
             $this->channel->appendChild($item);
         }
-        $this->xmlDoc->appendChild($this->channel);
+        $this->rss->appendChild($this->channel);
+        $this->xmlDoc->appendChild($this->rss);
     }
 
     /**
@@ -144,7 +158,7 @@ class GeneratorXML
      */
     public function setLessonFeed($content)
     {
-        $this->getWebSiteData();
+        $this->getWebSiteData('rss_lesson');
         if(isset($content) && !empty($content)){
             foreach($content as $lesson){
                 if(!empty($lesson->getChapter())){
@@ -170,7 +184,8 @@ class GeneratorXML
             $item->appendChild($description);
             $this->channel->appendChild($item);
         }
-        $this->xmlDoc->appendChild($this->channel);
+        $this->rss->appendChild($this->channel);
+        $this->xmlDoc->appendChild($this->rss);
     }
 
     /**
