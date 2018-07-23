@@ -46,7 +46,7 @@ body > header {
         body > header > section > div > .left-block > p {
           font-size: 1.7em;
           line-height: 60px;
-          color: #1A5CCB; }
+          color: #1a5ccbdb; }
       body > header > section > div > .right-block {
         flex-basis: 80%;
         text-align: right; }
@@ -63,7 +63,7 @@ body > header {
           cursor: pointer;
           transition: color 0.2s; }
           body > header > section > div > .right-block > i:hover {
-            color: #1A5CCB; }
+            color: #1a5ccbdb; }
         body > header > section > div > .right-block .profil-icon {
           display: inline-block;
           cursor: pointer; }
@@ -85,9 +85,9 @@ body > header {
             font-size: 1.5em; }
           body > header > section > div > .right-block .profil-icon:hover > .avatar-profil {
             background-color: rgba(26, 92, 203, 0.05);
-            border-color: #1A5CCB; }
+            border-color: #1a5ccbdb; }
           body > header > section > div > .right-block .profil-icon:hover > i {
-            color: #1A5CCB; }
+            color: #1a5ccbdb; }
   body > header > nav {
     height: 60px;
     border-bottom: 1px solid #E5E5E5; }
@@ -117,9 +117,14 @@ body > header {
         body > header > nav > ul > li.burgermenu {
           display: none; }
         body > header > nav > ul > li.current {
-          background-color: #1A5CCB; }
+          background-color: #1a5ccbdb; }
           body > header > nav > ul > li.current > a {
             color: #FFFFFF; }
+
+.logo-header img {
+  width: 150px;
+  height: 53px;
+  margin-top: 3px; }
 
 #menu-header-section {
   width: 250px;
@@ -157,7 +162,7 @@ body > header {
           padding: 15px 0;
           transition: color 0.2s; }
         #menu-header-section > .content-menu-header > ul > li:hover {
-          background-color: #1A5CCB; }
+          background-color: #1a5ccbdb; }
           #menu-header-section > .content-menu-header > ul > li:hover > a {
             color: #FFFFFF; }
         #menu-header-section > .content-menu-header > ul > li.separator {
@@ -190,8 +195,8 @@ main {
           main > .left-column > .content-box-left > .btn-tosle.btn-close-window > p {
             font-size: 1em; }
         main > .left-column > .content-box-left > .btn-tosle.new-message {
-          background-color: #1A5CCB;
-          border: 1px solid #1A5CCB;
+          background-color: #1a5ccbdb;
+          border: 1px solid #1a5ccbdb;
           color: #FFFFFF; }
         main > .left-column > .content-box-left > .btn-tosle > i {
           font-size: 1.5em;
@@ -222,9 +227,9 @@ main {
             text-align: right;
             flex-basis: 100%; }
           main > .left-column > .content-box-left > ul > li > a:hover {
-            color: #1A5CCB; }
+            color: #1a5ccbdb; }
         main > .left-column > .content-box-left > ul > li.active > a {
-          color: #1A5CCB; }
+          color: #1a5ccbdb; }
       main > .left-column > .content-box-left:nth-child(2) {
         margin-top: 15px; }
       main > .left-column > .content-box-left > .profil-info {
@@ -236,7 +241,7 @@ main {
           word-break: break-all; }
           main > .left-column > .content-box-left > .profil-info > .contact > a {
             text-decoration: none;
-            color: #1A5CCB; }
+            color: #1a5ccbdb; }
       main > .left-column > .content-box-left > .profil-stats {
         margin-top: 50px;
         display: flex;
@@ -333,10 +338,10 @@ main {
           main > .middle-column > .content-message > .message-info:hover > .parameter-message > i, main > .middle-column > .content-message > .message-info.active > .parameter-message > i {
             color: black; }
         main > .middle-column > .content-message > .message-info:hover > .header-message > .logo-header-message, main > .middle-column > .content-message > .message-info.active > .header-message > .logo-header-message {
-          background-color: #1A5CCB;
+          background-color: #1a5ccbdb;
           color: #FFFFFF; }
         main > .middle-column > .content-message > .message-info:hover > .header-message > .id-header-message, main > .middle-column > .content-message > .message-info.active > .header-message > .id-header-message {
-          color: #1A5CCB; }
+          color: #1a5ccbdb; }
         main > .middle-column > .content-message > .message-info:hover > .main-message > p, main > .middle-column > .content-message > .message-info.active > .main-message > p {
           color: #000000; }
         main > .middle-column > .content-message > .message-info:hover > .footer-message > p, main > .middle-column > .content-message > .message-info.active > .footer-message > p {
@@ -394,7 +399,7 @@ main {
         main .right-column > .content-right-column > .container-message > .message-owner {
           padding: 5px 10px 5px 10%; }
           main .right-column > .content-right-column > .container-message > .message-owner > p:first-child {
-            background-color: #1A5CCB;
+            background-color: #1a5ccbdb;
             border-radius: 5px 5px 0px 5px;
             width: 100%;
             padding: 10px 15px;

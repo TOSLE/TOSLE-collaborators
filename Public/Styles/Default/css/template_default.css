@@ -132,7 +132,7 @@ Override buttons OSPAF
             flex-direction: column;
             margin-left: 10px; }
             html .article > .content-article .comments-article .comment > div:nth-child(2) .name-user {
-              color: #1A5CCB;
+              color: #1a5ccbdb;
               font-size: 16px;
               font-weight: 600; }
             html .article > .content-article .comments-article .comment > div:nth-child(2) .content {
@@ -151,7 +151,7 @@ Override buttons OSPAF
             margin-left: auto; }
             html .article > .content-article .comments-article .comment .signal .material-icons {
               cursor: pointer;
-              color: #1A5CCB; }
+              color: #1a5ccbdb; }
       html .article > .content-article .container-editor {
         margin-bottom: 40px; }
   html .header-blog-container .icons-list {
@@ -160,7 +160,7 @@ Override buttons OSPAF
       color: #FFF;
       text-decoration: none;
       border: 1px solid #FFF;
-      background-color: #1A5CCB;
+      background-color: #1a5ccbdb;
       border-radius: 3.5px;
       padding: 3.5px;
       text-align: center;
@@ -256,7 +256,7 @@ Override buttons OSPAF
       color: #FFF;
       text-decoration: none;
       border: 1px solid #FFF;
-      background-color: #1A5CCB;
+      background-color: #1a5ccbdb;
       border-radius: 3.5px;
       padding: 3.5px;
       text-align: center;
@@ -286,7 +286,7 @@ Override buttons OSPAF
     border-radius: 5px; }
   html .bloc-login-container h2, html .bloc-signup-container h2 {
     text-align: center;
-    color: #1A5CCB; }
+    color: #1a5ccbdb; }
   html .bloc-login-container p, html .bloc-signup-container p {
     text-align: center;
     font-size: 0.9em;
@@ -333,7 +333,7 @@ Override buttons OSPAF
           transition: 0.2s; }
           html .content-comment > .fade-comment > .comment-content-option > a:hover {
             text-decoration: underline;
-            color: #1A5CCB; }
+            color: #1a5ccbdb; }
     html .content-comment:last-child {
       border-bottom: none; }
   html .lesson-description {
@@ -354,15 +354,15 @@ Override buttons OSPAF
         text-decoration: none; }
         html .lesson-chapters > ul > a > li {
           padding: 7.5px 15px;
-          border-left: 2px solid #1A5CCB;
+          border-left: 2px solid #1a5ccbdb;
           opacity: 0.7;
           transition: 0.2s; }
           html .lesson-chapters > ul > a > li.active, html .lesson-chapters > ul > a > li:hover {
             padding: 7.5px 15px;
-            border-left: 15px solid #1A5CCB;
+            border-left: 15px solid #1a5ccbdb;
             opacity: 1; }
           html .lesson-chapters > ul > a > li.active {
-            color: #1A5CCB; }
+            color: #1a5ccbdb; }
   html .chapter-bloc {
     background-color: white;
     padding: 15px; }
@@ -371,6 +371,10 @@ Override buttons OSPAF
       border-bottom: 1px solid; }
     html .chapter-bloc .content-chapter {
       margin-top: 25px; }
+  html .logo-header img {
+    width: 150px;
+    height: 53px;
+    margin-top: 3px; }
   html .profile {
     display: flex;
     background-color: #FFFFFF;
@@ -385,7 +389,7 @@ Override buttons OSPAF
         border-radius: 50%;
         width: 200px;
         height: 200px;
-        border: solid 1.5px #1A5CCB;
+        border: solid 1.5px #1a5ccbdb;
         display: flex;
         overflow: hidden;
         margin-top: 30px;
@@ -412,7 +416,7 @@ Override buttons OSPAF
         html .profile .info section span:nth-child(2) {
           font-size: 16px; }
       html .profile .info .name span {
-        color: #1A5CCB !important;
+        color: #1a5ccbdb !important;
         font-size: 24px !important;
         font-weight: 600 !important; }
   html .container-content-profile {
@@ -427,7 +431,7 @@ Override buttons OSPAF
       margin-bottom: 40px; }
       html .container-content-profile section h2 {
         margin: 10px 0 10px 20px;
-        color: #1A5CCB; }
+        color: #1a5ccbdb; }
     html .container-content-profile .comment {
       display: flex;
       flex-direction: column; }
@@ -436,7 +440,7 @@ Override buttons OSPAF
         width: 100%; }
         html .container-content-profile .comment .container .title-tab {
           font-size: 20px;
-          color: #1A5CCB;
+          color: #1a5ccbdb;
           font-weight: 600; }
         html .container-content-profile .comment .container ul {
           display: flex; }
@@ -462,7 +466,7 @@ Override buttons OSPAF
       flex-direction: column; }
       html .container-message .message i {
         font-size: 80px;
-        color: #1A5CCB;
+        color: #1a5ccbdb;
         margin-bottom: 20px; }
       html .container-message .message h2 {
         margin-bottom: 20px; }
@@ -472,7 +476,7 @@ Override buttons OSPAF
         text-decoration: none; }
       html .container-message .message a {
         font-weight: 600;
-        color: #1A5CCB; }
+        color: #1a5ccbdb; }
 
 #menu-header-section {
   width: 250px;
@@ -510,7 +514,7 @@ Override buttons OSPAF
           padding: 15px 0;
           transition: color 0.2s; }
         #menu-header-section > .content-menu-header > ul > li:hover {
-          background-color: #1A5CCB; }
+          background-color: #1a5ccbdb; }
           #menu-header-section > .content-menu-header > ul > li:hover > a {
             color: #FFFFFF; }
         #menu-header-section > .content-menu-header > ul > li.separator {
@@ -530,7 +534,7 @@ body > header {
         body > header > section > div > .left-block > p {
           font-size: 1.7em;
           line-height: 60px;
-          color: #1A5CCB; }
+          color: #1a5ccbdb; }
       body > header > section > div > .right-block {
         flex-basis: 80%;
         text-align: right; }
@@ -547,7 +551,7 @@ body > header {
           cursor: pointer;
           transition: color 0.2s; }
           body > header > section > div > .right-block > i:hover {
-            color: #1A5CCB; }
+            color: #1a5ccbdb; }
         body > header > section > div > .right-block .profil-icon {
           display: inline-block;
           cursor: pointer; }
@@ -569,9 +573,9 @@ body > header {
             font-size: 1.5em; }
           body > header > section > div > .right-block .profil-icon:hover > .avatar-profil {
             background-color: rgba(26, 92, 203, 0.05);
-            border-color: #1A5CCB; }
+            border-color: #1a5ccbdb; }
           body > header > section > div > .right-block .profil-icon:hover > i {
-            color: #1A5CCB; }
+            color: #1a5ccbdb; }
   body > header > nav {
     height: 60px;
     border-bottom: 1px solid #E5E5E5; }
@@ -599,7 +603,7 @@ body > header {
         body > header > nav > ul > li:hover {
           background-color: rgba(0, 0, 0, 0.1); }
         body > header > nav > ul > li.current {
-          background-color: #1A5CCB; }
+          background-color: #1a5ccbdb; }
           body > header > nav > ul > li.current > a {
             color: #FFFFFF; }
 

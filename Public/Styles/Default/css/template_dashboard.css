@@ -33,7 +33,7 @@ body > header {
         body > header > section > div > .left-block > p {
           font-size: 1.7em;
           line-height: 60px;
-          color: #1A5CCB; }
+          color: #1a5ccbdb; }
       body > header > section > div > .right-block {
         flex-basis: 80%;
         text-align: right; }
@@ -50,7 +50,7 @@ body > header {
           cursor: pointer;
           transition: color 0.2s; }
           body > header > section > div > .right-block > i:hover {
-            color: #1A5CCB; }
+            color: #1a5ccbdb; }
         body > header > section > div > .right-block .profil-icon {
           display: inline-block;
           cursor: pointer; }
@@ -72,9 +72,9 @@ body > header {
             font-size: 1.5em; }
           body > header > section > div > .right-block .profil-icon:hover > .avatar-profil {
             background-color: rgba(26, 92, 203, 0.05);
-            border-color: #1A5CCB; }
+            border-color: #1a5ccbdb; }
           body > header > section > div > .right-block .profil-icon:hover > i {
-            color: #1A5CCB; }
+            color: #1a5ccbdb; }
   body > header > nav {
     height: 60px;
     border-bottom: 1px solid #E5E5E5; }
@@ -102,7 +102,7 @@ body > header {
         body > header > nav > ul > li:hover {
           background-color: rgba(0, 0, 0, 0.1); }
         body > header > nav > ul > li.current {
-          background-color: #1A5CCB; }
+          background-color: #1a5ccbdb; }
           body > header > nav > ul > li.current > a {
             color: #FFFFFF; }
 
@@ -142,7 +142,7 @@ body > header {
           padding: 15px 0;
           transition: color 0.2s; }
         #menu-header-section > .content-menu-header > ul > li:hover {
-          background-color: #1A5CCB; }
+          background-color: #1a5ccbdb; }
           #menu-header-section > .content-menu-header > ul > li:hover > a {
             color: #FFFFFF; }
         #menu-header-section > .content-menu-header > ul > li.separator {
@@ -167,7 +167,7 @@ main {
         display: block;
         flex-basis: 5%;
         padding-top: 2.5px;
-        color: #1A5CCB; }
+        color: #1a5ccbdb; }
         main .content-backoffice > .header-content > a > i {
           line-height: 150%; }
         main .content-backoffice > .header-content > a.desactive {
@@ -199,7 +199,7 @@ main {
             main .content-backoffice > .main-content > table > tbody > tr > td.td-content-number {
               text-align: center; }
             main .content-backoffice > .main-content > table > tbody > tr > td.td-content-icone {
-              color: #1A5CCB;
+              color: #1a5ccbdb;
               text-align: center; }
             main .content-backoffice > .main-content > table > tbody > tr > td.td-content-action {
               text-align: center; }
@@ -250,7 +250,7 @@ main {
         border-bottom: solid 0.5px #BDBDBDBD; }
     main #nav-dashboard p {
       font-weight: 400;
-      color: #1A5CCB;
+      color: #1a5ccbdb;
       margin-left: 20px; }
     main #nav-dashboard i {
       margin-left: auto;
@@ -305,8 +305,8 @@ main {
       margin-left: 16px;
       font-size: 14px; }
   main .blue {
-    fill: #1A5CCB;
-    color: #1A5CCB; }
+    fill: #1a5ccbdb;
+    color: #1a5ccbdb; }
   main .column-col-5 ul {
     display: flex;
     flex-direction: row;
@@ -375,7 +375,7 @@ main {
             height: 60px; }
     main .dashboard-bloc .icons-dashboard {
       float: right;
-      color: #1A5CCB; }
+      color: #1a5ccbdb; }
       main .dashboard-bloc .icons-dashboard i {
         font-size: 1.8em; }
   main .row-stat .container .row {
@@ -418,6 +418,10 @@ main {
       max-width: 480px;
       justify-content: center;
       margin: auto; } }
+  main .logo-header img {
+    width: 150px;
+    height: 53px;
+    margin-top: 3px; }
 
 footer {
   background-color: #74858D;
