@@ -14,7 +14,7 @@
                         <i class="material-icons">
                             filter_list
                         </i>
-                        <p>Modifier le filtre</p>
+                        <p>Modifier l'affichage</p>
                     </a>
                 </div>
             </div>
@@ -71,6 +71,7 @@
     <div class="modal-window">
         <div class="modal-header">
             <i class="modal-header-icon material-icons" data-type="close-modal">close</i>
+            <h2>Modify the display filter of article</h2>
             <h2>Modifier le filtre d'affichage des blogs</h2>
         </div>
         <div class="modal-main">
@@ -80,9 +81,9 @@
                         <div>
                             <form action="" method="get">
                                 <div class="form-group-base">
-                                <label for="colsize">Nombre de blog par ligne</label>
+                                <label for="colsize">Number of blog per line</label>
                                 <select id="colsize" name="colsize">
-                                    <option value="default">Votre choix</option>
+                                    <option value="default">Your choice</option>
                                     <option value="4">3</option>
                                     <option value="6">2</option>
                                     <option value="12">1</option>
