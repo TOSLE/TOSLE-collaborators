@@ -329,7 +329,7 @@ class User extends CoreSql{
                     'label' => FORM_USER_EMAIL_PLACEHOLDER,
                     "required"=>true
                 ],
-                "pwd"=>[
+                "pwdConfirm"=>[
                     "type"=>"password",
                     'label' => FORM_USER_PASSWORD_SECURITY_LABEL,
                     "placeholder"=> FORM_USER_PASSWORD_SECURITY_PLACEHOLDER,

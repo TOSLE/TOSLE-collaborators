@@ -31,8 +31,17 @@
                                 <span><?php echo $profile_info['email']; ?></span>
                             </section>
                             <section class="group">
-                                <span>Group:</span>
-                                <span>3IW2</span>
+                                <span>Group :</span>
+                                <?php if(!empty($this->Auth->getGroups())):?>
+                                        <span>
+                                            <?php foreach($this->Auth->getGroups() as $key => $group):?>
+                                                <?php echo ($key > 0)?'-':'';?>
+                                                <?php echo $group->getName();?>
+                                            <?php endforeach;?>
+                                        </span>
+                                <?php else:?>
+                                        <span>User has no group</span>
+                                <?php endif;?>
                             </section>
                             <section class="newsletter">
                                 <span>Newsletter :</span>
