@@ -478,8 +478,7 @@ Override buttons OSPAF
         font-weight: 600;
         display: inline; }
     html .container-message .buttondiv {
-      display: flex;
-      flex-direction: column; }
+      display: flex; }
 
 #menu-header-section {
   width: 250px;
