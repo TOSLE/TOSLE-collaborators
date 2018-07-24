@@ -228,6 +228,9 @@ section .marg-container {
 
   }
 }
+#stat-visit {
+  max-width: 669px;
+}
 
 .blue {
   fill: $colorGlobalToslePrimary;
@@ -398,6 +401,21 @@ section .marg-container {
 .responsive-menu {
   display: none;
 }
+.logo-header {
+  img {
+    width: 150px;
+    height: 53px;
+    margin-top: 3px;
+  }
+}
+.content-backoffice {
+  h4 {
+    font-size: 16px;
+    font-weight: 500;
+    margin-left: 16px;
+  }
+}
+
 
 @media screen and (max-width: 1407px) {
   .responsive-menu {
@@ -459,14 +477,6 @@ section .marg-container {
     .btn-dashboard {
       margin-bottom: 27px;
     }
-  }
-}
-
-.logo-header {
-  img {
-    width: 150px;
-    height: 53px;
-    margin-top: 3px;
   }
 }
 
