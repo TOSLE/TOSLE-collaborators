@@ -1,4 +1,4 @@
-<div class="col-<?php echo (empty($config["global"]["col"]))?"6":$config["global"]["col"];?>">
+j <div class="col-<?php echo (empty($config["global"]["col"]))?"6":$config["global"]["col"];?>">
     <div>
         <section class="content-backoffice">
             <div class="header-content">
