@@ -24,14 +24,19 @@ class ProfileController extends CoreController
             }
             else {
                 $Profile = new ProfileRepository();
+                $Lesson = new LessonRepository();
                 $View = new View("default", "Profile/profile");
                 $ArrayInfoUser = $Profile->getInfoUser($_SESSION['token'], $_SESSION['email']);
 
                 $idUser = $this->Auth->getId();
                 $ArrayCommentsUser = $Profile->getCommentUser($idUser);
 
+                $user = $this->Auth;
+                $ArrayLessonUser = $Lesson->getLessonsUser($user->getId());
+
                 $View->setData("profile_info", $ArrayInfoUser);
                 $View->setData("comments_user", $ArrayCommentsUser);
+                $View->setData("lessons_user", $ArrayLessonUser);
             }
 
         }

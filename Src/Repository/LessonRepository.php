@@ -665,4 +665,45 @@ class LessonRepository extends Lesson
         $LessonChapter->getOneData(['lessonid']);
         return $LessonChapter->getLessonId();
     }
+    public function getLessonsUser($id)
+    {
+
+        $target = ["id", "title", "url"];
+        $joinParameter = [
+            "userlesson" => [
+                "lesson_id"
+            ]
+        ];
+        $whereParameter = [
+            "userlesson" => [
+                "userid" => $id
+            ]
+        ];
+        $this->setLeftJoin($joinParameter, $whereParameter);
+        $this->setOrderByParameter(["id" => "DESC"]);
+
+        $ArrayLesson = $this->getData($target);
+
+        foreach ($ArrayLesson as $lesson) {
+            $lessons[] = [
+                "id" => $lesson->getId(),
+                "title" => $lesson->getTitle(),
+                "url" => DIRNAME.'lesson/'.$lesson->getUrl(),
+            ];
+        }
+        /**
+         * Tri le tableau par date
+         */
+        if (isset($lessons)) {
+            return $lessons;
+        }
+        else {
+            $lessons[] = [
+                "title" => "No subscription at a class",
+                "id" => " ",
+                "url" => " ",
+            ];
+            return $lessons;
+        }
+    }
 }
