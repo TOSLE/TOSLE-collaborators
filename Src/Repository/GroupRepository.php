@@ -21,8 +21,8 @@ class GroupRepository extends Group
         }
         return [
             "group_select" => [
-                "label" => "Selection des groupes",
-                "description" => "Vous avez le droit à plusieurs choix (\"CTRL + Clic\" pour réaliser un choix multiple)",
+                "label" => DASHBOARD_BLOC_LESSONS_ADD_SELECT_GROUP,
+                "description" => DASHBOARD_BLOC_LESSONS_ADD_GROUP_CHOICES,
                 "multiple" => true,
                 "options" => $option
             ]

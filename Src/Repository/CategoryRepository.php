@@ -21,17 +21,17 @@ class CategoryRepository extends Category
         }
         return [
                 "category_select" => [
-                    "label" => "Selection des catégories",
-                    "description" => "Vous avez le droit à plusieurs choix",
+                    "label" => DASHBOARD_BLOC_LESSONS_ADD_SELECT_CATEGORY,
+                    "description" => DASHBOARD_BLOC_LESSONS_ADD_CATEGORIES_CHOICES,
                     "multiple" => true,
                     "options" => $option
                 ],
                 "category_input" => [
                     "type"=>"text",
-                    "placeholder"=>"Ajouts de catégories",
+                    "placeholder"=>DASHBOARD_BLOC_LESSONS_ADD_CATEGORIES2,
                     "required"=>false,
-                    "label"=>"Ajouter des catégories",
-                    "description"=>"Format attendu : [category 1; category 2; category 3]. Il seront automatiquement ajoutés."
+                    "label"=>DASHBOARD_BLOC_LESSONS_ADD_CATEGORIES,
+                    "description"=>DASHBOARD_BLOC_LESSONS_ADD_CATEGORIES_FORMAT
                 ],
             ];
     }

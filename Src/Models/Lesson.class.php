@@ -285,24 +285,24 @@ class Lesson extends CoreSql
             "config" => [
                 "method" => "post",
                 "action" => "",
-                "save" => "Sauvegarder en brouillon",
-                "submit" => "Enregistrer le nouveau cours",
+                "save" => DASHBOARD_BLOC_LESSONS_ADD_SAVE_DRAFT,
+                "submit" => DASHBOARD_BLOC_LESSONS_ADD_SAVE,
                 "form_file" => false,
             ],
             "input" => [
                 "title" => [
                     "type" => "text",
-                    "placeholder" => "Intitulé du cours",
+                    "placeholder" => DASHBOARD_BLOC_LESSONS_ADD_TITLE2,
                     "required" => true,
                     "maxString" => 100,
-                    "label" => "Renseignez le titre de votre cours"
+                    "label" => DASHBOARD_BLOC_LESSONS_ADD_TITLE
                 ]
             ],
             "textarea" => [
-                "label" => "Lesson description",
+                "label" => DASHBOARD_BLOC_LESSONS_ADD_DESCRIPTION,
                 "name" => "textarea_lesson",
-                "description" => "Un maximum de 500 caractères",
-                "placeholder" => "Maximum 500 caractères"
+                "description" => DASHBOARD_BLOC_LESSONS_ADD_MAX_CHARACTERS2,
+                "placeholder" => DASHBOARD_BLOC_LESSONS_ADD_MAX_CHARACTERS
             ],
             'select_multiple' => [
                 $category->configFormCategory(2),
@@ -310,37 +310,37 @@ class Lesson extends CoreSql
             ],
             'select' => [
                 'select_color' => [
-                    'label' => 'Choisissez la couleur de votre cours',
+                    'label' => DASHBOARD_BLOC_LESSONS_ADD_COLOR,
                     'required' => false,
                     'options' => [
-                        '#1A5CCB' => 'Couleur de base',
-                        '#7a76ff' => 'Violet',
-                        '#ff8383' => 'Rouge',
-                        '#97ca74' => 'Vert',
-                        '#f1c97c' => 'Orange',
-                        '#61c0bf' => 'Bleu pastel',
-                        '#f8a3d3' => 'Rose pastel',
+                        '#1A5CCB' => DASHBOARD_BLOC_LESSONS_ADD_COLOR_BASE,
+                        '#7a76ff' => DASHBOARD_BLOC_LESSONS_ADD_COLOR1,
+                        '#ff8383' => DASHBOARD_BLOC_LESSONS_ADD_COLOR2,
+                        '#97ca74' => DASHBOARD_BLOC_LESSONS_ADD_COLOR3,
+                        '#f1c97c' => DASHBOARD_BLOC_LESSONS_ADD_COLOR4,
+                        '#61c0bf' => DASHBOARD_BLOC_LESSONS_ADD_COLOR5,
+                        '#f8a3d3' => DASHBOARD_BLOC_LESSONS_ADD_COLOR6,
                     ],
-                    'description' => 'Couleur d\'arrière plan'
+                    'description' => DASHBOARD_BLOC_LESSONS_ADD_COLOR_BACKGROUND
                 ],
                 'select_type' => [
-                    'label' => 'Choisissez le type de cours',
+                    'label' => DASHBOARD_BLOC_LESSONS_ADD_TYPE,
                     'required' => true,
                     'options' => [
-                        1 => 'Public',
-                        2 => 'Privé',
+                        1 => DASHBOARD_BLOC_LESSONS_ADD_TYPE1,
+                        2 => DASHBOARD_BLOC_LESSONS_ADD_TYPE2,
                     ],
-                    'description' => 'Cours privé ou Cours public'
+                    'description' => DASHBOARD_BLOC_LESSONS_ADD_TYPE_OPTIONS
                 ],
                 'select_difficulty' => [
-                    'label' => 'Choisissez la difficulté de votre cours',
+                    'label' => DASHBOARD_BLOC_LESSONS_ADD_DIFFICULTY,
                     'required' => true,
                     'options' => [
-                        1 => 'Facile',
-                        2 => 'Normal',
-                        3 => 'Difficile',
+                        1 => DASHBOARD_BLOC_LESSONS_ADD_DIFFICULTY1,
+                        2 => DASHBOARD_BLOC_LESSONS_ADD_DIFFICULTY2,
+                        3 => DASHBOARD_BLOC_LESSONS_ADD_DIFFICULTY3,
                     ],
-                    'description' => 'Difficulté estimé du cours'
+                    'description' => DASHBOARD_BLOC_LESSONS_ADD
                 ],
             ],
             "exit" => $slugs["dashboard_lesson"]

@@ -65,3 +65,8 @@
     define('MESSAGING_PLACEHOLDER', 'Enter new message...');
     define('MESSAGING_FOOTER_LEGAL', 'Legal');
     define('MESSAGING_FOOTER_PRIVACY', 'Privacy');
+
+    /**
+     * User
+     */
+    define('USER_PROFILE_EDIT_PASSWORD', 'Edit your password');
