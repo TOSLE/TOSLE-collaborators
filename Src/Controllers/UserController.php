@@ -35,15 +35,15 @@ class UserController extends CoreController
         $registerMessage = "";
         if(isset($params['URI'][0])){ // message de confirmation après l'inscription
             if($params['URI'][0] == 'confirmed'){
-                $registerMessage = 'Accès confirmé';
+                $registerMessage = USER_PROFILE_CONFIRM_MESSAGE_VALIDATE;
             }
         }
         if(isset($params['URI'][0])){ // message de confirmation après l'inscription
             if($params['URI'][0] == 'registered'){
-                $registerMessage = 'Inscription réussie, à présent, veuillez confirmer votre inscription pour valider votre adresse email.';
+                $registerMessage = USER_PROFILE_CONFIRM_MESSAGE_INSCRIPTION;
             }
              if($params['URI'][0] == 'passchanged'){
-                $registerMessage = 'Mot de passe modifié avec succès';
+                $registerMessage = USER_PROFILE_CONFIRM_MESSAGE_PASSWORD_CHANGE;
             }
         }
      //   $errors["error status"]=" status invalide";
@@ -136,12 +136,8 @@ class UserController extends CoreController
                 $User->setStatus(1);
                 $User->save();
 
-                //blogcontroller
-                $messConfirm = 'Inscription confirmé, vous pouvez vous connectez dès maintenant';
                 header('Location:'.$routes["signin"].'/confirmed');
             } else {
-                $messError = 'Inscription echoué, veuillez reesayer de vous inscrire.';
-               
                 header('Location:'.$routes["signup"].'/error');
             }
         }
@@ -315,11 +311,87 @@ class UserController extends CoreController
         header('Location:'.$this->Routes['dashboard_student']);
     }
 
+    /**
+     * @param $params
+     */
     public function editpasswordAction($params)
     {
+        $User = new UserRepository();
         if(isset($params['POST']) && !empty($params['POST'])){
-            echo $this->Auth->getPassword();
-        }
+            $errors = Form::checkForm($User->configFormEditPassword(), $params['POST']);
+            if(!empty($errors)){
+                header('Location:'.$this->Routes['edit_profile'].'?errors=1');
+            }
+            $_post = $params['POST'];
+            if($_post['pwdlast'] == $_post['pwd']){
+                header('Location:'.$this->Routes['edit_profile'].'?errors=2');
+            }
+            if(!password_verify($_post['pwdlast'],$this->Auth->getPassword())){
+                header('Location:'.$this->Routes['edit_profile'].'?errors=3');
+            }
+            $this->Auth->setPassword($_post['pwd']);
+            $this->Auth->setToken();
+            $this->Auth->save();
 
+            $_SESSION['token'] = $this->Auth->getToken();
+            $_SESSION['email'] = $this->Auth->getEmail();
+            header('Location:'.$this->Routes['edit_profile'].'?success=1');
+        }
+    }
+
+
+    /**
+     * @param $params
+     * @return array|int
+     */
+    public function editaccountAction($params)
+    {
+        $User = new UserRepository();
+        if(isset($params['POST']) && !empty($params['POST'])){
+            $errors = Form::checkForm($User->configFormEditAccount(), $params['POST']);
+            $_post = Form::secureData($params['POST']);
+            if(!empty($errors)){
+                header('Location:'.$this->Routes['edit_profile'].'?errors=4');
+            }
+            if(!password_verify($_post['pwd'],$this->Auth->getPassword())){
+                header('Location:'.$this->Routes['edit_profile'].'?errors=5');
+            }
+
+            $this->Auth->setFirstName($_post['firstname']);
+            $this->Auth->setLastName($_post['lastname']);
+
+            $_file = $_FILES;
+            $file = null;
+            if(isset($_file)){
+                $errors = Form::checkFiles($_file);
+                if(empty($errors) || is_numeric($errors)){
+                    if( $errors != 1) {
+                        $File = new FileRepository();
+                        $arrayFile = $File->addFile($_file, $User->configFormEditAccount(), "Profile/Avatar", "Avatar");
+                        if(!is_numeric($arrayFile)){
+                            if(array_key_exists('CODE_ERROR', $arrayFile)){
+                                header('Location:'.$this->Routes['edit_profile'].'?errors=6');
+                            }
+                            foreach ($arrayFile as $fileId) {
+                                $file = $fileId;
+                            }
+                        }
+
+                    }
+                } else {
+                    if(!array_key_exists('EXCEPT_ERROR', $errors)){
+                        header('Location:'.$this->Routes['edit_profile'].'?errors=7');
+                    }
+                }
+            }
+            if(isset($file)){
+                $this->Auth->setFileid($file);
+            }
+            $this->Auth->setToken();
+            $this->Auth->save();
+            $_SESSION['token'] = $this->Auth->getToken();
+            $_SESSION['email'] = $this->Auth->getEmail();
+            header('Location:'.$this->Routes['edit_profile'].'?success=2');
+        }
     }
 }

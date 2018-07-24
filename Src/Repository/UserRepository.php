@@ -67,23 +67,26 @@ class UserRepository extends User
     {
 
     }
+
+    /**
+     * @param $email
+     * @return array|int
+     */
      function checkEmailExist($email)
     {
         $target = ["email"];
-        $parameter = [
+        /**$parameter = [
             "LIKE" => [
                 "email" => $email
             ]
-        ];
+        ];**/
         $entree=$email;
         $tableau=$this->getData($target);
         foreach ($tableau as $cle) {
             $result =  $cle->getEmail();
             if($result == $entree)
             {
-                return [AUTHENTIFICATION_FAILED_KEY => "Mail déjà utilisé"];
-            }
-            else{
+                return [AUTHENTIFICATION_FAILED_KEY => USER_PROFILE_EMAIL_EXIST];
             }
         }
         return 1;

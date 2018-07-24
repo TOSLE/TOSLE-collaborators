@@ -16,7 +16,25 @@
         </section>
     </div>
 </section>
-<?php $this->addModal("dashboard_form", $config, $errors); ?>
+<section class="container">
+    <div class="row">
+        <div class="col-4">
+            <div>
+                <h2><?php echo USER_PROFILE_EDIT_ACCOUNT;?></h2>
+            </div>
+        </div>
+        <div class="col-6">
+            <div>
+                <div>
+                    <?php if(isset($errorsFormEditAccount)):?>
+                        <h3><?php echo $errorsFormEditAccount;?></h3>
+                    <?php endif;?>
+                </div>
+                <?php $this->addModal("dashboard_form", $config); ?>
+            </div>
+        </div>
+    </div>
+</section>
 <section class="container">
     <div class="row">
         <div class="col-4">
@@ -26,7 +44,12 @@
         </div>
         <div class="col-6">
             <div>
-                <?php $this->addModal("dashboard_form", $configEditPassword, $errors); ?>
+                <div>
+                    <?php if(isset($errorsFormEditPassword)):?>
+                        <h3><?php echo $errorsFormEditPassword;?></h3>
+                    <?php endif;?>
+                </div>
+                <?php $this->addModal("dashboard_form", $configEditPassword); ?>
             </div>
         </div>
     </div>

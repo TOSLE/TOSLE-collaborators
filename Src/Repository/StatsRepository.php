@@ -45,6 +45,20 @@ class StatsRepository extends Stats
     }
 
     /**
+     * @param $url
+     * @return mixed|string
+     * Construit l'url qui va bien en fonction du DIRNAME
+     */
+    public function getTargetSubstr($url)
+    {
+        if(DIRNAME == '/'){
+            return trim($url, DIRNAME);
+        } else {
+            return str_ireplace(DIRNAME, '', $url);
+        }
+    }
+
+    /**
      * @param $sort
      * @return array|int
      * Cette fonction retourne les données tries pour les vues d'un cours. Elle construit le tableau de façon à avoir
@@ -60,7 +74,7 @@ class StatsRepository extends Stats
         switch ($sort){
             case 'year':
                 foreach($this->stats as $stat){
-                    $target = trim($stat->getTarget(), DIRNAME);
+                    $target = $this->getTargetSubstr($stat->getTarget());
                     if($currentYear == $stat->getYear() && stristr($target, 'lesson/')){
                         $targetExploded = explode('/',$target);
                         if(isset($targetExploded[1]) && isset($countStats[$targetExploded[1]])) {
@@ -73,7 +87,7 @@ class StatsRepository extends Stats
                 break;
             case 'month':
                 foreach($this->stats as $stat){
-                    $target = trim($stat->getTarget(), DIRNAME);
+                    $target = $this->getTargetSubstr($stat->getTarget());
                     if($currentYear == $stat->getYear() && $currentMonth == $stat->getMonth() && stristr($target, 'lesson/')){
                         $targetExploded = explode('/',$target);
                         if(isset($targetExploded[1]) && isset($countStats[$targetExploded[1]])) {
@@ -86,7 +100,7 @@ class StatsRepository extends Stats
                 break;
             case 'day':
                 foreach($this->stats as $stat){
-                    $target = trim($stat->getTarget(), DIRNAME);
+                    $target = $this->getTargetSubstr($stat->getTarget());
                     if($currentYear == $stat->getYear() && $currentMonth == $stat->getMonth() && $currentDay == $stat->getDay() && stristr($target, 'lesson/')){
                         $targetExploded = explode('/',$target);
                         if(isset($targetExploded[1]) && isset($countStats[$targetExploded[1]])) {
@@ -128,7 +142,7 @@ class StatsRepository extends Stats
         switch ($sort){
             case 'year':
                 foreach($this->stats as $stat){
-                    $target = trim($stat->getTarget(), DIRNAME);
+                    $target = $this->getTargetSubstr($stat->getTarget());
                     if($currentYear == $stat->getYear() && stristr($target, 'view-article/')){
                         $targetExploded = explode('/',$target);
                         if(isset($targetExploded[1]) && isset($countStats[$targetExploded[1]])) {
@@ -141,7 +155,7 @@ class StatsRepository extends Stats
                 break;
             case 'month':
                 foreach($this->stats as $stat){
-                    $target = trim($stat->getTarget(), DIRNAME);
+                    $target = $this->getTargetSubstr($stat->getTarget());
                     if($currentYear == $stat->getYear() && $currentMonth == $stat->getMonth() && stristr($target, 'view-article/')){
                         $targetExploded = explode('/',$target);
                         if(isset($targetExploded[1]) && isset($countStats[$targetExploded[1]])) {
@@ -154,7 +168,7 @@ class StatsRepository extends Stats
                 break;
             case 'day':
                 foreach($this->stats as $stat){
-                    $target = trim($stat->getTarget(), DIRNAME);
+                    $target = $this->getTargetSubstr($stat->getTarget());
                     if($currentYear == $stat->getYear() && $currentMonth == $stat->getMonth() && $currentDay == $stat->getDay() && stristr($target, 'view-article/')){
                         $targetExploded = explode('/',$target);
                         if(isset($targetExploded[1]) && isset($countStats[$targetExploded[1]])) {
