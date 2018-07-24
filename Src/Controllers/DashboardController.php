@@ -33,7 +33,7 @@ class DashboardController extends CoreController
         $configTableBlog = $Blog->getModalLatestArticle(12, 5,true);
 
         $View = new View("dashboard", "dashboard");
-        $View->setData("PageName", NAV_DASHBOARD . " " . GLOBAL_HOME_TEXT);
+        $View->setData("PageName", NAVBAR_DASHBOARD . " " . GLOBAL_CMS_TOSLE);
         $View->setData("totalUser", $totalUser);
         $View->setData("totalLesson", $totalLesson);
         $View->setData("totalComment", $totalComment);
@@ -52,7 +52,7 @@ class DashboardController extends CoreController
     function lessonsAction($params)
     {
         $View = new View("dashboard", "Dashboard/lesson");
-        $View->setData("PageName", NAV_DASHBOARD . " " . NAV_DASHBOARD_LESSON);
+        $View->setData("PageName", NAVBAR_DASHBOARD . " " . NAVBAR_DASHBOARD_LESSON);
         $Lesson = new LessonRepository();
 
         $View->setData("modalAddOption", $Lesson->getModalAdd(12));
@@ -68,7 +68,7 @@ class DashboardController extends CoreController
     function homeworkAction($params)
     {
         $View = new View("dashboard", "homework");
-        $View->setData("PageName", NAV_DASHBOARD . " " . NAV_DASHBOARD_LESSON);
+        $View->setData("PageName", NAVBAR_DASHBOARD . " " . NAVBAR_DASHBOARD_LESSON);
 
     }
 
@@ -80,7 +80,7 @@ class DashboardController extends CoreController
     function studentAction($params)
     {
         $View = new View("dashboard", "Dashboard/student");
-        $View->setData("PageName", NAV_DASHBOARD . " " . NAV_DASHBOARD_STUDENT);
+        $View->setData("PageName", NAVBAR_DASHBOARD . " " . NAVBAR_DASHBOARD_STUDENT);
         $Dashboard = new DashboardRepository();
         $configBlocUsers = $Dashboard->getAllUsers();
         $configBlocGroups = $Dashboard->getAllGroups();
@@ -113,7 +113,7 @@ class DashboardController extends CoreController
         /**
          * On set les variables importantes de la vue (le pagename)
          */
-        $View->setData("PageName", NAV_DASHBOARD . " " . NAV_DASHBOARD_BLOG);
+        $View->setData("PageName", NAVBAR_DASHBOARD . " " . NAVBAR_DASHBOARD_BLOG);
 
 
         $latestArticles = $BlogRepository->getModalAllArticle(12, null);
@@ -139,7 +139,7 @@ class DashboardController extends CoreController
     function portofolioAction($params)
     {
         $View = new View("dashboard", "portofolio");
-        $View->setData("PageName", NAV_DASHBOARD . " " . NAV_DASHBOARD_PORTOFOLIO);
+        $View->setData("PageName", NAVBAR_DASHBOARD . " " . NAVBAR_DASHBOARD_PORTOFOLIO);
     }
 
     /**
@@ -150,7 +150,7 @@ class DashboardController extends CoreController
     function chatAction($params)
     {
         $View = new View("dashboard", "Dashboard/chat");
-        $View->setData("PageName", NAV_DASHBOARD . " " . NAV_DASHBOARD_CHAT);
+        $View->setData("PageName", NAVBAR_DASHBOARD . " " . NAVBAR_DASHBOARD_CHAT);
     }
 
     /**
@@ -161,7 +161,7 @@ class DashboardController extends CoreController
     function statsAction($params)
     {
         $View = new View("dashboard", "Dashboard/stats");
-        $View->setData("PageName", NAV_DASHBOARD . " " . NAV_DASHBOARD_STATISTIC);
+        $View->setData("PageName", NAVBAR_DASHBOARD . " " . NAVBAR_DASHBOARD_STATISTIC);
 
         $Stats = new StatsRepository();
 
@@ -236,7 +236,7 @@ class DashboardController extends CoreController
     public function chapterAction($params)
     {
         $View = new View("dashboard", "Dashboard/chapter");
-        $View->setData("PageName", NAV_DASHBOARD . " " . NAV_DASHBOARD_LESSON);
+        $View->setData("PageName", NAVBAR_DASHBOARD . " " . NAVBAR_DASHBOARD_LESSON);
         $Lesson = new LessonRepository();
 
         /*$View->setData("modalAddOption", $Lesson->getModalAdd(12));
