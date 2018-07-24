@@ -15,7 +15,7 @@
                     <div class="profile-container">
                         <section class="picture">
                             <div class="profil-picture">
-                                <img src="<?php echo (!empty($this->Auth->getFileid()))?$this->Auth->getAvatar()->getPath().'/'.$this->Auth->getAvatar()->getName():DIRNAME.'Tosle/Users/Images/475899654133.jpg';?>">
+                                <img src="<?php echo (!empty($this->Auth->getFileid())) ? $this->Auth->getAvatar()->getPath() . '/' . $this->Auth->getAvatar()->getName() : DIRNAME . 'Tosle/Users/Images/475899654133.jpg'; ?>">
                             </div>
                         </section>
                         <section class="info">
@@ -23,7 +23,8 @@
                                 <span><?php echo $profile_info['firstname'] . ' ' . $profile_info['lastname']; ?></span>
                             </section>
                             <section class="edit-action">
-                                <a href="<?php echo $this->slugs["edit_profile"];?>" class="btn btn-tosle">Edit my profile</a>
+                                <a href="<?php echo $this->slugs["edit_profile"]; ?>" class="btn btn-tosle">Edit my
+                                    profile</a>
                             </section>
                             <section class="email">
                                 <span>Contact mail :</span>
@@ -51,6 +52,27 @@
             <div>
                 <section class="container-content-profile">
                     <section class="comment">
+                        <h2>My Last Lesson</h2>
+                        <div class="container">
+                            <ul class="title-tab">
+                                <li><span>Title</span></li>
+                                <li><span></span></li>
+                                <li><span>Url</span></li>
+                            </ul>
+                            <?php if (isset($lessons_user)): ?>
+                                <?php foreach ($lessons_user as $lesson): ?>
+                                    <ul>
+                                        <li><span><?php echo $lesson['title']; ?></span></li>
+                                        <li><span></span></li>
+                                        <li><a href="<?php echo $lesson['url']; ?>">Link</a></li>
+                                    </ul>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                        </div>
+                    </section>
+                </section>
+                <section class="container-content-profile">
+                    <section class="comment">
                         <h2>My Last Comment</h2>
                         <div class="container">
                             <ul class="title-tab">
@@ -72,5 +94,4 @@
                 </section>
             </div>
         </div>
-    </div>
 </section>

@@ -21,6 +21,7 @@ class DashboardController extends CoreController
         $Message = new MessageRepository();
         $Blog = new BlogRepository();
         $Group = new GroupRepository();
+        $Stats = new StatsRepository();
 
         $totalUser = $User->getAllUser();
         $totalLesson = $Lesson->getAllLesson();
@@ -28,6 +29,7 @@ class DashboardController extends CoreController
         $totalMessage = $Message->getAllMessage();
         $totalArticle = $Blog->getAllArticle();
         $totalGroup = $Group->getAllGroup();
+        $resultStatYear = $Stats->getStatViewTosle();
 
         $configTableLesson = $Lesson->getModalLatestLesson(12, 5, true);
         $configTableBlog = $Blog->getModalLatestArticle(12, 5,true);
@@ -42,6 +44,7 @@ class DashboardController extends CoreController
         $View->setData("totalGroup", $totalGroup);
         $View->setData("configTableLesson", $configTableLesson);
         $View->setData("configTableBlog", $configTableBlog);
+        $View->setData("statViewTosle", $resultStatYear);
     }
 
     /**
@@ -165,8 +168,8 @@ class DashboardController extends CoreController
          * Stat consultation des cours
          */
         $classStatYear = $Stats->getNewStatsClass('year');
-        $labelStatClassYear = '';
-        $statClassYear = '';
+        $labelStatClassYear = '[""]';
+        $statClassYear = '[0]';
         if(isset($classStatYear) && !empty($classStatYear)){
             $labelStatClassYear = '["'.implode('" ,"', $classStatYear['lessons']).'"]';
             $statClassYear = '['.implode(' ,', $classStatYear['counts']).']';
@@ -176,8 +179,8 @@ class DashboardController extends CoreController
 
 
         $classStatMonth = $Stats->getNewStatsClass('month');
-        $labelStatClassMonth = '';
-        $statClassMonth = '';
+        $labelStatClassMonth = '[""]';
+        $statClassMonth = '[0]';
         if(isset($classStatMonth) && !empty($classStatMonth)){
             $labelStatClassMonth = '["'.implode('" ,"', $classStatMonth['lessons']).'"]';
             $statClassMonth = '['.implode(' ,', $classStatMonth['counts']).']';
@@ -187,8 +190,8 @@ class DashboardController extends CoreController
 
 
         $classStatDay = $Stats->getNewStatsClass('day');
-        $labelStatClassDay = '';
-        $statClassDay = '';
+        $labelStatClassDay = '[""]';
+        $statClassDay = '[0]';
         if(isset($classStatDay) && !empty($classStatDay)){
             $labelStatClassDay = '["'.implode('" ,"', $classStatDay['lessons']).'"]';
             $statClassDay = '['.implode(' ,', $classStatDay['counts']).']';
@@ -201,8 +204,8 @@ class DashboardController extends CoreController
          */
 
         $articleStatYear = $Stats->getNewStatsArticle('year');
-        $labelStatBlogYear = '';
-        $statBlogYear = '';
+        $labelStatBlogYear = '[""]';
+        $statBlogYear = '[0]';
         if(isset($articleStatYear) && !empty($articleStatYear)){
             $labelStatBlogYear = '["'.implode('" ,"', $articleStatYear['articles']).'"]';
             $statBlogYear = '['.implode(' ,', $articleStatYear['counts']).']';
@@ -211,8 +214,8 @@ class DashboardController extends CoreController
         $View->setData("statBlogYear", $statBlogYear);
 
         $articleStatMonth = $Stats->getNewStatsArticle('month');
-        $labelStatBlogMonth = '';
-        $statBlogMonth = '';
+        $labelStatBlogMonth = '[""]';
+        $statBlogMonth = '[0]';
         if(isset($articleStatMonth) && !empty($articleStatMonth)){
             $labelStatBlogMonth = '["'.implode('" ,"', $articleStatMonth['articles']).'"]';
             $statBlogMonth = '['.implode(' ,', $articleStatMonth['counts']).']';
@@ -221,8 +224,8 @@ class DashboardController extends CoreController
         $View->setData("statBlogMonth", $statBlogMonth);
 
         $articleStatDay = $Stats->getNewStatsArticle('day');
-        $labelStatBlogDay = '';
-        $statBlogDay = '';
+        $labelStatBlogDay = '[""]';
+        $statBlogDay = '[0]';
         if(isset($articleStatDay) && !empty($articleStatDay)){
             $labelStatBlogDay = '["'.implode('" ,"', $articleStatDay['articles']).'"]';
             $statBlogDay = '['.implode(' ,', $articleStatDay['counts']).']';
