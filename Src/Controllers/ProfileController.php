@@ -79,6 +79,18 @@ class ProfileController extends CoreController
                 if($this->Auth->getStatus() > 1){
                     $View->setData('controller', 'DashboardController');
                 }
+                if(isset($params['GET']['errors']) && $params['GET']['errors']==1){
+                    $View->setData('errorsFormEditPassword', USER_PROFILE_ERROR_MESSAGE_EDIT_PASSWORD_ERROR1);
+                }
+                if(isset($params['GET']['errors']) && $params['GET']['errors']==2){
+                    $View->setData('errorsFormEditPassword', USER_PROFILE_ERROR_MESSAGE_EDIT_PASSWORD_ERROR2);
+                }
+                if(isset($params['GET']['errors']) && $params['GET']['errors']==3){
+                    $View->setData('errorsFormEditPassword', USER_PROFILE_ERROR_MESSAGE_EDIT_PASSWORD_ERROR3);
+                }
+                if(isset($params['GET']['success']) && $params['GET']['success']==1){
+                    $View->setData('errorsFormEditPassword', USER_PROFILE_CONFIRM_MESSAGE_PASSWORD_CHANGE);
+                }
                 $View->setData('configEditPassword', $User->configFormEditPassword());
                 $View->setData("config", $configFormEditUser);
                 $View->setData("errors", $errors);

@@ -66,7 +66,21 @@
     define('MESSAGING_FOOTER_LEGAL', 'Legal');
     define('MESSAGING_FOOTER_PRIVACY', 'Privacy');
 
-    /**
-     * User
-     */
+/**
+ * User
+ */
     define('USER_PROFILE_EDIT_PASSWORD', 'Edit your password');
+    define('USER_PROFILE_EDIT_ACCOUNT', 'Edit your account');
+        /**
+         * Message de confirmation
+         */
+        define('USER_PROFILE_CONFIRM_MESSAGE_INSCRIPTION', 'Inscription success, please confirm your address.');
+        define('USER_PROFILE_CONFIRM_MESSAGE_VALIDATE', 'Account validated');
+        define('USER_PROFILE_CONFIRM_MESSAGE_PASSWORD_CHANGE', 'Update password success');
+        /**
+         * Message d'erreur
+         */
+        define('USER_PROFILE_EMAIL_EXIST', 'Email already exist');
+        define('USER_PROFILE_ERROR_MESSAGE_EDIT_PASSWORD_ERROR1', 'Edit password failed');
+        define('USER_PROFILE_ERROR_MESSAGE_EDIT_PASSWORD_ERROR2', 'The old and new password must be different');
+        define('USER_PROFILE_ERROR_MESSAGE_EDIT_PASSWORD_ERROR3', 'Bad last password');

@@ -14,12 +14,12 @@ class Form
         if(isset($config['input'])){
             foreach ($config["input"] as $name => $attributs) {
                 if(isset($attributs["confirm"]) && $data[$name] != $data[$attributs["confirm"]]){
-                    $errorsMsg["confirmation"]= $name . 'ne correspond pas à '.$attributs["confirm"];
+                    $errorsMsg[FORM_USER_ERRORS_CONFIRM]= $name .FORM_USER_ERRORS_CONFIRM_NOT_EQUALS.$attributs["confirm"];
                 } else if (!isset($attributs["confirm"])){
                     if($attributs["type"]=="email" && !self::checkEmail($data[$name])){
                         $errorsMsg["email"]= "Format de l'email incorrect";
                     } else if($attributs["type"]=="password" && !self::checkPwd($data[$name])){
-                        $errorsMsg["password"]= "Mot de passe incorrect(Maj, Min, Chiffre, au minimum 6 caractères)";
+                        $errorsMsg[FORM_USER_ERRORS_PASSWORD]= FORM_USER_ERRORS_PASSWORD_NOT_RESPECT_FORMAT;
                     } else if($attributs["type"]=="number" && !self::checkNumber($data[$name]) && (isset($attributs['required']) && $attributs['required'])){
                         $errorsMsg["number"]= $name. " n'est pas correct";
                     }
