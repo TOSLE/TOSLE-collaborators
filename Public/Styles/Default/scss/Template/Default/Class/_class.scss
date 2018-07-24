@@ -283,3 +283,16 @@ input {
     margin-top: 3px;
   }
 }
+.container-message {
+  .mention-legal {
+    margin-left: 40px;
+    .title {
+      padding-bottom: 20px;
+      color: $colorGlobalToslePrimary;
+    }
+    .paragraph {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+  }
+}
