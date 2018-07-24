@@ -3,8 +3,5 @@
         ERROR DEFINE
     */
         include "error.lang.php";
-
-    /*
-        TOSLE DEFINE
-     */
-        include "tosle.lang.php";
+    include 'install.lang.php';
+    include 'form.lang.php';
