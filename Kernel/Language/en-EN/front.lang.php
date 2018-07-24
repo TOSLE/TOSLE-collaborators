@@ -18,7 +18,7 @@
     define('NAVBAR_STATS', 'Stats');
     define('NAVBAR_STUDENT', 'Student');
 
-    define('HEADER_MENU_PROFILE', 'View profile');
+    define('HEADER_MENU_PROFILE', 'Edit profile');
     define('HEADER_MENU_DASHBOARD', 'Dashboard');
     define('HEADER_MENU_LESSON_DASHBOARD', 'Lesson dashboard');
     define('HEADER_MENU_BLOG_DASHBOARD', 'Blog dashboard');
