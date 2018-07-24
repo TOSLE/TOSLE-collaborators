@@ -27,7 +27,11 @@
     }
     a {
       font-weight: 600;
-      color: #1A5CCB;
+      display:inline;
     }
   }
+  .buttondiv{
+      display:flex;
+      flex-direction:column;
+    }
 }

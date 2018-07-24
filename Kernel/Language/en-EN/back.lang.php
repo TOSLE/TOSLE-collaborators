@@ -11,14 +11,29 @@ define('DASHBOARD_MENU_PORTFOLIO', 'Portfolio');
 define('DASHBOARD_MENU_CHAT', 'Chat');
 define('DASHBOARD_MENU_STATISTIC', 'Statistics');
 
+define('DASHBOARD_SECTION_STATISTIC', 'Statistics cms');
+define('DASHBOARD_SECTION_REGISTER', 'User register');
+define('DASHBOARD_SECTION_LESSON', 'Lesson post');
+define('DASHBOARD_SECTION_COMMENT', 'Comments post');
+define('DASHBOARD_SECTION_MESSAGE', 'Message send');
+define('DASHBOARD_SECTION_NBARTICLE', 'Number of article in the blog');
+define('DASHBOARD_SECTION_NBGROUPS', 'Number of groups');
+
+
 /**
  * TABLE COLUMN HEADER
  */
-    define('DASHBOARD_HEADER_TABLE_TITLE', 'Title');
-    define('DASHBOARD_HEADER_TABLE_CREATED', 'Create');
+    define('DASHBOARD_HEADER_TABLE_TITLE_MODAL', 'Latest lesson on your Website');
+    define('DASHBOARD_HEADER_TABLE_NAME', 'View latest post on your blog');
+    define('DASHBOARD_HEADER_TABLE_CREATED', 'Created at ');
     define('DASHBOARD_HEADER_TABLE_ACTION', 'Action');
     define('DASHBOARD_HEADER_TABLE_TYPE', 'Type');
     define('DASHBOARD_HEADER_TABLE_VALUE', 'Value');
+
+    define('DASHBOARD_HEADER_TABLE_TITLE', 'Title');
+    define('DASHBOARD_HEADER_TABLE_EDIT', 'Edit');
+    define('DASHBOARD_HEADER_TABLE_UNPUBLISH', 'Unpublish');
+    define('DASHBOARD_HEADER_TABLE_CHAPTERS', 'Chapters');
 
     define('DASHBOARD_HEADER_NEW_TABLE_AVATAR', 'Avatar');
     define('DASHBOARD_HEADER_NEW_TABLE_NAME', 'Name');

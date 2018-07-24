@@ -108,11 +108,11 @@ class LessonRepository extends Lesson
     {
         $routes = Access::getSlugsById();
         $ViewLatestBloc = new DashboardBlocModal();
-        $ViewLatestBloc->setTitle("Latest lesson on your Website");
+        $ViewLatestBloc->setTitle(DASHBOARD_HEADER_TABLE_TITLE_MODAL);
         $ViewLatestBloc->setTableHeader([
-            1 => "Title",
-            2 => "Create at",
-            4 => "Action"
+            1 => DASHBOARD_HEADER_TABLE_TITLE,
+            2 => DASHBOARD_HEADER_TABLE_CREATED,
+            4 => DASHBOARD_HEADER_TABLE_ACTION
         ]);
         $ViewLatestBloc->setColSizeBloc($colSize);
         $ViewLatestBloc->setActionButtonStatus(0, [
@@ -123,11 +123,11 @@ class LessonRepository extends Lesson
         ]);
         $ViewLatestBloc->setActionButtonStatus(1, [
             "color" => "red",
-            "text" => "Unpublish",
+            "text" => DASHBOARD_HEADER_TABLE_UNPUBLISH,
             "type" => "href",
             "target" => $routes["class/status"]."/"
         ]);
-        $ViewLatestBloc->setActionButtonEdit("Edit");
+        $ViewLatestBloc->setActionButtonEdit(DASHBOARD_HEADER_TABLE_EDIT);
 
         $ViewLatestBloc->setTableBodyClass([
             1 => "td-content-text",
@@ -138,7 +138,7 @@ class LessonRepository extends Lesson
             $ViewLatestBloc->setIconHeader("dashboard_lesson", "access");
         }
         $ViewLatestBloc->setTableBodyContent($this->getLastLesson($limit), true);
-        $ViewLatestBloc->setActionTargetButton("Chapters", $routes['dashboard_chapter']);
+        $ViewLatestBloc->setActionTargetButton(DASHBOARD_HEADER_TABLE_CHAPTERS, $routes['dashboard_chapter']);
         $ViewLatestBloc->setArrayHref("edit", $routes["class/edit"]);
         return $ViewLatestBloc->getArrayData();
     }

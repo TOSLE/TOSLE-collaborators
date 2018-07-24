@@ -64,33 +64,33 @@
                         <nav>
                             <ul>
                                 <li><a href="<?php echo $this->slugs["dashboardhome"]; ?>">
-                                        <p>Dashboard</p>
+                                        <p><?php echo DASHBOARD_MENU_HOME;?> </p>
                                         <i class="material-icons blue">dashboard</i>
 
                                     </a>
                                 </li>
                                 <li><a href="<?php echo $this->slugs["dashboard_lesson"] ?>">
-                                        <p>Class</p>
+                                        <p><?php echo DASHBOARD_MENU_LESSONS;?> </p>
                                         <i class="material-icons blue">school</i>
                                     </a>
                                 </li>
                                 <li><a href="<?php echo $this->slugs['dashboard_student']; ?>">
-                                        <p>Students</p>
+                                        <p><?php echo DASHBOARD_MENU_HOMEWORK;?> </p>
                                         <i class="material-icons blue">group</i>
                                     </a>
                                 </li>
                                 <li><a href="<?php echo $this->slugs["dashboard_blog"] ?>">
-                                        <p>Blog</p>
+                                        <p><?php echo DASHBOARD_MENU_BLOG;?> </p>
                                         <i class="material-icons blue">library_books</i>
                                     </a>
                                 </li>
                                 <li><a href="<?php echo DIRNAME . substr($language, 0, 2) . "/dashboard/"; ?>">
-                                        <p>Portofolio</p>
+                                        <p><?php echo DASHBOARD_MENU_PORTFOLIO;?> </p>
                                         <i class="material-icons blue">image</i>
                                     </a>
                                 </li>
                                 <li><a href="<?php echo $this->slugs["dashboard_stat"] ?>">
-                                        <p>Statistics</p>
+                                        <p><?php echo DASHBOARD_MENU_STATISTIC;?></p>
                                         <i class="material-icons blue">insert_chart_outlined</i>
                                     </a>
                                 </li>
@@ -108,39 +108,39 @@
                                 <div>
                                     <section id="stat-cms" class="block-dash">
                                         <div class="title">
-                                            <h4>Statistics cms</h4>
+                                            <h4><?php echo DASHBOARD_SECTION_STATISTIC;?></h4>
                                             <a href="<?php echo $this->slugs["dashboard_stat"] ?>">
                                                 <i class="material-icons blue">arrow_forward</i>
                                             </a>
                                         </div>
                                         <div class="container">
                                             <ul>
-                                                <li><p>User register</p>
+                                                <li><p><?php echo DASHBOARD_SECTION_REGISTER;?></p>
                                                     <p class="blue stat-register"><?php if (isset($totalUser)) echo $totalUser; else echo '0'; ?></p>
                                                 </li>
                                             </ul>
                                             <ul>
-                                                <li><p>Lesson post</p>
+                                                <li><p><?php echo DASHBOARD_SECTION_LESSON;?></p>
                                                     <p class="blue stat-register"><?php if (isset($totalLesson)) echo $totalLesson; else echo '0'; ?></p>
                                                 </li>
                                             </ul>
                                             <ul>
-                                                <li><p>Comments post</p>
+                                                <li><p><?php echo DASHBOARD_SECTION_COMMENT;?></p>
                                                     <p class="blue stat-register"><?php if (isset($totalComment)) echo $totalComment; else echo '0'; ?></p>
                                                 </li>
                                             </ul>
                                             <ul>
-                                                <li><p>Message send</p>
+                                                <li><p><?php echo DASHBOARD_SECTION_MESSAGE;?></p>
                                                     <p class="blue stat-register"><?php if (isset($totalMessage)) echo $totalMessage; else echo '0'; ?></p>
                                                 </li>
                                             </ul>
                                             <ul>
-                                                <li><p>Number of article in the blog</p>
+                                                <li><p><?php echo DASHBOARD_SECTION_NBARTICLE;?></p>
                                                     <p class="blue stat-register"><?php if (isset($totalArticle)) echo $totalArticle; else echo '0'; ?></p>
                                                 </li>
                                             </ul>
                                             <ul>
-                                                <li><p>Number of groups</p>
+                                                <li><p><?php echo DASHBOARD_SECTION_NBGROUPS;?></p>
                                                     <p class="blue stat-register"><?php if (isset($totalGroup)) echo $totalGroup; else echo '0'; ?></p>
                                                 </li>
                                             </ul>

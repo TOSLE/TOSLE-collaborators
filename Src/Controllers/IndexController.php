@@ -25,7 +25,7 @@ class IndexController extends CoreController
 
     function accessAction($params)
     {
-        echo "Vous n'avez apparemment pas les droits d'accès à ce lien";
+        $View = new View('default', 'error_access');
     }
     function notfoundAction($params)
     {
