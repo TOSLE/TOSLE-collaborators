@@ -199,6 +199,7 @@ class Access
         "chat/untrash" => 2,
         "chat/delete" => 2,
         "user/editpassword" => 1,
+        "user/editaccount" => 1,
     ];
 
     private $urlFixe = [
