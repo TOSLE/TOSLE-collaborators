@@ -34,12 +34,12 @@ class DashboardRepository
         $User->setWhereParameter($parameter);
         $User->setOrderByParameter(['lastname' => 'ASC']);
         $users = $User->getData();
-        $Table = new DashboardTable('bloc-users', 'Liste des utilisateurs', 12);
-        $Table->setTableHeader("text", "Nom");
-        $Table->setTableHeader("text", "Prénom");
-        $Table->setTableHeader("text", "Email");
-        $Table->setTableHeader("date", "Inscription");
-        $Table->setTableHeader("date", "Action");
+        $Table = new DashboardTable('bloc-users', DASHBOARD_BLOC_USERS, 12);
+        $Table->setTableHeader("text", DASHBOARD_BLOC_NAME);
+        $Table->setTableHeader("text", DASHBOARD_BLOC_FIRSTNAME);
+        $Table->setTableHeader("text", DASHBOARD_BLOC_EMAIL);
+        $Table->setTableHeader("date", DASHBOARD_BLOC_INSCRIPTION);
+        $Table->setTableHeader("date", DASHBOARD_BLOC_ACTIONS);
 
         if(isset($users) && !empty($users)){
             foreach($users as $user){
@@ -73,12 +73,12 @@ class DashboardRepository
     {
         $Group = new GroupRepository();
         $groups = $Group->getGroup();
-        $Table = new DashboardTable('bloc-groups', 'Liste des groupes', 12);
+        $Table = new DashboardTable('bloc-groups', DASHBOARD_BLOC_GROUPS, 12);
         $Table->setAction('add', 'addGroupModal');
-        $Table->setTableHeader("text", "Avatar");
-        $Table->setTableHeader("text", "Nom");
-        $Table->setTableHeader("text", "Nombre d'utilisateur");
-        $Table->setTableHeader("date", "Action");
+        $Table->setTableHeader("text", DASHBOARD_BLOC_AVATAR);
+        $Table->setTableHeader("text", DASHBOARD_BLOC_NAME);
+        $Table->setTableHeader("text", DASHBOARD_BLOC_NB_USERS);
+        $Table->setTableHeader("date", DASHBOARD_BLOC_ACTIONS);
 
         if(isset($groups) && !empty($groups)){
             foreach($groups as $group){

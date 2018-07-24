@@ -105,8 +105,18 @@ define('DASHBOARD_SECTION_NBGROUPS', 'Number of groups');
  * Dashboard Student
  */
     define('DASHBOARD_BLOC_GROUPS', 'Group list');
-    define('DASHBOARD_BLOC_USERS', 'User list');
-    define('DASHBOARD_ADD_GROUP', 'Add group');
+    define('DASHBOARD_BLOC_AVATAR', 'Avatar');
+    define('DASHBOARD_BLOC_NAME', 'Name');
+    define('DASHBOARD_BLOC_NB_USERS', 'Numbers of users');
+    define('DASHBOARD_BLOC_ACTIONS', 'Action');
+
+    define('DASHBOARD_BLOC_USERS', 'Users list');
+    define('DASHBOARD_BLOC_FIRSTNAME', 'Firstname');
+    define('DASHBOARD_BLOC_EMAIL', 'Email');
+    define('DASHBOARD_BLOC_INSCRIPTION', 'Inscription');
+
+
+
 
 /**
  * Dashboard Blog
@@ -118,10 +128,14 @@ define('DASHBOARD_SECTION_NBGROUPS', 'Number of groups');
         define('DASHBOARD_BLOC_BLOG_ANALYTICS_ARTICLES_UNPUBLISH', 'Unpublish number');
         define('DASHBOARD_BLOC_BLOG_ANALYTICS_ARTICLES_COMMENTS', 'Comment number');
         define('DASHBOARD_BLOC_BLOG_ANALYTICS_ARTICLES_FILES', 'File number');
+
     define('DASHBOARD_BLOC_BLOG_LAST', 'Last blogs');
     define('DASHBOARD_BLOC_BLOG_TITLE_MODAL', 'View all blog');
     define('DASHBOARD_BLOC_BLOG_ALL_PUBLISH', 'All published blogs');
     define('DASHBOARD_BLOC_BLOG_ALL_UNPUBLISH', 'All unpublished blogs');
+    define('DASHBOARD_BLOC_BLOG_TITRE', 'Title');
+    define('DASHBOARD_BLOC_BLOG_DATE_PUBLISH', 'Date of publication');
+    define('DASHBOARD_BLOC_BLOG_ACTION', 'Action');
         define('DASHBOARD_BLOC_BLOG_BUTTON_VIEW', 'View');
         define('DASHBOARD_BLOC_BLOG_BUTTON_EDIT', 'Edit');
         define('DASHBOARD_BLOC_BLOG_BUTTON_PUBLISH', 'Publish');
