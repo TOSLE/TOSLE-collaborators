@@ -19,6 +19,7 @@
                     <p>
                         <?php echo $lesson->getDescription();?>
                     </p>
+                    <!--
                     <?php if(isset($this->Auth)):?>
                         <?php if(isset($subscribe)):?>
                             <a href="<?php echo $this->slugs['class/follow'].'/'.$lesson->getId();?>" class="btn btn-red-outline"><i class="material-icons">notifications_off</i><span>Unsubscribe</span></a>
@@ -26,6 +27,7 @@
                             <a href="<?php echo $this->slugs['class/follow'].'/'.$lesson->getId();?>" class="btn btn-tosle-outline"><i class="material-icons">notifications</i><span>Subscribe</span></a>
                         <?php endif;?>
                     <?php endif;?>
+                    -->
                 </div>
             </div>
             <div class="col-6">
