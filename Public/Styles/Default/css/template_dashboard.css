@@ -223,6 +223,10 @@ main {
     width: 100%;
     height: 100%;
     align-items: center; }
+  main #nav-dashboard nav ul li a i {
+    width: 24px;
+    margin-left: auto;
+    margin-right: 15px; }
   main section .marg-container {
     margin-left: 15px; }
   main .title-page {
@@ -307,6 +311,9 @@ main {
   main .blue {
     fill: #1a5ccbdb;
     color: #1a5ccbdb; }
+  main .white {
+    fill: #FFFFFF;
+    color: #FFFFFF; }
   main .column-col-5 ul {
     display: flex;
     flex-direction: row;
@@ -417,7 +424,44 @@ main {
     main #left-side {
       max-width: 480px;
       justify-content: center;
-      margin: auto; } }
+      margin: auto; }
+    main #nav-dashboard {
+      background-color: transparent;
+      box-shadow: none;
+      border: none;
+      display: flex;
+      flex-direction: row;
+      justify-content: center; }
+      main #nav-dashboard .btn-dashboard {
+        max-width: 200px;
+        display: flex;
+        flex-direction: row;
+        margin-right: 15px; }
+        main #nav-dashboard .btn-dashboard a {
+          display: flex;
+          align-items: center;
+          background-color: #1a5ccbdb;
+          padding: 5px;
+          border-radius: 5px; }
+          main #nav-dashboard .btn-dashboard a i {
+            margin-left: 20px;
+            margin-right: 20px;
+            padding-right: 0;
+            width: 24px; }
+          main #nav-dashboard .btn-dashboard a a:hover {
+            background-color: #134485; }
+        main #nav-dashboard .btn-dashboard a:link {
+          text-decoration: none; }
+        main #nav-dashboard .btn-dashboard p {
+          font-size: 0.8em;
+          color: #FFFFFF; }
+      main #nav-dashboard .btn-dashboard:last-child {
+        margin-right: 0; } }
+  @media screen and (max-width: 1144px) {
+    main #nav-dashboard {
+      flex-wrap: wrap; }
+      main #nav-dashboard .btn-dashboard {
+        margin-bottom: 27px; } }
   main .logo-header img {
     width: 150px;
     height: 53px;

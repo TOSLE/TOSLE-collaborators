@@ -59,44 +59,50 @@
         </div>
         <div class="col-12 responsive-menu">
             <div>
-                <section id="left-side">
-                    <section id="nav-dashboard">
-                        <nav>
-                            <ul>
-                                <li><a href="<?php echo $this->slugs["dashboardhome"]; ?>">
-                                        <p>Dashboard</p>
-                                        <i class="material-icons blue">dashboard</i>
-
-                                    </a>
-                                </li>
-                                <li><a href="<?php echo $this->slugs["dashboard_lesson"] ?>">
-                                        <p>Class</p>
-                                        <i class="material-icons blue">school</i>
-                                    </a>
-                                </li>
-                                <li><a href="<?php echo $this->slugs['dashboard_student']; ?>">
-                                        <p>Students</p>
-                                        <i class="material-icons blue">group</i>
-                                    </a>
-                                </li>
-                                <li><a href="<?php echo $this->slugs["dashboard_blog"] ?>">
-                                        <p>Blog</p>
-                                        <i class="material-icons blue">library_books</i>
-                                    </a>
-                                </li>
-                                <li><a href="<?php echo DIRNAME . substr($language, 0, 2) . "/dashboard/"; ?>">
-                                        <p>Portofolio</p>
-                                        <i class="material-icons blue">image</i>
-                                    </a>
-                                </li>
-                                <li><a href="<?php echo $this->slugs["dashboard_stat"] ?>">
-                                        <p>Statistics</p>
-                                        <i class="material-icons blue">insert_chart_outlined</i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </section>
+                <section id="nav-dashboard">
+                    <div class="btn-dashboard">
+                        <a href="<?php echo $this->slugs["dashboardhome"]; ?>">
+                            <p>Dashboard</p>
+                            <i class="material-icons white">dashboard</i>
+                        </a>
+                    </div>
+                    <div class="btn-dashboard">
+                        <a href="<?php echo $this->slugs["dashboard_lesson"]; ?>">
+                            <p>Class</p>
+                            <i class="material-icons white">school</i>
+                        </a>
+                    </div>
+                    <div class="btn-dashboard">
+                        <a href="<?php echo $this->slugs["dashboard_student"]; ?>">
+                            <p>Students</p>
+                            <i class="material-icons white">group</i>
+                        </a>
+                    </div>
+                    <div class="btn-dashboard">
+                        <a href="<?php echo $this->slugs["dashboard_blog"]; ?>">
+                            <p>Blog</p>
+                            <i class="material-icons white">library_books</i>
+                        </a>
+                    </div>
+                    <div class="btn-dashboard">
+                        <a href="<?php echo DIRNAME . substr($language, 0, 2) . "/dashboard/"; ?>">
+                            <p>Portofolio</p>
+                            <i class="material-icons white">image</i>
+                        </a>
+                    </div>
+                    <div class="btn-dashboard">
+                        <a href="<?php echo $this->slugs["edit_profile"]; ?>">
+                            <p>My Account</p>
+                            <i class="material-icons white">build</i>
+                        </a>
+                    </div>
+                    <div class="btn-dashboard">
+                        <a href="<?php echo $this->slugs["dashboard_stat"]; ?>">
+                            <p>Statistics</p>
+                            <i class="material-icons white">insert_chart_outlined</i>
+                        </a>
+                    </div>
+                </section>
             </div>
         </div>
         <div class="col-10">
@@ -162,8 +168,8 @@
                             </div>
                         </div>
                         <div class="row">
-                            <?php $this->addModal("dashboard_bloc", $configTableLesson);?>
-                            <?php $this->addModal("dashboard_bloc", $configTableBlog);?>
+                            <?php $this->addModal("dashboard_bloc", $configTableLesson); ?>
+                            <?php $this->addModal("dashboard_bloc", $configTableBlog); ?>
                         </div>
                     </div>
                 </section>
