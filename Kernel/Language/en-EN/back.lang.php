@@ -100,6 +100,13 @@ define('DASHBOARD_SECTION_NBGROUPS', 'Number of groups');
         define('DASHBOARD_BLOC_LESSONS_ADD_EXIT', 'Exit');
         define('DASHBOARD_BLOC_LESSONS_ADD_SAVE_DRAFT', 'Save as draft');
         define('DASHBOARD_BLOC_LESSONS_ADD_SAVE', 'Save  the new lesson');
+        define('DASHBOARD_BLOC_LESSONS_ADD_CHAPTER_FILE', 'Select the file(s) to join to this chapter');
+        define('DASHBOARD_BLOC_LESSONS_ADD_CHAPTER_SELECT', 'Select lesson');
+        define('DASHBOARD_BLOC_LESSONS_ADD_CHAPTER_DESCRITPION', 'You can always edit it later');
+        define('DASHBOARD_BLOC_LESSONS_ADD_CHAPTER_NOSELECT', 'no selected course
+');
+
+
 
 /**
  * Dashboard Student
@@ -134,9 +141,12 @@ define('DASHBOARD_SECTION_NBGROUPS', 'Number of groups');
     define('DASHBOARD_BLOC_BLOG_ALL_PUBLISH', 'All published blogs');
     define('DASHBOARD_BLOC_BLOG_ALL_UNPUBLISH', 'All unpublished blogs');
     define('DASHBOARD_BLOC_BLOG_TITRE', 'Title');
+    define('DASHBOARD_BLOC_BLOG_LIMIT', 'No limit');
     define('DASHBOARD_BLOC_BLOG_DATE_PUBLISH', 'Date of publication');
     define('DASHBOARD_BLOC_BLOG_ACTION', 'Action');
         define('DASHBOARD_BLOC_BLOG_BUTTON_VIEW', 'View');
         define('DASHBOARD_BLOC_BLOG_BUTTON_EDIT', 'Edit');
         define('DASHBOARD_BLOC_BLOG_BUTTON_PUBLISH', 'Publish');
         define('DASHBOARD_BLOC_BLOG_BUTTON_UNPUBLISH', 'Unpublish');
+
+        define('DASHBOARD_BLOC_BLOG_BUTTON_SAVE', 'Save without publishing');

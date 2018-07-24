@@ -385,14 +385,14 @@ class LessonRepository extends Lesson
             'title'
         ];
         $array = $this->getData($target);
-        $option['_forbidden'] = "Pas de cours sélectionné";
+        $option['_forbidden'] = DASHBOARD_BLOC_LESSONS_ADD_CHAPTER_NOSELECT;
         foreach($array as $lesson){
             $option[$lesson->getId()] = $lesson->getTitle();
         }
         return [
             "select_lesson" => [
-                "label" => "Selection du cours",
-                "description" => "Vous pourrez toujours le modifier plus tard",
+                "label" => DASHBOARD_BLOC_LESSONS_ADD_CHAPTER_SELECT,
+                "description" => DASHBOARD_BLOC_LESSONS_ADD_CHAPTER_DESCRITPION,
                 "multiple" => false,
                 "required" => true,
                 "options" => $option

@@ -165,8 +165,8 @@ class UserRepository extends User
         }
         return [
             "select_users" => [
-                "label" => "Ajouter des utilisateurs",
-                "description" => "Vous avez le droit à plusieurs choix (\"CTRL + Clic\" pour réaliser un choix multiple)",
+                "label" => "Add user",
+                "description" => "You have the right to several choices (\"CTRL + Clic\" pour réaliser un choix multiple)",
                 "multiple" => true,
                 "options" => $option
             ]
