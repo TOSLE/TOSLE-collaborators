@@ -197,7 +197,8 @@ class Access
         "chat/addconv" => 1,
         "chat/trash" => 2,
         "chat/untrash" => 2,
-        "chat/delete" => 2
+        "chat/delete" => 2,
+        "user/editpassword" => 1,
     ];
 
     private $urlFixe = [

@@ -74,9 +74,12 @@ class ProfileController extends CoreController
                         header('Location:'.$routes['profilehome']);
                     }
                     else {
-
                     }
                 }
+                if($this->Auth->getStatus() > 1){
+                    $View->setData('controller', 'DashboardController');
+                }
+                $View->setData('configEditPassword', $User->configFormEditPassword());
                 $View->setData("config", $configFormEditUser);
                 $View->setData("errors", $errors);
             }

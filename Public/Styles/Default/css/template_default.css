@@ -375,6 +375,14 @@ Override buttons OSPAF
     width: 150px;
     height: 53px;
     margin-top: 3px; }
+  html .container-message .mention-legal {
+    margin-left: 40px; }
+    html .container-message .mention-legal .title {
+      padding-bottom: 20px;
+      color: #1a5ccbdb; }
+    html .container-message .mention-legal .paragraph {
+      margin-top: 20px;
+      margin-bottom: 20px; }
   html .profile {
     display: flex;
     background-color: #FFFFFF;

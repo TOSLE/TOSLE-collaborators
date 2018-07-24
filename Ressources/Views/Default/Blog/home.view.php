@@ -23,32 +23,43 @@
 </section>
 <section class="container">
     <div class="row">
-    <?php foreach($data as $row => $value):?>
-            <div class="col-<?php echo $col;?>">
-                <div>
-                    <div class="blog-article article-content-text">
-                        <div class="content-article" style="background-image: url('<?php echo $value['image']->getPath().$value['image']->getName();?>')">
-                            <div class="fade-background-article">
-                                <h2><?php echo $value["blog_title"];?></h2>
-                                <p class="resume"><?php echo $value["blog_content"];?></p>
-                                <?php if(isset($value["category"])):?>
-                                    <ul class="tag-list category-list-homeblog">
-                                        <?php foreach ($value["category"] as $category):?>
-                                            <li class="item tosle">
-                                                <?php echo $category;?>
-                                            </li>
-                                        <?php endforeach;?>
-                                    </ul>
-                                <?php endif;?>
-                                <p class="info-comment-homeblog"><?php echo $value["blog_numberComment"];?> <i class="material-icons">comment</i></p>
-                                <a href="<?php echo $this->slugs["view_blog_article"]."/".$value["blog_url"];?>" class="btn btn-tosle"><?php echo READ_MORE;?></a>
-                                <p class="datecreate"><?php echo $value["blog_datecreate"];?></p>
+        <?php if(isset($data)):?>
+            <?php foreach ($data as $row => $value): ?>
+                <div class="col-<?php echo $col; ?>">
+                    <div>
+                        <div class="blog-article article-content-text">
+                            <div class="content-article"
+                                 style="background-image: url('<?php echo $value['image']->getPath() . $value['image']->getName(); ?>')">
+                                <div class="fade-background-article">
+                                    <h2><?php echo $value["blog_title"]; ?></h2>
+                                    <p class="resume"><?php echo $value["blog_content"]; ?></p>
+                                    <?php if (isset($value["category"])): ?>
+                                        <ul class="tag-list category-list-homeblog">
+                                            <?php foreach ($value["category"] as $category): ?>
+                                                <li class="item tosle">
+                                                    <?php echo $category; ?>
+                                                </li>
+                                            <?php endforeach; ?>
+                                        </ul>
+                                    <?php endif; ?>
+                                    <p class="info-comment-homeblog"><?php echo $value["blog_numberComment"]; ?> <i
+                                                class="material-icons">comment</i></p>
+                                    <a href="<?php echo $this->slugs["view_blog_article"] . "/" . $value["blog_url"]; ?>"
+                                       class="btn btn-tosle"><?php echo READ_MORE; ?></a>
+                                    <p class="datecreate"><?php echo $value["blog_datecreate"]; ?></p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <div class="col-10">
+                <div>
+                    <p>Aucun article pour le moment</p>
+                </div>
             </div>
-    <?php endforeach;?>
+        <?php endif; ?>
     </div>
 </section>
 <?php if(isset($pagination) && !empty($pagination)):?>
