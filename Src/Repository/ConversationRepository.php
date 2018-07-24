@@ -24,6 +24,15 @@ class ConversationRepository extends Conversation
                         'status' => $_status
                     ]
                 ];
+                if($_status == 0){
+                    $parameter = [
+                        'LIKE' => [
+                            'type' => 1,
+                            'status' => $_status,
+                            'idowner' => $_Auth->getId(),
+                        ]
+                    ];
+                }
                 $this->setWhereParameter($parameter);
                 $array = $this->getData();
                 $arrayKey = [];
@@ -50,6 +59,15 @@ class ConversationRepository extends Conversation
                     'status' => $_status
                 ]
             ];
+            if($_status == 0){
+                $parameter = [
+                    'LIKE' => [
+                        'type' => 1,
+                        'status' => $_status,
+                        'idowner' => $_Auth->getId(),
+                    ]
+                ];
+            }
             $this->setWhereParameter($parameter);
             $array = $this->getData();
             foreach($array as $conversation){
@@ -158,6 +176,14 @@ class ConversationRepository extends Conversation
                 $_identifier => $_value
             ]
         ];
+        if($_identifier == 'status' && $_identifier == 0){
+            $parameter = [
+                'LIKE' => [
+                    $_identifier => $_value,
+                    'idowner' => $_Auth->getId(),
+                ]
+            ];
+        }
         $this->setWhereParameter($parameter);
         if($_Auth->getStatus() > 1){
             return $this->countData(['id']);
