@@ -59,40 +59,41 @@ class UserController extends CoreController
         $errors = [];
         if(!empty($params["POST"])) {
             $errors = Form::checkForm($form, $params["POST"]);
+            $_post = Form::secureData($params["POST"]);
             $retourValue=$user->checkEmailExist($params["POST"]["email"]);
 
                if(is_numeric($retourValue)){     
-                     $user->setEmail($params["POST"]["email"]);                             
+                     $user->setEmail($_post["email"]);
                     } 
                 else {
                         $errors=$retourValue;                                                
                     }
 
             if (empty($errors)) {
-                $user->setFirstName($params["POST"]["firstname"]);
-                $user->setLastName($params["POST"]["lastname"]);
-                $user->checkEmailExist($params["POST"]["email"]);
+                $user->setFirstName($_post["firstname"]);
+                $user->setLastName($_post["lastname"]);
+                $user->checkEmailExist($_post["email"]);
                //print_r($retourValue);
                 //die();
              
-                $user->setEmail($params["POST"]["emailConfirm"]);
-                $user->setPassword($params["POST"]["pwd"]);
-                $user->setPassword($params["POST"]["pwdConfirm"]);
+                $user->setEmail($_post["emailConfirm"]);
+                $user->setPassword($_post["pwd"]);
+                $user->setPassword($_post["pwdConfirm"]);
                 $user->setToken();
                 $user->save();
 
-                $email = $params["POST"]["email"];
-                $firstName = $params["POST"]["firstname"];
-                $lastName = $params["POST"]["lastname"];
+                $email = $_post["email"];
+                $firstName = $_post["firstname"];
+                $lastName = $_post["lastname"];
                 $token = $user->getToken();
 
                 Mail::sendMailRegister($email, $firstName, $lastName,$token);
                 header('Location:'.Access::getSlugsById()['signin'].'/registered');
             } else {
                 $form["data_content"] = [
-                    "email" => $params["POST"]["email"],
-                    "firstname" => $params["POST"]["firstname"],
-                    "lastname" => $params["POST"]["lastname"],
+                    "email" => $_post["email"],
+                    "firstname" => $_post["firstname"],
+                    "lastname" => $_post["lastname"],
                 ];
             }
         }
