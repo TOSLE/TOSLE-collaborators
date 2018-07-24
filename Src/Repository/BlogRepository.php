@@ -149,12 +149,12 @@ class BlogRepository extends Blog
     {
         $routes = Access::getSlugsById();
         $ViewLatestBloc = new DashboardBlocModal();
-        $ViewLatestBloc->setTitle("View latest post on your blog");
+        $ViewLatestBloc->setTitle(DASHBOARD_HEADER_TABLE_NAME);
         $ViewLatestBloc->setIconHeader("modal_view_all_posts", "modal");
         $ViewLatestBloc->setTableHeader([
-            1 => "Titre",
-            2 => "Date de publication",
-            3 => "Action"
+            1 => DASHBOARD_HEADER_TABLE_TITLE,
+            2 => DASHBOARD_HEADER_TABLE_CREATED,
+            3 => DASHBOARD_HEADER_TABLE_ACTION
         ]);
         $ViewLatestBloc->setColSizeBloc($colSize);
         $ViewLatestBloc->setActionButtonStatus(0, [

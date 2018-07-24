@@ -25,7 +25,7 @@ class IndexController extends CoreController
 
     function accessAction($params)
     {
-        echo "Vous n'avez apparemment pas les droits d'accès à ce lien";
+        $View = new View('default', 'error_access');
     }
     function notfoundAction($params)
     {
@@ -45,11 +45,11 @@ class IndexController extends CoreController
                 $data = Form::secureData($params["POST"]);
                 $status = $Installer->testConnectionBDD($data);
                 if(!$status) {
-                    $errors['BDD Connexion'] = "Il semble que la connexion à la BDD est échouée.";
+                    $errors[INSTALL_FORM_WARNING_MESSAGE_DATABASE] = INSTALL_FORM_WARNING_MESSAGE_DATABASE_MESSAGE;
                 } else {
                     $status = $Installer->setParameterFile($data);
                     if(!$status) {
-                        $errors['Parameter'] = "Il semble que la création du fichier a échoué.";
+                        $errors[INSTALL_FORM_WARNING_MESSAGE_PARAMETER] = INSTALL_FORM_WARNING_MESSAGE_PARAMETER_MESSAGE;
                     } else {
                         $Routes = Access::getSlugsById();
                         header('Location:'.$Routes['index/config']);

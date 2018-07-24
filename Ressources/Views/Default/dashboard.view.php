@@ -114,39 +114,39 @@
                                 <div>
                                     <section id="stat-cms" class="block-dash">
                                         <div class="title">
-                                            <h4>Statistics cms</h4>
+                                            <h4><?php echo DASHBOARD_SECTION_STATISTIC;?></h4>
                                             <a href="<?php echo $this->slugs["dashboard_stat"] ?>">
                                                 <i class="material-icons blue">arrow_forward</i>
                                             </a>
                                         </div>
                                         <div class="container">
                                             <ul>
-                                                <li><p>User register</p>
+                                                <li><p><?php echo DASHBOARD_SECTION_REGISTER;?></p>
                                                     <p class="blue stat-register"><?php if (isset($totalUser)) echo $totalUser; else echo '0'; ?></p>
                                                 </li>
                                             </ul>
                                             <ul>
-                                                <li><p>Lesson post</p>
+                                                <li><p><?php echo DASHBOARD_SECTION_LESSON;?></p>
                                                     <p class="blue stat-register"><?php if (isset($totalLesson)) echo $totalLesson; else echo '0'; ?></p>
                                                 </li>
                                             </ul>
                                             <ul>
-                                                <li><p>Comments post</p>
+                                                <li><p><?php echo DASHBOARD_SECTION_COMMENT;?></p>
                                                     <p class="blue stat-register"><?php if (isset($totalComment)) echo $totalComment; else echo '0'; ?></p>
                                                 </li>
                                             </ul>
                                             <ul>
-                                                <li><p>Message send</p>
+                                                <li><p><?php echo DASHBOARD_SECTION_MESSAGE;?></p>
                                                     <p class="blue stat-register"><?php if (isset($totalMessage)) echo $totalMessage; else echo '0'; ?></p>
                                                 </li>
                                             </ul>
                                             <ul>
-                                                <li><p>Number of article in the blog</p>
+                                                <li><p><?php echo DASHBOARD_SECTION_NBARTICLE;?></p>
                                                     <p class="blue stat-register"><?php if (isset($totalArticle)) echo $totalArticle; else echo '0'; ?></p>
                                                 </li>
                                             </ul>
                                             <ul>
-                                                <li><p>Number of groups</p>
+                                                <li><p><?php echo DASHBOARD_SECTION_NBGROUPS;?></p>
                                                     <p class="blue stat-register"><?php if (isset($totalGroup)) echo $totalGroup; else echo '0'; ?></p>
                                                 </li>
                                             </ul>

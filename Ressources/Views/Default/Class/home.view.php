@@ -63,7 +63,7 @@
                                 </div>
                                 <div class="difficult">
                                     <div class="arrow-difficult" style="border-left-color: <?php echo $lesson->getColor();?>;"></div>
-                                    <p>Difficulté du cours</p>
+                                    <p><?php echo LESSON_DIFFICULTY;?></p>
                                     <?php for($i = 0; $i < $lesson->getLevel(); $i++):?>
                                         <span class="material-icons">star_rate</span>
                                     <?php endfor;?>
@@ -79,7 +79,7 @@
                                 <?php endif;?>
                                 <div class="more-infos" style="background-color: <?php echo $lesson->getColor();?>">
                                     <p class="info-comment-lesson"><?php echo $lesson->getNumbercomment();?> <i class="material-icons">comment</i></p>
-                                    <a href="<?php echo $this->slugs["view_lesson"]."/".$lesson->getUrl();?>" class="btn btn-white info-btn-readmore"><?php echo BLOG_BUTTON_READMORE;?></a>
+                                    <a href="<?php echo $this->slugs["view_lesson"]."/".$lesson->getUrl();?>" class="btn btn-white info-btn-readmore"><?php echo READ_MORE;?></a>
                                     <p class="info-chapter">
                                         <?php echo count($lesson->getChapter());?> <i class="material-icons">import_contacts</i>
                                     </p>
