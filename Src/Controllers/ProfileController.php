@@ -67,26 +67,12 @@ class ProfileController
                 $User->getUser();
                 $Profile->editProfile($User->getId());
 
-                //$User = new User();
-
                 $form = $User->configFormAdd();
                 $errors = [];
-
-                
 
                 $View->setData("config", $form);
                 $View->setData("errors", $errors);
             }
         }
-    }
-
-    /**
-     * @Route("/en/profile/homework")
-     * @param array $params
-     * View homework profile action
-     */
-    function homeworkAction($params)
-    {
-        $View = new View("default");
     }
 }
