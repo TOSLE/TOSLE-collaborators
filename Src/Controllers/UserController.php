@@ -314,4 +314,12 @@ class UserController extends CoreController
         }
         header('Location:'.$this->Routes['dashboard_student']);
     }
+
+    public function editpasswordAction($params)
+    {
+        if(isset($params['POST']) && !empty($params['POST'])){
+            echo $this->Auth->getPassword();
+        }
+
+    }
 }

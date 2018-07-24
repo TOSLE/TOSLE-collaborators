@@ -17,3 +17,17 @@
     </div>
 </section>
 <?php $this->addModal("dashboard_form", $config, $errors); ?>
+<section class="container">
+    <div class="row">
+        <div class="col-4">
+            <div>
+                <h2><?php echo USER_PROFILE_EDIT_PASSWORD;?></h2>
+            </div>
+        </div>
+        <div class="col-6">
+            <div>
+                <?php $this->addModal("dashboard_form", $configEditPassword, $errors); ?>
+            </div>
+        </div>
+    </div>
+</section>

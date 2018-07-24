@@ -345,4 +345,38 @@ class User extends CoreSql{
             ],
         ];
     }
+
+    public function configFormEditPassword()
+    {
+        $routes = Access::getSlugsById();
+        return [
+            "config"=> [
+                "method"=>"post",
+                "action"=>$routes['user/editpassword'],
+                "submit"=>FORM_BASIC_SAVE,
+                "form_file"=>true,
+            ],
+            "input"=> [
+                "pwdlast"=>[
+                    "type"=>"password",
+                    "placeholder"=> FORM_USER_PASSWORD_LAST_PLACEHOLDER,
+                    "required"=>true,
+                    'label' => FORM_USER_PASSWORD_LAST_LABEL
+                ],
+                "pwd"=>[
+                    "type"=>"password",
+                    "placeholder"=>FORM_USER_PASSWORD_PLACEHOLDER,
+                    "required"=>true,
+                    'label' => FORM_USER_PASSWORD_LABEL
+                ],
+                "pwdConfirm"=>[
+                    "type"=>"password",
+                    "placeholder"=>FORM_USER_PASSWORD_CONFIRM_PLACEHOLDER,
+                    "required"=>true,
+                    "confirm"=>"pwd",
+                    'label' => FORM_USER_PASSWORD_CONFIRM_LABEL
+                ]
+            ],
+        ];
+    }
 }
