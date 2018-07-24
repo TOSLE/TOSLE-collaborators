@@ -48,9 +48,12 @@ define('DASHBOARD_SECTION_NBGROUPS', 'Number of groups');
  * Dashboard Lesson
  */
     define('DASHBOARD_BLOC_LESSON_GENERAL', 'Global menu');
+        define('DASHBOARD_BLOC_LESSON_GENERAL_ACTION', 'Action');
         define('DASHBOARD_BLOC_LESSON_GENERAL_ADD_LESSON', 'Add lesson');
         define('DASHBOARD_BLOC_LESSON_GENERAL_ADD_CHAPTER', 'Add chapter');
-    define('DASHBOARD_BLOC_LESSON_ANALYTICS', 'Analytics');
+    define('DASHBOARD_BLOC_LESSON_ANALYTICS', 'Lesson analytics');
+        define('DASHBOARD_BLOC_LESSON_ANALYTICS_TYPE', 'Type');
+        define('DASHBOARD_BLOC_LESSON_ANALYTICS_VALUE', 'Value');
         define('DASHBOARD_BLOC_LESSON_ANALYTICS_NUMBER_LESSON', 'Number lesson');
         define('DASHBOARD_BLOC_LESSON_ANALYTICS_NUMBER_CHAPTER', 'Number chapter');
     define('DASHBOARD_BLOC_LESSONS', 'Your lessons');
