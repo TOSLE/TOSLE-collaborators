@@ -73,6 +73,8 @@ class ProfileController extends CoreController
                     if($errors == 1){
                         header('Location:'.$routes['profilehome']);
                     }
+                    else {
+                    }
                 }
                 if($this->Auth->getStatus() > 1){
                     $View->setData('controller', 'DashboardController');

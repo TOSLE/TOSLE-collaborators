@@ -21,9 +21,9 @@ class LessonRepository extends Lesson
         $routes = Access::getSlugsById();
 
         $BlocGeneral->setColSizeBloc($_colsize);
-        $BlocGeneral->setTitle("Menu general");
+        $BlocGeneral->setTitle(DASHBOARD_BLOC_LESSON_GENERAL);
         $BlocGeneral->setTableHeader([
-            2 => "Action"
+            2 => DASHBOARD_BLOC_LESSON_GENERAL_ACTION
         ]);
         $BlocGeneral->setTableBodyClass([
             2 => "td-content-action"
@@ -35,7 +35,7 @@ class LessonRepository extends Lesson
                     "type" => "href",
                     "target" => $routes["class/add"]."/lesson",
                     "color" => "tosle",
-                    "text" => "Add lesson"
+                    "text" => DASHBOARD_BLOC_LESSON_GENERAL_ADD_LESSON
                 ]
             ],
             1 => [
@@ -43,7 +43,7 @@ class LessonRepository extends Lesson
                     "type" => "href",
                     "target" => $routes["chapter/add"]."/chapter",
                     "color" => "tosle",
-                    "text" => "Add chapter"
+                    "text" => DASHBOARD_BLOC_LESSON_GENERAL_ADD_CHAPTER
                 ]
             ]
         ]);
@@ -56,10 +56,10 @@ class LessonRepository extends Lesson
     public function getModalStats()
     {
         $StatsBlog = new DashboardBlocModal();
-        $StatsBlog->setTitle("Lesson Analytics");
+        $StatsBlog->setTitle(DASHBOARD_BLOC_LESSON_ANALYTICS);
         $StatsBlog->setTableHeader([
-            1 => "Type",
-            2 => "Value"
+            1 => DASHBOARD_BLOC_LESSON_ANALYTICS_TYPE,
+            2 => DASHBOARD_BLOC_LESSON_ANALYTICS_VALUE
         ]);
         $StatsBlog->setTableBodyClass([
             1 => "td-content-text",
@@ -68,11 +68,11 @@ class LessonRepository extends Lesson
         $StatsBlog->setColSizeBloc(6);
         $StatsBlog->setTableBodyContent([
             0 => [
-                1 => "Nombre de cours",
+                1 => DASHBOARD_BLOC_LESSON_ANALYTICS_NUMBER_LESSON,
                 2 => $this->countLesson()
             ],
             1 => [
-                1 => "Nombre de chapitre",
+                1 => DASHBOARD_BLOC_LESSON_ANALYTICS_NUMBER_CHAPTER,
                 2 => $this->countChapter()
             ],
         ]);
@@ -108,11 +108,11 @@ class LessonRepository extends Lesson
     {
         $routes = Access::getSlugsById();
         $ViewLatestBloc = new DashboardBlocModal();
-        $ViewLatestBloc->setTitle("Latest lesson on your Website");
+        $ViewLatestBloc->setTitle(DASHBOARD_HEADER_TABLE_TITLE_MODAL);
         $ViewLatestBloc->setTableHeader([
-            1 => "Title",
-            2 => "Create at",
-            4 => "Action"
+            1 => DASHBOARD_HEADER_TABLE_TITLE,
+            2 => DASHBOARD_HEADER_TABLE_CREATED,
+            4 => DASHBOARD_HEADER_TABLE_ACTION
         ]);
         $ViewLatestBloc->setColSizeBloc($colSize);
         $ViewLatestBloc->setActionButtonStatus(0, [
@@ -123,11 +123,11 @@ class LessonRepository extends Lesson
         ]);
         $ViewLatestBloc->setActionButtonStatus(1, [
             "color" => "red",
-            "text" => "Unpublish",
+            "text" => DASHBOARD_HEADER_TABLE_UNPUBLISH,
             "type" => "href",
             "target" => $routes["class/status"]."/"
         ]);
-        $ViewLatestBloc->setActionButtonEdit("Edit");
+        $ViewLatestBloc->setActionButtonEdit(DASHBOARD_HEADER_TABLE_EDIT);
 
         $ViewLatestBloc->setTableBodyClass([
             1 => "td-content-text",
@@ -138,7 +138,7 @@ class LessonRepository extends Lesson
             $ViewLatestBloc->setIconHeader("dashboard_lesson", "access");
         }
         $ViewLatestBloc->setTableBodyContent($this->getLastLesson($limit), true);
-        $ViewLatestBloc->setActionTargetButton("Chapters", $routes['dashboard_chapter']);
+        $ViewLatestBloc->setActionTargetButton(DASHBOARD_HEADER_TABLE_CHAPTERS, $routes['dashboard_chapter']);
         $ViewLatestBloc->setArrayHref("edit", $routes["class/edit"]);
         return $ViewLatestBloc->getArrayData();
     }

@@ -75,6 +75,7 @@
     }
   }
 }
+
 main {
   /* display: flex; */
   flex-direction: row;
@@ -92,13 +93,28 @@ li {
   margin-bottom: 27px !important;
 }
 
-#nav-dashboard ul li a {
-  text-decoration: none;
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  height: 100%;
-  align-items: center;
+#nav-dashboard {
+  ul li a {
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+  }
+  nav {
+    ul {
+      li {
+        a {
+          i {
+            width: 24px;
+            margin-left: auto;
+            margin-right: 15px;
+          }
+        }
+      }
+    }
+  }
 }
 
 section .marg-container {
@@ -169,16 +185,16 @@ section .marg-container {
 
     }
     a:link {
-      text-decoration : none;
+      text-decoration: none;
     }
     > h4 {
       margin-left: 16px;
       font-weight: 500;
     }
   }
-    .container {
-      width: 100%;
-      border: solid 0.5px #BDBDBDBD;
+  .container {
+    width: 100%;
+    border: solid 0.5px #BDBDBDBD;
   }
 }
 
@@ -216,6 +232,11 @@ section .marg-container {
 .blue {
   fill: $colorGlobalToslePrimary;
   color: $colorGlobalToslePrimary;
+}
+
+.white {
+  fill: #FFFFFF;
+  color: #FFFFFF;
 }
 
 .column-col-5 {
@@ -331,6 +352,7 @@ section .marg-container {
     }
   }
 }
+
 .row-stat {
   .container {
     .row {
@@ -372,10 +394,10 @@ section .marg-container {
     }
   }
 }
+
 .responsive-menu {
   display: none;
 }
-
 
 @media screen and (max-width: 1407px) {
   .responsive-menu {
@@ -389,8 +411,57 @@ section .marg-container {
     justify-content: center;
     margin: auto;
   }
-
+  #nav-dashboard {
+    background-color: transparent;
+    box-shadow: none;
+    border: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    .btn-dashboard {
+      max-width: 200px;
+      display: flex;
+      flex-direction: row;
+      margin-right: 15px;
+      a {
+        display: flex;
+        align-items: center;
+        background-color: $colorGlobalToslePrimary;
+        padding: 5px;
+        border-radius: 5px;
+        i {
+          margin-left: 20px;
+          margin-right: 20px;
+          padding-right: 0;
+          width: 24px;
+        }
+        a:hover {
+          background-color: #134485;
+        }
+      }
+      a:link {
+        text-decoration: none;
+      }
+      p {
+        font-size: 0.8em;
+        color: #FFFFFF;
+      }
+    }
+    .btn-dashboard:last-child {
+      margin-right: 0;
+    }
+  }
 }
+
+@media screen and (max-width: 1144px) {
+  #nav-dashboard {
+    flex-wrap: wrap;
+    .btn-dashboard {
+      margin-bottom: 27px;
+    }
+  }
+}
+
 .logo-header {
   img {
     width: 150px;
