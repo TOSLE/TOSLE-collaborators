@@ -59,40 +59,41 @@ class UserController extends CoreController
         $errors = [];
         if(!empty($params["POST"])) {
             $errors = Form::checkForm($form, $params["POST"]);
+            $_post = Form::secureData($params["POST"]);
             $retourValue=$user->checkEmailExist($params["POST"]["email"]);
 
                if(is_numeric($retourValue)){     
-                     $user->setEmail($params["POST"]["email"]);                             
+                     $user->setEmail($_post["email"]);
                     } 
                 else {
                         $errors=$retourValue;                                                
                     }
 
             if (empty($errors)) {
-                $user->setFirstName($params["POST"]["firstname"]);
-                $user->setLastName($params["POST"]["lastname"]);
-                $user->checkEmailExist($params["POST"]["email"]);
+                $user->setFirstName($_post["firstname"]);
+                $user->setLastName($_post["lastname"]);
+                $user->checkEmailExist($_post["email"]);
                //print_r($retourValue);
                 //die();
              
-                $user->setEmail($params["POST"]["emailConfirm"]);
-                $user->setPassword($params["POST"]["pwd"]);
-                $user->setPassword($params["POST"]["pwdConfirm"]);
+                $user->setEmail($_post["emailConfirm"]);
+                $user->setPassword($_post["pwd"]);
+                $user->setPassword($_post["pwdConfirm"]);
                 $user->setToken();
                 $user->save();
 
-                $email = $params["POST"]["email"];
-                $firstName = $params["POST"]["firstname"];
-                $lastName = $params["POST"]["lastname"];
+                $email = $_post["email"];
+                $firstName = $_post["firstname"];
+                $lastName = $_post["lastname"];
                 $token = $user->getToken();
 
                 Mail::sendMailRegister($email, $firstName, $lastName,$token);
                 header('Location:'.Access::getSlugsById()['signin'].'/registered');
             } else {
                 $form["data_content"] = [
-                    "email" => $params["POST"]["email"],
-                    "firstname" => $params["POST"]["firstname"],
-                    "lastname" => $params["POST"]["lastname"],
+                    "email" => $_post["email"],
+                    "firstname" => $_post["firstname"],
+                    "lastname" => $_post["lastname"],
                 ];
             }
         }
@@ -152,40 +153,33 @@ class UserController extends CoreController
         if(!empty($params["POST"])) {
             $errors = Form::checkForm($form, $params["POST"]);
             if (empty($errors)) {
-              /*  $user->checkEmailExist($params["POST"]["email"]);
-                $retourValue=$user->checkEmailExist($params["POST"]["email"]);
-                if(is_numeric($retourValue)){     
-                    echo "testt";*/
+                    $errorsEmailExist = $user->checkEmailExist($params["POST"]["email"]);
+                    if(is_array($errorsEmailExist) && !is_numeric($errorsEmailExist)){
+                        $target = [/** Ce que l'on récupère lors de la requête (SELECT) **/
+                            "id",
+                            "token"
+                        ];
+                        $parameter = [/** Les parametres pour la condition de la requête **/
+                            "LIKE" => [
+                                "email" => $params["POST"]["email"],
+                            ]
+                        ];
+                        $user->setWhereParameter($parameter, null);
+                        $user->getOneData($target);
 
-                     $target = [/** Ce que l'on récupère lors de la requête (SELECT) **/
-                        "id",
-                        "token"
-                    ];
-                    $parameter = [/** Les parametres pour la condition de la requête **/
-                        "LIKE" => [
-                            "email" => $params["POST"]["email"],
-                        ]
-                    ];
-                    $user->setWhereParameter($parameter, null);
-                    $user->getOneData($target);
+                        $user->setEmail($params["POST"]["email"]); // voir pour le selectMultipleResponse + confirmEmail
+                        $user->setToken();
 
-                    $user->setEmail($params["POST"]["email"]); // voir pour le selectMultipleResponse + confirmEmail               
-                    $user->setToken(); 
-
-                    $user->save();
-
-
-
-                  /*  } else {
-                        $errors=$retourValue;                                                
-                    }*/
-                    $email = $params["POST"]["email"];
-                    $token = $user->getToken();
+                        $user->save();
+                        $email = $params["POST"]["email"];
+                        $token = $user->getToken();
+                        Mail::sendMailPassword($email,$token);
+                    } else {
+                        $errors = [
+                            'Email' => 'Email not found'
+                        ];
+                    }
               }
-
-
-
-            Mail::sendMailPassword($email,$token); 
         }
             $View->setData("configFormEmail", $form);
             $View->setData("errors", $errors);    
@@ -355,6 +349,15 @@ class UserController extends CoreController
             }
             if(!password_verify($_post['pwd'],$this->Auth->getPassword())){
                 header('Location:'.$this->Routes['edit_profile'].'?errors=5');
+            }
+
+            if(!($this->Auth->getEmail() == $_post['email'])){
+                $errorsEmail = $User->checkEmailExist($_post['email']);
+                if(is_array($errorsEmail)){
+                    header('Location:'.$this->Routes['edit_profile'].'?errors=8');
+                } else {
+                    $this->Auth->setEmail($_post['email']);
+                }
             }
 
             $this->Auth->setFirstName($_post['firstname']);

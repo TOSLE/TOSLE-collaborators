@@ -304,9 +304,9 @@ class User extends CoreSql{
                 "image"=>[
                     "type"=>"file",
                     "required"=>false,
-                    "label"=>"Select your background image",
+                    "label"=>FORM_USER_AVATAR_LABEL,
                     "format"=>"PNG JPG JPEG",
-                    "description"=>"Authorised format (png, jpg, jpeg)",
+                    "description"=>FORM_USER_AVATAR_FORMAT,
                     "multiple"=>false
                 ],
                 "firstname"=>[
@@ -322,6 +322,12 @@ class User extends CoreSql{
                     "label"=>FORM_USER_LASTNAME_LABEL,
                     "required"=>true,
                     "maxString"=>100
+                ],
+                "email"=>[
+                    "type"=>"email",
+                    "placeholder"=>FORM_USER_EMAIL_LABEL,
+                    'label' => FORM_USER_EMAIL_PLACEHOLDER,
+                    "required"=>true
                 ],
                 "pwd"=>[
                     "type"=>"password",

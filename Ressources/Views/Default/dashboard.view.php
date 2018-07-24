@@ -37,11 +37,6 @@
                                         <i class="material-icons blue">library_books</i>
                                     </a>
                                 </li>
-                                <li><a href="<?php echo DIRNAME . substr($language, 0, 2) . "/dashboard/"; ?>">
-                                        <p>Portofolio</p>
-                                        <i class="material-icons blue">image</i>
-                                    </a>
-                                </li>
                                 <li><a href="<?php echo $this->slugs["edit_profile"]; ?>">
                                         <p>My account</p>
                                         <i class="material-icons blue">build</i>
@@ -83,12 +78,6 @@
                         <a href="<?php echo $this->slugs["dashboard_blog"]; ?>">
                             <p>Blog</p>
                             <i class="material-icons white">library_books</i>
-                        </a>
-                    </div>
-                    <div class="btn-dashboard">
-                        <a href="<?php echo DIRNAME . substr($language, 0, 2) . "/dashboard/"; ?>">
-                            <p>Portofolio</p>
-                            <i class="material-icons white">image</i>
                         </a>
                     </div>
                     <div class="btn-dashboard">

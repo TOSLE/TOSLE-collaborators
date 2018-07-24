@@ -18,7 +18,8 @@
     define('NAVBAR_STATS', 'Stats');
     define('NAVBAR_STUDENT', 'Student');
 
-    define('HEADER_MENU_PROFILE', 'Edit profile');
+    define('HEADER_MENU_EDITPROFILE', 'Edit profile');
+    define('HEADER_MENU_VIEWPROFILE', 'View profile');
     define('HEADER_MENU_DASHBOARD', 'Dashboard');
     define('HEADER_MENU_LESSON_DASHBOARD', 'Lesson dashboard');
     define('HEADER_MENU_BLOG_DASHBOARD', 'Blog dashboard');
@@ -75,7 +76,7 @@
          * Message de confirmation
          */
         define('USER_PROFILE_CONFIRM_MESSAGE_INSCRIPTION', 'Inscription success, please confirm your address.');
-        define('USER_PROFILE_CONFIRM_MESSAGE_VALIDATE', 'Account validated');
+        define('USER_PROFILE_CONFIRM_MESSAGE_VALIDATE', 'Account validate');
         define('USER_PROFILE_CONFIRM_MESSAGE_PASSWORD_CHANGE', 'Update password success');
         define('USER_PROFILE_CONFIRM_MESSAGE_ACCOUNT_CHANGE', 'Update account success');
         /**

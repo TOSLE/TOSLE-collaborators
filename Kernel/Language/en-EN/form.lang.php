@@ -21,9 +21,17 @@
     define('FORM_USER_LASTNAME_PLACEHOLDER', 'Your lastname');
     define('FORM_USER_LASTNAME_LABEL', 'Lastname');
 
+    define('FORM_USER_AVATAR_LABEL', 'Select your avatar');
+    define('FORM_USER_AVATAR_FORMAT', 'Authorised format (png, jpg, jpeg)');
+
+    define('FORM_USER_EMAIL_LABEL', 'Email');
+    define('FORM_USER_EMAIL_PLACEHOLDER', 'Your email');
+
 
     define('FORM_USER_ERRORS_PASSWORD', 'Password');
         define('FORM_USER_ERRORS_PASSWORD_NOT_RESPECT_FORMAT', 'Respect the password format : 6 character (Capital and 
         tiny letter, digit)');
     define('FORM_USER_ERRORS_CONFIRM', 'Confirm');
         define('FORM_USER_ERRORS_CONFIRM_NOT_EQUALS', ' is different from : ');
+
+    define('FORM_USER_ERRORS_EMAIL_EXIST', 'Email already exist');
