@@ -55,6 +55,7 @@
                             </ul>
                         </nav>
                     </section>
+                </section>
             </div>
         </div>
         <div class="col-12 responsive-menu">
@@ -177,3 +178,22 @@
         </div>
     </div>
 </div>
+<script>
+    var containerStatTosle = document.getElementById('stat-visitor');
+    var chartViewTosle = new Chart(containerStatTosle, {
+        type: 'line',
+        data: {
+            labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+            datasets: [{
+                label: "Number of visitor",
+                data: <?php echo '[' . implode(' ,', $statViewTosle) . ']'; ?>,
+                fill: false,
+                borderColor: "#1A5CCB",
+                lineTension: 0.1
+            }]
+        },
+        options: {
+            showLines: true
+        }
+    });
+</script>

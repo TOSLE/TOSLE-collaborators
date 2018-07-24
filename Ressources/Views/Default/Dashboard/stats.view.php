@@ -461,7 +461,7 @@
         }
     });
     var chartArticleDay = new Chart(chartArticleByDay, {
-        type: 'polarArea',
+        type: 'pie',
         data: {
             labels: <?php if (isset($labelStatBlogDay)) echo $labelStatBlogDay; else echo '["empty"]'; ?>,
             datasets: [
