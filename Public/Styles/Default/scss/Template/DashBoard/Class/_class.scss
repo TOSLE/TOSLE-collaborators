@@ -139,7 +139,7 @@ section .marg-container {
   }
   p {
     font-weight: 400;
-    color: #1A5CCB;
+    color: $colorGlobalToslePrimary;
     margin-left: 20px;
   }
   i {
@@ -214,8 +214,8 @@ section .marg-container {
 }
 
 .blue {
-  fill: #1A5CCB;
-  color: #1A5CCB;
+  fill: $colorGlobalToslePrimary;
+  color: $colorGlobalToslePrimary;
 }
 
 .column-col-5 {
@@ -390,5 +390,12 @@ section .marg-container {
     margin: auto;
   }
 
+}
+.logo-header {
+  img {
+    width: 150px;
+    height: 53px;
+    margin-top: 3px;
+  }
 }
 

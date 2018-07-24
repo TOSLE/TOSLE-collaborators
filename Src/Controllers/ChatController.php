@@ -18,7 +18,7 @@ class ChatController extends CoreController
         if(isset($this->Auth)){
             $Conversation = new ConversationRepository();
             $View = new View("messaging", "chat");
-            $View->setData("PageName", NAVBAR_MESSAGING." ".GLOBAL_HOME_TEXT);
+            $View->setData("PageName", NAVBAR_MESSAGING." ".GLOBAL_CMS_TOSLE);
             $conversationView = null;
             $errorsAdd = null;
             $page = "index";
@@ -166,7 +166,7 @@ class ChatController extends CoreController
         if(isset($this->Auth)){
             $Conversation = new ConversationRepository();
             $View = new View("messaging", "chat");
-            $View->setData("PageName", NAVBAR_MESSAGING." ".GLOBAL_HOME_TEXT);
+            $View->setData("PageName", NAVBAR_MESSAGING." ".GLOBAL_CMS_TOSLE);
             $conversationView = null;
             $errorsAdd = null;
             $page = "draft";
@@ -239,7 +239,7 @@ class ChatController extends CoreController
         if(isset($this->Auth)){
             $Conversation = new ConversationRepository();
             $View = new View("messaging", "chat");
-            $View->setData("PageName", NAVBAR_MESSAGING." ".GLOBAL_HOME_TEXT);
+            $View->setData("PageName", NAVBAR_MESSAGING." ".GLOBAL_CMS_TOSLE);
             $conversationView = null;
             $errorsAdd = null;
             $page = "trash";

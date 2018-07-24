@@ -16,7 +16,7 @@
                         <i class="material-icons">
                             filter_list
                         </i>
-                        <p>Modifier le filtre</p>
+                        <p>Modifier l'affichage</p>
                     </a>
 
                     <?php if(isset($newsletter)):?>
@@ -63,7 +63,7 @@
                                 </div>
                                 <div class="difficult">
                                     <div class="arrow-difficult" style="border-left-color: <?php echo $lesson->getColor();?>;"></div>
-                                    <p>Difficulté du cours</p>
+                                    <p><?php echo LESSON_DIFFICULTY;?></p>
                                     <?php for($i = 0; $i < $lesson->getLevel(); $i++):?>
                                         <span class="material-icons">star_rate</span>
                                     <?php endfor;?>
@@ -79,7 +79,7 @@
                                 <?php endif;?>
                                 <div class="more-infos" style="background-color: <?php echo $lesson->getColor();?>">
                                     <p class="info-comment-lesson"><?php echo $lesson->getNumbercomment();?> <i class="material-icons">comment</i></p>
-                                    <a href="<?php echo $this->slugs["view_lesson"]."/".$lesson->getUrl();?>" class="btn btn-white info-btn-readmore"><?php echo BLOG_BUTTON_READMORE;?></a>
+                                    <a href="<?php echo $this->slugs["view_lesson"]."/".$lesson->getUrl();?>" class="btn btn-white info-btn-readmore"><?php echo READ_MORE;?></a>
                                     <p class="info-chapter">
                                         <?php echo count($lesson->getChapter());?> <i class="material-icons">import_contacts</i>
                                     </p>
@@ -121,7 +121,7 @@
     <div class="modal-window">
         <div class="modal-header">
             <i class="modal-header-icon material-icons" data-type="close-modal">close</i>
-            <h2>Modifier le filtre d'affichage des blogs</h2>
+            <h2>Modify the display filter of lessons</h2>
         </div>
         <div class="modal-main">
             <div class="container">
@@ -130,9 +130,9 @@
                         <div>
                             <form action="" method="get">
                                 <div class="form-group-base">
-                                    <label for="colsize">Nombre de blog par ligne</label>
+                                    <label for="colsize">Number of lesson per line</label>
                                     <select id="colsize" name="colsize">
-                                        <option value="default">Votre choix</option>
+                                        <option value="default">Your choice</option>
                                         <option value="4">3</option>
                                         <option value="6">2</option>
                                         <option value="12">1</option>
