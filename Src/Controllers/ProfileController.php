@@ -117,6 +117,9 @@ class ProfileController extends CoreController
                 if(isset($params['GET']['success']) && $params['GET']['success']==2){
                     $View->setData('errorsFormEditAccount', USER_PROFILE_CONFIRM_MESSAGE_ACCOUNT_CHANGE);
                 }
+                if(isset($params['GET']['errors']) && $params['GET']['errors']==8){
+                    $View->setData('errorsFormEditAccount', USER_PROFILE_EMAIL_EXIST);
+                }
 
                 $View->setData('configEditPassword', $User->configFormEditPassword());
                 $View->setData("config", $configFormEditUser);

@@ -357,6 +357,15 @@ class UserController extends CoreController
                 header('Location:'.$this->Routes['edit_profile'].'?errors=5');
             }
 
+            if(!($this->Auth->getEmail() == $_post['email'])){
+                $errorsEmail = $User->checkEmailExist($_post['email']);
+                if(is_array($errorsEmail)){
+                    header('Location:'.$this->Routes['edit_profile'].'?errors=8');
+                } else {
+                    $this->Auth->setEmail($_post['email']);
+                }
+            }
+
             $this->Auth->setFirstName($_post['firstname']);
             $this->Auth->setLastName($_post['lastname']);
 
