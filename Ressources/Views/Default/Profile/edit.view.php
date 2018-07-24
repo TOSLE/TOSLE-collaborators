@@ -26,11 +26,11 @@
         <div class="col-6">
             <div>
                 <div>
-                    <?php if(isset($errorsFormEditPassword)):?>
-                        <h3><?php echo $errorsFormEditPassword;?></h3>
+                    <?php if(isset($errorsFormEditAccount)):?>
+                        <h3><?php echo $errorsFormEditAccount;?></h3>
                     <?php endif;?>
                 </div>
-                <?php $this->addModal("dashboard_form", $config, $errors); ?>
+                <?php $this->addModal("dashboard_form", $config); ?>
             </div>
         </div>
     </div>

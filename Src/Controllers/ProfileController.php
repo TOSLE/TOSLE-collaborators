@@ -73,12 +73,14 @@ class ProfileController extends CoreController
                     if($errors == 1){
                         header('Location:'.$routes['profilehome']);
                     }
-                    else {
-                    }
                 }
+
                 if($this->Auth->getStatus() > 1){
                     $View->setData('controller', 'DashboardController');
                 }
+                /**
+                 * Errors and succes from edit password
+                 */
                 if(isset($params['GET']['errors']) && $params['GET']['errors']==1){
                     $View->setData('errorsFormEditPassword', USER_PROFILE_ERROR_MESSAGE_EDIT_PASSWORD_ERROR1);
                 }
@@ -91,6 +93,26 @@ class ProfileController extends CoreController
                 if(isset($params['GET']['success']) && $params['GET']['success']==1){
                     $View->setData('errorsFormEditPassword', USER_PROFILE_CONFIRM_MESSAGE_PASSWORD_CHANGE);
                 }
+
+                /**
+                 * Errors and succes from edit account
+                 */
+                if(isset($params['GET']['errors']) && $params['GET']['errors']==4){
+                    $View->setData('errorsFormEditAccount', USER_PROFILE_ERROR_MESSAGE_EDIT_PASSWORD_ERROR4);
+                }
+                if(isset($params['GET']['errors']) && $params['GET']['errors']==5){
+                    $View->setData('errorsFormEditAccount', USER_PROFILE_ERROR_MESSAGE_EDIT_PASSWORD_ERROR3);
+                }
+                if(isset($params['GET']['errors']) && $params['GET']['errors']==6){
+                    $View->setData('errorsFormEditAccount', USER_PROFILE_ERROR_MESSAGE_EDIT_PASSWORD_ERROR6);
+                }
+                if(isset($params['GET']['errors']) && $params['GET']['errors']==7){
+                    $View->setData('errorsFormEditAccount', USER_PROFILE_ERROR_MESSAGE_EDIT_PASSWORD_ERROR6);
+                }
+                if(isset($params['GET']['success']) && $params['GET']['success']==2){
+                    $View->setData('errorsFormEditAccount', USER_PROFILE_CONFIRM_MESSAGE_ACCOUNT_CHANGE);
+                }
+
                 $View->setData('configEditPassword', $User->configFormEditPassword());
                 $View->setData("config", $configFormEditUser);
                 $View->setData("errors", $errors);

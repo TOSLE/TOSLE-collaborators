@@ -336,11 +336,62 @@ class UserController extends CoreController
             $_SESSION['token'] = $this->Auth->getToken();
             $_SESSION['email'] = $this->Auth->getEmail();
             header('Location:'.$this->Routes['edit_profile'].'?success=1');
-            //if()
-            /*if(password_verify($this->Auth->getPassword(), $this->password)){
-
-            }*/
         }
+    }
 
+
+    /**
+     * @param $params
+     * @return array|int
+     */
+    public function editaccountAction($params)
+    {
+        $User = new UserRepository();
+        if(isset($params['POST']) && !empty($params['POST'])){
+            $errors = Form::checkForm($User->configFormEditAccount(), $params['POST']);
+            $_post = Form::secureData($params['POST']);
+            if(!empty($errors)){
+                header('Location:'.$this->Routes['edit_profile'].'?errors=4');
+            }
+            if(!password_verify($_post['pwd'],$this->Auth->getPassword())){
+                header('Location:'.$this->Routes['edit_profile'].'?errors=5');
+            }
+
+            $this->Auth->setFirstName($_post['firstname']);
+            $this->Auth->setLastName($_post['lastname']);
+
+            $_file = $_FILES;
+            $file = null;
+            if(isset($_file)){
+                $errors = Form::checkFiles($_file);
+                if(empty($errors) || is_numeric($errors)){
+                    if( $errors != 1) {
+                        $File = new FileRepository();
+                        $arrayFile = $File->addFile($_file, $User->configFormEditAccount(), "Profile/Avatar", "Avatar");
+                        if(!is_numeric($arrayFile)){
+                            if(array_key_exists('CODE_ERROR', $arrayFile)){
+                                header('Location:'.$this->Routes['edit_profile'].'?errors=6');
+                            }
+                            foreach ($arrayFile as $fileId) {
+                                $file = $fileId;
+                            }
+                        }
+
+                    }
+                } else {
+                    if(!array_key_exists('EXCEPT_ERROR', $errors)){
+                        header('Location:'.$this->Routes['edit_profile'].'?errors=7');
+                    }
+                }
+            }
+            if(isset($file)){
+                $this->Auth->setFileid($file);
+            }
+            $this->Auth->setToken();
+            $this->Auth->save();
+            $_SESSION['token'] = $this->Auth->getToken();
+            $_SESSION['email'] = $this->Auth->getEmail();
+            header('Location:'.$this->Routes['edit_profile'].'?success=2');
+        }
     }
 }

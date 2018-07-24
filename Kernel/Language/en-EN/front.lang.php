@@ -77,6 +77,7 @@
         define('USER_PROFILE_CONFIRM_MESSAGE_INSCRIPTION', 'Inscription success, please confirm your address.');
         define('USER_PROFILE_CONFIRM_MESSAGE_VALIDATE', 'Account validated');
         define('USER_PROFILE_CONFIRM_MESSAGE_PASSWORD_CHANGE', 'Update password success');
+        define('USER_PROFILE_CONFIRM_MESSAGE_ACCOUNT_CHANGE', 'Update account success');
         /**
          * Message d'erreur
          */
@@ -84,3 +85,5 @@
         define('USER_PROFILE_ERROR_MESSAGE_EDIT_PASSWORD_ERROR1', 'Edit password failed');
         define('USER_PROFILE_ERROR_MESSAGE_EDIT_PASSWORD_ERROR2', 'The old and new password must be different');
         define('USER_PROFILE_ERROR_MESSAGE_EDIT_PASSWORD_ERROR3', 'Bad last password');
+        define('USER_PROFILE_ERROR_MESSAGE_EDIT_PASSWORD_ERROR4', 'You failed to confirm the password');
+        define('USER_PROFILE_ERROR_MESSAGE_EDIT_PASSWORD_ERROR6', 'Error to upload the file');
