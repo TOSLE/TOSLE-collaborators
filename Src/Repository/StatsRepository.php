@@ -66,13 +66,14 @@ class StatsRepository extends Stats
                 if(isset($resultQuery)) {
                     $arrayGetClass = [];
                     foreach($resultQuery as $row) {
-                        array_push($arrayGetClass, $row->getTarget());
+                        $chain = str_replace(DIRNAME, "",$row->getTarget());
+                        array_push($arrayGetClass, $chain);
                     }
                     if(isset($arrayGetClass)) {
                         $arrayLesson = [];
                         for($i = 0; $i < sizeof($arrayGetClass); $i+=1){
                             $rowDecoupe = explode("/",$arrayGetClass[$i]);
-                            if(isset($rowDecoupe[2]) && $rowDecoupe[2] === "lesson"){
+                            if(isset($rowDecoupe[0]) && $rowDecoupe[0] === "lesson"){
                                 array_push($arrayLesson,$arrayGetClass[$i]);
                             }
                         }
@@ -80,8 +81,8 @@ class StatsRepository extends Stats
                             $arrayKeyLessonName = [];
                             for($i = 0; $i < sizeof($arrayLesson); $i+=1){
                                 $getClass = explode("/", $arrayLesson[$i]);
-                                if(!isset($getClass[4])){
-                                    array_push($arrayKeyLessonName, $getClass[3]);
+                                if(!isset($getClass[2])){
+                                    array_push($arrayKeyLessonName, $getClass[1]);
                                 }
                             }
                             $statArrayLesson = array_count_values($arrayKeyLessonName);
@@ -90,7 +91,6 @@ class StatsRepository extends Stats
                         }
 
                     }
-
                 }
                 break;
 
@@ -117,13 +117,14 @@ class StatsRepository extends Stats
                 if(isset($resultQuery)) {
                     $arrayGetClass = [];
                     foreach($resultQuery as $row) {
-                        array_push($arrayGetClass, $row->getTarget());
+                        $chain = str_replace(DIRNAME, "",$row->getTarget());
+                        array_push($arrayGetClass, $chain);
                     }
                     if(isset($arrayGetClass)) {
                         $arrayLesson = [];
                         for($i = 0; $i < sizeof($arrayGetClass); $i+=1){
                             $rowDecoupe = explode("/",$arrayGetClass[$i]);
-                            if(isset($rowDecoupe[2]) && $rowDecoupe[2] === "lesson"){
+                            if(isset($rowDecoupe[0]) && $rowDecoupe[0] === "lesson"){
                                 array_push($arrayLesson,$arrayGetClass[$i]);
                             }
                         }
@@ -131,14 +132,15 @@ class StatsRepository extends Stats
                             $arrayKeyLessonName = [];
                             for($i = 0; $i < sizeof($arrayLesson); $i+=1){
                                 $getClass = explode("/", $arrayLesson[$i]);
-                                if(!isset($getClass[4])){
-                                    array_push($arrayKeyLessonName, $getClass[3]);
+                                if(!isset($getClass[2])){
+                                    array_push($arrayKeyLessonName, $getClass[1]);
                                 }
                             }
                             $statArrayLesson = array_count_values($arrayKeyLessonName);
                             return $statArrayLesson;
 
                         }
+
                     }
                 }
                 break;
@@ -170,13 +172,14 @@ class StatsRepository extends Stats
                 if(isset($resultQuery)) {
                     $arrayGetClass = [];
                     foreach($resultQuery as $row) {
-                        array_push($arrayGetClass, $row->getTarget());
+                        $chain = str_replace(DIRNAME, "",$row->getTarget());
+                        array_push($arrayGetClass, $chain);
                     }
                     if(isset($arrayGetClass)) {
                         $arrayLesson = [];
                         for($i = 0; $i < sizeof($arrayGetClass); $i+=1){
                             $rowDecoupe = explode("/",$arrayGetClass[$i]);
-                            if(isset($rowDecoupe[2]) && $rowDecoupe[2] === "lesson"){
+                            if(isset($rowDecoupe[0]) && $rowDecoupe[0] === "lesson"){
                                 array_push($arrayLesson,$arrayGetClass[$i]);
                             }
                         }
@@ -184,13 +187,15 @@ class StatsRepository extends Stats
                             $arrayKeyLessonName = [];
                             for($i = 0; $i < sizeof($arrayLesson); $i+=1){
                                 $getClass = explode("/", $arrayLesson[$i]);
-                                if(!isset($getClass[4])){
-                                    array_push($arrayKeyLessonName, $getClass[3]);
+                                if(!isset($getClass[2])){
+                                    array_push($arrayKeyLessonName, $getClass[1]);
                                 }
                             }
                             $statArrayLesson = array_count_values($arrayKeyLessonName);
                             return $statArrayLesson;
+
                         }
+
                     }
                 }
                 break;
@@ -223,13 +228,14 @@ class StatsRepository extends Stats
                 if(isset($resultQuery)) {
                     $arrayGetArticle = [];
                     foreach($resultQuery as $row) {
-                        array_push($arrayGetArticle, $row->getTarget());
+                        $chain = str_replace(DIRNAME, "",$row->getTarget());
+                        array_push($arrayGetArticle, $chain);
                     }
                     if(isset($arrayGetArticle)) {
                         $arrayArticle = [];
                         for($i = 0; $i < sizeof($arrayGetArticle); $i+=1){
                             $rowDecoupe = explode("/",$arrayGetArticle[$i]);
-                            if(isset($rowDecoupe[2]) && $rowDecoupe[2] === "view-article"){
+                            if(isset($rowDecoupe[0]) && $rowDecoupe[0] === "view-article"){
                                 array_push($arrayArticle,$arrayGetArticle[$i]);
                             }
                         }
@@ -237,15 +243,12 @@ class StatsRepository extends Stats
                             $arrayKeyArticleName = [];
                             for($i = 0; $i < sizeof($arrayArticle); $i+=1){
                                 $getClass = explode("/", $arrayArticle[$i]);
-                                if(!isset($getClass[4])){
-                                    array_push($arrayKeyArticleName, $getClass[3]);
-                                }
+                                array_push($arrayKeyArticleName, $getClass[1]);
+
                             }
                             $statArrayArticle = array_count_values($arrayKeyArticleName);
                             return $statArrayArticle;
-
                         }
-
                     }
                 }
                 break;
@@ -273,13 +276,14 @@ class StatsRepository extends Stats
                 if(isset($resultQuery)) {
                     $arrayGetArticle = [];
                     foreach($resultQuery as $row) {
-                        array_push($arrayGetArticle, $row->getTarget());
+                        $chain = str_replace(DIRNAME, "",$row->getTarget());
+                        array_push($arrayGetArticle, $chain);
                     }
                     if(isset($arrayGetArticle)) {
                         $arrayArticle = [];
                         for($i = 0; $i < sizeof($arrayGetArticle); $i+=1){
                             $rowDecoupe = explode("/",$arrayGetArticle[$i]);
-                            if(isset($rowDecoupe[2]) && $rowDecoupe[2] === "view-article"){
+                            if(isset($rowDecoupe[0]) && $rowDecoupe[0] === "view-article"){
                                 array_push($arrayArticle,$arrayGetArticle[$i]);
                             }
                         }
@@ -287,15 +291,12 @@ class StatsRepository extends Stats
                             $arrayKeyArticleName = [];
                             for($i = 0; $i < sizeof($arrayArticle); $i+=1){
                                 $getClass = explode("/", $arrayArticle[$i]);
-                                if(!isset($getClass[4])){
-                                    array_push($arrayKeyArticleName, $getClass[3]);
-                                }
+                                array_push($arrayKeyArticleName, $getClass[1]);
+
                             }
                             $statArrayArticle = array_count_values($arrayKeyArticleName);
                             return $statArrayArticle;
-
                         }
-
                     }
                 }
                 break;
@@ -324,16 +325,18 @@ class StatsRepository extends Stats
                 $this->setWhereParameter($parameter);
                 $resultQuery = $this->getData($target);
 
+
                 if(isset($resultQuery)) {
                     $arrayGetArticle = [];
                     foreach($resultQuery as $row) {
-                        array_push($arrayGetArticle, $row->getTarget());
+                        $chain = str_replace(DIRNAME, "",$row->getTarget());
+                        array_push($arrayGetArticle, $chain);
                     }
                     if(isset($arrayGetArticle)) {
                         $arrayArticle = [];
                         for($i = 0; $i < sizeof($arrayGetArticle); $i+=1){
                             $rowDecoupe = explode("/",$arrayGetArticle[$i]);
-                            if(isset($rowDecoupe[2]) && $rowDecoupe[2] === "view-article"){
+                            if(isset($rowDecoupe[0]) && $rowDecoupe[0] === "view-article"){
                                 array_push($arrayArticle,$arrayGetArticle[$i]);
                             }
                         }
@@ -341,26 +344,16 @@ class StatsRepository extends Stats
                             $arrayKeyArticleName = [];
                             for($i = 0; $i < sizeof($arrayArticle); $i+=1){
                                 $getClass = explode("/", $arrayArticle[$i]);
-                                if(!isset($getClass[4])){
-                                    array_push($arrayKeyArticleName, $getClass[3]);
-                                }
+                                array_push($arrayKeyArticleName, $getClass[1]);
+
                             }
                             $statArrayArticle = array_count_values($arrayKeyArticleName);
                             return $statArrayArticle;
-
                         }
                     }
                 }
                 break;
             }
-
-
         }
     }
-
-    public function getStatMessage($sort)
-    {
-
-    }
-
 }
