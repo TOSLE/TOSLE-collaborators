@@ -175,22 +175,22 @@ class DashboardController extends CoreController
         /**
          * Stat consultation des cours
          */
-
-        $resultStatClassYear = $Stats->getStatViewClass('year');
-        $labelStatClassYear = '["'.implode('" ,"', array_keys($resultStatClassYear)).'"]';
-        $statClassYear = '['.implode(' ,', $resultStatClassYear).']';
+        $classStatYear = $Stats->getNewStatsClass('year');
+        $labelStatClassYear = '["'.implode('" ,"', $classStatYear['lessons']).'"]';
+        $statClassYear = '['.implode(' ,', $classStatYear['counts']).']';
         $View->setData("labelStatClassYear", $labelStatClassYear);
         $View->setData("statClassYear", $statClassYear);
 
-        $resultStatClassMonth = $Stats->getStatViewClass('month');
-        $labelStatClassMonth = '["'.implode('" ,"', array_keys($resultStatClassMonth)).'"]';
-        $statClassMonth = '['.implode(' ,', $resultStatClassMonth).']';
+
+        $classStatMonth = $Stats->getNewStatsClass('month');
+        $labelStatClassMonth = '["'.implode('" ,"', $classStatMonth['lessons']).'"]';
+        $statClassMonth = '['.implode(' ,', $classStatMonth['counts']).']';
         $View->setData("labelStatClassMonth", $labelStatClassMonth);
         $View->setData("statClassMonth", $statClassMonth);
 
-        $resultStatClassDay = $Stats->getStatViewClass('day');
-        $labelStatClassDay = '["'.implode('" ,"', array_keys($resultStatClassDay)).'"]';
-        $statClassDay = '['.implode(' ,', $resultStatClassDay).']';
+        $classStatDay = $Stats->getNewStatsClass('day');
+        $labelStatClassDay = '["'.implode('" ,"', $classStatDay['lessons']).'"]';
+        $statClassDay = '['.implode(' ,', $classStatDay['counts']).']';
         $View->setData("labelStatClassDay", $labelStatClassDay);
         $View->setData("statClassDay", $statClassDay);
 
@@ -198,25 +198,23 @@ class DashboardController extends CoreController
          * Stat consultation des articles du blog
          */
 
-        $resultStatBlogYear = $Stats->getStatViewArticle('year');
-        $labelStatBlogYear = '["'.implode('" ,"', array_keys($resultStatBlogYear)).'"]';
-        $statBlogYear = '['.implode(' ,', $resultStatBlogYear).']';
+        $articleStatYear = $Stats->getNewStatsArticle('year');
+        $labelStatBlogYear = '["'.implode('" ,"', $articleStatYear['articles']).'"]';
+        $statBlogYear = '['.implode(' ,', $articleStatYear['counts']).']';
         $View->setData("labelStatBlogYear", $labelStatBlogYear);
         $View->setData("statBlogYear", $statBlogYear);
 
-        $resultStatBlogMonth = $Stats->getStatViewArticle('month');
-        $labelStatBlogMonth = '["'.implode('" ,"', array_keys($resultStatBlogMonth)).'"]';
-        $statBlogMonth = '['.implode(' ,', $resultStatBlogMonth).']';
+        $articleStatMonth = $Stats->getNewStatsArticle('month');
+        $labelStatBlogMonth = '["'.implode('" ,"', $articleStatMonth['articles']).'"]';
+        $statBlogMonth = '['.implode(' ,', $articleStatMonth['counts']).']';
         $View->setData("labelStatBlogMonth", $labelStatBlogMonth);
         $View->setData("statBlogMonth", $statBlogMonth);
 
-        $resultStatBlogDay = $Stats->getStatViewArticle('day');
-        $labelStatBlogDay = '["'.implode('" ,"', array_keys($resultStatBlogDay)).'"]';
-        $statBlogDay = '['.implode(' ,', $resultStatBlogDay).']';
+        $articleStatDay = $Stats->getNewStatsArticle('day');
+        $labelStatBlogDay = '["'.implode('" ,"', $articleStatDay['articles']).'"]';
+        $statBlogDay = '['.implode(' ,', $articleStatDay['counts']).']';
         $View->setData("labelStatBlogDay", $labelStatBlogDay);
         $View->setData("statBlogDay", $statBlogDay);
-
-
         /**
          * Stat inscription utilisateur au cms
          */

@@ -8,10 +8,11 @@
  */
 class StatsRepository extends Stats
 {
-
+    private $stats;
     public function __construct()
     {
         parent::__construct();
+        $this->stats = $this->getData();
     }
 
     public function getStatViewTosle()
@@ -42,6 +43,143 @@ class StatsRepository extends Stats
         }
         return $arrayStatViewTosle;
     }
+
+    /**
+     * @param $sort
+     * @return array|int
+     * Cette fonction retourne les données tries pour les vues d'un cours. Elle construit le tableau de façon à avoir
+     * les cours dans un tableau, et les données de vue dans l'autre
+     */
+    public function getNewStatsClass($sort)
+    {
+        $currentYear = date('Y');
+        $currentMonth = date('n');
+        $currentDay = date('j');
+        $countStats = [];
+        $returnedStat = [];
+        switch ($sort){
+            case 'year':
+                foreach($this->stats as $stat){
+                    $target = trim($stat->getTarget(), DIRNAME);
+                    if($currentYear == $stat->getYear() && stristr($target, 'lesson/')){
+                        $targetExploded = explode('/',$target);
+                        if(isset($targetExploded[1]) && isset($countStats[$targetExploded[1]])) {
+                            $countStats[$targetExploded[1]]++;
+                        } else {
+                            $countStats[$targetExploded[1]] = 1;
+                        }
+                    }
+                }
+                break;
+            case 'month':
+                foreach($this->stats as $stat){
+                    $target = trim($stat->getTarget(), DIRNAME);
+                    if($currentYear == $stat->getYear() && $currentMonth == $stat->getMonth() && stristr($target, 'lesson/')){
+                        $targetExploded = explode('/',$target);
+                        if(isset($targetExploded[1]) && isset($countStats[$targetExploded[1]])) {
+                            $countStats[$targetExploded[1]]++;
+                        } else {
+                            $countStats[$targetExploded[1]] = 1;
+                        }
+                    }
+                }
+                break;
+            case 'day':
+                foreach($this->stats as $stat){
+                    $target = trim($stat->getTarget(), DIRNAME);
+                    if($currentYear == $stat->getYear() && $currentMonth == $stat->getMonth() && $currentDay == $stat->getDay() && stristr($target, 'lesson/')){
+                        $targetExploded = explode('/',$target);
+                        if(isset($targetExploded[1]) && isset($countStats[$targetExploded[1]])) {
+                            $countStats[$targetExploded[1]]++;
+                        } else {
+                            $countStats[$targetExploded[1]] = 1;
+                        }
+                    }
+                }
+                break;
+            default:
+                return 0;
+                break;
+        }
+        foreach ($countStats as $targetLesson => $count){
+            $lesson[] = $targetLesson;
+            $countLesson[] = $count;
+            $returnedStat = [
+                'lessons' => $lesson,
+                'counts' => $countLesson
+            ];
+        }
+        return $returnedStat;
+    }
+
+    /**
+     * @param $sort
+     * @return array|int
+     * Cette fonction retourne les données tries pour les vues d'un article. Elle construit le tableau de façon à avoir
+     * les articles dans un tableau, et les données de vue dans l'autre
+     */
+    public function getNewStatsArticle($sort)
+    {
+        $currentYear = date('Y');
+        $currentMonth = date('n');
+        $currentDay = date('j');
+        $countStats = [];
+        $returnedStat = [];
+        switch ($sort){
+            case 'year':
+                foreach($this->stats as $stat){
+                    $target = trim($stat->getTarget(), DIRNAME);
+                    if($currentYear == $stat->getYear() && stristr($target, 'view-article/')){
+                        $targetExploded = explode('/',$target);
+                        if(isset($targetExploded[1]) && isset($countStats[$targetExploded[1]])) {
+                            $countStats[$targetExploded[1]]++;
+                        } else {
+                            $countStats[$targetExploded[1]] = 1;
+                        }
+                    }
+                }
+                break;
+            case 'month':
+                foreach($this->stats as $stat){
+                    $target = trim($stat->getTarget(), DIRNAME);
+                    if($currentYear == $stat->getYear() && $currentMonth == $stat->getMonth() && stristr($target, 'view-article/')){
+                        $targetExploded = explode('/',$target);
+                        if(isset($targetExploded[1]) && isset($countStats[$targetExploded[1]])) {
+                            $countStats[$targetExploded[1]]++;
+                        } else {
+                            $countStats[$targetExploded[1]] = 1;
+                        }
+                    }
+                }
+                break;
+            case 'day':
+                foreach($this->stats as $stat){
+                    $target = trim($stat->getTarget(), DIRNAME);
+                    if($currentYear == $stat->getYear() && $currentMonth == $stat->getMonth() && $currentDay == $stat->getDay() && stristr($target, 'view-article/')){
+                        $targetExploded = explode('/',$target);
+                        if(isset($targetExploded[1]) && isset($countStats[$targetExploded[1]])) {
+                            $countStats[$targetExploded[1]]++;
+                        } else {
+                            $countStats[$targetExploded[1]] = 1;
+                        }
+                    }
+                }
+                break;
+            default:
+                return 0;
+                break;
+        }
+        foreach ($countStats as $targetLesson => $count){
+            $lesson[] = $targetLesson;
+            $countLesson[] = $count;
+            $returnedStat = [
+                'articles' => $lesson,
+                'counts' => $countLesson
+            ];
+        }
+        return $returnedStat;
+    }
+
 
     public function getStatViewClass($sort)
     {
