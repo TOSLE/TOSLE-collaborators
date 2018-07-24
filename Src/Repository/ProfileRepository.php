@@ -72,24 +72,21 @@ class ProfileRepository extends User
             return $commentaires;
         }
     }
-
-
     public function editProfile($_idProfile)
     {
-        $User = new UserRepository();
-        echo $_idProfile;
-        $User->getUserById($_idProfile);
-        echo '<pre>';
-        print_r($User);
-        echo '</pre>';
-        $configForm = $User->configFormAdd();
-
-        /*
-        return $arrayObject = [
-            "user" => $ArrayInfoUser,
-            "configFrom" => $configForm,
+        $User = new UserRepository($_idProfile);
+        $configForm = $User->configFormEdit();
+        $file = null;
+        if(!empty($User->getFileid())){
+            $file = "".$User->getAvatar()->getPath().'/'.$User->getAvatar()->getName();
+        }
+        $configForm["data_content"] = [
+            "firstname" => $User->getFirstName(),
+            "lastname" => $User->getLastName(),
+            "email" => $User->getEmail(),
+            "file_img" => $file,
         ];
-        */
+        return $configForm;
     }
 
 }

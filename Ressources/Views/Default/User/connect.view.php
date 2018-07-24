@@ -32,6 +32,11 @@
                     </article>
                     <section>
                         <?php $this->addModal("form", $config, $errors); ?>
+                        <div>
+                            <p>
+                                Mot de passe oublié ? <a href="<?php echo $this->slugs['view-newpassword'];?>" class="btn-sm btn-tosle-outline">Cliquez-ici</a>
+                            </p>
+                        </div>
                     </section>
                 </section>
             </div>

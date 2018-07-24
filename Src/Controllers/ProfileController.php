@@ -6,7 +6,7 @@
  * Time: 12:10
  */
 
-class ProfileController
+class ProfileController extends CoreController
 {
     /**
      * @Route("/en/profile(/index)")
@@ -27,8 +27,7 @@ class ProfileController
                 $View = new View("default", "Profile/profile");
                 $ArrayInfoUser = $Profile->getInfoUser($_SESSION['token'], $_SESSION['email']);
 
-                $CurrentUser = Authentification::getUser($_SESSION['token'], $_SESSION['email']);
-                $idUser = $CurrentUser->getId();
+                $idUser = $this->Auth->getId();
                 $ArrayCommentsUser = $Profile->getCommentUser($idUser);
 
                 $View->setData("profile_info", $ArrayInfoUser);
@@ -61,18 +60,35 @@ class ProfileController
             if (is_null($_SESSION['token']) && is_null($_SESSION['email'])) {
                 $View = new View("default", "Profile/notconnect");
             } else {
+                $routes = Access::getSlugsById();
                 $View = new View("default", "Profile/edit");
                 $Profile = new ProfileRepository();
                 $User = new UserRepository();
-                $User->getUser();
-                $Profile->editProfile($User->getId());
-
-                $form = $User->configFormAdd();
                 $errors = [];
+                $User->getUser();
+                $configFormEditUser = $Profile->editProfile($User->getId());
 
-                $View->setData("config", $form);
+                if(isset($params["POST"]) && !empty($params["POST"])){
+                    $errors = $User->addUser($params["POST"], $User->getId(), $_FILES);
+                    if($errors == 1){
+                        header('Location:'.$routes['profilehome']);
+                    }
+                    else {
+                    }
+                }
+                $View->setData("config", $configFormEditUser);
                 $View->setData("errors", $errors);
             }
         }
+    }
+
+    /**
+     * @Route("/en/profile/homework")
+     * @param array $params
+     * View homework profile action
+     */
+    function homeworkAction($params)
+    {
+        $View = new View("default");
     }
 }

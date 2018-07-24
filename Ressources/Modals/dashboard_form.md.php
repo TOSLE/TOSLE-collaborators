@@ -12,9 +12,20 @@
         </div>
     </section>
     <?php else:?>
-        <?php foreach($errors as $name => $value):?>
-            <?php echo $name. " ".$value;?>
-        <?php endforeach; ?>
+        <section class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div>
+                        <h2>Une erreur est détectée sur votre fichier</h2>
+                        <?php foreach($errors as $name => $value):?>
+                            <p> Type d'erreur : <?php echo $name;?></p>
+                            <p>Message d'erreur : <?php echo $value;?></p>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     <?php endif;?>
 <?php endif;?>
 <form method="<?php echo $config['config']['method'];?>" action="<?php echo $config['config']['action'];?>" <?php echo (isset($config['config']['form_file']) && $config['config']['form_file'])?"enctype='multipart/form-data'":"";?>>
@@ -62,6 +73,19 @@
                         <?php endif;?>
                     <?php endif;?>
                     <?php if($name == "group_select"):?>
+                        <?php if(isset($attributs["label"])):?>
+                            <label for="<?php echo $name;?>"><?php echo $attributs["label"];?></label>
+                        <?php endif;?>
+                        <select <?php echo (isset($attributs["multiple"]))?"multiple='multiple'":"";?> size="8" id="<?php echo $name;?>" name="<?php echo $name;?>[]">
+                            <?php foreach($attributs["options"] as $value => $text):?>
+                                <option value="<?php echo $value;?>" <?php echo (isset($config['data_content']['selectedOption']["group_select"][$value]))?"selected":"";?>><?php echo $text;?></option>
+                            <?php endforeach;?>
+                        </select>
+                        <?php if(isset($attributs["description"])):?>
+                            <div class="small-precision-input"><?php echo $attributs["description"];?></div>
+                        <?php endif;?>
+                    <?php endif;?>
+                    <?php if($name == "select_users"):?>
                         <?php if(isset($attributs["label"])):?>
                             <label for="<?php echo $name;?>"><?php echo $attributs["label"];?></label>
                         <?php endif;?>

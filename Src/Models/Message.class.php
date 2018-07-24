@@ -13,10 +13,24 @@ class Message extends CoreSql {
     protected $datecreate;
     protected $status;
     protected $dateupdated;
+    protected $userid;
+    protected $tag;
 
-    public function __construct()
+    private $autor;
+
+    public function __construct($_id = null)
     {
-        //parent::__construct();
+        parent::__construct();
+        if(isset($_id) && is_numeric($_id)){
+            $parameter = [
+                'LIKE' => [
+                    'id' => $_id
+                ]
+            ];
+            $this->setWhereParameter($parameter);
+            $this->getOneData();
+            $this->setAutor($this->userid);
+        }
     }
 
     /**
@@ -98,6 +112,57 @@ class Message extends CoreSql {
     {
         $this->dateupdated = $dateupdated;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getUserid()
+    {
+        return $this->userid;
+    }
+
+    /**
+     * @param mixed $userid
+     */
+    public function setUserid($userid)
+    {
+        $this->userid = $userid;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAutor()
+    {
+        return $this->autor;
+    }
+
+    /**
+     * @param int $autor
+     */
+    public function setAutor($autor)
+    {
+        $this->autor = new User($autor);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTag()
+    {
+        return $this->tag;
+    }
+
+    /**
+     * @param mixed $tag
+     */
+    public function setTag()
+    {
+        $this->tag = uniqid();
+    }
+
+
+
 
 
 

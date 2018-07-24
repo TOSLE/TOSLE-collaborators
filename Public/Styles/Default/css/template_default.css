@@ -14,7 +14,10 @@ html > body #positionning-box-tosle {
       width: 100%; }
 
 html {
-  height: 100%; }
+  height: 100%;
+  /**
+Override buttons OSPAF
+ */ }
   html body {
     height: 100%;
     background-color: #EBEBEB; }
@@ -129,7 +132,7 @@ html {
             flex-direction: column;
             margin-left: 10px; }
             html .article > .content-article .comments-article .comment > div:nth-child(2) .name-user {
-              color: #1A5CCB;
+              color: #1a5ccbdb;
               font-size: 16px;
               font-weight: 600; }
             html .article > .content-article .comments-article .comment > div:nth-child(2) .content {
@@ -148,7 +151,7 @@ html {
             margin-left: auto; }
             html .article > .content-article .comments-article .comment .signal .material-icons {
               cursor: pointer;
-              color: #1A5CCB; }
+              color: #1a5ccbdb; }
       html .article > .content-article .container-editor {
         margin-bottom: 40px; }
   html .header-blog-container .icons-list {
@@ -157,7 +160,7 @@ html {
       color: #FFF;
       text-decoration: none;
       border: 1px solid #FFF;
-      background-color: #1A5CCB;
+      background-color: #1a5ccbdb;
       border-radius: 3.5px;
       padding: 3.5px;
       text-align: center;
@@ -184,6 +187,20 @@ html {
           right: 7.5px; }
       html .lesson-bloc > .fade-background-lesson > .description-lesson {
         padding: 7.5px; }
+      html .lesson-bloc > .fade-background-lesson > .difficult {
+        display: flex; }
+        html .lesson-bloc > .fade-background-lesson > .difficult > .arrow-difficult {
+          width: 10px;
+          border-bottom: 10px solid transparent;
+          border-left: 10px solid;
+          border-top: 10px solid transparent; }
+        html .lesson-bloc > .fade-background-lesson > .difficult > p {
+          padding: 7.5px;
+          font-weight: 600; }
+        html .lesson-bloc > .fade-background-lesson > .difficult > span {
+          width: 25px;
+          line-height: 100%;
+          margin-top: 4px; }
       html .lesson-bloc > .fade-background-lesson > .category-list-lesson {
         position: absolute;
         bottom: 0;
@@ -205,12 +222,24 @@ html {
         transition: 0.4s; }
         html .lesson-bloc > .fade-background-lesson > .more-infos > .info-comment-lesson {
           position: absolute;
-          bottom: 10px;
+          font-weight: bold;
+          color: white;
+          text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+          bottom: 16px;
           left: 15px; }
+          html .lesson-bloc > .fade-background-lesson > .more-infos > .info-comment-lesson > i {
+            position: relative;
+            top: 7px; }
         html .lesson-bloc > .fade-background-lesson > .more-infos > .info-chapter {
           position: absolute;
-          bottom: 10px;
+          font-weight: bold;
+          color: white;
+          text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+          bottom: 15px;
           right: 15px; }
+          html .lesson-bloc > .fade-background-lesson > .more-infos > .info-chapter > i {
+            position: relative;
+            top: 5px; }
         html .lesson-bloc > .fade-background-lesson > .more-infos > .info-btn-readmore {
           position: absolute;
           bottom: 10px;
@@ -227,7 +256,7 @@ html {
       color: #FFF;
       text-decoration: none;
       border: 1px solid #FFF;
-      background-color: #1A5CCB;
+      background-color: #1a5ccbdb;
       border-radius: 3.5px;
       padding: 3.5px;
       text-align: center;
@@ -239,6 +268,113 @@ html {
         margin: auto; }
       html .header-lesson-container .icons-list > .lesson-link-icon.newsletter-off {
         background-color: #F43C3E; }
+  html .btn > i {
+    position: relative;
+    top: 5px; }
+  html .bg-white {
+    background-color: #FFFFFF;
+    -webkit-box-shadow: 0px 0px 8px 0px rgba(143, 143, 143, 0.59);
+    -moz-box-shadow: 0px 0px 8px 0px rgba(143, 143, 143, 0.59);
+    box-shadow: 0px 0px 8px 0px rgba(143, 143, 143, 0.59);
+    border: solid 0.5px #3b3f5442; }
+  html .bg-message-blog {
+    background-color: #FFFFFF;
+    -webkit-box-shadow: 0px 0px 8px 0px rgba(143, 143, 143, 0.59);
+    -moz-box-shadow: 0px 0px 8px 0px rgba(143, 143, 143, 0.59);
+    box-shadow: 0px 0px 8px 0px rgba(143, 143, 143, 0.59);
+    border: solid 0.5px #3b3f5442;
+    border-radius: 5px; }
+  html .bloc-login-container h2, html .bloc-signup-container h2 {
+    text-align: center;
+    color: #1a5ccbdb; }
+  html .bloc-login-container p, html .bloc-signup-container p {
+    text-align: center;
+    font-size: 0.9em;
+    padding: 20px 0; }
+  html .login-bloc {
+    padding: 15px; }
+  html body > main .message-bloc > .login-message {
+    color: #0000cc;
+    font-weight: 500;
+    font-style: italic; }
+  html .errors-message {
+    font-size: 0.9em;
+    color: red;
+    margin-bottom: 15px; }
+  html .errors-message .error-type {
+    font-weight: 500; }
+  html .captcha_img img {
+    border: 1px solid #000; }
+  html input {
+    margin-top: 15px; }
+  html .encaps-comment {
+    background-color: white;
+    max-width: 700px;
+    margin: 0 auto; }
+  html .content-comment {
+    border-bottom: 1px solid; }
+    html .content-comment > .fade-comment {
+      padding: 15px;
+      position: relative;
+      width: 100%; }
+      html .content-comment > .fade-comment > .comment-content-infos {
+        padding: 5px 0; }
+      html .content-comment > .fade-comment > .comment-autor-infos {
+        font-size: 0.8em;
+        color: #787878; }
+      html .content-comment > .fade-comment > .comment-content-option {
+        font-size: 0.8em;
+        position: absolute;
+        bottom: 15px;
+        right: 15px; }
+        html .content-comment > .fade-comment > .comment-content-option > a {
+          color: black;
+          text-decoration: none;
+          transition: 0.2s; }
+          html .content-comment > .fade-comment > .comment-content-option > a:hover {
+            text-decoration: underline;
+            color: #1a5ccbdb; }
+    html .content-comment:last-child {
+      border-bottom: none; }
+  html .lesson-description {
+    background-color: white;
+    padding: 15px;
+    padding-bottom: 20px; }
+    html .lesson-description > p {
+      margin: 10px 0; }
+  html .lesson-chapters {
+    background-color: white; }
+    html .lesson-chapters > h3 {
+      padding: 7.5px;
+      border-bottom: 1px solid; }
+    html .lesson-chapters > ul {
+      list-style: none; }
+      html .lesson-chapters > ul > a {
+        color: black;
+        text-decoration: none; }
+        html .lesson-chapters > ul > a > li {
+          padding: 7.5px 15px;
+          border-left: 2px solid #1a5ccbdb;
+          opacity: 0.7;
+          transition: 0.2s; }
+          html .lesson-chapters > ul > a > li.active, html .lesson-chapters > ul > a > li:hover {
+            padding: 7.5px 15px;
+            border-left: 15px solid #1a5ccbdb;
+            opacity: 1; }
+          html .lesson-chapters > ul > a > li.active {
+            color: #1a5ccbdb; }
+  html .chapter-bloc {
+    background-color: white;
+    padding: 15px; }
+    html .chapter-bloc .content-file-chapter {
+      padding: 10px 0;
+      border-bottom: 1px solid; }
+    html .chapter-bloc .content-chapter {
+      margin-top: 25px; }
+  html .logo-header img {
+    width: 150px;
+    height: 53px;
+    margin-top: 3px; }
   html .profile {
     display: flex;
     background-color: #FFFFFF;
@@ -253,7 +389,7 @@ html {
         border-radius: 50%;
         width: 200px;
         height: 200px;
-        border: solid 1.5px #1A5CCB;
+        border: solid 1.5px #1a5ccbdb;
         display: flex;
         overflow: hidden;
         margin-top: 30px;
@@ -280,7 +416,7 @@ html {
         html .profile .info section span:nth-child(2) {
           font-size: 16px; }
       html .profile .info .name span {
-        color: #1A5CCB !important;
+        color: #1a5ccbdb !important;
         font-size: 24px !important;
         font-weight: 600 !important; }
   html .container-content-profile {
@@ -295,7 +431,7 @@ html {
       margin-bottom: 40px; }
       html .container-content-profile section h2 {
         margin: 10px 0 10px 20px;
-        color: #1A5CCB; }
+        color: #1a5ccbdb; }
     html .container-content-profile .comment {
       display: flex;
       flex-direction: column; }
@@ -304,7 +440,7 @@ html {
         width: 100%; }
         html .container-content-profile .comment .container .title-tab {
           font-size: 20px;
-          color: #1A5CCB;
+          color: #1a5ccbdb;
           font-weight: 600; }
         html .container-content-profile .comment .container ul {
           display: flex; }
@@ -330,7 +466,7 @@ html {
       flex-direction: column; }
       html .container-message .message i {
         font-size: 80px;
-        color: #1A5CCB;
+        color: #1a5ccbdb;
         margin-bottom: 20px; }
       html .container-message .message h2 {
         margin-bottom: 20px; }
@@ -340,7 +476,7 @@ html {
         text-decoration: none; }
       html .container-message .message a {
         font-weight: 600;
-        color: #1A5CCB; }
+        color: #1a5ccbdb; }
 
 #menu-header-section {
   width: 250px;
@@ -378,7 +514,7 @@ html {
           padding: 15px 0;
           transition: color 0.2s; }
         #menu-header-section > .content-menu-header > ul > li:hover {
-          background-color: #1A5CCB; }
+          background-color: #1a5ccbdb; }
           #menu-header-section > .content-menu-header > ul > li:hover > a {
             color: #FFFFFF; }
         #menu-header-section > .content-menu-header > ul > li.separator {
@@ -398,12 +534,16 @@ body > header {
         body > header > section > div > .left-block > p {
           font-size: 1.7em;
           line-height: 60px;
-          color: #1A5CCB; }
+          color: #1a5ccbdb; }
       body > header > section > div > .right-block {
         flex-basis: 80%;
         text-align: right; }
         body > header > section > div > .right-block .tosle-btn {
           line-height: 60px; }
+        body > header > section > div > .right-block #modal-signin {
+          text-align: left; }
+          body > header > section > div > .right-block #modal-signin input {
+            margin-top: 15px; }
         body > header > section > div > .right-block > i {
           font-size: 1.5em;
           margin-right: 50px;
@@ -411,7 +551,7 @@ body > header {
           cursor: pointer;
           transition: color 0.2s; }
           body > header > section > div > .right-block > i:hover {
-            color: #1A5CCB; }
+            color: #1a5ccbdb; }
         body > header > section > div > .right-block .profil-icon {
           display: inline-block;
           cursor: pointer; }
@@ -433,9 +573,9 @@ body > header {
             font-size: 1.5em; }
           body > header > section > div > .right-block .profil-icon:hover > .avatar-profil {
             background-color: rgba(26, 92, 203, 0.05);
-            border-color: #1A5CCB; }
+            border-color: #1a5ccbdb; }
           body > header > section > div > .right-block .profil-icon:hover > i {
-            color: #1A5CCB; }
+            color: #1a5ccbdb; }
   body > header > nav {
     height: 60px;
     border-bottom: 1px solid #E5E5E5; }
@@ -463,7 +603,7 @@ body > header {
         body > header > nav > ul > li:hover {
           background-color: rgba(0, 0, 0, 0.1); }
         body > header > nav > ul > li.current {
-          background-color: #1A5CCB; }
+          background-color: #1a5ccbdb; }
           body > header > nav > ul > li.current > a {
             color: #FFFFFF; }
 
@@ -484,7 +624,8 @@ main {
           font-size: 0.7em; }
 
 footer {
-  background-color: #74858D; }
+  background-color: #74858D;
+  margin-top: 15px; }
   footer > .footer-section {
     max-width: 1230px;
     margin: 0 auto;
@@ -544,7 +685,8 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
-    background-color: white; }
+    background-color: white;
+    z-index: 10000; }
     body > header > nav > ul > li > a {
       font-size: 1.4em;
       padding: 30px 0; }

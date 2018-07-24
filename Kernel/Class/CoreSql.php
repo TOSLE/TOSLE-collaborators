@@ -11,6 +11,8 @@ class CoreSql{
     private $orderByParameter;
     private $leftJoin = "";
 
+    private $requestSend = [];
+
     /**
      * CoreSql constructor.
      * Ne prend aucun paramètre
@@ -64,6 +66,7 @@ class CoreSql{
 
             $query = $this->pdo->prepare("UPDATE ".$this->table." SET "
                 . implode(',', $set) ." WHERE ".$this->columnBase."_id='".$this->id."'");
+            $this->setRequestsend($query);
             $query->execute($this->columns);
         }	else {
             unset($this->columns["id"]);
@@ -79,7 +82,7 @@ class CoreSql{
                 . implode(',', $columnName) .") VALUES (:"
                 . implode(',:', array_keys($this->columns)) .
                 ")");
-
+            $this->setRequestsend($query);
             $query->execute($this->columns);
         }
     }
@@ -200,21 +203,24 @@ class CoreSql{
 
     /**
      * @param array $_target
-     * @return array
+     * @return int|array
      * Permet de traiter la gestion des targets
      */
-    public function getTarget($_target)
+    private function setSelectedTarget($_target)
     {
-        $arrayTarget = [];
-        foreach ($_target as $key => $value){
-            if(substr($value, 0,1) === '_'){
-                $arrayTarget[$key] = substr($value, 1);
-            } else {
-                $arrayTarget[$key] = $this->columnBase.'_'.$value;
+        if(is_array($_target)){
+            $arrayTarget = [];
+            foreach ($_target as $key => $value){
+                if(substr($value, 0,1) === '_'){
+                    $arrayTarget[$key] = substr($value, 1);
+                } else {
+                    $arrayTarget[$key] = $this->columnBase.'_'.$value;
+                }
             }
+            return $arrayTarget;
         }
+        return ["*"];
 
-        return $arrayTarget;
     }
     /**
      * function getData
@@ -228,9 +234,9 @@ class CoreSql{
      *
      * Cette fonction nous retourne un array contenant le résultat de la requête. Le reste est trié par les Repository
      */
-    public function getData($target)
+    public function getData($target = "*")
     {
-        $target = $this->getTarget($target);
+        $target = $this->setSelectedTarget($target);
 
         $query = $this->pdo->prepare("
             SELECT " . implode(',', $target) . " 
@@ -241,6 +247,7 @@ class CoreSql{
             ".$this->limitParameter."
         ");
         $query->execute();
+        $this->setRequestsend($query);
 
         // On vide le parameter WHERE pour éviter tout problème sur requête qui viendrait après et où on ne veut pas de parametre
         $this->whereParameter = "";
@@ -278,9 +285,9 @@ class CoreSql{
      * Même tableau que la fonction getData, la différence est que cette fonction va retourner directement les données
      * dans l'objet
      */
-    public function getOneData($target)
+    public function getOneData($target = "*")
     {
-        $target = $this->getTarget($target);
+        $target = $this->setSelectedTarget($target);
 
         $query = $this->pdo->prepare("
             SELECT " . implode(',', $target) . " 
@@ -291,6 +298,7 @@ class CoreSql{
             ".$this->limitParameter."
         ");
         $query->execute();
+        $this->setRequestsend($query);
         $resultQuery = $query->fetch();
         // On vide le parameter WHERE pour éviter tout problème sur requête qui viendrait après et où on ne veut pas de parametre
         $this->whereParameter = "";
@@ -323,13 +331,11 @@ class CoreSql{
 
     /**
      * @param array $target
-     * @return array
+     * @return int
      */
-    public function countData($target)
+    public function countData($target = "*")
     {
-        foreach ($target as $key => $value){
-            $target[$key] = $this->columnBase.'_'.$value;
-        }
+        $target = $this->setSelectedTarget($target);
 
         $query = $this->pdo->prepare("
             SELECT count(" . implode(',', $target) . ") 
@@ -341,6 +347,7 @@ class CoreSql{
         ");
 
         $query->execute();
+        $this->setRequestsend($query);
 
         // On vide le parameter WHERE pour éviter tout problème sur requête qui viendrait après et où on ne veut pas de parametre
         $this->whereParameter = "";
@@ -348,7 +355,7 @@ class CoreSql{
         $this->limitParameter = "";
         $this->leftJoin = "";
 
-        return $query->fetch();
+        return $query->fetch()[0];
     }
 
     /**
@@ -395,6 +402,10 @@ class CoreSql{
         }
     }
 
+    /**
+     * Cette fonction va deleter un élément en BDD
+     * Elle utilise le WHERE parameter pour identifier ce qu'elle va DELETE
+     */
     public function delete()
     {
         $query = $this->pdo->prepare("
@@ -402,9 +413,28 @@ class CoreSql{
             FROM " . $this->table . " 
             ".$this->whereParameter."
         ");
+        $this->setRequestsend($query);
         $query->execute();
 
         $this->whereParameter = "";
+    }
+
+
+    /**
+     * @param $request
+     * Ajout la requête envoyé au tableau
+     */
+    public function setRequestsend($request)
+    {
+        $this->requestSend[] = $request;
+    }
+
+    /**
+     * @return array
+     */
+    public function getRequestsend()
+    {
+        return $this->requestSend;
     }
 
 }

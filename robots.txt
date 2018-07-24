@@ -1,1 +1,1 @@
-Sitemap: <lien url="http://www.mon-site-web.com/sitemap.xml">http://www.mon-site-web.com/sitemap.xml</lien>
+Sitemap: <lien url="http://localhost/Tosle/Static/xml/sitemap.xml">http://localhost/Tosle/Static/xml/sitemap.xml</lien>

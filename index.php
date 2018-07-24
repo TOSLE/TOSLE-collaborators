@@ -26,6 +26,9 @@
 	if(file_exists("App/config/parameter.php")) {
         require "App/config/parameter.php";
 	    if(Installer::checkDatabaseConnexion()){
+            require "App/config/configuration.php";
+            $Generator = new GeneratorXML('sitemap');
+            $Generator->setSitemap();
             /**
              * @array tempUri
              * Contient un tableau de notre URI. La première cellule vaut l'URI propre et la seconde vaut les variables GET
@@ -50,12 +53,12 @@
              * Contient les données de la route que l'on a trouvé grâce à l'URI
              */
             $slug = null;
-            if (isset($uriExploded[1])) {
-                $slug = $uriExploded[1];
+            if (isset($uriExploded[0])) {
+                $slug = $uriExploded[0];
             }
             $accessParams = $Acces->getRoute(strtolower($slug));
 
-            $language = (empty($uriExploded[0])) ? "en-EN" : strtolower($uriExploded[0]) . "-" . strtoupper($uriExploded[0]);
+            $language = (isset($_COOKIE['TOSLE_LANG'])) ? strtolower($_COOKIE['TOSLE_LANG']) . "-" . strtoupper($_COOKIE['TOSLE_LANG']) : "no-cookie";
             $controller = (empty($accessParams["controller"])) ? "ClassController" : ucfirst(strtolower($accessParams["controller"])) . "Controller";
             $action = (empty($accessParams["action"])) ? "indexAction" : strtolower($accessParams["action"]) . "Action";
 
@@ -68,53 +71,65 @@
             $Auth = null;
             if (isset($_SESSION['token']) && isset($_SESSION['email'])) {
                 if (($userConnected = Authentification::checkAuthentification($_SESSION['token'], $_SESSION['email']))) {
-                    $Auth = Authentification::getUser($_SESSION['token'], $_SESSION['email']);
-                    $userStatus = $Auth->getStatus();
+                    Authentification::getUser($_SESSION['token'], $_SESSION['email']);
+                    if(isset($_SESSION['auth']) && !empty($_SESSION['auth'])){
+                        $Auth = json_decode($_SESSION['auth']);
+                        $userStatus = $Auth->{'status'};
+                    }
                 } else {
                     echo "<p>Connection failed</p>";
                 }
             }
-
             if ($userStatus < $accessParams["security"]) {
                 $controller = "IndexController";
                 $action = "accessAction";
             }
 
+
             /**
-             * Il est possible que l'URI renseigné soit sous le format domaine/langue/controller/action
+             * Il est possible que l'URI renseigné soit sous le format domaine/controller/action
              * On va donc tester s'il ne s'agit pas de ce genre d'URI
              */
-            if (isset($uriExploded[1]) && isset($uriExploded[2]) && $accessParams["slug"] == $Acces->getSlug("default")["slug"]) {
-                $backOfficeRoute = $Acces->getBackOfficeRoute(strtolower($uriExploded[1]) . '/' . strtolower($uriExploded[2]));
+            if (isset($uriExploded[0]) && isset($uriExploded[1]) && $accessParams["slug"] == $Acces->getSlug("default")["slug"]) {
+                $backOfficeRoute = $Acces->getBackOfficeRoute(strtolower($uriExploded[0]) . '/' . strtolower($uriExploded[1]));
                 if (!(intval($userStatus) < intval($backOfficeRoute)) && $backOfficeRoute != -1) {
-                    $controller = ucfirst(strtolower($uriExploded[1])) . "Controller";
-                    $action = strtolower($uriExploded[2]) . "Action";
-                    unset($uriExploded[2]);
+                    $controller = ucfirst(strtolower($uriExploded[0])) . "Controller";
+                    $action = strtolower($uriExploded[1]) . "Action";
+                    unset($uriExploded[1]);
                 } else {
                     if (!($backOfficeRoute == -1)) {
                         $controller = "IndexController";
                         $action = "accessAction";
-                        unset($uriExploded[2]);
+                        unset($uriExploded[1]);
                     } else {
                         $controller = "IndexController";
                         $action = "notfoundAction";
-                        unset($uriExploded[2]);
+                        unset($uriExploded[1]);
                     }
                 }
+            }
+
+            /**
+             * Il n'est pas nécessaire d'avoir les statistiques de vue sur les routes avec accès admin
+             */
+            if($accessParams['security'] < 2 && !isset($backOfficeRoute)) {
+                $cookieAnalytics = (isset($_COOKIE['TOSLE_ANALYTICS']))?$_COOKIE['TOSLE_ANALYTICS']:null;
+                $Analytics = new Analytics();
+                $Analytics->setViewStats($cookieAnalytics);
             }
 
             /**
              * On créer notre tableau de paramètre qui contiendra nos GET, POST et paramètres en URI
              */
             unset($uriExploded[0]);
-            unset($uriExploded[1]);
             $parameter = ["POST" => $_POST, "GET" => $_GET, "URI" => array_values($uriExploded)];
 
             if (file_exists("Kernel/Language/" . $language . "/conf.lang.php")) {
                 include "Kernel/Language/" . $language . "/conf.lang.php";
             } else {
+                setcookie('TOSLE_LANG', 'en', time()+(3600*24*30*12));
                 $language = "en-EN";
-                include "Kernel/Language/en-EN/conf.lang.php";
+                include "Kernel/Language/".$language."/conf.lang.php";
             }
 
             if (file_exists("Src/Controllers/" . $controller . ".php")) {

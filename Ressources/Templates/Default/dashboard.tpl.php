@@ -4,7 +4,6 @@
     <title>Dashboard</title>
     <link href="<?php echo DIRNAME;?>Public/Libraries/Framework/ospaf/css/ospaf.css" rel="stylesheet">
     <link href="<?php echo DIRNAME;?>Public/Styles/Default/css/template_default.css" rel="stylesheet">
-    <link href="<?php echo DIRNAME;?>Public/Styles/Default/css/template_dashboard_css.css" rel="stylesheet">
     <link href="<?php echo DIRNAME;?>Public/Styles/Default/css/template_dashboard.css" rel="stylesheet">
 
     <script src="<?php echo DIRNAME;?>Public/Libraries/jQuery/jquery-3.3.1.js"></script>
@@ -15,7 +14,9 @@
     <section>
         <div>
             <div class="left-block">
-                <p>TOSLE</p>
+                <div class="logo-header">
+                    <img src="<?php echo DIRNAME ?>Tosle/logo/tosle-logo-new.jpg" alt="Logo Tosle">
+                </div>
             </div>
             <div class="right-block">
                 <?php include "Header/right_header.tpl.php"; ?>
@@ -44,7 +45,6 @@
 <!-- INCLUDE SCRIPT -->
 <script src="<?php echo DIRNAME;?>Public/Javascripts/Default/menuprofil.js"></script>
 <script src="<?php echo DIRNAME;?>Public/Libraries/Framework/ospaf/js/modals.js"></script>
-<script src="<?php echo DIRNAME;?>Public/Javascripts/Default/Chartjs/mychart.js"></script>
 <!-- INCLUDE SCRIPT -->
 </body>
 </html>

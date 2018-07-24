@@ -8,28 +8,30 @@ class User extends CoreSql{
     protected $password;
     protected $token;
     protected $dateconnection;
+    protected $pseudo;
     protected $newsletter = null;
     protected $fileid = null;
     protected $birthday = null;
 
     protected $status = null;
 
+    private $dateInscription;
+    private $dateUpdated;
+    private $groups = [];
+    private $avatar;
     public function __construct($_id = null){
         parent::__construct();
         if(isset($_id) && is_numeric($_id)){
-            $target = [
-                'id',
-                'firstname',
-                'lastname',
-                'email',
-            ];
+            $Group = new GroupRepository();
             $parameter = [
                 'LIKE' => [
                     'id' => $_id
                 ]
             ];
             $this->setWhereParameter($parameter);
-            $this->getOneData($target);
+            $this->getOneData();
+            $this->setAvatar($this->fileid);
+            $this->groups = $Group->getGroupsUser($this->id);
         }
     }
 
@@ -69,13 +71,21 @@ class User extends CoreSql{
     {
         $this->newsletter = $newsletter;
     }
-    public function setFileId($fileid)
+    public function setFileid($fileid)
     {
         $this->fileid = $fileid;
     }
     public function setBirthDay($birthday)
     {
         $this->birthday = $birthday;
+    }
+    public function setAvatar($_id)
+    {
+        $this->avatar = new File($_id);
+    }
+    public function getAvatar()
+    {
+        return $this->avatar;
     }
 
 
@@ -124,11 +134,57 @@ class User extends CoreSql{
         return $this->status;
     }
 
-    public function configFormAdd()
+    public function setPseudo($pseudo)
+    {
+        $this->pseudo = $pseudo;
+    }
+
+    public function getPseudo()
+    {
+        return $this->pseudo;
+    }
+
+    public function setDateinscription($dateInscription)
+    {
+        $this->dateInscription = $dateInscription;
+    }
+
+    public function getDateinscription()
+    {
+        return $this->dateInscription;
+    }
+
+    public function setDateupdated($dateUpdated)
+    {
+        $this->dateUpdated = $dateUpdated;
+    }
+
+    public function getDateupdated()
+    {
+        return $this->dateUpdated;
+    }
+
+    public function getGroups()
+    {
+        return $this->groups;
+    }
+
+    public function setGroups($_arrayGroups)
+    {
+        if(isset($_arrayGroups) && is_array($_arrayGroups)){
+            foreach($_arrayGroups as $groupId){
+                $this->groups[] = new Group($groupId);
+            }
+        } else {
+            $this->groups = null;
+        }
+    }
+
+    public function configFormAdd($action = "")
     {
         // FAIRE LES ID ET LES CLASS POUR LE CMS
         return [
-            "config"=> ["method"=>"post", "action"=>"", "submit"=>"S'inscrire"],
+            "config"=> ["method"=>"post", "action"=>$action, "submit"=>"S'inscrire"],
             "input"=> [
                 "firstname"=>[
                     "type"=>"text",
@@ -167,15 +223,57 @@ class User extends CoreSql{
             ],
             "captcha" => true
         ];
+    } 
+    public function passwordFormAdd()
+    {
+        // FAIRE LES ID ET LES CLASS POUR LE CMS
+        return [
+            "config"=> ["method"=>"post", "action"=>"", "submit"=>"Envoie lien pour mot de passe"],
+            "input"=> [
+                
+                "email"=>[
+                    "type"=>"email",
+                    "placeholder"=>"Votre email",
+                    "required"=>true
+                ]
+            ],
+            "captcha" => true
+        ];
+    } 
+    public function setnewpasswordFormAdd()
+    {
+        // FAIRE LES ID ET LES CLASS POUR LE CMS
+        return [
+            "config"=> ["method"=>"post", "action"=>"", "submit"=>"Modifier mot de passe"],
+            "input"=> [
+                
+                "pwd"=>[
+                    "type"=>"password",
+                    "placeholder"=>"Votre nouveau mot de passe",
+                    "required"=>true
+                ],
+                "pwdConfirm"=>[
+                    "type"=>"password",
+                    "placeholder"=>"Confirmez votre nouveau mot de passe",
+                    "required"=>true,
+                    "confirm"=>"pwd"
+            ],
+            "captcha" => true
+        ]
+        ];
     }
 
-    public function configFormConnect()
+    public function configFormConnect($action = "")
     {
         return [
             "config"=> [
                 "method"=>"post",
-                "action"=>"",
-                "submit"=>"Se connecter"
+                "action"=>$action,
+                "submit"=>"Se connecter",
+                "secure" => [
+                    "status" => false,
+                    "duration" => 5
+                ],
             ],
             "input"=> [
                 "email"=>[
@@ -189,6 +287,62 @@ class User extends CoreSql{
                     "required"=>true,
                 ]
             ]
+        ];
+    }
+
+    public function configFormEdit()
+    {
+        return [
+            "config"=> [
+                "method"=>"post",
+                "action"=>"",
+                "submit"=>"Sauvegarder",
+                "form_file"=>true,
+            ],
+            "input"=> [
+                "image"=>[
+                    "type"=>"file",
+                    "required"=>false,
+                    "label"=>"Select your background image",
+                    "format"=>"PNG JPG JPEG",
+                    "description"=>"Authorised format (png, jpg, jpeg)",
+                    "multiple"=>false
+                ],
+                "firstname"=>[
+                    "type"=>"text",
+                    "placeholder"=>"Votre prénom",
+                    "required"=>true,
+                    "maxString"=>100
+                ],
+                "lastname"=>[
+                    "type"=>"text",
+                    "placeholder"=>"Votre nom",
+                    "required"=>true,
+                    "maxString"=>100
+                ],
+                "email"=>[
+                    "type"=>"email",
+                    "placeholder"=>"Votre email",
+                    "required"=>true
+                ],
+                "emailConfirm"=>[
+                    "type"=>"email",
+                    "placeholder"=>"Confirmez votre email",
+                    "required"=>true,
+                    "confirm"=>"email"
+                ],
+                "pwd"=>[
+                    "type"=>"password",
+                    "placeholder"=>"Votre mot de passe",
+                    "required"=>true
+                ],
+                "pwdConfirm"=>[
+                    "type"=>"password",
+                    "placeholder"=>"Confirmez votre mot de passe",
+                    "required"=>true,
+                    "confirm"=>"pwd"
+                ]
+            ],
         ];
     }
 }

@@ -12,7 +12,9 @@
             <section>
                 <div>
                     <div class="left-block">
-                        <p>TOSLE</p>
+                        <div class="logo-header">
+                            <img src="<?php echo DIRNAME ?>Tosle/logo/tosle-logo-new.jpg" alt="Logo Tosle">
+                        </div>
                     </div>
                     <div class="right-block">
                         <?php include "Header/right_header.tpl.php"; ?>
@@ -42,6 +44,7 @@
         <!-- INCLUDE SCRIPT -->
         <script src="<?php echo DIRNAME;?>Public/Javascripts/Default/menuprofil.js"></script>
         <script src="<?php echo DIRNAME;?>Public/Javascripts/Default/Messaging/burgermenu.js"></script>
+        <script src="<?php echo DIRNAME;?>Public/Libraries/Framework/ospaf/js/modals.js"></script>
         <!-- INCLUDE SCRIPT -->
     </body>
 </html>

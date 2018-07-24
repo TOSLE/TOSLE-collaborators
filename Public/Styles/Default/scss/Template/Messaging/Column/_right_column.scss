@@ -1,6 +1,22 @@
 .right-column {
   height: 100%;
   background-color: $colorBackgroundRightColumn;
+  .error-add-message {
+    position: absolute;
+    background-color: rgba(255,255,255,0.8);
+    z-index: 3000;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px;
+    bottom: 15%;
+    .type-error {
+      color: red;
+      font-weight: bold;
+    }
+    .content-error {
+      color: red;
+    }
+  }
   > .content-right-column {
     position: relative;
     height: 100%;
@@ -13,6 +29,14 @@
       width: 100%;
       > h2 {
         text-align: center;
+      }
+      > .trash-icon {
+        color: black;
+        position: absolute;
+        transition: color 0.2s;
+        &:hover {
+          color: red;
+        }
       }
       > .more-infos {
         text-align: center;
@@ -67,9 +91,14 @@
       > div > p:first-child {
         font-size: 1em;
       }
+      &.no-conversation {
+        text-align: center;
+        button {
+          margin: 0 auto;
+        }
+      }
     }
     > .edit-new-message {
-      display: flex;
       border-top: 1px solid $colorBorderBottomSection;
       padding: 5px;
       position: absolute;
@@ -77,20 +106,22 @@
       height: 90px;
       bottom: 0;
       background-color: #FFFFFF;
-      > .content-input {
-        flex-basis: 80%;
-        border-right: 1px solid $colorBorderBottomSection;
-        > textarea {
-          border: none;
-          min-width: 100%;
-          max-width: 100%;
-          min-height: 80px;
-          max-height: 80px;
-          border-bottom: 1px solid $colorBorderBottomSection;
-          outline: none;
-          transition: 0.4s;
-          &:hover, &:active {
-            border-bottom: 1px solid black;
+      form {
+        display: flex;
+        > .content-input {
+          flex-basis: 80%;
+          border-right: 1px solid $colorBorderBottomSection;
+          > textarea {
+            border: none;
+            width: 100%;
+            min-height: 80px;
+            max-height: 80px;
+            border-bottom: 1px solid $colorBorderBottomSection;
+            outline: none;
+            transition: 0.4s;
+            &:hover, &:active {
+              border-bottom: 1px solid black;
+            }
           }
         }
       }

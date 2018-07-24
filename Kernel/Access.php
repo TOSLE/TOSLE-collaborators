@@ -27,7 +27,7 @@ class Access
             "security" => false
         ],
         "chathome" => [ // Chat  homepage
-            "slug" => "chat",
+            "slug" => "messaging",
             "controller" => "chat",
             "action" => "index",
             "security" => false
@@ -98,6 +98,19 @@ class Access
             "action" => "view",
             "security" => false
         ],
+
+        "view-newpassword" => [ // change status blog
+            "slug" => "view-newpassword",
+            "controller" => "user",
+            "action" => "getpassword",
+            "security" => false
+        ],
+        "set-newpassword" => [ // change status blog
+            "slug" => "set-newpassword",
+            "controller" => "user",
+            "action" => "setnewpassword",
+            "security" => false
+        ],
         "view_lesson" => [ // change status blog
             "slug" => "lesson",
             "controller" => "class",
@@ -116,6 +129,48 @@ class Access
             "action" => "subscribe",
             "security" => false
         ],
+        "dashboard_student" => [
+            "slug" => "dashboard-student",
+            "controller" => "dashboard",
+            "action" => "student",
+            "security" => 2
+        ],
+        "dashboard_stat" => [
+            "slug" => "dashboard-statistic",
+            "controller" => "dashboard",
+            "action" => "stats",
+            "security" => 2
+        ],
+        "chatdraft" => [
+            "slug" => "messaging-draft",
+            "controller" => "chat",
+            "action" => "draft",
+            "security" => 1
+        ],
+        "chattrash" => [
+            "slug" => "messaging-trash",
+            "controller" => "chat",
+            "action" => "viewtrash",
+            "security" => 2
+        ],
+        "comment_signalement" => [
+            "slug" => "comment-signalement",
+            "controller" => "index",
+            "action" => "signalement",
+            "security" => false
+        ],
+        "comment_delete" => [
+            "slug" => "delete-comment",
+            "controller" => "index",
+            "action" => "deletecom",
+            "security" => 1
+        ],
+        "legal_notice" => [
+            "slug" => "legal",
+            "controller" => "index",
+            "action" => "legal",
+            "security" => 0
+        ]
     ];
 
     private $backOffice = [
@@ -124,16 +179,30 @@ class Access
         "blog/edit" => 2,
         "class/add" => 2,
         "class/edit" => 2,
+
         "class/status" => 2,
         "chapter/add" => 2,
         "chapter/edit" => 2,
         "chapter/status" => 2,
         "chapter/order" => 2,
         "index/config" => false,
+        "user/delete" => 2,
+        "group/delete" => 2,
+        "group/manage" => 2,
+        "group/edit" => 2,
+        "group/unset" => 2,
+        "group/gunset" => 2,
+        "group/umanage" => 2,
+        "class/follow" => 1,
+        "chat/addconv" => 1,
+        "chat/trash" => 2,
+        "chat/untrash" => 2,
+        "chat/delete" => 2
     ];
 
     private $urlFixe = [
-        'rss_blog' => 'Tosle/Static/xml/blogfeed.xml'
+        'rss_blog' => 'Tosle/Static/xml/blogfeed.xml',
+        'rss_lesson' => 'Tosle/Static/xml/lessonfeed.xml'
     ];
 
     /**
@@ -220,10 +289,10 @@ class Access
         $Acces = new Access();
         $data = [];
         foreach ($Acces->getAccess() as $key => $value){
-            $data[$key] = "".DIRNAME.substr($language,0,2)."/".$value["slug"];
+            $data[$key] = "".DIRNAME.$value["slug"];
         }
         foreach ($Acces->getBackoffice() as $key => $value){
-            $data[$key] = "".DIRNAME.substr($language,0,2)."/".$key;
+            $data[$key] = "".DIRNAME.$key;
         }
         foreach ($Acces->getUrlFixe() as $key => $value){
             $data[$key] = $value;
@@ -240,10 +309,12 @@ class Access
         $Acces = new Access();
         $data = [];
         foreach ($Acces->getAccess() as $key => $value){
-            $data[$key] = "".DIRNAME.substr($language,0,2)."/".$value["slug"];
+            if($value['security'] < 2){
+                $data[$key] = "/".$value["slug"];
+            }
         }
         foreach ($Acces->getUrlFixe() as $key => $value){
-            $data[$key] = "".DIRNAME.$value;
+            $data[$key] = $value;
         }
         return $data;
     }
@@ -255,8 +326,8 @@ class Access
      */
     public static function constructUrl($string = "url to encode")
     {
-        $search = array('à', 'ä', 'â', 'é', 'è', 'ë', 'ê', 'ï', 'ì', 'î', 'ù', 'û', 'ü', 'ô', 'ö', '&', ' ', '?', '!', 'ç', ';', '/', '.', ',', ':', '(', ')', '=', '\'');
-        $replace = array('a', 'a', 'a', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'u', 'u', 'u', 'o', 'o', '', '-', '', '', 'c', '', '-', '', '', '', '', '', '', '-');
+        $search = array('à', 'ä', 'â', 'é', 'è', 'ë', 'ê', 'ï', 'ì', 'î', 'ù', 'û', 'ü', 'ô', 'ö', '&', ' ', '?', '!', 'ç', ';', '/', '.', ',', ':', '(', ')', '=');
+        $replace = array('a', 'a', 'a', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'u', 'u', 'u', 'o', 'o', '', '-', '', '', 'c', '', '-', '', '', '', '', '', '');
 
         return urlencode(trim(str_ireplace($search, $replace, strtolower((trim($string)))),'-'));
     }

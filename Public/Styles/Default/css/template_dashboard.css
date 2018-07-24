@@ -33,12 +33,16 @@ body > header {
         body > header > section > div > .left-block > p {
           font-size: 1.7em;
           line-height: 60px;
-          color: #1A5CCB; }
+          color: #1a5ccbdb; }
       body > header > section > div > .right-block {
         flex-basis: 80%;
         text-align: right; }
         body > header > section > div > .right-block .tosle-btn {
           line-height: 60px; }
+        body > header > section > div > .right-block #modal-signin {
+          text-align: left; }
+          body > header > section > div > .right-block #modal-signin input {
+            margin-top: 15px; }
         body > header > section > div > .right-block > i {
           font-size: 1.5em;
           margin-right: 50px;
@@ -46,7 +50,7 @@ body > header {
           cursor: pointer;
           transition: color 0.2s; }
           body > header > section > div > .right-block > i:hover {
-            color: #1A5CCB; }
+            color: #1a5ccbdb; }
         body > header > section > div > .right-block .profil-icon {
           display: inline-block;
           cursor: pointer; }
@@ -68,9 +72,9 @@ body > header {
             font-size: 1.5em; }
           body > header > section > div > .right-block .profil-icon:hover > .avatar-profil {
             background-color: rgba(26, 92, 203, 0.05);
-            border-color: #1A5CCB; }
+            border-color: #1a5ccbdb; }
           body > header > section > div > .right-block .profil-icon:hover > i {
-            color: #1A5CCB; }
+            color: #1a5ccbdb; }
   body > header > nav {
     height: 60px;
     border-bottom: 1px solid #E5E5E5; }
@@ -98,7 +102,7 @@ body > header {
         body > header > nav > ul > li:hover {
           background-color: rgba(0, 0, 0, 0.1); }
         body > header > nav > ul > li.current {
-          background-color: #1A5CCB; }
+          background-color: #1a5ccbdb; }
           body > header > nav > ul > li.current > a {
             color: #FFFFFF; }
 
@@ -138,7 +142,7 @@ body > header {
           padding: 15px 0;
           transition: color 0.2s; }
         #menu-header-section > .content-menu-header > ul > li:hover {
-          background-color: #1A5CCB; }
+          background-color: #1a5ccbdb; }
           #menu-header-section > .content-menu-header > ul > li:hover > a {
             color: #FFFFFF; }
         #menu-header-section > .content-menu-header > ul > li.separator {
@@ -163,7 +167,7 @@ main {
         display: block;
         flex-basis: 5%;
         padding-top: 2.5px;
-        color: #1A5CCB; }
+        color: #1a5ccbdb; }
         main .content-backoffice > .header-content > a > i {
           line-height: 150%; }
         main .content-backoffice > .header-content > a.desactive {
@@ -195,19 +199,233 @@ main {
             main .content-backoffice > .main-content > table > tbody > tr > td.td-content-number {
               text-align: center; }
             main .content-backoffice > .main-content > table > tbody > tr > td.td-content-icone {
-              color: #1A5CCB;
+              color: #1a5ccbdb;
               text-align: center; }
             main .content-backoffice > .main-content > table > tbody > tr > td.td-content-action {
               text-align: center; }
             main .content-backoffice > .main-content > table > tbody > tr > td .ordered-button {
               font-size: 0.9em; }
+  main main {
+    /* display: flex; */
+    flex-direction: row;
+    max-width: 1230px;
+    margin: 0 auto;
+    min-height: 100%; }
+  main li {
+    text-decoration: none;
+    list-style: none; }
+  main .container > .row {
+    margin-bottom: 27px !important; }
+  main #nav-dashboard ul li a {
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    align-items: center; }
+  main section .marg-container {
+    margin-left: 15px; }
+  main .title-page {
+    margin: 26px 0 0 0; }
+    main .title-page h2 {
+      font-weight: 300;
+      color: #3D3F3E; }
+  main #left-side {
+    display: flex;
+    flex-direction: column;
+    max-width: 175px; }
+  main .right-side {
+    margin-top: -15px; }
+  main #nav-dashboard {
+    background-color: #FFFFFF;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+    border: solid 0.5px #BDBDBDBD;
+    margin-bottom: 27px; }
+    main #nav-dashboard li {
+      height: 60px;
+      border-right: solid 0.5px #BDBDBDBD;
+      border-top: solid 0.5px #BDBDBDBD;
+      width: 100%; }
+      main #nav-dashboard li:last-child {
+        border-bottom: solid 0.5px #BDBDBDBD; }
+    main #nav-dashboard p {
+      font-weight: 400;
+      color: #1a5ccbdb;
+      margin-left: 20px; }
+    main #nav-dashboard i {
+      margin-left: auto;
+      padding-right: 15px; }
+  main .block-dash {
+    background-color: #FFFFFF;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+    border: solid 0.5px #BDBDBDBD; }
+    main .block-dash .title {
+      display: flex;
+      color: #343A40;
+      padding-top: 15px;
+      padding-bottom: 15px;
+      border-top: solid 0.5px #BDBDBDBD;
+      border-left: solid 0.5px #BDBDBDBD;
+      border-right: solid 0.5px #BDBDBDBD;
+      flex-direction: row; }
+      main .block-dash .title a {
+        display: flex;
+        align-self: flex-end;
+        margin-left: auto;
+        padding-right: 10px; }
+      main .block-dash .title a:link {
+        text-decoration: none; }
+      main .block-dash .title > h4 {
+        margin-left: 16px;
+        font-weight: 500; }
+    main .block-dash .container {
+      width: 100%;
+      border: solid 0.5px #BDBDBDBD; }
+  main #stat-cms {
+    display: flex;
+    flex-direction: column; }
+    main #stat-cms ul {
+      font-size: 14px;
+      height: 40px;
+      border-bottom: solid 0.5px #BDBDBDBD;
+      width: 100%; }
+    main #stat-cms li {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      flex-direction: row; }
+      main #stat-cms li .stat-register {
+        font-weight: 600;
+        display: flex;
+        align-items: flex-end;
+        margin-left: auto;
+        padding-right: 20px; }
+    main #stat-cms ul > li > p:nth-child(1) {
+      margin-left: 16px;
+      font-size: 14px; }
+  main .blue {
+    fill: #1a5ccbdb;
+    color: #1a5ccbdb; }
+  main .column-col-5 ul {
+    display: flex;
+    flex-direction: row;
+    align-items: center; }
+  main .column-col-5 > ul > li {
+    width: 100%;
+    max-width: 211px;
+    height: 30px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    border-bottom: solid 0.5px #C4C4C4;
+    color: #8C8C8C; }
+    main .column-col-5 > ul > li > span {
+      width: 100%;
+      text-align: center; }
+    main .column-col-5 > ul > li:nth-child(2), main .column-col-5 > ul > li:nth-child(3), main .column-col-5 > ul > li:nth-child(4) {
+      max-width: 96px; }
+  main .row-col-5 ul {
+    display: flex;
+    flex-direction: row;
+    align-items: center; }
+  main .row-col-5 > ul > li {
+    /** todo a modifier essayer de tout regrouper column + row**/
+    width: 100%;
+    max-width: 211px;
+    height: 60px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    border-bottom: solid 0.5px #C4C4C4;
+    color: #3D3F3E; }
+    main .row-col-5 > ul > li:nth-child(1) {
+      max-width: 196px;
+      font-size: 12px; }
+    main .row-col-5 > ul > li:nth-child(2), main .row-col-5 > ul > li:nth-child(3), main .row-col-5 > ul > li:nth-child(4) {
+      max-width: 96px; }
+    main .row-col-5 > ul > li > span {
+      width: 100%;
+      text-align: center; }
+  main #last-blog-post .column-col-5 > ul > li:nth-child(1), main #last-blog-post .row-col-5 > ul > li:nth-child(1) {
+    max-width: 300px; }
+  main #last-chat-message .column-col-5 > ul > li:nth-child(1), main #last-chat-message .row-col-5 > ul > li:nth-child(1) {
+    max-width: 70px; }
+  main #last-chat-message .column-col-5 > ul > li:nth-child(2), main #last-chat-message .row-col-5 > ul > li:nth-child(2) {
+    max-width: 300px; }
+  main .stat-small {
+    margin-bottom: 27px;
+    height: 254px;
+    background-color: #ffffff; }
   main .bold-text {
     font-weight: 500; }
   main .additional-message-title {
     font-size: 0.7em; }
+  main .dashboard-bloc {
+    background-color: #FFF;
+    padding: 15px; }
+    main .dashboard-bloc .table-dashboard {
+      width: 100%;
+      border-collapse: collapse; }
+      main .dashboard-bloc .table-dashboard tr {
+        height: 50px; }
+        main .dashboard-bloc .table-dashboard tr td {
+          border: 1px solid #BDBDBD; }
+          main .dashboard-bloc .table-dashboard tr td.avatar img {
+            height: 60px; }
+    main .dashboard-bloc .icons-dashboard {
+      float: right;
+      color: #1a5ccbdb; }
+      main .dashboard-bloc .icons-dashboard i {
+        font-size: 1.8em; }
+  main .row-stat .container .row {
+    flex-direction: row; }
+  main .block-stat {
+    background-color: #FFFFFF;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+    border: solid 0.5px #BDBDBDBD;
+    max-height: 600px; }
+    main .block-stat .title {
+      display: flex;
+      color: #343A40;
+      padding-top: 15px;
+      padding-bottom: 15px;
+      border-top: solid 0.5px #BDBDBDBD;
+      border-left: solid 0.5px #BDBDBDBD;
+      border-right: solid 0.5px #BDBDBDBD; }
+      main .block-stat .title h4 {
+        font-size: 16px;
+        font-weight: 600;
+        margin-left: 16px; }
+      main .block-stat .title select {
+        align-self: flex-end;
+        margin-left: auto;
+        margin-right: 20px; }
+    main .block-stat .container {
+      border: solid 0.5px #BDBDBDBD; }
+      main .block-stat .container canvas {
+        height: 500px;
+        width: 500px;
+        padding: 10px; }
+  main .responsive-menu {
+    display: none; }
+  @media screen and (max-width: 1407px) {
+    main .responsive-menu {
+      display: block; }
+    main .large-menu {
+      display: none; }
+    main #left-side {
+      max-width: 480px;
+      justify-content: center;
+      margin: auto; } }
+  main .logo-header img {
+    width: 150px;
+    height: 53px;
+    margin-top: 3px; }
 
 footer {
-  background-color: #74858D; }
+  background-color: #74858D;
+  margin-top: 15px; }
   footer > .footer-section {
     max-width: 1230px;
     margin: 0 auto;
@@ -267,7 +485,8 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
-    background-color: white; }
+    background-color: white;
+    z-index: 10000; }
     body > header > nav > ul > li > a {
       font-size: 1.4em;
       padding: 30px 0; }

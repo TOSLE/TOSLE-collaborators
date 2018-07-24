@@ -8,6 +8,24 @@
 
 class CoreFile
 {
+
+    /**
+     * Le constructeur va permettre d'identifier le paramWindows. Qui gère si l'utilisation de notre CMS se fait
+     * à la racine sur du serveur ou dans des sous-dossiers. Par exemple, $paramWindows vaudra :
+     *      - '../../' si DIRNAME vaut => '/Sous/Dossier/'
+     *      - '../' si DIRNAME vaut => '/SousDossier/'
+     */
+    public static function getParamWindows()
+    {
+        $tmpString = trim(DIRNAME, '/');
+        $tmpArray = explode('/', $tmpString);
+        $paramWindows = "";
+        foreach ($tmpArray as $folder) {
+            $paramWindows .= '../';
+        }
+        return $paramWindows;
+    }
+
     /**
      * @param $relativePath
      * @return array
@@ -20,11 +38,10 @@ class CoreFile
         if(SYSTEM == "LINUX") {
             $directoryPath = getcwd() . DIRNAME . 'Tosle/Static/' . $relativePath;
         } else {
-            $directoryPath = '../..' . DIRNAME . 'Tosle/Static/' . $relativePath;
+            $directoryPath = getcwd() . '/Tosle/Static/' . $relativePath;
         }
         if(!file_exists($directoryPath)){
             mkdir($directoryPath, 0755, true);
-
         }
 
         return [
@@ -45,7 +62,7 @@ class CoreFile
         if(SYSTEM == "LINUX") {
             $directoryPath = getcwd() . DIRNAME . 'App/' . $relativePath;
         } else {
-            $directoryPath = '../..' . DIRNAME . 'App/' . $relativePath;
+            $directoryPath = self::getParamWindows() . DIRNAME . 'App/' . $relativePath;
         }
         if(!file_exists($directoryPath)){
             mkdir($directoryPath, 0755, true);
@@ -72,12 +89,26 @@ class CoreFile
         return $directoryPath;
     }
 
+    /**
+     * @return string
+     * Permet d'obtenir l'url du fichier sql peu importe l'OS
+     */
+    static public function getRobotFile()
+    {
+        if(SYSTEM == "LINUX") {
+            $directoryPath = getcwd() . DIRNAME . '/robots.txt';
+        } else {
+            $directoryPath = 'robots.txt';
+        }
+        return $directoryPath;
+    }
+
     static public function testFeedFile($relativePath)
     {
         if(SYSTEM == "LINUX") {
             $directoryPath = getcwd() . DIRNAME . 'Tosle/Static/xml/' . $relativePath;
         } else {
-            $directoryPath = '../..' . DIRNAME . 'Tosle/Static/xml/' . $relativePath;
+            $directoryPath = self::getParamWindows() . DIRNAME . 'Tosle/Static/xml/' . $relativePath;
         }
         if(!file_exists($directoryPath)){
             return null;

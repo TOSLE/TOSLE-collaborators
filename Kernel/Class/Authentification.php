@@ -50,6 +50,13 @@ class Authentification
             'email' => $email
         ]]);
         $User->getOneData($target);
-        return $User;
+        $arrayTmp = [];
+        $arrayTmp['id'] = $User->getId();
+        $arrayTmp['status'] = $User->getStatus();
+        $arrayTmp['lastname'] = $User->getLastName();
+        $arrayTmp['firstname'] = $User->getFirstName();
+        $arrayTmp['newsletter'] = $User->getNewsletter();
+        $stringSession = json_encode($arrayTmp, JSON_FORCE_OBJECT);
+        $_SESSION['auth'] = $stringSession;
     }
 }

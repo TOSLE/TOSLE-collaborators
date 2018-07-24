@@ -12,7 +12,9 @@ class GeneratorXML
     private $fileName;
     private $xmlDoc;
     private $channel;
+    private $rss;
     private $routes;
+    private $atom;
 
     /**
      * GeneratorXML constructor.
@@ -32,37 +34,74 @@ class GeneratorXML
      */
     public function setSitemap()
     {
+        $Lesson = new LessonRepository();
+        $Blog = new BlogRepository();
         $urlset = $this->xmlDoc->createElement('urlset');
         $urlset->setAttribute('xmlns', "http://www.google.com/schemas/sitemap/0.84");
         $Routes = Access::getPublicSlugs();
         foreach($Routes as $id => $route){
             if($id != "default"){
                 $url = $this->xmlDoc->createElement('url');
-                $loc = $this->xmlDoc->createElement('loc', $_SERVER['SERVER_NAME'].$route);
+                $loc = $this->xmlDoc->createElement('loc', Installer::url().$route);
                 $priority = $this->xmlDoc->createElement('priority', "0.5");
                 $url->appendChild($loc);
                 $url->appendChild($priority);
                 $urlset->appendChild($url);
             }
         }
+        $lessons = $Lesson->getLessons(null);
+        foreach ($lessons as $lesson){
+            foreach ($lesson->getChapter() as $chapter){
+                $url = $this->xmlDoc->createElement('url');
+                $loc = $this->xmlDoc->createElement('loc', Installer::url().'/'.$lesson->getUrl().'/'.$chapter->getUrl());
+                $priority = $this->xmlDoc->createElement('priority', "1");
+                $url->appendChild($loc);
+                $url->appendChild($priority);
+                $urlset->appendChild($url);
+            }
+        }
+
+        $blogs = $Blog->getAllArticleByStatus(1);
+        foreach($blogs as $blog){
+            $url = $this->xmlDoc->createElement('url');
+            $loc = $this->xmlDoc->createElement('loc', Installer::url().'/'.$blog->getUrl());
+            $priority = $this->xmlDoc->createElement('priority', "0.8");
+            $url->appendChild($loc);
+            $url->appendChild($priority);
+            $urlset->appendChild($url);
+        }
         $this->xmlDoc->appendChild($urlset);
 
     }
 
     /**
+     * @param string|null $key_link
      * Initialise les données du site internet en cours
      */
-    public function getWebSiteData()
+    public function getWebSiteData($key_link = null)
     {
+        $this->rss = $this->xmlDoc->createElement('rss');
+        $this->rss->setAttribute('xmlns:atom', 'http://www.w3.org/2005/Atom');
+        $this->rss->setAttribute('version', '2.0');
+
+        $this->atom = $this->xmlDoc->createElement('atom:link');
+        $this->atom->setAttribute('type', 'application/rss+xml');
+        if(isset($key_link)){
+            $this->atom->setAttribute('href', Installer::url().'/'.$this->routes[$key_link]);
+        }
+        $this->atom->setAttribute('rel', 'self');
         $this->channel = $this->xmlDoc->createElement('channel');
         $title = $this->xmlDoc->createElement('title', 'Le site de tosle');
-        $link = $this->xmlDoc->createElement('link', $_SERVER['SERVER_NAME']);
+        $link = $this->xmlDoc->createElement('link', Installer::url());
         $description = $this->xmlDoc->createElement('description', 'Description of Website');
-        $webMaster = $this->xmlDoc->createElement('webMaster', 'contact.tosle@gmail.com');
+        $User = new UserRepository();
+        $userAdmin = $User->getAdminInfos();
+        $webMaster = $this->xmlDoc->createElement('webMaster', $userAdmin->getEmail().' ('.$userAdmin->getFirstname().' '.$userAdmin->getLastname().')');
         $language = $this->xmlDoc->createElement('language', 'fr');
         $copyright = $this->xmlDoc->createElement('copyright', 'TOSLE');
         $generator = $this->xmlDoc->createElement('generator', 'TOSLE');
-        $lastBuildDate = $this->xmlDoc->createElement('lastBuildDate', date('c'));
+        $lastBuildDate = $this->xmlDoc->createElement('lastBuildDate', date('D, d M Y H:i:s O'));
+        $this->channel->appendChild($this->atom);
         $this->channel->appendChild($title);
         $this->channel->appendChild($link);
         $this->channel->appendChild($description);
@@ -89,19 +128,21 @@ class GeneratorXML
      */
     public function setBlogFeed($content)
     {
-        $this->getWebSiteData();
+        $this->getWebSiteData('rss_blog');
         $BlogRepository = new BlogRepository();
         if(isset($content) && !empty($content)){
             foreach($content as $blog){
                 $item = $this->xmlDoc->createElement('item');
                 $title = $this->xmlDoc->createElement('title', $blog->getTitle());
                 $description = $this->xmlDoc->createElement('description', $this->convertStringToXml($BlogRepository->getResumeContent($blog->getContent())));
-                $datePub = $this->xmlDoc->createElement('pubDate', $blog->getDatecreate());
-                $link = $this->xmlDoc->createElement('link', $_SERVER['SERVER_NAME'].$this->routes['view_blog_article'].'/'.$blog->getUrl());
+                $datePub = $this->xmlDoc->createElement('pubDate', $blog->getDatecreatefeed());
+                $link = $this->xmlDoc->createElement('link', Installer::url().$this->routes['view_blog_article'].'/'.$blog->getUrl());
+                $guid = $this->xmlDoc->createElement('guid', Installer::url().$this->routes['view_blog_article'].'/'.$blog->getUrl());
                 $item->appendChild($title);
                 $item->appendChild($description);
                 $item->appendChild($datePub);
                 $item->appendChild($link);
+                $item->appendChild($guid);
                 $this->channel->appendChild($item);
             }
         } else {
@@ -112,7 +153,8 @@ class GeneratorXML
             $item->appendChild($description);
             $this->channel->appendChild($item);
         }
-        $this->xmlDoc->appendChild($this->channel);
+        $this->rss->appendChild($this->channel);
+        $this->xmlDoc->appendChild($this->rss);
     }
 
     /**
@@ -121,21 +163,24 @@ class GeneratorXML
      */
     public function setLessonFeed($content)
     {
-        $this->getWebSiteData();
+        $this->getWebSiteData('rss_lesson');
         if(isset($content) && !empty($content)){
             foreach($content as $lesson){
                 if(!empty($lesson->getChapter())){
                     $item = $this->xmlDoc->createElement('item');
                     $title = $this->xmlDoc->createElement('title', $lesson->getTitle());
                     $description = $this->xmlDoc->createElement('description', $this->convertStringToXml($lesson->getDescription()));
-                    $datePub = $this->xmlDoc->createElement('pubDate', $lesson->getDatecreate());
-                    $link = $this->xmlDoc->createElement('link', $_SERVER['SERVER_NAME'].$this->routes['view_blog_article'].'/'.$lesson->getUrl());
-                    $chapter = $this->xmlDoc->createElement('numberChapter', sizeof($lesson->getChapter()));
-                    $item->appendChild($chapter);
+                    $datePub = $this->xmlDoc->createElement('pubDate', $lesson->getDatecreatefeed());
+                    $link = $this->xmlDoc->createElement('link', Installer::url().$this->routes['view_lesson'].'/'.$lesson->getUrl());
+                    $guid = $this->xmlDoc->createElement('guid', Installer::url().$this->routes['view_lesson'].'/'.$lesson->getUrl());
+                    //$chapter = $this->xmlDoc->createElement('numberChapter', sizeof($lesson->getChapter()));
+                    //$item->appendChild($chapter);
+                    $item->appendChild($title);
                     $item->appendChild($title);
                     $item->appendChild($description);
                     $item->appendChild($datePub);
                     $item->appendChild($link);
+                    $item->appendChild($guid);
                     $this->channel->appendChild($item);
                 }
             }
@@ -147,7 +192,8 @@ class GeneratorXML
             $item->appendChild($description);
             $this->channel->appendChild($item);
         }
-        $this->xmlDoc->appendChild($this->channel);
+        $this->rss->appendChild($this->channel);
+        $this->xmlDoc->appendChild($this->rss);
     }
 
     /**

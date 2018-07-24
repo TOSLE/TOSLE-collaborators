@@ -45,7 +45,11 @@ class DashboardBlocModal
                     "target" => $action
                 ]
             ];
-        } else {
+        } elseif($type == "access") {
+            $this->iconHeader = [
+                "access" => $action
+            ];
+        }else {
             $this->iconHeader = [
                 "href" => [
                     "location" => $action

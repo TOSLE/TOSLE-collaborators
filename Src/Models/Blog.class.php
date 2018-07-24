@@ -17,9 +17,18 @@ class Blog extends CoreSql {
     protected $url;
     protected $fileid;
 
-    public function __construct()
+    public function __construct($_id = null)
     {
         parent::__construct();
+        if(isset($_id) && is_numeric($_id)){
+            $parameter = [
+                'LIKE' => [
+                    'id' => $_id
+                ]
+            ];
+            $this->setWhereParameter($parameter);
+            $this->getOneData();
+        }
     }
 
     /**
@@ -100,6 +109,12 @@ class Blog extends CoreSql {
     public function setDatecreate($datecreate)
     {
         $this->datecreate = $datecreate;
+    }
+
+    public function getDatecreatefeed()
+    {
+        $date = new DateTime($this->datecreate);
+        return $date->format("D, d M Y H:i:s O");
     }
 
     /**
