@@ -8,12 +8,12 @@
                             <section class="container-message">
                                 <section class="message">
                                     <i class="material-icons">
-                                        sentiment_very_dissatisfied
+                                        remove_circle
                                     </i>
-                                    <h2>404</h2>
+                                    <h2>403</h2>
                                     <p>That's an error.</p>
                                     <p>The requested URL <b><?php echo $_SERVER['REQUEST_URI']; ?></b> was not found.</p>
-                                    <p><a href="<?php echo DIRNAME ?>">Click here to be redirected to the homepage.</a></p>
+                                    <a href="<?php echo DIRNAME ?>">Click here to be redirected to the homepage.</a>
                                 </section>
                             </section>
                         </div>
@@ -22,4 +22,3 @@
             </div>
         </div>
     </div>
-</div>

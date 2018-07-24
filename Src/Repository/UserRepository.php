@@ -110,7 +110,8 @@ class UserRepository extends User
             "firstname",
             "lastname",
             "email",
-            "status"
+            "status",
+            "fileid"
         ];
         $parameter = [
             "LIKE" => [
@@ -169,16 +170,46 @@ class UserRepository extends User
         ];
     }
 
-    public function addUser($_post, $_idUser = null)
+    public function addUser($_post, $_idUser = null, $_file = null)
     {
-
-        $errors = Form::checkForm($this->configFormAdd(), $_post);
+        if(isset($_file)){
+            $configForm = $this->configFormEdit();
+        } else {
+            $configForm = $this->configFormAdd();
+        }
+        $errors = Form::checkForm($configForm, $_post);
         $_post = Form::secureData($_post);
 
         if (empty($errors)) {
             $tmpPostArray = $_post;
             if (isset($_idUser)) {
                 $this->setId($_idUser);
+            }
+            $file = null;
+            if(isset($_file)){
+                $errors = Form::checkFiles($_file);
+                if(empty($errors) || is_numeric($errors)){
+                    if( $errors != 1) {
+                        $File = new FileRepository();
+                        $arrayFile = $File->addFile($_file, $configForm, "Profile/Avatar", "Avatar");
+                        if(!is_numeric($arrayFile)){
+                            if(array_key_exists('CODE_ERROR', $arrayFile)){
+                                return $arrayFile;
+                            }
+                            foreach ($arrayFile as $fileId) {
+                                $file = $fileId;
+                            }
+                        }
+
+                    }
+                } else {
+                    if(!array_key_exists('EXCEPT_ERROR', $errors)){
+                        return $errors;
+                    }
+                }
+            }
+            if(isset($file)){
+                $this->setFileid($file);
             }
             $this->setFirstName($tmpPostArray['firstname']);
             $this->setLastName($tmpPostArray['lastname']);
@@ -190,12 +221,9 @@ class UserRepository extends User
             $this->save();
 
             $_SESSION['token'] = $this->getToken();
-
+            $_SESSION['email'] = $this->getEmail();
             return 1;
         } else {
-            echo '<pre>';
-            print_r($errors);
-            echo '</pre>';
             return $errors;
         }
     }
@@ -326,5 +354,22 @@ class UserRepository extends User
         ];
         $User->setWhereParameter($paramater);
         return $User->countData(['id']);
+    }
+
+    public function getAdminInfos()
+    {
+        $target = [
+            'firstname',
+            'lastname',
+            'email'
+        ];
+        $paramater = [
+            'LIKE' => [
+                'status' => 2
+            ]
+        ];
+        $this->setWhereParameter($paramater);
+        $this->getOneData($target);
+        return $this;
     }
 }

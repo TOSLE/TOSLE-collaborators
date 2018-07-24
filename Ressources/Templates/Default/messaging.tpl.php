@@ -12,7 +12,9 @@
             <section>
                 <div>
                     <div class="left-block">
-                        <p>TOSLE</p>
+                        <div class="logo-header">
+                            <img src="<?php echo DIRNAME ?>Tosle/logo/tosle-logo-new.jpg" alt="Logo Tosle">
+                        </div>
                     </div>
                     <div class="right-block">
                         <?php include "Header/right_header.tpl.php"; ?>

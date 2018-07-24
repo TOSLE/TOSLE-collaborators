@@ -15,7 +15,7 @@
                     <div class="profile-container">
                         <section class="picture">
                             <div class="profil-picture">
-                                <img src="<?php echo DIRNAME; ?>Tosle/Users/Images/475899654133.jpg">
+                                <img src="<?php echo (!empty($this->Auth->getFileid()))?$this->Auth->getAvatar()->getPath().'/'.$this->Auth->getAvatar()->getName():DIRNAME.'Tosle/Users/Images/475899654133.jpg';?>">
                             </div>
                         </section>
                         <section class="info">
@@ -50,30 +50,6 @@
         <div class="col-8">
             <div>
                 <section class="container-content-profile">
-                    <section class="lessons">
-                        <div class="title-tab">
-                            <h2>My Lesson</h2>
-                            <div class="container">
-                                <ul class="title-tab">
-                                    <li><span>Title</span></li>
-                                    <li><span>Date</span></li>
-                                    <li><span>link</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </section>
-                    <section class="homework">
-                        <h2>My Homework</h2>
-                        <div class="container">
-                            <ul class="title-tab">
-                                <li><span>Title</span></li>
-                                <li><span>Chapter Lesson</span></li>
-                                <li><span>Title Lesson</span></li>
-                                <li><span>Date</span></li>
-                            </ul>
-                        </div>
-
-                    </section>
                     <section class="comment">
                         <h2>My Last Comment</h2>
                         <div class="container">
@@ -92,11 +68,8 @@
                                 <?php endforeach; ?>
                             <?php endif; ?>
                         </div>
-
                     </section>
-
                 </section>
-
             </div>
         </div>
     </div>

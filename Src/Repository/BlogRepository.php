@@ -109,27 +109,31 @@ class BlogRepository extends Blog
      * @return array|boolean
      * Retourne tous les articles par rapport à un status
      */
-    public function getAllArticleByStatus($status = 1, $max = null, $min = 0)
+    public function getAllArticleByStatus($status = null, $max = null, $min = 0)
     {
-        if(is_numeric($status))
-        {
-            $target = [
-                "title",
-                "datecreate",
-                "id",
-                "status",
-                "type",
-                "content",
-                "url",
-                "fileid"
-            ];
-            $this->setOrderByParameter(["id" => "DESC"]);
-            if(isset($max)) {
-                $this->setLimitParameter($max, $min);
-            }
-            return $this->getData($target);
+        $target = [
+            "title",
+            "datecreate",
+            "id",
+            "status",
+            "type",
+            "content",
+            "url",
+            "fileid"
+        ];
+        $this->setOrderByParameter(["id" => "DESC"]);
+        if(isset($max)) {
+            $this->setLimitParameter($max, $min);
         }
-        return false;
+        if(isset($status)){
+            $parameter = [
+                'LIKE' => [
+                    'status' => $status
+                ]
+            ];
+            $this->setWhereParameter($parameter);
+        }
+        return $this->getData($target);
     }
 
 
@@ -145,12 +149,12 @@ class BlogRepository extends Blog
     {
         $routes = Access::getSlugsById();
         $ViewLatestBloc = new DashboardBlocModal();
-        $ViewLatestBloc->setTitle("View latest post on your blog");
+        $ViewLatestBloc->setTitle(DASHBOARD_HEADER_TABLE_NAME);
         $ViewLatestBloc->setIconHeader("modal_view_all_posts", "modal");
         $ViewLatestBloc->setTableHeader([
-            1 => "Titre",
-            2 => "Date de publication",
-            3 => "Action"
+            1 => DASHBOARD_HEADER_TABLE_TITLE,
+            2 => DASHBOARD_HEADER_TABLE_CREATED,
+            3 => DASHBOARD_HEADER_TABLE_ACTION
         ]);
         $ViewLatestBloc->setColSizeBloc($colSize);
         $ViewLatestBloc->setActionButtonStatus(0, [

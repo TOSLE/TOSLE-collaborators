@@ -132,14 +132,6 @@ class Access
             "action" => "add",
             "security" => false
         ],
-
-        "dashboard_portfolio" => [ // Dashboard blog homepage
-            "slug" => "dashboard-portfolio",
-            "controller" => "portfolio",
-            "action" => "",
-            "security" => 2
-        ],
-
         "view-newpassword" => [ // change status blog
             "slug" => "view-newpassword",
             "controller" => "user",
@@ -152,21 +144,18 @@ class Access
             "action" => "setnewpassword",
             "security" => false
         ],
-
         "view_lesson" => [ // change status blog
             "slug" => "lesson",
             "controller" => "class",
             "action" => "view",
             "security" => false
         ],
-
         "edit_profile" => [
             "slug" => "edit-profile",
             "controller" => "profile",
             "action" => "edit",
             "security" => false
         ],
-
         "subscribe_lesson" => [
             "slug" => "subscribe-lesson",
             "controller" => "class",
@@ -202,6 +191,18 @@ class Access
             "controller" => "index",
             "action" => "signalement",
             "security" => false
+        ],
+        "comment_delete" => [
+            "slug" => "delete-comment",
+            "controller" => "index",
+            "action" => "deletecom",
+            "security" => 1
+        ],
+        "legal_notice" => [
+            "slug" => "legal",
+            "controller" => "index",
+            "action" => "legal",
+            "security" => 0
         ]
     ];
 
@@ -235,11 +236,12 @@ class Access
         "chat/untrash" => 2,
         "chat/delete" => 2,
         "index/deletecom" => 1,
-
+        "user/editpassword" => 1,
     ];
 
     private $urlFixe = [
         'rss_blog' => 'Tosle/Static/xml/blogfeed.xml',
+        'rss_lesson' => 'Tosle/Static/xml/lessonfeed.xml'
     ];
 
     /**

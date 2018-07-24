@@ -8,12 +8,14 @@
                             <section class="container-message">
                                 <section class="message">
                                     <i class="material-icons">
-                                        sentiment_very_dissatisfied
+                                        remove_circle
                                     </i>
-                                    <h2>404</h2>
-                                    <p>That's an error.</p>
-                                    <p>The requested URL <b><?php echo $_SERVER['REQUEST_URI']; ?></b> was not found.</p>
-                                    <p><a href="<?php echo DIRNAME ?>">Click here to be redirected to the homepage.</a></p>
+                                    <h2>Error 403</h2>
+                                    <p>You don't have the permission to access </p>
+                                    <div class="buttondiv">
+                                        <a class="btn btn-blue-outline" href="<?php echo DIRNAME ;?>">Back  to the homepage</a>
+                                        <a class="btn btn-green-outline" href="<?php echo DIRNAME ;?>">Sign in</a>
+                                    </div>
                                 </section>
                             </section>
                         </div>
@@ -22,4 +24,3 @@
             </div>
         </div>
     </div>
-</div>

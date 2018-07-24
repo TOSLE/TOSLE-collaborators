@@ -18,7 +18,7 @@ class ChatController extends CoreController
         if(isset($this->Auth)){
             $Conversation = new ConversationRepository();
             $View = new View("messaging", "chat");
-            $View->setData("PageName", NAVBAR_MESSAGING." ".GLOBAL_HOME_TEXT);
+            $View->setData("PageName", NAVBAR_MESSAGING." ".GLOBAL_CMS_TOSLE);
             $conversationView = null;
             $errorsAdd = null;
             $page = "index";
@@ -166,7 +166,7 @@ class ChatController extends CoreController
         if(isset($this->Auth)){
             $Conversation = new ConversationRepository();
             $View = new View("messaging", "chat");
-            $View->setData("PageName", NAVBAR_MESSAGING." ".GLOBAL_HOME_TEXT);
+            $View->setData("PageName", NAVBAR_MESSAGING." ".GLOBAL_CMS_TOSLE);
             $conversationView = null;
             $errorsAdd = null;
             $page = "draft";
@@ -174,9 +174,9 @@ class ChatController extends CoreController
             $numberMessage = MessageRepository::countMessage();
             $routeChat = $this->Routes['chatdraft'];
             $configFormNew = $Conversation->configFormAdd($this->Auth);
-            $inBoxNumber = $Conversation->getNumberConversation('status', 1);
-            $draftNumber = $Conversation->getNumberConversation('status', 0);
-            $tashNumber = $Conversation->getNumberConversation('status', -1);
+            $inBoxNumber = $Conversation->getNumberConversation('status', 1, $this->Auth);
+            $draftNumber = $Conversation->getNumberConversation('status', 0, $this->Auth);
+            $tashNumber = $Conversation->getNumberConversation('status', -1, $this->Auth);
             $totalConv = $inBoxNumber + $draftNumber + $tashNumber;
 
             $conversations = $Conversation->getConversations($this->Auth, 0);
@@ -239,7 +239,7 @@ class ChatController extends CoreController
         if(isset($this->Auth)){
             $Conversation = new ConversationRepository();
             $View = new View("messaging", "chat");
-            $View->setData("PageName", NAVBAR_MESSAGING." ".GLOBAL_HOME_TEXT);
+            $View->setData("PageName", NAVBAR_MESSAGING." ".GLOBAL_CMS_TOSLE);
             $conversationView = null;
             $errorsAdd = null;
             $page = "trash";
@@ -247,9 +247,9 @@ class ChatController extends CoreController
             $numberMessage = MessageRepository::countMessage();
             $routeChat = $this->Routes['chattrash'];
             $configFormNew = $Conversation->configFormAdd($this->Auth);
-            $inBoxNumber = $Conversation->getNumberConversation('status', 1);
-            $draftNumber = $Conversation->getNumberConversation('status', 0);
-            $tashNumber = $Conversation->getNumberConversation('status', -1);
+            $inBoxNumber = $Conversation->getNumberConversation('status', 1, $this->Auth);
+            $draftNumber = $Conversation->getNumberConversation('status', 0, $this->Auth);
+            $tashNumber = $Conversation->getNumberConversation('status', -1, $this->Auth);
             $totalConv = $inBoxNumber + $draftNumber + $tashNumber;
 
             $conversations = $Conversation->getConversations($this->Auth, -1);

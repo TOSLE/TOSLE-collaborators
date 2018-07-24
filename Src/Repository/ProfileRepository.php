@@ -74,14 +74,17 @@ class ProfileRepository extends User
     }
     public function editProfile($_idProfile)
     {
-        $User = new UserRepository();
-        $User->getUserById($_idProfile);
+        $User = new UserRepository($_idProfile);
         $configForm = $User->configFormEdit();
-
+        $file = null;
+        if(!empty($User->getFileid())){
+            $file = "".$User->getAvatar()->getPath().'/'.$User->getAvatar()->getName();
+        }
         $configForm["data_content"] = [
             "firstname" => $User->getFirstName(),
             "lastname" => $User->getLastName(),
             "email" => $User->getEmail(),
+            "file_img" => $file,
         ];
         return $configForm;
     }

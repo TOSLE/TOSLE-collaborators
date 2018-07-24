@@ -69,14 +69,17 @@ class ProfileController extends CoreController
                 $configFormEditUser = $Profile->editProfile($User->getId());
 
                 if(isset($params["POST"]) && !empty($params["POST"])){
-                    $resultAdd = $User->addUser($params["POST"], $User->getId());
-                    if($resultAdd == 1){
+                    $errors = $User->addUser($params["POST"], $User->getId(), $_FILES);
+                    if($errors == 1){
                         header('Location:'.$routes['profilehome']);
                     }
                     else {
-
                     }
                 }
+                if($this->Auth->getStatus() > 1){
+                    $View->setData('controller', 'DashboardController');
+                }
+                $View->setData('configEditPassword', $User->configFormEditPassword());
                 $View->setData("config", $configFormEditUser);
                 $View->setData("errors", $errors);
             }

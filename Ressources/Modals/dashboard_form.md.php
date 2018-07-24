@@ -12,9 +12,20 @@
         </div>
     </section>
     <?php else:?>
-        <?php foreach($errors as $name => $value):?>
-            <?php echo $name. " ".$value;?>
-        <?php endforeach; ?>
+        <section class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div>
+                        <h2>Une erreur est détectée sur votre fichier</h2>
+                        <?php foreach($errors as $name => $value):?>
+                            <p> Type d'erreur : <?php echo $name;?></p>
+                            <p>Message d'erreur : <?php echo $value;?></p>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     <?php endif;?>
 <?php endif;?>
 <form method="<?php echo $config['config']['method'];?>" action="<?php echo $config['config']['action'];?>" <?php echo (isset($config['config']['form_file']) && $config['config']['form_file'])?"enctype='multipart/form-data'":"";?>>
@@ -149,7 +160,7 @@
             <?php endif;?>
         <?php endif;?>
         <div>
-            Voici les différentes options du formulaire
+            <p><?php echo FORM_BASIC_OPTIONS;?></p>
         </div>
         <?php if(isset($config["exit"])):?>
             <a href="<?php echo $config["exit"];?>" class="btn btn-red">Exit</a>
@@ -158,5 +169,6 @@
             <button type="submit" class="btn btn-orange" name="save-draft"><?php echo $config["config"]["save"];?></button>
         <?php endif;?>
         <button type="submit" class="btn btn-green" name="publish"><?php echo $config["config"]["submit"];?></button>
+
     </div>
 </form>

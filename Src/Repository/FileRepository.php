@@ -47,7 +47,6 @@ class FileRepository extends File
                     ];
             $_tmpArrayContainerByInput[$inputName] = $_tmpArrayContainer;
         }
-
         $_tmpArrayFormated = [];
         $arrayFiles = [];
         foreach($_tmpArrayContainerByInput as $inputName => $content)
@@ -61,6 +60,7 @@ class FileRepository extends File
         $arrayObject = [];
         foreach($arrayFiles as $inputName => $files){
             foreach($files as $file){
+
                 if(!is_uploaded_file($file["tmp_name"]) ){
                     return [
                         "CODE_ERROR" => 1,
