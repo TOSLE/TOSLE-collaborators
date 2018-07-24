@@ -45,7 +45,7 @@
                                     <p class="info-comment-homeblog"><?php echo $value["blog_numberComment"]; ?> <i
                                                 class="material-icons">comment</i></p>
                                     <a href="<?php echo $this->slugs["view_blog_article"] . "/" . $value["blog_url"]; ?>"
-                                       class="btn btn-tosle"><?php echo BLOG_BUTTON_READMORE; ?></a>
+                                       class="btn btn-tosle"><?php echo READ_MORE; ?></a>
                                     <p class="datecreate"><?php echo $value["blog_datecreate"]; ?></p>
                                 </div>
                             </div>
