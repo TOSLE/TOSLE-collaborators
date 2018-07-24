@@ -12,8 +12,8 @@
                 <div class="row">
                     <div class="col-12">
                         <div>
-                            <h2>Bienvenue sur l'installation de votre CMS TOSLE</h2>
-                            <p>Procédature d'installation, étape <?php echo (isset($stepInstall))?$stepInstall:"1";?> / 2</p>
+                            <h2><?php echo INSTALL_FORM_TITLE;?></h2>
+                            <p><?php echo INSTALL_FORM_STEP;?> <?php echo (isset($stepInstall))?$stepInstall:"1";?> / 2</p>
                         </div>
                     </div>
                 </div>
@@ -23,10 +23,10 @@
                 <div class="row">
                     <div class="col-12">
                         <div>
-                            <h2>Warning !</h2>
+                            <h2><?php echo INSTALL_FORM_WARNING;?></h2>
                             <?php foreach ($errorsParameter as $type => $content):?>
-                                <h3 class="error-type">Type : <?php echo $type;?></h3>
-                                <p class="error-message">Signification : <?php echo $content;?></p>
+                                <h3 class="error-type"><?php echo INSTALL_FORM_WARNING_TYPE;?><?php echo $type;?></h3>
+                                <p class="error-message"><?php echo INSTALL_FORM_WARNING_TYPE;?><?php echo $content;?></p>
                             <?php endforeach;?>
                         </div>
                     </div>

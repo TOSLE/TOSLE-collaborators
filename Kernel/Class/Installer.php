@@ -25,13 +25,10 @@ class Installer
         $message = null;
         if(dirname($_SERVER["SCRIPT_NAME"]) != '/'){
             if(DEV_MODE){
-                $message['Repertoire d\'installation'] = 'Vous êtes sur le point d\'utiliser le CMS TOSLE en mode développeur. Si ce n\'est
-                pas déjà fait, faites attention à bien générer le fichier .htaccess avec le bon RewriteBase.';
-                $message['Rewrite Base'] = 'TOSLE a détecté : "'.dirname($_SERVER["SCRIPT_NAME"]).'". Le RewriteBase de 
-                votre ".htaccess" doit posséder cette valeur pour que tout fonctionne correctement.';
+                $message[INSTALL_FORM_INSTALLER_REPERTORYINSTALL] = INSTALL_FORM_INSTALLER_REPERTORYINSTALL_MESSAGE;
+                $message[INSTALL_FORM_INSTALLER_REWRITEBASE] = INSTALL_FORM_INSTALLER_REWRITEBASE_MESSAGE;
             } else {
-                $message['Repertoire d\'installation'] = 'Attention, le CMS TOSLE n\'est pas adapté à une utilisation sur un environnement
-                 autre que LINUX. L\'Installeur a détecté un élément qui pourrait entraver le fonctionnement de votre site.';
+                $message[INSTALL_FORM_INSTALLER_REPERTORYINSTALL_BIS] = INSTALL_FORM_INSTALLER_REPERTORYINSTALL_BIS_MESSAGE;
             }
         }
         return $message;
@@ -125,7 +122,7 @@ class Installer
         try {
             $bdd = new PDO('mysql:host='.DBHOST.';charset=UTF8',DBUSER,DBPWD);
         } catch(PDOException $e) {
-            return ['SQL' => 'Failed to access at the database'];;
+            return [INSTALL_FORM_FAILED_CONNECT => INSTALL_FORM_FAILED_CONNECT_MESSAGE];;
         }
 
         $bdd->query(file_get_contents($sqlFilePath));
@@ -157,7 +154,7 @@ class Installer
             "config"=> [
                 "method"=>"post",
                 "action"=>"",
-                "submit"=>"Next step",
+                "submit"=>FORM_INSTALL_STEP,
                 "secure" => [
                     "status" => false,
                     "duration" => 8
@@ -166,58 +163,58 @@ class Installer
             "input"=> [
                 "dbhost"=>[
                     "type"=>"text",
-                    "placeholder"=>"Example : localhost",
+                    "placeholder"=>FORM_INSTALL_PLACEHOLDER_DBHOST,
                     "required"=>true,
                     "maxString"=>100,
-                    "description"=>"Laissez vide pour laisser la valeur par défaut",
-                    "label" => "Adresse de la base de données*"
+                    "description"=>FORM_DESCRIPTION_REQUIRED,
+                    "label" => FORM_INSTALL_LABEL_DBHOST
                 ],
                 "dbuser"=>[
                     "type"=>"text",
-                    "placeholder"=>"Example : root",
+                    "placeholder"=>FORM_INSTALL_PLACEHOLDER_DBUSER,
                     "required"=>true,
                     "maxString"=>30,
-                    "description"=>"We do not collect this information",
-                    "label" => "Nom d'utilisateur de la base de données"
+                    "description"=>FORM_DESCRIPTION_REQUIRED,
+                    "label" => FORM_INSTALL_LABEL_DBUSER
                 ],
                 "dbpwd"=>[
                     "type"=>"password_install",
-                    "placeholder"=>"Example : password",
+                    "placeholder"=>FORM_INSTALL_PLACEHOLDER_DBPASSWORD,
                     "required"=>false,
                     "maxString"=>255,
-                    "description"=>"We do not collect this information",
-                    "label" => "Mot de passe de l'utilisateur"
+                    "description"=>FORM_DESCRIPTION_REQUIRED,
+                    "label" => FORM_INSTALL_LABEL_DBPASSWORD
                 ],
                 "dbname"=>[
                     "type"=>"text",
-                    "placeholder"=>"Example : my_db - This is an optional input",
+                    "placeholder"=>FORM_INSTALL_PLACEHOLDER_DNAME,
                     "required"=>false,
                     "maxString"=>100,
-                    "description"=>"Laissez vide si vous n'avez touché aucun fichier '.sql'",
-                    "label" => "Nom de la table à utiliser"
+                    "description"=>FORM_DESCRIPTION_NOTREQUIRED,
+                    "label" => FORM_INSTALL_LABEL_DBNAME
                 ],
                 "dbport"=>[
                     "type"=>"number",
-                    "placeholder"=>"Example : 3306 - This is an optional input",
+                    "placeholder"=>FORM_INSTALL_PLACEHOLDER_PORT,
                     "required"=>false,
-                    "description"=>"Laissez vide pour laisser la valeur par défaut",
-                    "label" => "Port de la base de données"
+                    "description"=>FORM_DESCRIPTION_NOTREQUIRED,
+                    "label" => FORM_INSTALL_LABEL_PORT
                 ],
                 "guser"=>[
                     "type"=>"text",
-                    "placeholder"=>"Email, necessary for our mailing system",
+                    "placeholder"=>FORM_INSTALL_PLACEHOLDER_GUSER,
                     "required"=>true,
                     "maxString"=>255,
-                    "description"=>"Il s'agit de l'email que le serveur va utiliser pour communiquer",
-                    "label" => "Email du système de messagerie"
+                    "description"=>FORM_DESCRIPTION_REQUIRED,
+                    "label" => FORM_INSTALL_LABEL_GUSER
                 ],
                 "gpwd"=>[
                     "type"=>"password_install",
-                    "placeholder"=>"Email password*",
+                    "placeholder"=>FORM_INSTALL_PLACEHOLDER_GPWD,
                     "required"=>true,
                     "maxString"=>255,
-                    "description"=>"Nous ne collectons pas ces données, soyez-en sûr",
-                    "label" => "Mot de passe de l'email"
+                    "description"=>FORM_DESCRIPTION_REQUIRED,
+                    "label" => FORM_INSTALL_LABEL_GPWD
                 ],
             ],
         ];
@@ -233,7 +230,7 @@ class Installer
             "config"=> [
                 "method"=>"post",
                 "action"=>"",
-                "submit"=>"Valider la configuration",
+                "submit"=>FORM_INSTALL_STEP_2,
                 "secure" => [
                     "status" => false,
                     "duration" => 8
@@ -242,56 +239,59 @@ class Installer
             "input"=> [
                 "website_name"=>[
                     "type"=>"text",
-                    "placeholder"=>"Example : CMS TOSLE",
+                    "placeholder"=>FORM_INSTALL_PLACEHOLDER_WEBSITE,
                     "required"=>true,
                     "maxString"=>15,
-                    "description"=>"Maximum de 15 caractères",
-                    "label" => "Nom de votre site internet*"
+                    "description"=>FORM_DESCRIPTION_REQUIRED,
+                    "label" => FORM_INSTALL_LABEL_WEBSITE
                 ],
                 "lastname"=>[
                     "type"=>"text",
-                    "placeholder"=>"Your lastname",
+                    "placeholder"=>FORM_INSTALL_PLACEHOLDER_LASTNAME,
                     "required"=>true,
                     "maxString"=>15,
-                    "label" => "Votre nom*"
+                    "description"=>FORM_DESCRIPTION_REQUIRED,
+                    "label" => FORM_INSTALL_LABEL_LASTNAME
                 ],
                 "firstname"=>[
                     "type"=>"text",
-                    "placeholder"=>"Your firstname",
+                    "placeholder"=>FORM_INSTALL_PLACEHOLDER_FIRSTNAME,
                     "required"=>true,
                     "maxString"=>15,
-                    "label" => "Votre prénom*"
+                    "description"=>FORM_DESCRIPTION_REQUIRED,
+                    "label" => FORM_INSTALL_LABEL_FIRSTNAME
                 ],
                 "email"=>[
                     "type"=>"email",
-                    "placeholder"=>"Your email : contact@domain.com",
+                    "placeholder"=>FORM_INSTALL_PLACEHOLDER_EMAIL,
                     "required"=>true,
                     "maxString"=>15,
-                    "description"=>"Nous ne stockons pas vos données",
-                    "label" => "Votre email*"
+                    "description"=>FORM_DESCRIPTION_REQUIRED,
+                    "label" => FORM_INSTALL_LABEL_EMAIL
                 ],
                 "emailConfirm"=>[
                     "type"=>"email",
-                    "placeholder"=>"Confirm email",
+                    "placeholder"=>FORM_INSTALL_PLACEHOLDER_EMAILCONFIRM,
                     "required"=>true,
                     "confirm"=>"email",
-                    "label" => "Confirmez votre email*"
+                    "description"=>FORM_DESCRIPTION_REQUIRED,
+                    "label" => FORM_INSTALL_LABEL_EMAILCONFIRM
                 ],
                 "pwd"=>[
                     "type"=>"password",
-                    "placeholder"=>"Your password",
+                    "placeholder"=>FORM_INSTALL_PLACEHOLDER_PASSWORD,
                     "required"=>true,
                     "maxString"=>15,
-                    "description"=>"Mot de passe incorrect (doit contenir : Maj, Min, Chiffre, au minimum 6 caractères)",
-                    "label" => "Mot de passe*"
+                    "description"=>FORM_DESCRIPTION_REQUIRED,
+                    "label" => FORM_INSTALL_LABEL_PASSWORD
                 ],
                 "pwdConfirm"=>[
                     "type"=>"password",
-                    "placeholder"=>"Confirm password",
+                    "placeholder"=>FORM_INSTALL_PLACEHOLDER_PASSWORDCONFIRM,
                     "required"=>true,
                     "confirm"=>"pwd",
-                    "label" => "Confirmez votre mot de passe*",
-                    "description"=>"Rappel : Maj, Min, Chiffre, au minimum 6 caractères",
+                    "label" => FORM_INSTALL_LABEL_PASSWORDCONFIRM,
+                    "description"=>FORM_DESCRIPTION_REQUIRED
                 ],
             ],
         ];

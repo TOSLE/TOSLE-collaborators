@@ -160,7 +160,7 @@
             <?php endif;?>
         <?php endif;?>
         <div>
-            Voici les différentes options du formulaire
+            <p><?php echo FORM_BASIC_OPTIONS;?></p>
         </div>
         <?php if(isset($config["exit"])):?>
             <a href="<?php echo $config["exit"];?>" class="btn btn-red">Exit</a>
@@ -169,5 +169,6 @@
             <button type="submit" class="btn btn-orange" name="save-draft"><?php echo $config["config"]["save"];?></button>
         <?php endif;?>
         <button type="submit" class="btn btn-green" name="publish"><?php echo $config["config"]["submit"];?></button>
+
     </div>
 </form>

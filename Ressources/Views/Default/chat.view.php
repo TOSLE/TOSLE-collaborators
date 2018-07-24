@@ -1,12 +1,12 @@
 <section id="left-column" class="left-column">
     <div class="content-box-left">
-        <button id="close-burgermenu" class="btn-tosle btn-close-window btn-dark"><i class="material-icons">&#xE5CD;</i><p><?php echo LEFT_COLUMN_MESSAGING_CLOSEMENU;?></p></button>
-        <a href="#" class="btn-tosle new-message target-modal" data-type="open-modal" data-target="newConversation"><i class="material-icons">&#xE158;</i> <p><?php echo LEFT_COLUMN_MESSAGING_NEWMESSAGE;?></p></a>
+        <button id="close-burgermenu" class="btn-tosle btn-close-window btn-dark"><i class="material-icons">&#xE5CD;</i><p><?php echo MESSAGING_CLOSE_MENU;?></p></button>
+        <a href="#" class="btn-tosle new-message target-modal" data-type="open-modal" data-target="newConversation"><i class="material-icons">&#xE158;</i> <p><?php echo MESSAGING_NEW_MESSAGE;?></p></a>
         <ul>
-            <li class="<?php echo (isset($page) && $page == "index")?'active':'';?>"><a href="<?php echo $this->slugs['chathome'];?>"><i class="material-icons">&#xE0CB;</i><p><?php echo LEFT_COLUMN_MESSAGING_MENU_INBOX;?></p><span class="notif-active"><?php echo (isset($inBoxNumber))?$inBoxNumber:'';?></span></a></li>
-            <li class="<?php echo (isset($page) && $page == "draft")?'active':'';?>"><a href="<?php echo $this->slugs['chatdraft'];?>"><i class="material-icons">&#xE254;</i><p><?php echo LEFT_COLUMN_MESSAGING_MENU_DRAFTS;?></p><span class="notif-active"><?php echo (isset($draftNumber))?$draftNumber:'';?></span></a></li>
+            <li class="<?php echo (isset($page) && $page == "index")?'active':'';?>"><a href="<?php echo $this->slugs['chathome'];?>"><i class="material-icons">&#xE0CB;</i><p><?php echo MESSAGING_INBOX;?></p><span class="notif-active"><?php echo (isset($inBoxNumber))?$inBoxNumber:'';?></span></a></li>
+            <li class="<?php echo (isset($page) && $page == "draft")?'active':'';?>"><a href="<?php echo $this->slugs['chatdraft'];?>"><i class="material-icons">&#xE254;</i><p><?php echo MESSAGING_DRAFT;?></p><span class="notif-active"><?php echo (isset($draftNumber))?$draftNumber:'';?></span></a></li>
             <?php if($this->Auth->getStatus() > 1):?>
-            <li class="<?php echo (isset($page) && $page == "trash")?'active':'';?>"><a href="<?php echo $this->slugs['chattrash'];?>"><i class="material-icons">delete</i><p>Trash</p><span class="notif-active"><?php echo (isset($tashNumber))?$tashNumber:'';?></span></a></li>
+            <li class="<?php echo (isset($page) && $page == "trash")?'active':'';?>"><a href="<?php echo $this->slugs['chattrash'];?>"><i class="material-icons">delete</i><p><?php echo MESSAGING_TRASH;?></p><span class="notif-active"><?php echo (isset($tashNumber))?$tashNumber:'';?></span></a></li>
             <?php endif;?>
         </ul>
     </div>
@@ -18,21 +18,21 @@
         <div class="profil-stats">
             <div class="conversation">
                 <p class="number"><?php echo (isset($totalConv))?$totalConv:'';?></p>
-                <p class="description"><?php echo LEFT_COLUMN_MESSAGING_PROFILINFOS_NUMBERCHAT;?></p>
+                <p class="description"><?php echo MESSAGING_STATS_CONV;?></p>
             </div>
             <div class="number-message">
                 <p class="number"><?php echo $numberMessage;?></p>
-                <p class="description"><?php echo LEFT_COLUMN_MESSAGING_PROFILINFOS_NUMBERMESSAGE;?></p>
+                <p class="description"><?php echo MESSAGING_STATS_MESSAGE;?></p>
             </div>
             <div class="number-user">
                 <p class="number"><?php echo $numberStudent;?></p>
-                <p class="description"><?php echo LEFT_COLUMN_MESSAGING_PROFILINFOS_NUMBERSTUDENT;?></p>
+                <p class="description"><?php echo MESSAGING_STATS_STUDENT;?></p>
             </div>
         </div>
     </div>
     <div class="footer-infos">
         <div class="more-infos">
-            <a href="<?php echo $this->slugs["edit_profile"]; ?>"><?php echo GLOBAL_FOOTER_LEGAL;?></a> - <a href="#"><?php echo GLOBAL_FOOTER_PRIVACY;?></a>
+            <a href="<?php echo $this->slugs["legal_notice"]; ?>"><?php echo MESSAGING_FOOTER_LEGAL;?></a> - <a href="#"><?php echo MESSAGING_FOOTER_PRIVACY;?></a>
         </div>
         <div class="global-infos">
             <p>TOSLE <i class="material-icons">&#xE90C;</i> 2018</p>
@@ -41,7 +41,7 @@
 </section>
 <section class="middle-column">
     <div class="content-actually-filter">
-        <p><i class="material-icons">&#xE152;</i> <?php echo MIDDLE_COLUMN_MESSAGING_HEADER_FILTER;?> <strong>Newest</strong></p>
+        <p><i class="material-icons">&#xE152;</i> <?php echo MESSAGING_FILTER_NEWEST;?></p>
     </div>
     <div class="content-message">
         <?php if(isset($conversations)):?>
@@ -112,13 +112,13 @@
                     <form action="" method="post">
                         <div class="content-input">
                             <?php if($page == 'draft'):?>
-                            <textarea name="message" placeholder="<?php echo RIGHT_COLUMN_MESSAGING_NEWMESSAGE_PLACEHOLDER;?>..."><?php echo $conversationView->getMessages()[0]->getContent();?></textarea>
+                            <textarea name="message" placeholder="<?php echo MESSAGING_PLACEHOLDER;?>..."><?php echo $conversationView->getMessages()[0]->getContent();?></textarea>
                             <?php else:?>
-                                <textarea name="message" placeholder="<?php echo RIGHT_COLUMN_MESSAGING_NEWMESSAGE_PLACEHOLDER;?>..."></textarea>
+                                <textarea name="message" placeholder="<?php echo MESSAGING_PLACEHOLDER;?>..."></textarea>
                             <?php endif;?>
                         </div>
                         <div class="content-button">
-                            <input type="submit" class="btn btn-dark" name="submitMessage" value="<?php echo RIGHT_COLUMN_MESSAGING_NEWMESSAGE_BUTTON;?>">
+                            <input type="submit" class="btn btn-dark" name="submitMessage" value="<?php echo MESSAGING_SEND;?>">
                         </div>
                     </form>
                 <?php endif;?>

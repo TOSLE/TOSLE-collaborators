@@ -143,7 +143,7 @@
           flex-direction: column;
           margin-left: 10px;
           .name-user {
-            color: #1A5CCB;
+            color: $colorGlobalToslePrimary;
             font-size: 16px;
             font-weight: 600;
           }
@@ -167,7 +167,7 @@
           margin-left: auto;
           .material-icons {
             cursor: pointer;
-            color: #1A5CCB;
+            color: $colorGlobalToslePrimary;
           }
         }
       }

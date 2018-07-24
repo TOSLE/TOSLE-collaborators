@@ -12,7 +12,7 @@
       border-radius: 50%;
       width: 200px;
       height: 200px;
-      border: solid 1.5px #1A5CCB;
+      border: solid 1.5px $colorGlobalToslePrimary;
       display: flex;
       overflow: hidden;
       margin-top: 30px;
@@ -47,7 +47,7 @@
     }
     .name {
       span {
-        color: #1A5CCB !important;
+        color: $colorGlobalToslePrimary !important;
         font-size: 24px !important;
         font-weight: 600 !important;
       }
@@ -68,7 +68,7 @@
     margin-bottom: 40px;
     h2 {
       margin: 10px 0 10px 20px;
-      color: #1A5CCB;
+      color: $colorGlobalToslePrimary;
     }
   }
   .comment {

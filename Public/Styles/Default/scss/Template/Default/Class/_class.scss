@@ -152,7 +152,7 @@ Override buttons OSPAF
 
 .bloc-login-container h2, .bloc-signup-container h2 {
   text-align: center;
-  color: #1A5CCB;
+  color: $colorGlobalToslePrimary;
 }
 .bloc-login-container p, .bloc-signup-container p {
   text-align: center;
@@ -273,5 +273,26 @@ input {
   }
   .content-chapter {
     margin-top: 25px;
+  }
+}
+
+.logo-header {
+  img {
+    width: 150px;
+    height: 53px;
+    margin-top: 3px;
+  }
+}
+.container-message {
+  .mention-legal {
+    margin-left: 40px;
+    .title {
+      padding-bottom: 20px;
+      color: $colorGlobalToslePrimary;
+    }
+    .paragraph {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
   }
 }
