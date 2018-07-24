@@ -14,6 +14,9 @@
     define('NAVBAR_MESSAGING', 'Messaging');
     define('NAVBAR_PROFILE', 'Profile');
     define('NAVBAR_DASHBOARD', 'Dashboard');
+    define('NAVBAR_CHAPTER', 'Chapter');
+    define('NAVBAR_STATS', 'Stats');
+    define('NAVBAR_STUDENT', 'Student');
 
     define('HEADER_MENU_PROFILE', 'View profile');
     define('HEADER_MENU_DASHBOARD', 'Dashboard');
