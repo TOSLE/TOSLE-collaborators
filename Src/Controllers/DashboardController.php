@@ -165,21 +165,34 @@ class DashboardController extends CoreController
          * Stat consultation des cours
          */
         $classStatYear = $Stats->getNewStatsClass('year');
-        $labelStatClassYear = '["'.implode('" ,"', $classStatYear['lessons']).'"]';
-        $statClassYear = '['.implode(' ,', $classStatYear['counts']).']';
+        $labelStatClassYear = '';
+        $statClassYear = '';
+        if(isset($classStatYear) && !empty($classStatYear)){
+            $labelStatClassYear = '["'.implode('" ,"', $classStatYear['lessons']).'"]';
+            $statClassYear = '['.implode(' ,', $classStatYear['counts']).']';
+        }
         $View->setData("labelStatClassYear", $labelStatClassYear);
         $View->setData("statClassYear", $statClassYear);
 
 
         $classStatMonth = $Stats->getNewStatsClass('month');
-        $labelStatClassMonth = '["'.implode('" ,"', $classStatMonth['lessons']).'"]';
-        $statClassMonth = '['.implode(' ,', $classStatMonth['counts']).']';
+        $labelStatClassMonth = '';
+        $statClassMonth = '';
+        if(isset($classStatMonth) && !empty($classStatMonth)){
+            $labelStatClassMonth = '["'.implode('" ,"', $classStatMonth['lessons']).'"]';
+            $statClassMonth = '['.implode(' ,', $classStatMonth['counts']).']';
+        }
         $View->setData("labelStatClassMonth", $labelStatClassMonth);
         $View->setData("statClassMonth", $statClassMonth);
 
+
         $classStatDay = $Stats->getNewStatsClass('day');
-        $labelStatClassDay = '["'.implode('" ,"', $classStatDay['lessons']).'"]';
-        $statClassDay = '['.implode(' ,', $classStatDay['counts']).']';
+        $labelStatClassDay = '';
+        $statClassDay = '';
+        if(isset($classStatDay) && !empty($classStatDay)){
+            $labelStatClassDay = '["'.implode('" ,"', $classStatDay['lessons']).'"]';
+            $statClassDay = '['.implode(' ,', $classStatDay['counts']).']';
+        }
         $View->setData("labelStatClassDay", $labelStatClassDay);
         $View->setData("statClassDay", $statClassDay);
 
@@ -188,20 +201,32 @@ class DashboardController extends CoreController
          */
 
         $articleStatYear = $Stats->getNewStatsArticle('year');
-        $labelStatBlogYear = '["'.implode('" ,"', $articleStatYear['articles']).'"]';
-        $statBlogYear = '['.implode(' ,', $articleStatYear['counts']).']';
+        $labelStatBlogYear = '';
+        $statBlogYear = '';
+        if(isset($articleStatYear) && !empty($articleStatYear)){
+            $labelStatBlogYear = '["'.implode('" ,"', $articleStatYear['articles']).'"]';
+            $statBlogYear = '['.implode(' ,', $articleStatYear['counts']).']';
+        }
         $View->setData("labelStatBlogYear", $labelStatBlogYear);
         $View->setData("statBlogYear", $statBlogYear);
 
         $articleStatMonth = $Stats->getNewStatsArticle('month');
-        $labelStatBlogMonth = '["'.implode('" ,"', $articleStatMonth['articles']).'"]';
-        $statBlogMonth = '['.implode(' ,', $articleStatMonth['counts']).']';
+        $labelStatBlogMonth = '';
+        $statBlogMonth = '';
+        if(isset($articleStatMonth) && !empty($articleStatMonth)){
+            $labelStatBlogMonth = '["'.implode('" ,"', $articleStatMonth['articles']).'"]';
+            $statBlogMonth = '['.implode(' ,', $articleStatMonth['counts']).']';
+        }
         $View->setData("labelStatBlogMonth", $labelStatBlogMonth);
         $View->setData("statBlogMonth", $statBlogMonth);
 
         $articleStatDay = $Stats->getNewStatsArticle('day');
-        $labelStatBlogDay = '["'.implode('" ,"', $articleStatDay['articles']).'"]';
-        $statBlogDay = '['.implode(' ,', $articleStatDay['counts']).']';
+        $labelStatBlogDay = '';
+        $statBlogDay = '';
+        if(isset($articleStatDay) && !empty($articleStatDay)){
+            $labelStatBlogDay = '["'.implode('" ,"', $articleStatDay['articles']).'"]';
+            $statBlogDay = '['.implode(' ,', $articleStatDay['counts']).']';
+        }
         $View->setData("labelStatBlogDay", $labelStatBlogDay);
         $View->setData("statBlogDay", $statBlogDay);
         /**
