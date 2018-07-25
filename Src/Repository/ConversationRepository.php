@@ -176,7 +176,7 @@ class ConversationRepository extends Conversation
                 $_identifier => $_value
             ]
         ];
-        if($_identifier == 'status' && $_identifier == 0){
+        if($_identifier == 'status' && $_value == 0){
             $parameter = [
                 'LIKE' => [
                     $_identifier => $_value,
