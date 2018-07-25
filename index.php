@@ -77,7 +77,7 @@
                         $userStatus = $Auth->{'status'};
                     }
                 } else {
-                    echo "<p>Connection failed</p>";
+                    //echo "<p>Connection failed</p>";
                 }
             }
             if ($userStatus < $accessParams["security"]) {

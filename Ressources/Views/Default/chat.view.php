@@ -32,7 +32,7 @@
     </div>
     <div class="footer-infos">
         <div class="more-infos">
-            <a href="<?php echo $this->slugs["legal_notice"]; ?>"><?php echo MESSAGING_FOOTER_LEGAL;?></a> - <a href="#"><?php echo MESSAGING_FOOTER_PRIVACY;?></a>
+            <a href="<?php echo $this->slugs["legal_notice"]; ?>"><?php echo MESSAGING_FOOTER_LEGAL;?></a>
         </div>
         <div class="global-infos">
             <p>TOSLE <i class="material-icons">&#xE90C;</i> 2018</p>

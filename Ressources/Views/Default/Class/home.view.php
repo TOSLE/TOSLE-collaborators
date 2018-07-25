@@ -18,7 +18,7 @@
                         </i>
                         <p>Modifiy display</p>
                     </a>
-
+                    <!--
                     <?php if(isset($newsletter)):?>
                         <?php if($newsletter):?>
                             <a href="<?php echo $this->slugs['subscribe_lesson'];?>" class="lesson-link-icon newsletter-off">
@@ -36,6 +36,7 @@
                             </a>
                         <?php endif;?>
                     <?php endif;?>
+                    -->
                 </div>
             </div>
         </div>
