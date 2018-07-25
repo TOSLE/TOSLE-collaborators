@@ -352,7 +352,7 @@ class UserController extends CoreController
                 $errors = 'Errors';
                 header('Location:'.$this->Routes['edit_profile'].'?errors=4');
             }
-            if(!password_verify($_post['pwd'],$this->Auth->getPassword())){
+            if(!password_verify($_post['pwdConfirm'],$this->Auth->getPassword())){
                 $errors = 'Errors';
                 header('Location:'.$this->Routes['edit_profile'].'?errors=5');
             }
