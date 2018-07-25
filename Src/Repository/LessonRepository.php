@@ -471,7 +471,7 @@ class LessonRepository extends Lesson
                     $arrayUnset[] = $key;
                 }
             } else {
-                if($lesson->getType() == 2 && is_array($arrayGroups) && !isset($userGroups)){
+                if($lesson->getType() == 2 && is_array($arrayGroups) && !isset($userGroups) && $Auth->getStatus() < 2){
                     $arrayUnset[] = $key;
                 }
             }
