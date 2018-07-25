@@ -24,10 +24,10 @@
         <div class="col-6">
             <div class="bg-white">
                 <section class="login-bloc">
-                    <h2>Bienvenue sur le CMS Tosle</h2>
+                    <h2>Welcome to the CMS Tosle</h2>
                     <article class="register-login">
                         <p>
-                            Veuillez entrer votre adresse e-mail.
+                            Enter your e-mail address.
                         </p>
                     </article>
                     <section>
@@ -44,9 +44,10 @@
                 <section class="login-bloc">
                     <article class="register-info">
                         <p>
-                            <a href="<?php echo DIRNAME;?>" class="btn btn-blue">Revenir à l'accueil</a>
-                            <a href="<?php echo $this->slugs['signup'];?>" class="btn btn-tosle-outline">Cliquez-ici pour s'inscrire</a>
-                            <a href="<?php echo $this->slugs['view-newpassword'];?>" >Mot de passe oublié ?</a>
+                            <a href="<?php echo DIRNAME;?>" class="btn btn-blue">Back to the home</a>
+                            <a href="<?php echo $this->slugs['signup'];?>" class="btn btn-tosle-outline">Click here to register</a>
+                            <a href="<?php echo $this->slugs['view-newpassword'];?>" >
+Forget password ?</a>
                         </p>
                     </article>
                 </section>

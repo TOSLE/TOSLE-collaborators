@@ -228,9 +228,9 @@ class GroupRepository extends Group
         $routes = Access::getSlugsById();
         if(!empty($this->id)){
             $users = $this->getUsersGroup($this->id);
-            $Table = new DashboardTable('group-users', 'Liste des utilisateurs du groupe : '.$this->name, 12);
-            $Table->setTableHeader("text", "Nom");
-            $Table->setTableHeader("text", "Prénom");
+            $Table = new DashboardTable('group-users', 'List of users of the group: '.$this->name, 12);
+            $Table->setTableHeader("text", "Name");
+            $Table->setTableHeader("text", "Firstname");
             $Table->setTableHeader("text", "Email");
             $Table->setTableHeader("date", "Action");
 
@@ -240,10 +240,10 @@ class GroupRepository extends Group
                     $Table->setColumnBody('text', $user->getFirstname());
                     $Table->setColumnBody('text', $user->getEmail());
 
-                    $Table->setValueButton('Supprimer du groupe');
+                    $Table->setValueButton('Delete from the groupe');
                     $Table->setActionButton($routes['group/unset'].'/'.$this->id.'/'.$user->getId());
                     $Table->setColorButton("red");
-                    $Table->setConfirmButton('Voulez-vous vraiment supprimer cet utilisateur : '.$user->getLastname().' '.$user->getFirstname().' du groupe ?');
+                    $Table->setConfirmButton('Do you want really delete this user ? : '.$user->getLastname().' '.$user->getFirstname().' from the group ?');
                     $Table->saveButton();
                     $Table->saveTrBody();
                 }
@@ -251,7 +251,7 @@ class GroupRepository extends Group
 
             return $Table->getArrayPHP();
         }
-        return ['NO_GROUP' => 'Aucun groupe renseigné'];
+        return ['NO_GROUP' => 'Any groupe informed'];
     }
 
     /**
