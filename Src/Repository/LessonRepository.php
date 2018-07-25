@@ -458,7 +458,7 @@ class LessonRepository extends Lesson
             $Chapter = new ChapterRepository();
             $Groups = new LessonGroup();
             $arrayGroups = $Groups->getGroupsLesson($lesson->getId());
-            if(is_array($arrayGroups) && isset($userGroups) && $lesson->getType() == 2){
+            if(is_array($arrayGroups) && isset($userGroups) && $lesson->getType() == 2 && $Auth->getStatus() < 2){
                 $courseGroupe = null;
                 foreach($arrayGroups as $idGroup => $group){
                     foreach($userGroups as $id => $name){
