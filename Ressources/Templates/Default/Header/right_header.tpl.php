@@ -43,7 +43,6 @@
         </div>
     </div>
 <?php else: ?>
-    <i class="material-icons">&#xE003;</i>
     <div id="profil-icon" class="profil-icon">
         <div class="avatar-profil">
             <img src="<?php echo (!empty($this->Auth->getFileid()))?$this->Auth->getAvatar()->getPath().'/'.$this->Auth->getAvatar()->getName():DIRNAME.'Tosle/Users/Images/475899654133.jpg';?>">
