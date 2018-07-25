@@ -23,9 +23,9 @@
                 </span>
                 </div>
                 <div class="comment-content-option">
-                    <a href="<?php echo $this->slugs['comment_signalement'].'/'.$comment->getId();?>">Signaler</a>
+                    <a href="<?php echo $this->slugs['comment_signalement'].'/'.$comment->getId();?>">Signale</a>
                     <?php if(isset($this->Auth) && ($this->Auth->getStatus() > 1 ||($this->Auth->getId() == $comment->getUser()->getId()))):?>
-                        - <a href="<?php echo $this->slugs['comment_delete'].'/'.$comment->getId();?>">Supprimer</a>
+                        - <a href="<?php echo $this->slugs['comment_delete'].'/'.$comment->getId();?>">Delete</a>
                     <?php endif;?>
                 </div>
             </div>

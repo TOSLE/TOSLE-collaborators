@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-6">
                 <div class="lesson-description">
-                    <h3>Descriptif du cours</h3>
+                    <h3>Lesson Description</h3>
                     <p>
                         <?php echo $lesson->getDescription();?>
                     </p>
@@ -30,7 +30,7 @@
             </div>
             <div class="col-6">
                 <div class="lesson-chapters">
-                    <h3>Liste des chapitres</h3>
+                    <h3>Chapters List</h3>
                     <ul>
                         <?php foreach($lesson->getChapter() as $chapter):?>
                             <a href="<?php echo $this->slugs['view_lesson'].'/'.$lesson->getUrl().'/'.$chapter->getUrl();?>">
@@ -77,11 +77,11 @@
                 <div class="col-3"></div>
                 <div class="col-6">
                     <div>
-                        <h3>Commentaires</h3>
+                        <h3>Commentary</h3>
                         <?php if(isset($comments)):?>
                             <?php $this->addModal("comment", $comments); ?>
                         <?php else:?>
-                            <p>Aucun commentaire pour le moment</p>
+                            <p>Any commentary</p>
                         <?php endif;?>
                         <?php if(isset($this->Auth)):?>
                             <?php $this->addModal("form", $formAddComment, $errors); ?>

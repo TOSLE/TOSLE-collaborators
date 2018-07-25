@@ -10,7 +10,7 @@
     </div>
     <div id="footer-right-col">
         <div id="link">
-            <a href="<?php echo $this->slugs["legal_notice"]; ?>">Mentions légales</a> <span>-</span> <a href="#">Confidentialités</a>
+            <a href="<?php echo $this->slugs["legal_notice"]; ?>">Legal Mentions</a> <span>-</span> <a href="#">Confidentiality</a>
         </div>
     </div>
 </section>
