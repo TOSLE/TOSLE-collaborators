@@ -82,7 +82,7 @@ class Form
         $dataReturn = [];
         foreach($arrayData as $name => $content){
             if(!stristr($name, "ckeditor") && !stristr($name, "select") && !stristr($name, "image")){
-                $dataReturn[$name] = htmlspecialchars($content);
+                $dataReturn[$name] = htmlspecialchars(strip_tags($content));
             } else {
                 $dataReturn[$name] = $content;
             }
