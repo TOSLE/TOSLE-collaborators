@@ -325,7 +325,7 @@ class UserController extends CoreController
                 $errors = 'Errors';
                 header('Location:'.$this->Routes['edit_profile'].'?errors=3');
             }
-            if(!empty($errors)){
+            if(empty($errors)){
                 $this->Auth->setPassword($_post['pwd']);
                 $this->Auth->setToken();
                 $this->Auth->save();
