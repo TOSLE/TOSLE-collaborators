@@ -24,17 +24,17 @@
         <div class="col-6">
             <div class="bg-white">
                 <section class="login-bloc">
-                    <h2>Bienvenue sur le CMS Tosle</h2>
+                    <h2>Welcome on CMS TOSLE</h2>
                     <article class="register-login">
                         <p>
-                            Veuillez entrer vos informations de connexion ci-dessous.
+                            Please enter your information.
                         </p>
                     </article>
                     <section>
                         <?php $this->addModal("form", $config, $errors); ?>
                         <div>
                             <p>
-                                Mot de passe oublié ? <a href="<?php echo $this->slugs['view-newpassword'];?>" class="btn-sm btn-tosle-outline">Cliquez-ici</a>
+                                Forget password ? <a href="<?php echo $this->slugs['view-newpassword'];?>" class="btn-sm btn-tosle-outline">Click here</a>
                             </p>
                         </div>
                     </section>
@@ -49,8 +49,8 @@
                 <section class="login-bloc">
                     <article class="register-info">
                         <p>
-                            <a href="<?php echo DIRNAME;?>" class="btn btn-blue">Revenir à l'accueil</a>
-                            <a href="<?php echo $this->slugs['signup'];?>" class="btn btn-tosle-outline">Cliquez-ici pour s'inscrire</a>
+                            <a href="<?php echo DIRNAME;?>" class="btn btn-blue">Back home</a>
+                            <a href="<?php echo $this->slugs['signup'];?>" class="btn btn-tosle-outline">No account ? Sign up</a>
                         </p>
                     </article>
                 </section>
