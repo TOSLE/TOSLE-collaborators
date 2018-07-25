@@ -30,8 +30,8 @@
             <label for="captcha" class="captcha_img">
                 <img src="<?php echo DIRNAME;?>Public/Libraries//TosleCaptcha/GenerateCaptcha.php">
             </label>
-            <input id="captcha" type="text" name="captcha" placeholder="Veuillez saisir le captcha présent ci-dessus" required='required'>
-            <div class="small-precision-input">Vous pouvez recharger la page pour générer un nouveau captcha</div>
+            <input id="captcha" type="text" name="captcha" placeholder="Please enter the captcha shown above" required='required'>
+            <div class="small-precision-input">You can reload the page to generate a new captcha</div>
         <?php endif;?>
         <?php if(isset($config["textarea"])):?>
             <?php if(isset($config["textarea"]["label"])):?>

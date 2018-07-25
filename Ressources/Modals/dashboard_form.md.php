@@ -4,9 +4,9 @@
         <div class="row">
             <div class="col-12">
                 <div>
-                    <h2>Une erreur est détectée sur votre fichier</h2>
-                    <p> Message d'erreur : <?php echo $errors['MESSAGE'];?></p>
-                    <p>Code d'erreur : <?php echo $errors['CODE_ERROR'];?></p>
+                    <h2>An error is detected on your file</h2>
+                    <p> Error Message : <?php echo $errors['MESSAGE'];?></p>
+                    <p>Error code : <?php echo $errors['CODE_ERROR'];?></p>
                 </div>
             </div>
         </div>
@@ -16,10 +16,10 @@
             <div class="row">
                 <div class="col-12">
                     <div>
-                        <h2>Une erreur est détectée sur votre fichier</h2>
+                        <h2>An error is detected on your file</h2>
                         <?php foreach($errors as $name => $value):?>
-                            <p> Type d'erreur : <?php echo $name;?></p>
-                            <p>Message d'erreur : <?php echo $value;?></p>
+                            <p> Error Type : <?php echo $name;?></p>
+                            <p>Error Message : <?php echo $value;?></p>
                         <?php endforeach; ?>
                     </div>
                 </div>
