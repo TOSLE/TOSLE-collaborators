@@ -318,18 +318,22 @@ class UserController extends CoreController
             }
             $_post = $params['POST'];
             if($_post['pwdlast'] == $_post['pwd']){
+                $errors = 'Errors';
                 header('Location:'.$this->Routes['edit_profile'].'?errors=2');
             }
             if(!password_verify($_post['pwdlast'],$this->Auth->getPassword())){
+                $errors = 'Errors';
                 header('Location:'.$this->Routes['edit_profile'].'?errors=3');
             }
-            $this->Auth->setPassword($_post['pwd']);
-            $this->Auth->setToken();
-            $this->Auth->save();
+            if(!empty($errors)){
+                $this->Auth->setPassword($_post['pwd']);
+                $this->Auth->setToken();
+                $this->Auth->save();
 
-            $_SESSION['token'] = $this->Auth->getToken();
-            $_SESSION['email'] = $this->Auth->getEmail();
-            header('Location:'.$this->Routes['edit_profile'].'?success=1');
+                $_SESSION['token'] = $this->Auth->getToken();
+                $_SESSION['email'] = $this->Auth->getEmail();
+                header('Location:'.$this->Routes['edit_profile'].'?success=1');
+            }
         }
     }
 
