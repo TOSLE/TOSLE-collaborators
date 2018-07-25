@@ -67,23 +67,26 @@ class UserRepository extends User
     {
 
     }
+
+    /**
+     * @param $email
+     * @return array|int
+     */
      function checkEmailExist($email)
     {
         $target = ["email"];
-        $parameter = [
+        /**$parameter = [
             "LIKE" => [
                 "email" => $email
             ]
-        ];
+        ];**/
         $entree=$email;
         $tableau=$this->getData($target);
         foreach ($tableau as $cle) {
             $result =  $cle->getEmail();
             if($result == $entree)
             {
-                return [AUTHENTIFICATION_FAILED_KEY => "Mail déjà utilisé"];
-            }
-            else{
+                return [AUTHENTIFICATION_FAILED_KEY => USER_PROFILE_EMAIL_EXIST];
             }
         }
         return 1;
@@ -162,8 +165,8 @@ class UserRepository extends User
         }
         return [
             "select_users" => [
-                "label" => "Ajouter des utilisateurs",
-                "description" => "Vous avez le droit à plusieurs choix (\"CTRL + Clic\" pour réaliser un choix multiple)",
+                "label" => "Add user",
+                "description" => "You have the right to several choices (\"CTRL + Clic\" pour réaliser un choix multiple)",
                 "multiple" => true,
                 "options" => $option
             ]

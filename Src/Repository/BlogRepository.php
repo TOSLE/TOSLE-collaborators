@@ -199,9 +199,9 @@ class BlogRepository extends Blog
         $ViewArticleBloc = new DashboardBlocModal();
         $ViewArticleBloc->setTitle("Your articles");
         $ViewArticleBloc->setTableHeader([
-            1 => "Titre",
-            2 => "Date de publication",
-            3 => "Action"
+            1 => DASHBOARD_BLOC_BLOG_TITRE,
+            2 => DASHBOARD_BLOC_BLOG_DATE_PUBLISH,
+            3 => DASHBOARD_BLOC_BLOG_ACTION
         ]);
         $ViewArticleBloc->setColSizeBloc($colSize);
         $ViewArticleBloc->setActionButtonStatus(0, [
@@ -237,7 +237,7 @@ class BlogRepository extends Blog
     public function getModalStats()
     {
         $StatsBlog = new DashboardBlocModal();
-        $StatsBlog->setTitle("Blog Analytics");
+        $StatsBlog->setTitle(DASHBOARD_BLOC_BLOG_ANALYTICS);
         $StatsBlog->setTableHeader([
             1 => "Type",
             2 => "Value"
@@ -249,23 +249,23 @@ class BlogRepository extends Blog
         $StatsBlog->setColSizeBloc(6);
         $StatsBlog->setTableBodyContent([
             0 => [
-                1 => "Nombre d'article",
+                1 => DASHBOARD_BLOC_BLOG_ANALYTICS_ARTICLES,
                 2 => $this->countNumberOfBlog()
             ],
             1 => [
-                1 => "Nombre d'article publié",
+                1 => DASHBOARD_BLOC_BLOG_ANALYTICS_ARTICLES_PUBLISH,
                 2 => $this->countNumberOfBlogByStatus(1)
             ],
             2 => [
-                1 => "Nombre d'article dépublié",
+                1 => DASHBOARD_BLOC_BLOG_ANALYTICS_ARTICLES_UNPUBLISH,
                 2 => $this->countNumberOfBlogByStatus(0)
             ],
             3 => [
-                1 => "Nombre de commentaires",
+                1 => DASHBOARD_BLOC_BLOG_ANALYTICS_ARTICLES_COMMENTS,
                 2 => $this->getAllComment()
             ],
             4 => [
-                1 => "Nombre d'articles avec fichier",
+                1 => DASHBOARD_BLOC_BLOG_ANALYTICS_ARTICLES_FILES,
                 2 => $this->getNumberArticleWithFile()
             ]
         ]);

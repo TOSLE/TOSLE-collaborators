@@ -35,15 +35,15 @@ class UserController extends CoreController
         $registerMessage = "";
         if(isset($params['URI'][0])){ // message de confirmation après l'inscription
             if($params['URI'][0] == 'confirmed'){
-                $registerMessage = 'Accès confirmé';
+                $registerMessage = USER_PROFILE_CONFIRM_MESSAGE_VALIDATE;
             }
         }
         if(isset($params['URI'][0])){ // message de confirmation après l'inscription
             if($params['URI'][0] == 'registered'){
-                $registerMessage = 'Inscription réussie, à présent, veuillez confirmer votre inscription pour valider votre adresse email.';
+                $registerMessage = USER_PROFILE_CONFIRM_MESSAGE_INSCRIPTION;
             }
              if($params['URI'][0] == 'passchanged'){
-                $registerMessage = 'Mot de passe modifié avec succès';
+                $registerMessage = USER_PROFILE_CONFIRM_MESSAGE_PASSWORD_CHANGE;
             }
         }
      //   $errors["error status"]=" status invalide";
@@ -59,40 +59,41 @@ class UserController extends CoreController
         $errors = [];
         if(!empty($params["POST"])) {
             $errors = Form::checkForm($form, $params["POST"]);
+            $_post = Form::secureData($params["POST"]);
             $retourValue=$user->checkEmailExist($params["POST"]["email"]);
 
                if(is_numeric($retourValue)){     
-                     $user->setEmail($params["POST"]["email"]);                             
+                     $user->setEmail($_post["email"]);
                     } 
                 else {
                         $errors=$retourValue;                                                
                     }
 
             if (empty($errors)) {
-                $user->setFirstName($params["POST"]["firstname"]);
-                $user->setLastName($params["POST"]["lastname"]);
-                $user->checkEmailExist($params["POST"]["email"]);
+                $user->setFirstName($_post["firstname"]);
+                $user->setLastName($_post["lastname"]);
+                $user->checkEmailExist($_post["email"]);
                //print_r($retourValue);
                 //die();
              
-                $user->setEmail($params["POST"]["emailConfirm"]);
-                $user->setPassword($params["POST"]["pwd"]);
-                $user->setPassword($params["POST"]["pwdConfirm"]);
+                $user->setEmail($_post["emailConfirm"]);
+                $user->setPassword($_post["pwd"]);
+                $user->setPassword($_post["pwdConfirm"]);
                 $user->setToken();
                 $user->save();
 
-                $email = $params["POST"]["email"];
-                $firstName = $params["POST"]["firstname"];
-                $lastName = $params["POST"]["lastname"];
+                $email = $_post["email"];
+                $firstName = $_post["firstname"];
+                $lastName = $_post["lastname"];
                 $token = $user->getToken();
 
                 Mail::sendMailRegister($email, $firstName, $lastName,$token);
                 header('Location:'.Access::getSlugsById()['signin'].'/registered');
             } else {
                 $form["data_content"] = [
-                    "email" => $params["POST"]["email"],
-                    "firstname" => $params["POST"]["firstname"],
-                    "lastname" => $params["POST"]["lastname"],
+                    "email" => $_post["email"],
+                    "firstname" => $_post["firstname"],
+                    "lastname" => $_post["lastname"],
                 ];
             }
         }
@@ -136,12 +137,8 @@ class UserController extends CoreController
                 $User->setStatus(1);
                 $User->save();
 
-                //blogcontroller
-                $messConfirm = 'Inscription confirmé, vous pouvez vous connectez dès maintenant';
                 header('Location:'.$routes["signin"].'/confirmed');
             } else {
-                $messError = 'Inscription echoué, veuillez reesayer de vous inscrire.';
-               
                 header('Location:'.$routes["signup"].'/error');
             }
         }
@@ -156,40 +153,33 @@ class UserController extends CoreController
         if(!empty($params["POST"])) {
             $errors = Form::checkForm($form, $params["POST"]);
             if (empty($errors)) {
-              /*  $user->checkEmailExist($params["POST"]["email"]);
-                $retourValue=$user->checkEmailExist($params["POST"]["email"]);
-                if(is_numeric($retourValue)){     
-                    echo "testt";*/
+                    $errorsEmailExist = $user->checkEmailExist($params["POST"]["email"]);
+                    if(is_array($errorsEmailExist) && !is_numeric($errorsEmailExist)){
+                        $target = [/** Ce que l'on récupère lors de la requête (SELECT) **/
+                            "id",
+                            "token"
+                        ];
+                        $parameter = [/** Les parametres pour la condition de la requête **/
+                            "LIKE" => [
+                                "email" => $params["POST"]["email"],
+                            ]
+                        ];
+                        $user->setWhereParameter($parameter, null);
+                        $user->getOneData($target);
 
-                     $target = [/** Ce que l'on récupère lors de la requête (SELECT) **/
-                        "id",
-                        "token"
-                    ];
-                    $parameter = [/** Les parametres pour la condition de la requête **/
-                        "LIKE" => [
-                            "email" => $params["POST"]["email"],
-                        ]
-                    ];
-                    $user->setWhereParameter($parameter, null);
-                    $user->getOneData($target);
+                        $user->setEmail($params["POST"]["email"]); // voir pour le selectMultipleResponse + confirmEmail
+                        $user->setToken();
 
-                    $user->setEmail($params["POST"]["email"]); // voir pour le selectMultipleResponse + confirmEmail               
-                    $user->setToken(); 
-
-                    $user->save();
-
-
-
-                  /*  } else {
-                        $errors=$retourValue;                                                
-                    }*/
-                    $email = $params["POST"]["email"];
-                    $token = $user->getToken();
+                        $user->save();
+                        $email = $params["POST"]["email"];
+                        $token = $user->getToken();
+                        Mail::sendMailPassword($email,$token);
+                    } else {
+                        $errors = [
+                            'Email' => 'Email not found'
+                        ];
+                    }
               }
-
-
-
-            Mail::sendMailPassword($email,$token); 
         }
             $View->setData("configFormEmail", $form);
             $View->setData("errors", $errors);    
@@ -315,11 +305,105 @@ class UserController extends CoreController
         header('Location:'.$this->Routes['dashboard_student']);
     }
 
+    /**
+     * @param $params
+     */
     public function editpasswordAction($params)
     {
+        $User = new UserRepository();
         if(isset($params['POST']) && !empty($params['POST'])){
-            echo $this->Auth->getPassword();
-        }
+            $errors = Form::checkForm($User->configFormEditPassword(), $params['POST']);
+            if(!empty($errors)){
+                header('Location:'.$this->Routes['edit_profile'].'?errors=1');
+            }
+            $_post = $params['POST'];
+            if($_post['pwdlast'] == $_post['pwd']){
+                $errors = 'Errors';
+                header('Location:'.$this->Routes['edit_profile'].'?errors=2');
+            }
+            if(!password_verify($_post['pwdlast'],$this->Auth->getPassword())){
+                $errors = 'Errors';
+                header('Location:'.$this->Routes['edit_profile'].'?errors=3');
+            }
+            if(empty($errors)){
+                $this->Auth->setPassword($_post['pwd']);
+                $this->Auth->setToken();
+                $this->Auth->save();
 
+                $_SESSION['token'] = $this->Auth->getToken();
+                $_SESSION['email'] = $this->Auth->getEmail();
+                header('Location:'.$this->Routes['edit_profile'].'?success=1');
+            }
+        }
+    }
+
+
+    /**
+     * @param $params
+     * @return array|int
+     */
+    public function editaccountAction($params)
+    {
+        $User = new UserRepository();
+        if(isset($params['POST']) && !empty($params['POST'])){
+            $errors = Form::checkForm($User->configFormEditAccount(), $params['POST']);
+            $_post = Form::secureData($params['POST']);
+            if(!empty($errors)){
+                $errorsToEdit = 'Errors';
+                header('Location:'.$this->Routes['edit_profile'].'?errors=4');
+            }
+            if(!password_verify($_post['pwdConfirm'],$this->Auth->getPassword())){
+                $errorsToEdit = 'Errors';
+                header('Location:'.$this->Routes['edit_profile'].'?errors=5');
+            }
+
+            if(!($this->Auth->getEmail() == $_post['email'])){
+                $errorsEmail = $User->checkEmailExist($_post['email']);
+                if(is_array($errorsEmail)){
+                    $errorsToEdit = 'Errors';
+                    header('Location:'.$this->Routes['edit_profile'].'?errors=8');
+                } else {
+                    $this->Auth->setEmail($_post['email']);
+                }
+            }
+            $_file = $_FILES;
+            $file = null;
+            if (isset($_file)) {
+                $errors = Form::checkFiles($_file);
+                if (empty($errors) || is_numeric($errors)) {
+                    if ($errors != 1) {
+                        $File = new FileRepository();
+                        $arrayFile = $File->addFile($_file, $User->configFormEditAccount(), "Profile/Avatar", "Avatar");
+                        if (!is_numeric($arrayFile)) {
+                            if (array_key_exists('CODE_ERROR', $arrayFile)) {
+                                $errorsToEdit = 'Errors';
+                                header('Location:' . $this->Routes['edit_profile'] . '?errors=6');
+                            }
+                            foreach ($arrayFile as $fileId) {
+                                $file = $fileId;
+                            }
+                        }
+
+                    }
+                } else {
+                    if (!array_key_exists('EXCEPT_ERROR', $errors)) {
+                        $errorsToEdit = 'Errors';
+                        header('Location:' . $this->Routes['edit_profile'] . '?errors=7');
+                    }
+                }
+            }
+            if (isset($file)) {
+                $this->Auth->setFileid($file);
+            }
+            if(empty($errorsToEdit)) {
+                $this->Auth->setFirstName($_post['firstname']);
+                $this->Auth->setLastName($_post['lastname']);
+                $this->Auth->setToken();
+                $this->Auth->save();
+                $_SESSION['token'] = $this->Auth->getToken();
+                $_SESSION['email'] = $this->Auth->getEmail();
+                header('Location:' . $this->Routes['edit_profile'] . '?success=2');
+            }
+        }
     }
 }

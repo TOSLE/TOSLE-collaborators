@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-12">
             <div>
-                <h2>Liens et recherche avancée</h2>
+                <h2>Links and advanced search</h2>
                 <div class="icons-list">
                     <?php if(isset($urlClassFeed)):?>
                         <a href="<?php echo $urlClassFeed;?>" class="lesson-link-icon">
@@ -16,26 +16,27 @@
                         <i class="material-icons">
                             filter_list
                         </i>
-                        <p>Modifier l'affichage</p>
+                        <p>Modifiy display</p>
                     </a>
-
+                    <!--
                     <?php if(isset($newsletter)):?>
                         <?php if($newsletter):?>
                             <a href="<?php echo $this->slugs['subscribe_lesson'];?>" class="lesson-link-icon newsletter-off">
                                 <i class="material-icons">
                                     mail
                                 </i>
-                                <p>Se désinscrire de la newsletter</p>
+                                <p>Unsubscribe of the newsletter</p>
                             </a>
                         <?php else:?>
                             <a href="<?php echo $this->slugs['subscribe_lesson'];?>" class="lesson-link-icon">
                                 <i class="material-icons">
                                     mail
                                 </i>
-                                <p>S'inscrire à la newsletter</p>
+                                <p>Subscribe of the newsletter</p>
                             </a>
                         <?php endif;?>
                     <?php endif;?>
+                    -->
                 </div>
             </div>
         </div>

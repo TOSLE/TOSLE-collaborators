@@ -65,13 +65,65 @@ define('DASHBOARD_SECTION_NBGROUPS', 'Number of groups');
         define('DASHBOARD_BLOC_CHAPTERS_BUTTON_EDIT', 'Edit');
         define('DASHBOARD_BLOC_CHAPTERS_BUTTON_PUBLISH', 'Publish');
         define('DASHBOARD_BLOC_CHAPTERS_BUTTON_UNPUBLISH', 'Unpublish');
+     define('DASHBOARD_BLOC_LESSONS_ADD_TITLE', 'Lesson Title');
+     define('DASHBOARD_BLOC_LESSONS_ADD_TITLE2', 'Lesson Title');
+        define('DASHBOARD_BLOC_LESSONS_ADD_SELECT_CATEGORY', 'Categories Selection');
+        define('DASHBOARD_BLOC_LESSONS_ADD_CATEGORIES_CHOICES', 'You have the right to several choices');
+        define('DASHBOARD_BLOC_LESSONS_ADD_CATEGORIES', 'Add categories');
+        define('DASHBOARD_BLOC_LESSONS_ADD_CATEGORIES2', 'Adding of categories');
+        define('DASHBOARD_BLOC_LESSONS_ADD_CATEGORIES_FORMAT', 'Format : [category 1; category 2; category 3]. They are add automaticaly.');
+        define('DASHBOARD_BLOC_LESSONS_ADD_SELECT_GROUP', 'Selection group');
+        define('DASHBOARD_BLOC_LESSONS_ADD_GROUP_CHOICES', 'You have the right to several choices ("CTRL + Clic")');
+        define('DASHBOARD_BLOC_LESSONS_ADD_COLOR', 'Choose lesson color
+');
+        define('DASHBOARD_BLOC_LESSONS_ADD_COLOR_BASE', 'Base color');
+        define('DASHBOARD_BLOC_LESSONS_ADD_COLOR1', 'Purple');
+        define('DASHBOARD_BLOC_LESSONS_ADD_COLOR2', 'Red');
+        define('DASHBOARD_BLOC_LESSONS_ADD_COLOR3', 'Green');
+        define('DASHBOARD_BLOC_LESSONS_ADD_COLOR4', 'Orange');
+        define('DASHBOARD_BLOC_LESSONS_ADD_COLOR5', 'Pastel blue');
+        define('DASHBOARD_BLOC_LESSONS_ADD_COLOR6', 'Pastel pink');
+        define('DASHBOARD_BLOC_LESSONS_ADD_COLOR_BACKGROUND', 'Background color');
+        define('DASHBOARD_BLOC_LESSONS_ADD_TYPE', 'Lesson Type');
+        define('DASHBOARD_BLOC_LESSONS_ADD_TYPE1', 'Public');
+        define('DASHBOARD_BLOC_LESSONS_ADD_TYPE2', 'Private');
+        define('DASHBOARD_BLOC_LESSONS_ADD_TYPE_OPTIONS', 'Private lesson or public lesson');
+        define('DASHBOARD_BLOC_LESSONS_ADD_DIFFICULTY', 'Choose the lesson difficulty');
+        define('DASHBOARD_BLOC_LESSONS_ADD_DIFFICULTY1', 'Easy');
+        define('DASHBOARD_BLOC_LESSONS_ADD_DIFFICULTY2', 'Medium');
+        define('DASHBOARD_BLOC_LESSONS_ADD_DIFFICULTY3', 'High');
+        define('DASHBOARD_BLOC_LESSONS_ADD', 'Difficulty valued of the lesson');
+        define('DASHBOARD_BLOC_LESSONS_ADD_DESCRIPTION', 'Lesson description');
+        define('DASHBOARD_BLOC_LESSONS_ADD_MAX_CHARACTERS', 'Maximum 500 characters');
+        define('DASHBOARD_BLOC_LESSONS_ADD_MAX_CHARACTERS2', 'A maximum of 500 characters');
+        define('DASHBOARD_BLOC_LESSONS_ADD_OPTIONS', 'Options');
+        define('DASHBOARD_BLOC_LESSONS_ADD_EXIT', 'Exit');
+        define('DASHBOARD_BLOC_LESSONS_ADD_SAVE_DRAFT', 'Save as draft');
+        define('DASHBOARD_BLOC_LESSONS_ADD_SAVE', 'Save  the new lesson');
+        define('DASHBOARD_BLOC_LESSONS_ADD_CHAPTER_FILE', 'Select the file(s) to join to this chapter');
+        define('DASHBOARD_BLOC_LESSONS_ADD_CHAPTER_SELECT', 'Select lesson');
+        define('DASHBOARD_BLOC_LESSONS_ADD_CHAPTER_DESCRITPION', 'You can always edit it later');
+        define('DASHBOARD_BLOC_LESSONS_ADD_CHAPTER_NOSELECT', 'no selected course
+');
+
+
 
 /**
  * Dashboard Student
  */
     define('DASHBOARD_BLOC_GROUPS', 'Group list');
-    define('DASHBOARD_BLOC_USERS', 'User list');
-    define('DASHBOARD_ADD_GROUP', 'Add group');
+    define('DASHBOARD_BLOC_AVATAR', 'Avatar');
+    define('DASHBOARD_BLOC_NAME', 'Name');
+    define('DASHBOARD_BLOC_NB_USERS', 'Numbers of users');
+    define('DASHBOARD_BLOC_ACTIONS', 'Action');
+
+    define('DASHBOARD_BLOC_USERS', 'Users list');
+    define('DASHBOARD_BLOC_FIRSTNAME', 'Firstname');
+    define('DASHBOARD_BLOC_EMAIL', 'Email');
+    define('DASHBOARD_BLOC_INSCRIPTION', 'Inscription');
+
+
+
 
 /**
  * Dashboard Blog
@@ -83,11 +135,18 @@ define('DASHBOARD_SECTION_NBGROUPS', 'Number of groups');
         define('DASHBOARD_BLOC_BLOG_ANALYTICS_ARTICLES_UNPUBLISH', 'Unpublish number');
         define('DASHBOARD_BLOC_BLOG_ANALYTICS_ARTICLES_COMMENTS', 'Comment number');
         define('DASHBOARD_BLOC_BLOG_ANALYTICS_ARTICLES_FILES', 'File number');
+
     define('DASHBOARD_BLOC_BLOG_LAST', 'Last blogs');
     define('DASHBOARD_BLOC_BLOG_TITLE_MODAL', 'View all blog');
     define('DASHBOARD_BLOC_BLOG_ALL_PUBLISH', 'All published blogs');
     define('DASHBOARD_BLOC_BLOG_ALL_UNPUBLISH', 'All unpublished blogs');
+    define('DASHBOARD_BLOC_BLOG_TITRE', 'Title');
+    define('DASHBOARD_BLOC_BLOG_LIMIT', 'No limit');
+    define('DASHBOARD_BLOC_BLOG_DATE_PUBLISH', 'Date of publication');
+    define('DASHBOARD_BLOC_BLOG_ACTION', 'Action');
         define('DASHBOARD_BLOC_BLOG_BUTTON_VIEW', 'View');
         define('DASHBOARD_BLOC_BLOG_BUTTON_EDIT', 'Edit');
         define('DASHBOARD_BLOC_BLOG_BUTTON_PUBLISH', 'Publish');
         define('DASHBOARD_BLOC_BLOG_BUTTON_UNPUBLISH', 'Unpublish');
+
+        define('DASHBOARD_BLOC_BLOG_BUTTON_SAVE', 'Save without publishing');

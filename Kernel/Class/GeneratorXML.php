@@ -51,13 +51,15 @@ class GeneratorXML
         }
         $lessons = $Lesson->getLessons(null);
         foreach ($lessons as $lesson){
-            foreach ($lesson->getChapter() as $chapter){
-                $url = $this->xmlDoc->createElement('url');
-                $loc = $this->xmlDoc->createElement('loc', Installer::url().'/'.$lesson->getUrl().'/'.$chapter->getUrl());
-                $priority = $this->xmlDoc->createElement('priority', "1");
-                $url->appendChild($loc);
-                $url->appendChild($priority);
-                $urlset->appendChild($url);
+            if(!empty($lesson->getChapter())){
+                foreach ($lesson->getChapter() as $chapter){
+                    $url = $this->xmlDoc->createElement('url');
+                    $loc = $this->xmlDoc->createElement('loc', Installer::url().'/'.$lesson->getUrl().'/'.$chapter->getUrl());
+                    $priority = $this->xmlDoc->createElement('priority', "1");
+                    $url->appendChild($loc);
+                    $url->appendChild($priority);
+                    $urlset->appendChild($url);
+                }
             }
         }
 

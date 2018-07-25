@@ -64,7 +64,7 @@ class ProfileRepository extends User
         }
         else {
             $commentaires[] = [
-                "content" => "Aucun commentaires pour le moment",
+                "content" => "No comment at the moment",
                 "date" => " ",
                 "type" => " ",
             ];
@@ -75,7 +75,7 @@ class ProfileRepository extends User
     public function editProfile($_idProfile)
     {
         $User = new UserRepository($_idProfile);
-        $configForm = $User->configFormEdit();
+        $configForm = $User->configFormEditAccount();
         $file = null;
         if(!empty($User->getFileid())){
             $file = "".$User->getAvatar()->getPath().'/'.$User->getAvatar()->getName();

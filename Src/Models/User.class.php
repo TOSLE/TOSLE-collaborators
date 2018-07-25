@@ -188,13 +188,13 @@ class User extends CoreSql{
             "input"=> [
                 "firstname"=>[
                     "type"=>"text",
-                    "placeholder"=>"Votre prénom",
+                    "placeholder"=>FORM_USER_FIRSTNAME_PLACEHOLDER,
                     "required"=>true,
                     "maxString"=>100
                 ],
                 "lastname"=>[
                     "type"=>"text",
-                    "placeholder"=>"Votre nom",
+                    "placeholder"=>FORM_USER_LASTNAME_PLACEHOLDER,
                     "required"=>true,
                     "maxString"=>100
                 ],
@@ -290,57 +290,50 @@ class User extends CoreSql{
         ];
     }
 
-    public function configFormEdit()
+    public function configFormEditAccount()
     {
+        $routes = Access::getSlugsById();
         return [
             "config"=> [
                 "method"=>"post",
-                "action"=>"",
-                "submit"=>"Sauvegarder",
+                "action"=>$routes['user/editaccount'],
+                "submit"=>FORM_BASIC_SAVE,
                 "form_file"=>true,
             ],
             "input"=> [
                 "image"=>[
                     "type"=>"file",
                     "required"=>false,
-                    "label"=>"Select your background image",
+                    "label"=>FORM_USER_AVATAR_LABEL,
                     "format"=>"PNG JPG JPEG",
-                    "description"=>"Authorised format (png, jpg, jpeg)",
+                    "description"=>FORM_USER_AVATAR_FORMAT,
                     "multiple"=>false
                 ],
                 "firstname"=>[
                     "type"=>"text",
-                    "placeholder"=>"Votre prénom",
+                    "placeholder"=>FORM_USER_FIRSTNAME_PLACEHOLDER,
+                    "label"=>FORM_USER_FIRSTNAME_LABEL,
                     "required"=>true,
                     "maxString"=>100
                 ],
                 "lastname"=>[
                     "type"=>"text",
-                    "placeholder"=>"Votre nom",
+                    "placeholder"=>FORM_USER_LASTNAME_PLACEHOLDER,
+                    "label"=>FORM_USER_LASTNAME_LABEL,
                     "required"=>true,
                     "maxString"=>100
                 ],
                 "email"=>[
                     "type"=>"email",
-                    "placeholder"=>"Votre email",
-                    "required"=>true
-                ],
-                "emailConfirm"=>[
-                    "type"=>"email",
-                    "placeholder"=>"Confirmez votre email",
-                    "required"=>true,
-                    "confirm"=>"email"
-                ],
-                "pwd"=>[
-                    "type"=>"password",
-                    "placeholder"=>"Votre mot de passe",
+                    "placeholder"=>FORM_USER_EMAIL_LABEL,
+                    'label' => FORM_USER_EMAIL_PLACEHOLDER,
                     "required"=>true
                 ],
                 "pwdConfirm"=>[
                     "type"=>"password",
-                    "placeholder"=>"Confirmez votre mot de passe",
-                    "required"=>true,
-                    "confirm"=>"pwd"
+                    'label' => FORM_USER_PASSWORD_SECURITY_LABEL,
+                    "placeholder"=> FORM_USER_PASSWORD_SECURITY_PLACEHOLDER,
+                    "required"=>true
                 ]
             ],
         ];

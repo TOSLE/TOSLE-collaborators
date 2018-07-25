@@ -35,7 +35,7 @@
     <div class="modal-window">
         <div class="modal-header">
             <i class="modal-header-icon material-icons" data-type="close-modal">close</i>
-            <h2>Ajout d'un groupe</h2>
+            <h2> Add a group </h2>
         </div>
         <div class="modal-main">
             <div class="container">

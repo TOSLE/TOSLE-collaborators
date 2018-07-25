@@ -89,22 +89,22 @@ class Group extends CoreSql {
             "config"=> [
                 "method"=>"post",
                 "action"=>"",
-                "submit"=>"Enregistrer",
+                "submit"=>"Save",
                 "form_file"=>true,
             ],
             "input"=> [
                 "name"=>[
                     "type"=>"text",
-                    "placeholder"=>"Nom du groupe",
+                    "placeholder"=>"Group name",
                     "required"=>true,
                     "maxString"=>20,
-                    "label"=>"Nom du groupe",
-                    "description"=>"20 caractères maximum"
+                    "label"=>"Group name",
+                    "description"=>"20 characters maximum"
                 ],
                 "file"=>[
                     "type"=>"file",
                     "required"=>false,
-                    "label"=>"Ajouter un avatar au groupe",
+                    "label"=>"Add an avatar ",
                     "format"=>"JPEG JPG PNG",
                     "description"=>"Authorised format (JPEG, PNG, JPG)",
                     "multiple"=>false

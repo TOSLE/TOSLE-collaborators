@@ -237,6 +237,7 @@ class Access
         "chat/delete" => 2,
         "index/deletecom" => 1,
         "user/editpassword" => 1,
+        "user/editaccount" => 1,
     ];
 
     private $urlFixe = [
@@ -365,8 +366,8 @@ class Access
      */
     public static function constructUrl($string = "url to encode")
     {
-        $search = array('à', 'ä', 'â', 'é', 'è', 'ë', 'ê', 'ï', 'ì', 'î', 'ù', 'û', 'ü', 'ô', 'ö', '&', ' ', '?', '!', 'ç', ';', '/', '.', ',', ':', '(', ')', '=');
-        $replace = array('a', 'a', 'a', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'u', 'u', 'u', 'o', 'o', '', '-', '', '', 'c', '', '-', '', '', '', '', '', '');
+        $search = array('à', 'ä', 'â', 'é', 'è', 'ë', 'ê', 'ï', 'ì', 'î', 'ù', 'û', 'ü', 'ô', 'ö', '&', ' ', '?', '!', 'ç', ';', '/', '.', ',', ':', '(', ')', '=', '\'');
+        $replace = array('a', 'a', 'a', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'u', 'u', 'u', 'o', 'o', '', '-', '', '', 'c', '', '-', '', '', '', '', '', '', '-');
 
         return urlencode(trim(str_ireplace($search, $replace, strtolower((trim($string)))),'-'));
     }

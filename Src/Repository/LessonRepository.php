@@ -385,14 +385,14 @@ class LessonRepository extends Lesson
             'title'
         ];
         $array = $this->getData($target);
-        $option['_forbidden'] = "Pas de cours sélectionné";
+        $option['_forbidden'] = DASHBOARD_BLOC_LESSONS_ADD_CHAPTER_NOSELECT;
         foreach($array as $lesson){
             $option[$lesson->getId()] = $lesson->getTitle();
         }
         return [
             "select_lesson" => [
-                "label" => "Selection du cours",
-                "description" => "Vous pourrez toujours le modifier plus tard",
+                "label" => DASHBOARD_BLOC_LESSONS_ADD_CHAPTER_SELECT,
+                "description" => DASHBOARD_BLOC_LESSONS_ADD_CHAPTER_DESCRITPION,
                 "multiple" => false,
                 "required" => true,
                 "options" => $option
@@ -664,5 +664,46 @@ class LessonRepository extends Lesson
         ];
         $LessonChapter->getOneData(['lessonid']);
         return $LessonChapter->getLessonId();
+    }
+    public function getLessonsUser($id)
+    {
+
+        $target = ["id", "title", "url"];
+        $joinParameter = [
+            "userlesson" => [
+                "lesson_id"
+            ]
+        ];
+        $whereParameter = [
+            "userlesson" => [
+                "userid" => $id
+            ]
+        ];
+        $this->setLeftJoin($joinParameter, $whereParameter);
+        $this->setOrderByParameter(["id" => "DESC"]);
+
+        $ArrayLesson = $this->getData($target);
+
+        foreach ($ArrayLesson as $lesson) {
+            $lessons[] = [
+                "id" => $lesson->getId(),
+                "title" => $lesson->getTitle(),
+                "url" => DIRNAME.'lesson/'.$lesson->getUrl(),
+            ];
+        }
+        /**
+         * Tri le tableau par date
+         */
+        if (isset($lessons)) {
+            return $lessons;
+        }
+        else {
+            $lessons[] = [
+                "title" => "No subscription at a class",
+                "id" => " ",
+                "url" => " ",
+            ];
+            return $lessons;
+        }
     }
 }

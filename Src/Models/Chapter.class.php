@@ -224,14 +224,14 @@ Class Chapter extends CoreSql {
             "config"=> [
                 "method"=>"post",
                 "action"=>"",
-                "submit"=>"Publier le chapitre",
-                "save"=>"Sauvegarder en brouillon",
+                "submit"=>DASHBOARD_BLOC_LESSON_GENERAL_ADD_CHAPTER,
+                "save"=>DASHBOARD_BLOC_LESSONS_ADD_SAVE_DRAFT,
                 "form_file"=>true,
             ],
             "input"=> [
                 "title"=>[
                     "type"=>"text",
-                    "placeholder"=>"Titre du chapitre",
+                    "placeholder"=>"Chapter Title",
                     "required"=>true,
                     "maxString"=>100,
                     "label"=>"Insert title of your chapter",
@@ -240,7 +240,7 @@ Class Chapter extends CoreSql {
                 "file"=>[
                     "type"=>"file",
                     "required"=>false,
-                    "label"=>"Selectionnez le/les fichiers à joindre à ce chapitre",
+                    "label"=>DASHBOARD_BLOC_LESSONS_ADD_CHAPTER_FILE,
                     "format"=>"PDF DOCX DOCM DOTX DOTM XLSX XLSM XLSB XLTM",
                     "description"=>"Authorised format (pdf, docx, docm, dotx, dotm, xlsx, xlsm, xlsb, xltm)",
                     "multiple"=>false
@@ -249,7 +249,7 @@ Class Chapter extends CoreSql {
             "ckeditor" => [
                 "label" => "Edition de votre chapitre",
                 "name" => "ckeditor_chapter",
-                "description" => "Pas de limite !",
+                "description" => DASHBOARD_BLOC_BLOG_LIMIT,
                 "placeholder" => "Placeholder"
             ],
             'select' => $lesson->getSelectLesson(),

@@ -32,7 +32,7 @@
     </div>
     <div class="footer-infos">
         <div class="more-infos">
-            <a href="<?php echo $this->slugs["legal_notice"]; ?>"><?php echo MESSAGING_FOOTER_LEGAL;?></a> - <a href="#"><?php echo MESSAGING_FOOTER_PRIVACY;?></a>
+            <a href="<?php echo $this->slugs["legal_notice"]; ?>"><?php echo MESSAGING_FOOTER_LEGAL;?></a>
         </div>
         <div class="global-infos">
             <p>TOSLE <i class="material-icons">&#xE90C;</i> 2018</p>
@@ -107,7 +107,7 @@
             </div>
             <div class="edit-new-message">
                 <?php if($page == 'trash'):?>
-                    <a href="<?php echo $this->slugs['chat/untrash'].'/'.$conversationView->getId();?>" class="btn btn-green">Réactiver la conversation</a>
+                    <a href="<?php echo $this->slugs['chat/untrash'].'/'.$conversationView->getId();?>" class="btn btn-green">Reactive the conversation</a>
                 <?php else:?>
                     <form action="" method="post">
                         <div class="content-input">
@@ -145,18 +145,18 @@
             <div class="content-infos-message">
                 <div class="more-infos">
                     <p>
-                        Il n'y a aucun message pour le moment
+                        There are no messages for the moment
                     </p>
                 </div>
             </div>
             <div class="container-message no-conversation">
-                <button class="btn btn-tosle target-modal" data-type="open-modal" data-target="newConversation">Démarrer une conversation</button>
+                <button class="btn btn-tosle target-modal" data-type="open-modal" data-target="newConversation">Start a conversation</button>
             </div>
         <?php else:?>
             <div class="content-infos-message">
                 <div class="more-infos">
                     <p>
-                        Aucune conversation dans la catégorie
+                        No conversation in the category
                     </p>
                 </div>
             </div>
@@ -168,7 +168,7 @@
     <div class="modal-window">
         <div class="modal-header">
             <i class="modal-header-icon material-icons" data-type="close-modal">close</i>
-            <h2>Nouvelle conversation</h2>
+            <h2>New conversation</h2>
         </div>
         <div class="modal-main">
             <div class="container">

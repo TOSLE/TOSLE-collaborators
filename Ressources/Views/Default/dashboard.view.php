@@ -37,11 +37,6 @@
                                         <i class="material-icons blue">library_books</i>
                                     </a>
                                 </li>
-                                <li><a href="<?php echo DIRNAME . substr($language, 0, 2) . "/dashboard/"; ?>">
-                                        <p>Portofolio</p>
-                                        <i class="material-icons blue">image</i>
-                                    </a>
-                                </li>
                                 <li><a href="<?php echo $this->slugs["edit_profile"]; ?>">
                                         <p>My account</p>
                                         <i class="material-icons blue">build</i>
@@ -55,6 +50,7 @@
                             </ul>
                         </nav>
                     </section>
+                </section>
             </div>
         </div>
         <div class="col-12 responsive-menu">
@@ -82,12 +78,6 @@
                         <a href="<?php echo $this->slugs["dashboard_blog"]; ?>">
                             <p>Blog</p>
                             <i class="material-icons white">library_books</i>
-                        </a>
-                    </div>
-                    <div class="btn-dashboard">
-                        <a href="<?php echo DIRNAME . substr($language, 0, 2) . "/dashboard/"; ?>">
-                            <p>Portofolio</p>
-                            <i class="material-icons white">image</i>
                         </a>
                     </div>
                     <div class="btn-dashboard">
@@ -177,4 +167,22 @@
         </div>
     </div>
 </div>
-</div>
+<script>
+    var containerStatTosle = document.getElementById('stat-visitor');
+    var chartViewTosle = new Chart(containerStatTosle, {
+        type: 'line',
+        data: {
+            labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+            datasets: [{
+                label: "Number of visitor",
+                data: <?php echo '[' . implode(' ,', $statViewTosle) . ']'; ?>,
+                fill: false,
+                borderColor: "#1A5CCB",
+                lineTension: 0.1
+            }]
+        },
+        options: {
+            showLines: true
+        }
+    });
+</script>
