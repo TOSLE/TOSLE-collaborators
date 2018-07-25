@@ -349,18 +349,18 @@ class UserController extends CoreController
             $errors = Form::checkForm($User->configFormEditAccount(), $params['POST']);
             $_post = Form::secureData($params['POST']);
             if(!empty($errors)){
-                $errors = 'Errors';
+                $errorsToEdit = 'Errors';
                 header('Location:'.$this->Routes['edit_profile'].'?errors=4');
             }
             if(!password_verify($_post['pwdConfirm'],$this->Auth->getPassword())){
-                $errors = 'Errors';
+                $errorsToEdit = 'Errors';
                 header('Location:'.$this->Routes['edit_profile'].'?errors=5');
             }
 
             if(!($this->Auth->getEmail() == $_post['email'])){
                 $errorsEmail = $User->checkEmailExist($_post['email']);
                 if(is_array($errorsEmail)){
-                    $errors = 'Errors';
+                    $errorsToEdit = 'Errors';
                     header('Location:'.$this->Routes['edit_profile'].'?errors=8');
                 } else {
                     $this->Auth->setEmail($_post['email']);
@@ -376,7 +376,7 @@ class UserController extends CoreController
                         $arrayFile = $File->addFile($_file, $User->configFormEditAccount(), "Profile/Avatar", "Avatar");
                         if (!is_numeric($arrayFile)) {
                             if (array_key_exists('CODE_ERROR', $arrayFile)) {
-                                $errors = 'Errors';
+                                $errorsToEdit = 'Errors';
                                 header('Location:' . $this->Routes['edit_profile'] . '?errors=6');
                             }
                             foreach ($arrayFile as $fileId) {
@@ -387,7 +387,7 @@ class UserController extends CoreController
                     }
                 } else {
                     if (!array_key_exists('EXCEPT_ERROR', $errors)) {
-                        $errors = 'Errors';
+                        $errorsToEdit = 'Errors';
                         header('Location:' . $this->Routes['edit_profile'] . '?errors=7');
                     }
                 }
@@ -395,7 +395,7 @@ class UserController extends CoreController
             if (isset($file)) {
                 $this->Auth->setFileid($file);
             }
-            if(empty($errors)) {
+            if(empty($errorsToEdit)) {
                 $this->Auth->setFirstName($_post['firstname']);
                 $this->Auth->setLastName($_post['lastname']);
                 $this->Auth->setToken();
