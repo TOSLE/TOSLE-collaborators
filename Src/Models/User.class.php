@@ -184,7 +184,7 @@ class User extends CoreSql{
     {
         // FAIRE LES ID ET LES CLASS POUR LE CMS
         return [
-            "config"=> ["method"=>"post", "action"=>$action, "submit"=>"S'inscrire"],
+            "config"=> ["method"=>"post", "action"=>$action, "submit"=>"Sign up"],
             "input"=> [
                 "firstname"=>[
                     "type"=>"text",
@@ -200,23 +200,23 @@ class User extends CoreSql{
                 ],
                 "email"=>[
                     "type"=>"email",
-                    "placeholder"=>"Votre email",
+                    "placeholder"=>"Your email",
                     "required"=>true
                 ],
                 "emailConfirm"=>[
                     "type"=>"email",
-                    "placeholder"=>"Confirmez votre email",
+                    "placeholder"=>"Confim your email",
                     "required"=>true,
                     "confirm"=>"email"
                 ],
                 "pwd"=>[
                     "type"=>"password",
-                    "placeholder"=>"Votre mot de passe",
+                    "placeholder"=>"Your password",
                     "required"=>true
                 ],
                 "pwdConfirm"=>[
                     "type"=>"password",
-                    "placeholder"=>"Confirmez votre mot de passe",
+                    "placeholder"=>"Confirm your password",
                     "required"=>true,
                     "confirm"=>"pwd"
                 ]
@@ -228,12 +228,12 @@ class User extends CoreSql{
     {
         // FAIRE LES ID ET LES CLASS POUR LE CMS
         return [
-            "config"=> ["method"=>"post", "action"=>"", "submit"=>"Envoie lien pour mot de passe"],
+            "config"=> ["method"=>"post", "action"=>"", "submit"=>"Send link for password"],
             "input"=> [
                 
                 "email"=>[
                     "type"=>"email",
-                    "placeholder"=>"Votre email",
+                    "placeholder"=>"Your email",
                     "required"=>true
                 ]
             ],
@@ -244,17 +244,17 @@ class User extends CoreSql{
     {
         // FAIRE LES ID ET LES CLASS POUR LE CMS
         return [
-            "config"=> ["method"=>"post", "action"=>"", "submit"=>"Modifier mot de passe"],
+            "config"=> ["method"=>"post", "action"=>"", "submit"=>"Modify your password"],
             "input"=> [
                 
                 "pwd"=>[
                     "type"=>"password",
-                    "placeholder"=>"Votre nouveau mot de passe",
+                    "placeholder"=>"Your new password",
                     "required"=>true
                 ],
                 "pwdConfirm"=>[
                     "type"=>"password",
-                    "placeholder"=>"Confirmez votre nouveau mot de passe",
+                    "placeholder"=>"Confirm your new password",
                     "required"=>true,
                     "confirm"=>"pwd"
             ],
@@ -269,7 +269,7 @@ class User extends CoreSql{
             "config"=> [
                 "method"=>"post",
                 "action"=>$action,
-                "submit"=>"Se connecter",
+                "submit"=>"sign in",
                 "secure" => [
                     "status" => false,
                     "duration" => 5
@@ -278,12 +278,12 @@ class User extends CoreSql{
             "input"=> [
                 "email"=>[
                     "type"=>"email",
-                    "placeholder"=>"Votre email",
+                    "placeholder"=>"Your email",
                     "required"=>true,
                 ],
                 "pwd"=>[
                     "type"=>"password",
-                    "placeholder"=>"Votre mot de passe",
+                    "placeholder"=>"Your password",
                     "required"=>true,
                 ]
             ]

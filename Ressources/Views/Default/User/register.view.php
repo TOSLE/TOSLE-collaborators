@@ -11,10 +11,10 @@
         <div class="col-6">
             <div class=" bg-white">
                 <section class="login-bloc">
-                    <h2>Formulaire d'inscription</h2>
+                    <h2>Registration Form</h2>
                     <article>
                         <p>
-                            Veuillez entrer vos informations pour l'inscription ci-dessous.
+                            Please enter your registration information below.
                         </p>
                     </article>
                     <section class="info-signup">
@@ -34,8 +34,8 @@
                 <section class="login-bloc">
                     <article class="register-info">
                         <p>
-                            <a href="<?php echo DIRNAME;?>" class="btn btn-blue">Revenir à l'accueil</a>
-                            <a href="<?php echo $this->slugs['signin'];?>" class="btn btn-tosle-outline">Déjà inscrit ? Connectez-vous ici.</a>
+                            <a href="<?php echo DIRNAME;?>" class="btn btn-blue">Back to the Home</a>
+                            <a href="<?php echo $this->slugs['signin'];?>" class="btn btn-tosle-outline">Already registered ? Log in here.</a>
                         </p>
                     </article>
                 </section>

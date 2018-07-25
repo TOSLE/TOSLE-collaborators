@@ -56,7 +56,7 @@
         <?php else: ?>
             <div class="col-10">
                 <div>
-                    <p>Aucun article pour le moment</p>
+                    <p>Any article for the moment</p>
                 </div>
             </div>
         <?php endif; ?>
@@ -83,7 +83,6 @@
         <div class="modal-header">
             <i class="modal-header-icon material-icons" data-type="close-modal">close</i>
             <h2>Modify the display filter of article</h2>
-            <h2>Modifier le filtre d'affichage des blogs</h2>
         </div>
         <div class="modal-main">
             <div class="container">

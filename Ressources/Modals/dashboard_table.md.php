@@ -33,7 +33,7 @@
                                         <?php if(!empty($content)):?>
                                             <td class="avatar"><img src="<?php echo $content;?>"/></td>
                                         <?php else:?>
-                                            <td class="avatar">Aucun avatar</td>
+                                            <td class="avatar">Any avatar</td>
                                         <?php endif;?>
                                     <?php else:?>
                                         <td class="<?php echo $class;?>"><?php echo $content;?></td>
@@ -44,7 +44,7 @@
                     <?php endforeach;?>
                 <?php else:?>
                     <tr>
-                        <td colspan="<?php echo sizeof($config['table']['header']);?>">Aucun groupe pour le moment</td>
+                        <td colspan="<?php echo sizeof($config['table']['header']);?>">Any group for the moment</td>
                     </tr>
                 <?php endif;?>
                 </tbody>
