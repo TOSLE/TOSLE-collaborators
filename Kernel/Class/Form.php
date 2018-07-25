@@ -17,25 +17,25 @@ class Form
                     $errorsMsg[FORM_USER_ERRORS_CONFIRM]= $name .FORM_USER_ERRORS_CONFIRM_NOT_EQUALS.$attributs["confirm"];
                 } else if (!isset($attributs["confirm"])){
                     if($attributs["type"]=="email" && !self::checkEmail($data[$name])){
-                        $errorsMsg["email"]= "Format de l'email incorrect";
+                        $errorsMsg["email"]= "Incorrect email format";
                     } else if($attributs["type"]=="password" && !self::checkPwd($data[$name])){
                         $errorsMsg[FORM_USER_ERRORS_PASSWORD]= FORM_USER_ERRORS_PASSWORD_NOT_RESPECT_FORMAT;
                     } else if($attributs["type"]=="number" && !self::checkNumber($data[$name]) && (isset($attributs['required']) && $attributs['required'])){
-                        $errorsMsg["number"]= $name. " n'est pas correct";
+                        $errorsMsg["number"]= $name. " is not correct";
                     }
                 }
 
                 if(isset($attributs["maxString"]) && !self::maxString($data[$name], $attributs["maxString"])){
-                    $errorsMsg["longueur"]= $name. " doit faire moins de ".$attributs["maxString"];
+                    $errorsMsg["longueur"]= $name. " must to do less than".$attributs["maxString"];
                 }
                 if(isset($attributs["minString"]) && !self::minString($data[$name], $attributs["minString"])){
-                    $errorsMsg["longueur"]= $name. " doit faire plus de ".$attributs["minString"];
+                    $errorsMsg["longueur"]= $name. "must to do less than ".$attributs["minString"];
                 }
                 if(isset($attributs["maxNum"]) && !self::maxNum($data[$name], $attributs["maxNum"])){
-                    $errorsMsg["longueur"]= $name. " doit faire moins de ".$attributs["maxNum"];
+                    $errorsMsg["longueur"]= $name. "must to do less than ".$attributs["maxNum"];
                 }
                 if(isset($attributs["minNum"]) && !self::minString($data[$name], $attributs["minNum"])){
-                    $errorsMsg["longueur"]= $name. " doit faire plus de ".$attributs["minNum"];
+                    $errorsMsg["longueur"]= $name. " must to do less than ".$attributs["minNum"];
                 }
             }
         }
@@ -43,7 +43,7 @@ class Form
             foreach($config["select"] as $name => $attributs) {
                 if(isset($attributs['options']) && !empty($attributs['options'])){
                     if($data[$name] === "_forbidden"){
-                        $errorsMsg[$attributs['label']] = "Il est nécessaire de sélectionner une autre valeur que celle par défaut";
+                        $errorsMsg[$attributs['label']] = "It is necessary to select a different value than the default one";
                     }
                 }
             }
@@ -51,7 +51,7 @@ class Form
         if(isset($config["captcha"])){
             if(isset($_SESSION["captcha"]) && isset($data['captcha'])) {
                 if($_SESSION["captcha"] != $data['captcha']){
-                    $errorsMsg["captcha"] = "Le captcha saisi n'est pas valide";
+                    $errorsMsg["captcha"] = "Captcha is not valid";
                 }
             }
         }
@@ -59,13 +59,13 @@ class Form
             if(isset($_SESSION['csrf_token_tosle']) && isset($data['_token'])){
                 $returnSecure = self::checkSecureForm($_SESSION['csrf_token_tosle'], $data['_token'], $config['config']['secure']);
                 if($returnSecure === 1){
-                    $errorsMsg["Timeout"] = "Délait d'authentification dépassé pour le formulaire. Merci de réessayer l'envoie";
+                    $errorsMsg["Timeout"] = "Authentication timeout exceeded for the form. Please try again";
                 }
                 if($returnSecure === 2){
-                    $errorsMsg["Authentification failed"] = "Authentification non reconnue. Veuillez réessayer.";
+                    $errorsMsg["Authentification failed"] = "Authentication not recognized. Try Again.";
                 }
             } else {
-                $errorsMsg["Authentification error"] = "Authentification échoué pour le formulaire. Veuillez réessayer.";
+                $errorsMsg["Authentification error"] = "Authentication failed for the form. Try Again.";
             }
         }
         return $errorsMsg;
