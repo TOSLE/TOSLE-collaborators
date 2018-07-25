@@ -45,10 +45,10 @@ class Mail
 
             //Content
             $mail->isHTML(true);                                  // Set email format to HTML
-            $mail->Subject = 'Bienvenue sur le CMS TOSLE '.$firstName.' '.$lastName;
+            $mail->Subject = 'Welcome to the CMS TOSLE  '.$firstName.' '.$lastName;
             //$mail->Body = 'Veuillez confirmer votre inscription en cliquant sur le lien ci-dessous </br>http://localhost:88/en/verify-mail-register?token='.$token.'';
-            $mail->Body = 'Veuillez confirmer votre inscription en cliquant sur le lien ci-dessous </br>http://'.$_SERVER["SERVER_NAME"].Access::getSlugsById()['verify'].'?email='.$email.'&amp;token='.$token.'';
-            $mail->AltBody = 'Veuillez confirmer votre inscription en cliquant sur le lien ci-dessous http://'.$_SERVER["SERVER_NAME"].Access::getSlugsById()['verify'].'?email='.$email.'?token='.$token.'';
+            $mail->Body = 'Please confirm your registration by clicking on the link below </br>http://'.$_SERVER["SERVER_NAME"].Access::getSlugsById()['verify'].'?email='.$email.'&amp;token='.$token.'';
+            $mail->AltBody = 'Please confirm your registration by clicking on the link below http://'.$_SERVER["SERVER_NAME"].Access::getSlugsById()['verify'].'?email='.$email.'?token='.$token.'';
 
             $mail->send();
         } catch (Exception $e) {
@@ -82,9 +82,9 @@ class Mail
 
             //Content
             $mail->isHTML(true);                                  // Set email format to HTML
-            $mail->Subject = 'Bienvenue sur le CMS TOSLE ';
+            $mail->Subject = 'Welcome to the CMS TOSLE ';
             //$mail->Body = 'Veuillez confirmer votre inscription en cliquant sur le lien ci-dessous </br>http://localhost:88/en/verify-mail-register?token='.$token.'';
-            $mail->Body = 'Veuillez confirmer votre inscription en cliquant sur le lien ci-dessous </br>http://'.$_SERVER["SERVER_NAME"].Access::getSlugsById()['set-newpassword'].'?email='.$email.'&amp;token='.$token.'';
+            $mail->Body = 'Please change your password on the link below</br>http://'.$_SERVER["SERVER_NAME"].Access::getSlugsById()['set-newpassword'].'?email='.$email.'&amp;token='.$token.'';
 
             $mail->send();
         } catch (Exception $e) {
@@ -121,14 +121,14 @@ public static function sendMailSignalement($data)
             //Attachments
             //$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
             //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
-            $bodyMessage = 'Un commentaire a été signalé, voici les informations : <br><br>';
-            $bodyMessage .= '<strong>Url du commentaire : </strong>http://' .$data['url'].'<br>';
-            $bodyMessage .= '<strong>Contenu du commentaire : </strong>' .$data['content'].'<br>';
-            $bodyMessage .= '<strong>Auteur du commentaire : </strong>' .$data['user'].'<br>';
-            $bodyMessage .= '<strong>Signalé par : </strong>' .$data['sendBy'].'<br>';
+            $bodyMessage = 'A comment has been signaled, here is the information: <br><br>';
+            $bodyMessage .= '<strong>Url of commentary : </strong>http://' .$data['url'].'<br>';
+            $bodyMessage .= '<strong>Comment content: </strong>' .$data['content'].'<br>';
+            $bodyMessage .= '<strong>Author of commentary : </strong>' .$data['user'].'<br>';
+            $bodyMessage .= '<strong>Signaled by : </strong>' .$data['sendBy'].'<br>';
             //Content
             $mail->isHTML(true);                                  // Set email format to HTML
-            $mail->Subject = '[URGENT] - Signalement d\'un commentaire';
+            $mail->Subject = '[URGENT] - Signalement of a  commentary';
             //$mail->Body = 'Veuillez confirmer votre inscription en cliquant sur le lien ci-dessous </br>http://localhost:88/en/verify-mail-register?token='.$token.'';
             $mail->Body = $bodyMessage;
             $mail->send();

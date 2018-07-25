@@ -90,18 +90,18 @@ class DashboardRepository
                 $Table->setColumnBody('text', $group->getName());
                 $Table->setColumnBody('number', $Group->countUserGroup($group->getId()));
 
-                $Table->setValueButton('Supprimer');
+                $Table->setValueButton('Delete');
                 $Table->setActionButton($this->routes['group/delete'].'/'.$group->getId());
                 $Table->setColorButton("red");
-                $Table->setConfirmButton('Voulez-vous vraiment supprimer ce groupe : '.$group->getName().' ?');
+                $Table->setConfirmButton('Do you want delete this group: '.$group->getName().' ?');
                 $Table->saveButton();
 
-                $Table->setValueButton('Modifier');
+                $Table->setValueButton('Modify');
                 $Table->setActionButton($this->routes['group/edit'].'/'.$group->getId());
                 $Table->setColorButton("orange");
                 $Table->saveButton();
 
-                $Table->setValueButton('Utilisateurs');
+                $Table->setValueButton('Users');
                 $Table->setActionButton($this->routes['group/manage'].'/'.$group->getId());
                 $Table->setColorButton("tosle");
                 $Table->saveButton();
