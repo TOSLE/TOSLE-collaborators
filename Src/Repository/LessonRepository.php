@@ -459,11 +459,22 @@ class LessonRepository extends Lesson
             $Groups = new LessonGroup();
             $arrayGroups = $Groups->getGroupsLesson($lesson->getId());
             if(is_array($arrayGroups) && isset($userGroups) && $lesson->getType() == 2){
-                $temporaryTab = array_diff_key($arrayGroups,$userGroups);
+                /*$temporaryTab = array_diff_key($arrayGroups,$userGroups);
                 if(isset($temporaryTab) && is_array($temporaryTab)){
                     if(sizeof($arrayGroups) == sizeof($temporaryTab)){
                         $arrayUnset[] = $key;
                     }
+                }*/
+                $courseGroupe = null;
+                foreach($arrayGroups as $group){
+                    foreach($userGroups as $id => $name){
+                        if($group->getId() == $id){
+                            $courseGroupe = true;
+                        }
+                    }
+                }
+                if(!isset($courseGroupe)){
+                    $arrayUnset[] = $key;
                 }
             }
             $arrayChapter = $LessonChapter->getLessonChapterByIdentifier('lesson', $lesson->getId());
