@@ -174,8 +174,8 @@ class Blog extends CoreSql {
         return [
             "config"=> [
                 "method"=>"post",
-                "action"=>"", "submit"=>"Publier l'article",
-                "save"=>"Sauvegarder sans publier",
+                "action"=>"", "submit"=>DASHBOARD_BLOC_BLOG_BUTTON_PUBLISH,
+                "save"=>DASHBOARD_BLOC_BLOG_BUTTON_SAVE,
                 "form_file"=>true,
             ],
             "input"=> [
@@ -199,7 +199,7 @@ class Blog extends CoreSql {
             "ckeditor" => [
                 "label" => "Edition de votre article",
                 "name" => "ckeditor_article",
-                "description" => "Pas de limite !",
+                "description" => DASHBOARD_BLOC_BLOG_LIMIT,
                 "placeholder" => "Placeholder"
             ],
             'select_multiple' => [
@@ -215,8 +215,8 @@ class Blog extends CoreSql {
         return [
             "config"=> [
                 "method"=>"post",
-                "action"=>"", "submit"=>"Publier l'article",
-                "save"=>"Sauvegarder sans publier",
+                "action"=>"", "submit"=>DASHBOARD_BLOC_BLOG_BUTTON_PUBLISH,
+                "save"=>DASHBOARD_BLOC_BLOG_BUTTON_SAVE,
                 "form_file"=>true,
             ],
             "input"=> [
@@ -239,8 +239,8 @@ class Blog extends CoreSql {
             "textarea" => [
                 "label" => "Image description",
                 "name" => "textarea_articleImage",
-                "description" => "Un maximum de 500 caractères",
-                "placeholder" => "Maximum 500 caractères"
+                "description" => DASHBOARD_BLOC_LESSONS_ADD_MAX_CHARACTERS2,
+                "placeholder" => DASHBOARD_BLOC_LESSONS_ADD_MAX_CHARACTERS
             ],
             'select_multiple' => [
                 $category->configFormCategory(1)
@@ -256,8 +256,8 @@ class Blog extends CoreSql {
         return [
             "config"=> [
                 "method"=>"post",
-                "action"=>"", "submit"=>"Publier l'article",
-                "save"=>"Sauvegarder sans publier",
+                "action"=>"", "submit"=>DASHBOARD_BLOC_BLOG_BUTTON_PUBLISH,
+                "save"=>DASHBOARD_BLOC_BLOG_BUTTON_SAVE,
                 "form_file"=>true,
             ],
             "input"=> [

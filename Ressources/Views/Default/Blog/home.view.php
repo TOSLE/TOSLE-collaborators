@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-12">
             <div>
-                <h2>Liens et recherche avancée</h2>
+                <h2>Links and advanced search</h2>
                 <div class="icons-list">
                     <a href="<?php echo $urlBlogfeed;?>" class="blog-link-icon">
                         <i class="material-icons">
@@ -14,7 +14,7 @@
                         <i class="material-icons">
                             filter_list
                         </i>
-                        <p>Modifier l'affichage</p>
+                        <p>Modify display</p>
                     </a>
                 </div>
             </div>

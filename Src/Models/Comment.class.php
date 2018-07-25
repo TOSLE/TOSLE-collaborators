@@ -139,17 +139,17 @@ class Comment extends CoreSql {
         return [
             "config"=> [
                 "method"=>"post",
-                "action"=>"", "submit"=>"Envoyer votre commentaire",
+                "action"=>"", "submit"=>"Send your commentary",
                 "secure" => [
                     "status" => true,
                     "duration" => 8
                 ],
             ],
             "textarea" => [
-                "label" => "Nouveau commentaire",
+                "label" => "New comments",
                 "name" => "textarea_comment",
-                "description" => "Laissez parler votre imagination",
-                "placeholder" => "Soyez sûr de ce que vous voulez publier."
+                "description" => "Let your imagination speak",
+                "placeholder" => "Be sure of what you want to publish."
             ],
         ];
     }
