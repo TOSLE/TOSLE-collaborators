@@ -123,7 +123,6 @@
              */
             unset($uriExploded[0]);
             $parameter = ["POST" => $_POST, "GET" => $_GET, "URI" => array_values($uriExploded)];
-
             if (file_exists("Kernel/Language/" . $language . "/conf.lang.php")) {
                 include "Kernel/Language/" . $language . "/conf.lang.php";
             } else {
@@ -142,6 +141,9 @@
                 }
             }
 	    } else {
+            setcookie('TOSLE_LANG', 'en', time()+(3600*24*30*12));
+            $language = "en-EN";
+            include "Kernel/Language/".$language."/conf.lang.php";
             $controller = "IndexController";
             $action = "configAction";
             $tempUri = explode("?", substr(urldecode($_SERVER["REQUEST_URI"]), strlen(DIRNAME)));
