@@ -1,6 +1,5 @@
 <?php
-class Access
-{
+class Access {
     private $access = [
         "default" => [ // Redirect 404
             "slug" => "404",
